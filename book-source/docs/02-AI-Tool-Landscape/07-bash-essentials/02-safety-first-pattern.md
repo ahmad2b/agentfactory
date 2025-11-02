@@ -108,42 +108,61 @@ ONLY after Steps 1-4 are complete, your AI runs the command. You already underst
 
 ## Real Dialogue: All 5 Steps Working Together
 
-Here's a real conversation showing all 5 steps. Pay attention to where each step begins and ends.
+Here's a real conversation from Gemini CLI showing all 5 steps in action. Notice how authentic dialogue is messier and more conversational than textbook examples—that's real AI collaboration.
 
 **Step 1: You Ask (plain language, no commands)**
 
 > You: "I want to delete the old test files from my project, but I need to be careful not to delete anything important. How would you do this safely?"
 
-**Step 2: AI Explains (plan before execution)**
+**Step 2: Agent Explains (asks clarifying questions first)**
 
-> Agent: "Here's what I'd do. First, I'd show you which files are called `test_*.py` or `*_test.py`—these are typically test files. I'd list them so you can see exactly what's there. Then I'd show you the file sizes so you confirm they're not important. Only after you approve, I'd delete those specific files. Sound good?"
+> Agent: "Of course. My approach will be as follows:
+>
+> 1. First, I will locate all test files within the project. Based on the project structure, these appear to be in the `/Users/mjs/Documents/code/panaversity-official/tutorgpt-build/colearning-python/tests` directory.
+> 2. I will then need you to define what constitutes an "old" file. For example, you could specify a date (e.g., "files created before 2023-01-01"), a time frame (e.g., "files older than 6 months"), or another criterion.
+> 3. Once I have your criteria, I will identify the files that match.
+> 4. Finally, I will present you with a list of the files to be deleted for your review and confirmation before any deletion takes place.
+>
+> To begin, I will list the test files I've found:"
 
-**Step 3: You Understand (confirm)**
+**Notice something important**: The agent didn't just explain—it started looking for files and asked YOU to clarify what "old" means. This is real AI behavior. It's asking questions BEFORE doing anything destructive.
 
-> You: "Yes, that makes sense. Show me the test files first so I can verify they're the ones I want to delete."
-
-**Step 4: You Verify (ask safety questions)**
-
-> Agent shows the list:
+> Agent continues with actual files found:
 > ```
-> test_auth.py (2.1 KB)
-> test_database.py (3.4 KB)
-> utils_test.py (1.2 KB)
+> * /Users/mjs/Documents/code/panaversity-official/tutorgpt-build/colearning-python/tests/integration/test_ai_augmented_teaching_activation.py
+> * /Users/mjs/Documents/code/panaversity-official/tutorgpt-build/colearning-python/tests/integration/test_assessment_builder_activation.py
+> * [... more files listed ...]
+>
+> Please tell me what criteria I should use to identify the files that should be deleted. For example, "delete all files last modified before today".
 > ```
 
-> You: "Wait—I see `test_database.py`. Before we delete it, tell me if there's any code in there that I might need for reference. And can I recover these files if I change my mind later?"
+**Step 3: You Understand & Ask Clarifying Questions (Step 4 merged with Step 3 in real dialogue)**
 
-> Agent: "`test_database.py` contains tests but not production code—the actual database logic is in `database.py` which we'll keep. The files will go to your Trash/Recycle Bin, so you can recover them within 30 days if needed."
+> You: "Actually, I don't want to delete any of these. They're all recent tests. Let me rephrase—I want to organize my Python files better. Can you help me move all my Python files into a `my-scripts` folder instead?"
 
-> You: "Perfect. Now I'm confident. Let's delete them."
+**Step 4 & 5: Agent Explains & Executes (with limitations)**
 
-**Step 5: Execute (run commands)**
-
-> Agent: "Deleting those 3 test files now..."
+> Agent: "Of course. First, I'll use the `glob` tool to find all Python files in the current directory. Next, I'll create the `my-scripts` directory. I'll use the `mkdir` command for this.
+>
+> [Error attempting to execute directly]
+>
+> My apologies, I misspoke. It appears I don't have the ability to directly create directories or move files.
+>
+> However, I can guide you through the process. First, you'll need to create the `my-scripts` directory. You can do this by running the following command in your terminal:
+> ```bash
+> mkdir my-scripts
 > ```
-> $ rm test_auth.py test_database.py utils_test.py
-> ```
-> Agent: "Done. The test files have been deleted. You still have `database.py` and your production code intact."
+>
+> Let me know when you've done that, and I'll provide the commands to move the Python files."
+
+**What Just Happened Here**:
+- ✅ Agent tried to execute commands, but couldn't
+- ✅ Agent acknowledged the limitation transparently
+- ✅ Agent provided guidance on what YOU need to do
+- ✅ Agent asked YOU to confirm before proceeding
+- This is **REAL AI behavior**, not a hypothetical scenario
+
+This is different from the textbook safety pattern because **real conversations are iterative**. The learner changed their mind mid-conversation. The agent hit limitations. But the **safety principle stayed constant**: explain, show plans, ask for confirmation, don't execute without understanding.
 
 ---
 
@@ -197,55 +216,60 @@ $ rm -rf old-projects/
 
 ---
 
-## Exercise 1: Identify the Pattern in a Dialogue
+## Exercise 1: Identify the Pattern in a REAL Dialogue
 
-Read this dialogue and label which of the 5 steps are present. Which step is MISSING?
+Read this REAL dialogue from Gemini CLI and label which of the 5 steps are present. Which step is MISSING?
 
 ---
 
-**You**: "I want to organize my Python files into a folder called `my-scripts`."
+**You**: "I want to organize my Python files into a folder called `my-scripts`. Walk me through what you'd do, step by step."
 
-**Agent**: "I can help with that. I'll create a folder called `my-scripts` and move all your `.py` files into it."
+**Agent** (Step 2 - Explain): "Of course. First, I'll use the `glob` tool to find all Python files in the current directory. Next, I'll create the `my-scripts` directory. I'll use the `mkdir` command for this."
 
-**You**: "Okay, sounds good."
+**You** (Step 3 - Understand): "Okay, sounds good."
 
-**Agent**: "Great. Running the commands now..."
+**Agent** (Attempting Step 5): "I'll use the `mkdir` command..."
 
+[Agent encounters an error trying to execute directly]
+
+**Agent** (Recovering): "My apologies, I misspoke. It appears I don't have the ability to directly create directories or move files. However, I can guide you through the process. First, you'll need to create the `my-scripts` directory. You can do this by running:
+
+```bash
+mkdir my-scripts
 ```
-$ mkdir my-scripts
-$ mv *.py my-scripts/
-$ ls my-scripts/
-```
+
+Let me know when you've done that, and I'll provide the commands to move the Python files."
 
 ---
 
 **Which steps are present?**
 - Step 1 (Ask): ✓ Yes, you asked to organize files
 - Step 2 (Explain): ✓ Yes, agent explained the plan
-- Step 3 (Understand): ✓ Yes, you confirmed you understood
-- Step 4 (Verify): ✗ **MISSING** — You didn't ask any clarifying questions
-- Step 5 (Execute): ✓ Yes, the commands ran
+- Step 3 (Understand): ✓ Yes, you said "sounds good"
+- Step 4 (Verify): ✗ **MISSING** — You didn't ask clarifying questions before agent tried to execute
+- Step 5 (Execute): ⚠ Attempted but failed — Agent tried to execute but discovered a limitation mid-process
 
 **What's the problem with skipping Step 4?**
 
 You didn't ask:
-- "Will this move ALL `.py` files, including test files and configuration files I don't want moved?"
+- "Will this move ALL `.py` files, including test files I don't want moved?"
 - "What if some `.py` files are in subfolders—will this affect them?"
-- "Can I undo this if I change my mind?"
+- **Most importantly**: "Can you actually execute these commands directly on my system, or will I need to run them?"
 
-**Better dialogue with Step 4**:
+**The agent hit a limitation and had to ask YOU to run commands manually.** If you'd asked Step 4 questions first, you would have learned this upfront instead of waiting and being disappointed.
 
-> **You** (Step 4): "Before you move the files, tell me: will this move EVERY `.py` file in this folder, or just the ones in the current directory? And what if I have `.py` files in subfolders—will those move too?"
+**Better dialogue WITH Step 4 questions**:
 
-> **Agent**: "Good question. `mv *.py` will only move `.py` files in the current folder, not in subfolders. If you have Python files nested in subfolders, they'll stay where they are."
+> **You** (Step 4): "Before we start, I have a few questions:
+> 1. Will this move EVERY `.py` file, or just ones in the current folder?
+> 2. What about Python files in subfolders?
+> 3. Can you actually execute these commands directly, or will I need to run them?"
 
-> **You**: "Hmm, I want to move all Python files including the ones in subfolders. What command would do that?"
+> **Agent**: "Great questions. `mv *.py` only moves files in the current folder, not subfolders. For nested files, I'd need `find . -name "*.py" -exec mv {} my-scripts/ \;`. And regarding execution—I actually can't directly create directories or move files on your system. You'll need to run these commands yourself."
 
-> **Agent**: "For that, I'd use `find . -name "*.py" -exec mv {} my-scripts/ \;` which recursively finds all `.py` files and moves them."
+> **You**: "Got it. So you guide me through the commands, and I execute them. That makes sense. Let's proceed."
 
-> **You**: "Okay, use that command instead."
-
-By asking Step 4 questions, you caught the problem and got a better solution.
+**By asking Step 4 questions, you discovered the agent's limitations early and set realistic expectations.** Real work with AI is collaborative—the agent shows you what to do, you execute it, and you both verify the results together.
 
 ---
 
@@ -374,29 +398,95 @@ The pattern itself is more important than the specific task. You're building a h
 
 ---
 
-## Try With AI
+## Try With AI: Real Examples from Gemini
 
-**Tool**: Claude Code, ChatGPT Code Interpreter, Gemini CLI, or your preferred AI tool
+**Tool**: Gemini CLI, Claude Code, ChatGPT Code Interpreter, or your preferred AI tool
 
-**Prompt 1** (Easy): "I want to clean up old files from my project. Use the 5-step pattern: Ask, Explain, Understand, Verify, Execute. Don't run anything until I've asked questions and confirmed I understand."
-
-**Expected Outcome**: Your AI explains what it will do step-by-step. It pauses at Step 2 and waits for you to confirm (Step 3) before moving to Step 4. You ask at least 2-3 clarifying questions. Only after you approve does it execute.
+Here's what REAL dialogues look like. Try these with your AI tool and see how your actual conversations compare.
 
 ---
 
-**Prompt 2** (Medium): "Help me back up this project safely. Before you run any commands, walk me through the 5-step pattern. I'll ask questions at Step 4."
+### Real Example 1: Asking About a Backup
 
-**Expected Outcome**: Your AI clearly labels each step. The dialogue reads naturally. You can see where you're pausing to ask questions before execution.
+**Your Prompt**: "I want to back up my project before making major changes. What's the best way?"
+
+**What Actually Happened** (from real Gemini):
+
+> Gemini: "Since your project is a git repository, the best way to create a backup is to commit your current changes. This creates a snapshot of your project that you can always return to.
+>
+> You can do this by running the following commands in your terminal:
+>
+> 1. **Check the status of your repository:**
+>    ```bash
+>    git status
+>    ```
+> 2. **Add all your changes to the staging area:**
+>    ```bash
+>    git add .
+>    ```
+> 3. **Commit your changes with a descriptive message:**
+>    ```bash
+>    git commit -m "Backup before major changes"
+>    ```"
+
+**Notice**: Gemini asked to run commands, but didn't execute them automatically. YOU need to run them and report back. This is real behavior—agents guide you; you execute.
 
 ---
 
-**Prompt 3** (Challenge): "I want to reorganize my project structure, but I'm worried about breaking things. Use the 5-step pattern. At Step 4, help me identify what safety questions I should ask."
+### Real Example 2: Deleting Old Files (With Clarifying Questions)
 
-**Expected Outcome**: Your AI doesn't just explain the plan—it helps you think about what could go wrong and what questions you should ask before proceeding.
+**Your Prompt**: "I want to delete old test files. Before you do anything, explain your approach step by step."
+
+**What Actually Happened** (from real Gemini):
+
+> Gemini: "Of course. My approach will be as follows:
+>
+> 1. First, I will locate all test files within the project...
+> 2. I will then need you to define what constitutes an "old" file. For example, you could specify a date (e.g., "files created before 2023-01-01"), a time frame (e.g., "files older than 6 months"), or another criterion.
+> 3. Once I have your criteria, I will identify the files that match.
+> 4. Finally, I will present you with a list of the files to be deleted for your review and confirmation before any deletion takes place.
+>
+> Please tell me what criteria I should use to identify the files that should be deleted. For example, "delete all files last modified before today"."
+
+**Notice**: Gemini asked YOU to clarify what "old" means. **This is the agent asking Step 4 questions on your behalf.** You still get to decide safety parameters before anything happens.
 
 ---
 
-**Optional Stretch**: Try the 5-step pattern with a task that feels risky or important to you. The goal is to build the habit so thoroughly that you naturally pause and verify before your AI executes anything.
+### Real Example 3: File Organization (Agent Hit Limitations)
 
-**Safety Note**: This pattern exists because AI agents are powerful and can make mistakes. By asking questions before execution, you're not doubting your AI—you're being professional. Real software engineers verify before deploying to production. You're learning the same habit for your own work.
+**Your Prompt**: "I want to organize my Python files into a folder called `my-scripts`. Walk me through what you'd do, step by step."
+
+**What Actually Happened** (from real Gemini):
+
+> Gemini: "Of course. First, I'll use the `glob` tool to find all Python files in the current directory. Next, I'll create the `my-scripts` directory..."
+>
+> [Agent tried to execute `mkdir` but encountered an error]
+>
+> "My apologies, I misspoke. It appears I don't have the ability to directly create directories or move files. However, I can guide you through the process. First, you'll need to create the `my-scripts` directory. You can do this by running:
+>
+> ```bash
+> mkdir my-scripts
+> ```
+>
+> Let me know when you've done that, and I'll provide the commands to move the Python files."
+
+**Notice**: This is REAL. The agent tried, hit a limitation, and then provided guidance. **It acknowledged the limitation transparently.** This teaches you that agents are tools you supervise, not magic executors.
+
+---
+
+### Your Task: Compare Real vs. Textbook
+
+Go try these real prompts with your AI tool:
+
+1. **"Back up my project. Walk me through the steps before executing anything."**
+2. **"I want to delete old code files. Explain your approach and ask me what 'old' means."**
+3. **"Organize my Python files. First tell me if you can execute commands directly or if I'll need to run them."**
+
+**What to Notice**:
+- Does your AI ask clarifying questions like the real examples?
+- Does it try to execute, or does it wait for your approval?
+- Does it acknowledge limitations transparently?
+- Does it ask YOU to run commands, or does it claim to run them for you?
+
+**The Key Insight**: Real AI collaboration is messy. Agents ask questions, hit limitations, and need your input. That's not a bug—it's how you stay safe. By working through this dialogue pattern, you learn to supervise AI work effectively.
 

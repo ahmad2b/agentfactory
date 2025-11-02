@@ -232,31 +232,6 @@ Pause here and test your understanding.
 
 ---
 
-## Summative Assessment: Have Real Conversations With Your AI
-
-The best way to learn is to practice. Have three real conversations with your AI companion.
-
-**Conversation 1: Location Check**
-- Ask: "Where are you working right now?"
-- Observe: What path does your AI show?
-- Write down: The directory path your AI reported
-- Reflect: Where is your AI? Is this a folder you recognize?
-
-**Conversation 2: File Listing**
-- Ask: "What files and folders can you see from where you are?"
-- Observe: What does the listing show?
-- Count: How many items are folders (directories) vs. files?
-- Write down: 3 file names you see in the listing
-
-**Conversation 3: Safety Question**
-- Ask: "If I asked you to delete an old backup folder, how would you make sure we're deleting the right one?"
-- Observe: How does your AI approach this safely?
-- Write: One sentence about why this safety habit matters
-
-After these conversations, you'll have experienced how pwd and ls work in real dialogue. You won't memorize commands—you'll understand their purpose because you've seen your AI use them to answer your questions.
-
----
-
 ## Try With AI
 
 **Tool**: Claude Code, ChatGPT Code Interpreter, or your preferred AI companion
