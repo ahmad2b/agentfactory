@@ -15,34 +15,33 @@ const initSatori = async () => {
  * Docusaurus plugin to automatically generate Open Graph images for each page
  */
 module.exports = function (context, options) {
-  const ogDir = path.join(context.siteDir, "static", "img", "og");
-
-  // Create og directory if it doesn't exist
-  if (!fs.existsSync(ogDir)) {
-    fs.mkdirSync(ogDir, { recursive: true });
-  }
 
   return {
     name: "docusaurus-plugin-og-image-generator",
 
     async postBuild({ siteConfig, routesPaths, outDir, head }) {
       console.log("\n🎨 Generating Open Graph images...\n");
+      // Ensure OG images are generated into the FINAL BUILD output, not static/
+      const ogOutDir = path.join(outDir, "img", "og");
+      if (!fs.existsSync(ogOutDir)) {
+        fs.mkdirSync(ogOutDir, { recursive: true });
+      }
 
       // Generate homepage OG image
       await generateOGImage({
         title: siteConfig.title,
         description: siteConfig.tagline,
         slug: 'home',
-        ogDir,
+        ogDir: ogOutDir,
         siteConfig,
       });
 
       // Read all docs from the docs directory
       const docsDir = path.join(context.siteDir, "docs");
-      await generateImagesFromDirectory(docsDir, ogDir, siteConfig, docsDir);
+      await generateImagesFromDirectory(docsDir, ogOutDir, siteConfig, docsDir);
 
       // Inject OG image meta tags into built HTML files
-      await injectOGImagesIntoHTML(outDir, siteConfig, context.siteDir);
+      await injectOGImagesIntoHTML(outDir, siteConfig);
 
       console.log("\n✅ Open Graph images generated and injected successfully!\n");
     },
@@ -116,7 +115,7 @@ function extractFrontMatter(content) {
 /**
  * Inject OG image meta tags into built HTML files
  */
-async function injectOGImagesIntoHTML(outDir, siteConfig, siteDir) {
+async function injectOGImagesIntoHTML(outDir, siteConfig) {
   console.log("\n🔧 Injecting OG images into HTML files...\n");
 
   const htmlFiles = [];
@@ -136,7 +135,8 @@ async function injectOGImagesIntoHTML(outDir, siteConfig, siteDir) {
   
   findHTMLFiles(outDir);
 
-  const ogImagesDir = path.join(siteDir, 'static', 'img', 'og');
+  // Look for generated images inside the built output directory
+  const ogImagesDir = path.join(outDir, 'img', 'og');
 
   for (const htmlFile of htmlFiles) {
     try {
