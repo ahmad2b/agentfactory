@@ -55,7 +55,7 @@ function HomepageHeader() {
             <div className={styles.heroButtons}>
               <Link
                 className={clsx(
-                  "button button--primary button--lg",
+                  "button button--primary button--md",
                   styles.ctaButton
                 )}
                 to="/docs/preface-agent-native"
@@ -67,7 +67,7 @@ function HomepageHeader() {
               </Link>
               <Link
                 className={clsx(
-                  "button button--outline button--lg",
+                  "button button--outline button--md",
                   styles.secondaryButton
                 )}
                 href="https://panaversity.org/flagship-program/courses"

@@ -1,5 +1,5 @@
 ---
-title: "Which SDD Framework or Tool Fits YOUR Work?
+title: "Which SDD Framework or Tool Fits YOUR Work?"
 chapter: 30
 lesson: 6
 duration: "3-3.5 hours"
@@ -21,7 +21,7 @@ learning_objectives:
 
 # Which SDD Framework or Tool Fits YOUR Work?
 
-You've learned the *why* of specification-driven development. You've written a spec. You understand Constitutions.
+You've learned the _why_ of specification-driven development. You've written a spec. You understand Constitutions.
 
 Now comes a practical question: **Which SDD framework should YOU use?**
 
@@ -70,12 +70,14 @@ Four main approaches emerged to answer this question. Here's how to think about 
 #### Who It's For
 
 ✅ **Excellent fit if you are:**
+
 - Solo developer or tiny team (1-3 people)
 - Learning SDD for the first time (need low friction)
 - Building medium-sized features (not tiny bug fixes, not massive systems)
 - Already comfortable with Agile/BDD workflows
 
 ❌ **Poor fit if you are:**
+
 - Building complex systems requiring strong architectural enforcement
 - On a medium-large team where consistency across projects matters
 - In a regulated domain where auditable decisions are critical
@@ -96,16 +98,19 @@ Spec-Kit is GitHub's open-source SDD framework released in 2025. It's built arou
 #### The Core Workflow: Constitution → Specify → Plan → Tasks
 
 **1. SPECIFY: What are we building?**
+
 - Clarify requirements and acceptance criteria
 - Check for Constitution violations BEFORE code is written
 - Output: Specification document + clarification checklist
 
 **2. PLAN: How will we build it?**
+
 - Design architecture and technology decisions
 - Verify Constitutional alignment
 - Output: Plan document + technical checklist
 
 **3. TASKS: What are the work units?**
+
 - Break into atomic tasks (each 4-8 hours of work)
 - Each task traces back to specific requirements
 - Output: Task breakdown + task checklist
@@ -113,6 +118,7 @@ Spec-Kit is GitHub's open-source SDD framework released in 2025. It's built arou
 #### Why Spec-Kit (GitHub) Works
 
 ✅ **Strengths:**
+
 - **Strong governance**: Constitution enforces consistency across all features and teams
 - **Comprehensive traceability**: Requirements → Plan → Tasks → Code → Tests (auditable)
 - **Scales to large teams**: 5 people, 50 people, 500 people—same process works
@@ -121,6 +127,7 @@ Spec-Kit is GitHub's open-source SDD framework released in 2025. It's built arou
 #### Where Spec-Kit (GitHub) Struggles
 
 ❌ **Limitations:**
+
 - **Doesn't track "why" decisions**: Plans document "how," but not "why we chose X over Y"
 - **Doesn't log AI interactions**: When an agent generates code, no record of the reasoning
 - **No domain templates**: Each team rebuilds domain-specific rules from scratch
@@ -130,6 +137,7 @@ Spec-Kit is GitHub's open-source SDD framework released in 2025. It's built arou
 #### When to Use Spec-Kit (GitHub)
 
 Choose Spec-Kit if you want to:
+
 - Use GitHub's official open-source framework
 - Build your own extensions and customizations
 - Avoid any additional proprietary tools
@@ -143,11 +151,13 @@ Choose Spec-Kit if you want to:
 #### Horizontal Additions: Decision & Interaction Intelligence
 
 **1. Architectural Decision Records (ADRs)**
+
 - Document the "why" behind choices, not just the "what"
 - Example: "Why JWT instead of sessions?" → ADR explains tradeoffs, security implications, and when to reconsider
 - **For AI agents**: When facing a choice, agents reference ADRs to understand team philosophy
 
 **2. Prompt History Records (PHRs)**
+
 - Track every AI interaction during development
 - Captures: prompt sent → response generated → whether accepted/modified/rejected → why
 - Creates audit trail for compliance and learning
@@ -174,6 +184,7 @@ Spec-Kit Plus (AI-native SDD for professional teams)
 #### Why Spec-Kit Plus Works
 
 ✅ **Strengths:**
+
 - **Everything Spec-Kit has**, plus:
 - **Captures reasoning**: ADRs document architectural decisions and tradeoffs
 - **Logs AI interactions**: PHRs create audit trail and improve future prompts
@@ -184,6 +195,7 @@ Spec-Kit Plus (AI-native SDD for professional teams)
 #### Where Spec-Kit Plus Is Best
 
 ✅ **Excellent fit if you are:**
+
 - On a team (or planning to be) working with AI agents
 - Building a system that will last years
 - In a regulated domain (healthcare, finance, aerospace)
@@ -193,6 +205,7 @@ Spec-Kit Plus (AI-native SDD for professional teams)
 #### When to Use Spec-Kit Plus
 
 Choose Spec-Kit Plus if:
+
 - You're using this book (all chapters assume Spec-Kit Plus)
 - You're on a team collaborating with AI agents
 - You need auditable decisions (compliance, regulated domains)
@@ -210,6 +223,7 @@ Choose Spec-Kit Plus if:
 Tesel (still in private beta, invite-only) takes spec-driven development to its logical extreme: **specs become the primary artifact, and code is generated**.
 
 **Workflow:**
+
 ```
 1. Write specification (natural language, structured)
 2. Run code generator
@@ -227,11 +241,13 @@ Tesel (still in private beta, invite-only) takes spec-driven development to its 
 #### The Reality
 
 Tesel works for specific domains:
+
 - Safety-critical systems (medical devices, aerospace)
 - Regulated industries with stable requirements
 - Situations where reproducibility and auditability are paramount
 
 It's experimental for most other use cases because:
+
 - **Non-determinism**: Run the generator twice, sometimes get different code
 - **Incomplete specs**: Natural language might miss edge cases; you can't manually fix them in code
 - **Stability**: Still in beta with limited adoption
@@ -277,6 +293,7 @@ teams          teams            agents
 ### From Spec-Kit to Spec-Kit Plus: What Changed?
 
 GitHub's **Spec-Kit** gave us the foundation:
+
 - Constitution (immutable rules)
 - Three-phase workflow (Specify → Plan → Tasks)
 - Strong governance and traceability
@@ -290,6 +307,7 @@ But working with AI agents and real professional teams, we discovered critical g
 When an AI agent encounters a choice later (e.g., "Should we use JWT or sessions?"), it doesn't know the team's reasoning.
 
 **The Solution**: **Architectural Decision Records (ADRs)**
+
 - Document the "why" behind architecture choices
 - Example: "Why JWT instead of sessions? → ADR explains security tradeoffs, when to reconsider, etc."
 - **For AI agents**: Agents reference ADRs to understand team philosophy and make consistent choices
@@ -301,6 +319,7 @@ When an AI agent encounters a choice later (e.g., "Should we use JWT or sessions
 There's no record of the AI's reasoning, no audit trail.
 
 **The Solution**: **Prompt History Records (PHRs)**
+
 - Track every AI interaction: prompt sent → response → whether accepted/modified/rejected → why
 - Creates an audit trail (compliance requirement)
 - **For AI agents**: Agents learn which prompts work best. Teams improve future interactions.
@@ -312,6 +331,7 @@ There's no record of the AI's reasoning, no audit trail.
 Each team rebuilds domain-specific knowledge from scratch. Inconsistent patterns. Wasted effort.
 
 **The Solution**: **Intelligence Templates**
+
 - Pre-built domain packages with rules, patterns, and validations
 - Example: Education Template (used in this book) includes CEFR proficiency levels, Bloom's taxonomy levels, code testing requirements
 - **For AI agents**: Agents know domain patterns. Healthcare teams don't rebuild HIPAA knowledge; Fintech teams don't rebuild PCI-DSS.
@@ -329,6 +349,7 @@ Spec-Kit Plus (AI-native SDD for professional teams)
 ```
 
 **You're not learning abstract theory.** You're learning the practical version that:
+
 - Works with AI agents (Claude Code, Gemini CLI, etc.)
 - Scales from solo to 50+ person teams
 - Includes domain expertise (Education template for this book, healthcare/fintech/aerospace for others)
@@ -371,12 +392,14 @@ When you work with Claude Code, Gemini CLI, or other AI agents:
 Constitution + specs + ADRs + PHRs = **complete knowledge system for AI agents**
 
 This is what professional teams need. It's the difference between:
+
 - "Build a login system" (hope the agent includes password reset)
 - "Build a login system that respects our Constitution (bcrypt passwords, 80%+ tests, audit logging)" (agent knows the rules)
 
 #### 4. The Industry Is Standardizing
 
 In 2025, GitHub, major tech companies, and emerging startups chose Spec-Kit-like approaches:
+
 - Clear governance (Constitution)
 - Traceability (specs → plans → code)
 - Enforcement (AI agents respect principles)
@@ -385,7 +408,7 @@ Learning Spec-Kit Plus now means **you're ahead of where the industry is moving*
 
 ---
 
-**Next lesson**: You'll build your first Spec-Kit Plus feature from start to finish, learning by doing.
+**Next lesson**: You'll build your first Spec-Kit Plus feature from start to fi`` nish, learning by doing.
 
 **The journey to specification-driven development starts now.**
 

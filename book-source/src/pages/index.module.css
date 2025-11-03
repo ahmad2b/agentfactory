@@ -412,16 +412,16 @@
     color: #001f3f !important;
     border: none !important;
     font-weight: 600;
-    padding: 1.125rem 2.5rem !important;
-    font-size: 1.0625rem;
+    padding: 0.9rem 1.6rem !important;
+    font-size: 1rem;
     line-height: 1.4;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     position: relative;
     overflow: hidden;
     border-radius: 50px;
-    flex: 1;
-    min-width: 180px;
+    /* Let button size to its content on desktop */
+    text-align: center;
 }
 
 .ctaButton::before {
@@ -460,8 +460,8 @@
     color: white !important;
     border: 1.5px solid rgba(255, 255, 255, 0.35) !important;
     font-weight: 500;
-    padding: 1.125rem 2.5rem !important;
-    font-size: 1.0625rem;
+    padding: 0.9rem 1.6rem !important;
+    font-size: 1rem;
     line-height: 1.4;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
@@ -469,8 +469,8 @@
     border-radius: 50px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    flex: 1;
-    min-width: 180px;
+    /* Let button size to its content on desktop */
+    text-align: center;
 }
 
 .secondaryButton::before {
@@ -545,6 +545,7 @@
 .buttonContent {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.75rem;
     position: relative;
     z-index: 1;

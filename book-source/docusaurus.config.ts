@@ -99,6 +99,7 @@ const config: Config = {
   ],
 
   plugins: [
+    "./plugins/docusaurus-plugin-og-image-generator",
     function (context, options) {
       return {
         name: "custom-webpack-config",
@@ -119,6 +120,34 @@ const config: Config = {
   themeConfig: {
     // Replace with your project's social card
     image: "img/book-cover-page.png",
+
+    // Open Graph metadata for social media sharing
+    metadata: [
+      { name: "og:title", content: "AI Native Software Development" },
+      {
+        name: "og:description",
+        content:
+          "Colearning Agentic AI with Python and TypeScript – The AI & Spec Driven Way",
+      },
+      { name: "og:type", content: "website" },
+      {
+        name: "og:image",
+        content: "https://ai-native.panaversity.org/img/book-cover-page.png",
+      },
+      { name: "og:url", content: "https://ai-native.panaversity.org" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "AI Native Software Development" },
+      {
+        name: "twitter:description",
+        content:
+          "Colearning Agentic AI with Python and TypeScript – The AI & Spec Driven Way",
+      },
+      {
+        name: "twitter:image",
+        content: "https://ai-native.panaversity.org/img/book-cover-page.png",
+      },
+    ],
+
     colorMode: {
       respectPrefersColorScheme: true,
     },
