@@ -138,6 +138,9 @@ async function injectOGImagesIntoHTML(outDir, siteConfig) {
   // Look for generated images inside the built output directory
   const ogImagesDir = path.join(outDir, 'img', 'og');
 
+  // Stable version token per build, overridable from env/CI
+  const buildVersion = process.env.BUILD_VERSION || String(Math.floor(Date.now() / 1000));
+
   for (const htmlFile of htmlFiles) {
     try {
       let html = fs.readFileSync(htmlFile, 'utf-8');
@@ -188,7 +191,7 @@ async function injectOGImagesIntoHTML(outDir, siteConfig) {
       }
 
       if (fs.existsSync(ogImagePath)) {
-        const imageUrl = `${siteConfig.url}/img/og/${imageFilename}`;
+        const imageUrl = `${siteConfig.url}/img/og/${imageFilename}?v=${buildVersion}`;
         // Build canonical page URL for better social parsing
         let pagePath = '';
         if (slug === 'home') {
