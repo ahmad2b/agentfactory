@@ -273,7 +273,7 @@ Read these three prompts. For each, identify whether it specifies **logic** (ste
 > "Create a REST API endpoint that retrieves user data from the database"
 
 **Prompt B**:
-> "Create a GET /users/{user_id} endpoint: 1) Query database for user by ID, 2) If found, return user data with 200 status, 3) If not found, return 404 error, 4) Handle database connection errors with 500 status"
+> "Create a GET `/users/{user_id}` endpoint: 1) Query database for user by ID, 2) If found, return user data with 200 status, 3) If not found, return 404 error, 4) Handle database connection errors with 500 status"
 
 **Prompt C**:
 > "Implement user authentication"
