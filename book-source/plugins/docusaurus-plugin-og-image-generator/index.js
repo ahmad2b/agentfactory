@@ -28,11 +28,23 @@ module.exports = function (context, options) {
     async postBuild({ siteConfig, routesPaths, outDir, head }) {
       console.log("\n🎨 Generating Open Graph images...\n");
 
+      // Generate homepage OG image
+      await generateOGImage({
+        title: siteConfig.title,
+        description: siteConfig.tagline,
+        slug: 'home',
+        ogDir,
+        siteConfig,
+      });
+
       // Read all docs from the docs directory
       const docsDir = path.join(context.siteDir, "docs");
-      await generateImagesFromDirectory(docsDir, ogDir, siteConfig);
+      await generateImagesFromDirectory(docsDir, ogDir, siteConfig, docsDir);
 
-      console.log("✅ Open Graph images generated successfully!\n");
+      // Inject OG image meta tags into built HTML files
+      await injectOGImagesIntoHTML(outDir, siteConfig, context.siteDir);
+
+      console.log("\n✅ Open Graph images generated and injected successfully!\n");
     },
   };
 };
@@ -40,7 +52,7 @@ module.exports = function (context, options) {
 /**
  * Recursively scan docs directory and generate images
  */
-async function generateImagesFromDirectory(dir, ogDir, siteConfig) {
+async function generateImagesFromDirectory(dir, ogDir, siteConfig, docsRoot) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
 
   for (const entry of entries) {
@@ -48,7 +60,7 @@ async function generateImagesFromDirectory(dir, ogDir, siteConfig) {
 
     if (entry.isDirectory()) {
       // Recursively process subdirectories
-      await generateImagesFromDirectory(fullPath, ogDir, siteConfig);
+      await generateImagesFromDirectory(fullPath, ogDir, siteConfig, docsRoot);
     } else if (
       entry.isFile() &&
       (entry.name.endsWith(".md") || entry.name.endsWith(".mdx"))
@@ -58,11 +70,8 @@ async function generateImagesFromDirectory(dir, ogDir, siteConfig) {
       const metadata = extractFrontMatter(content);
 
       if (metadata.title) {
-        const relativePath = path.relative(path.join(dir, ".."), fullPath);
-        const slug = relativePath
-          .replace(/\\/g, "/")
-          .replace(/\.mdx?$/, "")
-          .replace(/^docs\//, "");
+        const relativePath = path.relative(docsRoot, fullPath);
+        const slug = relativePath.replace(/\\/g, "/").replace(/\.mdx?$/, "");
 
         await generateOGImage({
           title: metadata.title,
@@ -102,6 +111,87 @@ function extractFrontMatter(content) {
   }
 
   return frontMatter;
+}
+
+/**
+ * Inject OG image meta tags into built HTML files
+ */
+async function injectOGImagesIntoHTML(outDir, siteConfig, siteDir) {
+  console.log("\n🔧 Injecting OG images into HTML files...\n");
+
+  const htmlFiles = [];
+  
+  // Recursively find all HTML files
+  function findHTMLFiles(dir) {
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        findHTMLFiles(fullPath);
+      } else if (entry.isFile() && entry.name.endsWith('.html')) {
+        htmlFiles.push(fullPath);
+      }
+    }
+  }
+  
+  findHTMLFiles(outDir);
+
+  const ogImagesDir = path.join(siteDir, 'static', 'img', 'og');
+
+  for (const htmlFile of htmlFiles) {
+    try {
+      let html = fs.readFileSync(htmlFile, 'utf-8');
+      
+      // Extract the path from the HTML file location
+      const relativePath = path.relative(outDir, htmlFile);
+      
+      // Convert HTML path to slug (similar to how we generate images)
+      let slug = relativePath
+        .replace(/\\/g, '/')
+        .replace(/\.html$/, '')
+        .replace(/\/index$/, ''); // Remove trailing /index
+      
+      // Handle special cases
+      if (slug === 'index' || slug === '') {
+        slug = 'home';
+      }
+      
+      // For docs pages, remove the "docs/" prefix to match generated image names
+      if (slug.startsWith('docs/')) {
+        slug = slug.replace(/^docs\//, '');
+      }
+      
+      // Convert to OG image filename
+      const imageFilename = slug.replace(/\//g, '-') + '.png';
+      const ogImagePath = path.join(ogImagesDir, imageFilename);
+      
+      // Check if OG image exists for this page
+      if (fs.existsSync(ogImagePath)) {
+        const imageUrl = `${siteConfig.url}/img/og/${imageFilename}`;
+        
+        // Replace or add OG image meta tags
+        // Remove existing og:image and twitter:image tags
+        html = html.replace(/<meta[^>]*property="og:image"[^>]*>/gi, '');
+        html = html.replace(/<meta[^>]*name="twitter:image"[^>]*>/gi, '');
+        
+        // Add new OG image tags before </head>
+        const ogTags = `
+  <meta property="og:image" content="${imageUrl}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:image" content="${imageUrl}">
+</head>`;
+        
+        html = html.replace(/<\/head>/i, ogTags);
+        
+        // Write back
+        fs.writeFileSync(htmlFile, html, 'utf-8');
+        console.log(`  ✓ Injected OG image: ${imageFilename}`);
+      }
+    } catch (error) {
+      console.log(`  ⊘ Error processing ${path.basename(htmlFile)}: ${error.message}`);
+    }
+  }
 }
 
 /**
@@ -329,7 +419,7 @@ async function generateOGImage({
     fs.writeFileSync(filepath, pngBuffer);
 
     console.log(`  ✓ Generated: ${filename}`);
-    return filepath;
+    return filename;
   } catch (error) {
     console.error(
       `  ✗ Failed to generate image for "${title}":`,
