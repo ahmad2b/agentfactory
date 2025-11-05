@@ -319,10 +319,11 @@ Now connect Spec-Kit Plus to an AI tool. You have two primary options: **Claude 
    In Claude Code, verify you can access Spec-Kit Plus commands:
 
    ```bash
-   /sp.help
+   /sp.specify --help
    ```
 
-   You should see available commands like `/sp.specify`, `/sp.plan`, `/sp.tasks`, `/sp.implement`.
+   You should see help information for the specify command. The core commands are:
+   - `/sp.specify`, `/sp.clarify`, `/sp.plan`, `/sp.adr`, `/sp.tasks`, `/sp.implement`, `/sp.phr`
 
 ### Option 2: Gemini CLI (Alternative)
 
@@ -355,9 +356,13 @@ If you prefer Google's Gemini, here's the alternative setup:
 
 4. **Verify Gemini CLI Access**
 
+   In Gemini CLI, test access to Spec-Kit Plus commands:
+
    ```bash
-   /sp.help
+   /sp.specify --help
    ```
+
+   You should see help information for the specify command.
 
 ### Choose Your Tool
 
@@ -391,48 +396,42 @@ Open Claude Code (or your chosen AI tool) in the `calculator-project` directory:
 claude-code .
 ```
 
-Inside Claude Code, type:
+Inside Claude Code, verify Spec-Kit Plus commands are available:
 
 ```
-/sp.help
+/sp.specify --help
 ```
 
-**Expected Output**: List of available Spec-Kit Plus commands:
+You should see help information for the specify command. The core Spec-Kit Plus commands are:
 - `/sp.specify` — Launch specification workflow
 - `/sp.clarify` — Refine and validate specs
 - `/sp.plan` — Generate implementation plan
 - `/sp.adr <title>` — Document architectural decisions
 - `/sp.tasks` — Decompose plan into tasks
 - `/sp.implement` — Generate code
-- `/sp.validate` — Run validation checks
+- `/sp.phr` — Record prompt history
 
-If you see this list, your orchestrator is configured correctly.
+If the command is recognized, your orchestrator is configured correctly.
 
 ### Test 2: Access Spec-Kit Plus Templates
 
-Still in Claude Code, ask:
+Verify that Spec-Kit Plus templates are available. From your terminal:
 
-```
-/sp.show-templates
+```bash
+ls .specify/templates/
 ```
 
-**Expected Output**: Displays available templates:
+**Expected Output**: You should see these template files:
 - `spec-template.md` — Structure for writing specifications
 - `plan-template.md` — Structure for writing plans
 - `tasks-template.md` — Structure for task breakdown
-- `phr-template.md` — Structure for prompt history records
+- `phr-template.prompt.md` — Structure for prompt history records
 
 If you see these templates, your framework installation is correct.
 
 ### Test 3: Verify Directory Structure
 
-In Claude Code, type:
-
-```
-/sp.init-check
-```
-
-Or manually verify from your terminal:
+Verify the complete project structure from your terminal:
 
 ```bash
 # Navigate to your project
@@ -573,7 +572,7 @@ Should I proceed to write my first specification?
 - [ ] Claude Code (or Gemini CLI) configured and running
 - [ ] Project directory structure created (`.specify/`, `specs/`, `history/`)
 - [ ] `.env` file with API key configured
-- [ ] `/sp.help` command returns available commands
+- [ ] `/sp.specify --help` command works (verifies Spec-Kit Plus access)
 - [ ] Git repository initialized with initial commit
 - [ ] Calculator constitution drafted
 
@@ -616,8 +615,9 @@ do anything else?
 After you receive the response, ask:
 
 ```
-Thanks for confirming. Now can you run /sp.help and tell me:
-1. What are the 6 main Spec-Kit Plus workflow commands?
+Thanks for confirming. Now can you tell me:
+1. What are the 7 main Spec-Kit Plus workflow commands?
+   (Hint: /sp.specify, /sp.clarify, /sp.plan, /sp.adr, /sp.tasks, /sp.implement, /sp.phr)
 2. In what order should I use them (from specification through implementation)?
 3. Which commands are explicit (I run them) vs automatic (system runs them)?
 ```

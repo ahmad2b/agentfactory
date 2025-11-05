@@ -141,38 +141,66 @@ Tests verify that implementation works. Evals verify that implementation solves 
 
 Here's how professionals work:
 
-**Step 1: Informal Chat About Success**
+**Step 1: YOU Drive the Exploration Through Questions**
+
+**Critical**: YOU ask the questions to explore the problem space. The AI doesn't interview you; you use the AI to think through requirements.
 
 ```
-You: "I want to build a calculator with basic operations"
+You: "I want to build a calculator"
 
-AI: "Great! Let me ask clarifying questions:
-   - Which operations? (add, subtract, multiply, divide, power?)
-   - What about edge cases? (e.g., division by zero, power(0,0)?)
-   - What's your definition of 'works correctly'? (How many decimals? Integer division or float?)
-   - How will users interact? (Python library? CLI? Web interface?)"
+You: "What operations should a basic calculator include?"
 
-You: "Operations: add, subtract, multiply, divide, power (all 5)
-     Edge cases: Division by zero should error clearly
-     Results: float with 6-decimal minimum precision
-     Interface: Python library (importable as a module)"
+AI: "Common operations are add, subtract, multiply, divide, and power (exponentiation).
+     Those five operations cover most basic arithmetic needs."
 
-AI: "Got it. So success looks like:
-   ✅ 5 operations working correctly
-   ✅ Division by zero raises clear error
-   ✅ All results return float with 6+ decimals
-   ✅ Can be imported and called as a library
+You: "What edge cases do I need to consider for these operations?"
 
-   Is that correct? Anything else?"
+AI: "Key edge cases:
+     - Division by zero (should error)
+     - Negative exponents (e.g., 2^-3)
+     - 0^0 (mathematically undefined)
+     - Very large numbers (overflow handling)
+     - Type mixing (int and float inputs)"
 
-You: "Yes, also should handle negative numbers and very large numbers without errors"
+You: "Should results be integers or floats?"
 
-AI: "Perfect. Those are your evals. Now let's capture this formally in a specification."
+AI: "Floats are better for arithmetic operations because:
+     - Division naturally produces decimals (5/2 = 2.5)
+     - Power operations often produce decimals (2^0.5 = 1.414...)
+     - Consistent return type simplifies usage
+     - Python's float has ~15-17 decimal places of precision"
+
+You: "How precise do the results need to be?"
+
+AI: "For a basic calculator, 6 decimal places minimum is standard:
+     - Enough for most practical calculations
+     - Avoids floating-point display noise
+     - Matches calculator conventions"
+
+You: "What interface makes sense—CLI, library, or web?"
+
+AI: "For learning SDD, a Python library (importable module) is best:
+     - Simple to test
+     - Easy to validate specifications
+     - Can add CLI/web later if needed
+     - Focus on core logic first"
+
+You: "So if I understand correctly, success looks like:
+     ✅ 5 operations (add, subtract, multiply, divide, power)
+     ✅ All results return float
+     ✅ Minimum 6 decimal precision
+     ✅ Division by zero raises clear error
+     ✅ Handles negative numbers and large numbers
+     ✅ Importable as Python library
+
+     Does that cover the essentials?"
+
+AI: "Yes! Those are your evals—the success criteria. Now let's formalize this into a specification using /sp.specify."
 ```
 
 **Step 2: Formalize Into Specification**
 
-That conversation becomes the specification's acceptance criteria. The spec says, "Here's what the calculator must do" (derived from the evals conversation).
+That conversation becomes the specification's acceptance criteria. The spec says, "Here's what the calculator must do" (derived from the evals conversation you just had).
 
 ### Why Evals-First Matters
 
