@@ -76,7 +76,7 @@ workflow: "manual-implementation"
 version: "1.0.0"
 ---
 
-# Lesson 4: Clarify Phase — Refining Specs with /sp.clarify
+# Clarify Phase — Refining Specs with /sp.clarify
 
 You've written a calculator specification. It looks good. But there are always gaps you didn't catch—ambiguities that seemed clear in your head but are actually unclear on paper. Edge cases you missed. Assumptions you didn't state explicitly.
 

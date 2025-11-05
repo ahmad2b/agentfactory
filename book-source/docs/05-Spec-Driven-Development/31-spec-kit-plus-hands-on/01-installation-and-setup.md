@@ -86,7 +86,7 @@ workflow: "manual-implementation"
 version: "1.0.0"
 ---
 
-# Lesson 1: Installation & Setup — AI-Native SDD Toolkit
+# Installation & Setup — AI-Native SDD Toolkit
 
 Welcome to hands-on Spec-Kit Plus development! Chapter 30 taught you **why** specification-driven development matters. This chapter teaches you **how** to do it—by building a real calculator project from specification to working code using Spec-Kit Plus and your AI companion.
 

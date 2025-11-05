@@ -81,7 +81,7 @@ workflow: "manual-implementation"
 version: "1.0.0"
 ---
 
-# Lesson 7: Implement Phase — AI-Driven Code Generation and Validation
+# Implement Phase — AI-Driven Code Generation and Validation
 
 This is it: **Implementation**. Everything you've done—specification, planning, tasking—leads to this moment.
 

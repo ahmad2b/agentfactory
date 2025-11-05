@@ -76,7 +76,7 @@ workflow: "manual-implementation"
 version: "1.0.0"
 ---
 
-# Lesson 2: Constitution Phase — Project-Wide Rules
+# Constitution Phase — Project-Wide Rules
 
 Welcome to the second lesson of hands-on Spec-Kit Plus development. You've installed the framework and configured your AI tool. Now it's time to create the **foundational rules** that will guide every part of your calculator project.
 

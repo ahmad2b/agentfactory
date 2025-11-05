@@ -81,7 +81,7 @@ workflow: "manual-implementation"
 version: "1.0.0"
 ---
 
-# Lesson 8: Capstone Integration — Complete Workflow End-to-End
+# Capstone Integration — Complete Workflow End-to-End
 
 This is the capstone: **Apply everything you've learned in Lessons 1-7 to a new project, independently.**
 

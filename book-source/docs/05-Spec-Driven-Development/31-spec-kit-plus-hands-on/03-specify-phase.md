@@ -81,7 +81,7 @@ workflow: "manual-implementation"
 version: "1.0.0"
 ---
 
-# Lesson 3: Specify Phase — Writing Complete Specifications
+# Specify Phase — Writing Complete Specifications
 
 Welcome to the most important phase: **Specification**. This is where you translate your vague ideas ("I want a calculator") into crystal-clear requirements that AI can build from.
 

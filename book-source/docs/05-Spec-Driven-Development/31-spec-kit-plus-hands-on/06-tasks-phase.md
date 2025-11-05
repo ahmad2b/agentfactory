@@ -76,7 +76,7 @@ workflow: "manual-implementation"
 version: "1.0.0"
 ---
 
-# Lesson 6: Tasks Phase — Atomic Work Units and Checkpoints
+# Tasks Phase — Atomic Work Units and Checkpoints
 
 You now have:
 - ✅ A clear specification

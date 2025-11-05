@@ -81,7 +81,7 @@ workflow: "manual-implementation"
 version: "1.0.0"
 ---
 
-# Lesson 5: Plan Phase — Architecture Decisions and ADRs
+# Plan Phase — Architecture Decisions and ADRs
 
 You have a clear specification. Now comes planning: **How will you build it?**
 
