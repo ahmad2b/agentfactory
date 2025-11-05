@@ -1,5 +1,5 @@
 ---
-title: "Plan Phase — Architecture Decisions and ADRs"
+title: "Plan Phase - Architecture Decisions and ADRs"
 chapter: 31
 lesson: 5
 duration_minutes: 120
@@ -81,10 +81,10 @@ workflow: "manual-implementation"
 version: "1.0.0"
 ---
 
-# Plan Phase — Architecture Decisions and ADRs
+# Plan Phase - Architecture Decisions and ADRs
 
 With your specification complete, you now face a new question: How will you actually build it?
-This is the essence of the Plan Phase — transforming the ‘What’ of your specification into the ‘How’ of architecture and implementation strategy.
+This is the essence of the Plan Phase - transforming the ‘What’ of your specification into the ‘How’ of architecture and implementation strategy.
 
 `/sp.plan` generates an implementation plan that breaks your specification into:
 - **Architectural components** (core library, error handlers, type system, tests)
@@ -100,10 +100,10 @@ This lesson teaches you how to work with generated plans and how to capture impo
 
 `/sp.plan` analyzes your specification and generates a detailed implementation plan by:
 
-1. **Breaking spec into components** — Which parts of your spec need separate modules?
-2. **Ordering dependencies** — What must be built first?
-3. **Identifying design decisions** — Where are there multiple valid approaches?
-4. **Proposing architecture** — How should code be organized?
+1. **Breaking spec into components** - Which parts of your spec need separate modules?
+2. **Ordering dependencies** - What must be built first?
+3. **Identifying design decisions** - Where are there multiple valid approaches?
+4. **Proposing architecture** - How should code be organized?
 
 **Input**: Your specification (what the calculator must do)
 
@@ -165,7 +165,7 @@ The generated plan should include:
 
 ## Understanding ADRs (Architectural Decision Records) (20 minutes)
 
-Planning exposes **architectural decisions** — choices about how to build that have long-term consequences.
+Planning exposes **architectural decisions** - choices about how to build that have long-term consequences.
 
 ### What Is an ADR?
 
@@ -216,7 +216,7 @@ Use your AI companion to review your implementation plan and ADRs.
 
 ### Prompt Set (Copy-Paste Ready)
 
-**Prompt 1 — Plan Review**
+**Prompt 1 - Plan Review**
 
 Copy and paste this into Claude Code:
 
@@ -227,7 +227,7 @@ Looking at my specification, does this plan address all requirements?
 Are the phases in the right order? Any missing components?
 ```
 
-**Prompt 2 — ADR Completeness**
+**Prompt 2 - ADR Completeness**
 
 After plan review, ask:
 
@@ -238,7 +238,7 @@ Are these the most important decisions? Did I miss any critical architectural
 choices? 
 ```
 
-**Prompt 3 — Plan to Tasks Readiness**
+**Prompt 3 - Plan to Tasks Readiness**
 
 Finally, ask:
 

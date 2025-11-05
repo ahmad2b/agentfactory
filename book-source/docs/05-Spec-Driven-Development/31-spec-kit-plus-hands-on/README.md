@@ -5,7 +5,7 @@ title: "Chapter 31: Spec-Kit Plus Hands-On"
 
 # Chapter 31: Spec-Kit Plus Hands-On
 
-Welcome to hands-on specification-driven development. This chapter transforms understanding (from Chapter 30) into practice. You won't read about specifications—you'll write them. You won't learn about AI collaboration — you'll build project with your AI companion from specifications to implementation.
+Welcome to hands-on specification-driven development. This chapter transforms understanding (from Chapter 30) into practice. You won't read about specifications-you'll write them. You won't learn about AI collaboration - you'll build project with your AI companion from specifications to implementation.
 
 ---
 
@@ -37,14 +37,14 @@ Welcome to hands-on specification-driven development. This chapter transforms un
 
 By completing this chapter, you'll master:
 
-1. **Spec-Kit Plus Architecture** — Understand Horizontal Intelligence (ADRs + PHRs) and Vertical Intelligence (orchestrator + subagents)
-2. **Evals-First Collaboration** — How to explore problem space with AI BEFORE writing formal specifications
-3. **Constitution Creation** — Setting project-wide quality standards that cascade to all features
-4. **Specification Writing** — Creating clear, testable requirements using SMART criteria
-5. **Iterative Refinement** — Using `/sp.clarify` to identify and resolve specification gaps
-6. **Architecture Planning** — Generating implementation plans and documenting decisions with ADRs
-7. **Task Decomposition** — Breaking plans into atomic work units with checkpoint-driven execution
-8. **AI-Driven Implementation** — Orchestrating code generation with systematic validation protocols
-9. **Independent Workflow** — Applying all skills end-to-end without guidance
+1. **Spec-Kit Plus Architecture** - Understand Horizontal Intelligence (ADRs + PHRs) and Vertical Intelligence (orchestrator + subagents)
+2. **Evals-First Collaboration** - How to explore problem space with AI BEFORE writing formal specifications
+3. **Constitution Creation** - Setting project-wide quality standards that cascade to all features
+4. **Specification Writing** - Creating clear, testable requirements using SMART criteria
+5. **Iterative Refinement** - Using `/sp.clarify` to identify and resolve specification gaps
+6. **Architecture Planning** - Generating implementation plans and documenting decisions with ADRs
+7. **Task Decomposition** - Breaking plans into atomic work units with checkpoint-driven execution
+8. **AI-Driven Implementation** - Orchestrating code generation with systematic validation protocols
+9. **Independent Workflow** - Applying all skills end-to-end without guidance
 
 Most importantly, you'll build the muscle memory for specification-first thinking that makes you dramatically faster in Chapters 32 and beyond. Let's build something real.

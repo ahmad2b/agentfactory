@@ -1,5 +1,5 @@
 ---
-title: "Constitution Phase — Project-Wide Rules"
+title: "Constitution Phase - Project-Wide Rules"
 chapter: 31
 lesson: 2
 duration_minutes: 90
@@ -76,7 +76,7 @@ workflow: "manual-implementation"
 version: "1.0.0"
 ---
 
-# Constitution Phase — Project-Wide Rules
+# Constitution Phase - Project-Wide Rules
 
 Welcome to the second lesson of hands-on Spec-Kit Plus development. You've installed the framework and configured your AI tool. Now it's time to create the **foundational rules** that will guide every part of your calculator project.
 
@@ -312,7 +312,7 @@ Use the agent to commit and open a PR for the constitution:
 - Create a draft PR (or share the compare URL if `gh` auth is missing)
 
 
-The Constitution is now **the foundation** for all your feature work. Every specification you write, every plan you generate, every task you break down—they all work within the Constitution's constraints.
+The Constitution is now **the foundation** for all your feature work. Every specification you write, every plan you generate, every task you break down-they all work within the Constitution's constraints.
 
 ---
 
@@ -327,7 +327,7 @@ Now let's use your AI companion to review your Constitution and ensure it's clea
 
 ### Prompt Set (Copy-Paste Ready)
 
-**Prompt 1 — Constitution Clarity Check**
+**Prompt 1 - Constitution Clarity Check**
 
 Copy and paste this into Claude Code:
 
@@ -344,7 +344,7 @@ Here's my Constitution:
 Please identify any rules that need clarification.
 ```
 
-**Prompt 2 — Cascade Validation**
+**Prompt 2 - Cascade Validation**
 
 After reviewing clarity, ask:
 
@@ -359,7 +359,7 @@ Looking at my Constitution, what constraints must my spec respect?
 This helps me understand if my Constitution is specific enough to guide specs.
 ```
 
-**Prompt 3 — Reality Check**
+**Prompt 3 - Reality Check**
 
 Finally, ask:
 

@@ -1,5 +1,5 @@
 ---
-title: "Specify Phase — Writing Complete Specifications"
+title: "Specify Phase - Writing Complete Specifications"
 chapter: 31
 lesson: 3
 duration_minutes: 120
@@ -81,11 +81,11 @@ workflow: "manual-implementation"
 version: "1.0.0"
 ---
 
-# Specify Phase — Writing Complete Specifications
+# Specify Phase - Writing Complete Specifications
 
 Welcome to the most important phase: **Specification**. This is where you translate your vague ideas ("I want a calculator") into crystal-clear requirements that AI can build from.
 
-Here's the paradigm shift: In AI-native development, **your ability to write a clear specification is more valuable than your ability to write code**. Bad code can be refactored — but a bad spec breaks everything downstream. In this lesson, you’ll learn how to collaborate with AI to define success and turn it into a complete, testable specification.
+Here's the paradigm shift: In AI-native development, **your ability to write a clear specification is more valuable than your ability to write code**. Bad code can be refactored - but a bad spec breaks everything downstream. In this lesson, you’ll learn how to collaborate with AI to define success and turn it into a complete, testable specification.
 
 ---
 
@@ -233,7 +233,7 @@ A good spec has:
 A bad spec has:
 - ❌ Vague operations ("should work correctly" - what's "correct"?)
 - ❌ Missing edge cases (surprises emerge during implementation)
-- ❌ Ambiguous criteria ("handle errors"—how?)
+- ❌ Ambiguous criteria ("handle errors"-how?)
 - ❌ Ignores Constitution (specification asks for things Constitution forbids)
 
 **Action**: Read your specification aloud. Does it sound clear? Would a developer understand exactly what to build?
@@ -254,7 +254,7 @@ Now let's use your AI companion to validate your specification and ensure it's c
 
 ### Prompt Set (Copy-Paste Ready)
 
-**Prompt 1 — Specification Completeness**
+**Prompt 1 - Specification Completeness**
 
 Copy and paste this into Claude Code:
 

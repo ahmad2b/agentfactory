@@ -1,5 +1,5 @@
 ---
-title: "Installation & Setup — AI-Native SDD Toolkit"
+title: "Installation & Setup - AI-Native SDD Toolkit"
 chapter: 31
 lesson: 1
 duration_minutes: 90
@@ -73,7 +73,7 @@ cognitive_load:
   assessment: "5 new concepts (Spec-Kit Plus framework, Horizontal Intelligence, Vertical Intelligence, AI tool options, Project structure) within A2 limit of 7 ✓"
 
 differentiation:
-  extension_for_advanced: "Explore multi-tool setup—configure both Claude Code and Gemini CLI; compare workflows between the two"
+  extension_for_advanced: "Explore multi-tool setup-configure both Claude Code and Gemini CLI; compare workflows between the two"
   remedial_for_struggling: "Step-by-step guided installation with video/visual aids; installation verification checklist"
 
 # Generation metadata
@@ -86,11 +86,11 @@ workflow: "manual-implementation"
 version: "1.0.0"
 ---
 
-# Installation & Setup — AI-Native SDD Toolkit
+# Installation & Setup - AI-Native SDD Toolkit
 
-Welcome to hands-on Spec-Kit Plus development! Chapter 30 taught you **why** specification-driven development matters. This chapter teaches you **how** to do it—by building a real calculator project from specification to working code using Spec-Kit Plus and your AI companion.
+Welcome to hands-on Spec-Kit Plus development! Chapter 30 taught you **why** specification-driven development matters. This chapter teaches you **how** to do it-by building a real calculator project from specification to working code using Spec-Kit Plus and your AI companion.
 
-This lesson gets your toolkit ready. By the end, you'll have Spec-Kit Plus installed, your AI tool configured, and a test project initialized. More importantly, you'll understand the architecture behind Spec-Kit Plus—why it's independent of any single AI tool, and how the three-tier Vertical Intelligence pattern (You → Orchestrator → Specialized Subagents) enables efficient workflow management.
+This lesson gets your toolkit ready. By the end, you'll have Spec-Kit Plus installed, your AI tool configured, and a test project initialized. More importantly, you'll understand the architecture behind Spec-Kit Plus-why it's independent of any single AI tool, and how the three-tier Vertical Intelligence pattern (You → Orchestrator → Specialized Subagents) enables efficient workflow management.
 
 ---
 
@@ -153,11 +153,11 @@ AI Orchestrator (Main Collaborator)
 
 **How Vertical Intelligence Works**:
 
-1. **You describe intent** — "Build a calculator with 5 operations"
-2. **Orchestrator delegates** — Routes to appropriate subagent (e.g., Specification Subagent for writing specs)
-3. **Subagent executes** — Specification Subagent asks clarifying questions, identifies gaps, returns complete spec
-4. **You validate** — Review spec and approve (or iterate)
-5. **Orchestrator delegates next phase** — Routes to Planning Subagent
+1. **You describe intent** - "Build a calculator with 5 operations"
+2. **Orchestrator delegates** - Routes to appropriate subagent (e.g., Specification Subagent for writing specs)
+3. **Subagent executes** - Specification Subagent asks clarifying questions, identifies gaps, returns complete spec
+4. **You validate** - Review spec and approve (or iterate)
+5. **Orchestrator delegates next phase** - Routes to Planning Subagent
 6. **Cycle repeats** through Plan → Tasks → Implementation
 
 **Why This Matters**: You don't need to memorize specification templates, planning methodologies, or code patterns. The orchestrator knows which expert to consult for which task. Your job is **thinking clearly about intent and validating results**, not memorizing frameworks.
@@ -166,10 +166,10 @@ AI Orchestrator (Main Collaborator)
 
 Chapter 30 introduced you to four SDD approaches:
 
-- **Kiro** — Extremely simple (just folders, no automation)
-- **GitHub Spec-Kit** — GitHub-based workflow with templates
-- **Spec-Kit Plus** (Panaversity's approach) — Templates + ADRs + PHRs + Vertical Intelligence
-- **Tessel** — Code-generation focused (spec as source of truth)
+- **Kiro** - Extremely simple (just folders, no automation)
+- **GitHub Spec-Kit** - GitHub-based workflow with templates
+- **Spec-Kit Plus** (Panaversity's approach) - Templates + ADRs + PHRs + Vertical Intelligence
+- **Tessel** - Code-generation focused (spec as source of truth)
 
 We chose Spec-Kit Plus for this book because:
 
@@ -233,9 +233,9 @@ calculator-project/
 
 **Explanation of Directories**:
 
-- **`.specify/`** — Framework infrastructure (read-only templates and tools)
-- **`specs/`** — Your specification artifacts (what you write)
-- **`history/`** — Knowledge capture (ADRs and PHRs for traceability)
+- **`.specify/`** - Framework infrastructure (read-only templates and tools)
+- **`specs/`** - Your specification artifacts (what you write)
+- **`history/`** - Knowledge capture (ADRs and PHRs for traceability)
 
 Note: The `specs/` and `history/` directories will appear when we create our first specification.
 
@@ -245,7 +245,7 @@ For the rest of this chapter, all examples will show **Claude Code**. If you're 
 
 ---
 
-## Part D: Verify Commands Work 
+## Part C: Verify Commands Work 
 
 Now let's test that everything is connected.
 
@@ -270,14 +270,14 @@ Inside Terminal, verify Spec-Kit Plus commands are available:
 ```
 
 You should see core Spec-Kit Plus commands:
-- `/sp.constitution` — Build your constitution
-- `/sp.specify` — Launch specification workflow
-- `/sp.clarify` — Refine and validate specs
-- `/sp.plan` — Generate implementation plan
-- `/sp.adr` — Document architectural decisions
-- `/sp.tasks` — Decompose plan into tasks
-- `/sp.implement` — Generate code
-- `/sp.phr` — Record prompt history
+- `/sp.constitution` - Build your constitution
+- `/sp.specify` - Launch specification workflow
+- `/sp.clarify` - Refine and validate specs
+- `/sp.plan` - Generate implementation plan
+- `/sp.adr` - Document architectural decisions
+- `/sp.tasks` - Decompose plan into tasks
+- `/sp.implement` - Generate code
+- `/sp.phr` - Record prompt history
 
 If the command is recognized, your orchestrator is configured correctly.
 
@@ -295,7 +295,7 @@ Now let's use your newly configured Spec-Kit Plus to run a real test. This activ
 
 ### Prompt Set (Copy-Paste Ready)
 
-**Prompt 1 — Framework Verification**
+**Prompt 1 - Framework Verification**
 
 Copy and paste this into Claude Code:
 
@@ -310,7 +310,7 @@ Then, tell me: Am I ready to write my first specification, or do I need to
 do anything else?
 ```
 
-**Prompt 2 — Command Verification**
+**Prompt 2 - Command Verification**
 
 After you receive the response, ask:
 
@@ -322,7 +322,7 @@ Thanks for confirming. Now can you tell me:
 3. Which commands are explicit (I run them) vs automatic (system runs them)?
 ```
 
-**Prompt 3 — Architecture Confirmation**
+**Prompt 3 - Architecture Confirmation**
 
 Finally, ask:
 

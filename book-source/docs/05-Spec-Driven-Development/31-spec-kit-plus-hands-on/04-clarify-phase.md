@@ -1,5 +1,5 @@
 ---
-title: "Clarify Phase — Refining Specs with /sp.clarify"
+title: "Clarify Phase - Refining Specs with /sp.clarify"
 chapter: 31
 lesson: 4
 duration_minutes: 90
@@ -76,9 +76,9 @@ workflow: "manual-implementation"
 version: "1.0.0"
 ---
 
-# Clarify Phase — Refining Specs with /sp.clarify
+# Clarify Phase - Refining Specs with /sp.clarify
 
-You've written a calculator specification. It looks good. But there are always gaps you didn't catch—ambiguities that seemed clear in your head but are actually unclear on paper. Edge cases you missed. Assumptions you didn't state explicitly.
+You've written a calculator specification. It looks good. But there are always gaps you didn't catch-ambiguities that seemed clear in your head but are actually unclear on paper. Edge cases you missed. Assumptions you didn't state explicitly.
 
 This is where the `/sp.clarify` command helps. **Clarify is NOT a formal workflow phase** like `/sp.specify` or `/sp.plan`. It's a **quick check** that your specification is complete before moving to planning.
 
@@ -94,25 +94,25 @@ The goal: Make your specification **so clear** that the planning phase can gener
 
 `/sp.clarify` analyzes your specification and reports:
 
-1. **Ambiguous Terms** — Words that could mean multiple things
+1. **Ambiguous Terms** - Words that could mean multiple things
 
    - Example: "should handle errors" (what errors? how should they be handled?)
 
-2. **Missing Assumptions** — Things you assumed but didn't state
+2. **Missing Assumptions** - Things you assumed but didn't state
 
    - Example: You assumed division by zero is an error, but didn't state what exception type
    - Example: You assumed float precision, but didn't specify the Python precision limits
 
-3. **Incomplete Requirements** — Operations or cases you didn't cover
+3. **Incomplete Requirements** - Operations or cases you didn't cover
 
    - Example: You specified divide(10, 2) but didn't specify divide(10, 0.0000001)
    - Example: You specified all operations individually but didn't specify operation chaining
 
-4. **Constraint Conflicts** — Where spec might contradict Constitution
+4. **Constraint Conflicts** - Where spec might contradict Constitution
 
    - Example: Spec says "results are exact integers" but Constitution says "always return float"
 
-5. **Edge Case Gaps** — Cases that should be handled but aren't documented
+5. **Edge Case Gaps** - Cases that should be handled but aren't documented
    - Example: What happens with power(2, 10000)? Overflow?
    - Example: What happens with very small numbers (e.g., 0.000000001)?
 
@@ -225,7 +225,7 @@ Use your AI companion to validate that your clarification has improved the speci
 
 ### Prompt Set (Copy-Paste Ready)
 
-**Prompt 1 — Clarification Impact Assessment**
+**Prompt 1 - Clarification Impact Assessment**
 
 Copy and paste this into Claude Code:
 
@@ -236,7 +236,7 @@ Can a developer now implement this calculator from my specification alone?
 Any remaining critical gaps?
 ```
 
-**Prompt 2 — Specification Quality Self-Assessment**
+**Prompt 2 - Specification Quality Self-Assessment**
 
 Finally, ask:
 

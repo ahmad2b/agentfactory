@@ -1,5 +1,5 @@
 ---
-title: "Tasks Phase — Atomic Work Units and Checkpoints"
+title: "Tasks Phase - Atomic Work Units and Checkpoints"
 chapter: 31
 lesson: 6
 duration_minutes: 90
@@ -76,7 +76,7 @@ workflow: "manual-implementation"
 version: "1.0.0"
 ---
 
-# Tasks Phase — Atomic Work Units and Checkpoints
+# Tasks Phase - Atomic Work Units and Checkpoints
 
 You now have:
 - ✅ A clear specification
@@ -85,7 +85,7 @@ You now have:
 
 Next: Break the plan into **atomic work units** (tasks) that you'll implement.
 
-This lesson teaches the **checkpoint pattern**—the critical workflow practice that keeps YOU in control. The pattern is:
+This lesson teaches the **checkpoint pattern**-the critical workflow practice that keeps YOU in control. The pattern is:
 
 ```
 Agent: "Here's Phase 1 code"
@@ -278,7 +278,7 @@ Use your AI companion to confirm your tasks are well-decomposed and ready for im
 
 ### Prompt Set (Copy-Paste Ready)
 
-**Prompt 1 — Task Atomicity Check**
+**Prompt 1 - Task Atomicity Check**
 
 Copy and paste this into Claude Code:
 
@@ -293,7 +293,7 @@ For each task, is it:
 Any tasks that are too big, too small, or trying to do multiple things?
 ```
 
-**Prompt 2 — Dependency Validation**
+**Prompt 2 - Dependency Validation**
 
 After task validation, ask:
 
@@ -304,7 +304,7 @@ Are these dependencies logical? Would you change the order?
 What's the critical path (minimum tasks to complete before "done")?
 ```
 
-**Prompt 3 — Checkpoint Pattern Understanding**
+**Prompt 3 - Checkpoint Pattern Understanding**
 
 Finally, ask:
 

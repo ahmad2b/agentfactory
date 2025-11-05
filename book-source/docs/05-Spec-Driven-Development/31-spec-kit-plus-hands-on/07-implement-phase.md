@@ -1,5 +1,5 @@
 ---
-title: "Implement Phase — AI-Driven Code Generation and Validation"
+title: "Implement Phase - AI-Driven Code Generation and Validation"
 chapter: 31
 lesson: 7
 duration_minutes: 150
@@ -81,15 +81,15 @@ workflow: "manual-implementation"
 version: "1.0.0"
 ---
 
-# Implement Phase — AI-Driven Code Generation and Validation
+# Implement Phase - AI-Driven Code Generation and Validation
 
-This is it: **Implementation**. Everything you've done—specification, planning, tasking—leads to this moment.
+This is it: **Implementation**. Everything you've done-specification, planning, tasking-leads to this moment.
 
 `/sp.implement` orchestrates AI code generation. The agent generates code, you review it, you validate against acceptance criteria, you commit. Then the next task.
 
 This lesson teaches two critical skills:
-1. **Code validation** — How to review AI-generated code
-2. **PHR auto-creation** — Understanding automatic documentation of AI collaboration
+1. **Code validation** - How to review AI-generated code
+2. **PHR auto-creation** - Understanding automatic documentation of AI collaboration
 
 ---
 
@@ -170,7 +170,7 @@ If all checks pass:
 
 ---
 
-## PHRs — Automatic Documentation 
+## PHRs - Automatic Documentation 
 
 While ADRs capture architectural decisions, PHRs capture collaboration and implementation decisions. Together, they form the project’s explainable memory.
 
@@ -369,7 +369,7 @@ Use your AI companion to reflect on your implementation and capture important de
 
 ### Prompt Set (Copy-Paste Ready)
 
-**Prompt 1 — Implementation Quality**
+**Prompt 1 - Implementation Quality**
 
 Copy and paste this into Claude Code:
 
@@ -390,7 +390,7 @@ Is the implementation quality good? Any suggestions for improvement?
 What patterns from this implementation should I maintain for the remaining operations?
 ```
 
-**Prompt 2 — Decision Capture**
+**Prompt 2 - Decision Capture**
 
 After quality review, ask:
 
@@ -401,7 +401,7 @@ If I need to understand "why" something was implemented this way in the future,
 where would I look?
 ```
 
-**Prompt 3 — PHR Exploration**
+**Prompt 3 - PHR Exploration**
 
 Finally, ask:
 
