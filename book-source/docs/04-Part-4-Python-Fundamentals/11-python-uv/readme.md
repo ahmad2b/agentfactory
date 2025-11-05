@@ -25,8 +25,3 @@ By the end of this chapter, you'll understand:
 - **Team collaboration with lockfiles**: How uv.lock ensures every teammate gets identical environments, understanding reproducibility (the foundation of professional development), and managing project updates across distributed teams
 - **Your AI-native Python identity**: Positioning yourself as a developer who understands package management concepts deeply, uses AI to handle mechanical command execution, validates AI suggestions against official documentation, and builds maintainable projects from day one
 
-## What's Next
-
-After completing this chapter, continue to **Chapter 12: Introduction to Python** where you'll apply your new project management skills to learning Python syntax itself. You'll discover Python's philosophy (readability, simplicity, explicitness) and write your first programs in professionally-structured UV projects—not messy script files.
-
-The UV foundation you establish here becomes essential infrastructure for every Python chapter that follows. You're not just learning a tool. You're adopting the professional practices that make you credible to employers, effective with teams, and confident building production systems.
