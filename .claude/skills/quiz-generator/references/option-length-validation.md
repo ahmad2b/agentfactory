@@ -48,7 +48,7 @@ D: "Maybe"                                                  (5 words)  ← Mediu
 Example acceptable ranges:
 - 4, 5, 6, 7 words → PASS (spread: 3 words)
 - 10, 11, 12, 13 words → PASS (spread: 3 words)
-- 5, 6, 8, 9 words → PASS (spread: 4 words) ✓ Actually acceptable
+- 5, 6, 8, 9 words → FAIL (spread: 4 words) ✗ Exceeds ±3 tolerance
 - 3, 5, 9, 10 words → FAIL (spread: 7 words)
 - 2, 6, 8, 12 words → FAIL (spread: 10 words)
 
