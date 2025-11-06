@@ -137,9 +137,9 @@ Use the complete workflow from Lessons 1-3.
 **Step 1: Create Worktrees**
 
 ```bash
-git worktree add ../feature-001-[name] main
-git worktree add ../feature-002-[name] main
-git worktree add ../feature-003-[name] main
+git worktree add worktrees/feature-001-[name] -b feature-001-[name]
+git worktree add worktrees/feature-002-[name] -b feature-002-[name]
+git worktree add worktrees/feature-003-[name] -b feature-003-[name]
 ```
 
 **Step 2: Write Specs (In Parallel)**

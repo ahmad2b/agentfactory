@@ -65,11 +65,11 @@ source_spec: "specs/002-chapter-32-redesign/spec.md"
 created: "2025-11-06"
 last_modified: "2025-11-06"
 git_author: "Claude Code"
-workflow: "/sp.implement (Lesson 7: Second Climax)"
+workflow: "/sp.implement (Lesson 6: Second Climax)"
 version: "1.0.0"
 ---
 
-# Lesson 7: SpecKit-Orchestrated Autonomous Execution
+# Lesson 6: SpecKit-Orchestrated Autonomous Execution
 
 **SECOND CLIMAX: Creative Independence Through Specification-Driven Orchestration**
 

@@ -283,23 +283,58 @@ STATUS_DIR="./.orchestrator-status"
 # Create status directory if it doesn't exist
 mkdir -p "$STATUS_DIR"
 
-# Write completion record
+# Cross-platform timestamp (works on macOS, Linux, Windows Git Bash)
+if date --version >/dev/null 2>&1; then
+  # GNU date (Linux)
+  TIMESTAMP=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+else
+  # BSD date (macOS)
+  TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+fi
+
+# Check acceptance criteria
+if [ -f "$FEATURE_ID/ACCEPTANCE_CRITERIA.checked" ]; then
+  CRITERIA_MET="true"
+else
+  CRITERIA_MET="false"
+fi
+
+# Write completion record (safer than heredoc with variable substitution)
 cat > "$STATUS_DIR/$FEATURE_ID.json" <<EOF
 {
   "feature_id": "$FEATURE_ID",
   "session_id": "$SESSION_ID",
-  "completed_at": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')",
+  "completed_at": "$TIMESTAMP",
   "status": "complete",
-  "acceptance_criteria_verified": $([ -f "$FEATURE_ID/ACCEPTANCE_CRITERIA.checked" ] && echo "true" || echo "false")
+  "acceptance_criteria_verified": $CRITERIA_MET
 }
 EOF
 
-echo "✓ Feature $FEATURE_ID completion notified at $(date)"
+echo "✓ Feature $FEATURE_ID completion notified at $TIMESTAMP"
 echo "  Session ID: $SESSION_ID"
-echo "  Status: $(cat $STATUS_DIR/$FEATURE_ID.json | jq '.status')"
 
-# Optional: Write to shared orchestrator log
-echo "$(date): $FEATURE_ID complete - $(cat $STATUS_DIR/$FEATURE_ID.json | jq -c '.')" >> .orchestrator-status.log
+# Use jq if available, otherwise parse manually
+if command -v jq >/dev/null 2>&1; then
+  echo "  Status: $(jq -r '.status' "$STATUS_DIR/$FEATURE_ID.json")"
+else
+  echo "  Status: complete"
+fi
+
+# Write to shared orchestrator log with file locking (prevents race conditions)
+# Use flock on Linux, or >> without locking on macOS (acceptable for low contention)
+LOG_FILE=".orchestrator-status.log"
+LOG_ENTRY="$TIMESTAMP: $FEATURE_ID complete (session: $SESSION_ID)"
+
+if command -v flock >/dev/null 2>&1; then
+  # Linux: use flock for safe concurrent writes
+  (
+    flock -x 200
+    echo "$LOG_ENTRY" >> "$LOG_FILE"
+  ) 200>"$LOG_FILE.lock"
+else
+  # macOS/BSD: simple append (low risk of corruption with short writes)
+  echo "$LOG_ENTRY" >> "$LOG_FILE"
+fi
 ```
 
 This hook is simple but powerful. When an agent finishes, the hook:
@@ -332,14 +367,29 @@ COMPLETE_COUNT=$(ls -1 "$STATUS_DIR"/*.json 2>/dev/null | wc -l)
 echo "Features Complete: $COMPLETE_COUNT"
 echo ""
 
+# Check if jq is available
+HAS_JQ=false
+if command -v jq >/dev/null 2>&1; then
+  HAS_JQ=true
+fi
+
 # List each feature's status
 echo "=== FEATURE STATUS ==="
 for status_file in "$STATUS_DIR"/*.json; do
   if [ -f "$status_file" ]; then
-    feature=$(jq -r '.feature_id' "$status_file")
-    completed=$(jq -r '.completed_at' "$status_file")
-    session=$(jq -r '.session_id' "$status_file")
-    criteria=$(jq -r '.acceptance_criteria_verified' "$status_file")
+    if [ "$HAS_JQ" = true ]; then
+      # Use jq for clean parsing
+      feature=$(jq -r '.feature_id' "$status_file")
+      completed=$(jq -r '.completed_at' "$status_file")
+      session=$(jq -r '.session_id' "$status_file")
+      criteria=$(jq -r '.acceptance_criteria_verified' "$status_file")
+    else
+      # Fallback: use grep and sed (works without jq)
+      feature=$(grep -o '"feature_id"[[:space:]]*:[[:space:]]*"[^"]*"' "$status_file" | cut -d'"' -f4)
+      completed=$(grep -o '"completed_at"[[:space:]]*:[[:space:]]*"[^"]*"' "$status_file" | cut -d'"' -f4)
+      session=$(grep -o '"session_id"[[:space:]]*:[[:space:]]*"[^"]*"' "$status_file" | cut -d'"' -f4)
+      criteria=$(grep -o '"acceptance_criteria_verified"[[:space:]]*:[[:space:]]*[a-z]*' "$status_file" | awk '{print $NF}')
+    fi
 
     echo "✓ $feature"
     echo "  Completed: $completed"
@@ -379,6 +429,12 @@ Run this script every minute. It tells you:
 - When you're ready for integration
 
 **No manual checking. No status meetings. Just one command.**
+
+> **Platform Compatibility Note**: Both scripts include cross-platform compatibility:
+> - Timestamp generation works on Linux (GNU date) and macOS (BSD date)
+> - File locking uses `flock` on Linux, simple append on macOS (safe for low contention)
+> - JSON parsing checks for `jq` availability and provides `grep`/`sed` fallback
+> - Scripts work on Windows Git Bash without modification
 
 ---
 
