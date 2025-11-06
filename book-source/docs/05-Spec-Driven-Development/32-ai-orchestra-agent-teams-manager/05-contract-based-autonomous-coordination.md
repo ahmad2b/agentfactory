@@ -84,6 +84,22 @@ By the end of this lesson, you'll understand how to write contracts so clear tha
 
 ---
 
+## From Scaling Problems to Contract Solutions
+
+In Lesson 4, you identified what breaks at scale:
+- ❌ **Vague integration points** → merge conflicts during integration
+- ❌ **Implicit dependencies** → agents block waiting for each other
+- ❌ **Ad-hoc communication** → coordination overhead kills productivity
+
+Contracts solve all of these:
+- ✅ **Explicit integration contracts** → clean merges (agents know exact boundaries)
+- ✅ **Documented dependencies** → autonomous work (no blocking)
+- ✅ **Specifications as communication** → async coordination (no meetings)
+
+This lesson teaches you HOW to write contracts that enable 5-7 agent coordination without synchronous meetings or constant oversight.
+
+---
+
 ## Why Contracts Enable Autonomy
 
 Let's start with the honest truth: at Lesson 5 scale (5 agents), constant monitoring doesn't scale. At 7-9 agents, it's impossible.
