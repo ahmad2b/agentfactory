@@ -273,30 +273,64 @@ cd calculator-project
 
 **Step 5: Verify Project Structure**
 
-After initialization, you should see the following directory structure.
+After initialization, you should see the following directory structure:
 
 ```
 calculator-project/
+├── .claude/
+│   └── commands/                    # Slash commands for SDD workflow
+│       ├── sp.adr.md                # Document architectural decisions
+│       ├── sp.analyze.md            # Cross-artifact consistency checks
+│       ├── sp.checklist.md          # Generate custom checklists
+│       ├── sp.clarify.md            # Refine specifications
+│       ├── sp.constitution.md       # Create project constitution
+│       ├── sp.git.commit_pr.md      # Commit and create PRs
+│       ├── sp.implement.md          # Generate code from tasks
+│       ├── sp.phr.md                # Record prompt history
+│       ├── sp.plan.md               # Generate implementation plans
+│       ├── sp.specify.md            # Create specifications
+│       └── sp.tasks.md              # Break plans into atomic tasks
+│
 ├── .specify/
 │   ├── memory/
-│   │   └── constitution.md          # Project-wide rules
-│   ├── templates/
-│   └── scripts/
-├── specs/                           # Specification Artifacts
-├── history/
-│   ├── adr/                         # Architectural Decision Records
-│   └── prompts/                     # Prompt History Records (AI collaboration logs)
-├── README.md
-└── .gitignore
+│   │   └── constitution.md          # Project-wide rules and principles
+│   │
+│   ├── scripts/
+│   │   └── bash/                    # Automation scripts
+│   │       ├── check-prerequisites.sh
+│   │       ├── common.sh
+│   │       ├── create-adr.sh
+│   │       ├── create-new-feature.sh
+│   │       ├── create-phr.sh
+│   │       ├── setup-plan.sh
+│   │       └── update-agent-context.sh
+│   │
+│   └── templates/                   # Templates for specs, plans, tasks, ADRs, PHRs
+│       ├── adr-template.md
+│       ├── agent-file-template.md
+│       ├── checklist-template.md
+│       ├── phr-template.prompt.md
+│       ├── plan-template.md
+│       ├── spec-template.md
+│       └── tasks-template.md
+│
+├── .git/                            # Git repository
+├── CLAUDE.md                        # Agent instructions and guidelines
+├── README.md                        # Project documentation
+└── .gitignore                       # Git ignore rules
 ```
 
-Note: The `specs/` and `history/` directories will appear when we create our first specification.
+**Note**: The `specs/`, `history/prompts/`, and `history/adr/` directories will be created automatically when you start your first feature.
 
-**Explanation of Directories**:
+**Explanation of Key Directories**:
 
-- **`.specify/`** - Framework infrastructure (read-only templates and tools)
-- **`specs/`** - Your specification artifacts (what you write)
-- **`history/`** - Knowledge capture (ADRs and PHRs for traceability)
+- **`.claude/commands/`** - Slash commands you'll use throughout the SDD workflow (/sp.specify, /sp.plan, etc.)
+- **`.specify/memory/`** - Your project constitution (created once, referenced always)
+- **`.specify/scripts/`** - Automation scripts for PHRs, ADRs, and feature setup
+- **`.specify/templates/`** - Templates that guide spec, plan, task, ADR, and PHR creation
+- **`CLAUDE.md`** - Agent instructions that guide your AI collaborator's behavior
+- **`specs/`** - (Created later) Your feature specifications
+- **`history/`** - (Created later) ADRs and PHRs for knowledge capture
 
 ---
 
