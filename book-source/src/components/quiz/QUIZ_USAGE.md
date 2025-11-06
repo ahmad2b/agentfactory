@@ -65,7 +65,7 @@ Each question must have:
   options: ["Option A", "Option B", "Option C", "Option D"],  // Exactly 4 options
   correctOption: 2,  // Index 0-3 of correct answer
   explanation: "Detailed explanation (100-150 words) addressing why correct and why each distractor is wrong",
-  source: "Lesson N: Lesson Title"  // Required in v4.0
+  source: "Lesson N: [Lesson Title]"  // Required in v4.0
 }
 ```
 

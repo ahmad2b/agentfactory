@@ -271,7 +271,7 @@ const Quiz: React.FC<QuizProps> = ({
                 )}
               </div>
 
-              {!isAnswerCorrect && (
+              {!isAnswerCorrect && selectedAnswer !== null && (
                 <div className={styles.feedbackYourAnswer}>
                   <strong>Why your answer was wrong:</strong>
                   <p>
