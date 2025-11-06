@@ -45,9 +45,9 @@ You'll discover why specifications matter through experience, not lectures. Star
 
 Here you'll practice specification-first development with your AI companion. You'll build a Python calculator project starting from specification (not code), learning the SpecifyPlus optionated workflow. Then you'll write a real-world grading system specification that becomes the foundation for Chapter 32's capstone.
 
-### Chapter 32: Real-World Spec-Kit Workflows & Capstone
+### Chapter 32: The Super AI Orchestra - Managing 10-15 AI Agents
 
-You'll scale SDD from solo work to team coordination. You'll simulate professional team development by orchestrating multiple AI agents working in parallel from shared specifications. You'll learn how specifications enable 2-person teams to scale to 500+ people, how agents stay current with evolving APIs, and implement a three-part capstone that demonstrates specification-driven parallelization.
+You'll master decomposition thinking to orchestrate 10-15 autonomous AI agents and achieve 10x productivity. Starting with manual 3-agent coordination using git worktrees and parallel SpecKit Plus workflows, you'll experience the FIRST CLIMAX (understanding what scales from 3 to 5 to 10-15 agents), learn contract-based autonomous coordination with explicit integration contracts and completion hooks, then experience the SECOND CLIMAX where SpecKit Plus itself becomes your orchestrator—coordinating 5-10 agents while you focus on strategy. The chapter culminates in a capstone project where you build a 3-5 feature system with measurable 2.5-3x speedup, creating a portfolio artifact that demonstrates strategic thinking and proves you can manage autonomous teams at scale.
 
 ### Chapter 33: The Tessl Framework - Pioneering Spec-Driven Development for Reliable AI-Native Software
 
