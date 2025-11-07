@@ -232,7 +232,18 @@ claude "Explain dependency injection in detail"
 
 **Purpose**: Show plan usage limits
 
+**Syntax**:
+```bash
+/usage    # Check current usage
+```
+
+**When to use**:
+- Before starting large tasks
+- When approaching daily/weekly limits
+- To understand usage patterns
+
 **Example Output**:
+```
 Settings:  Status   Config   Usage   (tab to cycle)
 
  Current session
@@ -273,7 +284,7 @@ Settings:  Status   Config   Usage   (tab to cycle)
 /permissions
 ```
 
-**Output**:
+**Example Output**:
 ```
 Current permissions:
 - Read files: ✓ Allowed
@@ -281,6 +292,8 @@ Current permissions:
 - Execute commands: ✓ Allowed (approval required)
 - Access network: ✗ Denied
 ```
+
+**Best practice**: Review permissions when starting work on a new project or when handling sensitive data.
 
 ---
 
