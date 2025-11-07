@@ -47,19 +47,13 @@ Output: ✓ Lint passed
 
 ---
 
-## Your First Hook: Echo Messages on Actions
+## Step 1: Write Your First Hook (Foundation)
 
-Let's create a simple hook that **echoes messages** when different actions happen. This teaches the mechanics without complexity.
+You'll write JSON directly so you understand exactly how hooks work.
 
-### Step 1: Create Project Settings File
+### Create `.claude/settings.json`
 
-In your project root, create `.claude/settings.json`:
-
-```bash
-mkdir -p .claude
-```
-
-**File**: `.claude/settings.json`
+In your project root, create a file named `.claude/settings.json`:
 
 ```json
 {
@@ -92,380 +86,168 @@ mkdir -p .claude
         ]
       }
     ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(bash:*)",
+      "Bash(echo:*)",
+      "Write",
+      "Edit"
+    ],
+    "deny": [],
+    "ask": []
   }
 }
 ```
 
-### Step 2: Understand the Three Hooks
+**Understanding the structure**:
 
-**Hook 1: SessionStart**
+**Hooks section**:
+- **`SessionStart`**: Runs when Claude Code starts
+- **`PreToolUse`**: Runs BEFORE a tool executes (with `matcher: "Bash"` = only bash)
+- **`PostToolUse`**: Runs AFTER a tool completes (with `matcher: "Edit"` = only edits)
+- **`type: "command"`**: Execute a shell command
+- **`command`**: The actual shell command to run (`echo` in this case)
+
+**Permissions section** (NEW):
+- **`allow`**: Tools that Claude Code is permitted to use
+  - `"Bash(bash:*)"` → Allow bash commands
+  - `"Bash(echo:*)"` → Allow echo specifically
+  - `"Write"` → Allow creating files
+  - `"Edit"` → Allow editing files
+- **`deny`**: Tools to explicitly block (empty = no blocks)
+- **`ask`**: Tools that require user confirmation each time (empty = none)
+
+**Why permissions?** Hooks run shell commands, which are powerful. Permissions tell Claude Code which tools are safe in this project and which need user approval.
+
+### Test Your Hook
+
+1. Save the file
+2. Exit Claude Code: `exit`
+3. Restart: `claude`
+4. You should see: `🚀 Claude Code session started for this project`
+5. Ask Claude: "List Python files in this project"
+6. You should see: `⚡ Running bash command...` before the command runs
+7. Ask Claude: "Add a comment to test.md"
+8. You should see: `✅ File edited successfully` after the edit
+
+**Why write it manually?** You now understand exactly what each hook does, how the JSON is structured, AND why permissions matter.
+
+---
+
+## Step 2: The Interactive Way (Easier)
+
+Now that you understand hooks, Claude Code has a faster way to add them:
+
+### Use the `/hooks` Command
+
+Instead of writing JSON, type:
+
+```
+/hooks
+```
+
+You'll see an interactive menu:
+- PreToolUse — Before tool execution
+- PostToolUse — After tool execution
+- Notification — When notifications are sent
+- UserPromptSubmit — When the user submits a prompt
+- SessionStart — When a new session is started
+
+Select an event, enter your command, done. No JSON to write.
+
+**When to use**: When you want to quickly add a simple hook without editing config files.
+
+---
+
+## Step 3: The AI-Native Way (Automation)
+
+For more complex hooks or when you want AI to help, use Claude Code's AI-native approach:
+
+### Tell Claude to Configure Your Hooks
+
+Instead of writing JSON or using `/hooks`, just ask Claude:
+
+**Example prompt**:
+```
+I want to add a hook that runs npm run lint after every file edit.
+Use the official Claude Code hooks documentation to create the right
+configuration. Here's the link: https://docs.claude.com/en/docs/claude-code/hooks
+```
+
+Claude will:
+1. Fetch the official hooks documentation
+2. Generate the correct JSON
+3. Create or update `.claude/settings.json`
+4. Test the hook with you
+
+**Why this works**: Claude reads the official docs in real-time, ensuring your hooks match the latest Claude Code API.
+
+---
+
+## Understanding Permissions (Critical for Hooks)
+
+Hooks execute shell commands, which are powerful. The `permissions` section controls what Claude Code is allowed to do in your project.
+
+### Permission Types
+
+**`allow`** — Tools Claude Code can use automatically:
 ```json
-"SessionStart": [
-  {
-    "type": "command",
-    "command": "echo '🚀 Claude Code session started for this project'"
-  }
+"allow": [
+  "Bash(bash:*)",     // Allow any bash command
+  "Bash(echo:*)",     // Allow echo specifically
+  "Write",            // Allow creating files
+  "Edit",             // Allow editing files
+  "Read"              // Allow reading files
 ]
 ```
 
-**When it runs**: Every time you type `claude` to start a session
-
-**Output**:
-```
-🚀 Claude Code session started for this project
-```
-
-**Hook 2: PreToolUse**
+**`deny`** — Tools to explicitly block:
 ```json
-"PreToolUse": [
-  {
-    "matcher": "Bash",
-    "hooks": [
-      {
-        "type": "command",
-        "command": "echo '⚡ Running bash command...'"
-      }
-    ]
-  }
+"deny": [
+  "Bash(rm:*)"        // Block delete commands
 ]
 ```
 
-**When it runs**: BEFORE Claude executes any bash command
-
-**Output**:
-```
-⚡ Running bash command...
-```
-
-**Hook 3: PostToolUse**
+**`ask`** — Tools that require user confirmation:
 ```json
-"PostToolUse": [
-  {
-    "matcher": "Edit",
-    "hooks": [
-      {
-        "type": "command",
-        "command": "echo '✅ File edited successfully'"
-      }
-    ]
-  }
+"ask": [
+  "Bash(git push:*)"  // Always ask before pushing
 ]
 ```
 
-**When it runs**: AFTER Claude finishes editing a file
+### Why This Matters for Hooks
 
-**Output**:
+Hooks are shell commands that run **automatically** (without user input). Permissions ensure:
+
+1. **Security**: Only safe commands can run automatically
+2. **Control**: You decide which tools need approval
+3. **Predictability**: No surprises from automated actions
+
+**Example**: A hook that runs `npm run lint` needs:
+```json
+"allow": ["Bash(npm:*)"]
 ```
-✅ File edited successfully
-```
+
+Without this permission, the hook runs but fails with: `"Pre is not logged in"`
 
 ---
 
-## Test Your Hooks
+## Understanding Hook Events
 
-### Test 1: SessionStart Hook
+Each hook fires at a specific lifecycle moment:
 
-```bash
-cd your-project
-claude
-```
-
-**What you'll see**:
-```
-🚀 Claude Code session started for this project
-
-(Claude Code starts...)
-```
-
-The hook ran when the session started!
-
-### Test 2: PreToolUse Hook
-
-In Claude Code, ask Claude to run a bash command:
-
-```
-List all Python files in this project
-```
-
-**What you'll see**:
-```
-⚡ Running bash command...
-find . -name "*.py" -type f
-```
-
-The hook echoed BEFORE the bash command executed.
-
-### Test 3: PostToolUse Hook
-
-In Claude Code, ask Claude to edit a file:
-
-```
-Add a comment to the top of app.py saying "Main application file"
-```
-
-**What you'll see**:
-```
-✅ File edited successfully
-```
-
-The hook echoed AFTER the file was edited.
-
----
-
-## How Hooks Work: The Architecture
-
-```
-You ask Claude Code to do something
-    ↓
-╔═════════════════════════════════╗
-║  Hook System Checks             ║
-║  "Is there a hook for this?"    ║
-╚════════════┬════════════════════╝
-             │
-    ┌────────┴────────┐
-    │                 │
-    ▼                 ▼
-[PreToolUse]    [PostToolUse]
-(Before)        (After)
-    │                 │
-    └────────┬────────┘
-             ▼
-    Claude Code executes action
-```
-
----
-
-## All Nine Hook Types Explained
-
-Claude Code provides **nine hook events** at different lifecycle stages. We'll cover the three most common first, then explore the advanced ones.
-
-### Common Hooks (For Most Projects)
-
-#### Hook Type 1: SessionStart
-
-**Runs**: When Claude Code starts (`claude` command)
-
-**Use for**:
-- Greeting messages
-- Loading environment variables
-- Project initialization
-
-**Example in your settings.json**:
-```json
-{
-  "hooks": {
-    "SessionStart": [
-      {
-        "type": "command",
-        "command": "echo '🚀 Project loaded, ready to code!'"
-      }
-    ]
-  }
-}
-```
-
-#### Hook Type 2: PreToolUse
-
-**Runs**: BEFORE Claude executes a tool (Bash, Edit, Read, etc.)
-
-**Capabilities**:
-- Execute validation commands
-- Run preparation steps
-- Can **block** tool execution if needed
-
-**Use for**:
-- Validation before dangerous commands
-- Warning messages
-- Preparation steps
-- Blocking unwanted actions
-
-**Example - Warning before bash**:
-```json
-{
-  "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo '⚠️  About to run a command...'"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-#### Hook Type 3: PostToolUse
-
-**Runs**: AFTER Claude executes a tool
-
-**Use for**:
-- Validation of results
-- Cleanup tasks
-- Confirmation messages
-- Running tests or linters after edits
-
-**Example - Message after edit**:
-```json
-{
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "echo '✅ Modification complete'"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
----
-
-### Advanced Hooks (For Complex Workflows)
-
-#### Hook Type 4: UserPromptSubmit
-
-**Runs**: When users submit a prompt to Claude Code
-
-**Use for**:
-- Logging user requests
-- Pre-processing input
-- Rate limiting
-
-**Example**:
-```json
-{
-  "hooks": {
-    "UserPromptSubmit": [
-      {
-        "type": "command",
-        "command": "echo '[LOG] User asked something at $(date)'"
-      }
-    ]
-  }
-}
-```
-
-#### Hook Type 5: Notification
-
-**Runs**: When Claude Code sends a notification
-
-**Use for**:
-- Logging important events
-- Triggering alerts
-
-**Example**:
-```json
-{
-  "hooks": {
-    "Notification": [
-      {
-        "type": "command",
-        "command": "echo '🔔 Notification event'"
-      }
-    ]
-  }
-}
-```
-
-#### Hook Type 6: Stop
-
-**Runs**: When Claude Code finishes responding
-
-**Use for**:
-- Cleanup after each response
-- Resetting state
-- Final validation
-
-**Example**:
-```json
-{
-  "hooks": {
-    "Stop": [
-      {
-        "type": "command",
-        "command": "echo '✋ Claude Code response complete'"
-      }
-    ]
-  }
-}
-```
-
-#### Hook Type 7: SubagentStop
-
-**Runs**: When a subagent task completes
-
-**Use for**:
-- Logging subagent results
-- Triggering post-processing
-- Collecting artifacts from subagents
-
-**Example**:
-```json
-{
-  "hooks": {
-    "SubagentStop": [
-      {
-        "type": "command",
-        "command": "echo '🤖 Subagent task finished'"
-      }
-    ]
-  }
-}
-```
-
-#### Hook Type 8: PreCompact
-
-**Runs**: Before Claude Code compacts conversation history
-
-**Use for**:
-- Saving conversation snapshots
-- Preparing for history cleanup
-
-**Example**:
-```json
-{
-  "hooks": {
-    "PreCompact": [
-      {
-        "type": "command",
-        "command": "echo '📦 Conversation history about to be compacted'"
-      }
-    ]
-  }
-}
-```
-
-#### Hook Type 9: SessionEnd
-
-**Runs**: When Claude Code session ends
-
-**Use for**:
-- Cleanup tasks
-- Saving session state
-- Logging session metrics
-
-**Example**:
-```json
-{
-  "hooks": {
-    "SessionEnd": [
-      {
-        "type": "command",
-        "command": "echo '👋 Session ended. Goodbye!'"
-      }
-    ]
-  }
-}
-```
+| Hook Event | Fires When | Use For |
+|-----------|-----------|---------|
+| **SessionStart** | Claude Code starts | Greeting, environment setup |
+| **PreToolUse** | Before a tool executes | Validation, warnings |
+| **PostToolUse** | After a tool completes | Confirmation, running tests |
+| **UserPromptSubmit** | User submits a prompt | Logging, preprocessing |
+| **Notification** | Claude sends a notification | Logging events |
+| **Stop** | Claude finishes responding | Cleanup |
+| **SubagentStop** | Subagent task completes | Collecting results |
+| **PreCompact** | Before history compaction | Snapshots |
+| **SessionEnd** | Session ends | Cleanup, saving state |
 
 ---
 
@@ -682,48 +464,56 @@ Now:
 
 ## Try With AI
 
-Practice hooks with Claude Code.
+Practice all three approaches: manual, interactive, and AI-native.
 
-### Exercise 1: Create Your First Hook
+### Exercise 1: Write Your First Hook (Foundation)
 
 **Steps**:
-1. Create `.claude/settings.json` in your project (use the example above)
+1. Create `.claude/settings.json` in your project (copy the example from "Step 1" above, including BOTH hooks AND permissions sections)
 2. Save the file
-3. Run `claude` to start a session
-4. You should see: `🚀 Claude Code session started for this project`
-5. Ask Claude: "List files in this project" (uses bash)
-6. You should see: `⚡ Running bash command...`
+3. Exit Claude Code: `exit`
+4. Restart: `claude`
+5. You should see: `🚀 Claude Code session started for this project`
+6. Ask Claude: "List files in this project"
+7. You should see: `⚡ Running bash command...` appear before the command runs
+8. Ask Claude: "Create a test.md file"
+9. The file should be created, and you should see: `✅ File edited successfully`
 
-**Expected outcome**: All three hooks fire in the right sequence.
+**Expected outcome**: You understand:
+- How hooks trigger at different lifecycle moments
+- How permissions allow/block tools
+- Why both sections are needed for hooks to work
 
-### Exercise 2: Customize Your Hooks
+### Exercise 2: Use the Interactive Way
 
-**Prompt**:
+**Steps**:
+1. Type: `/hooks`
+2. Select **PreToolUse**
+3. When prompted, enter: `echo '🔧 Preparing to execute...'`
+4. Type `/hooks` again
+5. Select **PostToolUse**
+6. When prompted, enter: `echo '✨ All done!'`
+7. Restart Claude Code and test by asking: "List files"
+
+**Expected outcome**: Hooks configured without manually editing JSON.
+
+### Exercise 3: AI-Native Configuration
+
+**Prompt to Claude**:
 ```
-I've created hooks that echo messages. Now help me customize them:
-
-1. Change the SessionStart message to include the project name
-2. Change the Bash message to say something different
-3. Change the Edit message to add a checkmark
-
-Show me the updated settings.json
+I need to add a hook that runs 'npm run lint' after every file edit to catch
+style errors automatically. Use the official Claude Code hooks documentation
+at https://docs.claude.com/en/docs/claude-code/hooks to create the right
+configuration for my .claude/settings.json
 ```
 
-**Expected outcome**: Your personalized hooks with custom messages.
+**Claude will**:
+1. Read the official hooks documentation
+2. Generate the correct JSON configuration
+3. Create/update your `.claude/settings.json`
+4. Test it with you
 
-### Exercise 3: Explore Other Matchers
-
-**Prompt**:
-```
-I want to add hooks for different tools. Show me how to add hooks that echo:
-- "📖 Reading file..." when Claude reads files
-- "📝 Creating file..." when Claude creates files
-- "🗑️  Deleting file..." when Claude deletes files
-
-Update my settings.json with these three new hooks.
-```
-
-**Expected outcome**: Hooks for Read, Write, and Delete operations.
+**Expected outcome**: A production-ready hook configured by AI using official docs as source of truth.
 
 ---
 
