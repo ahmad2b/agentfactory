@@ -83,8 +83,6 @@ version: "1.0.0"
 
 # Lesson 5: Contact Card Validator — Real-World Integration Project
 
-## Opening Hook
-
 You've learned four essential skills in this chapter: creating and manipulating strings, formatting output with f-strings, and safely converting between types. Now it's time to apply everything to solve a real problem—a **Contact Card Validator** that cleans, validates, and formats contact information.
 
 Every application needs to collect user data: registration forms, profile pages, contact forms, CRM systems. Messy input like `"  JOHN DOE  "`, invalid emails, or non-numeric ages cause problems. Your job as a developer is to clean and validate this data before storing it.
