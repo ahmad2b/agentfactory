@@ -15,6 +15,8 @@ article {
   max-width: 100%;
   margin: 0 auto;
   padding-top: 2rem;
+  position: relative;
+  z-index: 5;
 }
 
 /* Mobile: Ensure article has clear spacing from navbar */
@@ -33,6 +35,25 @@ article {
 @media screen and (max-width: 375px) {
   article {
     padding-top: 1rem;
+  }
+}
+
+/* Hide "On this page" sidebar button on mobile - prevents overlap with content */
+@media screen and (max-width: 996px) {
+  .theme-doc-toc-desktop {
+    display: none !important;
+  }
+
+  /* Hide mobile TOC button that overlaps with content */
+  .tocMobile_ITEo,
+  .tocCollapsible_ETCw.tocMobile_ITEo {
+    display: none !important;
+  }
+
+  /* Ensure article stays on top of sidebar when it opens */
+  article {
+    position: relative;
+    z-index: 1001;
   }
 }
 
