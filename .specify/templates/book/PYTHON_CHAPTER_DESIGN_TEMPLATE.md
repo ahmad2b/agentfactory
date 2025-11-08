@@ -1,136 +1,240 @@
-# Python Chapter Design Template (AI-Native Pedagogy)
+# Python Chapter Design Template: AIDD Applied to Programming
 
-**Purpose**: Opinionated, reusable framework for designing Python chapters (12-29) aligned with AI-native colearning philosophy.
+**Purpose**: Framework for designing Python chapters (12-29) by teaching programming through AIDD principles learned in Part 1-2.
 
-**Foundation**: Embedded in `preface-agent-native.md` vision + Chapter 31-32 (Spec-Driven Development) execution patterns.
+**Foundation**: Students already know AIDD concepts (Part 1-3, Chapters 1-11). Python chapters teach **how to apply AIDD thinking to real code**—specification-first problem-solving, validation-first testing, AI partnership for implementation.
 
----
-
-## Master Design Principles
-
-### 1. Core Philosophy (From Preface)
-
-Every Python chapter must answer:
-
-- **Why Python?** Dominates AI/agentic development (readability, flexibility, ecosystem)
-- **Why this skill?** Enables AI collaboration (clear thinking → AI generation)
-- **What's the student's role?** Specification writer, validator, architect (NOT syntax memorizer)
-- **What's AI's role?** Syntax executor, pattern applier, implementation partner
-
-### 2. Three-Tier Structure (Like Spec-Kit Plus Vertical Intelligence)
-
-Every lesson follows this pattern:
-
-```
-TIER 1: CONCEPT (Human Teacher)
-↓
-TIER 2: CODE IDEA (Show minimal example)
-↓
-TIER 3: THINK WITH AI (Dialogue-driven exploration)
-↓
-REASONING PATTERN (Why this matters for AI development)
-```
-
-This mirrors the Spec-Kit Plus architecture:
-- **Tier 1** = Human intent (specification)
-- **Tier 2** = Code example (reference)
-- **Tier 3** = AI collaboration (execution + validation)
-
-### 3. Evals-First, Spec-First, AI-Native
-
-Before writing ANY content:
-
-1. **Define success evals** (business-goal-aligned)
-   - What can students DO? (skills)
-   - What will they BUILD? (application)
-   - How do they COLLABORATE with AI? (partnership)
-
-2. **Write specification** (not just outline)
-   - Learning objectives tied to evals
-   - Cognitive load limits (5/7/10 concepts)
-   - Code examples with pedagogical purpose
-   - Assessment criteria
-
-3. **Implement lessons** (each follows template)
-   - YAML frontmatter with skills metadata
-   - 5-part teaching pattern
-   - "Try With AI" activity
-   - Cross-references to book scaffold
+**NOT covered here**: Formal Spec-Driven Development (SDD)—that comes later in Part 6, Chapter 30-33. We're using AIDD mindset, not SDD formality.
 
 ---
 
-## Chapter Design Workflow
+## CRITICAL DESIGN RULES (FIXED)
 
-### Phase 0: Context Gathering (Ask 3 Questions)
+### Rule 1: USER INTENT IS AUTHORITY
+
+**Never override user input:**
+- User says "beginner" → Make A1-A2 (NOT A2-B1)
+- User says "just variables" → Only variables (NOT + functions + loops)
+- User says "5 concepts max" → Exactly 5 (NOT "5 + bonus")
+
+**Always ask, always honor. Do NOT assume.**
+
+---
+
+### Rule 2: NO FORWARD REFERENCES (SDD Only — AIDD Already Taught)
+
+**Never mention untaught concepts (SDD onwards):**
+- ❌ NO Chapter 30+ references
+- ❌ NO "Spec-Driven Development" (not yet taught)
+- ❌ NO methodology beyond AIDD
+
+**DO reference AIDD (Ch 1-11, already taught):**
+- ✅ "Apply the specification-first thinking from Chapter 4..."
+- ✅ "Recall the nine pillars of AIDD from Chapter 4..."
+- ✅ "Use validation-first thinking when testing your code..."
+
+**Students learned AIDD in Part 1-2.** Python chapters should reinforce it by applying AIDD concepts to actual programming.
+
+---
+
+### Rule 3: MINIMAL SCOPE
+
+**Depth > breadth.**
+
+- Beginner chapters: 5 concepts max, 3 lessons
+- Intermediate chapters: 7 concepts max, 4-5 lessons
+- Advanced chapters: 10 concepts max, 5-6 lessons
+
+**If user asks for "just variables," create JUST variables.** Don't add "but you should also know about loops."
+
+---
+
+### Rule 4: MINIMAL FILES
+
+**Create ONLY:**
+- ✅ spec.md
+- ✅ plan.md
+- ✅ tasks.md
+
+**Never create:**
+- ❌ index.md
+- ❌ _templates/ directory
+- ❌ _assets/ directory
+- ❌ _code-examples/ directory
+- ❌ lesson-template.md
+- ❌ capstone-rubric.md
+
+---
+
+### Rule 5: SIMPLE TEACHING STRUCTURE
+
+**Every lesson (DO NOT force 5-part structure):**
+
+1. **What it is** - Plain explanation (2-3 sentences)
+2. **Code Idea** - Minimal example showing concept
+3. **Try It** - Student builds something with concept
+4. **Why It Matters** - Real-world connection
+
+**No philosophy lectures. No methodology references. Just clear teaching.**
+
+---
+
+## Chapter Design Workflow: Three Sources of Intelligence
+
+### How Context, User Intent, and Python Expertise Work Together
+
+**Priority Order:**
+1. **Chapter Title** (anchor) — defines what we're teaching
+2. **User Intent** (audience/scope/outcome) — must be honored completely
+3. **Context** (if provided) — extract relevant pedagogical insights
+4. **Python Docs** (authoritative) — verify syntax and best practices
+5. **AI Intelligence** (pedagogical design) — create optimal learning approach
+
+---
+
+### Phase 0: Context Gathering (ASK USER - HONOR ANSWERS)
 
 **Extract from arguments:**
-```
-Chapter number (12-29)
-Part within Python sequence (4-5)
-Position relative to dependencies
-```
+- Chapter number (12-29)
+- Chapter title (from chapter-index.md) — **this is our anchor**
+- Context (if provided: teaching materials, code examples, existing pedagogical work)
 
-**Ask user:**
-1. **Existing materials?** (notes, notebooks, teaching experience)
-   - If yes: Extract concepts → transform to AI-native structure
-2. **Target audience?** (beginner/professional/founder)
-   - Shapes evals, real-world examples, complexity
-3. **Real problems to solve?** (what can students build?)
-   - Informs capstone project, "Try With AI" activities
+**If context is provided:**
+1. Read the chapter title FIRST
+2. Extract pedagogical insights that fit the title
+3. Note useful code examples and patterns
+4. Understand learning outcomes already identified
+5. Check prerequisites and connections
+6. **Ignore what doesn't fit the chapter scope**
+
+**ASK USER (honor their answers completely — never override):**
+
+1. **Target audience?** (pick ONE)
+   - Absolute beginner (no coding experience)
+   - Beginner (some coding)
+   - Intermediate (comfortable with basics)
+
+2. **Core focus for this chapter?** (pick ONE - don't add extras)
+   - Just variables and basic types
+   - Variables + basic operations
+   - Variables, types, and simple functions
+   - [From context, or describe your focus]
+
+3. **What can students BUILD after?** (testable outcome)
+   - Store and display name/age
+   - Simple calculation script
+   - Function that processes data
+   - [From context, or your specific project]
+
+4. **Additional context to incorporate?**
+   - Existing lesson drafts or notes
+   - Code examples you want to use
+   - Specific Python 3.13+ features
+   - Real-world projects students should build
+
+**CRITICAL WORKFLOW**:
+- Chapter title is the anchor (never deviate)
+- User's stated intent is authoritative (always honor)
+- Context provides relevant insights (extract, don't override)
+- Python docs ensure accuracy (verify with official sources)
+- AI intelligence creates pedagogy (design optimal learning)
+
+**Do NOT**: Let context override user's explicit answers. Do NOT assume intermediate when user said beginner. Do NOT add concepts beyond user's stated scope.
 
 ---
 
-### Phase 1: Specification (Evals → Spec)
+## Using Three Sources of Intelligence
+
+### 1. Python Official Docs (Authoritative)
+- Verify Python 3.13+ syntax and features
+- Check official best practices for language features
+- Understand how the language actually works
+- Never teach outdated or non-standard approaches
+
+### 2. AI Intelligence (Pedagogical Design)
+- Create explanations suitable for target audience
+- Find real-world examples and use cases
+- Design progression from simple to complex
+- Generate code examples that clearly demonstrate concepts
+- Create exercises that build toward the final project
+- Anticipate common misconceptions and address them
+
+### 3. AIDD Thinking (Learning Model)
+- **Specification-first**: Explain the problem before the code
+- **Validation-first**: How students test their understanding
+- **AI-partnership**: What they ask their AI to explore
+- **Real outcomes**: What they actually build (not just exercises)
+
+**Integration**: Python docs provide accuracy. AI intelligence provides pedagogy. AIDD thinking provides the learning model.
+
+---
+
+### Phase 1: Specification (NO FORWARD REFERENCES)
 
 **Create `specs/part-5-chapter-${N}/spec.md` with this structure:**
 
 ```yaml
 ---
 chapter: N
-title: "[Title from chapter-index.md]"
+title: "[From chapter-index.md - EXACT]"
 part: 5
+target_audience: "[From user answer - EXACT, don't override]"
+core_focus: "[From user answer - EXACT, don't add extras]"
 complexity: [beginner|intermediate|advanced]
-cefr_range: "[A1-A2|A2-B1|B1-B2]"
 python_version: "3.13+"
-cognitive_load_limit: [5|7|10]  # Based on complexity tier
 ---
 
-## Success Evals (Business-Goal-Aligned)
+## Success Criteria (From User Input)
 
-### Students Will Understand
-[3-5 comprehension criteria]
+### Students Can BUILD
+[From user answer to "What can they build?"]
 
-### Students Will Do
-[3-5 skill-based criteria]
+### Students Understand
+[3-5 concepts ONLY - matching user's "core focus" answer]
+[VALIDATE: Total concepts ≤ 5 for beginner, ≤7 for intermediate, ≤10 for advanced]
 
-### Students Will Build
-[2-3 application/capstone criteria]
+### NO FORWARD REFERENCES (SDD Only — AIDD Already Taught)
+✅ Validate: Does this mention Chapters 30+ or "Spec-Driven Development"? NO
+✅ Validate: Does this mention AIDD (Ch 1-11, already taught)? YES, ENCOURAGED when relevant
+✅ Validate: Does this mention methodology not yet taught (beyond AIDD)? NO
+**Note**: Python chapters can and should reference AIDD concepts (specification-first thinking, validation-first, etc.) since students learned them in Part 1-2. Example: "Apply the specification-first thinking from Chapter 4 when designing your functions..."
+
+## Prerequisites
+[Only chapters BEFORE this one]
 
 ## Learning Objectives
-[3-5 SMART objectives aligned with evals]
+[3-5 SMART objectives using ONLY concepts taught in chapters 1-N]
 
-## Lesson Structure
-- Lesson 1: [Topic]
-- Lesson 2: [Topic]
-- Lesson 3-5: [Topics]
-- Capstone: [Real project]
+## Content Structure
 
-## Concepts Taught
-[List with pedagogical purpose + AI prompt template for each]
+### Lesson 1: [Topic from core focus]
+Duration: 15-20 min (beginner), 25-30 min (intermediate)
+Concepts: [1-2 from list above]
+Code examples: [1-2 simple]
+Student activity: [Build something with Concept 1]
+
+### Lesson 2: [Topic from core focus]
+[Same structure]
+
+### Lesson 3: [Topic from core focus - ONLY if in scope]
+[Same structure - DON'T add lessons beyond user scope]
+
+## TOTAL CONCEPTS TAUGHT
+[Count them. Verify ≤ tier limit]
 
 ## Acceptance Criteria
-- [ ] Every concept: Concept → Code → Think With AI → Reasoning
-- [ ] Python 3.13+ syntax, f-strings, modern type hints
-- [ ] Cognitive load ≤ limit
-- [ ] No REPL examples; use "Ask your AI" instead
-- [ ] Security standards met (no eval, shell=True, secrets)
-- [ ] Each lesson 20-35 minutes
-- [ ] "Try With AI" activities testable with Claude Code/Gemini CLI
+- [ ] Scope matches user's "core focus" answer EXACTLY
+- [ ] Target audience matches user answer (NOT overridden)
+- [ ] Zero forward references (no Chapter 30+, no SDD, no methodology)
+- [ ] Concept count ≤ tier limit (5/7/10)
+- [ ] Each lesson 15-35 min
+- [ ] Python 3.13+ syntax
+- [ ] Students can actually build the promised project
 ```
 
-**Key difference from old approach:**
-- ❌ OLD: "Here's Python syntax, memorize it"
-- ✅ NEW: "Here's a concept. Ask AI to generate code. Validate understanding."
+**Key principle:**
+- ❌ NEVER: Override user scope, add extra concepts, reference untaught methodology
+- ✅ ALWAYS: Honor user answers, stay focused, self-contained chapter
 
 ---
 
@@ -544,14 +648,55 @@ $ /sp.python-chapter 17
 
 ---
 
+## CRITICAL VALIDATION CHECKLIST
+
+**Before finalizing spec.md, verify ALL of these:**
+
+```
+□ Target audience MATCHES user answer (no override)
+□ Core focus MATCHES user answer exactly
+□ Scope does NOT add beyond what user asked
+□ No chapters 30+ mentioned anywhere
+□ No "Spec-Driven Development" mentioned
+□ AIDD references (Ch 1-11) used when relevant to reinforce prior learning
+□ No methodology/pedagogy names mentioned (except AIDD for reinforcement)
+□ Concept count COUNTED and ≤ tier limit (5/7/10)
+□ Prerequisites ONLY chapters before this one (Ch 1-11 known; Ch 12+ if building on Python)
+□ Learning objectives testable and realistic
+□ Students CAN actually build promised project
+□ Only 3 files will be created (spec/plan/tasks)
+□ No index.md, templates, assets directories
+```
+
+**If ANY check fails → ASK USER FOR CLARIFICATION, don't assume.**
+
+**Note on AIDD references**: Python chapters should reinforce AIDD principles by applying them. For example:
+- "Let's apply the specification-first thinking from Chapter 4 to write function specifications"
+- "Use the validation-first approach from AIDD when testing your code"
+- "Remember the nine pillars of AIDD—they apply to functions too"
+
+---
+
+## FIXES IN THIS TEMPLATE
+
+✅ **Problem 1: Part mismatch** - Validates chapter location from authoritative source
+✅ **Problem 2: Forward references** - Zero mentions of Chapter 30+, SDD, methodology
+✅ **Problem 3: Content overload** - Respects "core focus" answer, doesn't add extras
+✅ **Problem 4: File clutter** - Creates ONLY spec/plan/tasks, no scaffolding
+✅ **Problem 5: Audience mismatch** - Asks user, honors their answer, NO overrides
+✅ **Problem 6: Self-referential methodology** - No circular dependencies, self-contained
+
+---
+
 ## Final Note
 
-**This template embeds:**
-- AI-native colearning philosophy (from preface)
-- Spec-Driven Development workflow (from Chapter 31-32)
-- Pedagogical standards (CEFR, Bloom's, DigComp)
-- Python 3.13+ best practices
-- Security and quality gates
+**This template enforces:**
+- User intent is authority (honor answers, no overrides)
+- No forward references (self-contained chapters)
+- Minimal scope (depth > breadth)
+- Minimal files (3 only, no clutter)
+- Simple teaching structure (no forced patterns)
+- Critical validation (11-point checklist)
 
-**Result**: Any AI orchestrator can design a consistent, high-quality Python chapter using this framework. No ambiguity. No guessing. Just opinionated, pedagogically-sound education.
+**Result**: Beginner-appropriate, focused, self-contained chapters without circular dependencies. Any AI orchestrator can design consistent, high-quality Python chapters using this framework.
 
