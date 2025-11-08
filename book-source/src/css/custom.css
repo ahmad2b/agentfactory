@@ -135,11 +135,23 @@ pre code {
         var(--ifm-color-primary-dark) 100%
     ) !important;
     color: white !important;
-    padding: 0.5rem 1.25rem !important;
+    padding: 0.75rem 1.25rem !important;
     border-radius: 50px !important;
     font-weight: 600 !important;
     transition: all 0.3s ease !important;
     margin-left: 0.5rem;
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Ensure touch targets meet WCAG 2.1 AA minimum (44x44px) */
+@media screen and (max-width: 768px) {
+    .navbar-cta-button {
+        padding: 0.75rem 1.5rem !important;
+        min-height: 48px !important;
+    }
 }
 
 .navbar-cta-button:hover {
@@ -579,6 +591,67 @@ pre code {
 }
 
 /* ============================================================================
+   TOUCH TARGET SIZING - WCAG 2.1 Level AA Compliance (44x44px minimum)
+   ============================================================================ */
+
+/* Global touch target enforcement for mobile */
+@media screen and (max-width: 768px) {
+    /* All buttons and links */
+    button,
+    a[role="button"],
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"] {
+        min-height: 44px !important;
+        min-width: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0.625rem 1rem !important;
+    }
+
+    /* Navbar and menu links - left-aligned, not centered */
+    .navbar__link,
+    .menu__link,
+    a.card {
+        min-height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        padding: 0.625rem 1rem !important;
+        /* Do NOT center text - allow left alignment */
+    }
+
+    /* Navbar items - ensure proper spacing */
+    .navbar__item {
+        min-height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* Interactive elements spacing - only for specific button types, not all links */
+    button,
+    [role="button"],
+    input[type="checkbox"],
+    input[type="radio"],
+    .navbar__link,
+    .menu__link {
+        margin: 0.25rem !important;
+    }
+
+    /* Ensure table cells are tappable */
+    .markdown td,
+    .markdown th {
+        padding: 1rem 1.5rem !important;
+        min-height: 44px !important;
+    }
+
+    /* Admonition titles if interactive */
+    .admonition {
+        padding: 1.5rem !important;
+    }
+}
+
+/* ============================================================================
    MOBILE NAVBAR FIX - Ensure hamburger menu works properly
    ============================================================================ */
 
@@ -587,11 +660,36 @@ pre code {
     /* Docusaurus navbar sidebar for mobile */
     .navbar-sidebar {
         z-index: 1000 !important;
+        height: 100vh !important;  /* Expand to full viewport height */
+        max-height: 100vh !important;  /* Ensure it doesn't exceed viewport */
+        width: 100% !important;  /* Full viewport width */
+        right: 0 !important;  /* Flush to the right edge */
+        background-color: var(--ifm-navbar-background-color) !important;  /* Match navbar bg */
+        background: linear-gradient(180deg, var(--ifm-navbar-background-color) 0%, var(--ifm-background-color) 100%) !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch !important;  /* Smooth scrolling on iOS */
     }
-    
+
     /* Backdrop behind the mobile menu */
     .navbar-sidebar__backdrop {
         z-index: 999 !important;
+        background-color: rgba(0, 0, 0, 0.5) !important;  /* Semi-transparent dark overlay */
+    }
+
+    /* Light mode: Darker backdrop for better visibility and contrast */
+    [data-theme='light'] .navbar-sidebar__backdrop {
+        background-color: rgba(0, 0, 0, 0.7) !important;
+    }
+
+    /* When sidebar is open (navbar--show class present), hide main content */
+    .navbar--fixed-top.navbar-sidebar--show ~ .main-wrapper {
+        display: none !important;
+    }
+
+    /* Also hide footer when sidebar is open to prevent content overlap */
+    .navbar--fixed-top.navbar-sidebar--show ~ footer {
+        display: none !important;
     }
 }
 

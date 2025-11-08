@@ -14,6 +14,47 @@
 article {
   max-width: 100%;
   margin: 0 auto;
+  padding-top: 2rem;
+  position: relative;
+  z-index: 5;
+}
+
+/* Mobile: Ensure article has clear spacing from navbar */
+@media screen and (max-width: 996px) {
+  article {
+    padding-top: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  article {
+    padding-top: 1.25rem;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  article {
+    padding-top: 1rem;
+  }
+}
+
+/* Hide "On this page" sidebar button on mobile - prevents overlap with content */
+@media screen and (max-width: 996px) {
+  .theme-doc-toc-desktop {
+    display: none !important;
+  }
+
+  /* Hide mobile TOC button that overlaps with content */
+  .tocMobile_ITEo,
+  .tocCollapsible_ETCw.tocMobile_ITEo {
+    display: none !important;
+  }
+
+  /* Ensure article stays on top of sidebar when it opens */
+  article {
+    position: relative;
+    z-index: 1001;
+  }
 }
 
 /* Enhanced body text */
@@ -767,6 +808,64 @@ article {
   .markdown th,
   .markdown td {
     padding: 0.75rem 1rem;
+  }
+}
+
+/* Mobile optimizations for 375px (iPhone SE) viewports */
+@media screen and (max-width: 375px) {
+  .markdown h1 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .markdown h1::after {
+    width: 60px;
+    height: 3px;
+    margin-top: 0.75rem;
+  }
+
+  .markdown h2 {
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .markdown h3 {
+    font-size: 1.25rem;
+  }
+
+  /* Ensure code blocks and tables fit without horizontal scroll */
+  .markdown pre {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .markdown table {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    display: block;
+  }
+
+  /* Improve readability on smaller screens */
+  .markdown {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+  }
+
+  .markdown ul,
+  .markdown ol {
+    padding-left: 1.5rem;
+  }
+
+  .markdown blockquote {
+    padding: 0.875rem;
+    margin: 1.5rem 0;
+  }
+
+  .admonition {
+    padding: 1.25rem;
+    margin: 1.5rem 0;
   }
 }
 
