@@ -135,11 +135,23 @@ pre code {
         var(--ifm-color-primary-dark) 100%
     ) !important;
     color: white !important;
-    padding: 0.5rem 1.25rem !important;
+    padding: 0.75rem 1.25rem !important;
     border-radius: 50px !important;
     font-weight: 600 !important;
     transition: all 0.3s ease !important;
     margin-left: 0.5rem;
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Ensure touch targets meet WCAG 2.1 AA minimum (44x44px) */
+@media screen and (max-width: 768px) {
+    .navbar-cta-button {
+        padding: 0.75rem 1.5rem !important;
+        min-height: 48px !important;
+    }
 }
 
 .navbar-cta-button:hover {
@@ -579,6 +591,58 @@ pre code {
 }
 
 /* ============================================================================
+   TOUCH TARGET SIZING - WCAG 2.1 Level AA Compliance (44x44px minimum)
+   ============================================================================ */
+
+/* Global touch target enforcement for mobile */
+@media screen and (max-width: 768px) {
+    /* All buttons and links */
+    button,
+    a[role="button"],
+    .navbar__link,
+    .menu__link,
+    a.card,
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"] {
+        min-height: 44px !important;
+        min-width: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0.625rem 1rem !important;
+    }
+
+    /* Navbar items - ensure proper spacing */
+    .navbar__item {
+        min-height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* Interactive elements spacing */
+    a,
+    button,
+    [role="button"],
+    input[type="checkbox"],
+    input[type="radio"] {
+        margin: 0.25rem !important;
+    }
+
+    /* Ensure table cells are tappable */
+    .markdown td,
+    .markdown th {
+        padding: 1rem 1.5rem !important;
+        min-height: 44px !important;
+    }
+
+    /* Admonition titles if interactive */
+    .admonition {
+        padding: 1.5rem !important;
+    }
+}
+
+/* ============================================================================
    MOBILE NAVBAR FIX - Ensure hamburger menu works properly
    ============================================================================ */
 
@@ -588,7 +652,7 @@ pre code {
     .navbar-sidebar {
         z-index: 1000 !important;
     }
-    
+
     /* Backdrop behind the mobile menu */
     .navbar-sidebar__backdrop {
         z-index: 999 !important;
