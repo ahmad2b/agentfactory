@@ -12,7 +12,7 @@ description: Intelligence-driven workflow for Python chapters (12-29). Reads con
 - Skills Library: Available domain skills for this chapter
 - Context Materials: Existing pedagogical patterns (if available)
 
-**Adaptive Questions**: 0-3 targeted questions based on what intelligence can't derive (NOT hardcoded 4 questions).
+**Adaptive Questions**: 0-3 targeted questions based on what intelligence can't derive.
 
 ## User Input
 
@@ -46,7 +46,7 @@ Students don't memorize Python syntax. Instead:
 - **Validate Together**: Use isinstance(), type(), and tests to check understanding
 - **Learn from Errors**: When errors occur, ask AI "why?" and learn the pattern
 
-**Note on AIDD**: Students in Chapters 1-11 learned AIDD principles (Specification → Generation → Execution → Reflection). Part 4 applies these principles to learning Python, using the beginner-friendly "AI-Native Learning" framing. Students don't write formal specifications yet (that's Part 5+), but they DO describe intent through type hints and clear code structure.
+**Note on AIDD**: Students in Chapters 1-11 learned AIDD principles. Part 4 applies these principles to learning Python, using the beginner-friendly "AI-Native Learning" framing. Students don't write formal specifications yet (that's Part 5+), but they DO describe intent through type hints and clear code structure.
 
 ### Teaching Pattern (Every Concept)
 
@@ -197,11 +197,6 @@ exactly how reasoning chains in AI maintain state.
 ---
 
 ### Rule 5: MINIMAL FILES
-
-**Create ONLY:**
-- ✅ spec.md (what students learn)
-- ✅ plan.md (how we teach it)
-- ✅ tasks.md (implementation checklist)
 
 **Never create:**
 - ❌ index.md, _templates/, _assets/, _code-examples/, lesson-template.md, capstone-rubric.md

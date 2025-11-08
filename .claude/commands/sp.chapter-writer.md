@@ -438,27 +438,17 @@ elif 49 <= chapter_num <= 56:
     part_language = "production deployment, system design, scalability"
 
 # From chapter index (THE ANCHOR)
-part_num = determine_part(chapter_num)
+part_num = <derived from chapter-index.md>
 prerequisites = f"Chapters 1-{chapter_num - 1}"
-learning_pattern = determine_learning_pattern(part_num)  # AI-Native Learning, SDD, etc.
+learning_pattern = <derived from part number>  # AI-Native Learning, SDD, etc.
 
-# Store derived intelligence
+# Store all derived intelligence for later phases
 chapter_intelligence = {
-    "number": chapter_num,
-    "title": chapter_title,  # FROM CHAPTER-INDEX.MD (authoritative)
-    "part": part_num,
-    "language": language,
-    "complexity_tier": complexity_tier,
-    "cefr_range": cefr_range,
-    "max_concepts_per_lesson": max_concepts,
-    "prerequisites": prerequisites,
-    "audience": audience,
-    "learning_pattern": learning_pattern,
-    "part_appropriate_language": part_language,
-    "available_skills": skills,
-    "colearning_required": True,  # Always apply ai-collaborate-teaching
-    "documentation_source": context.get("doc_source"),
-    "dry_run": dry_run
+    "number", "title", "part", "language",
+    "complexity_tier", "cefr_range", "max_concepts_per_lesson",
+    "prerequisites", "audience", "learning_pattern",
+    "part_appropriate_language", "available_skills",
+    "colearning_required", "documentation_source", "dry_run"
 }
 ```
 
@@ -764,95 +754,13 @@ if dry_run:
 3. Pass full context (CoLearning, MCP docs, teaching patterns) to each command
 4. Respect approval gates ONLY between phases
 
-### Command Parsing
+### Command Parsing & Language Detection
 
-```python
-import sys
-
-args = sys.argv[1:]  # $ARGUMENTS
-
-# Parse chapter number (required)
-chapter_num = None
-for arg in args:
-    if arg.isdigit():
-        chapter_num = int(arg)
-        break
-
-if not chapter_num:
-    error("Usage: /sp.chapter-writer <chapter-number> [--language <lang>] [--dry-run]")
-
-# Parse language (optional, auto-detect if missing)
-language = None
-for i, arg in enumerate(args):
-    if arg == "--language" and i + 1 < len(args):
-        language = args[i + 1]
-
-if not language:
-    language = auto_detect_language(chapter_num)  # From chapter-index.md
-
-# Parse dry-run flag
-dry_run = "--dry-run" in args
-
-print(f"📖 Chapter {chapter_num}: {language} chapter")
-print(f"   Dry run: {dry_run}")
-```
-
-### Auto-Detection Logic
-
-```python
-def auto_detect_language(chapter_num: int) -> str:
-    """Detect language from chapter number ranges."""
-    # Python chapters
-    python_chapters = list(range(12, 30)) + list(range(41, 46))
-
-    # TypeScript chapters
-    typescript_chapters = list(range(38, 41)) + list(range(46, 49))
-
-    # Conceptual chapters (everything else)
-    if chapter_num in python_chapters:
-        return "python"
-    elif chapter_num in typescript_chapters:
-        return "typescript"
-    else:
-        return "conceptual"
-```
-
-### MCP Integration Pattern
-
-```bash
-# Check MCP server availability
-check_mcp_context7() {
-    # Attempt to list MCP servers
-    if command -v mcp &> /dev/null; then
-        if mcp list 2>/dev/null | grep -q "context7"; then
-            return 0  # Available
-        fi
-    fi
-    return 1  # Not available
-}
-
-# Load language documentation
-load_language_docs() {
-    local language=$1
-    local version=$2
-
-    if check_mcp_context7; then
-        echo "📚 Loading $language v$version documentation via MCP..."
-
-        # Example: Fetch Python docs (actual MCP API call)
-        # This is pseudo-code - actual implementation depends on MCP CLI/API
-        mcp fetch context7 python-docs --version $version \
-            --sections tutorial,library/stdtypes,library/functions \
-            > /tmp/chapter_docs_$language.json
-
-        echo "✅ Documentation loaded"
-        return 0
-    else
-        echo "⚠️  MCP context7 unavailable - using cached context"
-        return 1
-    fi
-}
-```
+Agent autonomously:
+- Parses chapter number (required), language flag (optional), dry-run flag (optional)
+- Auto-detects language from chapter ranges if not specified (Python: 12-29, 41-45; TypeScript: 38-40, 46-48; Conceptual: others)
+- Detects and uses available MCP servers for documentation loading
+- Validates inputs and provides usage errors if needed
 
 ---
 
