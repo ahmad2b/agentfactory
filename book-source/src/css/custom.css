@@ -651,6 +651,8 @@ pre code {
     /* Docusaurus navbar sidebar for mobile */
     .navbar-sidebar {
         z-index: 1000 !important;
+        height: 100vh !important;  /* Expand to full viewport height */
+        max-height: 100vh !important;  /* Ensure it doesn't exceed viewport */
     }
 
     /* Backdrop behind the mobile menu */
