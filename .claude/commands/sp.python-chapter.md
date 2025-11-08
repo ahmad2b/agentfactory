@@ -376,18 +376,25 @@ When you run `/sp.python-chapter [N]`:
 
 ---
 
-### PHASE 1: Specification (Automated)
+### PHASE 1: Specification (Automated + Quality Gate)
 
 ```
 → Invoke: /sp.specify [chapter-context]
-  ├─ Pass: chapter number, title, user answers, context materials
+  ├─ Pass: chapter number, title, derived intelligence, context materials
   ├─ Apply: AI-Native Learning principles, cognitive load limits, teaching patterns
   ├─ Create: specs/part-4-chapter-[N]/spec.md
-  └─ Report: "Spec created. Review and approve."
+  └─ Report: "Spec created."
+
+→ Invoke: /sp.clarify (Quality Gate)
+  ├─ Read: specs/part-4-chapter-[N]/spec.md
+  ├─ Identify: Underspecified areas, ambiguities, missing details
+  ├─ Ask: Up to 5 targeted clarification questions
+  ├─ Update: spec.md with answers encoded
+  └─ Report: "Spec clarified and updated."
 
 WAIT: User reviews spec.md
 → User confirms: "✅ Spec approved" or provides feedback
-  ├─ If feedback: Update spec.md iteratively
+  ├─ If feedback: Update spec.md iteratively (may re-run /sp.clarify)
   └─ If approved: Continue to PHASE 2
 ```
 
@@ -403,16 +410,24 @@ WAIT: User reviews spec.md
 
 ---
 
-### PHASE 2: Planning (Automated)
+### PHASE 2: Planning (Automated + ADR Gate)
 
 ```
 → Invoke: /sp.plan [spec-context]
-  ├─ Read: specs/part-4-chapter-[N]/spec.md
+  ├─ Read: specs/part-4-chapter-[N]/spec.md (clarified)
   ├─ Apply: Lesson progression, CEFR proficiency levels, AI prompts, skills-proficiency-mapper
   ├─ Create: specs/part-4-chapter-[N]/plan.md
-  └─ Report: "Plan created. Review and approve."
+  └─ Report: "Plan created."
 
-WAIT: User reviews plan.md
+→ Invoke: /sp.adr (Architectural Decision Gate)
+  ├─ Read: specs/part-4-chapter-[N]/plan.md
+  ├─ Detect: Architecturally significant decisions (lesson structure, pedagogical approaches, tech choices)
+  ├─ Suggest: "📋 Architectural decision detected: [X]. Document with /sp.adr [title]?"
+  ├─ Wait: User consent to create ADR (never auto-create)
+  ├─ Create: history/adr/[NNN]-[decision-title].md (if user approves)
+  └─ Report: "ADR created and linked to plan." OR "ADR suggestion noted."
+
+WAIT: User reviews plan.md (+ any ADRs)
 → User confirms: "✅ Plan approved" or provides feedback
   ├─ If feedback: Update plan.md iteratively
   └─ If approved: Continue to PHASE 3
@@ -428,18 +443,28 @@ WAIT: User reviews plan.md
 
 ---
 
-### PHASE 3: Tasks (Automated)
+### PHASE 3: Tasks (Automated + Analysis Gate)
 
 ```
 → Invoke: /sp.tasks [spec+plan-context]
   ├─ Read: specs/part-4-chapter-[N]/spec.md + plan.md
   ├─ Apply: Acceptance criteria, validation steps, implementation checklist
   ├─ Create: specs/part-4-chapter-[N]/tasks.md
-  └─ Report: "Tasks created. Review and approve."
+  └─ Report: "Tasks created."
 
-WAIT: User reviews tasks.md
+→ Invoke: /sp.analyze (Cross-Artifact Consistency Gate)
+  ├─ Read: specs/part-4-chapter-[N]/spec.md + plan.md + tasks.md
+  ├─ Validate: Cross-artifact consistency (spec ↔ plan ↔ tasks alignment)
+  ├─ Check: Learning objectives → lessons → tasks traceability
+  ├─ Detect: Missing tasks, orphaned objectives, scope drift, conflicts
+  ├─ Report: Consistency issues (critical/major/minor) with recommendations
+  └─ Output: analysis-report.md with findings
+
+WAIT: User reviews tasks.md + analysis report
 → User confirms: "✅ Tasks approved" or provides feedback
-  ├─ If feedback: Update tasks.md iteratively
+  ├─ If critical issues: Must fix before proceeding
+  ├─ If major issues: Should fix (user decision)
+  ├─ If minor issues: Nice to fix (user decision)
   └─ If approved: Continue to PHASE 4
 ```
 
@@ -451,26 +476,39 @@ WAIT: User reviews tasks.md
 
 ---
 
-### PHASE 4: Implementation (Optional)
+### PHASE 4: Implementation (Automated + Technical Review Gate)
 
 ```
-→ Ask user: "Ready to implement lesson content?"
+→ Invoke: /sp.implement [chapter-slug]
+  ├─ Read: specs/part-4-chapter-[N]/spec.md + plan.md + tasks.md (all approved)
+  ├─ Strategy: Parallel team approach (Lessons 1-4 parallel, Lesson 5 sequential capstone)
+  ├─ Invoke: lesson-writer subagent (per lesson)
+  ├─ Apply: AI-Native Learning pattern, CEFR levels, validation-first approach
+  ├─ Create: book-source/docs/04-Part-4-Python-Fundamentals/[N]-[chapter-name]/
+  │   ├─ readme.md
+  │   ├─ 01-[lesson-name].md
+  │   ├─ 02-[lesson-name].md
+  │   ├─ 03-[lesson-name].md
+  │   ├─ 04-[lesson-name].md
+  │   └─ 05-[capstone-name].md (if applicable)
+  └─ Report: "All lessons implemented."
 
-Options:
-A) Implement with lesson-writer subagent
-   → Invoke: lesson-writer subagent
-   → Pass: spec.md, plan.md, tasks.md
-   → Apply: AI-Native Learning pattern, CEFR levels, validation-first approach
-   → Create: docs/part-4/chapter-[N]/{01,02,03,04}-lesson-*.md
-   → Then: Invoke technical-reviewer for validation
+→ Invoke: technical-reviewer (Quality Gate)
+  ├─ Read: All lesson files
+  ├─ Validate: AI-Native Learning compliance, lesson closure pattern, code quality
+  ├─ Check: Part 4 language appropriateness, constitutional alignment
+  ├─ Test: All code examples (Python 3.14+)
+  ├─ Report: Validation report with PASS/CONDITIONAL PASS/FAIL
+  └─ Output: VALIDATION_REPORT_CHAPTER_[N].md
 
-B) Manual implementation
-   → User implements using tasks.md as checklist
+→ If CONDITIONAL PASS or FAIL:
+  ├─ Apply fixes for critical issues
+  ├─ Re-run technical-reviewer
+  └─ Repeat until PASS
 
-C) Done for now
-   → Keep design artifacts, skip implementation
-
-→ Report final status
+WAIT: User reviews lessons + validation report
+→ User confirms: "✅ Implementation approved"
+  └─ Proceed to finalization (commit, PR, etc.)
 ```
 
 ---
@@ -968,20 +1006,46 @@ VALIDATION_REPORT_CHAPTER_[N].md   (Technical review results)
 
 ---
 
-⏺ PHASE 1: Specification (Automated)
+⏺ PHASE 1: Specification + Clarification Gate
 
-Invoking: /sp.specify with chapter context...
+Invoking: /sp.specify with derived intelligence...
 Applying: AI-Native Learning principles, teaching patterns, cognitive load limits
 
 [/sp.specify generates spec.md]
 
 📋 Spec created: specs/part-4-chapter-14/spec.md
 
-Please review the specification:
-- Does this match your vision for Chapter 14?
-- Are learning objectives clear?
-- Is scope appropriate (not too broad)?
-- Are AI-Native Learning principles emphasized?
+---
+
+🔍 Running /sp.clarify to identify underspecified areas...
+
+Analyzing spec for ambiguities...
+  ✓ Learning objectives: Clear and measurable
+  ✓ Prerequisites: Explicitly listed
+  ⚠️ Scope clarity: "Data Types" could mean 10+ topics
+  ⚠️ Code examples: Quantity not specified
+  ⚠️ Capstone: Build artifact not defined
+
+Asking targeted clarifications (3 questions):
+
+Q1: Which specific data types should we cover?
+    (Found: int, float, str, bool, None, list, dict, tuple, set)
+[User: Focus on core 5 only - int, float, str, bool, None. Collections are Chapter 18-19]
+
+Q2: How many code examples per lesson?
+[User: 3-6 examples per lesson, progressive complexity]
+
+Q3: Should students BUILD a hands-on project?
+[User: Yes - Interactive Type Explorer program demonstrating all core types]
+
+✅ Spec updated with clarifications
+
+---
+
+Please review the clarified specification:
+- Does scope now match chapter title anchor "Data Types"?
+- Are learning objectives achievable in 3.5-4 hours?
+- Is capstone project appropriate for A1-A2 learners?
 
 Reply with: "✅ Spec approved" or provide feedback
 
@@ -991,7 +1055,7 @@ Reply with: "✅ Spec approved" or provide feedback
 
 ---
 
-⏺ PHASE 2: Planning (Automated)
+⏺ PHASE 2: Planning + ADR Gate
 
 Invoking: /sp.plan with approved spec...
 Applying: Lesson progression, CEFR levels, AI prompts, skills-proficiency-mapper
@@ -999,13 +1063,42 @@ Applying: Lesson progression, CEFR levels, AI prompts, skills-proficiency-mapper
 [/sp.plan generates plan.md with skills metadata]
 
 📋 Plan created: specs/part-4-chapter-14/plan.md
+  - 5 lessons (4 foundational + 1 capstone)
+  - CEFR: A2-B1 progression
+  - Skills mapped to each lesson
+  - 4 "Try With AI" prompts per lesson
 
-Please review the lesson breakdown:
-- Are 5 lessons appropriate (including capstone)?
-- Are AI prompts specified for each lesson (4 prompts progressive)?
-- Are CEFR proficiency levels correct (A2-B1 for data types)?
-- Is AI-Native Learning pattern applied throughout?
-- Are cognitive load limits respected?
+---
+
+🏛️ Running /sp.adr to detect architectural decisions...
+
+Analyzing plan for significant decisions...
+  ✓ Lesson structure: Standard 4-prompt format (no ADR needed - established pattern)
+  ✓ CEFR progression: A2 → A2-B1 → B1 (standard tier)
+  📋 Pedagogical approach detected: "Collections awareness in Lesson 4 vs deep dive later"
+
+📋 Architectural decision detected:
+   "Teaching collections as awareness-only in Chapter 14 vs comprehensive coverage"
+
+   Rationale: Collections (list, dict, tuple, set) are complex (7+ concepts each).
+   Chapter 14 scope = core types only. Deep dive deferred to Chapters 18-19.
+
+   Decision: Lesson 4 teaches "what collections exist" + basic syntax only.
+             No iteration, comprehension, or methods until Ch 18-19.
+
+   Document this decision with ADR? (y/n)
+
+[User: y]
+
+Creating ADR: history/adr/014-collections-awareness-pattern.md
+✅ ADR created and linked to plan.md
+
+---
+
+Please review the plan + ADR:
+- Are 5 lessons appropriate structure?
+- Is collections awareness pattern justified?
+- Are CEFR levels and cognitive load appropriate?
 
 Reply with: "✅ Plan approved" or provide feedback
 
@@ -1015,7 +1108,7 @@ Reply with: "✅ Plan approved" or provide feedback
 
 ---
 
-⏺ PHASE 3: Tasks (Automated)
+⏺ PHASE 3: Tasks + Analysis Gate
 
 Invoking: /sp.tasks with spec + plan...
 Applying: Validation points, acceptance criteria, lesson structure
@@ -1023,12 +1116,46 @@ Applying: Validation points, acceptance criteria, lesson structure
 [/sp.tasks generates tasks.md]
 
 📋 Tasks created: specs/part-4-chapter-14/tasks.md
+  - 58 tasks across 8 phases
+  - Organized by lesson (not user story)
+  - Code testing tasks included
 
-Please review the implementation checklist:
-- Are acceptance criteria clear?
-- Are validation steps included (lesson closure pattern)?
-- Are all 5 lessons covered with tasks?
-- Are code testing tasks included?
+---
+
+🔬 Running /sp.analyze for cross-artifact consistency...
+
+Analyzing spec ↔ plan ↔ tasks alignment...
+
+**Traceability Matrix**:
+  ✓ Learning Objective 1 → Lesson 1 → Tasks T004-T010 ✓
+  ✓ Learning Objective 2 → Lesson 2 → Tasks T011-T018 ✓
+  ✓ Learning Objective 3 → Lesson 3 → Tasks T019-T026 ✓
+  ✓ Learning Objective 4 → Lesson 4 → Tasks T027-T035 ✓
+  ✓ Learning Objective 5 → Lesson 5 → Tasks T036-T043 ✓
+
+**Scope Validation**:
+  ✓ All spec concepts have corresponding lessons
+  ✓ All lessons have implementation tasks
+  ✓ No orphaned tasks (all map to spec/plan)
+
+**Consistency Checks**:
+  ✓ CEFR levels consistent (spec A2-B1 = plan A2-B1 = tasks complexity)
+  ✓ Cognitive load respected (max 7 concepts per lesson in tasks)
+  ✓ Lesson closure pattern specified in tasks (Try With AI ONLY)
+  ✓ Code testing tasks for all examples
+
+**Risk Analysis**:
+  ⚠️ MINOR: Lesson 5 (capstone) has 8 tasks - ensure not overwhelming
+  ✓ Mitigation: Capstone is integration (reuses L1-4 concepts, not 8 NEW concepts)
+
+📊 Analysis Report: All critical checks passed. 1 minor advisory noted.
+
+---
+
+Please review tasks.md + analysis report:
+- Are 58 tasks reasonable for 5 lessons?
+- Is spec → plan → tasks traceability clear?
+- Any critical consistency issues?
 
 Reply with: "✅ Tasks approved" or provide feedback
 
@@ -1038,54 +1165,91 @@ Reply with: "✅ Tasks approved" or provide feedback
 
 ---
 
-⏺ PHASE 4: Implementation (Optional)
+⏺ PHASE 4: Implementation + Technical Review Gate
 
-All design artifacts complete:
-  ✅ specs/part-4-chapter-14/spec.md (AI-Native Learning)
-  ✅ specs/part-4-chapter-14/plan.md (CEFR-leveled, skills mapped)
-  ✅ specs/part-4-chapter-14/tasks.md (validation-first)
+All design artifacts approved:
+  ✅ specs/part-4-chapter-14/spec.md (clarified)
+  ✅ specs/part-4-chapter-14/plan.md (ADR documented)
+  ✅ specs/part-4-chapter-14/tasks.md (analyzed)
 
-Ready to implement lesson content?
+Invoking: /sp.implement 014-data-types
 
-A) Implement with lesson-writer subagent + technical-reviewer validation
-   → Automatically creates lesson .md files with full AI-Native Learning methodology
-   → Then validates with technical-reviewer
-B) Manual implementation
-   → You create lessons using tasks.md as guide
-C) Done for now
-   → Keep design artifacts, implement later
+📚 Implementing lessons with parallel team strategy...
+  → Lessons 1-4: Parallel (4 lesson-writer subagents)
+  → Lesson 5: Sequential (capstone after L1-4 complete)
 
-[User chooses A]
+[lesson-writer subagents working...]
 
-✅ Invoking lesson-writer subagent...
-[5 lessons created in parallel/sequential approach]
+✅ All 5 lessons created:
+  ✓ book-source/docs/04-Part-4-Python-Fundamentals/14-data-types/readme.md
+  ✓ book-source/docs/04-Part-4-Python-Fundamentals/14-data-types/01-variables-and-type-hints.md
+  ✓ book-source/docs/04-Part-4-Python-Fundamentals/14-data-types/02-integers-and-floats.md
+  ✓ book-source/docs/04-Part-4-Python-Fundamentals/14-data-types/03-strings-and-booleans.md
+  ✓ book-source/docs/04-Part-4-Python-Fundamentals/14-data-types/04-collections-awareness.md
+  ✓ book-source/docs/04-Part-4-Python-Fundamentals/14-data-types/05-type-explorer-capstone.md
 
-✅ Invoking technical-reviewer for validation...
-[Validation report generated]
+---
 
-⚠️ CONDITIONAL PASS: 1 critical issue found
-- Lesson 5 has checklist after "Try With AI" (violates closure pattern)
+🔍 Invoking technical-reviewer for validation...
 
-✅ Applying fix...
-[Removed checklist section from Lesson 5]
+Validating AI-Native Learning compliance...
+  ✓ 4-step pattern applied (describe → explore → validate → learn)
+  ✓ AI positioned as co-reasoning partner
+  ✓ Part 4 appropriate language (no SDD terminology)
 
-✅ Re-validating...
-[Validation passed]
+Validating lesson closure pattern...
+  ✓ Lessons 1-4 end with "Try With AI" ONLY
+  ⚠️ Lesson 5: Has "Capstone Completion Checklist" after "Try With AI" (CRITICAL VIOLATION)
+
+Validating code quality...
+  ✓ All 19 code examples run on Python 3.14+
+  ✓ Modern type hints throughout
+  ✓ No security issues
+
+Validating constitutional compliance...
+  ✓ All 9 domain skills applied
+  ✓ Graduated teaching pattern followed
+  ✓ CEFR proficiency appropriate
+
+📋 Verdict: CONDITIONAL PASS (1 critical issue)
+
+---
+
+⚠️ CRITICAL ISSUE DETECTED: Lesson 5 closure pattern violation
+
+Applying automatic fix...
+  → Removing lines 559-575 (Capstone Completion Checklist section)
+  → Lesson now ends at line 555 with "Try With AI" section
+
+✅ Fix applied
+
+---
+
+🔍 Re-running technical-reviewer...
+
+✅ PASS: All requirements met
+  - Lesson closure pattern compliant
+  - AI-Native Learning principles excellent
+  - Code quality 100% (19/19 examples pass)
+  - Constitutional alignment verified
+
+📋 Validation Report: VALIDATION_REPORT_CHAPTER_14.md
 
 ---
 
 ✅ WORKFLOW COMPLETE
 
-Chapter 14 fully validated:
-  ✅ Specification (AI-Native Learning principles)
-  ✅ Lesson Plan (CEFR-leveled, skills mapped, cognitive load validated)
-  ✅ Implementation Tasks (58/58 complete)
-  ✅ Lesson Content (5 lessons, AI-Native Learning pattern applied)
-  ✅ Technical Validation (PASS - all requirements met)
+Chapter 14 production-ready:
+  ✅ Specification (clarified with /sp.clarify)
+  ✅ Planning (ADR documented with /sp.adr)
+  ✅ Tasks (consistency validated with /sp.analyze)
+  ✅ Implementation (5 lessons, 94 KB content)
+  ✅ Technical Review (PASS after critical fix)
 
-📋 Validation Report: VALIDATION_REPORT_CHAPTER_14.md
+Files created: 6 lessons + 1 validation report
+Quality gates: 4/4 passed (clarify, ADR, analyze, technical-review)
 
-Next: Commit to git, prepare for publication
+Next: Commit to git → Create PR → Publish
 ```
 
 ---
@@ -1121,20 +1285,36 @@ Next: Commit to git, prepare for publication
 
 ---
 
-## ONE COMMAND. FULL INTELLIGENCE. COMPLETE WORKFLOW.
+## ONE COMMAND. FULL INTELLIGENCE. COMPLETE WORKFLOW WITH QUALITY GATES.
 
-Run `/sp.python-chapter [N]` and the system:
+Run `/sp.python-chapter [N]` and the system executes this opinionated workflow:
 
-✅ Gathers intelligent context (AI-Native Learning-driven questions)
-✅ Automatically chains `/sp.specify` → `/sp.plan` → `/sp.tasks` → `/sp.implement` with approval gates
-✅ Applies vertical intelligence (AI-Native Learning, teaching patterns, pedagogy) at every phase
-✅ Respects chapter boundaries (ruthless context filtering, no forward references)
-✅ Honors user intent (never overrides audience/scope/outcome decisions)
-✅ Validates quality (acceptance criteria at each gate)
-✅ Implements lessons with lesson-writer subagent
-✅ Validates with technical-reviewer (AI-Native Learning compliance, lesson closure pattern)
+**PHASE 0: Intelligent Context Discovery**
+✅ Reads constitution + chapter-index + skills (automatic intelligence derivation)
+✅ Asks 0-3 targeted questions (only when genuinely ambiguous)
 
-**Result: AI-Native Learning-centered Python chapters ready for publication.**
+**PHASE 1: Specification + Clarification Gate**
+✅ `/sp.specify` → Creates spec.md
+✅ `/sp.clarify` → Identifies underspecified areas, asks up to 5 clarifications, updates spec
+✅ Human review → Approval gate
+
+**PHASE 2: Planning + ADR Gate**
+✅ `/sp.plan` → Creates plan.md with CEFR levels, skills mapping
+✅ `/sp.adr` → Detects architectural decisions, suggests documentation (waits for user consent)
+✅ Human review → Approval gate
+
+**PHASE 3: Tasks + Analysis Gate**
+✅ `/sp.tasks` → Creates tasks.md with acceptance criteria
+✅ `/sp.analyze` → Cross-artifact consistency check (spec ↔ plan ↔ tasks alignment)
+✅ Human review → Approval gate
+
+**PHASE 4: Implementation + Technical Review Gate**
+✅ `/sp.implement` → lesson-writer creates all lessons (parallel + sequential strategy)
+✅ `technical-reviewer` → Validates AI-Native Learning compliance, code quality, lesson closure
+✅ Auto-fix critical issues → Re-validate until PASS
+✅ Human review → Final approval
+
+**Result: High-quality, AI-Native Learning-centered Python chapters with built-in quality assurance.**
 
 ---
 
