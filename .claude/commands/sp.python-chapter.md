@@ -25,6 +25,25 @@ Students don't memorize syntax. They:
 
 Result: Portable thinking skills, not syntax cargo cult.
 
+## 🧠 The Goal
+
+In traditional programming classes, students often get lost memorizing syntax.
+In the AI-driven classroom, our goal is different — we learn **concepts first**, then use **Claude Code** or **Gemini CLI** to generate, explain, and refine Python syntax *with understanding*.
+
+You will **think in logic**, not just in code.
+
+We’ll explore three foundational ideas:
+
+1. Loops (repetition)
+2. Conditionals (decision-making)
+3. Functions (modular thinking)
+
+For each, you’ll see:
+
+* A plain-language concept explanation
+* A Python example
+* A colearning prompt for your AI assistant
+
 ---
 
 ## Teaching Pattern (Every Concept)
@@ -759,76 +778,320 @@ Workflow complete when:
 
 ---
 
-## Implementation Notes
+## ORCHESTRATED WORKFLOW: Full SpecKit Plus Loop
 
-This command is **fully automated**. When you run it:
+This command **fully automates** the SpecKit Plus SDD workflow (Spec → Plan → Tasks → Implement).
 
-1. **Claude Code extracts** chapter number from arguments
-2. **Claude Code asks** 3 context questions (existing materials, audience, problems)
-3. **Claude Code invokes** `/sp.specify` with chapter context
-4. **User approves** spec.md
-5. **Claude Code invokes** `/sp.plan` with approved spec
-6. **User approves** plan.md
-7. **Claude Code invokes** `/sp.tasks` with spec + plan
-8. **User approves** tasks.md
-9. **Claude Code reports** completion with all 3 files ready to share
+### Execution Flow
 
-**Result:** Full specification package ready for implementer (lesson-writer subagent)
+When you run `/sp.python-chapter [N]`:
+
+**PHASE 0: CONTEXT GATHERING**
+```
+1. Parse chapter number from [N]
+2. Validate chapter range (12-29) and read chapter-index.md
+3. Ask user 4 clarifying questions:
+   - Who are we teaching? (audience)
+   - What's the core focus for THIS chapter? (scope)
+   - What can students BUILD? (outcome)
+   - Which context aspects fit THIS chapter? (materials)
+4. Store all responses for next phases
+```
+
+**PHASE 1: SPECIFICATION** (Automated)
+```
+→ Invoke: /sp.specify [chapter-context]
+  ├─ Pass all user answers + chapter title
+  ├─ /sp.specify creates: specs/part-5-chapter-[N]/spec.md
+  └─ Report: "Spec created. Review and confirm to proceed."
+
+WAIT: User reviews spec.md
+→ User confirms: "Spec approved" or provides feedback
+  ├─ If feedback: Update spec.md, then proceed
+  └─ If approved: Continue to PHASE 2
+```
+
+**PHASE 2: PLANNING** (Automated)
+```
+→ Invoke: /sp.plan [spec-context]
+  ├─ Read: specs/part-5-chapter-[N]/spec.md
+  ├─ /sp.plan creates: specs/part-5-chapter-[N]/plan.md
+  └─ Report: "Plan created. Review and confirm to proceed."
+
+WAIT: User reviews plan.md
+→ User confirms: "Plan approved" or provides feedback
+  ├─ If feedback: Update plan.md, then proceed
+  └─ If approved: Continue to PHASE 3
+```
+
+**PHASE 3: TASKS** (Automated)
+```
+→ Invoke: /sp.tasks [spec+plan-context]
+  ├─ Read: specs/part-5-chapter-[N]/spec.md + plan.md
+  ├─ /sp.tasks creates: specs/part-5-chapter-[N]/tasks.md
+  └─ Report: "Tasks created. Review and confirm to proceed."
+
+WAIT: User reviews tasks.md
+→ User confirms: "Tasks approved" or provides feedback
+  ├─ If feedback: Update tasks.md, then proceed
+  └─ If approved: Continue to PHASE 4 (optional)
+```
+
+**PHASE 4: IMPLEMENTATION** (Optional)
+```
+→ Option 1: Invoke lesson-writer subagent
+  ├─ Pass: spec.md + plan.md + tasks.md
+  ├─ lesson-writer creates: Lesson content files (01-lesson-1.md, etc.)
+  └─ Report: "Implementation complete. Ready for validation."
+
+→ Option 2: Manual implementation
+  └─ User implements lessons manually using tasks.md as guide
+
+→ Report final status:
+  ├─ All 3 design files (spec/plan/tasks) ✅
+  ├─ Lesson content files ✅ (if implemented)
+  └─ Ready for technical-reviewer validation
+```
+
+### Key Automation Points
+
+**Automatic Execution** (No user action needed):
+- ✅ Phase 0 → Phase 1 transition: Questions answered, `/sp.specify` invoked automatically
+- ✅ Phase 1 → Phase 2 transition: After approval, `/sp.plan` invoked automatically
+- ✅ Phase 2 → Phase 3 transition: After approval, `/sp.tasks` invoked automatically
+- ✅ Phase 3 → Phase 4 (optional): After approval, ask user if they want implementation
+
+**Human Checkpoints** (User approval required):
+- ⏸ After spec.md created: Review + approve before planning
+- ⏸ After plan.md created: Review + approve before tasks
+- ⏸ After tasks.md created: Review + approve before implementation
+- ⏸ After implementation (if chosen): Ready for validation
+
+### What Gets Created
+
+**By End of Phase 3** (required):
+```
+specs/part-5-chapter-[N]/
+  ├─ spec.md       (What students learn)
+  ├─ plan.md       (How we teach it, lesson-by-lesson)
+  └─ tasks.md      (Implementation checklist)
+```
+
+**By End of Phase 4** (if implemented):
+```
+docs/part-5/chapter-[N]/
+  ├─ 01-lesson-1.md
+  ├─ 02-lesson-2.md
+  ├─ 03-lesson-3.md
+  ├─ 04-lesson-4.md (or more, based on plan)
+  └─ index.md        (auto-generated TOC)
+```
+
+### Command Execution Template
+
+**What the user sees**:
+
+```
+> /sp.python-chapter 13
+
+⏺ PHASE 0: Context Gathering
+
+Chapter 13: "Introduction to Python" (Part 5)
+
+Q1: Who are we teaching?
+→ [User answers]
+
+Q2: What's the core focus for THIS chapter?
+→ [User answers]
+
+Q3: What can students BUILD after this chapter?
+→ [User answers]
+
+Q4: Which context aspects fit THIS chapter?
+→ [User answers]
+
+✅ Context gathered. Moving to Phase 1...
 
 ---
 
-## How Claude Code Implements This
+⏺ PHASE 1: Specification (Automated)
 
-```
-STEP 1: Parse chapter number
-├─ Extract from $ARGUMENTS
-├─ Validate range 12-29
-└─ Exit if invalid
+Invoking: /sp.specify with chapter context...
 
-STEP 2: Ask user context (3 questions)
-├─ Read existing materials? (offer to paste)
-├─ Target audience?
-├─ Real problems to solve?
-└─ Store responses for next phases
+[/sp.specify creates spec.md]
 
-STEP 3: Execute /sp.specify (SlashCommand)
-├─ Pass chapter context to /sp.specify
-├─ /sp.specify creates specs/part-5-chapter-${N}/spec.md
-├─ User reviews and approves spec
-└─ Confirm: "Spec approved, moving to planning"
+📋 Spec created: specs/part-5-chapter-13/spec.md
 
-STEP 4: Execute /sp.plan (SlashCommand)
-├─ Read approved spec.md
-├─ Run /sp.plan with spec context
-├─ /sp.plan creates specs/part-5-chapter-${N}/plan.md
-├─ User reviews and approves plan
-└─ Confirm: "Plan approved, moving to tasks"
+Please review the specification and confirm:
+- Does this match your vision for Chapter 13?
+- Are learning objectives clear?
+- Is scope appropriate (not too broad)?
 
-STEP 5: Execute /sp.tasks (SlashCommand)
-├─ Read spec.md + plan.md
-├─ Run /sp.tasks with full context
-├─ /sp.tasks creates specs/part-5-chapter-${N}/tasks.md
-├─ User reviews and approves tasks
-└─ Confirm: "Tasks approved, ready for implementation"
+Reply with: "✅ Spec approved" or provide feedback
 
-STEP 6: Final Report
-├─ List all 3 files created
-├─ Show file paths
-└─ Next: "Ready for lesson-writer subagent"
+→ [User reviews and approves]
+
+---
+
+⏺ PHASE 2: Planning (Automated)
+
+Invoking: /sp.plan with approved spec...
+
+[/sp.plan creates plan.md]
+
+📋 Plan created: specs/part-5-chapter-13/plan.md
+
+Please review the lesson breakdown:
+- Are 4 lessons appropriate?
+- Is AI prompt specified for each lesson?
+- Are proficiency levels correct (CEFR)?
+
+Reply with: "✅ Plan approved" or provide feedback
+
+→ [User reviews and approves]
+
+---
+
+⏺ PHASE 3: Tasks (Automated)
+
+Invoking: /sp.tasks with spec + plan...
+
+[/sp.tasks creates tasks.md]
+
+📋 Tasks created: specs/part-5-chapter-13/tasks.md
+
+Please review the implementation checklist:
+- Are acceptance criteria clear?
+- Is testing included?
+- Are all phases represented?
+
+Reply with: "✅ Tasks approved" or provide feedback
+
+→ [User reviews and approves]
+
+---
+
+⏺ PHASE 4: Implementation (Optional)
+
+3 design files ready:
+  ✅ specs/part-5-chapter-13/spec.md
+  ✅ specs/part-5-chapter-13/plan.md
+  ✅ specs/part-5-chapter-13/tasks.md
+
+Ready to implement lesson content?
+
+Options:
+A) "Implement with lesson-writer subagent" → Automatic lesson creation
+B) "Manual implementation" → You implement using tasks.md as guide
+C) "Done" → Keep design files, skip implementation for now
+
+→ [User chooses option]
+
+If A: Invokes lesson-writer subagent, creates lesson files
+If B/C: Reports completion status and next steps
+
+✅ WORKFLOW COMPLETE
+
+Final Report:
+  ✅ Chapter 13 specification ready
+  ✅ Lesson plan approved
+  ✅ Implementation tasks defined
+  ✅ All 3 design artifacts in: specs/part-5-chapter-13/
+
+Next: Share with lesson-writer subagent for implementation
 ```
 
 ---
 
-## Key Points
+## How to Implement Orchestration (For Claude Code)
+
+The `/sp.python-chapter` command must use **SlashCommand tool** to invoke each phase automatically.
+
+### Implementation Pattern (Pseudocode)
+
+```python
+# MAIN COMMAND EXECUTION
+
+def sp_python_chapter(chapter_num):
+    # PHASE 0: Context Gathering
+    chapter_title = read_chapter_index(chapter_num)
+    validate_chapter_range(chapter_num)  # 12-29 only
+
+    user_answers = ask_user_four_questions()
+    # Stores: audience, scope, outcome, context_materials
+
+    # PHASE 1: Specification (AUTOMATED)
+    context = prepare_context_for_spec(
+        chapter_num=chapter_num,
+        chapter_title=chapter_title,
+        user_answers=user_answers
+    )
+
+    SlashCommand.invoke("/sp.specify", context=context)
+    # → Creates: specs/part-5-chapter-[N]/spec.md
+
+    print("📋 Spec created. Review and approve before proceeding.")
+    wait_for_user_approval()  # User: "✅ Spec approved"
+
+    # PHASE 2: Planning (AUTOMATED)
+    spec_content = Read("specs/part-5-chapter-{N}/spec.md")
+    context = prepare_context_for_plan(
+        spec=spec_content,
+        chapter_title=chapter_title
+    )
+
+    SlashCommand.invoke("/sp.plan", context=context)
+    # → Creates: specs/part-5-chapter-[N]/plan.md
+
+    print("📋 Plan created. Review and approve before proceeding.")
+    wait_for_user_approval()  # User: "✅ Plan approved"
+
+    # PHASE 3: Tasks (AUTOMATED)
+    plan_content = Read("specs/part-5-chapter-{N}/plan.md")
+    context = prepare_context_for_tasks(
+        spec=spec_content,
+        plan=plan_content,
+        chapter_title=chapter_title
+    )
+
+    SlashCommand.invoke("/sp.tasks", context=context)
+    # → Creates: specs/part-5-chapter-[N]/tasks.md
+
+    print("📋 Tasks created. Review and approve before proceeding.")
+    wait_for_user_approval()  # User: "✅ Tasks approved"
+
+    # PHASE 4: Implementation (OPTIONAL)
+    print("Ready to implement lesson content?")
+    user_choice = ask_user([
+        "A) Implement with lesson-writer subagent",
+        "B) Manual implementation",
+        "C) Done for now"
+    ])
+
+    if user_choice == "A":
+        Task.invoke(
+            subagent_type="lesson-writer",
+            spec=spec_content,
+            plan=plan_content,
+            tasks=tasks_content
+        )
+        # → Creates: docs/part-5/chapter-[N]/{01,02,03,04}-lesson-*.md
+
+    # Final Report
+    report_completion(chapter_num, files_created)
+```
+
+### Key Points
 
 - **Automatic execution:** SlashCommand tool invokes `/sp.specify`, `/sp.plan`, `/sp.tasks` sequentially
 - **Human checkpoints:** User approves each phase before proceeding
 - **Full context passed:** Each phase receives outputs from previous phase
+- **Context filtering:** Ruthless filtering applied at each phase (no Ch 14+ concepts, no advanced variations)
 - **AI-native pedagogy enforced:** All specs follow Concept → Code → Think → Reasoning pattern
 - **Python 3.13+ mandatory:** Every generated spec includes modern syntax standards
 - **Security-first:** All specs include security non-negotiables checklist
 
-**One user command.** Full spec package. Ready to implement.
+**One user command.** Full spec → plan → tasks → implementation package. Ready for validation.
 
 ---
 
@@ -886,4 +1149,4 @@ All chapters created with this command follow:
 ✅ **Problem 5: Audience mismatch** - Asks user, honors their answer, no override
 ✅ **Problem 6: Wrong methodology** - No self-referential rules, user-driven scope
 
-**Result: Beginner-appropriate, focused chapters without circular dependencies.**
+**Result: Beginner-appropriate, AIID First, focused chapters without circular dependencies.**

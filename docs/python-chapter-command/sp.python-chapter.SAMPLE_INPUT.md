@@ -28,7 +28,7 @@ Command asks 4 questions. You respond with your context. Same result, different 
 
 **You type:**
 ```
-/sp.python-chapter 13
+/sp.python-chapter ch-13-intro-python
 
 Write Chapter 13: Introduction to Modern Python in Part 4
 
@@ -37,12 +37,12 @@ Core Context & Guiding Philosophy:
 This chapter must reflect modern AIDD principles:
 - AI-Driven Learning: Students use Claude Code or Gemini CLI as coding partners
 - Focus on reasoning and problem-solving, NOT syntax memorization
-- Specification-First: Clarify what you want BEFORE writing code
+- AIDD-First: Clarify what you want BEFORE writing code
 - Validation-First: Test understanding, not just memorize
 
-Existing Teaching Materials:
+Existing Teaching Materials - This is old reference review and get the best ignore irrelevat aspects:
 @context/13_chap12_to_29_specs/Lesson_01_Introduction_to_Python.md
-@context/13_chap12_to_29_specs/Lesson_01_Introduction_to_Python.ipynb
+@context/13_chap12_to_29_specs/readme.md
 
 Additional Guidance:
 - Target: Absolute beginners (no coding experience)
