@@ -728,7 +728,7 @@ Use **ChatGPT web** (or your AI companion tool if already set up) for the follow
 
 ### Prompt 3 (Apply): Dictionary Comprehension for Temperature Conversion
 
-> "Write a dictionary comprehension that converts temperatures from Celsius to Fahrenheit. Start with a dict like {'New York': 20, 'Los Angeles': 25}. Show the original dict, the comprehension code, and the output. Then modify it to only include cities above 70°F in the result."
+> "Write a dictionary comprehension that converts temperatures from Celsius to Fahrenheit. Start with a dict like `{'New York': 20, 'Los Angeles': 25}`. Show the original dict, the comprehension code, and the output. Then modify it to only include cities above 70°F in the result."
 
 **Expected Outcome**: You write a correct comprehension with the formula (C * 9/5) + 32, see the output, and add filtering. You understand the {key: value for ...} syntax and if conditions.
 

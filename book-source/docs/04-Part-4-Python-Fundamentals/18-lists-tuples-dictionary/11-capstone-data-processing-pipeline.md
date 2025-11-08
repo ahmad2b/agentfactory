@@ -287,7 +287,7 @@ Filtering is useful, but aggregation is powerful. Now calculate statistics **by 
 - Input: list[dict[str, str | float]] of all students
 - Output: dict[str, dict[str, float | int]] where:
   - Outer key = major name
-  - Inner dict = {"count": N, "average_gpa": X.XX}
+  - Inner dict = `{"count": N, "average_gpa": X.XX}`
 - Use dict to accumulate counts and sums
 
 #### Code Example: Aggregation with Dict
