@@ -1,10 +1,18 @@
 ---
-description: Orchestrate full SpecKit Plus workflow for Python chapters (12-29). Automatically chains /sp.specify → /sp.plan → /sp.tasks with approval gates. Students learn Python through AIDD thinking (specification-first, validation-first, AI partnership).
+description: Intelligence-driven workflow for Python chapters (12-29). Reads constitution + chapter-index to derive audience/complexity/prerequisites automatically. Asks only targeted questions when genuinely ambiguous. Chains /sp.specify → /sp.plan → /sp.tasks → /sp.implement with validation gates.
 ---
 
-# /sp.python-chapter: Orchestrated Python Chapter Workflow
+# /sp.python-chapter: Intelligence-Driven Python Chapter Workflow
 
-**Purpose**: Design a complete Python chapter (12-29) using AIDD principles with **automatic orchestration** of the full SpecKit Plus workflow (Spec → Plan → Tasks → optional Implementation). Students learn programming by applying AIDD thinking learned in Chapters 1-11.
+**Purpose**: Design a complete Python chapter (12-29) using **vertical intelligence** (constitution + chapter-index + skills) to automatically derive context. No hardcoded questions - the command reads authoritative sources and asks only what's genuinely ambiguous. Chains full workflow (Spec → Plan → Tasks → Implement → Validate) with approval gates.
+
+**Intelligence Sources**:
+- Constitution: Target audience, philosophy, learning patterns
+- Chapter Index: Exact title (THE ANCHOR), part, prerequisites
+- Skills Library: Available domain skills for this chapter
+- Context Materials: Existing pedagogical patterns (if available)
+
+**Adaptive Questions**: 0-3 targeted questions based on what intelligence can't derive (NOT hardcoded 4 questions).
 
 ## User Input
 
@@ -333,17 +341,38 @@ Lessons MUST end with "Try With AI" section ONLY. Prompt 4 provides cognitive cl
 
 When you run `/sp.python-chapter [N]`:
 
-### PHASE 0: Context Gathering (Interactive)
+### PHASE 0: Intelligent Context Gathering (Adaptive)
 
-1. **Validate chapter**: Read `specs/book/chapter-index.md` and extract chapter title (ANCHOR)
-2. **Ask 4 questions**:
-   - Who are we teaching? (audience → complexity tier)
-   - What's the core focus for THIS chapter? (scope → concept limit)
-   - What can students BUILD? (outcome → learning objective)
-   - Which context aspects fit? (materials → pedagogical patterns)
-3. **Store responses** for next phases
+**Intelligence-Driven Discovery** (not hardcoded questions):
 
-**Apply AIDD**: Specification-first means understanding WHO and WHAT before designing HOW.
+1. **Read authoritative sources**:
+   - Constitution: `.specify/memory/constitution.md` (target audience, philosophy, principles)
+   - Chapter Index: `specs/book/chapter-index.md` (chapter title, part, prerequisite chapters)
+   - Skills Library: `.claude/skills/` (available domain skills)
+   - Existing Context: `context/part-4-python/` or `context/13_chap12_to_29_specs/` (if available)
+
+2. **Derive chapter intelligence**:
+   - **Audience**: From constitution (Aspiring/Professional/Founders with graduated complexity)
+   - **Part**: From chapter-index.md (chapter N → Part X)
+   - **Complexity Tier**: From chapter number range (12-16=beginner, 17-23=intermediate, 24-29=advanced)
+   - **Prerequisite Knowledge**: All chapters 1 through N-1
+   - **Chapter Title**: Exact title from chapter-index.md (THE ANCHOR)
+   - **Learning Pattern**: AI-Native Learning (Part 4 appropriate, NOT formal SDD)
+
+3. **Intelligently determine what to ask user** (context-adaptive):
+   - IF context materials exist for this chapter → Ask: "Use existing context or start fresh?"
+   - IF chapter title is ambiguous/broad → Ask: "What specific aspect should we emphasize?"
+   - IF capstone vs foundational unclear → Ask: "Should students BUILD something or learn concepts?"
+   - IF multiple teaching approaches possible → Ask: "Which pedagogical angle fits best?"
+
+   **DO NOT ask**:
+   - ❌ "Who is the audience?" (constitution already defines this)
+   - ❌ "How many lessons?" (let intelligence determine based on scope)
+   - ❌ "What CEFR level?" (derive from chapter number range automatically)
+
+4. **Store derived intelligence** for next phases
+
+**Apply Vertical Intelligence**: Constitution + Chapter Index + Skills → Adaptive questions (not hardcoded forms).
 
 ---
 
@@ -495,35 +524,96 @@ C) Done for now
 
 ### THE ORCHESTRATED WORKFLOW (EXECUTABLE)
 
-#### PHASE 0: Validation & Context Gathering (Interactive)
+#### PHASE 0: Intelligent Context Discovery (Adaptive, NOT Hardcoded)
 
-1. **Read and validate chapter number**:
-   - Read: `specs/book/chapter-index.md`
-   - Extract chapter title for chapters 12-29 only
-   - Reject if chapter < 12 or > 29
-   - Store: `chapter_title`, `chapter_num`, `part_num` (derived from chapter)
+**1. Read Authoritative Sources** (Automatic, NO USER INTERACTION):
 
-   **Chapter-to-Part Mapping**:
-   - Part 4 (Python Fundamentals): Chapters 12-29
-     - Beginner (Ch 12-16): A1-A2 proficiency, max 5 concepts/lesson
-     - Intermediate (Ch 17-23): A2-B1 proficiency, max 7 concepts/lesson
-     - Advanced (Ch 24-29): B1-B2 proficiency, max 10 concepts/lesson
+```bash
+# Constitution for audience, philosophy, principles
+constitution=$(cat .specify/memory/constitution.md)
 
-2. **Ask 4 clarifying questions** (Interactive user input):
-   ```
-   Q1: Who is the primary audience for Chapter [N]: [Title]?
-   Q2: What is the core focus for THIS chapter ONLY?
-   Q3: What should students be able to BUILD by the end?
-   Q4: How should this chapter emphasize AIDD principles?
-   ```
-   - Store all 4 answers in context
-   - Apply AIDD thinking: Specification-first means understanding WHO and WHAT before HOW
+# Chapter index for title, part, prerequisites
+chapter_data=$(grep "^| $CHAPTER_NUM |" specs/book/chapter-index.md)
+chapter_title=$(echo "$chapter_data" | awk -F'|' '{print $3}' | tr im)
+chapter_file=$(echo "$chapter_data" | awk -F'|' '{print $4}' | sed 's/`//g' | trim)
 
-3. **Create feature branch** (Automatic, NO USER INTERACTION):
-   ```bash
-   git checkout -b [branch-name]
-   ```
-   Where `[branch-name]` = `[NNN]-topic-slug` (e.g., `014-data-types`)
+# Skills available
+skills=$(ls -1 .claude/skills/)
+
+# Context materials (if exist)
+context_files=$(find context/ -name "*chapter-$CHAPTER_NUM*" 2>/dev/null)
+```
+
+**2. Derive Chapter Intelligence** (Automatic computation):
+
+```python
+# From constitution (no need to ask user)
+audience = "Aspiring/Professional/Founders (graduated complexity)"
+
+# From chapter number (automatic tier assignment)
+if 12 <= chapter_num <= 16:
+    complexity_tier = "beginner"
+    cefr_range = "A1-A2"
+    max_concepts = 5
+elif 17 <= chapter_num <= 23:
+    complexity_tier = "intermediate"
+    cefr_range = "A2-B1"
+    max_concepts = 7
+elif 24 <= chapter_num <= 29:
+    complexity_tier = "advanced"
+    cefr_range = "B1-B2"
+    max_concepts = 10
+
+# From chapter index (THE ANCHOR)
+part_num = 4  # Chapters 12-29 are Part 4
+prerequisites = f"Chapters 1-{chapter_num - 1}"
+learning_pattern = "AI-Native Learning"  # Part 4 appropriate
+
+# Store derived intelligence
+chapter_intelligence = {
+    "number": chapter_num,
+    "title": chapter_title,  # FROM CHAPTER-INDEX.MD (authoritative)
+    "part": part_num,
+    "complexity_tier": complexity_tier,
+    "cefr_range": cefr_range,
+    "max_concepts_per_lesson": max_concepts,
+    "prerequisites": prerequisites,
+    "audience": audience,
+    "learning_pattern": learning_pattern,
+    "available_skills": skills
+}
+```
+
+**3. Intelligently Determine What to Ask** (Context-adaptive):
+
+```python
+questions = []
+
+# Only ask if genuinely ambiguous or requires human judgment
+if context_files:
+    questions.append("Existing context found for this chapter. Use it or start fresh?")
+
+if chapter_title_is_broad(chapter_title):  # e.g., "Data Types" could mean many things
+    questions.append(f"'{chapter_title}' - which specific aspects should we emphasize?")
+
+if unclear_if_capstone(chapter_num, part_num):  # e.g., is this a build lesson?
+    questions.append("Should students BUILD something or focus on concepts?")
+
+# Ask only necessary questions (0-3 max, NOT hardcoded 4)
+for q in questions:
+    user_input = ask(q)
+    chapter_intelligence["user_preferences"][q] = user_input
+```
+
+**4. Create Feature Branch** (Automatic, NO USER INTERACTION):
+
+```bash
+# Derive branch name from chapter data (not hardcoded)
+branch_slug=$(echo "$chapter_file" | sed 's/\/$//; s/\`//g')  # e.g., "14-data-types"
+git checkout -b "$branch_slug"
+```
+
+**Key Principle**: Intelligence derives from constitution + chapter-index + skills library. Only ask user when GENUINELY ambiguous or requires human creative judgment.
 
 ---
 
@@ -841,24 +931,40 @@ VALIDATION_REPORT_CHAPTER_[N].md   (Technical review results)
 ```
 > /sp.python-chapter 14
 
-⏺ PHASE 0: Context Gathering
+⏺ PHASE 0: Intelligent Context Discovery
 
-Chapter 14: "Data Types" (Part 4)
-Prerequisites: Chapters 1-13 (AIDD principles + Python intro)
+📖 Reading authoritative sources...
+  ✓ Constitution: Target audience, philosophy, principles
+  ✓ Chapter Index: Chapter 14 = "Data Types" (Part 4)
+  ✓ Skills Library: 13 skills available
+  ✓ Context: Found existing materials in context/13_chap12_to_29_specs/
 
-Q1: Who are we teaching?
-[User answers: Absolute beginners AND professionals transitioning to AI-native]
+🧠 Deriving chapter intelligence...
+  ✓ Chapter: 14 - "Data Types"
+  ✓ Part: 4 (Python Fundamentals)
+  ✓ Complexity Tier: Beginner (Chapters 12-16)
+  ✓ CEFR Range: A1-A2 (max 5 concepts/lesson)
+  ✓ Prerequisites: Chapters 1-13
+  ✓ Audience: Aspiring/Professional/Founders (graduated)
+  ✓ Learning Pattern: AI-Native Learning (NOT formal SDD)
 
-Q2: Core focus for THIS chapter?
-[User answers: Core data types - int, float, str, bool, None + type hints]
+🤔 Analyzing what needs clarification...
+  → Existing context materials found
 
-Q3: What will students BUILD?
-[User answers: Interactive Type Explorer program demonstrating all core types]
+  Q: Use existing context or start from scratch?
+  [User: Use existing but adapt for AI-Native Learning emphasis]
 
-Q4: Which context aspects from materials?
-[User answers: Use existing structure but emphasize AI-Native Learning pattern]
+  → Chapter title "Data Types" is broad (could be 10+ topics)
 
-✅ Context gathered. Moving to PHASE 1...
+  Q: Which specific data types should we emphasize?
+  [User: Core types only - int, float, str, bool, None + type hints]
+
+  → Checking if capstone needed...
+
+  Q: Should students BUILD something hands-on?
+  [User: Yes - Interactive Type Explorer program]
+
+✅ Intelligence gathered (2 automatic derivations + 3 targeted questions). Moving to PHASE 1...
 
 ---
 
