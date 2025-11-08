@@ -130,6 +130,6 @@ Let's go! 🚀
 **Chapter Information**:
 - **Part**: 4 (Python Fundamentals)
 - **Number**: 13
-- **Complexity Tier**: Beginner (CEFR A1-A2, with B1 capstone)
+- **Complexity Tier**: Intermediate (CEFR A2, with B1 capstone)
 - **Learning Pattern**: AI-Native Learning
-- **Key Skill Focus**: Understanding intent description (type hints) as foundation for specification-first thinking
+- **Key Skill Focus**: Python fundamentals with AI collaboration as learning partner
