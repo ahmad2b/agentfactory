@@ -42,7 +42,7 @@ By the end of this chapter, you'll be able to:
 Before starting this chapter, make sure you understand:
 
 - **Chapter 13: Introduction to Python** — How to execute code in the REPL
-- **Chapter 15: Operators, Keywords, and Variables** — Comparison operators (>, <, ==, !=) and logical operators (and, or, not)
+- **Chapter 15: Operators, Keywords, and Variables** — Comparison operators (`>`, `<`, `==`, `!=`) and logical operators (and, or, not)
 - **Chapter 16: Strings and Type Casting** — F-strings for output and type hints
 
 ## Context: Why Control Flow Matters
@@ -85,7 +85,7 @@ Each lesson builds on the previous, with heavy scaffolding and AI partnership th
 ### From Lessons 1-4 (Conditionals)
 
 - **Boolean values** (True/False) — The foundation of all decisions
-- **Comparison operators** (>, <, ==, !=, >=, <=) — Test relationships between values
+- **Comparison operators** (`>`, `<`, `==`, `!=`, `>=`, `<=`) — Test relationships between values
 - **if/else pattern** — Binary choice (two possible paths)
 - **elif chains** — Multiple choices in sequence
 - **Nesting** — Testing multiple conditions together
