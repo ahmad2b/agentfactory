@@ -174,49 +174,10 @@ Let's start with the foundation. You have a CSV-like string, and your job is to 
 
 #### Code Example: Data Parsing
 
+> **📘 Note**: In Chapter 20, you'll learn how to organize this parsing logic into reusable functions. For now, we're writing the code inline to focus on the data structure transformations—how lists and dicts work together to structure raw text.
+
 ```python
-def parse_csv_data(raw: str) -> list[dict[str, str | float]]:
-    """Parse CSV-like string into list of dicts.
-
-    Each dict represents one student record with keys: name, major, gpa.
-    Returns empty list if no valid records found.
-    """
-    lines: list[str] = raw.strip().split('\n')
-
-    # First line is headers
-    if not lines:
-        return []
-
-    headers: list[str] = lines[0].split(',')
-    students: list[dict[str, str | float]] = []
-
-    # Parse remaining lines (skip first line and empty lines)
-    for line in lines[1:]:
-        if not line.strip():  # Skip empty lines
-            continue
-
-        values: list[str] = line.split(',')
-
-        # Create dict with header -> value pairs
-        record: dict[str, str | float] = {}
-        for i, header in enumerate(headers):
-            header_clean = header.strip()
-            value_raw = values[i].strip() if i < len(values) else ""
-
-            # Convert GPA to float if it's the GPA column
-            if header_clean.lower() == 'gpa':
-                try:
-                    record[header_clean] = float(value_raw)
-                except ValueError:
-                    continue  # Skip row with invalid GPA
-            else:
-                record[header_clean] = value_raw
-
-        students.append(record)
-
-    return students
-
-# Usage
+# Raw CSV-like data (simulates reading a file)
 raw_data: str = """name,major,gpa
 Alice,Computer Science,3.8
 Bob,Mathematics,3.2
@@ -226,12 +187,43 @@ Eve,Computer Science,3.5
 Frank,Mathematics,3.6
 Grace,Physics,3.8"""
 
-parsed_students: list[dict[str, str | float]] = parse_csv_data(raw_data)
-print(f"Parsed {len(parsed_students)} students")
+# Step 1: Split the raw string into lines
+lines: list[str] = raw_data.strip().split('\n')
+
+# Step 2: Extract headers from first line
+headers: list[str] = lines[0].split(',')
+print(f"Headers: {headers}")  # ['name', 'major', 'gpa']
+
+# Step 3: Parse each data line into a dict
+students: list[dict[str, str | float]] = []
+
+for line in lines[1:]:  # Skip first line (headers)
+    if not line.strip():  # Skip empty lines
+        continue
+
+    values: list[str] = line.split(',')
+
+    # Create dict with header -> value pairs
+    record: dict[str, str | float] = {}
+    for i, header in enumerate(headers):
+        header_clean: str = header.strip()
+        value_raw: str = values[i].strip() if i < len(values) else ""
+
+        # Convert GPA to float if it's the GPA column
+        if header_clean.lower() == 'gpa':
+            record[header_clean] = float(value_raw)
+        else:
+            record[header_clean] = value_raw
+
+    students.append(record)
+
+print(f"Parsed {len(students)} students")
+print(f"First student: {students[0]}")
+# Output: {'name': 'Alice', 'major': 'Computer Science', 'gpa': 3.8}
 ```
 
 #### ✨ Teaching Tip
-> When debugging this parsing step, ask your AI: "Why is my list empty?" or "Show me what each dict contains after parsing". AI can help you visualize the structure and spot issues. Use `print(parsed_students[0])` to inspect the first record.
+> When debugging this parsing step, ask your AI: "Why is my list empty?" or "Show me what each dict contains after parsing". AI can help you visualize the structure and spot issues. Use `print(students[0])` to inspect the first record.
 
 ---
 
@@ -250,7 +242,7 @@ Now that you have structured data, filter it. Let's find all Computer Science st
 ```python
 # Filter: Computer Science students with GPA >= 3.5
 cs_high_achievers: list[dict[str, str | float]] = [
-    student for student in parsed_students
+    student for student in students
     if student["major"] == "Computer Science" and student["gpa"] >= 3.5
 ]
 
@@ -292,47 +284,46 @@ Filtering is useful, but aggregation is powerful. Now calculate statistics **by 
 
 #### Code Example: Aggregation with Dict
 
+> **📘 Note**: This aggregation pattern—grouping data and calculating statistics—is fundamental to data analysis. In Chapter 20, you'll learn to package this logic into reusable functions. For now, focus on understanding the dict-based accumulation pattern.
+
 ```python
-def aggregate_by_major(
-    students: list[dict[str, str | float]]
-) -> dict[str, dict[str, float | int]]:
-    """Aggregate student statistics by major.
+# Initialize empty dict to store statistics by major
+stats: dict[str, dict[str, float | int]] = {}
 
-    Returns dict mapping major → {count, average_gpa}.
-    """
-    stats: dict[str, dict[str, float | int]] = {}
+# Step 1: Accumulate counts and totals
+for student in students:
+    major: str = student["major"]
+    gpa: float = student["gpa"]
 
-    for student in students:
-        major: str = student["major"]
-        gpa: float = student["gpa"]
+    # Initialize major dict if not seen before
+    if major not in stats:
+        stats[major] = {
+            "count": 0,
+            "total_gpa": 0.0,
+            "average_gpa": 0.0
+        }
 
-        # Initialize major dict if not seen before
-        if major not in stats:
-            stats[major] = {
-                "count": 0,
-                "total_gpa": 0.0,
-                "average_gpa": 0.0
-            }
+    # Accumulate
+    stats[major]["count"] += 1
+    stats[major]["total_gpa"] += gpa
 
-        # Accumulate
-        stats[major]["count"] += 1
-        stats[major]["total_gpa"] += gpa
+# Step 2: Calculate averages
+for major in stats:
+    total_gpa: float = stats[major]["total_gpa"]
+    count: int = stats[major]["count"]
+    stats[major]["average_gpa"] = round(total_gpa / count, 2)
+    # Remove temporary field (we don't need total_gpa in final output)
+    del stats[major]["total_gpa"]
 
-    # Calculate averages
-    for major in stats:
-        total_gpa: float = stats[major]["total_gpa"]
-        count: int = stats[major]["count"]
-        stats[major]["average_gpa"] = round(total_gpa / count, 2)
-        # Remove temporary field
-        del stats[major]["total_gpa"]
-
-    return stats
-
-# Usage
-major_statistics: dict[str, dict[str, float | int]] = aggregate_by_major(parsed_students)
+# Display results
 print("Statistics by Major:")
-for major, data in major_statistics.items():
+for major, data in stats.items():
     print(f"{major}: {data['count']} students, avg GPA {data['average_gpa']}")
+
+# Output:
+# Computer Science: 3 students, avg GPA 3.73
+# Mathematics: 2 students, avg GPA 3.4
+# Physics: 2 students, avg GPA 3.45
 ```
 
 Notice the pattern:
@@ -367,34 +358,29 @@ Raw dicts are great for computation, but humans need readable output. Format you
 #### Code Example: Formatted Output
 
 ```python
-def format_report(
-    stats: dict[str, dict[str, float | int]],
-    title: str = "Student Statistics by Major"
-) -> str:
-    """Format aggregation results as readable report."""
-    lines: list[str] = [
-        title,
-        "=" * 50,
-        ""
-    ]
+# Build formatted report as a list of lines
+title: str = "Student Statistics by Major"
+lines: list[str] = [
+    title,
+    "=" * 50,
+    ""
+]
 
-    # Sort majors alphabetically for consistent output
-    sorted_majors: list[str] = sorted(stats.keys())
+# Sort majors alphabetically for consistent output
+sorted_majors: list[str] = sorted(stats.keys())
 
-    for major in sorted_majors:
-        count: int = stats[major]["count"]
-        avg_gpa: float = stats[major]["average_gpa"]
+for major in sorted_majors:
+    count: int = stats[major]["count"]
+    avg_gpa: float = stats[major]["average_gpa"]
 
-        # Format with alignment
-        lines.append(f"{major:25s} | Count: {count:2d} | Avg GPA: {avg_gpa:.2f}")
+    # Format with alignment
+    lines.append(f"{major:25s} | Count: {count:2d} | Avg GPA: {avg_gpa:.2f}")
 
-    lines.append("")
-    lines.append("=" * 50)
+lines.append("")
+lines.append("=" * 50)
 
-    return '\n'.join(lines)
-
-# Usage
-report: str = format_report(major_statistics)
+# Combine all lines into a single string with newlines
+report: str = '\n'.join(lines)
 print(report)
 
 # Output looks like:
@@ -421,10 +407,12 @@ Notice the formatting techniques:
 
 ## Putting It All Together: The Complete Pipeline
 
-Now integrate all phases into one cohesive application:
+Now integrate all phases into one cohesive application. This is the complete, runnable code combining everything you've learned:
 
 ```python
-# PHASE 1: Parse raw data
+# ============================================================
+# PHASE 1: PARSE RAW DATA
+# ============================================================
 raw_student_data: str = """name,major,gpa
 Alice,Computer Science,3.8
 Bob,Mathematics,3.2
@@ -434,22 +422,82 @@ Eve,Computer Science,3.5
 Frank,Mathematics,3.6
 Grace,Physics,3.8"""
 
-students: list[dict[str, str | float]] = parse_csv_data(raw_student_data)
+# Split into lines and extract headers
+lines: list[str] = raw_student_data.strip().split('\n')
+headers: list[str] = lines[0].split(',')
+
+# Parse each line into a dict
+students: list[dict[str, str | float]] = []
+for line in lines[1:]:
+    if not line.strip():
+        continue
+
+    values: list[str] = line.split(',')
+    record: dict[str, str | float] = {}
+
+    for i, header in enumerate(headers):
+        header_clean: str = header.strip()
+        value_raw: str = values[i].strip() if i < len(values) else ""
+
+        if header_clean.lower() == 'gpa':
+            record[header_clean] = float(value_raw)
+        else:
+            record[header_clean] = value_raw
+
+    students.append(record)
+
 print(f"✓ Parsed {len(students)} student records\n")
 
-# PHASE 2: Filter (optional - show CS students)
+# ============================================================
+# PHASE 2: FILTER DATA
+# ============================================================
 cs_students: list[dict[str, str | float]] = [
     s for s in students
     if s["major"] == "Computer Science"
 ]
 print(f"✓ Found {len(cs_students)} Computer Science students\n")
 
-# PHASE 3: Aggregate
-statistics: dict[str, dict[str, float | int]] = aggregate_by_major(students)
+# ============================================================
+# PHASE 3: AGGREGATE STATISTICS
+# ============================================================
+stats: dict[str, dict[str, float | int]] = {}
+
+# Accumulate counts and totals
+for student in students:
+    major: str = student["major"]
+    gpa: float = student["gpa"]
+
+    if major not in stats:
+        stats[major] = {"count": 0, "total_gpa": 0.0, "average_gpa": 0.0}
+
+    stats[major]["count"] += 1
+    stats[major]["total_gpa"] += gpa
+
+# Calculate averages
+for major in stats:
+    total_gpa: float = stats[major]["total_gpa"]
+    count: int = stats[major]["count"]
+    stats[major]["average_gpa"] = round(total_gpa / count, 2)
+    del stats[major]["total_gpa"]
+
 print("✓ Calculated statistics by major\n")
 
-# PHASE 4: Output
-report: str = format_report(statistics)
+# ============================================================
+# PHASE 4: FORMAT AND OUTPUT REPORT
+# ============================================================
+title: str = "Student Statistics by Major"
+lines: list[str] = [title, "=" * 50, ""]
+
+sorted_majors: list[str] = sorted(stats.keys())
+for major in sorted_majors:
+    count: int = stats[major]["count"]
+    avg_gpa: float = stats[major]["average_gpa"]
+    lines.append(f"{major:25s} | Count: {count:2d} | Avg GPA: {avg_gpa:.2f}")
+
+lines.append("")
+lines.append("=" * 50)
+
+report: str = '\n'.join(lines)
 print(report)
 ```
 
@@ -532,12 +580,19 @@ stem_students: list[dict[str, str | float]] = [
 
 Sort students by GPA (highest first) before output:
 
+> **📘 Note**: The `lambda` syntax below is a shorthand for defining small, inline operations. You'll learn lambda functions in Chapter 20. For now, just understand: `key=lambda s: s["gpa"]` means "sort by the 'gpa' field of each student dict."
+
 ```python
 top_students: list[dict[str, str | float]] = sorted(
     students,
     key=lambda s: s["gpa"],
     reverse=True
 )
+
+# Display sorted results
+print("Top Students by GPA:")
+for student in top_students:
+    print(f"{student['name']}: {student['gpa']}")
 ```
 
 ### Extension 3: Find Outliers
@@ -545,23 +600,21 @@ top_students: list[dict[str, str | float]] = sorted(
 Find students whose GPA is significantly different from their major's average:
 
 ```python
-def find_outliers(
-    students: list[dict[str, str | float]],
-    stats: dict[str, dict[str, float | int]],
-    threshold: float = 0.3
-) -> list[dict[str, str | float]]:
-    """Find students with GPA > threshold above their major's average."""
-    outliers: list[dict[str, str | float]] = []
+# Find students with GPA more than 0.3 above their major's average
+threshold: float = 0.3
+outliers: list[dict[str, str | float]] = []
 
-    for student in students:
-        major: str = student["major"]
-        avg: float = stats[major]["average_gpa"]
-        difference: float = student["gpa"] - avg
+for student in students:
+    major: str = student["major"]
+    avg: float = stats[major]["average_gpa"]
+    difference: float = student["gpa"] - avg
 
-        if difference > threshold:
-            outliers.append(student)
+    if difference > threshold:
+        outliers.append(student)
 
-    return outliers
+print(f"Found {len(outliers)} high-performing outliers:")
+for student in outliers:
+    print(f"  {student['name']} ({student['major']}): {student['gpa']}")
 ```
 
 ---
