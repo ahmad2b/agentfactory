@@ -224,7 +224,7 @@ Python is installed on Linux.
 
 Did something go wrong? Don't panic. This is where AI excels.
 
-#### Teaching Tip
+#### Tip
 
 Different computers have different setups. If your installation differs from the steps above, that's normal. Your AI tool (Claude Code or Gemini CLI) is perfect for platform-specific troubleshooting.
 

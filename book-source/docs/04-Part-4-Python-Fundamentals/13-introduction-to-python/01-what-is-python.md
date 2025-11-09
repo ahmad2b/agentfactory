@@ -123,13 +123,13 @@ You're not just creating variables. You're describing intent. You're saying "I w
 
 This practice of describing intent through type hints prepares you for Spec-Driven Development in Part 5, where you'll write formal specifications that AI systems execute as complete programs.
 
-#### 💬 AI Colearning Prompt
+#### AI Colearning Prompt
 
 Ask your AI companion: "Explain what Python is in a way a 10-year-old would understand. Focus on: What is it? Why does it matter for AI?"
 
 This is a powerful learning move. By asking your AI to simplify a concept, you get another explanation that reinforces your understanding. If the AI's explanation clicks for you better than this lesson's explanation, that's excellent. Different brains learn differently.
 
-#### 🎓 Instructor Commentary
+#### Instructor Commentary
 
 **Syntax is cheap—semantics is gold.**
 
