@@ -75,7 +75,7 @@ cognitive_load:
   assessment: "6 concepts (nested if, nested loops, conditionals in loops, loops in conditionals, complexity awareness, refactoring) - all review/synthesis of Lessons 1-4 concepts, no new syntax introduced. Within B1 limit of 10 ✓"
 
 differentiation:
-  extension_for_advanced: "Explore three-level nesting scenarios; research when to extract nested logic into functions (preview of Chapter 18)"
+  extension_for_advanced: "Explore three-level nesting scenarios; practice recognizing when nesting becomes too complex (readability and cognitive load awareness)"
   remedial_for_struggling: "Focus on two-level nesting only; use visual diagrams to trace execution flow; practice with simpler multiplication table (5×5 instead of 10×10)"
 
 # Generation metadata
@@ -146,53 +146,54 @@ Imagine you're building a system to determine if someone qualifies for a special
 Here's how nested `if` statements handle this:
 
 ```python
-def check_eligibility(age: int, has_recommendation: bool, has_health_clearance: bool) -> str:
-    """
-    Determine eligibility based on multiple criteria.
+# Test case 1: Young applicant (22) with recommendation
+age: int = 22
+has_recommendation: bool = True
+has_health_clearance: bool = False
 
-    Args:
-        age: Applicant's age
-        has_recommendation: Whether applicant has recommendation letter
-        has_health_clearance: Whether applicant has health clearance
-
-    Returns:
-        Eligibility status message
-    """
-    if age >= 18 and age <= 65:
-        # Age is valid, now check additional criteria
-        if age < 25:
-            # Young applicant - needs recommendation
-            if has_recommendation:
-                return "Eligible: Young applicant with recommendation"
-            else:
-                return "Not eligible: Young applicants need recommendation"
-        elif age > 60:
-            # Senior applicant - needs health clearance
-            if has_health_clearance:
-                return "Eligible: Senior applicant with health clearance"
-            else:
-                return "Not eligible: Senior applicants need health clearance"
+if age >= 18 and age <= 65:
+    # Age is valid, now check additional criteria
+    if age < 25:
+        # Young applicant - needs recommendation
+        if has_recommendation:
+            print("Eligible: Young applicant with recommendation")
         else:
-            # Age 25-60, no additional requirements
-            return "Eligible: Standard applicant"
+            print("Not eligible: Young applicants need recommendation")
+    elif age > 60:
+        # Senior applicant - needs health clearance
+        if has_health_clearance:
+            print("Eligible: Senior applicant with health clearance")
+        else:
+            print("Not eligible: Senior applicants need health clearance")
     else:
-        return "Not eligible: Age must be between 18 and 65"
-
-# Test cases
-print(check_eligibility(22, True, False))   # Young with recommendation
-print(check_eligibility(22, False, False))  # Young without recommendation
-print(check_eligibility(45, False, False))  # Standard age
-print(check_eligibility(62, False, True))   # Senior with clearance
-print(check_eligibility(70, False, True))   # Too old
+        # Age 25-60, no additional requirements
+        print("Eligible: Standard applicant")
+else:
+    print("Not eligible: Age must be between 18 and 65")
 ```
 
 **Output**:
 ```
 Eligible: Young applicant with recommendation
-Not eligible: Young applicants need recommendation
-Eligible: Standard applicant
-Eligible: Senior applicant with health clearance
-Not eligible: Age must be between 18 and 65
+```
+
+**More test cases you can try**:
+```python
+# Test case 2: Young without recommendation
+age, has_recommendation, has_health_clearance = 22, False, False
+# Output: Not eligible: Young applicants need recommendation
+
+# Test case 3: Standard age (no special requirements)
+age, has_recommendation, has_health_clearance = 45, False, False
+# Output: Eligible: Standard applicant
+
+# Test case 4: Senior with health clearance
+age, has_recommendation, has_health_clearance = 62, False, True
+# Output: Eligible: Senior applicant with health clearance
+
+# Test case 5: Too old
+age, has_recommendation, has_health_clearance = 70, False, True
+# Output: Not eligible: Age must be between 18 and 65
 ```
 
 #### 💬 AI Colearning Prompt
@@ -219,27 +220,23 @@ When you need to process data arranged in rows and columns (like a grid, table, 
 Let's create a multiplication table showing products from 1×1 through 10×10:
 
 ```python
-def print_multiplication_table(size: int) -> None:
-    """
-    Print a multiplication table up to size×size.
-
-    Args:
-        size: Maximum number for table (e.g., 10 for 1-10)
-    """
-    print(f"\nMultiplication Table (1 to {size}):\n")
-
-    # Outer loop: iterate through rows (first number)
-    for row in range(1, size + 1):
-        # Inner loop: iterate through columns (second number)
-        for col in range(1, size + 1):
-            product: int = row * col
-            # Format each number to take 4 spaces (right-aligned)
-            print(f"{product:4}", end="")
-        # After completing all columns in a row, move to next line
-        print()  # Newline after each row
-
 # Generate a 10x10 multiplication table
-print_multiplication_table(10)
+size: int = 10
+print(f"\nMultiplication Table (1 to {size}):\n")
+
+# Outer loop: iterate through rows (first number)
+for row in range(1, size + 1):
+    # Inner loop: iterate through columns (second number)
+    for col in range(1, size + 1):
+        product: int = row * col
+        # Format each number to take 4 spaces (right-aligned)
+        print(f"{product:4}", end="")
+    # After completing all columns in a row, move to next line
+    print()  # Newline after each row
+
+# You can try different table sizes by changing the size variable:
+# size = 5  # For a 5x5 table
+# size = 12  # For a 12x12 table
 ```
 
 **Output (partial)**:
@@ -279,33 +276,24 @@ Often you want to iterate through items but only process some of them based on a
 Let's sum only the positive numbers from a mixed list:
 
 ```python
-def sum_positive_numbers(numbers: list[int]) -> int:
-    """
-    Calculate the sum of only positive numbers in a list.
-
-    Args:
-        numbers: List of integers (can be positive, negative, or zero)
-
-    Returns:
-        Sum of all positive numbers
-    """
-    total: int = 0
-
-    # Iterate through all numbers
-    for num in numbers:
-        # Conditional inside loop: only add if positive
-        if num > 0:
-            total += num
-            print(f"Added {num}, running total: {total}")
-        else:
-            print(f"Skipped {num} (not positive)")
-
-    return total
-
-# Test with mixed numbers
+# Calculate the sum of only positive numbers in a list
 numbers: list[int] = [5, -3, 8, 0, -1, 12, -7, 4]
-result: int = sum_positive_numbers(numbers)
-print(f"\nFinal sum of positive numbers: {result}")
+total: int = 0
+
+# Iterate through all numbers
+for num in numbers:
+    # Conditional inside loop: only add if positive
+    if num > 0:
+        total += num
+        print(f"Added {num}, running total: {total}")
+    else:
+        print(f"Skipped {num} (not positive)")
+
+print(f"\nFinal sum of positive numbers: {total}")
+
+# You can try different lists:
+# numbers = [10, -5, 3, 0, 7, -2]  # Mix of positive, negative, and zero
+# numbers = [1, 2, 3, 4, 5]  # All positive
 ```
 
 **Output**:
@@ -327,7 +315,7 @@ Final sum of positive numbers: 29
 #### 🚀 CoLearning Challenge
 
 Ask your AI Co-Teacher:
-> "Generate a function that finds all even numbers in a list and returns them in a new list. Include type hints and explain the filtering logic."
+> "Generate code that finds all even numbers in a list and stores them in a new list. Use a for loop with an if statement to filter even numbers. Include type hints and explain the filtering logic. **Use inline code without functions.**"
 
 **Expected Outcome**: You'll understand how to combine iteration with conditional filtering to build new collections.
 
@@ -342,41 +330,49 @@ Sometimes you want to run an entire loop only if a certain condition is met. Thi
 Let's validate a shopping cart before processing items:
 
 ```python
-def process_cart(items: list[str], user_authenticated: bool, has_payment_method: bool) -> None:
-    """
-    Process shopping cart items only if user is ready to check out.
-
-    Args:
-        items: List of item names in cart
-        user_authenticated: Whether user is logged in
-        has_payment_method: Whether user has payment method on file
-    """
-    # Check prerequisites BEFORE attempting to process
-    if user_authenticated and has_payment_method:
-        print("✓ User authenticated and payment method verified")
-        print("Processing cart items:\n")
-
-        # Loop runs only if condition above is True
-        for item in items:
-            print(f"  - Processing: {item}")
-
-        print("\n✓ All items processed successfully")
-    else:
-        # Condition failed - loop never runs
-        print("✗ Cannot process cart:")
-        if not user_authenticated:
-            print("  - User must log in")
-        if not has_payment_method:
-            print("  - Payment method required")
-
-# Test case 1: Valid checkout
+# Test case 1: Valid checkout - process shopping cart items
 cart: list[str] = ["Laptop", "Mouse", "Keyboard"]
-process_cart(cart, user_authenticated=True, has_payment_method=True)
+user_authenticated: bool = True
+has_payment_method: bool = True
+
+# Check prerequisites BEFORE attempting to process
+if user_authenticated and has_payment_method:
+    print("✓ User authenticated and payment method verified")
+    print("Processing cart items:\n")
+
+    # Loop runs only if condition above is True
+    for item in cart:
+        print(f"  - Processing: {item}")
+
+    print("\n✓ All items processed successfully")
+else:
+    # Condition failed - loop never runs
+    print("✗ Cannot process cart:")
+    if not user_authenticated:
+        print("  - User must log in")
+    if not has_payment_method:
+        print("  - Payment method required")
 
 print("\n" + "="*50 + "\n")
 
 # Test case 2: Missing authentication
-process_cart(cart, user_authenticated=False, has_payment_method=True)
+user_authenticated = False
+has_payment_method = True
+
+if user_authenticated and has_payment_method:
+    print("✓ User authenticated and payment method verified")
+    print("Processing cart items:\n")
+
+    for item in cart:
+        print(f"  - Processing: {item}")
+
+    print("\n✓ All items processed successfully")
+else:
+    print("✗ Cannot process cart:")
+    if not user_authenticated:
+        print("  - User must log in")
+    if not has_payment_method:
+        print("  - Payment method required")
 ```
 
 **Output**:
@@ -403,6 +399,21 @@ Processing cart items:
 
 ---
 
+#### 🎓 Note: You Might See Functions in AI Responses
+
+When you ask your AI to generate code examples, it might create code using `def` keyword to define **functions**. Functions are reusable blocks of code—a powerful Python feature you'll learn in **Chapter 20**.
+
+For now, when working through this chapter:
+
+- **Don't worry if you see functions**: Your AI is showing you professional Python patterns
+- **You don't need to understand `def`, `return`, or function calls yet**: Focus on the control flow logic (loops, conditionals, nesting) inside the function body
+- **Ask for inline code instead**: If you see a function, ask your AI: *"Can you show me this same logic using inline code without functions? Just use variables and direct statements."*
+
+**Example prompt to request non-function code**:
+> "Generate the code using inline statements with variables, not as a function. I haven't learned functions yet."
+
+---
+
 ## AI Companion: Complex Nested Structures
 
 Now let's tackle a more complex scenario that combines multiple levels of nesting. This is where AI becomes especially helpful—describing the logic clearly and letting AI handle the intricate syntax.
@@ -419,49 +430,18 @@ Imagine a simple grid-based game where you need to:
 #### 🚀 CoLearning Challenge
 
 Tell your AI Co-Teacher:
-> "Create a Python function that processes a 5×5 game grid. Each cell contains either 'empty', 'coin', or 'trap'. The function should:
+> "Create Python code that processes a 5×5 game grid. Each cell contains either 'empty', 'coin', or 'trap'. The code should:
 > - Use nested loops to visit every cell
 > - If the cell is 'coin', add 10 points
 > - If the cell is 'trap', subtract 5 points
 > - Track the total score and print what's found at each position
-> Include type hints and detailed comments explaining the nesting structure."
+> Include type hints and detailed comments explaining the nesting structure. **Use inline code without functions.**"
 
 **Your AI might generate something like**:
 
 ```python
-def process_game_grid(grid: list[list[str]]) -> int:
-    """
-    Process a game grid and calculate score based on items found.
-
-    Args:
-        grid: 2D list representing game board (5x5)
-              Each cell is 'empty', 'coin', or 'trap'
-
-    Returns:
-        Total score from all items
-    """
-    score: int = 0
-
-    # Outer loop: iterate through rows (y-coordinate)
-    for row_index in range(len(grid)):
-        row: list[str] = grid[row_index]
-
-        # Inner loop: iterate through columns (x-coordinate)
-        for col_index in range(len(row)):
-            cell: str = row[col_index]
-
-            # Nested conditionals: determine what's in this cell
-            if cell == "coin":
-                score += 10
-                print(f"Row {row_index}, Col {col_index}: Found coin! (+10) Score: {score}")
-            elif cell == "trap":
-                score -= 5
-                print(f"Row {row_index}, Col {col_index}: Hit trap! (-5) Score: {score}")
-            # If empty, no action needed (could add else for verbosity)
-
-    return score
-
 # Sample game grid (5x5)
+# Each cell is 'empty', 'coin', or 'trap'
 game_grid: list[list[str]] = [
     ["empty", "coin", "empty", "trap", "coin"],
     ["coin", "empty", "empty", "coin", "empty"],
@@ -470,8 +450,26 @@ game_grid: list[list[str]] = [
     ["coin", "trap", "empty", "coin", "empty"]
 ]
 
-final_score: int = process_game_grid(game_grid)
-print(f"\n🎮 Game Over! Final Score: {final_score}")
+score: int = 0
+
+# Outer loop: iterate through rows (y-coordinate)
+for row_index in range(len(game_grid)):
+    row: list[str] = game_grid[row_index]
+
+    # Inner loop: iterate through columns (x-coordinate)
+    for col_index in range(len(row)):
+        cell: str = row[col_index]
+
+        # Nested conditionals: determine what's in this cell
+        if cell == "coin":
+            score += 10
+            print(f"Row {row_index}, Col {col_index}: Found coin! (+10) Score: {score}")
+        elif cell == "trap":
+            score -= 5
+            print(f"Row {row_index}, Col {col_index}: Hit trap! (-5) Score: {score}")
+        # If empty, no action needed (could add else for verbosity)
+
+print(f"\n🎮 Game Over! Final Score: {score}")
 ```
 
 **Output (partial)**:
@@ -511,7 +509,7 @@ for item in items:
                     process_item(item)
 ```
 
-**Better approach**: Combine conditions or extract logic into separate functions (which you'll learn in the next chapter):
+**Better approach**: Combine conditions using `and` to flatten the structure:
 
 ```python
 # ✅ Flatter structure - easier to read
@@ -539,31 +537,12 @@ If you have nested loops with large ranges, consider:
 #### ✨ Teaching Tip
 > Use your AI to evaluate complexity: "Is this nested structure too complex? How could I simplify it while keeping the same logic?" Your AI can suggest refactoring patterns and explain the tradeoffs.
 
-### Preview: Functions to the Rescue
+**When nesting gets too deep**: If your code is indented more than 3-4 levels, consider:
+- Combining conditions with `and` / `or`
+- Using early `continue` or `break` to reduce nesting
+- Asking your AI: "How can I flatten this nested structure while keeping the same logic?"
 
-When nesting becomes complex, **functions** (Chapter 18) let you break logic into named, reusable pieces. Instead of this:
-
-```python
-# Complex nested structure
-for row in grid:
-    for cell in row:
-        if cell == "coin":
-            if player_has_space:
-                # 10 lines of logic here
-                ...
-```
-
-You'll learn to write this:
-
-```python
-# Clear, modular structure
-for row in grid:
-    for cell in row:
-        if cell == "coin":
-            collect_coin(player, cell)  # Logic moved to function
-```
-
-Functions are the key to managing complexity in larger programs. For now, just recognize when your nesting is getting too deep—that's your signal to plan for simplification.
+For now, recognize when your nesting is getting too deep—that's your signal to simplify.
 
 ---
 
@@ -673,7 +652,7 @@ for item in items:
 **Solution**: Look for ways to flatten:
 - Combine conditions with `and`/`or`
 - Use `continue` to skip early
-- Extract nested logic into functions (next chapter)
+- Break complex logic into smaller, sequential steps
 
 #### 💬 AI Colearning Prompt
 > "Show me three ways to flatten this nested structure. Which approach is most readable and why?"
@@ -720,15 +699,15 @@ What's the pattern? How many total iterations will occur?
 Copy this prompt to your AI:
 
 ```
-Generate a Python function with type hints that uses nested loops to find
+Generate Python code with type hints that uses nested loops to find
 all pairs (i, j) where i + j = 10. Both i and j should range from 1 to 9.
 
 Print each pair in the format: "i + j = 10" (e.g., "3 + 7 = 10")
 
 Include:
 - Type hints on all variables
-- Docstring explaining the function
 - Comments showing the nesting structure
+- Use inline code without functions (I haven't learned functions yet)
 ```
 
 **Expected outcome**: You'll receive code that combines nested loops with a conditional inside to filter pairs. This practices the "conditionals inside loops" pattern.
@@ -761,4 +740,4 @@ complete execution path manually.
 - Nesting depth is reasonable (3 levels or fewer)
 - Logic matches your intended problem statement
 
-**What you've mastered**: You can now combine all control flow concepts from this chapter—conditionals, pattern matching, loops, and loop control—to solve complex, multi-dimensional problems. In Chapter 18, you'll learn how **functions** let you organize and reuse this logic effectively.
+**What you've mastered**: You can now combine all control flow concepts from this chapter—conditionals, pattern matching, loops, and loop control—to solve complex, multi-dimensional problems. As you continue learning Python, you'll discover how to organize and reuse this logic even more effectively.
