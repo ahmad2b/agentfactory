@@ -235,6 +235,8 @@ latitude, longitude = coordinates
 
 Unpacking is especially useful when functions return multiple values:
 
+> **📘 Note**: Don't worry about the `def` syntax below—we'll learn functions in detail in Chapter 20. For now, just understand that `get_player_position()` is a reusable piece of code that returns a tuple `(5, 10)`, and we can unpack it into separate variables `x` and `y`. Focus on the **unpacking pattern**, not the function definition.
+
 ```python
 def get_player_position() -> tuple[int, int]:
     # Player is at grid position (5, 10)
