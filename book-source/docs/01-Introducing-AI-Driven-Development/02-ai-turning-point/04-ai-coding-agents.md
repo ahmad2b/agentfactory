@@ -63,7 +63,7 @@ Each tool lived in its own silo. You couldn't easily combine them. You couldn't 
 
 The modern AI development stack is no longer a single tool. It's a **three-layer architecture** that separates concerns, enables interoperability, and gives you control. Understanding this stack is essential because it shapes how you'll work for the next five years.
 
-**But here's the deeper insight**: This three-layer stack isn't just about tools—it's about **partnership**. Each layer corresponds to a different role AI plays in your work. Understanding the architecture means understanding how you and AI collaborate at different levels. This section explains the three layers, how they map to AI's three roles as your partner (Teacher, Student, Co-Worker), and how to choose the right tools for your context.
+This section explains the three layers, what makes 2025's stack fundamentally different from 2024's, and how to choose the right tools for your context.
 
 ## The Three-Layer AI Development Stack
 
@@ -98,16 +98,6 @@ Think of the modern AI development stack like a building with three floors, each
 **Why it's separate:** Not every task needs autonomous execution. Sometimes you want suggestions (Layer 2). Sometimes you want the AI to handle the entire workflow (Layer 3). Separating these layers gives you control over when to use which approach.
 
 **In practice:** You invoke an agent with a high-level task ("refactor the authentication module to use JWT tokens") and let it execute autonomously while you review the changes.
-
-#### 🎓 Instructor Commentary
-
-> **The Three-Role Partnership Hidden in the Stack**: Notice how each layer maps to a different AI role from Principle 18 (Three-Role AI Partnership)?
->
-> - **Layer 1 (Frontier Models) = AI as Teacher**: Vast knowledge, best practices, pattern suggestions you don't know yet
-> - **Layer 2 (AI-First IDEs) = AI as Co-Worker**: Collaborative workspace where you work side-by-side, AI adapts to your context
-> - **Layer 3 (Development Agents) = AI as Student + Co-Worker**: Learns your specifications, executes autonomously based on YOUR intent
->
-> The stack architecture reflects HOW we partner with AI—not just WHAT tools we use. Understanding this helps you choose tools that support genuine partnership, not just productivity hacks.
 
 ## How the Layers Work Together
 
@@ -253,12 +243,12 @@ Let's explore how I naturally work with AI by reflecting on my experiences. Ask 
 
 **What you're learning**: Self-awareness about your partnership preferences—understanding HOW you naturally collaborate with AI shapes which tools will work best for you.
 
-### Prompt 2: Map Three Roles to Three Layers Together
+### Prompt 2: Explore AI's Three Roles In Your Work
 ```
-This lesson connected the three-layer stack to AI's three roles (Teacher, Student, Co-Worker). Let's explore this together: For each layer, ask me: "When have you experienced AI in this role?" Help me map MY actual experiences to the framework. Then ask: "Which role do you use LEAST? Why?" Let's discover gaps in how I'm leveraging AI partnership through examining my patterns.
+AI can act as Teacher (suggests patterns you don't know), Student (learns from your feedback and preferences), and Co-Worker (collaborates with you). Let's explore which roles you experience most: Ask me questions about my AI interactions: "When has AI taught me something new? When has it adapted to MY style? When have we worked side-by-side collaboratively?" Help me discover which role I use LEAST and why. Then ask: "What's blocking you from leveraging that role more?"
 ```
 
-**What you're learning**: Connecting abstract frameworks (three layers, three roles) to concrete experiences—your AI helps you see which partnership modes you're underusing.
+**What you're learning**: Self-awareness about how you partner with AI—recognizing which interaction modes (teaching, learning, collaborating) you're underusing and why.
 
 ### Prompt 3: Co-Design Your Stack Through Dialogue
 ```

@@ -97,7 +97,7 @@ These aren't aspirational claims from startups seeking funding. These are statem
 
 #### 🎓 Instructor Commentary
 
-> **Why benchmarks matter pedagogically**: Notice we're not just showing you impressive numbers—we're teaching you **how to evaluate evidence quality**. When you see claims about AI capabilities, ask: "Is this a vendor demo or an independent benchmark? Is it one impressive example or sustained performance?" This critical thinking skill applies to every technology claim you'll encounter, not just AI.
+> **Why benchmarks matter**: Notice we're not just showing you impressive numbers—we're teaching you **how to evaluate evidence quality**. When you see claims about AI capabilities, ask: "Is this a vendor demo or an independent benchmark? Is it one impressive example or sustained performance?" This critical thinking skill applies to every technology claim you'll encounter, not just AI.
 
 ## Mainstream Adoption: From Niche to Normal
 

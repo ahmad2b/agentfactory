@@ -125,7 +125,7 @@ The complete workflow integrates Test-Driven Development (TDD) and knowledge cap
 
 #### 🎓 Instructor Commentary
 
-> **Why this matters pedagogically**: We're not teaching you SDD because it's "best practice." We're teaching it because **in the AI era, specification-writing IS the primary skill**. Remember the constitutional principle: **"Specs are the new syntax."** You're learning to articulate intent so clearly that AI can execute flawlessly. The 7-step workflow trains this skill systematically—thinking before typing, validating before shipping. This is the foundation of AI-native development.
+> **Why this matters**: We're not teaching you SDD because it's "best practice." We're teaching it because **in the AI era, specification-writing IS the primary skill**. Remember the constitutional principle: **"Specs are the new syntax."** You're learning to articulate intent so clearly that AI can execute flawlessly. The 7-step workflow trains this skill systematically—thinking before typing, validating before shipping. This is the foundation of AI-native development.
 
 ### Why SDD Works
 
