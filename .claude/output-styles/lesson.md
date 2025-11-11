@@ -521,24 +521,37 @@ for item in empty:
 - **Direct Address**: Speak directly to the learner using "you" and "your"
 - **Engaging Tone**: Professional yet approachable, encouraging without being condescending
 
-**Punctuation & Emphasis Guidelines**:
-- **Em-dash (—) usage**: Use ONLY for parenthetical asides or dramatic breaks, NOT to connect related clauses
-  - ✅ "The developer's role is changing—and it's happening faster than expected."
-  - ✅ "Understanding intent (not memorizing syntax) is the new skill."
-  - ❌ "The job hasn't expanded arbitrarily—the technology landscape has integrated..." (use period or semicolon)
-  - ❌ "Notice Marcus didn't start with mastery—he started with..." (use period or comma)
-- **Bold formatting**: Use sparingly for key terms that need definition or special attention
-  - ✅ Bold new technical terms on first use: "A **variable** stores data..."
-  - ✅ Bold critical concepts: "The **primary skill** is specification-writing..."
-  - ❌ Decorative bold mid-sentence: "started with a different **mental model**"
-  - ❌ Over-bolding in prompts: "Give me **realistic** scenarios for **my** situation"
-- **ALL CAPS**: Avoid for emphasis; use italic or bold sparingly instead
-  - ✅ "Give me realistic scenarios for my situation..."
-  - ✅ "Give me *realistic* scenarios for *my* situation..." (if emphasis truly needed)
-  - ❌ "Give me REALISTIC scenarios for MY situation..."
-- **Natural flow**: Prefer shorter sentences and natural punctuation over dramatic formatting
-  - ✅ "The job hasn't expanded arbitrarily. The technology landscape has integrated these concerns..."
-  - ❌ "The job hasn't expanded arbitrarily—the technology landscape has integrated..."
+**Punctuation & Emphasis Guidelines** (apply judiciously with context-awareness):
+- **Em-dash (—) usage**: ONLY fix when it creates grammatical issues or hinders readability
+  - ✅ KEEP: "The developer's role is changing—and it's happening faster than expected." (dramatic break, grammatically sound)
+  - ✅ KEEP: "Understanding intent (not memorizing syntax) is the new skill." (parenthetical aside)
+  - ❌ FIX: "The job hasn't expanded arbitrarily—the technology landscape has integrated..." when it connects two independent clauses that should be separate sentences
+  - **Judgment required**: If removing the em-dash creates awkward flow or changes meaning, KEEP it. Only fix actual violations.
+
+- **Bold formatting**: ONLY fix when it's clearly decorative or excessive
+  - ✅ KEEP: "A **variable** stores data..." (new technical term on first use)
+  - ✅ KEEP: "The **primary skill** is specification-writing..." (critical concept requiring emphasis)
+  - ✅ KEEP: "**Path 1 (Fine-Tuning)**" (structural heading or important distinction)
+  - ✅ KEEP: "**there are two paths**" when emphasizing a key structural point
+  - ❌ FIX ONLY: Multiple bold words in a single prompt where emphasis is decorative (e.g., "Give me **realistic** scenarios for **my** situation")
+  - **Judgment required**: If bold serves pedagogical purpose (emphasis on key distinction, first use of term, structural clarity), KEEP it.
+
+- **ALL CAPS**: ONLY fix when used for emphasis (replace with italic or normal)
+  - ❌ FIX: "Give me REALISTIC scenarios for MY situation..." → "Give me realistic scenarios for my situation..."
+  - ✅ KEEP: ALL CAPS in acronyms (API, LMS, MCP) or proper names
+  - **Judgment required**: Distinguish between emphasis (fix) and legitimate uses (keep).
+
+- **Natural flow**: ONLY intervene when punctuation genuinely disrupts coherence
+  - FIX sentence structure ONLY when:
+    - Em-dash connects independent clauses that should be periods
+    - Sentence is grammatically incorrect after em-dash removal
+    - Multiple em-dashes create choppy reading
+  - PRESERVE existing flow when:
+    - Em-dash serves dramatic or stylistic purpose effectively
+    - Sentence is grammatically sound
+    - Readability is not hindered
+
+**CRITICAL**: Apply these guidelines with **judgment and restraint**. Only fix actual violations that harm clarity, grammar, or readability. Do NOT mechanically remove all em-dashes, bold formatting, or caps without considering context and pedagogical intent.
 
 ### Formatting Guidelines
 
