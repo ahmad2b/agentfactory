@@ -89,15 +89,15 @@ Once you climb to Layer 2, you reach where real money accumulates. This is where
 
 **Finance**: A subagent that reads regulatory documents, integrates with Bloomberg terminals, and executes trades within risk parameters. A solo developer building this could capture $100M+ in annual revenue by reaching 100-200 major financial firms.
 
-**Healthcare**: A subagent that reads patient records, clinical literature, and FDA regulations—then recommends treatment plans. One developer, integrated with 50 hospital systems, generates massive recurring revenue.
+**Healthcare**: A subagent that reads patient records, clinical literature, and FDA regulations, then recommends treatment plans. One developer, integrated with 50 hospital systems, generates massive recurring revenue.
 
-**Education**: A subagent that reads lesson plans and student data—then adapts personalized learning paths. One developer, integrated with 1,000 schools, generates compound growth.
+**Education**: A subagent that reads lesson plans and student data, then adapts personalized learning paths. One developer, integrated with 1,000 schools, generates compound growth.
 
-The competitors aren't other startups. They're incumbents: Bloomberg in finance, Epic Systems in healthcare, Blackboard in education. **And here's the critical insight: incumbents cannot respond quickly** because they're bound by legacy architecture, regulatory approval, and organizational inertia. A solo developer moves three to five times faster.
+The competitors aren't other startups. They're incumbents: Bloomberg in finance, Epic Systems in healthcare, Blackboard in education. Here's the critical insight: incumbents cannot respond quickly because they're bound by legacy architecture, regulatory approval, and organizational inertia. A solo developer moves three to five times faster.
 
-#### 🎓 Instructor Commentary
+#### 🎓 Expert Insight
 
-> This is where the economics get exciting for solo entrepreneurs. You're not competing against other startups for venture funding—you're competing against **organizational inertia**. Epic Systems has thousands of engineers, but they can't pivot quickly because they have millions of lines of legacy code, regulatory compliance, and risk-averse decision-making. You have zero legacy code. You can rebuild your entire product in a weekend if needed. This **agility asymmetry** is your competitive advantage.
+> This is where the economics get exciting for solo entrepreneurs. You're not competing against other startups for venture funding. You're competing against organizational inertia. Epic Systems has thousands of engineers, but they can't pivot quickly because they have millions of lines of legacy code, regulatory compliance, and risk-averse decision-making. You have zero legacy code. You can rebuild your entire product in a weekend if needed. This agility asymmetry is your competitive advantage.
 
 ![Snakes and Ladders: AI Market Structure](/img/snakes_ladders.jpg)
 
@@ -117,25 +117,22 @@ History shows this pattern clearly. In mobile operating systems (2007-2015):
 - **Google (Android)**: Owned manufacturer + developer + ecosystem layers. Dominated.
 - **Microsoft (Windows Mobile)**: Tried to compete directly on consumer appeal. Failed spectacularly. By 2010, Windows Mobile was extinct.
 
-Microsoft's mistake was trying to win the consumer layer against entrenched competitors. They should have focused on enterprise first—where they had relationships and credibility—then built upward.
+Microsoft's mistake was trying to win the consumer layer against entrenched competitors. They should have focused on enterprise first (where they had relationships and credibility), then built upward.
 
 The lesson transfers directly: Don't compete on consumer appeal (Layer 1). Own a developer layer or vertical market layer first, become indispensable, then leverage that dominance to integrate upward.
 
 This is why the Snakes and Ladders framework works: you find the ladders that others miss, climb them first, and use your dominance at one layer to own the layer above. Snakes pull you backward. Ladders pull you forward.
 
-#### ✨ Teaching Tip
-
-Microsoft's Windows Mobile failure teaches a timeless lesson: **don't fight where the giants are already dominant**. Apple owned consumer loyalty, Google owned manufacturer relationships. Microsoft tried to win on consumer appeal (Layer 1) when their strength was enterprise (Layer 3). The takeaway: Build where you have an unfair advantage, not where the market is biggest.
-
 ---
 
 Now that you understand the competitive layers, let's look at who wins economically. The economics are the second key insight that makes this opportunity real.
 
-#### 🚀 CoLearning Challenge
+#### 🤝 Practice Exercise
 
-**Quick Test**: Pick a vertical market you know (healthcare, education, finance, legal). Ask your AI: "Identify the top 3 incumbent systems in this vertical. For each one, explain why they're slow to innovate." Then validate: Do you agree with your AI's assessment, or is it missing something about how these companies actually operate?
+Ask your AI Co-Teacher:
+> "Pick a vertical market I might know (healthcare, education, finance, legal). Identify the top 3 incumbent systems in this vertical. For each one, explain why they're slow to innovate, then help me validate whether this analysis matches reality."
 
-**What you're practicing**: Using AI to research competitive dynamics, then applying your own judgment to validate its reasoning.
+**Expected Outcome**: You'll understand how to research competitive dynamics with AI and practice applying your own judgment to validate AI reasoning. This teaches you to combine AI research capabilities with critical thinking.
 
 ---
 
@@ -152,7 +149,7 @@ The 'Snakes and Ladders' framework describes four competitive layers. Explain th
 
 ### Prompt 2: Evaluate Layer 1 Opportunities
 ```
-The lesson says Layer 1 (consumer AI like ChatGPT) is a 'snake' I should avoid. But I use ChatGPT every day! Let's explore this together: First, help me understand if there's ANY opportunity for individuals in Layer 1. Then, I'll push back with counterarguments (what about plugins? what about niche consumer markets?). Adapt your reasoning based on my counterarguments—let's iterate until we have a clear decision framework for when Layer 1 makes sense vs. when it's truly a snake to avoid.
+The lesson says Layer 1 (consumer AI like ChatGPT) is a 'snake' I should avoid. But I use ChatGPT every day! Let's explore this together: First, help me understand if there's ANY opportunity for individuals in Layer 1. Then, I'll push back with counterarguments (what about plugins? what about niche consumer markets?). Adapt your reasoning based on my counterarguments. Let's iterate until we have a clear decision framework for when Layer 1 makes sense vs. when it's truly a snake to avoid.
 ```
 
 **Expected outcome**: Clear guidance on which layer to pursue, achieved through **collaborative iteration** where you challenge the framework and your AI adapts its reasoning.
