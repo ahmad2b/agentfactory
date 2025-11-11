@@ -478,14 +478,44 @@ Look for:
 - **Natural** in placement (enhances, doesn't interrupt)
 - **Conversational** in tone (not preachy or mechanical)
 
-**Writing Style Guidelines** (apply to ALL CoLearning elements):
-- ✅ Use natural conversational language ("Help me understand" not "Ask your AI to explain")
-- ✅ Avoid ALL CAPS for emphasis (use *italic* or **bold** sparingly instead)
-- ✅ Use em-dash (—) only for parenthetical thoughts, not to connect phrases
-- ✅ Placeholders in square brackets should be lowercase: [describe your situation]
-- ✅ Use commas for natural list flow within sentences
-- ✅ Keep prompts feeling like dialogue with AI partner, not commands
-- ✅ Bold only key terms that need emphasis, not decorative
+**Writing Style Guidelines** (apply to ALL CoLearning elements and content):
+
+**Punctuation & Emphasis** (apply judiciously with context-awareness):
+- **Em-dash (—)**: ONLY fix when it creates grammatical issues or hinders readability
+  - ✅ KEEP: "The developer's role is changing—and it's happening faster than expected." (dramatic break, grammatically sound)
+  - ✅ KEEP: "Understanding intent (not memorizing syntax) is the new skill." (parenthetical aside)
+  - ❌ FIX: "The job hasn't expanded arbitrarily—the technology landscape has integrated..." when it connects two independent clauses that should be separate sentences
+  - **Judgment required**: If removing the em-dash creates awkward flow or changes meaning, KEEP it. Only fix actual violations.
+
+- **Bold formatting**: ONLY fix when it's clearly decorative or excessive
+  - ✅ KEEP: "A **variable** stores data..." (new technical term on first use)
+  - ✅ KEEP: "The **primary skill** is specification-writing..." (critical concept requiring emphasis)
+  - ✅ KEEP: "**Path 1 (Fine-Tuning)**" (structural heading or important distinction)
+  - ✅ KEEP: "**there are two paths**" when emphasizing a key structural point
+  - ❌ FIX ONLY: Multiple bold words in a single prompt where emphasis is decorative (e.g., "Give me **realistic** scenarios for **my** situation")
+  - **Judgment required**: If bold serves pedagogical purpose (emphasis on key distinction, first use of term, structural clarity), KEEP it.
+
+- **ALL CAPS**: ONLY fix when used for emphasis (replace with italic or normal)
+  - ❌ FIX: "Give me REALISTIC scenarios for MY situation..." → "Give me realistic scenarios for my situation..."
+  - ✅ KEEP: ALL CAPS in acronyms (API, LMS, MCP) or proper names
+  - **Judgment required**: Distinguish between emphasis (fix) and legitimate uses (keep).
+
+- **Natural flow**: ONLY intervene when punctuation genuinely disrupts coherence
+  - FIX sentence structure ONLY when:
+    - Em-dash connects independent clauses that should be periods
+    - Sentence is grammatically incorrect after em-dash removal
+    - Multiple em-dashes create choppy reading
+  - PRESERVE existing flow when:
+    - Em-dash serves dramatic or stylistic purpose effectively
+    - Sentence is grammatically sound
+    - Readability is not hindered
+
+**CRITICAL**: Apply these guidelines with **judgment and restraint**. Only fix actual violations that harm clarity, grammar, or readability. Do NOT mechanically remove all em-dashes, bold formatting, or caps without considering context and pedagogical intent.
+
+**Tone**:
+- Natural conversational language ("Help me understand" not "Ask your AI to explain")
+- Professional and respectful (no condescension, no gatekeeping terms)
+- Direct and clear (avoid overly dramatic or breathless phrasing)
 
 **Examples**:
 
@@ -513,7 +543,7 @@ Look for:
 ```markdown
 #### 🎓 Expert Insight
 
-> Notice how this partnership is bidirectional. You specify what you need (AI learns your intent), AI suggests patterns you don't know yet (you learn from AI), and together you create what neither could alone. This isn't "using a tool"—it's co-creation.
+> Notice how this partnership is bidirectional. You specify what you need (AI learns your intent), AI suggests patterns you don't know yet (you learn from AI), and together you create what neither could alone. This isn't "using a tool"; it's co-creation.
 ```
 
 **Quality check**:
