@@ -478,26 +478,42 @@ Look for:
 - **Natural** in placement (enhances, doesn't interrupt)
 - **Conversational** in tone (not preachy or mechanical)
 
+**Writing Style Guidelines** (apply to ALL CoLearning elements):
+- ✅ Use natural conversational language ("Help me understand" not "Ask your AI to explain")
+- ✅ Avoid ALL CAPS for emphasis (use *italic* or **bold** sparingly instead)
+- ✅ Use em-dash (—) only for parenthetical thoughts, not to connect phrases
+- ✅ Placeholders in square brackets should be lowercase: [describe your situation]
+- ✅ Use commas for natural list flow within sentences
+- ✅ Keep prompts feeling like dialogue with AI partner, not commands
+- ✅ Bold only key terms that need emphasis, not decorative
+
 **Examples**:
 
 **💬 AI Colearning Prompt** (after introducing developer role evolution):
 ```markdown
 #### 💬 AI Colearning Prompt
 
-> **Explore with your AI**: "The lesson mentions developers shifting from 'typist' to 'orchestrator.' Ask your AI to explain this transition using a concrete analogy from another profession that went through similar transformation."
+> **Explore with your AI**: "The lesson mentions developers shifting from 'typist' to 'orchestrator.' Help me understand this transition using a concrete analogy from another profession that went through similar transformation."
 ```
 
 **Quality check**:
 - ✅ Encourages exploration (not just "ask AI to explain")
 - ✅ Demonstrates AI as Teacher (student learns from AI)
 - ✅ Specific to lesson content (developer role evolution)
-- ✅ Conversational tone
+- ✅ Conversational tone (natural, not command-driven)
+
+**Style Guidelines**:
+- Use natural conversational language ("Help me understand" not "Ask your AI")
+- Avoid ALL CAPS for emphasis (use italic *emphasis* or bold **emphasis** sparingly)
+- Use em-dash (—) only for parenthetical breaks, not to join phrases
+- Placeholders in square brackets should be lowercase: [describe your situation]
+- Keep prompts feeling like natural dialogue with AI partner
 
 **🎓 Expert Insight** (after explaining Three-Role Partnership):
 ```markdown
 #### 🎓 Expert Insight
 
-> Notice how this partnership is **bidirectional**: You specify what you need (AI learns your intent), AI suggests patterns you don't know yet (you learn from AI), and together you create what neither could alone. This isn't "using a tool"—it's co-creation.
+> Notice how this partnership is bidirectional. You specify what you need (AI learns your intent), AI suggests patterns you don't know yet (you learn from AI), and together you create what neither could alone. This isn't "using a tool"—it's co-creation.
 ```
 
 **Quality check**:
@@ -512,7 +528,7 @@ Look for:
 
 **Quick Test**: Ask your AI: "I want to build a simple to-do list app. What information do you need from me to implement it well?"
 
-**What you're practicing**: Specification-writing. The AI will ask about features, data structure, UI preferences—showing you what good specs include.
+**What you're practicing**: Specification-writing. The AI will ask about features, data structure, UI preferences, showing you what good specs include.
 ```
 
 **Quality check**:
@@ -656,7 +672,7 @@ Invoke lesson-writer:
 - Plan: [plan.md lesson section]
 - Constitutional Framework:
   - Build Three-Role AI Partnership from start (demonstrate in narrative, not just add elements)
-  - Natural CoLearning element integration (not mechanical insertion)
+  - Natural CoLearning element integration (💬🎓🤝✨ not mechanical insertion)
   - Conversational, exploration-focused tone throughout
   - "Specs Are the New Syntax" emphasis (for code lessons)
   - No forward references (pedagogical ordering strict)
@@ -790,7 +806,7 @@ Invoke technical-reviewer:
 ## Constitutional Compliance Achieved
 
 ✅ All 18 constitutional principles verified compliant
-✅ CoLearning elements (100% coverage, quality-checked)
+✅ CoLearning elements (💬🎓🤝✨ 100% coverage, quality-checked)
 ✅ Lesson closure pattern (100% compliant)
 ✅ Pedagogical ordering (no forward references)
 ✅ Three-Role Partnership (demonstrated authentically throughout)
