@@ -24,3 +24,6 @@ By the end of this chapter, you'll understand:
 - **The education gap**: Five critical gaps in traditional CS curriculum and why supplemental learning is essential
 - **Your optimal timing**: Why you're in the Early Majority adoption phase—the sweet spot for high return and manageable risk
 
+**Watch the chapter overview**
+
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/DVoSVT7kcA0" title="The Orchestrator Era AI & Future of Code" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
