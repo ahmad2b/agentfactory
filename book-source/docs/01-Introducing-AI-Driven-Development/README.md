@@ -23,7 +23,7 @@ Three forces have converged to create this inflection point:
 
 **Second, mainstream adoption happened fast.** The 2025 Stack Overflow Developer Survey found that 84% of developers are using or plan to use AI tools, with 51% using them daily. Google's 2025 DORA report shows that 90% of software development professionals now use AI, spending a median of two hours per day with these tools. This isn't experimental anymore—it's standard practice.
 
-**Third, the economics shifted dramatically.** Companies like Anthropic report that Claude Code achieved a $500 million annualized revenue run rate within two months of launch. Google's Gemini CLI acquired 1 million developers. OpenAI reports engineers using their Codex tool merge 70% more pull requests each week. The return on investment is measurable, immediate, and compelling.
+**Third, the economics shifted dramatically.** Companies like Anthropic report that Claude Code achieved a $500 million annualized revenue run rate within two months of launch. OpenAI reports engineers using their Codex tool merge 70% more pull requests each week. The return on investment is measurable, immediate, and compelling.
 
 But here's what matters most: This transformation creates unprecedented opportunity for individuals. You don't need a large team, years of experience, or venture capital to build valuable software. You need understanding, strategy, and the ability to work effectively with AI agents.
 
