@@ -55,10 +55,6 @@ differentiation:
 
 # The Inflection Point — Why 2025 Is Different
 
-:::info Maintenance Note
-Statistics and benchmarks in this chapter reflect 2025 data. 
-:::
-
 You might be thinking: "Is this just hype? Haven't we heard these claims before?"
 
 Fair question. The AI world has no shortage of breathless predictions. But 2025 is genuinely different—not because of marketing narratives, but because three independent trends are converging simultaneously:
@@ -154,9 +150,6 @@ These aren't pilot programs. These are multi-year platform bets by companies tha
 
 > **Explore with your AI partner**: "I'm looking at evidence from three independent sources—academic competitions, industry surveys, and billion-dollar acquisitions. Help me understand: What makes convergent validation like this more credible than a single impressive demo? Ask me follow-up questions about which evidence I find most convincing and why."
 
----
-
-:::note Skeptic's Corner: "Isn't this just corporate marketing?"
 
 **Fair concern. Let's address it directly.**
 
@@ -168,10 +161,6 @@ Notice the sources we're citing:
 When you see the same signal from academia, independent research, developer surveys, and multi-billion dollar bets, you're looking at convergent validation, not coordinated hype.
 
 The question isn't "Are these claims credible?" The question is: "How fast will this transition continue?"
-
-:::
-
----
 
 
 ## Try With AI

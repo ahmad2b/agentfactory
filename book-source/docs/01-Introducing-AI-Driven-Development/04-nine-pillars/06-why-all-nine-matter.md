@@ -111,7 +111,6 @@ Traditional mastery required thousands of solo hours per skill. AI changes the e
 - **Progressive practice** builds capability incrementally
 - **Cross-pollination** means skills reinforce each other (cloud knowledge improves your backend work; DevOps knowledge improves your testing)
 
-**This book teaches all nine pillars progressively across 46 chapters.** You don't learn everything in week one. You build Python fundamentals, then add Git, then layer in cloud basics, then integrate AI assistance—each chapter building on the previous.
 
 **Realistic timeline:**
 - **Months 1-6:** Foundational competency (pillars 1-3)
@@ -140,8 +139,6 @@ Five years ago, "full-stack" meant frontend + backend. Today, it means frontend 
 **By reading this chapter, you've already started.**
 
 You don't need to master all nine pillars before you begin. You don't need to quit your job and study full-time. You just need to commit to progressive learning across the integrated system.
-
-**This book is your roadmap.** Each chapter builds one skill at a time. Each section reinforces previous concepts. Each exercise applies learning immediately. By Chapter 46, you'll have practiced all nine pillars in real projects.
 
 **The journey is months, not years. The investment is hours per week, not full-time study. The outcome is transformative.
 

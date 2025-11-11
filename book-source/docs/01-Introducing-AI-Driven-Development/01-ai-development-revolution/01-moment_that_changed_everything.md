@@ -79,14 +79,9 @@ The numbers tell part of the story:
 - **76% of professional developers** are using or plan to use AI coding tools, with 62% already using them—up from 44% last year (Stack Overflow 2024 Developer Survey)
 - **$500 million run rate** for Claude Code alone, making it one of the fastest-growing products in startup history
 - **Significant productivity gains** reported by developers using AI tools across code review, testing, and implementation (Google DORA 2024 Research shows 3.4% increase in code quality, 3.1% faster code review, 7.5% better documentation)
-- **OpenAI o1 achieved 89th percentile** on competitive programming (Codeforces)—performing better than 89% of human competitive programmers
-- **DeepMind's AlphaCode ranked in the top 54%** of participants in real Codeforces competitions, solving novel problems requiring critical thinking, logic, and algorithms
 
 But numbers alone don't capture the shift. What's changing is the **nature of the work itself**.
 
-#### 💬 AI Colearning Prompt
-
-> **Explore with your AI**: "OpenAI's o1 model ranks in the 89th percentile on competitive programming (Codeforces) and AlphaCode placed in the top 54% of real competitions. What does this tell us about where AI coding capabilities stand today versus human programmers?"
 
 ## The Question You're Asking
 

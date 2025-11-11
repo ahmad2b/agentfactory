@@ -298,7 +298,7 @@ This evolution unlocked the Five Powers working together, making the UX→Intent
 
 #### 🤝 Practice Exercise
 
-> **Test the paradigm shift**: Pick any task you do regularly (booking travel, managing emails, tracking expenses). Describe your current manual process to your AI partner, then work together to design an agentic version. Ask the AI: "What would make this truly intent-driven rather than just automated?" Let the AI challenge your thinking—this is co-learning in action.
+> **Ask your AI**: Pick any task you do regularly (booking travel, managing emails, tracking expenses). Describe your current manual process to your AI partner, then work together to design an agentic version. Ask the AI: "What would make this truly intent-driven rather than just automated?" Let the AI challenge your thinking—this is co-learning in action.
 
 ## Try With AI
 
