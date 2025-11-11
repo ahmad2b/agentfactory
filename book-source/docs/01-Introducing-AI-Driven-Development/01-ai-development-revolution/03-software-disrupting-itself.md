@@ -205,7 +205,7 @@ Understanding that software is disrupting itself has direct implications for how
 
 #### 🤝 Practice Exercise
 
-Ask your AI: "Compare how long it took for cloud computing to reach 50% adoption (about 10 years) versus AI coding tools (about 2 years). What are 3 specific reasons why AI tools are being adopted 5x faster? Help me understand the factors at play."
+> **Ask your AI**: "Compare how long it took for cloud computing to reach 50% adoption (about 10 years) versus AI coding tools (about 2 years). What are 3 specific reasons why AI tools are being adopted 5x faster? Help me understand the factors at play."
 
 **What you're practicing**: Understanding technology adoption patterns. The AI will mention voluntary adoption, immediate productivity gains, and low switching costs. Exactly the points this lesson covered.
 

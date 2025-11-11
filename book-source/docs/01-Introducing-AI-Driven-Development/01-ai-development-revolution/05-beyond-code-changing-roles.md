@@ -286,7 +286,7 @@ The developers who thrive in this new landscape are those who embrace the transf
 
 #### 🤝 Practice Exercise
 
-Ask your AI: "I'm learning development in 2025. Which is more valuable: (A) knowing Python syntax perfectly, or (B) writing clear specifications and reviewing code quality? Explain why using concrete examples from my learning context."
+> **Ask your AI**: "I'm learning development in 2025. Which is more valuable: (A) knowing Python syntax perfectly, or (B) writing clear specifications and reviewing code quality? Explain why using concrete examples from my learning context."
 
 **What you're practicing**: Understanding what skills matter in the orchestrator role. The AI will prioritize specification and review skills, exactly what this lesson describes.
 

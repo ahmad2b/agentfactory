@@ -195,7 +195,7 @@ Whether you're a beginner, an experienced developer, or an educator, understandi
 
 #### 🤝 Practice Exercise
 
-Ask your AI: "The lesson claims AI is expanding the developer market, not shrinking it. Help me understand why this is true using one concrete example from history (like spreadsheets and accountants, or calculators and mathematicians). Then explain how this applies to my learning path."
+> **Ask your AI**: "The lesson claims AI is expanding the developer market, not shrinking it. Help me understand why this is true using one concrete example from history (like spreadsheets and accountants, or calculators and mathematicians). Then explain how this applies to my learning path."
 
 **What you're practicing**: Understanding market dynamics and positioning yourself in an expanding field, not a shrinking one.
 

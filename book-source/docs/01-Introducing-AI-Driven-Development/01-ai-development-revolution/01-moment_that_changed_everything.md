@@ -113,7 +113,7 @@ But there's a catch. The skills that traditional computer science education emph
 
 #### 🤝 Practice Exercise
 
-> **Ask your AI co-teacher:** "I'm learning software development in 2026. Traditional CS education emphasizes algorithm memorization and syntax fluency. What skills should I prioritize instead in the AI era? Give me realistic examples for my situation."
+> **Ask your AI:** "I'm learning software development in 2026. Traditional CS education emphasizes algorithm memorization and syntax fluency. What skills should I prioritize instead in the AI era? Give me realistic examples for my situation."
 
 **What you're practicing**: Understanding the shift from syntax-writing to specification-writing. The AI will suggest skills like clear problem articulation, code review, and system design. Exactly what this book teaches.
 
