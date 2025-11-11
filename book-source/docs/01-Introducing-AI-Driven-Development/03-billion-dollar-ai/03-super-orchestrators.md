@@ -101,6 +101,8 @@ That's $345 million per employee. Again, the economics were shocking because the
 
 > **Explore with your AI**: "The table shows Instagram at $77M per employee, WhatsApp at $345M, and Claude Code potentially higher. Let's dig into the pattern—ask your AI: 'What's the mathematical relationship between value-per-employee and the percentage of work that's automated?' Then challenge it: Are we cherry-picking examples, or is this a real trend? What evidence would prove this ISN'T just survivorship bias?"
 
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/mvJJNuj2c74" title="The Billion Dollar Orchestrator" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 ## The Path from Solo to $10M Annual Revenue
 
 Let's map the realistic path for a solo entrepreneur:

@@ -64,6 +64,9 @@ Let's explore what's actually happening to the profession—and what it means fo
 
 ## From Typist to Orchestrator
 
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/9wY2BSvonUI" title="The AI Coding Revolution: From Typist To Architect
+" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 For most of software engineering's history, being a developer meant this:
 
 **You were a typist.**

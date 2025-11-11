@@ -210,8 +210,6 @@ Want to see the original analysis that inspired this chapter? Watch the full pre
 
 <iframe width="100%" height="400" src="https://www.youtube.com/embed/VlOAWvvjThU" title="The $3 Trillion AI Coding Opportunity" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-**[Watch: The $3 Trillion AI Coding Opportunity](https://www.youtube.com/watch?v=VlOAWvvjThU)**
-
 This 40-minute presentation from industry analysts provides the detailed evidence and case studies behind the $3 trillion figure, along with projections for where the market is heading.
 
 ---
