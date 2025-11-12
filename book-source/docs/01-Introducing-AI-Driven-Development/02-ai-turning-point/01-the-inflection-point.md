@@ -288,7 +288,7 @@ Filename: evidence-compared-2024-vs-2025.png
 Alt Text: Side-by-side comparison dashboard showing five key dimensions of AI development transformation from 2024 to 2025, demonstrating dramatic improvements in capability, adoption rates, enterprise confidence, professional workflow integration, and developer role evolution.
 -->
 
-![Comparison of AI development across five dimensions between 2024 and 2025](/img/part-1/chapter-2/evidence-compared-2024-vs-2025.png)
+<!--![Comparison of AI development across five dimensions between 2024 and 2025](/img/part-1/chapter-2/evidence-compared-2024-vs-2025.png)-->
 
 #### 💬 AI Colearning Prompt
 
