@@ -97,6 +97,9 @@ In Lesson 1, you learned *how* metaclasses work. In this lesson, you'll learn *w
 Consider this scenario: You're building a plugin system. Developers write plugin classes, and you need every plugin automatically registered in a central registry. Without a metaclass, you'd require boilerplate:
 
 ```python
+# Manual registration approach (error-prone)
+REGISTRY: dict[str, type] = {}
+
 class Plugin1:
     pass
 
@@ -106,10 +109,22 @@ REGISTRY['plugin1'] = Plugin1  # Manual registration—error-prone
 With a registration metaclass, it happens automatically:
 
 ```python
+# Automatic registration with metaclass
+class PluginRegistry(type):
+    """Metaclass that auto-registers classes."""
+    REGISTRY: dict[str, type] = {}
+
+    def __new__(mcs, name: str, bases: tuple, namespace: dict):
+        cls = super().__new__(mcs, name, bases, namespace)
+        if name != 'PluginRegistry':  # Don't register the metaclass itself
+            mcs.REGISTRY[name.lower()] = cls
+        return cls
+
 class Plugin1(metaclass=PluginRegistry):
     pass
 
-# Plugin1 automatically in REGISTRY — no manual work
+# Plugin1 automatically in PluginRegistry.REGISTRY — no manual work
+print(f"Registered: {list(PluginRegistry.REGISTRY.keys())}")
 ```
 
 That's the power of metaclasses: **automating class creation logic at the framework level**. This lesson shows you five practical patterns used in real frameworks (Django, SQLAlchemy, etc.), and teaches you when NOT to use a metaclass (spoiler: `__init_subclass__` is often simpler).
@@ -696,16 +711,24 @@ print(MyClass._custom_prepared)  # True
 Django's ORM uses a metaclass to turn Python field definitions into database table definitions:
 
 ```python
-# Simplified Django pattern (how it actually works)
+# Simplified Django pattern (conceptual demonstration)
+class ModelBase(type):
+    """Simplified version of Django's ModelBase metaclass."""
+    def __new__(mcs, name: str, bases: tuple, namespace: dict):
+        cls = super().__new__(mcs, name, bases, namespace)
+        # Collect field definitions (simplified)
+        fields = {k: v for k, v in namespace.items() if k != '__module__'}
+        print(f"Model '{name}' registered with fields: {list(fields.keys())}")
+        return cls
+
 class Model(metaclass=ModelBase):
     """Base class for all Django models."""
     pass
 
+# Example usage (without actual Django fields):
 class User(Model):
     """Example Django model."""
-    id = IntegerField(primary_key=True)
-    name = CharField(max_length=100)
-    email = EmailField()
+    pass  # In real Django, this would have IntegerField, CharField, etc.
 
 # The ModelBase metaclass:
 # 1. Collects all Field instances
@@ -719,14 +742,21 @@ class User(Model):
 SQLAlchemy uses a metaclass-based system for ORM:
 
 ```python
-from sqlalchemy.orm import declarative_base
+# Note: Requires sqlalchemy package (pip install sqlalchemy)
+try:
+    from sqlalchemy.orm import declarative_base
+    from sqlalchemy import Column, Integer, String
 
-Base = declarative_base()  # Creates base with metaclass
+    Base = declarative_base()  # Creates base with metaclass
 
-class User(Base):
-    __tablename__ = 'users'
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
+    class User(Base):
+        __tablename__ = 'users'
+        id = Column(Integer, primary_key=True)
+        name = Column(String)
+
+    print("SQLAlchemy example - User model defined")
+except ImportError:
+    print("SQLAlchemy not installed (optional dependency for this example)")
 
 # The metaclass:
 # 1. Detects table name

@@ -107,8 +107,9 @@ class Dog:
 Python is actually doing something like:
 
 ```python
-# Pseudocode: class Dog → type.__call__() → creates Dog instance of type
-Dog = type.__call__(...)  # Simplified, but conceptually correct
+# Pseudocode (conceptual, not executable):
+# class Dog → type.__call__() → creates Dog instance of type
+# Dog = type.__call__(...)  # Simplified, but conceptually correct
 ```
 
 The **default metaclass for all classes is `type`**. Let's prove it:
@@ -133,7 +134,7 @@ The `type` metaclass is special. It's the default metaclass for every class you 
 When you use `type()` as a function, the signature is:
 
 ```python
-type(name: str, bases: tuple, namespace: dict) -> type
+# type(name: str, bases: tuple[type, ...], namespace: dict[str, object]) -> type
 ```
 
 **Parameters**:
@@ -170,6 +171,9 @@ print(type(Dog))  # Output: <class 'type'>
 3. ✅ `type(Dog)` confirms it's an instance of `type`
 
 This is powerful. It means you can create classes programmatically—at runtime, with dynamic names and methods. This is how frameworks like Django build model classes from database schema.
+
+#### 💬 AI Colearning Prompt
+> "Why would you ever need to create a class dynamically with `type()` instead of just writing `class Dog:`? Show me a real-world scenario where dynamic class creation is necessary."
 
 ## Core Concept 3: How Class Creation Works (The Flow)
 
@@ -208,6 +212,12 @@ class MyMeta(type):
 Then use it:
 
 ```python
+class MyMeta(type):
+    """Custom metaclass that intercepts class creation."""
+    def __new__(mcs, name: str, bases: tuple, namespace: dict):
+        print(f"Creating class: {name}")
+        return super().__new__(mcs, name, bases, namespace)
+
 class MyClass(metaclass=MyMeta):
     pass
 # Output: Creating class: MyClass
@@ -311,6 +321,15 @@ except AttributeError as e:
 3. ✅ Error message is clear about what's missing
 
 This is your first real metaclass pattern: **attribute validation**. Lesson 2 builds on this with registration, singleton, and framework patterns.
+
+#### 🎓 Expert Insight
+> In AI-native development, you don't memorize metaclass syntax patterns—you understand WHEN class creation needs customization. Your job: recognize "this validation must happen before any instance exists" moments. AI handles the metaclass mechanics; you provide the strategic insight.
+
+####  🤝 Practice Exercise
+
+> **Ask your AI**: "Create a metaclass that ensures all methods in a class have type hints. Then explain why this validation must happen at class creation time instead of at runtime."
+
+**Expected Outcome**: You'll understand that metaclasses enforce architectural constraints before code even runs, making certain bugs impossible.
 
 ## Core Concept 6: Understanding Method Resolution Order (MRO) with Metaclasses
 

@@ -158,6 +158,8 @@ Same behavior, one-tenth the code. The `@dataclass` decorator generates `__init_
 A **dataclass** is a decorator that auto-generates special methods based on type-hinted fields. When you write:
 
 ```python
+from dataclasses import dataclass
+
 @dataclass
 class Point:
     x: float
@@ -173,8 +175,7 @@ Python automatically creates these methods:
 
 The decorator reads your type hints to understand what fields exist and generates the code accordingly. This is why **type hints are mandatory** in dataclasses—they tell Python what fields to create.
 
-#### 🎓 Instructor Commentary
-
+#### 🎓 Expert Insight
 > In AI-native development, dataclasses represent a shift from "write everything yourself" to "declare your intent, let the decorator handle the mechanics." You describe the data structure with type hints, and Python generates the boilerplate. This is the opposite of memorizing special method signatures—you focus on what data you need, and the decorator handles how to manage it.
 
 ## Creating Your First Dataclass
@@ -208,13 +209,11 @@ print(laptop == mouse)       # False (different fields)
 
 Notice: no `__init__()` method written, yet you can create instances with parameters. No `__repr__()` method written, yet `print()` shows all fields. This is the dataclass magic.
 
-#### 🚀 CoLearning Challenge
+#### 🤝 Practice Exercise
 
-Ask your AI Co-Teacher:
+> **Ask your AI**: "Create a dataclass for a Point with x and y coordinates. Then show me what happens when I create two different points and compare them with ==. Explain why the comparison works without me writing an __eq__ method."
 
-> "Create a dataclass for a Point with x and y coordinates. Then show me what happens when I create two different points and compare them with ==. Explain why the comparison works without me writing an __eq__ method."
-
-**Expected Outcome:** You'll see that dataclasses handle equality comparison automatically by comparing all fields, and you'll understand why type hints matter.
+**Expected Outcome**: You'll see that dataclasses handle equality comparison automatically by comparing all fields, and you'll understand why type hints matter.
 
 ## Default Values and Optional Fields
 
@@ -242,6 +241,8 @@ print(bob)    # Person(name='Bob', email='bob@example.com', age=30, phone='555-1
 **Important rule**: Fields without defaults must come before fields with defaults. This is because `__init__()` parameters must follow the same rule:
 
 ```python
+from dataclasses import dataclass
+
 # ✅ Correct: required fields first, defaults second
 @dataclass
 class Config:
@@ -250,16 +251,15 @@ class Config:
     timeout: int = 30
 
 # ❌ Incorrect: default before required
-@dataclass
-class Config:
-    timeout: int = 30
-    host: str          # Error! Required field after optional
-    port: int
+# @dataclass
+# class Config:
+#     timeout: int = 30
+#     host: str          # Error! Required field after optional
+#     port: int
 ```
 
-#### ✨ Teaching Tip
-
-> Use Claude Code to explore this rule: "What error happens if I put a required field after a field with a default value in a dataclass? Show me the exact error message and explain why Python enforces this rule."
+#### 💬 AI Colearning Prompt
+> "What error happens if I put a required field after a field with a default value in a dataclass? Show me the exact error message and explain why Python enforces this rule."
 
 ## Immutable Data with frozen=True
 
@@ -276,7 +276,10 @@ class Point:
 point = Point(1.0, 2.0)
 
 # Try to modify (fails)
-point.x = 5.0  # Raises FrozenInstanceError!
+try:
+    point.x = 5.0  # Raises FrozenInstanceError!
+except Exception as e:
+    print(f"Error: {type(e).__name__}: {e}")
 ```
 
 Frozen dataclasses are useful for:
@@ -303,7 +306,10 @@ config = DatabaseConfig("localhost", 5432, "myapp_db")
 print(f"Connecting to {config.host}:{config.port}/{config.database}")
 
 # If code tries to change it:
-config.host = "newhost"  # Raises FrozenInstanceError (prevents bugs)
+try:
+    config.host = "newhost"  # Raises FrozenInstanceError (prevents bugs)
+except Exception as e:
+    print(f"Error: {type(e).__name__} - Cannot modify frozen dataclass")
 ```
 
 ## Comparable Data with order=True
@@ -341,6 +347,8 @@ The sort order is determined by field order. Fields are compared from first to l
 **Important**: Use `order=True` carefully:
 
 ```python
+from dataclasses import dataclass
+
 # ✅ Sensible: primary sort key first
 @dataclass(order=True)
 class GameScore:
@@ -348,10 +356,10 @@ class GameScore:
     player_name: str
 
 # ❌ Odd: name first means scores sort alphabetically, not numerically
-@dataclass(order=True)
-class GameScore:
-    player_name: str
-    score: int
+# @dataclass(order=True)
+# class GameScore:
+#     player_name: str
+#     score: int
 ```
 
 ## Key Dataclass Parameters
@@ -386,6 +394,8 @@ When should you use a dataclass? When the main purpose is **holding data**, use 
 **Dataclass (data-heavy, minimal behavior)**:
 
 ```python
+from dataclasses import dataclass
+
 @dataclass
 class Address:
     street: str
@@ -418,29 +428,26 @@ class BankAccount:
 
 For a `BankAccount`, a traditional class makes sense because deposits/withdrawals are complex behaviors. For an `Address`, a dataclass is perfect because it's just data.
 
-#### 🚀 CoLearning Challenge
-
-Ask your AI Co-Teacher:
-
-> "Create two versions of a User dataclass: one that just holds name and email, and one that tries to add login/logout methods. Show me which one feels like 'too much' and explain why dataclasses are for data, not behavior."
-
-**Expected Outcome:** You'll see that adding methods to a dataclass works technically but defeats the purpose. Dataclasses are for **data containers**, not behavior-heavy objects.
 
 ## Why Type Hints Are Mandatory
 
 You might wonder: why can't I just declare fields without type hints?
 
 ```python
+from dataclasses import dataclass
+
 # ❌ This doesn't work (no type hints)
-@dataclass
-class Broken:
-    name = "unknown"  # What is this? A class variable or a field?
-    age = 0
+# @dataclass
+# class Broken:
+#     name = "unknown"  # What is this? A class variable or a field?
+#     age = 0
 ```
 
 Without type hints, Python doesn't know if `name` is a field or a class variable. Type hints make the intent clear:
 
 ```python
+from dataclasses import dataclass
+
 # ✅ This works (type hints declare fields)
 @dataclass
 class Fixed:
@@ -462,16 +469,21 @@ This is why **every field must have a type hint**. It's not optional; it's how t
 Create a dataclass for a book with fields: title (str), author (str), pages (int), and year (int). Then:
 
 ```python
-# Your code here
+from dataclasses import dataclass
+
+# Example solution
+@dataclass
+class Book:
+    title: str
+    author: str
+    pages: int
+    year: int
+
 book = Book("1984", "George Orwell", 328, 1949)
 print(book)
 print(book.author)
-```
-
-Expected output (you should get something like this):
-```
-Book(title='1984', author='George Orwell', pages=328, year=1949)
-George Orwell
+# Output: Book(title='1984', author='George Orwell', pages=328, year=1949)
+# Output: George Orwell
 ```
 
 ### Exercise 2: Defaults and Optional Fields
@@ -479,11 +491,21 @@ George Orwell
 Create a dataclass for a person with name (required), email (required), and phone (optional, default "Unknown"):
 
 ```python
-# Your code here
+from dataclasses import dataclass
+
+# Example solution
+@dataclass
+class Person:
+    name: str
+    email: str
+    phone: str = "Unknown"
+
 person1 = Person("Alice", "alice@example.com")
 person2 = Person("Bob", "bob@example.com", "555-1234")
 print(person1)
 print(person2)
+# Output: Person(name='Alice', email='alice@example.com', phone='Unknown')
+# Output: Person(name='Bob', email='bob@example.com', phone='555-1234')
 ```
 
 ### Exercise 3: Frozen Dataclass
@@ -493,9 +515,17 @@ Create a frozen dataclass for a coordinate with x and y fields. Try to create an
 ```python
 from dataclasses import dataclass
 
-# Your code here
+# Example solution
+@dataclass(frozen=True)
+class Coordinate:
+    x: float
+    y: float
+
 point = Coordinate(5.0, 10.0)
-point.x = 20.0  # What happens?
+try:
+    point.x = 20.0  # What happens? FrozenInstanceError!
+except Exception as e:
+    print(f"Error: {type(e).__name__} - {e}")
 ```
 
 ---

@@ -106,19 +106,24 @@ Before diving into solutions, let's see why basic dataclass defaults can be dang
 ```python
 from dataclasses import dataclass
 
-@dataclass
-class TodoList:
-    items: list[str] = []  # ❌ DANGER!
+# This demonstrates the error - mutable defaults are not allowed
+try:
+    @dataclass
+    class TodoList:
+        items: list[str] = []  # ❌ DANGER!
+except ValueError as e:
+    print(f"Error: {e}")
+    # Output: ValueError: mutable default <class 'list'> for field items is not allowed
 ```
 
-All instances share the same list object:
+This mutable default attempt fails immediately in Python 3.10+. If it were allowed, all instances would share the same list object:
 
 ```python
-list1 = TodoList()
-list2 = TodoList()
-
-list1.items.append("Task 1")
-print(list2.items)  # ['Task 1'] — WOW, not what we wanted!
+# This is what would happen (conceptual - shown for understanding):
+# list1 = TodoList()
+# list2 = TodoList()
+# list1.items.append("Task 1")
+# print(list2.items)  # ['Task 1'] — shared state problem!
 ```
 
 This mutable default gotcha is the most common dataclass mistake. The solution: `default_factory`.
@@ -145,6 +150,15 @@ class TodoList:
 Now each instance gets its own mutable containers:
 
 ```python
+from dataclasses import dataclass, field
+
+@dataclass
+class TodoList:
+    name: str
+    items: list[str] = field(default_factory=list)
+    tags: dict[str, str] = field(default_factory=dict)
+    priority: int = 5
+
 list1 = TodoList(name="Work")
 list2 = TodoList(name="Personal")
 
@@ -154,8 +168,7 @@ print(list2.items)  # [] — correct, no shared state
 
 **Why this matters**: In production APIs and databases, shared mutable state causes subtle bugs that only appear when you create multiple instances. Using `default_factory` is non-negotiable for production dataclasses.
 
-#### 🎓 Instructor Commentary
-
+#### 🎓 Expert Insight
 > In AI-native development, you don't memorize Python's mutable default gotcha—you recognize "mutable type as default?" and immediately reach for `default_factory`. The pattern becomes automatic.
 
 ### Code Example 1: Using default_factory for Mutable Defaults
@@ -244,10 +257,9 @@ class APIResponse:
 - `metadata`: Arbitrary data attached to field (for validators, serialization hints, documentation)
 - `doc`: **NEW in Python 3.14** – Field documentation string (accessible via introspection)
 
-#### 🚀 CoLearning Challenge
+#### 🤝 Practice Exercise
 
-Ask your AI Co-Teacher:
-> "Create a User dataclass with name, email, created_at. Add metadata to the email field for validation. Explain what metadata is and how you'd use it for validation."
+> **Ask your AI**: "Create a User dataclass with name, email, created_at. Add metadata to the email field for validation. Then explain what metadata is and how you'd use it for validation."
 
 **Expected Outcome**: You'll understand that metadata is arbitrary data you attach to fields for use in custom validation functions.
 
@@ -312,10 +324,10 @@ print(user == User(user_id=1, name="Alice", email="alice@example.com", created_a
 # True (created_at not compared because compare=False)
 
 # Validate using metadata
-assert validate_field(user, "email", "bob@example.com")
-assert not validate_field(user, "email", "not_an_email")
-assert validate_field(user, "age", 25)
-assert not validate_field(user, "age", 200)  # Exceeds max
+print(validate_field(user, "email", "bob@example.com"))  # True
+print(validate_field(user, "email", "not_an_email"))      # False
+print(validate_field(user, "age", 25))   # True (within range)
+print(validate_field(user, "age", 200))  # False (exceeds max)
 ```
 
 **Specification Reference**: Spec Example 2: "Field with metadata (for serialization, validation)"
@@ -361,9 +373,8 @@ except ValueError as e:
 3. Cleaner than manual validation after instantiation
 4. Computed fields can depend on constructor parameters
 
-#### ✨ Teaching Tip
-
-> Use Claude Code to explore edge cases: "What happens if I try to create an Order with amount=0? How would I handle that differently than amount=-50?"
+#### 💬 AI Colearning Prompt
+> "What happens if I try to create an Order with amount=0? How would I handle that differently than amount=-50?"
 
 ### Code Example 3: __post_init__() for Validation and Computed Fields
 
@@ -549,9 +560,6 @@ print(restored_person)
 
 **Specification Reference**: Spec Example 5: "Dataclass with JSON serialization (to_dict/from_dict)"
 
-#### 🎓 Instructor Commentary
-
-> You don't memorize JSON serialization techniques—you understand the pattern: "convert nested dataclass to dict, then to JSON". AI handles the details; you understand the flow.
 
 ### Code Example 6: Real-World API Model with All Advanced Features
 
@@ -627,9 +635,9 @@ def to_dict(user: APIUser) -> dict[str, Any]:
 
 def from_dict(data: dict[str, Any]) -> APIUser:
     """Create user from dict (e.g., from API request)."""
-    # Parse datetime string
-    if 'created_at' in data:
-        data['created_at'] = datetime.fromisoformat(data['created_at'])
+    # Remove fields that are init=False (computed fields)
+    data.pop('created_at', None)
+    data.pop('is_verified', None)
 
     # Extract password for InitVar
     password = data.pop('password', "")
@@ -684,10 +692,12 @@ You now understand the tools. Here are the pitfalls to watch for:
 ### Mistake 1: Forgetting default_factory for Mutable Defaults
 
 ```python
-# ❌ WRONG - all instances share the same list
-@dataclass
-class Config:
-    items: list[str] = []
+from dataclasses import dataclass, field
+
+# ❌ WRONG - Python 3.10+ catches this error
+# @dataclass
+# class Config:
+#     items: list[str] = []  # ValueError: mutable default not allowed
 
 # ✅ RIGHT - each instance gets its own list
 @dataclass
@@ -721,6 +731,8 @@ def calculate_roi(self) -> float:
 Metadata is inert—it doesn't auto-validate. You must write validation logic:
 
 ```python
+from dataclasses import dataclass, field
+
 # ❌ Metadata alone doesn't validate
 @dataclass
 class User:
@@ -742,6 +754,9 @@ class User:
 By default, `__eq__()` compares all fields. Use `compare=False` for fields that shouldn't affect equality:
 
 ```python
+from dataclasses import dataclass, field
+from datetime import datetime
+
 # ❌ created_at affects equality (usually not desired)
 @dataclass
 class User:
