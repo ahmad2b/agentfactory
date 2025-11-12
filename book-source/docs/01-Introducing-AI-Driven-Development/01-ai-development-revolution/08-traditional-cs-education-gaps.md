@@ -54,6 +54,10 @@ differentiation:
 
 # Why Traditional CS Education Falls Short
 
+**Lesson Video:**
+
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/QcPRMFRVR5k" title="The $3 Trillion Developer Economy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 Let's address the uncomfortable truth: **The computer science education you can get at most universities in 2025 is teaching you how to be a developer in 2015.**
 
 This isn't a critique of educators, who work hard and care deeply about students. It's a structural reality: **curricula move slowly, technology moves fast, and the gap between what's taught and what's needed is widening.**

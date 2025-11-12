@@ -54,6 +54,10 @@ differentiation:
 
 # Software Disrupting Itself
 
+**Lesson Video:**
+
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/D05z2GBY44U" title="The $3 Trillion Developer Economy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 For the past four decades, software has been the great disruptor. It reshaped retail (Amazon), transportation (Uber), media (Netflix), and nearly every other industry. Now, in a twist that catches even veteran technologists off guard, software is disrupting **itself**.
 
 This isn't just another technology trend. It's a fundamentally different kind of transformation—and understanding why it's different will help you see why it's happening so fast and why traditional approaches to learning software development are becoming obsolete.

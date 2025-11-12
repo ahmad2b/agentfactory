@@ -54,6 +54,10 @@ differentiation:
 
 # The Opportunity Window
 
+**Lesson Video:**
+
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/A1yIQz3oiRw" title="The $3 Trillion Developer Economy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 If you're feeling overwhelmed by everything we've covered so far—the scale of the transformation, the changing developer role, the autonomous agent era—here's the perspective that reframes everything:
 
 **This is the best time in three to four decades to be learning software development.**

@@ -54,6 +54,10 @@ differentiation:
 
 # The Development Lifecycle in Transition
 
+**Lesson Video:**
+
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/sQqJ8aCInEA" title="The $3 Trillion Developer Economy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 Most discussions about AI coding focus on one thing: **writing code**. GitHub Copilot autocompletes your functions. Claude Code implements features from specifications. ChatGPT debugs your errors.
 
 But code generation is just one piece of a much larger transformation. Every phase of the software development lifecycle—from initial planning through production operations—is being reshaped by AI tools.
