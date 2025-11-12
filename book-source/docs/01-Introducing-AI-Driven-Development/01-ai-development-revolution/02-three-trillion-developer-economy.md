@@ -54,7 +54,7 @@ differentiation:
 
 # The $3 Trillion Developer Economy
 
-<iframe width="100%" height="400" src="https://youtu.be/HQQuxxCjmDs" title="The $3 Trillion Developer Economy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="100%" height="400" src="https://www.youtube.com/embed/HQQuxxCjmDs" title="The $3 Trillion Developer Economy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 Let's talk about money. Not because money is the only thing that matters, but because understanding the economic scale of what's being disrupted helps you grasp why this transformation is so significant.
 
