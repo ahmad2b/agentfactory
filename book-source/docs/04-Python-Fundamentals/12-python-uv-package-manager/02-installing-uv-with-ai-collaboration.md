@@ -344,8 +344,7 @@ AI might suggest checking:
 
 #### 🤝 Practice Exercise
 
-Ask your AI:
-> "Walk me through what happens step-by-step during UV installation on my [Windows/Mac/Linux] system. Then explain how I can verify UV is correctly added to my PATH."
+> **Ask your AI**: "Walk me through what happens step-by-step during UV installation on my [Windows/Mac/Linux] system. Then explain how I can verify UV is correctly added to my PATH."
 
 **Expected Outcome**: You should understand the complete installation workflow (download → place → PATH modification) and be able to troubleshoot "command not found" errors by checking PATH configuration with AI guidance.
 

@@ -405,8 +405,7 @@ A dependency is code someone else wrote that your project needs. `requests` is a
 
 #### 🤝 Practice Exercise
 
-Ask your AI:
-> "Create a UV project called 'api-client' that needs to make HTTP requests and parse JSON data. What dependencies should I add? Then explain how UV manages these dependencies differently than the old pip approach."
+> **Ask your AI**: "Create a UV project called 'api-client' that needs to make HTTP requests and parse JSON data. What dependencies should I add? Then explain how UV manages these dependencies differently than the old pip approach."
 
 **Expected Outcome**: You should understand how to identify project needs and translate them into dependencies, and be able to explain UV's automatic dependency resolution compared to manual pip management.
 

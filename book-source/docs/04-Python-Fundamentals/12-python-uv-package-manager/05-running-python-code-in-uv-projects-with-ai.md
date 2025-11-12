@@ -433,8 +433,7 @@ uv add requests pandas matplotlib
 
 #### 🤝 Practice Exercise
 
-Ask your AI:
-> "I want to create a script that fetches weather data from an API, parses JSON responses, and saves results to a file. What dependencies do I need? Then show me how to run this script using UV and explain how UV ensures the script finds all dependencies."
+> **Ask your AI**: "I want to create a script that fetches weather data from an API, parses JSON responses, and saves results to a file. What dependencies do I need? Then show me how to run this script using UV and explain how UV ensures the script finds all dependencies."
 
 **Expected Outcome**: You should understand the workflow of identifying dependencies from requirements, adding them to your project, and running scripts in isolated environments. You should be able to explain why `uv run` is necessary and what would happen without it.
 

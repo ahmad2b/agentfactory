@@ -573,8 +573,7 @@ Help me understand what's wrong and how to fix it.
 
 #### 🤝 Practice Exercise
 
-Ask your AI:
-> "I'm building a data analysis project that needs pandas, matplotlib, and pytest for testing. Add these dependencies to my UV project, separating production and development packages. Then explain how UV resolved their dependencies and what transitive packages were installed."
+> **Ask your AI**: "I'm building a data analysis project that needs pandas, matplotlib, and pytest for testing. Add these dependencies to my UV project, separating production and development packages. Then explain how UV resolved their dependencies and what transitive packages were installed."
 
 **Expected Outcome**: You should understand how to categorize dependencies (runtime vs. development), use AI to add them correctly, and interpret UV's dependency resolution output including transitive dependencies.
 

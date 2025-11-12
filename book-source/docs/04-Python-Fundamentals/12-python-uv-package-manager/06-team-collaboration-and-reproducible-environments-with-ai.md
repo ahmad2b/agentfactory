@@ -475,8 +475,7 @@ When you add/update/remove dependencies:
 
 #### 🤝 Practice Exercise
 
-Ask your AI:
-> "Simulate a team collaboration workflow: Create a UV project, add dependencies (requests and pytest), commit to git, then simulate a teammate cloning and setting up the environment. Explain how the lockfile ensures both developers have identical environments."
+> **Ask your AI**: "Simulate a team collaboration workflow: Create a UV project, add dependencies (requests and pytest), commit to git, then simulate a teammate cloning and setting up the environment. Explain how the lockfile ensures both developers have identical environments."
 
 **Expected Outcome**: You should understand the complete git workflow for UV projects (what to commit, what to ignore), how teammates use `uv sync` to recreate environments, and why lockfiles are critical for team collaboration and reproducible builds.
 
