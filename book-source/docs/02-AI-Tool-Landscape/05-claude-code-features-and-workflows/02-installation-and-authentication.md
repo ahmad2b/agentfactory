@@ -11,8 +11,6 @@ In Lesson 1, you learned why Claude Code is revolutionary. Now comes the crucial
 
 This isn't just about following installation commands. It's about crossing the bridge from "interesting concept" to "tool I can actually use." By the end of this lesson, Claude Code will be installed, authenticated, and ready to assist with your development work.
 
-We've designed this lesson to achieve a **95% first-attempt success rate**—meaning you should be up and running without needing external help. We'll cover Windows, macOS, and Linux with multiple installation methods, clear authentication paths, and comprehensive troubleshooting for common issues.
-
 Let's get started.
 
 ---
@@ -38,10 +36,6 @@ Before we begin, verify you have the following:
 - Check if installed: `node --version`
 - If not installed: https://nodejs.org (download LTS version)
 
-**4. Internet Connection**
-- Needed for initial download and authentication
-- Claude Code requires connection to communicate with Claude AI
-
 ---
 
 ## Installation: Node.js + NPM
@@ -54,19 +48,44 @@ Claude Code installs easily via Node.js package manager (npm). This is the recom
 
 ### Step 1: Install Claude Code Globally
 
-Open your terminal and run:
+Claude Code offers **four installation methods**. Choose the one that matches your operating system:
+
+#### Method 1: macOS/Linux (Recommended)
+
+```bash
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+**What this does**: Downloads and runs the official installer script, automatically detecting your system and installing Claude Code.
+
+#### Method 2: Homebrew (macOS)
+
+```bash
+brew install --cask claude-code
+```
+
+**What this does**: Installs Claude Code using Homebrew package manager (if you already use Homebrew).
+
+#### Method 3: Windows
+
+```powershell
+irm https://claude.ai/install.ps1 | iex
+```
+
+**What this does**: Downloads and runs the PowerShell installer script for Windows systems.
+
+#### Method 4: npm (Cross-Platform)
 
 ```bash
 npm install -g @anthropic-ai/claude-code
 ```
 
-**What this does**: Downloads and installs Claude Code globally on your system, making it accessible from any directory.
+**What this does**: Installs Claude Code via npm package manager (requires Node.js 18+).
 
-For macOs/Linux you can use:
-
-```bash
-curl -fsSL https://claude.ai/install.sh | bash
-```
+**Which method should I use?**
+- **macOS/Linux users**: Use Method 1 (curl) or Method 2 (Homebrew)
+- **Windows users**: Use Method 3 (PowerShell)
+- **Developers with Node.js**: Method 4 (npm) works on all platforms
 
 #### 🎓 Expert Insight
 > In AI-native development, terminal comfort is a skill multiplier. The 5 minutes you invest learning basic terminal commands unlocks 10x productivity with AI tools. You're not becoming a "terminal expert"—you're removing the friction between intent and execution.
@@ -83,8 +102,6 @@ claude --version
 ```
 2.0.37 (Claude Code)
 ```
-
-**If you see the version number**: ✅ Installation successful! Skip to [Authentication](#authentication-connecting-claude-code-to-your-account).
 
 ## Authentication: Connecting Claude Code to Your Account
 
@@ -162,6 +179,65 @@ claude "Hello! Can you confirm Claude Code is working?"
 > **Ask your AI**: "I just installed Claude Code. Create a simple 'Hello World' workflow that: (a) shows me Claude can read a file, (b) proposes a small change, (c) explains what it did. Use a safe test file."
 
 **Expected Outcome**: Confidence that Claude Code can read, propose changes, and explain actions—plus understanding of the approval workflow.
+
+---
+
+### Authentication Method B: Claude Console API Account (Developers)
+
+**When to use this**: You have Claude Console API credits but no Claude.ai subscription. Common for developers using Anthropic's API directly.
+
+**Step 1: Start the Authentication Flow**
+
+In your terminal, run:
+
+```bash
+claude
+```
+
+**Expected output**:
+```
+ Claude Code can be used with your Claude subscription or billed based on API usage through your
+ Console account.
+
+ Select login method:
+
+   1. Claude account with subscription · Pro, Max, Team, or Enterprise
+
+ ❯ 2. Anthropic Console account · API usage billing
+```
+
+Select Option 2.
+
+**Step 2: Enter Your API Key**
+
+1. Go to Claude Console: https://console.anthropic.com/settings/keys
+2. Create a new API key (if you don't have one)
+3. Copy the API key
+4. Return to your terminal and paste the key when prompted
+
+**Step 3: Confirm Authentication**
+
+You should see:
+
+```
+API key validated successfully
+Login successful. Press Enter to continue
+```
+
+**Step 4: Test Your Setup**
+
+Run a simple test command:
+
+```bash
+claude "Hello! Can you confirm Claude Code is working?"
+```
+
+**Expected output**: Claude responds with a greeting confirming the connection works.
+
+**⚠️ Important for Console API Users**:
+- Set usage limits in Console: https://console.anthropic.com/settings/limits
+- Monitor token usage (displayed after each interaction)
+- Console authentication uses API billing, not subscription credits
 
 ---
 

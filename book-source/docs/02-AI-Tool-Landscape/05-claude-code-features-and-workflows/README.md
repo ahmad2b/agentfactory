@@ -13,11 +13,28 @@ The goal is **not to build a supercomputer**, but to establish Claude Code as yo
 
 ## What You'll Learn
 
-By the end of this chapter, you'll understand:
+By the end of this chapter, you'll have:
 
-- **The paradigm shift from passive to agentic AI**: How Claude Code differs fundamentally from chat-based AI tools (GitHub Copilot, ChatGPT) by taking autonomous action—reading files, running commands, managing projects—not just suggesting code snippets
-- **Installation and authentication on any platform**: Complete setup process for Windows, macOS, or Linux with platform-specific instructions.
-- **Custom subagents for specialized tasks**: How to create focused AI assistants with specialized instructions and how specialized context prevents the "drift" problem in long conversations
-- **Agent Skills for autonomous discovery**: Building custom skills that Claude Code discovers and invokes automatically based on task context, understanding how skill libraries amplify your team's domain expertise, and the competitive advantage of encoding institutional knowledge as discoverable skills
-- **MCP (Model Context Protocol) for external integration**: Connecting Claude Code to external data sources.
-- **Your workflow transformation**: Transitioning from passive tool user to active AI orchestrator, establishing habits for effective AI collaboration, and recognizing when Claude Code amplifies productivity versus when simpler tools suffice
+1. **The Paradigm Shift** (Lesson 1) — Understanding how agentic AI (Claude Code) differs fundamentally from passive chat-based tools through context-aware, file-integrated collaboration
+
+2. **Claude Code Installed & Working** (Lesson 2) — Complete setup on Windows/macOS/Linux with 4 installation methods, authentication, and first successful commands
+
+3. **Persistent Project Context** (Lesson 3) — Creating CLAUDE.md files that eliminate repetitive context-sharing in every session
+
+4. **External Integration** (Lesson 4) — MCP servers for safe access to external systems (web, APIs, docs) with practical Playwright and Context7 workflows
+
+5. **Subagent Orchestration** (Lesson 5) — Recognizing when Claude automatically delegates to Explore agent (codebase search) or Plan mode (complex tasks) with hands-on exercises
+
+6. **Autonomous Expertise** (Lesson 6) — Agent Skills with progressive disclosure pattern (metadata → full definition → supporting files) and autonomous discovery
+
+7. **Permission System** (Lesson 7) — Safe collaboration workflows with permission management and approval patterns
+
+8. **Event-Driven Automation** (Lesson 8) — Hooks for custom behaviors triggered by events (PreToolUse, PostToolUse, SessionStart)
+
+9. **Configuration Mastery** (Lesson 9) — Settings hierarchy (User, Project, Local) and precedence rules for advanced customization
+
+10. **Complete Extensibility** (Lesson 10) — Plugins as unified containers bundling skills, commands, agents, hooks, and MCP into shareable, discoverable packages
+
+**Total Duration**: 70-85 minutes across 10 progressive lessons
+
+**The Result**: A fully personalized, extensible AI companion ready for sophisticated AI-Driven Development workflows throughout the course
