@@ -4,11 +4,15 @@ title: "Agent Skills"
 duration: "8-10 min"
 ---
 
-# Agent Skills: Autonomous Expertise
+# Agent Skills: Autonomous-Only Capabilities
 
 You've learned that **subagents** can be invoked automatically by Claude Code OR explicitly by you. Now let's explore **Agent Skills**—capabilities that are **ONLY autonomous**. You can't invoke them explicitly; Claude discovers and applies them automatically based on context.
 
-**The key difference**: Subagents give you control (use them when you want). Skills operate invisibly (Claude uses them when relevant). Skills make Claude Code smarter by default—no commands needed.
+**The key difference**: **Invocation control**.
+- **Subagents**: You have control (both autonomous AND explicit)
+- **Skills**: Pure automation (autonomous ONLY, no explicit invocation)
+
+**When to use skills**: When you want Claude to be smarter by default without needing to remember to invoke capabilities.
 
 ---
 
@@ -18,35 +22,46 @@ You've learned that **subagents** can be invoked automatically by Claude Code OR
 
 **Key characteristic**: Skills are **discovered, not invoked**. You don't command Claude Code to use a skill; Claude Code decides based on context.
 
-### Contrast: Subagents vs. Skills
+### Subagents vs. Skills: What's Actually Different?
 
-The key difference is **invocation control**:
+Based on the official documentation, **subagents and skills are almost identical** in structure. Both:
+- Have YAML frontmatter (name, description, tools)
+- Have markdown content (instructions)
+- Live in `.claude/` directories
+- Claude discovers them autonomously
 
-**Subagents** (flexible control):
-- ✅ **Autonomous**: Claude decides when to use them based on task complexity
-- ✅ **Explicit**: You can request them by name: "Use the code-review subagent"
-- **Both ways work**
+**The ONE key difference: Invocation control**
 
-**Skills** (model-invoked only):
-- ✅ **Autonomous**: Claude discovers and applies them based on context
-- ❌ **Not explicit**: You **cannot** request them by name
-- **Only autonomous invocation**
+| Feature | Subagents | Skills |
+|---------|-----------|--------|
+| **File structure** | `.claude/agents/name.md` | `.claude/skills/name/SKILL.md` |
+| **Autonomous invocation** | ✅ Claude decides when to use | ✅ Claude decides when to use |
+| **Explicit invocation** | ✅ "Use the [name] subagent" | ❌ Cannot invoke by name |
+| **Tool specification** | `tools:` (optional, inherits all if omitted) | `allowed-tools:` (optional, restricts if specified) |
 
 **Example**:
 
 ```
 You: "Review this code for quality issues"
 
-If you have a code-review subagent:
-- Claude MAY invoke it automatically (autonomous)
-- You CAN request it: "Use the code-review subagent" (explicit)
+With a code-review subagent:
+- ✅ Claude MAY invoke it automatically (autonomous)
+- ✅ You CAN request it: "Use the code-review subagent" (explicit)
 
-If you have a code-review skill:
-- Claude MAY apply it automatically (autonomous)
-- You CANNOT request it explicitly (skills have no names you invoke)
+With a code-review skill:
+- ✅ Claude MAY apply it automatically (autonomous)
+- ❌ You CANNOT request it by name (autonomous ONLY)
 ```
 
-**Why use skills?** When you want capabilities Claude applies invisibly without explicit commands. Skills make Claude Code **smarter by default**.
+**When to use skills over subagents**:
+- When you want pure automation (no manual invocation needed)
+- When you want Claude to be smarter by default
+- When you don't want to remember to invoke the capability
+
+**When to use subagents over skills**:
+- When you want control over when it's used
+- When you want to explicitly trigger it sometimes
+- When you need both autonomous AND manual invocation
 
 ---
 
