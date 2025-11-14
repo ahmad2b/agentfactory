@@ -7,69 +7,230 @@ title: Custom Slash Commands
 
 **Duration**: 16-18 minutes
 
-So far, you've used Gemini CLI's **built-in commands** like `/help`, `/tools`, and `/clear`. But what if you could create your own commands?
-
-Custom slash commands are **reusable prompts** that encapsulate your team's workflows. Instead of typing the same 200-word prompt every time, you type `/code-review src/main.py`. This lesson shows you how.
+> **A Word Before We Begin**
+>
+> You're doing code reviews. Every single day, you type the same detailed prompt: "Review this code for security vulnerabilities, performance issues, code style..." It's 200+ characters every time. There has to be a better way. In this lesson, you'll see the repetition problem firsthand, then learn how custom slash commands turn that 200-character prompt into 7 keystrokes: `/review`
 
 ---
 
-## Part 1: Why Custom Commands Matter
+## The Problem: Typing the Same Thing Over and Over
 
-### The Problem: Repetition
+Let's see this in action. You have a code file that needs review:
 
-You need to review code every day. Your review prompt is always:
+**File**: `api.py` (payment processing code)
+```python
+def process_payment(user_id, amount, card_number):
+    # Process payment
+    query = f"SELECT * FROM users WHERE id = {user_id}"
+
+    # Store card details
+    card_data = {
+        'number': card_number,
+        'amount': amount
+    }
+
+    # Log transaction
+    print(f"Processing payment: {amount} for user {user_id}")
+
+    return True
+```
+
+This code has **obvious security issues** (SQL injection, logging sensitive data, storing card numbers). You need Gemini to review it.
+
+### The Traditional Way: Type the Full Prompt Every Time
+
+To get a thorough review, you need a detailed prompt:
 
 ```
-Review this code for:
-1. Security vulnerabilities
-2. Performance issues
-3. Code style consistency with our team standards
-4. Testability and maintainability
+Review this code for the following issues:
 
-If you find issues, categorize by severity (critical/warning/info).
+1. Security vulnerabilities (SQL injection, XSS, authentication bypass, insecure data storage)
+2. Performance problems (inefficient algorithms, memory leaks, blocking operations)
+3. Code style and maintainability (naming conventions, documentation, error handling)
+4. Best practices violations (hardcoded secrets, missing validation, improper logging)
+
+For each issue found, provide:
+- Severity: CRITICAL, WARNING, or INFO
+- Location: Line number and function name
+- Explanation: Why this is a problem
+- Recommendation: How to fix it
+
+Focus on production-readiness and security-first mindset.
 ```
 
-Typing this every day is tedious. Copy-pasting it works but is error-prone.
+**This is 14 lines, 700+ characters.**
 
-### The Solution: Custom Commands
+You have to:
+1. Type (or copy-paste) this every single time
+2. Remember all the criteria you care about
+3. Hope you don't forget something important
+4. Then paste the code you want reviewed
 
-Create a file called `review.toml` in `~/.gemini/commands/`:
+**If you review 5 files a day, you're typing/pasting this 5 times a day, 25 times a week, 100 times a month.**
 
+### What Happens in Practice
+
+**Reality check**:
+- Day 1: You type the full detailed prompt
+- Day 2: You copy-paste from yesterday
+- Day 3: You shorten it to "review this for security issues"
+- Day 4: You forget to check performance
+- Day 5: Your teammate uses a different prompt, so reviews are inconsistent
+
+**The problems**:
+- ❌ **Repetition**: Same prompt, different day
+- ❌ **Inconsistency**: Team members use different criteria
+- ❌ **Degradation**: Prompts get shorter and less thorough over time
+- ❌ **Lost knowledge**: Good prompts are buried in chat history
+- ❌ **Fatigue**: "I'll just skip the detailed review this time..."
+
+---
+
+## The Solution: Custom Slash Commands
+
+What if you could type `/review api.py` and have Gemini automatically use your comprehensive prompt?
+
+**That's what custom slash commands do.**
+
+### Creating Your First Custom Command
+
+Create a file in your home directory:
+
+**Location**: `~/.gemini/commands/review.toml`
+
+**Content**:
 ```toml
-description = "Review code for security, performance, and style"
+description = "Review code for security, performance, and best practices"
 prompt = """
 Review this code for:
-1. Security vulnerabilities
+1. Security vulnerabilities (SQL injection, XSS, auth bypass)
 2. Performance issues
-3. Code style consistency
-4. Testability
+3. Code style and maintainability
+4. Best practices violations
 
-Categorize findings by severity (critical/warning/info).
+For each issue:
+- Severity: CRITICAL/WARNING/INFO
+- Location and explanation
+- How to fix it
+
+{'{{args}}'}
 """
 ```
 
-Now instead of typing the prompt, you type:
+**What this does**:
+1. The `description` appears when you type `/help`
+2. The `prompt` is what gets sent to Gemini
+3. `{'{{args}}'}` gets replaced with whatever you type after `/review`
+
+### Now the Same Task Becomes Simple
+
+Instead of typing 700 characters, you type **7 characters**:
 
 ```
-/review src/main.py
+/review api.py
 ```
 
-Gemini CLI automatically:
-1. Reads the file
-2. Inserts `src/main.py` into the prompt
-3. Sends it to Gemini
+**What happens behind the scenes**:
+1. Gemini CLI sees `/review`
+2. Loads `~/.gemini/commands/review.toml`
+3. Replaces `{'{{args}}'}` with `api.py`
+4. Sends the full comprehensive prompt to Gemini
+5. Gemini reviews your file
 
-### Team Standardization
+**You saved**:
+- ⏱️ **Time**: 30 seconds → 2 seconds
+- 🧠 **Mental load**: No remembering the full criteria
+- ✅ **Consistency**: Same thorough review every time
+- 👥 **Team alignment**: Everyone uses the same command
 
-When your team creates custom commands, everyone uses the same prompts. Code reviews are consistent. Planning sessions follow the same framework. Refactoring uses the same checklist.
+### Team Standardization: Codified Knowledge
 
-Commands become **team codified knowledge**.
+When your team creates custom commands:
+- **Code reviews are consistent**: Everyone uses `/review` with the same criteria
+- **New developers onboard faster**: `/setup` runs your project's specific setup
+- **Best practices are encoded**: `/deploy:prod` includes all your safety checks
+- **Knowledge doesn't disappear**: Commands live in version control, not chat history
+
+Commands become **team codified knowledge**—your workflows, captured as reusable tools.
+
+#### 💬 AI Colearning Prompt
+> "If custom slash commands are just saved prompts, couldn't I just save prompts in a text file and copy-paste them? What's the real advantage of the `/command` approach over copy-paste?"
+>
+> **Hint**: Think about how `/review` works when you pass a filename vs. copy-pasting both the prompt AND the file content every time.
+
+---
+
+## Seeing the Difference: Before and After
+
+Let's make the transformation concrete with a real example.
+
+### Without Custom Command: The Manual Process
+
+You want to review `api.py`:
+
+**Step 1**: Type or paste your review prompt (14 lines)
+**Step 2**: Tell Gemini which file to review
+
+```
+Review this code for the following issues:
+
+1. Security vulnerabilities (SQL injection, XSS, authentication bypass, insecure data storage)
+2. Performance problems (inefficient algorithms, memory leaks, blocking operations)
+3. Code style and maintainability (naming conventions, documentation, error handling)
+4. Best practices violations (hardcoded secrets, missing validation, improper logging)
+
+For each issue found, provide:
+- Severity: CRITICAL, WARNING, or INFO
+- Location: Line number and function name
+- Explanation: Why this is a problem
+- Recommendation: How to fix it
+
+api.py
+```
+
+**Total keystrokes**: ~700 characters (if copy-pasting from a saved file)
+**Time**: 15-30 seconds
+**Consistency**: Varies (did you remember to paste the latest version of your prompt?)
+
+### With Custom Command: One Line
+
+```
+/review api.py
+```
+
+**Total keystrokes**: 14 characters
+**Time**: 2 seconds
+**Consistency**: Always uses the same thorough prompt
+
+**The transformation**:
+- 🔒 **700 characters** → **14 characters** (50x reduction)
+- 🔒 **30 seconds** → **2 seconds** (15x faster)
+- 🔒 **"Did I remember everything?"** → **Always complete and consistent**
+
+### The Real Power: Team Consistency
+
+**Scenario**: Your team of 5 developers does code reviews.
+
+**Without custom commands**:
+- Developer A has a detailed 10-point checklist (700 characters)
+- Developer B has a shorter 5-point version (300 characters)
+- Developer C types it fresh each time (varies)
+- Developer D doesn't remember to check security every time
+- Developer E joined last week and doesn't have any saved prompt
+
+**Result**: Inconsistent reviews, gaps in coverage, knowledge loss
+
+**With `/review` command** (shared in version control):
+- All 5 developers type `/review filename.py`
+- All get the same comprehensive review
+- New developer E gets instant access to team standards
+- Review quality doesn't degrade over time
 
 ---
 
 ## Part 2: TOML File Structure and Syntax
 
-Custom commands are written in **TOML** format (a simple, readable configuration language).
+Custom commands are written in **TOML** format (a simple, readable configuration language like JSON but more human-friendly).
 
 ### Required Fields
 
@@ -83,7 +244,8 @@ Can be multi-line.
 """
 ```
 
-The `description` appears when someone types `/help` and looks for your command.
+**The `description`**: Shows up when you type `/help` to list all commands
+**The `prompt`**: The actual text sent to Gemini when you run the command
 
 ### Optional Fields
 
@@ -91,7 +253,7 @@ You can customize behavior:
 
 ```toml
 description = "Code review assistant"
-prompt = "Review this code: {{args}}"
+prompt = "Review this code: {'{{args}}'}"
 model = "gemini-2.5-pro"        # Override default model
 temperature = 0.7                 # Control creativity (0=deterministic, 1=creative)
 systemInstruction = "You are a security expert reviewing code for vulnerabilities"
@@ -109,7 +271,7 @@ systemInstruction = "You are a security expert reviewing code for vulnerabilitie
 
 ```toml
 description = "Explain a concept in simple terms"
-prompt = "Explain {{args}} in simple terms a 5th grader could understand"
+prompt = "Explain {'{{args}}'} in simple terms a 5th grader could understand"
 ```
 
 **Usage**:
@@ -125,14 +287,14 @@ prompt = "Explain {{args}} in simple terms a 5th grader could understand"
 
 The real power comes from **injection patterns**—ways to insert dynamic content into your prompt.
 
-### Pattern 1: Argument Injection (`{{args}}`)
+### Pattern 1: Argument Injection (`{'{{args}}'}`)
 
-The `{{args}}` placeholder gets replaced with whatever you type after the command.
+The `{'{{args}}'}` placeholder gets replaced with whatever you type after the command.
 
 **Example**:
 ```toml
 description = "Review code file for issues"
-prompt = "Review this code and suggest improvements:\n{{args}}"
+prompt = "Review this code and suggest improvements:\n{'{{args}}'}"
 ```
 
 **Usage**:
@@ -227,7 +389,7 @@ Changes:
 Project conventions:
 @{CONTRIBUTING.md}
 
-Focus area: {{args}}
+Focus area: {'{{args}}'}
 
 Format: <type>(<scope>): <description>
 Examples: feat(auth): Add OAuth support
@@ -240,7 +402,7 @@ Examples: feat(auth): Add OAuth support
 ```
 
 **What Happens**:
-1. `{{args}}` → "authentication improvements"
+1. `{'{{args}}'}` → "authentication improvements"
 2. `!{git diff --cached --name-only}` → Lists changed files
 3. `!{git diff --cached}` → Shows actual diff
 4. `@{CONTRIBUTING.md}` → Reads project guidelines
@@ -316,8 +478,8 @@ When developers clone your repo, they get these commands automatically. `/dev:se
 - Filename must match exactly (case-sensitive on Linux/Mac, not on Windows)
 - Gemini CLI may need restart after adding commands
 
-### "Variable not defined: {{args}}"
-- You used `{{args}}` but didn't provide arguments
+### "Variable not defined: args"
+- You used `{'{{args}}'}` but didn't provide arguments
 - Example that fails: `/review` (no file provided)
 - Correct: `/review src/main.py`
 
@@ -356,7 +518,7 @@ Show me:
 ### Prompt 2: Using All Injection Patterns
 ```
 I want to create a command that:
-1. Takes a commit message as argument ({{args}})
+1. Takes a commit message as argument ({'{{args}}'})
 2. Gets the current git status (!{git status})
 3. Reads my team's commit guidelines (@{CONTRIBUTING.md})
 4. Uses all three injection patterns to verify my commit message is valid
@@ -400,7 +562,7 @@ Debug this for me. What's wrong? How do I fix it?
 Custom slash commands let you **codify repetitive workflows** into reusable, shareable commands.
 
 **Three injection patterns**:
-1. `{{args}}` - Replace with command arguments
+1. `{'{{args}}'}` - Replace with command arguments
 2. `!{command}` - Execute shell command, inject output
 3. `@{filepath}` - Read file, inject contents
 
