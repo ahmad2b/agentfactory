@@ -1,18 +1,26 @@
 ---
-description: Universal intelligence-driven LoopFlow workflow orchestrator. Reads constitution + project context to derive requirements automatically. Chains /sp.specify → /sp.plan → /sp.tasks → /sp.implement with quality gates. Works for ANY chapter, feature, or task (not limited to Python).
+description: Universal intelligence-driven LoopFlow workflow orchestrator implementing AIDD (AI-Driven Development) methodology. Reads constitution + project context to derive requirements automatically. Chains /sp.specify → /sp.plan → /sp.tasks → /sp.implement with quality gates. Works for ANY chapter, feature, or task.
 ---
 
 # /sp.loopflow: Universal LoopFlow Orchestrator
 
-**Purpose**: Execute the complete LoopFlow+ workflow (Evals → Spec → Plan → Tasks → Implement → Validate) for ANY chapter, feature, or task using **vertical intelligence** (constitution + project context + domain skills). Goal-oriented, context-adaptive, and quality-assured.
+**Purpose**: Execute the complete LoopFlow+ workflow (Evals → Spec → Plan → Tasks → Implement → Validate) for ANY chapter, feature, or task using **vertical intelligence** (constitution + project context + domain skills). Implements **AIDD (AI-Driven Development)** methodology through spec-first workflow with intelligent verification.
 
 **Intelligence Sources**:
-- Constitution: Project vision, core principles, target audience, philosophies
+- Constitution: Project vision, core principles, target audience, philosophies (AIDD foundation)
 - Project Context: Chapter index, book structure, existing specs
 - Domain Skills: Available skills library (`.claude/skills/`)
 - User Intent: Natural language description of what to build
 
+**Workflow Pattern** (AIDD Spec-First):
+1. **Phase 0**: Deep Search (pre-spec intelligence - ALWAYS runs)
+2. **Phase 1**: Specification (spec-first using /sp.specify in terminal - AIDD core)
+3. **Phase 0.5**: Deep Research (post-spec verification - CONDITIONAL)
+4. **Phases 2-5**: Plan (/sp.plan) → Tasks (/sp.tasks) → Implement (/sp.implement) → Validate
+
 **Adaptive Workflow**: 0-5 targeted questions based on what intelligence can't derive. NO hardcoded questionnaires.
+
+Tip: Use docker sandbox setup your container and run your code in a controlled environment. Validate using this stratey when possible.
 
 ## User Input
 
@@ -22,14 +30,81 @@ $ARGUMENTS
 
 ---
 
-## ⚠️ CRITICAL ANTI-PATTERN: DON'T OVER-ENGINEER WITH AI
+## ⚠️ UNIVERSAL AI USAGE DECISION FRAMEWORK
 
-### Constitutional Alignment
+### Constitutional Grounding
 
-✅ **Principle 2 (Co-Learning Partner):** AI used strategically, not blindly for everything
+✅ **Principle 2 (Co-Learning Partner):** AI used strategically where it adds value, not reflexively for everything
 ✅ **Core Philosophy #1 (AI Spectrum):** Teaching when Assisted vs. Driven vs. Native makes sense
-✅ **Graduated Teaching (Principle 13):** Direct foundations first, AI for complexity
+✅ **Graduated Teaching (Principle 13):** Direct execution for foundations, AI for complexity, AI orchestration for scale
 ✅ **"Specs Are the New Syntax":** Focus on high-value specification work, not trivial command execution
+
+### Decision Framework: When to Use AI vs. Direct Execution
+
+**Apply this reasoning to ANY tool, framework, or operation:**
+
+```
+→ Analyze the task characteristics:
+  ├─ Is it deterministic? (same inputs → same outputs, no decisions required)
+  ├─ Is it simple? (1-2 steps, no branching logic, documented procedure)
+  ├─ Is it fast? (completes in < 5 seconds with direct command)
+  └─ Is it foundational? (students need to understand the direct mechanism)
+
+→ Decision tree:
+  ├─ IF all true → DIRECT EXECUTION
+  │   - Document the command clearly
+  │   - Show expected output
+  │   - Execution time: actual duration (not inflated)
+  │   - AI role: troubleshooting errors, understanding concepts
+  │
+  ├─ IF any false → EVALUATE COMPLEXITY
+  │   ├─ Non-deterministic (requires decisions) → AI COMPANION
+  │   ├─ Multi-step with branches → AI COMPANION
+  │   ├─ Requires understanding tradeoffs → AI COMPANION
+  │   └─ Involves 10+ items or orchestration → AI ORCHESTRATION
+
+→ Examples across different domains:
+  
+  **Package Management** (uv, npm, pip):
+  - `uv init my-project` → DIRECT (deterministic, 1 step, < 1 sec)
+  - Resolving dependency conflicts → AI COMPANION (non-deterministic, requires analysis)
+  - Setting up 10 microservices → AI ORCHESTRATION (scale)
+  
+  **Version Control** (git):
+  - `git status` → DIRECT (deterministic, 1 step, < 1 sec)
+  - Resolving merge conflicts → AI COMPANION (requires understanding code context)
+  - Managing 50 feature branches → AI ORCHESTRATION (scale)
+  
+  **Containerization** (docker):
+  - `docker build -t myapp .` → DIRECT (deterministic, documented)
+  - Optimizing multi-stage builds → AI COMPANION (requires tradeoff analysis)
+  - Orchestrating 20 microservices → AI ORCHESTRATION (scale with k8s)
+  
+  **Cloud Deployment** (AWS, Azure):
+  - Deploy via CLI with known config → DIRECT (if well-documented, < 2 min)
+  - Choosing instance types for workload → AI COMPANION (requires analysis)
+  - Multi-region failover architecture → AI ORCHESTRATION (complex strategy)
+```
+
+### Teaching Pattern (Graduated)
+
+**Tier 1 - Foundational (Book Teaches)**:
+- Direct commands for deterministic operations
+- Clear documentation of syntax and expected output
+- Build muscle memory and direct understanding
+- AI positioned as troubleshooter (errors) and explainer (concepts)
+
+**Tier 2 - Complex Execution (AI Companion)**:
+- Student specifies WHAT (intent, requirements, constraints)
+- AI handles HOW (complex syntax, multi-step procedures, tradeoffs)
+- Student validates and understands the output
+- Learn strategy and intent, not memorization
+
+**Tier 3 - Scale Operations (AI Orchestration)**:
+- Operations involving 10+ items or multi-file workflows
+- Student orchestrates high-level strategy
+- AI manages tactical execution and coordination
+- Learn supervision and quality assurance skills
 
 ---
 
@@ -55,37 +130,35 @@ $ARGUMENTS
 
 ---
 
-## PHASE 0: INTELLIGENT CONTEXT DISCOVERY
+## PHASE 0: DEEP SEARCH (Pre-Spec Intelligence)
 
-**STEP 1: Read Authoritative Sources**
+**Purpose**: Gather constitutional intelligence and project context BEFORE spec creation. This is the foundation for AIDD spec-first methodology.
 
-Immediately read these files FIRST (no user questions yet):
+**STEP 1: Read Authoritative Sources (Execute NOW)**
+
+YOU MUST immediately read these files (no user questions yet):
 
 1. **Constitution** (`.specify/memory/constitution.md`):
-   - Project vision: "Specs Are the New Syntax" (AI-native development)
-   - Core principles (18 total, especially Principle 13: Graduated Teaching, Principle 18: Three Roles)
-   - Core philosophies (8 total, especially Evals-First, Co-Learning, Spec-First, Validation-First)
-   - Target audience: Aspiring/Professional/Founders with graduated complexity
-   - Nine Pillars: AI CLI, Markdown, MCP, AI-First IDEs, Cross-Platform, TDD, SDD, Composable Skills, Cloud-Native
-   - **CRITICAL**: "AI Development Spectrum" (Assisted 2-3x → Driven 5-10x → Native 50-99x)
+   - Extract project vision, core principles, target audience
+   - Extract Nine Pillars, AI Development Spectrum
+   - Extract teaching patterns and philosophies
 
 2. **Chapter Index** (IF book chapter) (`specs/book/chapter-index.md`):
-   - Chapter number → Part mapping
-   - Prerequisites (what chapters must come before)
-   - Complexity tier (A1-C2 CEFR levels)
-   - Status (planned/in-progress/completed)
+   - Extract chapter number → Part mapping
+   - Extract prerequisites (what chapters must come before)
+   - Extract complexity tier (CEFR levels)
+   - Extract status (planned/in-progress/completed)
 
 3. **Existing Specs** (`specs/` directory):
-   - Similar chapters/features for pattern reference
-   - Naming conventions
-   - Structure examples
+   - Search for similar chapters/features for pattern reference
+   - Extract naming conventions and structure examples
 
 4. **Domain Skills** (`.claude/skills/`):
-   - Available skills for this task type
-   - Teaching patterns (if educational content)
-   - Validation strategies (if technical feature)
+   - List available skills for this task type
+   - Identify teaching patterns (if educational content)
+   - Identify validation strategies (if technical feature)
 
-**STEP 2: Automatic Derivations**
+**STEP 2: Automatic Derivations (Apply Constitutional Reasoning)**
 
 From sources above, derive WITHOUT asking user:
 
@@ -95,7 +168,7 @@ From sources above, derive WITHOUT asking user:
 - Complexity level and cognitive load limits
 - Prerequisites (chapters that must exist first)
 - Relevant domain skills (learning-objectives, concept-scaffolding, code-example-generator, etc.)
-- Teaching pattern (Graduated Teaching Principle 13: Book teaches stable → AI handles complex → AI orchestrates scale)
+- Teaching pattern (Graduated Teaching Principle 13: Direct → AI Companion → AI Orchestration)
 
 **For Code Features:**
 - Task type (authentication, API, database, deployment, etc.)
@@ -108,34 +181,31 @@ From sources above, derive WITHOUT asking user:
 - Audience (contributors, users, developers)
 - Prerequisites (what must exist to document/test)
 
-**CRITICAL ANTI-PATTERN CHECK:**
-- Is this task a simple, deterministic command? (like `uv init`, `docker build`, `git commit`)
-  - ✅ IF YES: Don't create elaborate AI workflows. Document direct commands.
-  - ✅ IF NO: This is where AI adds value (complex workflows, troubleshooting, strategic decisions).
+**CRITICAL: Apply AI Usage Decision Framework**
+- Identify which tasks are deterministic/simple → document as DIRECT
+- Identify which tasks require decisions/complexity → position as AI COMPANION
+- Identify which tasks involve scale (10+) → position as AI ORCHESTRATION
+- This is PRINCIPLE-BASED reasoning, not tool-specific templates
 
-**STEP 3: Apply Constitution Context**
+**STEP 3: Apply Constitution Context (Encode Principles)**
 
-Encode these principles into ALL downstream phases:
+Extract and encode these principles into ALL downstream phases:
 
 **From Core Philosophy:**
 1. **Evals-First Development**: Define success criteria BEFORE specs
-2. **Co-Learning Partnership**: Bidirectional learning (AI teaches student, student teaches AI feedback loop)
+2. **Co-Learning Partnership**: Bidirectional learning (AI teaches student, student teaches AI via feedback loop)
 3. **Spec-First Development**: "Specs Are the New Syntax" - articulating intent is the primary skill
 4. **Validation-First Safety**: Never trust, always verify
 
 **From Graduated Teaching (Principle 13):**
-- **Tier 1 (Book Content)**: Teach stable, foundational concepts that don't change often
+- **Tier 1 (Direct Execution)**: Teach stable, foundational operations that students execute directly
 - **Tier 2 (AI Companion)**: AI handles complex execution from specifications
 - **Tier 3 (AI Orchestration)**: AI orchestrates multi-step workflows at scale (10+ items)
 
-**WHEN TO USE AI (Critical Distinction):**
-- ❌ **DON'T use AI for**: Simple commands (`npm install`, `uv add`, `git status`), straightforward operations, 1-step tasks
-- ✅ **DO use AI for**: Troubleshooting, debugging complex errors, understanding concepts, strategic decisions, multi-step workflows
-
 **From AI Development Spectrum:**
-- **Assisted (2-3x)**: AI as helper for simple tasks (Parts 1-2)
-- **Driven (5-10x)**: AI generates from specs (Parts 3-8) ← Primary focus
-- **Native (50-99x)**: AI as core product capability (Parts 9-13)
+- **Assisted (2-3x)**: AI as helper for simple tasks
+- **Driven (5-10x)**: AI generates from specs ← Primary focus for most work
+- **Native (50-99x)**: AI as core product capability
 
 **From Target Audience:**
 - **Aspiring (A1-A2)**: Max 7 concepts per section, 2 options max, cognitive load managed
@@ -143,9 +213,9 @@ Encode these principles into ALL downstream phases:
 - **Advanced (C1)**: 10 concepts per section, 5+ options, architecture patterns
 - **Professional (C2)**: No artificial limits, production complexity
 
-**STEP 4: Identify Genuine Ambiguities**
+**STEP 4: Identify Genuine Ambiguities (0-5 Questions Max)**
 
-Now that you have full context, identify ONLY what's genuinely ambiguous (0-5 questions max):
+Now that you have full context, identify ONLY what's genuinely ambiguous:
 
 **Ask IF**:
 - Existing context found → "Use existing [spec/approach] or start fresh?"
@@ -158,7 +228,7 @@ Now that you have full context, identify ONLY what's genuinely ambiguous (0-5 qu
 - Constitution already specifies it (audience tier, complexity, principles)
 - Chapter index already defines it (prerequisites, part number)
 - Task type is obvious from goal ("Add authentication" = code feature)
-- Direct command is appropriate (simple `uv init` doesn't need AI workflow)
+- Decision framework applies clearly (simple command = direct execution)
 
 **Output**: Intelligence object containing:
 ```json
@@ -168,279 +238,152 @@ Now that you have full context, identify ONLY what's genuinely ambiguous (0-5 qu
   "complexity_level": "A1 | A2 | B1 | B2 | C1 | C2",
   "prerequisites": ["chapter-11", "chapter-12"],
   "domain_skills": ["learning-objectives", "concept-scaffolding"],
-  "teaching_pattern": "direct_commands | ai_companion | ai_orchestration",
-  "ai_usage_strategy": "describe when AI adds value vs direct commands",
+  "teaching_pattern": "direct_execution | ai_companion | ai_orchestration",
+  "ai_usage_strategy": "Direct: [operations]. AI Companion: [complexity]. AI Orchestration: [scale].",
   "cognitive_load_limit": 7,
-  "sandbox_validation_required": true,
-  "commands_to_test": ["list all CLI commands students will run"],
+  "validation_required": true,
   "ambiguities_clarified": {"question": "answer"}
 }
 ```
 
----
+**Output from Phase 0**: 
+- Intelligence object ready for spec creation
+- 0-5 clarifying questions answered
+- Constitutional principles identified for application
+- Ready to proceed to Phase 1 (Specification)
 
-## PHASE 0.5: GROUND TRUTH INTELLIGENCE GATHERING (For Tool/API/Framework Chapters)
+**CRITICAL**: Do NOT create git branch yet. Branch creation happens in PHASE 1 AFTER spec.md is created.
 
-**CRITICAL**: For chapters teaching external tools, APIs, frameworks, or CLIs, gather verified documentation BEFORE writing specifications. Never write specs from assumed knowledge.
-
-**Detect if Intelligence Gathering Required**:
-
-```
-→ Analyze Phase 0 intelligence object:
-  ├─ IF task_type includes: "external_tool" | "api_integration" | "framework_usage" | "cli_tutorial"
-  ├─ THEN: Ground truth gathering REQUIRED
-  └─ Examples requiring gathering:
-      - Claude Code features (settings, plugins, MCP, commands)
-      - Docker workflows (Dockerfile syntax, commands, best practices)
-      - UV package manager (CLI commands, configuration)
-      - GitHub API (endpoints, authentication, response schemas)
-      - FastAPI framework (decorators, dependency injection patterns)
-```
-
-**If Ground Truth Gathering Required:**
-
-```
-→ STEP 1: Identify What Needs Verification
-  ├─ Tool-specific claims:
-  │   - Configuration schema (JSON/YAML structure, valid keys/values)
-  │   - CLI commands (syntax, flags, expected output)
-  │   - UI workflows (menu navigation, button labels)
-  │   - API endpoints (URLs, parameters, response formats)
-  │   - Version-specific features (tool X version Y has feature Z)
-  │   - Integration patterns (how tool X connects to tool Y)
-  │
-  └─ Create preliminary list: "Claims requiring verification: [N]"
-
-→ STEP 2: Assess Available Tools for Information Gathering
-  ├─ Check connected MCP servers:
-  │   - Context7 MCP (if available): Library documentation with 8000+ token depth
-  │   - GitHub MCP (if available): Repository README, docs/, examples/
-  │   - Filesystem MCP (if available): Local documentation files
-  │   - Web MCP (if available): Official documentation sites
-  │
-  ├─ Check built-in tools:
-  │   - WebFetch: Retrieve and parse official documentation URLs
-  │   - Bash: Execute tool --help, man pages, version checks
-  │   - Read: Access local docs if URLs provided by user
-  │
-  └─ Report available tools: "Can use: [tool1, tool2, tool3]"
-
-→ STEP 3: Identify Information Gaps (Optional MCP Request)
-  ├─ IF specialized MCP would help:
-  │   - Example: "Context7 for React/Next.js documentation"
-  │   - Example: "Playwright MCP for testing documentation"
-  │   - Example: "Slack MCP for integration examples"
-  │
-  ├─ Ask user: "Would you like to connect [MCP-name] for deeper [tool] documentation?"
-  │   - Explain benefit: "Context7 provides 8000+ token library docs vs WebFetch's summary"
-  │   - Wait for user decision: YES (user connects) | NO (use available tools)
-  │
-  └─ Report: "Using tools: [final-list]"
-
-→ STEP 4: Gather Verified Information (Tool-Adaptive Strategy)
-
-  **Strategy A: Context7 MCP Available (PREFERRED for libraries/frameworks)**
-  ```
-  → For library/framework documentation:
-    ├─ Use: mcp__context7__resolve-library-id
-    │   - Input: Library name (e.g., "Claude Code", "FastAPI", "Docker")
-    │   - Output: Context7-compatible library ID
-    │
-    ├─ Use: mcp__context7__get-library-docs
-    │   - Input: Library ID + topic focus (e.g., "settings configuration")
-    │   - Output: 5000-8000 tokens of focused documentation
-    │   - Benefit: Comprehensive, structured, current
-    │
-    └─ Extract verified facts:
-        - Actual configuration schema
-        - Real command syntax with examples
-        - Current version compatibility
-        - Official usage patterns
-  ```
-
-  **Strategy B: WebFetch + Bash (Fallback for tools without Context7)**
-  ```
-  → For official documentation sites:
-    ├─ Use: WebFetch("https://official-docs-url")
-    │   - Retrieve: HTML converted to markdown
-    │   - Extract: Settings, commands, API schemas
-    │   - Limitation: Summary-level, may miss depth
-    │
-    ├─ Use: Bash for tool introspection:
-    │   - Example: "claude --help" (capture actual CLI output)
-    │   - Example: "docker version" (verify installation format)
-    │   - Example: "uv --version" (check current syntax)
-    │
-    └─ Cross-reference: CLI output vs documentation
-  ```
-
-  **Strategy C: GitHub MCP (For open-source tools)**
-  ```
-  → For tools with GitHub repositories:
-    ├─ Use: GitHub MCP to fetch:
-    │   - README.md (installation, quick start)
-    │   - docs/ directory (detailed guides)
-    │   - examples/ (real working code)
-    │   - CHANGELOG.md (version-specific features)
-    │
-    └─ Extract: Up-to-date patterns directly from source
-  ```
-
-→ STEP 5: Cache Verified Intelligence
-  ├─ Create: intelligence/[feature-slug]-verified-docs.md
-  │
-  │   Structure:
-  │   ```markdown
-  │   # Verified Documentation: [Tool Name]
-  │
-  │   **Generated**: [ISO timestamp]
-  │   **Tool Version**: [version if applicable]
-  │   **Sources**: [list of tools/URLs used]
-  │
-  │   ## Verified Facts
-  │
-  │   ### Configuration Schema
-  │   - Setting name: `permissions.defaultMode` (not `permission_mode`)
-  │   - Valid values: "acceptEdits" | "default" | "plan"
-  │   - Source: Context7 Claude Code docs / https://code.claude.com/docs/en/settings
-  │   - Verified: [timestamp]
-  │
-  │   ### CLI Commands
-  │   - Command: `/plugin marketplace add anthropics/skills`
-  │   - Expected output: "Successfully added marketplace: anthropic-agent-skills"
-  │   - Source: Terminal test + official docs
-  │   - Verified: [timestamp]
-  │
-  │   ### UI Workflows
-  │   - Navigation: `/plugin` → "Browse and install plugins" → select marketplace
-  │   - Source: Actual tool testing
-  │   - Verified: [timestamp]
-  │
-  │   ## Assumptions Flagged (Require Later Verification)
-  │   - [List any unverified claims]
-  │
-  │   ## Tool Usage Log
-  │   - Context7: Resolved "Claude Code" → /anthropics/claude-code
-  │   - Context7: Fetched 6500 tokens on settings + plugins
-  │   - WebFetch: https://github.com/anthropics/skills (plugin bundles)
-  │   - Bash: Tested `/plugin marketplace add` in terminal
-  │   ```
-  │
-  └─ Report: "✅ Cached [N] verified facts from [M] sources"
-
-→ STEP 6: Quality Gate Before Spec
-  ├─ Verify completeness:
-  │   - All tool-specific claims have source URLs
-  │   - Critical commands tested in actual environment
-  │   - Configuration examples validated against schema
-  │
-  ├─ Calculate verification coverage:
-  │   - Verified claims: [N]
-  │   - Assumptions flagged: [M]
-  │   - Coverage: [N/(N+M)]%
-  │
-  └─ Gate decision:
-      - IF coverage < 80%: BLOCK spec creation, gather more intelligence
-      - IF coverage >= 80%: ALLOW spec creation with flagged assumptions documented
-      - Report: "✅ Verification coverage: [X]%. Ready to spec." OR "❌ Coverage too low: [Y]%. Need more sources."
-
-WAIT: Intelligence gathering complete
-→ User reviews: intelligence/[feature-slug]-verified-docs.md
-→ User confirms: "✅ Verified facts look good" or requests additional verification
-  ├─ If more verification needed: Return to STEP 4 with additional tools
-  └─ If approved: Continue to PHASE 1 with verified intelligence
-```
-
-**Anti-Patterns Prevented**:
-- ❌ Writing specs from memory ("I think Claude Code uses permission_mode...")
-- ❌ Assuming API structure without checking docs ("Settings are probably JSON...")
-- ❌ Inventing plausible-sounding setting names (permission_mode, output_format, editor)
-- ❌ Skipping verification because "it seems right"
-
-**Intelligence-First Success Criteria**:
-- ✅ Every tool-specific claim has source citation
-- ✅ Critical commands tested in actual environment
-- ✅ Configuration examples validated against official schema
-- ✅ Verification coverage >= 80%
-- ✅ Assumptions explicitly flagged for later verification
-- ✅ Tools used documented for reproducibility
-
-**MCP Server Recommendations by Task Type**:
-
-| Task Type | Recommended MCP | Why |
-|-----------|-----------------|-----|
-| Library/Framework docs | Context7 | 8000+ token depth, current versions |
-| Open-source tools | GitHub | Source of truth (README, docs/) |
-| API integration | Web + specific API MCP | Live endpoint testing |
-| CLI tools | Bash + WebFetch | Introspection + official docs |
-| Cloud services | Provider-specific MCP | AWS/Azure/GCP MCPs for live schemas |
-
-**Output**: Verified intelligence cache ready for spec creation
+**CRITICAL**: Do NOT run Phase 0.5 (Deep Research) yet. That happens AFTER spec creation if needed (see Phase 0.5 below).
 
 ---
 
 ## PHASE 1: SPECIFICATION + CLARIFICATION GATE
 
+**THIS PHASE INVOKES /sp.specify AUTOMATICALLY** - No user permission needed to invoke the command.
+
+**STEP 1: Prepare Full Context** (Automatic)
+
+Gather context from Phase 0:
+- Intelligence object (task type, audience, complexity, prerequisites)
+- AI usage strategy (direct vs. AI companion vs. orchestration)
+- Teaching pattern (Tier 1/2/3 mapping)
+- Domain skills required
+- Verified intelligence cache (if Phase 0.5 ran)
+- Constitutional principles to apply
+
+**STEP 2: Invoke /sp.specify NOW** (Execute immediately)
+
+YOU MUST invoke this command NOW with full context:
+
 ```
-→ Invoke: /sp.specify [intelligence-context]
-  ├─ Pass: Full intelligence object from Phase 0
-  ├─ Apply: Evals-first (success criteria BEFORE implementation)
-  ├─ Apply: AI usage strategy (when to use AI vs direct commands)
-  ├─ Apply: Graduated teaching pattern (Tier 1/2/3 mapping)
-  ├─ Create: specs/[feature-slug]/spec.md
-  └─ Report: "Spec created with evals, AI strategy, and teaching tiers defined."
+/sp.specify [feature-slug]
 
-→ Invoke: /sp.clarify (Quality Gate)
-  ├─ Read: specs/[feature-slug]/spec.md
-  ├─ Identify: Underspecified areas, missing evals, ambiguous AI usage
-  ├─ Check: Is this over-engineering simple tasks with AI?
-  ├─ Ask: Up to 5 targeted clarification questions
-  ├─ Update: spec.md with answers encoded
-  └─ Report: "Spec clarified. AI usage strategy validated."
-
-→ Create Feature Branch (AFTER spec exists)
-  ├─ Derive branch name from spec directory (e.g., specs/part-4-chapter-15/ → part-4-chapter-15)
-  ├─ Check current branch:
-  │   IF current == main → Create new branch matching spec directory
-  │   IF current == spec directory → Stay on it
-  │   IF current != spec directory → Warn and ask user to switch
-  ├─ Execute: git checkout -b [spec-directory-name] (only if on main)
-  └─ Report: "✅ Branch: [branch-name]"
-
-WAIT: User reviews spec.md
-→ User confirms: "✅ Spec approved" or provides feedback
-  ├─ If feedback: Update spec.md iteratively (may re-run /sp.clarify)
-  └─ If approved: Continue to PHASE 2
+[Pass complete intelligence object]
+[Pass AI usage strategy]
+[Pass teaching pattern]
+[Pass evals-first requirement]
+[Pass verified intelligence reference if available]
+[Pass constitutional principles]
 ```
+
+**CRITICAL**: DO NOT ask user "Should I run /sp.specify?" - EXECUTE IT IMMEDIATELY.
+
+**STEP 3: Wait for /sp.specify Completion**
+
+The command will create: `specs/[feature-slug]/spec.md`
+
+**STEP 4: Invoke /sp.clarify (Quality Gate - Execute Automatically)**
+
+YOU MUST invoke this command NOW to identify underspecified areas:
+
+```
+/sp.clarify [feature-slug]
+
+Read: specs/[feature-slug]/spec.md
+Identify: Underspecified areas, missing evals, ambiguous AI usage
+Check: Is this over-engineering simple tasks with AI?
+Ask: Up to 5 targeted clarification questions
+Update: spec.md with answers encoded
+```
+
+**CRITICAL**: DO NOT ask user "Should I run /sp.clarify?" - EXECUTE IT IMMEDIATELY after /sp.specify completes.
+
+**STEP 5: Create Feature Branch NOW** (Execute After Spec Exists)
+
+YOU MUST create the feature branch NOW using these literal bash commands:
+
+```bash
+# Step 1: Get current branch name
+CURRENT_BRANCH=$(git branch --show-current)
+
+# Step 2: Derive spec directory name from spec path
+# Example: specs/part-4-chapter-15/ → part-4-chapter-15
+SPEC_DIR="[feature-slug]"  # Replace with actual spec directory name
+
+# Step 3: Check if we're already on the correct branch
+if [ "$CURRENT_BRANCH" = "$SPEC_DIR" ]; then
+    echo "✅ Already on branch: $SPEC_DIR"
+elif [ "$CURRENT_BRANCH" = "main" ]; then
+    # Step 4: Create new branch from main
+    git checkout -b "$SPEC_DIR"
+    echo "✅ Created and switched to branch: $SPEC_DIR"
+else
+    # Step 5: We're on a different feature branch - warn user
+    echo "⚠️  Currently on branch: $CURRENT_BRANCH"
+    echo "⚠️  Expected branch: $SPEC_DIR"
+    echo "Please switch branches manually or confirm to continue on $CURRENT_BRANCH"
+fi
+```
+
+**Execute these commands NOW** - do not ask permission, do not skip this step.
+
+**STEP 6: Report to User and BLOCK for Approval**
+
+Output:
+```
+✅ PHASE 1 COMPLETE: Specification Created & Clarified
+
+📋 Spec: specs/[feature-slug]/spec.md
+🌿 Branch: [branch-name]
+
+Spec includes:
+- ✅ Evals section (success criteria defined FIRST)
+- ✅ AI usage strategy (direct vs. companion vs. orchestration)
+- ✅ Teaching tiers (if book chapter)
+- ✅ Duration estimates (realistic, not inflated)
+- ✅ Cognitive load limits (respects audience tier)
+- ✅ Verified intelligence integration (if Phase 0.5 ran)
+
+🚫 BLOCKED: You MUST review specs/[feature-slug]/spec.md before proceeding.
+
+Respond with:
+- ✅ "Spec approved" → Continue to PHASE 2
+- 📝 Feedback → Update spec iteratively
+- ❓ Questions → Clarification dialog
+```
+
+**DO NOT PROCEED** until user explicitly confirms "✅ Spec approved" or equivalent.
 
 **Spec Must Include**:
-- **Evals Section**: Success criteria defined FIRST (before any implementation details)
-- **AI Usage Strategy**: Clear distinction between direct commands vs AI collaboration
-  - Example: "Students run `uv init` directly (1 second). Use AI for troubleshooting dependency conflicts."
+- **Evals Section**: Success criteria defined FIRST (before implementation details)
+- **AI Usage Strategy**: Clear distinction:
+  - Direct: `uv init` (deterministic, 1 sec)
+  - AI Companion: Troubleshooting dependency conflicts
+  - AI Orchestration: Setting up 10 microservices
 - **Teaching Tiers** (if book chapter):
-  - Tier 1: What concepts book teaches directly
+  - Tier 1: Direct commands book teaches
   - Tier 2: When AI companion handles complexity
   - Tier 3: When AI orchestrates multi-step workflows
-- **Duration**: Realistic time estimates (not inflated)
-  - Example: "Installation takes 1 minute, not 45 minutes"
-- **Cognitive Load**: Respects audience tier limits (A2 = max 7 concepts)
+- **Duration**: Realistic time estimates (1 min for simple ops, not 45 min)
+- **Cognitive Load**: Respects audience tier limits
 - **Verified Intelligence Integration** (if Phase 0.5 ran):
   - Reference: `intelligence/[feature-slug]-verified-docs.md`
-  - All tool-specific examples must use VERIFIED facts (not assumptions)
-  - Source citations required for configuration/commands/APIs
-  - Example spec content:
-    ```markdown
-    ## Settings Configuration (Verified)
+  - All tool-specific examples use VERIFIED facts
+  - Source citations for configuration/commands/APIs
 
-    Claude Code uses these ACTUAL settings ([verified](intelligence/chapter-5-verified-docs.md)):
-    - `permissions.defaultMode`: "acceptEdits" | "default" | "plan"
-    - `outputStyle`: "Concise" | "Explanatory" | "Verbose"
-
-    Source: Context7 Claude Code library + terminal testing [2025-01-14]
-    ```
-
-**Anti-Pattern Detection**:
-- ❌ If spec says "Use AI to run `docker build`" → FLAG: This is over-engineering
+**Anti-Pattern Detection in Spec**:
+- ❌ If spec says "Use AI to run `docker build`" → FLAG: Over-engineering
 - ❌ If duration is 50+ minutes for simple operations → FLAG: Inflated estimate
 - ❌ If every task involves "Ask AI to..." → FLAG: Not teaching strategic AI use
 - ❌ If tool-specific examples don't cite intelligence cache → FLAG: Unverified assumptions
@@ -448,68 +391,374 @@ WAIT: User reviews spec.md
 
 ---
 
+## PHASE 0.5: DEEP RESEARCH (Post-Spec Verification - CONDITIONAL)
+
+**Purpose**: After spec creation, validate assumptions and gather deeper intelligence if spec reveals verification needs. This phase is OPTIONAL and runs ONLY when triggered by spec analysis.
+
+**This Phase Is CONDITIONAL** - It runs ONLY if verification needs are detected.
+
+### DECISION GATE: Does Spec Require Deep Research?
+
+After user reviews spec in Phase 1, analyze if deep research is needed:
+
+**Triggers for Phase 0.5** (run deep research if ANY apply):
+
+```
+→ Analyze spec.md content:
+  ├─ Tool/API/Framework-Specific Claims:
+  │   - Spec mentions external tool configuration (settings schema, CLI flags)
+  │   - Spec describes API contracts (endpoints, parameters, responses)
+  │   - Spec references framework patterns (decorators, lifecycle, conventions)
+  │   - Spec includes version-specific features
+  │   → TRIGGER: Need to verify against authoritative sources
+  │
+  ├─ High Assumption Rate:
+  │   - Spec has >30% content marked as assumptions/unverified
+  │   - Spec uses tentative language ("probably", "might", "should be")
+  │   - Spec contradicts known information or existing verified docs
+  │   → TRIGGER: Need to validate assumptions
+  │
+  ├─ User Requests Verification:
+  │   - User says: "Validate spec assumptions before planning"
+  │   - User says: "Research [tool/API] to confirm this is accurate"
+  │   - User says: "Check official docs to verify"
+  │   → TRIGGER: Explicit user request
+  │
+  ├─ Missing Critical Context:
+  │   - Spec identifies gaps in understanding ("need to research X")
+  │   - Spec defers decisions ("to be determined after research")
+  │   - Spec requests examples from official sources
+  │   → TRIGGER: Spec explicitly requests more intelligence
+  │
+  └─ No Triggers Found:
+      → SKIP Phase 0.5, proceed directly to Phase 2 (Planning)
+```
+
+### IF TRIGGERED: Execute Deep Research
+
+**STEP 1: Reason from Constitutional Principles (Tool-Agnostic)**
+
+Apply verification strategy based on WHAT tools are available, not hardcoded tool list:
+
+```
+→ What needs verification?
+  ├─ Extract from spec: All tool-specific claims, API contracts, configuration schemas
+  ├─ Prioritize: Critical assumptions that affect implementation
+  ├─ Create: Verification requirements list with priorities
+  │
+→ What verification methods are available?
+  ├─ Check: Connected MCP servers (Context7, GitHub, etc.)
+  ├─ Check: Built-in tools (WebFetch, Bash, Read)
+  ├─ Check: User-provided resources (local docs, URLs)
+  ├─ Assess: Which tools best match verification needs
+  │
+→ Should we suggest super-orchestra mode?
+  ├─ IF (verification requires 4+ different sources AND synthesis complexity high)
+  │   → Suggest: "This requires multi-source synthesis. Use super-orchestra mode?"
+  │   → Wait for user decision: YES (switch mode) | NO (standard tools)
+  │
+  └─ Report: "Verification strategy: [tools-and-approach]"
+```
+
+**STEP 2: Execute Verification Strategy**
+
+Use WHATEVER tools are available (adapt to context):
+
+```
+→ IF Context7 MCP available:
+  - Resolve library ID for the tool/framework
+  - Fetch 5000-8000 tokens of focused documentation
+  - Extract verified facts (configuration, commands, patterns)
+
+→ ELSE IF WebFetch available:
+  - Fetch official documentation URLs
+  - Extract and convert HTML to markdown
+  - Cross-reference with existing knowledge
+
+→ IF Bash available (for CLI tools):
+  - Execute tool --help, --version for syntax verification
+  - Test example commands in safe environment
+  - Capture actual output as source of truth
+
+→ IF GitHub MCP available (for open-source tools):
+  - Fetch README.md, docs/, examples/ from repository
+  - Extract current patterns from source
+  - Check CHANGELOG for version-specific features
+
+→ ALWAYS:
+  - Document verification source for each claim
+  - Flag unverified assumptions explicitly
+  - Calculate coverage: verified/(verified + assumptions)
+```
+
+**STEP 3: Create Verified Intelligence Cache**
+
+Document all findings in: `intelligence/[feature-slug]-verified-docs.md`
+
+```markdown
+# Verified Documentation: [Tool/API/Framework Name]
+
+**Generated**: [ISO timestamp]
+**Tool Version**: [version if applicable]
+**Verification Tools Used**: [Context7 | WebFetch | Bash | GitHub | etc.]
+**Triggered By**: [spec assumption rate | user request | tool-specific claims]
+
+## Verified Facts
+
+### Configuration
+- Setting: `key.name` accepts ["value1", "value2", "value3"]
+- Source: [Context7 library docs | WebFetch https://url | Bash output]
+- Verified: [timestamp]
+
+### Commands/APIs
+- Syntax: `command subcommand --flag=value`
+- Expected output: [actual output captured]
+- Source: [verification method]
+- Verified: [timestamp]
+
+## Assumptions Flagged (Still Unverified)
+- [List remaining assumptions with reasoning]
+
+## Verification Coverage
+- Verified claims: [N]
+- Assumptions remaining: [M]
+- Coverage: [N/(N+M)]%
+
+## Verification Log
+- [Tool 1]: [What verified, how, when]
+- [Tool 2]: [What verified, how, when]
+```
+
+**STEP 4: Update Spec with Verified Intelligence**
+
+```
+→ Update specs/[feature-slug]/spec.md:
+  ├─ Replace assumptions with verified facts
+  ├─ Add source citations for tool-specific content
+  ├─ Reference intelligence cache: `intelligence/[feature-slug]-verified-docs.md`
+  ├─ Update confidence level (assumption → verified)
+  │
+→ IF changes are significant (>20% of spec updated):
+    ├─ Re-run /sp.clarify to check for new gaps
+    └─ Request user re-approval of updated spec
+
+→ ELSE:
+    └─ Report changes and confirm user still approves
+```
+
+**STEP 5: Quality Gate Before Planning**
+
+```
+→ Verify verification completeness:
+  ├─ Critical claims verified: [yes/no]
+  ├─ Verification coverage: [percentage]
+  ├─ Remaining assumptions: [count and acceptable?]
+  │
+→ Gate decision:
+    IF coverage < 70% AND critical claims unverified:
+      → BLOCK: Need more verification sources
+      → Suggest: Additional tools or super-orchestra mode
+    
+    IF coverage >= 70% OR user accepts remaining assumptions:
+      → ALLOW: Proceed to Phase 2 (Planning)
+      → Report: "✅ Verification complete. Coverage: [X]%"
+```
+
+**STEP 6: Report and Continue**
+
+Output:
+```
+✅ PHASE 0.5 COMPLETE: Deep Research & Verification
+
+📋 Verified Intelligence: intelligence/[feature-slug]-verified-docs.md
+📋 Updated Spec: specs/[feature-slug]/spec.md
+
+Verification results:
+- Verified facts: [N]
+- Remaining assumptions: [M]
+- Coverage: [X]%
+- Tools used: [list]
+
+Changes to spec:
+- [Summary of what was verified and updated]
+
+Ready to proceed to Phase 2 (Planning).
+```
+
+### IF NOT TRIGGERED: Skip Phase 0.5
+
+If decision gate determines no deep research needed:
+
+Output:
+```
+ℹ️  PHASE 0.5 SKIPPED: No verification triggers detected
+
+Spec analysis:
+- ✅ No tool-specific claims requiring external verification
+- ✅ Low assumption rate (< 30%)
+- ✅ No user request for additional research
+- ✅ No critical gaps identified
+
+Proceeding directly to Phase 2 (Planning) with Phase 0 intelligence.
+```
+
+---
+
 ## PHASE 2: PLANNING + ADR GATE
 
-```
-→ Invoke: /sp.plan [spec-context]
-  ├─ Read: specs/[feature-slug]/spec.md (clarified)
-  ├─ Apply: Teaching pattern (direct commands vs AI collaboration)
-  ├─ Apply: Proficiency levels (CEFR if book chapter)
-  ├─ Apply: Constitutional principles (Graduated Teaching, Co-Learning)
-  ├─ Create: specs/[feature-slug]/plan.md
-  └─ Report: "Plan created with teaching strategy and AI usage mapped."
+**THIS PHASE INVOKES /sp.plan AUTOMATICALLY** - No user permission needed to invoke the command.
 
-→ Invoke: /sp.adr (Architectural Decision Gate)
-  ├─ Read: specs/[feature-slug]/plan.md
-  ├─ Detect: Architecturally significant decisions
-  ├─ Suggest: "📋 Decision detected: [X]. Document with /sp.adr [title]?"
-  ├─ Wait: User consent (never auto-create)
-  ├─ Create: history/adr/[NNN]-[decision-title].md (if approved)
-  └─ Report: "ADR created and linked." OR "Suggestion noted."
+**STEP 1: Verify Prerequisites** (Automatic Check)
 
-WAIT: User reviews plan.md (+ any ADRs)
-→ User confirms: "✅ Plan approved" or provides feedback
-  ├─ If feedback: Update plan.md iteratively
-  └─ If approved: Continue to PHASE 3
+Confirm:
+- ✅ specs/[feature-slug]/spec.md exists and is approved
+- ✅ User confirmed "Spec approved"
+- ✅ Feature branch exists and is checked out
+
+**STEP 2: Invoke /sp.plan NOW** (Execute Immediately)
+
+YOU MUST invoke this command NOW with full context:
+
 ```
+/sp.plan [feature-slug]
+
+Read: specs/[feature-slug]/spec.md (clarified and approved)
+Apply: Teaching pattern (direct commands vs AI collaboration)
+Apply: Proficiency levels (CEFR if book chapter)
+Apply: Constitutional principles (Graduated Teaching, Co-Learning)
+Apply: AI usage decision framework (direct/companion/orchestration)
+Create: specs/[feature-slug]/plan.md
+```
+
+**CRITICAL**: DO NOT ask user "Should I run /sp.plan?" - EXECUTE IT IMMEDIATELY.
+
+**STEP 3: Invoke /sp.adr (Architectural Decision Gate - Suggest Only)**
+
+After /sp.plan completes, YOU MUST check for architectural decisions:
+
+Read: specs/[feature-slug]/plan.md
+Detect: Architecturally significant decisions (lesson structure, pedagogical approaches, tech choices)
+
+IF architectural decisions detected:
+  Suggest: "📋 Architectural decision detected: [X]. Document with /sp.adr [title]?"
+  WAIT: User consent to create ADR (NEVER auto-create)
+  
+  IF user approves:
+    Invoke: /sp.adr [title]
+    Create: history/adr/[NNN]-[decision-title].md
+  ELSE:
+    Note: "ADR suggestion recorded for future reference"
+
+**STEP 4: Report to User and BLOCK for Approval**
+
+Output:
+```
+✅ PHASE 2 COMPLETE: Plan Created
+
+📋 Plan: specs/[feature-slug]/plan.md
+📋 ADRs: [list if any created]
+
+Plan includes:
+- ✅ Direct Commands Section (with timing)
+  Example: "`uv init my-project` (1 second)"
+- ✅ AI Collaboration Section (strategic use cases)
+  Example: "Use AI for: understanding pyproject.toml, resolving version conflicts"
+- ✅ Lesson Structure (if book chapter): Reading time, "Try with AI" prompts
+- ✅ Teaching tier mapping (direct → companion → orchestration)
+
+🚫 BLOCKED: You MUST review specs/[feature-slug]/plan.md before proceeding.
+
+Respond with:
+- ✅ "Plan approved" → Continue to PHASE 3
+- 📝 Feedback → Update plan iteratively
+- ❓ Questions → Clarification dialog
+```
+
+**DO NOT PROCEED** until user explicitly confirms "✅ Plan approved" or equivalent.
 
 **Plan Must Include**:
-- **Direct Commands Section**: List all commands students run directly (with timing)
-  - Example: "`uv init my-project` (1 second), `uv add requests` (1-3 seconds)"
+- **Direct Commands Section**: List commands students execute directly (with timing)
 - **AI Collaboration Section**: When/why to use AI (strategic, not everything)
-  - Example: "Use AI for: understanding pyproject.toml structure, troubleshooting version conflicts, explaining virtual environments"
-- **Lesson Structure** (if book chapter):
-  - Estimated reading time (realistic)
-  - "Try with AI" prompts (3-4 focused, not 8+ verbose)
-  - Chapter 1 format: `### Prompt N: Title` → code block → `**Expected outcome:**` description
+- **Lesson Structure** (if book chapter): Realistic estimates, focused "Try with AI" prompts
+- **Teaching tier mapping**: Clear delineation of direct vs. companion vs. orchestration
 
 ---
 
 ## PHASE 3: TASKS + ANALYSIS GATE
 
-```
-→ Invoke: /sp.tasks [spec+plan-context]
-  ├─ Read: specs/[feature-slug]/spec.md + plan.md
-  ├─ Apply: Direct commands vs AI workflow mapping
-  ├─ Apply: Acceptance criteria from evals
-  ├─ Create: specs/[feature-slug]/tasks.md
-  └─ Report: "Tasks created with clear AI usage boundaries."
+**THIS PHASE INVOKES /sp.tasks AUTOMATICALLY** - No user permission needed to invoke the command.
 
-→ Invoke: /sp.analyze (Cross-Artifact Consistency Gate)
-  ├─ Read: specs/[feature-slug]/{spec,plan,tasks}.md
-  ├─ Validate: Objectives → plan → tasks traceability
-  ├─ Check: AI usage strategy consistency (not over-engineering)
-  ├─ Detect: Missing tasks, orphaned objectives, scope drift
-  ├─ Report: Issues (critical/major/minor) + recommendations
-  └─ Output: analysis-report.md
+**STEP 1: Verify Prerequisites** (Automatic Check)
 
-WAIT: User reviews tasks.md + analysis report
-→ User confirms: "✅ Tasks approved" or provides feedback
-  ├─ If critical issues: Must fix before proceeding
-  ├─ If major issues: Should fix (user decision)
-  ├─ If minor issues: Nice to fix (user decision)
-  └─ If approved: Continue to PHASE 4
+Confirm:
+- ✅ specs/[feature-slug]/spec.md exists and is approved
+- ✅ specs/[feature-slug]/plan.md exists and is approved
+- ✅ User confirmed "Plan approved"
+
+**STEP 2: Invoke /sp.tasks NOW** (Execute Immediately)
+
+YOU MUST invoke this command NOW with full context:
+
 ```
+/sp.tasks [feature-slug]
+
+Read: specs/[feature-slug]/spec.md + plan.md
+Apply: Direct commands vs AI workflow mapping
+Apply: Acceptance criteria from evals
+Apply: AI usage decision framework
+Create: specs/[feature-slug]/tasks.md
+```
+
+**CRITICAL**: DO NOT ask user "Should I run /sp.tasks?" - EXECUTE IT IMMEDIATELY.
+
+**STEP 3: Invoke /sp.analyze (Cross-Artifact Consistency Gate - Execute Automatically)**
+
+YOU MUST invoke this command NOW for quality assurance:
+
+```
+/sp.analyze [feature-slug]
+
+Read: specs/[feature-slug]/{spec,plan,tasks}.md
+Validate: Objectives → plan → tasks traceability
+Check: AI usage strategy consistency (not over-engineering)
+Detect: Missing tasks, orphaned objectives, scope drift
+Report: Issues (critical/major/minor) + recommendations
+Output: analysis-report.md
+```
+
+**CRITICAL**: DO NOT ask user "Should I run /sp.analyze?" - EXECUTE IT IMMEDIATELY after /sp.tasks completes.
+
+**STEP 4: Report to User and BLOCK for Approval**
+
+Output:
+```
+✅ PHASE 3 COMPLETE: Tasks Created & Analyzed
+
+📋 Tasks: specs/[feature-slug]/tasks.md
+📋 Analysis: specs/[feature-slug]/analysis-report.md
+
+Analysis results:
+- Critical issues: [count]
+- Major issues: [count]
+- Minor issues: [count]
+
+Task anti-pattern checks:
+- ✅ No "Create AI prompt for `npm install`" patterns found
+- ✅ Durations are realistic (not 50min for 1min operations)
+- ✅ "Try with AI" prompts are focused (3-4, not 8+)
+
+🚫 BLOCKED: You MUST review tasks.md + analysis-report.md before proceeding.
+
+Respond with:
+- ✅ "Tasks approved" → Continue to PHASE 4 (IF no critical issues)
+- 🔧 "Fix critical issues first" → Must fix before proceeding
+- 📝 Feedback → Update tasks iteratively
+- ❓ Questions → Clarification dialog
+```
+
+**DO NOT PROCEED** until:
+- User explicitly confirms "✅ Tasks approved" or equivalent
+- AND critical issues are resolved (if any were found)
 
 **Task Anti-Pattern Checks**:
 - ❌ "Create AI prompt for running `npm install`" → Should be "Run `npm install` directly"
@@ -520,215 +769,387 @@ WAIT: User reviews tasks.md + analysis report
 
 ## PHASE 4: IMPLEMENTATION + VALIDATION GATE
 
+**THIS PHASE INVOKES /sp.implement AUTOMATICALLY** - No user permission needed to invoke the command.
+
+**STEP 1: Verify Prerequisites** (Automatic Check)
+
+Confirm:
+- ✅ specs/[feature-slug]/spec.md exists and is approved
+- ✅ specs/[feature-slug]/plan.md exists and is approved
+- ✅ specs/[feature-slug]/tasks.md exists and is approved
+- ✅ User confirmed "Tasks approved"
+- ✅ Critical issues resolved (if any were found in analysis)
+
+**STEP 2: Invoke /sp.implement NOW** (Execute Immediately)
+
+YOU MUST invoke this command NOW with FULL intelligence context:
+
 ```
-→ Invoke: /sp.implement [feature-slug]
-  ├─ Read: specs/[feature-slug]/{spec,plan,tasks}.md (all approved)
-  ├─ Strategy: Task-type dependent (lessons/code/tests/docs)
-  ├─ Invoke: Appropriate subagent with FULL context including:
-  │   - Intelligence object (audience, complexity, prerequisites)
-  │   - AI usage strategy (direct commands vs collaboration)
-  │   - Teaching pattern (Tier 1/2/3 if applicable)
-  │   - Constitutional principles (Co-Learning, Graduated Teaching)
-  │   - Anti-pattern warnings (don't over-engineer with AI)
-  ├─ Create: Implementation artifacts (lessons, code, tests, etc.)
-  └─ Report: "Implementation complete. Reviewing for AI over-engineering..."
+/sp.implement [feature-slug]
 
-→ Validation Review (Conceptual)
-  ├─ For book chapters:
-  │   - Duration realistic? (not inflated for simple operations)
-  │   - Direct commands documented clearly? (not hidden behind AI)
-  │   - "Try with AI" section uses Chapter 1 format? (3-4 focused prompts)
-  │   - AI usage strategic? (troubleshooting, understanding, not trivial commands)
-  │   - Line count reasonable? (not verbose explanations of simple operations)
-  ├─ For code features:
-  │   - Tests pass?
-  │   - Code quality meets standards?
-  │   - Documentation clear?
-  ├─ Invoke: technical-reviewer + proof-validator (if applicable)
-  └─ Report: PASS / CONDITIONAL PASS / FAIL with conceptual issues
+Read: specs/[feature-slug]/{spec,plan,tasks}.md (all approved)
+Pass to subagent: COMPLETE intelligence object including:
 
-→ If CONDITIONAL PASS or FAIL:
-  ├─ Apply fixes for critical issues
-  ├─ Re-run validation
-  └─ Repeat until conceptual validation PASS
-
-→ Sandbox Validation (Hands-On Testing) **CRITICAL**
-  ├─ Philosophy: "If you have not run anything in sandbox, chances are it won't work"
-  ├─ For book chapters with hands-on commands:
-  │   - Extract ALL commands students will run
-  │   - Test EVERY command in actual environment
-  │   - Verify command syntax (CLI vs session commands)
-  │   - Verify output matches lesson claims
-  │   - Test "Try With AI" prompts for achievability
-  │   - Document what actually works vs what's documented
-  ├─ For code features:
-  │   - Run full test suite in sandbox
-  │   - Execute code in target environment
-  │   - Verify deployment steps work end-to-end
-  │   - Test edge cases and error paths
-  ├─ Create: SANDBOX-AUDIT-REPORT.md with:
-  │   - Commands tested (with actual output)
-  │   - Errors found (with line numbers)
-  │   - Fixes applied (with evidence)
-  │   - Re-test results (verification)
-  └─ Report: SANDBOX PASS / SANDBOX FAIL with specific command errors
-
-→ If SANDBOX FAIL:
-  ├─ Apply fixes for ALL command syntax errors
-  ├─ Re-run sandbox tests
-  ├─ Update SANDBOX-AUDIT-REPORT.md with fix verification
-  └─ Repeat until SANDBOX PASS
-
-WAIT: User reviews implementation + validation report + sandbox audit
-→ User confirms: "✅ Implementation approved"
-  └─ Proceed to PHASE 5
-```
-
-**Implementation Intelligence Context** (CRITICAL for subagents):
-
-Pass this FULL context to subagents (lesson-writer, general-purpose, etc.):
-
-```json
 {
-  "intelligence": { /* Phase 0 intelligence object */ },
-  "ai_usage_strategy": "Direct commands for X, Y, Z. Use AI for A, B, C.",
-  "teaching_pattern": "Tier 1: Book teaches [concepts]. Tier 2: AI handles [complexity]. Tier 3: AI orchestrates [scale].",
+  "intelligence": { /* Phase 0 intelligence */ },
+  "ai_usage_strategy": "Direct: [ops]. AI Companion: [complexity]. AI Orchestration: [scale].",
+  "teaching_pattern": "Tier 1: Direct [concepts]. Tier 2: AI [complexity]. Tier 3: AI orchestrates [scale].",
   "anti_patterns": [
-    "Don't use AI for simple commands like `uv init`",
-    "Don't inflate durations (1-minute tasks shouldn't be 45-minute lessons)",
-    "Don't create 8+ verbose 'Try with AI' prompts (use 3-4 focused ones)",
-    "Use Chapter 1 format: ### Prompt N: Title → code block → **Expected outcome:**"
+    "Don't use AI for deterministic simple commands",
+    "Don't inflate durations (1min tasks ≠ 45min lessons)",
+    "Don't create 8+ verbose 'Try with AI' prompts (use 3-4 focused)",
+    "Use decision framework: deterministic → direct, complex → AI companion, scale → AI orchestration"
   ],
   "constitutional_principles": [
     "Principle 13 (Graduated Teaching): Direct → AI Companion → AI Orchestration",
     "Principle 18 (Three Roles): AI as Teacher/Student/Co-Worker",
-    "Core Philosophy #2 (Co-Learning): Bidirectional learning, not one-way instruction",
+    "Core Philosophy #2 (Co-Learning): Bidirectional learning",
     "Core Philosophy #1 (AI Spectrum): Assisted → Driven → Native (teach when each applies)"
   ],
   "validation_criteria": {
     "duration_realistic": true,
     "direct_commands_clear": true,
     "ai_usage_strategic": true,
-    "try_with_ai_format": "Chapter 1 clean format",
+    "decision_framework_applied": true,
     "line_count_reasonable": true
-  }
+  },
+  "verified_intelligence": "intelligence/[feature-slug]-verified-docs.md"  // if Phase 0.5 ran
 }
+
+Strategy: Task-type dependent (lessons/code/tests/docs)
+Invoke: Appropriate subagent (lesson-writer, general-purpose, etc.)
+Create: Implementation artifacts
 ```
+
+**CRITICAL**: DO NOT ask user "Should I run /sp.implement?" - EXECUTE IT IMMEDIATELY.
+
+**STEP 3: Conceptual Validation Review** (Automatic After Implementation)
+
+After implementation completes, YOU MUST perform conceptual review:
+
+For book chapters:
+- ✅ Duration realistic? (not inflated for simple operations)
+- ✅ Direct commands documented clearly? (not hidden behind AI)
+- ✅ "Try with AI" section uses proper format? (3-4 focused prompts)
+- ✅ AI usage strategic? (troubleshooting, understanding, not trivial commands)
+- ✅ Decision framework applied? (deterministic → direct, complex → AI)
+- ✅ Line count reasonable? (not verbose explanations of simple ops)
+
+For code features:
+- ✅ Tests pass?
+- ✅ Code quality meets standards?
+- ✅ Documentation clear?
+
+IF conceptual issues found:
+  Apply fixes for critical issues
+  Re-run conceptual validation
+  Repeat until PASS
+
+**STEP 4: Technical Review** (Invoke technical-reviewer if applicable)
+
+For book chapters or complex features:
+
+YOU MUST invoke technical-reviewer:
+
+```
+Task(
+  subagent_type="technical-reviewer",
+  prompt="Validate [feature-slug] against constitution and quality standards"
+)
+```
+
+Wait for validation report (PASS / CONDITIONAL PASS / FAIL)
+
+IF CONDITIONAL PASS or FAIL:
+  Apply fixes for critical issues
+  Re-run technical-reviewer
+  Repeat until PASS
+
+**STEP 5: Sandbox Validation** (Hands-On Testing - CRITICAL)
+
+**Philosophy**: "If you have not run anything in sandbox, chances are it won't work"
+
+For chapters with hands-on commands:
+  Extract ALL commands students will run
+  Test EVERY command in actual environment
+  Verify command syntax (CLI vs session commands)
+  Verify output matches lesson claims
+  Test "Try With AI" prompts for achievability
+  Document what works vs. what's documented
+
+For code features:
+  Run full test suite in sandbox
+  Execute code in target environment
+  Verify deployment steps work end-to-end
+  Test edge cases and error paths
+
+Create: SANDBOX-AUDIT-REPORT.md with:
+  - Commands tested (with actual output)
+  - Errors found (with line numbers)
+  - Fixes applied (with evidence)
+  - Re-test results (verification)
+
+IF SANDBOX FAIL:
+  Apply fixes for ALL command syntax errors
+  Re-run sandbox tests
+  Update SANDBOX-AUDIT-REPORT.md
+  Repeat until SANDBOX PASS
+
+**STEP 6: Report to User and BLOCK for Approval**
+
+Output:
+```
+✅ PHASE 4 COMPLETE: Implementation + Validation
+
+📚 Implementation: [file paths]
+📋 Validation Report: [PASS/CONDITIONAL PASS/FAIL]
+📋 Sandbox Audit: SANDBOX-AUDIT-REPORT.md
+
+Validation results:
+- Conceptual review: [PASS/issues fixed]
+- Technical review: [PASS/CONDITIONAL PASS/FAIL]
+- Sandbox testing: [PASS/FAIL]
+- AI usage strategy: [verified/issues]
+- Decision framework applied: [yes/no]
+
+🚫 BLOCKED: You MUST review implementation + validation reports before proceeding.
+
+Respond with:
+- ✅ "Implementation approved" → Continue to PHASE 5
+- 🔧 "Fix issues first" → Address validation findings
+- 📝 Feedback → Iterative improvements
+- ❓ Questions → Clarification dialog
+```
+
+**DO NOT PROCEED** until user explicitly confirms "✅ Implementation approved" or equivalent.
 
 ---
 
 ## PHASE 5: FINALIZATION + OPTIONAL GIT WORKFLOW
 
+**STEP 1: Update Project Tracking** (Execute Automatically)
+
+For chapters:
+  Update chapter-index.md status (📋 Planned → ✅ Implemented & Validated)
+
+For features:
+  Update feature tracking (if exists)
+
+**STEP 2: Offer Git Workflow** (User Decision)
+
+Ask user:
 ```
-→ Update project tracking:
-  ├─ For chapters: Update chapter-index.md status
-  ├─ For features: Update feature tracking (if exists)
-  └─ Report: "Project tracking updated."
+📋 Feature complete and validated.
 
-→ Optional: Git workflow
-  ├─ User may request: "/sp.git.commit_pr" for automated commit + PR
-  ├─ Or: Manual commit with summary
-  └─ Report: "Git workflow completed" OR "Manual commit required"
+Git workflow options:
+A) Auto-commit and PR: `/sp.git.commit_pr`
+B) Manual commit: Provide summary for manual commit
+C) Skip for now: Continue without git operations
 
-→ Create PHR (Prompt History Record):
-  ├─ Document: User goal, intelligence derived, decisions, AI strategy applied
-  ├─ Include: Anti-pattern checks performed, validation results
-  ├─ Save: history/prompts/[feature-slug]/
-  └─ Report: "PHR created for future reference."
+Which option?
 ```
 
----
+Wait for user choice:
+- IF A: Invoke `/sp.git.commit_pr` automatically
+- IF B: Provide commit summary, wait for user to commit manually
+- IF C: Skip git operations
 
-## KEY LESSONS FROM CHAPTER 12 UV REVIEW
+**STEP 3: Create PHR (Prompt History Record - Execute Automatically)**
 
-### What We Fixed
+YOU MUST create PHR:
 
-**Problem**: Lessons over-engineered simple operations with AI:
-- "Tell AI to install UV" (30-second command became 10+ minute AI conversation)
-- "Ask AI to run `uv init`" (1-second command became elaborate prompt)
-- 667-line lesson for 3 simple commands
-- 8 verbose "Try with AI" prompts instead of 3-4 focused ones
-- Duration: 45 minutes for 1-minute installation
+```
+/sp.phr
 
-**Solution Applied**:
-- Direct commands for simple operations: "Run `uv init`" (not "Ask AI to run `uv init`")
-- AI for complex problems: troubleshooting, understanding concepts, strategic decisions
-- Realistic durations: 15 minutes for installation (actual time), not 45 minutes
-- Clean "Try with AI" format: 3-4 focused prompts using Chapter 1 style
-- Line count reduction: 38% overall (3,456 → 2,144 lines)
+Document: User goal, intelligence derived, decisions made, AI strategy applied
+Include: Anti-pattern checks performed, validation results
+Save: history/prompts/[feature-slug]/
+```
 
-**Results**:
-- Students learned WHEN to use AI strategically (not for everything)
-- Lessons became efficient, not verbose
-- Constitutional alignment: Graduated Teaching (direct → AI → orchestration)
+**STEP 4: Final Report**
 
-### Encode These Lessons
+Output:
+```
+🎉 LOOPFLOW COMPLETE: [Feature Name]
 
-**In Specifications**:
-- ✅ "Students run `uv init` directly (1 second)"
-- ❌ "Students tell AI to initialize a project using UV"
+✅ All phases executed successfully:
+- Phase 0: Intelligent discovery ([N] derivations, [M] questions)
+- Phase 1: Specification + clarification
+- Phase 2: Planning + ADR ([N] ADRs created)
+- Phase 3: Tasks + analysis ([issues] resolved)
+- Phase 4: Implementation + validation (PASS)
+- Phase 5: Finalization + tracking updated
 
-**In Plans**:
-- ✅ "Direct commands section: Installation (30 sec), Project creation (1 sec), Add dependency (1-3 sec)"
-- ✅ "AI collaboration section: Troubleshooting PATH errors, understanding pyproject.toml, resolving version conflicts"
-- ❌ "AI workflow for every command"
+📋 Artifacts created:
+- specs/[feature-slug]/{spec,plan,tasks}.md
+- [implementation files]
+- VALIDATION_REPORT.md
+- SANDBOX-AUDIT-REPORT.md
+- history/prompts/[feature-slug]/[timestamp].phr.md
 
-**In Implementations**:
-- ✅ Chapter 1 "Try with AI" format (3-4 prompts, clean structure)
-- ✅ Realistic durations matching actual time
-- ❌ Verbose explanations of trivial operations
-- ❌ 8+ "Try with AI" prompts with lengthy pre-explanations
+📊 Quality metrics:
+- AI usage strategy: Applied decision framework
+- Constitutional compliance: ✅
+- Validation: All gates passed
+- Sandbox testing: All commands verified
+
+🌿 Git status:
+- Branch: [branch-name]
+- Commit: [if completed] / Manual commit needed [if option B]
+
+Ready for: [next steps]
+```
 
 ---
 
 ## CRITICAL SUCCESS FACTORS
 
 1. **Vertical Intelligence**: Constitution + project context read FIRST, questions SECOND
-2. **Goal-Oriented**: User states GOAL, AI derives STRATEGY
-3. **AI Usage Strategy**: Clear distinction between direct commands (simple) vs AI (complex)
-4. **Graduated Teaching**: Apply Principle 13 (Book → AI Companion → AI Orchestration)
-5. **Quality Gates**: Every phase prevents bad patterns from propagating
-6. **Context Preservation**: Full intelligence + AI strategy passed through all phases
-7. **Anti-Pattern Detection**: Flag over-engineering with AI for simple tasks
-8. **Constitutional Compliance**: All outputs align with vision and principles
-9. **Realistic Expectations**: Durations, line counts, and complexity match actual needs
-10. **Shipping-Ready**: Built-in quality, not post-hoc validation
+2. **Goal-Oriented**: User states GOAL, AI derives STRATEGY using constitutional principles
+3. **Universal Decision Framework**: Deterministic/simple → direct, complex → AI companion, scale → AI orchestration (works for ANY tool)
+4. **Graduated Teaching**: Apply Principle 13 across all content
+5. **Quality Gates**: Every phase has automatic gates that prevent bad patterns
+6. **Context Preservation**: Full intelligence + AI strategy passed through all phases with explicit context objects
+7. **Constitutional Reasoning**: Principles guide decisions, not tool-specific templates
+8. **Imperative Execution**: Commands invoked automatically (not "should I run?"), approval gates between phases only
+9. **Branch Creation**: Literal bash commands executed after spec creation
+10. **Verification-First**: Tool/API content uses verified intelligence, not assumptions
+11. **Shipping-Ready**: Built-in quality, not post-hoc validation
+
+---
+
+## EXECUTION PATTERNS (How Commands Are Actually Invoked)
+
+### ✅ CORRECT: Imperative Automatic Invocation
+
+```
+PHASE 1:
+
+YOU MUST invoke /sp.specify NOW:
+
+/sp.specify [feature-slug]
+[full context passed]
+
+[Wait for completion]
+
+YOU MUST invoke /sp.clarify NOW:
+
+/sp.clarify [feature-slug]
+
+[Wait for completion]
+
+YOU MUST create feature branch NOW:
+
+[Execute literal bash commands from lines XXX-YYY]
+
+BLOCK: User must approve spec before proceeding to Phase 2.
+```
+
+### ❌ INCORRECT: Passive Suggestions
+
+```
+→ Invoke: /sp.specify [context]
+  ├─ Pass: intelligence object
+  └─ Report: "Spec created"
+
+WAIT: User reviews spec.md
+```
+
+**Problem**: "Invoke" reads as documentation, not as imperative command. No enforcement mechanism.
+
+### ✅ CORRECT: Approval Gates Between Phases
+
+```
+BLOCK: You MUST NOT proceed until user confirms "✅ Spec approved"
+
+IF user confirms approval:
+  Proceed to PHASE 2
+ELSE IF user provides feedback:
+  Update spec iteratively
+  Re-run /sp.clarify if needed
+  BLOCK again for re-approval
+```
+
+### ❌ INCORRECT: Passive Waiting
+
+```
+WAIT: User reviews spec.md
+→ User confirms: "✅ Spec approved"
+```
+
+**Problem**: "WAIT" is passive. No blocking enforcement. No clear decision branches.
 
 ---
 
 ## REFERENCES
 
-- **Constitution**: `.specify/memory/constitution.md` (source of truth)
+- **Constitution**: `.specify/memory/constitution.md` (source of truth for principles)
 - **Project Structure**:
   - Chapter Index: `specs/book/chapter-index.md`
   - Specs Directory: `specs/`
   - Skills Library: `.claude/skills/`
-- **LoopFlow Commands**:
-  - `/sp.specify` - Create specifications
-  - `/sp.clarify` - Clarify underspecified areas
-  - `/sp.plan` - Create implementation plans
-  - `/sp.adr` - Document architectural decisions
-  - `/sp.tasks` - Generate task checklists
-  - `/sp.analyze` - Cross-artifact consistency
-  - `/sp.implement` - Execute implementation
-  - `/sp.git.commit_pr` - Git workflow automation
+- **LoopFlow Commands** (invoked automatically by this orchestrator):
+  - `/sp.specify` - Create specifications with evals-first
+  - `/sp.clarify` - Clarify underspecified areas (up to 5 questions)
+  - `/sp.plan` - Create implementation plans with teaching tiers
+  - `/sp.adr` - Document architectural decisions (user consent required)
+  - `/sp.tasks` - Generate task checklists with acceptance criteria
+  - `/sp.analyze` - Cross-artifact consistency validation
+  - `/sp.implement` - Execute implementation with full intelligence context
+  - `/sp.git.commit_pr` - Git workflow automation (optional)
+  - `/sp.phr` - Create Prompt History Record (automatic)
 
 ---
 
 ## ONE COMMAND. UNIVERSAL INTELLIGENCE. COMPLETE WORKFLOW.
 
-Run `/sp.loopflow [goal]` and the system executes:
+Run `/sp.loopflow [goal]` and the system EXECUTES (AIDD Spec-First Methodology):
 
-**PHASE 0: Intelligent Discovery** → Constitution + context + AI usage strategy derived
-**PHASE 1: Specification + Clarification** → Evals-first + AI strategy + approval gate
-**PHASE 2: Planning + ADR** → Teaching pattern + direct vs AI mapping + approval gate
-**PHASE 3: Tasks + Analysis** → Anti-pattern checks + consistency + approval gate
-**PHASE 4: Implementation + Validation** → Context-aware execution + quality verification + approval gate
-**PHASE 5: Finalization** → Tracking + git + PHR
+**PHASE 0: Deep Search** (Pre-Spec Intelligence - ALWAYS)  
+→ Constitution + context + decision framework derived  
+→ 0-5 clarifying questions (only genuine ambiguities)  
+→ Intelligence object ready for spec creation
+
+**PHASE 1: Specification + Clarification** (AIDD Core - ALWAYS)  
+→ Evals-first + AI strategy + spec.md creation  
+→ /sp.specify + /sp.clarify invoked automatically  
+→ Feature branch created  
+→ APPROVAL GATE (user must approve spec)
+
+**PHASE 0.5: Deep Research** (Post-Spec Verification - CONDITIONAL)  
+→ Triggered IF spec has tool-specific claims, high assumption rate, or user requests  
+→ Constitutional reasoning drives verification strategy  
+→ Verified intelligence cache created  
+→ Spec updated with verified facts  
+→ APPROVAL GATE (if significant spec changes)
+
+**PHASE 2: Planning + ADR** (ALWAYS)  
+→ Teaching pattern + direct vs AI mapping  
+→ /sp.plan invoked automatically  
+→ ADRs suggested (user consent required)  
+→ APPROVAL GATE (user must approve plan)
+
+**PHASE 3: Tasks + Analysis** (ALWAYS)  
+→ Anti-pattern checks + consistency validation  
+→ /sp.tasks + /sp.analyze invoked automatically  
+→ APPROVAL GATE (user must approve tasks)
+
+**PHASE 4: Implementation + Validation** (ALWAYS)  
+→ Context-aware execution with full intelligence  
+→ /sp.implement invoked automatically  
+→ Technical review + sandbox testing  
+→ APPROVAL GATE (user must approve implementation)
+
+**PHASE 5: Finalization** (ALWAYS)  
+→ Tracking updates + optional git workflow  
+→ PHR created automatically  
+→ Ready for deployment/publication
 
 **Result**: Shipping-ready output with:
-- ✅ Strategic AI use (not over-engineered)
-- ✅ Constitutional compliance
-- ✅ Realistic expectations
-- ✅ Quality built-in
-- ✅ Decision trail documented
+- ✅ Strategic AI use (decision framework applied, not over-engineered)
+- ✅ Constitutional compliance (principles-driven, not template-driven)
+- ✅ Realistic expectations (durations, complexity, scope)
+- ✅ Quality built-in (validation at every gate)
+- ✅ Decision trail documented (ADRs + PHR)
+- ✅ Verification-first (tool/API content uses verified intelligence)
+- ✅ Universal applicability (works for ANY tool/framework/language using constitutional reasoning)
