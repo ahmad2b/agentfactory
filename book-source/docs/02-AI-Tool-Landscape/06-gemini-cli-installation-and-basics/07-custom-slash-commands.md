@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 title: Custom Slash Commands
 ---
 
@@ -419,4 +419,4 @@ Custom slash commands let you **codify repetitive workflows** into reusable, sha
 
 ## Next Lesson
 
-**Lesson 7: MCP Servers & Integration** teaches you how to connect Gemini CLI to external tools and databases using the Model Context Protocol, building on configuration skills from Lesson 4.
+**Lesson 8: Extensions, Security & IDE Integration** teaches you how to bundle MCP servers into extensions, filter tool access for security, and integrate with your IDE for seamless development.

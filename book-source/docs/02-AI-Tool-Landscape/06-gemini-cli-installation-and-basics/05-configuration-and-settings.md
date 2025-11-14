@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 title: Configuration & Settings
 ---
 
@@ -82,6 +82,10 @@ C:\Users\<username>\.gemini\settings.json
 
 :::tip Verified Configuration
 This JSON structure has been validated in Gemini CLI 0.15.0. All keys (`theme`, `model`, `auth`, `checkpointing`) are confirmed working configuration options.
+:::
+
+:::note MCP Server Configuration
+You can also configure **MCP (Model Context Protocol) servers** in `settings.json` to connect Gemini CLI to external tools, databases, and APIs. We'll cover this in detail in the next lesson ([MCP Servers & Integration](./06-mcp-servers-and-integration.md)). For now, just know that `mcpServers` is a valid configuration section.
 :::
 
 The most important part for beginners: **You usually don't need to edit this file directly**. Configuration is often managed through environment variables and the `.env` file, which we'll cover next.

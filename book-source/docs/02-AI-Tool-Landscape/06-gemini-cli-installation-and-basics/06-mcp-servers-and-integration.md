@@ -1,5 +1,5 @@
 ---
-sidebar_position: 7
+sidebar_position: 6
 title: MCP Servers & Integration
 ---
 
@@ -127,7 +127,7 @@ Simple, clear, immediate feedback.
 }
 ```
 
-More control, but error-prone for beginners. Lesson 4 covered configuration files if you need them.
+More control, but error-prone for beginners. The previous lesson ([Configuration & Settings](./05-configuration-and-settings.md)) covered `settings.json` structure and environment variables if you need manual configuration.
 
 ---
 
@@ -255,7 +255,7 @@ Combine all three MCP capabilities in one workflow.
 ### "MCP server connection failed"
 - Check server is running: `gemini mcp list`
 - Verify command syntax: `gemini mcp add --help`
-- Try manual configuration (Lesson 4 covers `settings.json`)
+- Try manual configuration (see [Configuration & Settings](./05-configuration-and-settings.md) for `settings.json` structure)
 
 ### "Authentication failed: Invalid token"
 - Re-authenticate: `/mcp auth server-name`
@@ -264,7 +264,7 @@ Combine all three MCP capabilities in one workflow.
 
 ### "Playwright timeout: Browser not responding"
 - Website may be slow or blocking automation
-- Try shorter timeout: Check Lesson 4 configuration
+- Try shorter timeout: Check [Configuration & Settings](./05-configuration-and-settings.md) for timeout configuration
 - Test website manually first
 
 ### "Context7 not finding documentation"
@@ -350,12 +350,16 @@ MCP (Model Context Protocol) is **the bridge between Gemini CLI and the outside 
 - Database access
 - Custom integrations
 
-**Compared to Lesson 4 (Configuration)**:
-- Lesson 4: How to configure Gemini CLI globally
-- Lesson 7: How to extend Gemini CLI with external capabilities
+**Relationship with Configuration & Settings**:
+- Previous lesson ([Configuration & Settings](./05-configuration-and-settings.md)): How to configure Gemini CLI globally (theme, model, auth, checkpointing)
+- This lesson: How to extend Gemini CLI with external capabilities (MCP servers)
+
+Both lessons work together—Configuration provides the infrastructure, MCP extends it with custom capabilities.
 
 ---
 
 ## Next Lesson
+
+**Lesson 7: Custom Slash Commands** teaches you how to create your own `/` commands to automate repetitive tasks and workflows.
 
 **Lesson 8: Extensions, Security & IDE Integration** teaches you how to bundle MCP servers into extensions, filter tool access for security, and integrate with your IDE for seamless development.
