@@ -9,24 +9,21 @@ Google didn't just follow—they went big. Gemini CLI is fully open source under
 
 What makes Gemini CLI particularly compelling is its accessibility. Developers get 60 model requests per minute and 1,000 requests per day at no charge simply by logging in with a personal Google account. That's roughly double the average number of requests developers typically make, according to Google.
 
+Through eight progressive lessons organized in three tiers, you'll move from installation through advanced customization—mastering not just Gemini CLI, but the judgment to choose the right AI tool for every development scenario.
+
 This chapter isn't about replacing Claude Code. It's about understanding **when to use each tool** and building the judgment to choose the right AI assistant for every development scenario you encounter.
-
-Recently, Google released [Gemini CLI Extensions](https://blog.google/technology/developers/gemini-cli-extensions/) which is conceptually similar to Claude Code Agent Skills. You can now also create a vertical agent skill library for Gemini CLI for your domain, startup, and company giving you a competitive advantage.
-
-By the end of this chapter, you'll have two powerful AI development tools at your command, each suited to different workflows and challenges.
 
 ## What You'll Learn
 
 By the end of this chapter, you'll understand:
 
-- **Why Gemini CLI matters in the AI tool landscape**: The three key differentiators (open source licensing, generous free tier, 1 million token context window), how Google's response to Claude Code demonstrates rapid AI tool evolution, the strategic value of open-source AI development tools, and when to choose Gemini CLI over proprietary alternatives
-
-- **Platform-specific installation and verification**: Complete setup process for Windows (PowerShell and Command Prompt), macOS (npm and Homebrew options, M1/M2 guidance), and Linux (Ubuntu/Debian/Fedora coverage), troubleshooting 8-10 common installation failures, and verification that `gemini --version` confirms successful installation
-
-- **Authentication with Google account and configuration**: OAuth authentication flow via browser, understanding free tier quotas (60 requests/minute, 1,000 requests/day), basic configuration customization (model selection, themes, vim mode), regional limitations and the Qwen Code alternative, and troubleshooting authentication failures
-
-- **Your first Gemini CLI commands**: Basic command syntax and interactive mode, five verification commands demonstrating different capabilities, understanding the three command types (slash `/`, at `@`, passthrough `!`), interpreting AI responses with critical thinking, handling common errors, and fundamental prompting principles
-
-- **Built-in tools for integrated workflows**: File operations (`@` commands) for code analysis and documentation understanding, web fetching for retrieving online content, Google Search grounding for current information with citations, shell integration (`!` commands) for executing system commands with AI guidance, combining multiple tools in realistic development workflows, and understanding tool limitations and security considerations
-
-- **The 1 million token context window advantage**: Translating "1 million tokens" into practical development terms (~100,000 lines of code or entire small-to-medium projects), identifying when context window size matters versus when it's irrelevant, leveraging massive context for architecture analysis and cross-file refactoring, understanding Gemini CLI's extension ecosystem and the Model Context Protocol (MCP), comparing Gemini CLI and Claude Code across 8 critical dimensions, and applying a decision framework to choose the right tool for every scenario
+- **The open source advantage**: Why Apache 2.0 licensing matters for AI development tools and how Gemini CLI's openness enables customization, forking, and community-driven evolution
+- **Tool selection framework**: Six objective dimensions (licensing, cost, context window, extensibility, interface, support) for evaluating AI assistants based on project needs, not vendor marketing
+- **Installation and authentication**: Three installation methods (npm global, npx temporary, version-specific tags) and OAuth-based Google login providing 60 requests/minute and 1,000 requests/day free tier
+- **Interface navigation**: The Gemini CLI terminal interface (ASCII logo, input box, status bar) and how to interact through natural conversation, slash commands, and shell mode
+- **Built-in tool ecosystem**: File operations, shell integration, web fetching, and Google Search grounding—and when to combine tools for complex tasks
+- **Context management**: How to use `/clear` for hard resets, `/compress` for smart summarization, `/chat save/resume` for conversation branching, and GEMINI.md files for persistent memory across sessions
+- **Configuration mastery**: The 7-level hierarchy (CLI flags → project settings → global settings → system defaults) and how to use `.env` files, project-specific settings, and security best practices
+- **Custom automation**: Creating reusable slash commands with TOML files and injection patterns (`{{args}}`, `!{shell}`, `@{file}`) to automate repetitive workflows
+- **MCP integration**: Connecting external capabilities (databases, APIs, browsers) through the Model Context Protocol using `gemini mcp add/list/remove` commands and OAuth authentication
+- **Extensions and security**: Building extension bundles, filtering tools with allowlists/blocklists, and integrating with VS Code for diff-based editing
