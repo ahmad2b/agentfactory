@@ -13,398 +13,405 @@ learning_objectives:
 
 ## The Collaboration Shift: AI Becomes Your Research Partner
 
-If you ask your AI tool "What's the weather today?", something important happens behind the scenes. Your AI doesn't guess or rely on outdated training data. It *reached out* to look it up. That reach—that ability to go beyond its own knowledge and grab fresh information—changes everything about what you can accomplish together.
+Let's start with a simple experiment. Open your Gemini CLI and ask:
 
-Think about your workday. You don't answer questions from memory alone. You check files, read websites, search for recent news, and run commands to verify facts. Your AI can do the same thing now. But here's the key difference from before: you don't type cryptic tool commands. You ask naturally. Your AI partner knows which tool to use and deploys it automatically.
-
-This lesson is about understanding the tools your AI companion has available—not to memorize syntax, but to know what's possible and what's safe. By the end, you'll confidently ask your AI to read files, fetch live data from websites, search the web, and run shell commands. And you'll understand exactly what's happening when it does.
-
----
-
-## Why Context Changes Everything: The Three Kinds of Questions
-
-Your AI has three different "ways of knowing":
-
-**1. Training Knowledge** (built-in understanding from its training data)
-- "What is machine learning?"
-- "Explain the difference between RAM and storage"
-- Fast answer, no tools needed
-
-**2. Fresh Information** (current facts it must look up)
-- "What's Tesla's stock price right now?"
-- "What are the latest GDPR changes in 2024?"
-- Requires web search or current data
-
-**3. Your Data** (files, documents, and systems only you have access to)
-- "Read my sales.csv and identify trends"
-- "Summarize this PDF product roadmap"
-- Requires file access or API calls
-
-When you ask a question, your AI partner is smart enough to know which kind of answer you need. If it doesn't have fresh information, it uses tools automatically. Your job isn't to command the tools—it's to ask clear questions and understand what your AI is doing.
-
----
-
-## Tool 1: File Operations — Reading and Analyzing Your Business Data
-
-**What This Means**: Your AI can read files you give it (CSV, JSON, PDFs, text files) and answer questions about the data inside.
-
-**Why You Care**: You have important data in files—sales numbers, customer lists, product specs, quarterly reports. Instead of manually summarizing or searching through files, you ask your AI to do it for you.
-
-### A Real Business Example: Sales Analysis
-
-Imagine you have a quarterly sales report:
-
-```csv
-Product,Q1_Sales,Q2_Sales,Q3_Sales,Q4_Sales,Year_Total
-Consulting,45000,48000,52000,55000,200000
-Training,32000,35000,38000,41000,146000
-Software,28000,31000,34000,37000,130000
-Support,18000,19000,21000,23000,81000
+```
+What is the current temperature in San Francisco?
 ```
 
-You ask your AI: "Read this sales.csv file and tell me which product grew the most from Q1 to Q4."
+Here's what happens when you run this:
 
-**Behind the scenes:**
-1. Your AI uses the file-reading tool to access the CSV
-2. It calculates the growth: Consulting grew 22% (best performer)
-3. It returns the answer with data to back it up
+```
+> What is the current temperature in San Francisco?
 
-**Your input:** One natural question in conversation
-**AI's work:** File access + analysis
-**Your output:** Actionable business insight
+🔍 Searching the web...
 
-You didn't need to learn Excel formulas, write Python scripts, or remember any commands. You asked. It read and analyzed. Done.
+The current temperature in San Francisco is approximately 62°F (17°C) with partly
+cloudy skies. Conditions vary by neighborhood, with coastal areas typically cooler.
 
-### How File Operations Work in Practice
+Sources:
+- weather.com (retrieved 2024-01-14)
+- National Weather Service
+```
 
-When you have a file and want answers about it:
+Notice something important: You didn't tell Gemini HOW to get this information. You didn't type a command like `/search-web` or configure APIs. You just asked naturally, and Gemini knew it needed current data, so it automatically used its web search tool.
 
-1. **Ask naturally**: "Look at this spreadsheet and identify our top customer"
-2. **Your AI reads the file** (automatically—no tool commands from you)
-3. **Your AI analyzes the data** based on your question
-4. **Your AI reports back** with findings and citations to the data
+This is the shift we're exploring today. Your AI doesn't just respond from memory—it actively reaches out to find fresh information, read files, and access the world beyond its training data. The key difference from traditional software: **you don't memorize commands. You ask naturally.**
 
-The beauty here: **you don't memorize file formats, command syntax, or tool names**. You just describe what you want to know.
+This lesson shows you what tools your AI has available, when it uses them, and what's happening behind the scenes. By the end, you'll understand how to work with AI tools safely and effectively.
 
-**What files can your AI read?**
-- ✅ CSV files (spreadsheets exported as text)
-- ✅ JSON files (structured data from APIs)
-- ✅ Plain text files (notes, logs, documentation)
-- ✅ PDFs (documents, reports, contracts)
-- ✅ XML files (configuration and data files)
-- ✅ Markdown files (documentation)
+---
+
+## The Three Tools: When Gemini Reaches Beyond Its Training Data
+
+Your AI has three ways to get information beyond what it learned during training. Let's see each in action.
+
+---
+
+## Tool 1: Web Search — Finding Current Information Across the Web
+
+**When to use:** You need current information but don't know which specific website has it.
+
+Ask Gemini:
+
+```
+What is the current stock price of Tesla?
+```
+
+**What you'll see:**
+```
+> What is the current stock price of Tesla?
+
+🔍 Searching the web...
+
+Tesla (TSLA) is currently trading at $242.84, up 2.3% today. The stock opened
+at $238.12 and has a 52-week range of $138.80 - $299.29.
+
+Market cap: $769 billion
+P/E ratio: 76.45
+Volume: 89.2M shares
+
+Sources:
+- Yahoo Finance (retrieved 2024-01-14, 14:23 UTC)
+- NASDAQ real-time data
+```
+
+**What happened:** Gemini searched multiple sources, synthesized the answer, and cited where it got the data.
+
+**Watch for:** `🔍 Searching the web...` indicator
+
+---
+
+## Tool 2: Web Fetching — Reading Specific Websites
+
+**When to use:** You know exactly which website has the information you need.
+
+Ask Gemini:
+
+```
+Fetch the Stripe pricing page and summarize their main pricing tiers
+```
+
+**What you'll see:**
+```
+> Fetch the Stripe pricing page and summarize their main pricing tiers
+
+🌐 Fetching https://stripe.com/pricing...
+
+Based on Stripe's pricing page, here are the main tiers:
+
+**Integrated Pricing (Pay-as-you-go)**
+- 2.9% + $0.30 per successful card charge
+- No monthly fees
+- Best for: Startups and small businesses
+
+**Custom Pricing**
+- Volume discounts available
+- Contact sales for rates
+- Best for: High-volume businesses
+
+Additional services:
+- Stripe Billing: Subscription management
+- Stripe Terminal: In-person payments (different rates)
+- International cards: +1.5% fee
+
+Source: stripe.com/pricing (retrieved 2024-01-14)
+```
+
+**What happened:** Gemini visited the specific URL, read the page, extracted pricing info, and organized it.
+
+**Watch for:** `🌐 Fetching https://...` indicator
+
+**Difference from web search:**
+- **Web Search** (Tool 1): "Find me current Tesla stock price" → AI searches to find the answer
+- **Web Fetch** (Tool 2): "Read Stripe's pricing page" → AI reads the specific page you named
+
+---
+
+## Tool 3: File Reading — Analyzing Your Local Data
+
+**When to use:** You have data in a file on your computer and want insights from it.
+
+Create a file called `sales.txt`:
+
+```
+Q1: $45,000
+Q2: $52,000
+Q3: $48,000
+Q4: $61,000
+```
+
+Ask Gemini:
+
+```
+Read sales.txt and tell me which quarter had the highest revenue
+```
+
+**What you'll see:**
+```
+> Read sales.txt and tell me which quarter had the highest revenue
+
+📄 Reading file: sales.txt...
+
+Based on the data in sales.txt, Q4 had the highest revenue at $61,000.
+
+Breakdown:
+- Q1: $45,000
+- Q2: $52,000
+- Q3: $48,000
+- Q4: $61,000 ← Highest
+
+Q4 exceeded Q1 by 35.6%, showing strong year-end performance.
+```
+
+**What happened:** Gemini read your local file, analyzed the data, and gave you insights.
+
+**Watch for:** `📄 Reading file:` indicator
+
+**What files can Gemini read?**
+- ✅ Text files (.txt, .md)
+- ✅ CSV files (spreadsheet data)
+- ✅ JSON files (structured data)
+- ✅ Code files (.py, .js, etc.)
 
 #### 💬 AI Colearning Prompt
-> "When my AI reads a CSV file, what's actually happening behind the scenes? How does it convert rows and columns into understanding that can answer business questions?"
+> "When Gemini reads a CSV file, what's actually happening behind the scenes? How does it convert rows and columns into understanding that answers business questions?"
 
 ---
 
-## Tool 2: Web Fetching — Getting Live Information From Websites
+## Tool 4: Shell Integration — AI-Assisted Terminal Commands
 
-**What This Means**: Your AI can visit websites and read their content, just like you would in a browser.
+**When to use:** You need to run terminal commands but don't remember the exact syntax, or you want AI to suggest the best approach.
 
-**Why You Care**: You need current information—competitor pricing, API documentation, industry news, regulatory updates. Instead of manually browsing, your AI fetches and summarizes.
+### The AI-Native Way: Ask First, Run Second
 
-### A Real Business Example: Competitor Research
+**Step 1:** Ask Gemini for the command
 
-You're pricing a new product. You ask your AI:
+In Gemini CLI, ask:
 
-> "Fetch Stripe's pricing page and summarize their plan tiers and costs."
-
-**Behind the scenes:**
-1. Your AI opens the Stripe pricing page (like clicking a link in your browser)
-2. It reads the HTML content
-3. It extracts the pricing tiers and features
-4. It returns a clean summary with sources
-
-**What you get back:**
 ```
-Stripe Pricing (fetched from stripe.com/pricing):
-
-Free Plan: $0/month
-- Transactions: Pay as you go (2.9% + $0.30)
-- No upfront costs
-
-Starter Plan: $100/month
-- Rate: 2.5% + $0.25 per transaction
-- Best for: Businesses under $100K revenue
-
-Scale Plan: Custom
-- Contact sales for pricing
-- Dedicated support
+I need to find all Excel files modified in the last month. What command should I use?
 ```
 
-**Citation included**: You know exactly where this data came from (stripe.com, fetched on today's date).
+**What you'll see:**
+```
+> I need to find all Excel files modified in the last month. What command should I use?
 
-### Another Example: Technical Documentation
+To find all Excel files modified in the last 30 days, use this command:
 
-You need to understand how to process refunds. You ask:
-
-> "Fetch the Stripe refund API documentation and explain the basic refund process."
-
-Your AI fetches the docs and explains it in plain English instead of making you read dense technical documentation.
-
-**What makes web fetching valuable:**
-- ✅ Get current pricing (changes frequently, you don't track manually)
-- ✅ Summarize long pages (no skimming through 50 paragraphs)
-- ✅ Compare features across sites (fetch competitor A, competitor B, compare)
-- ✅ Access technical documentation (complex docs explained simply)
-- ✅ Verify information (your AI cites the source, you can verify)
-
-#### 🎓 Expert Insight
-> In AI-native development, fetching competitor data isn't about "saving time"—it's about strategic intelligence at scale. When you can analyze 10 competitors in 5 minutes instead of 3 hours, you shift from reactive to proactive strategy. The constraint isn't data collection anymore; it's asking the right business questions.
-
----
-
-## Tool 3: Search Grounding — Finding Current Information Across the Web
-
-**What This Means**: Your AI can search the entire internet for current information, similar to Google, but it reads the search results and synthesizes them into a direct answer.
-
-**Why You Care**: Some information isn't on one specific page—it's spread across multiple sources. You need current facts, news, and real-time data. Search grounding lets you ask "What's happening today?" instead of "What does your training data say?"
-
-### Real Business Examples
-
-**Example 1: Current Stock Price**
-
-You ask: "What's Tesla's stock price right now?"
-
-Your AI:
-1. Searches the web for current Tesla stock data
-2. Finds multiple financial sources (Yahoo Finance, Bloomberg, etc.)
-3. Synthesizes the answer with current price, change, and context
-4. Cites the sources (so you know it's real, current data)
-
-**Example 2: Recent Regulatory Changes**
-
-You ask: "What are the latest GDPR enforcement updates in 2024?"
-
-Your AI:
-1. Searches for recent GDPR news and official EU sources
-2. Finds the most current updates
-3. Summarizes what changed and why it matters
-4. Provides links to official sources
-
-**Example 3: Competitive Intelligence**
-
-You ask: "Who just received Series B funding in the AI productivity space this quarter?"
-
-Your AI:
-1. Searches for recent venture funding announcements
-2. Finds recent Series B deals in your industry
-3. Tells you about new competitors and their funding
-4. Cites TechCrunch, Crunchbase, company announcements
-
-**Why this is different from web fetching:**
-- Web fetching = "Read this specific page"
-- Search grounding = "Find the answer across the entire web"
-
-Use search when you don't know which page has the answer. Use web fetch when you know exactly where the data is.
-
----
-
-## Tool 4: Shell Integration — Running System Commands Safely
-
-**What This Means**: Your AI can suggest and help you run terminal commands (like those you learned in Lesson 1) to manage files, check system status, and automate tasks.
-
-**Why You Care**: Some tasks are faster and more reliable in the terminal than clicking through UI menus. Your AI helps you navigate this without memorizing every command.
-
-### A Business Example: Finding Files
-
-You ask: "I need to find all Excel files created in the last month. How do I do that?"
-
-Your AI suggests the approach:
-
-**Plain English First:**
-"You want to search your computer for Excel files (.xlsx files) modified in the last 30 days. We can use a terminal command to do this quickly."
-
-**Then the command with explanation:**
-```bash
 find . -name "*.xlsx" -mtime -30 -type f
-```
 
 Breaking it down:
-- `find .` = Look in the current folder
-- `-name "*.xlsx"` = For files ending in .xlsx
-- `-mtime -30` = Modified in the last 30 days
-- `-type f` = That are files (not folders)
+- find .           → Search in current directory and subdirectories
+- -name "*.xlsx"   → Match files ending in .xlsx
+- -mtime -30       → Modified within last 30 days
+- -type f          → Only files (not directories)
 
-**Your job:** Read the explanation, verify it sounds safe, then copy and run the command.
+This searches recursively. If you want to search a specific folder instead of
+the current one, replace . with the folder path.
+```
 
-### Why This Matters for Business
+**Step 2:** Run the command using Shell Mode
 
-Terminal commands let you:
-- ✅ Find files quickly without endless clicking
-- ✅ Backup important data reliably
-- ✅ Automate repetitive tasks
-- ✅ Check system health and resources
-- ✅ Process multiple files at once (instead of one-by-one)
+Press `!` to enter shell mode in Gemini CLI, then run the command:
 
-**The key rule:** Your AI suggests the command and explains it. You review, understand it, and decide if it's safe to run. You're never blindly executing code.
+```
+!find . -name "*.xlsx" -mtime -30 -type f
+```
+
+Press `ESC` to exit shell mode and return to Gemini.
 
 ---
 
-## Combining Tools: A Real Workflow
+### Alternative: Direct Shell Commands (When You Know the Command)
 
-Now let's see how these tools work together. You're a product manager researching competitor pricing strategy.
+If you already know the command you want to run, you can execute it directly in shell mode without asking Gemini first:
 
-### The Scenario
+1. Press `!` to enter shell mode
+2. Type your command: `ls -la`
+3. Press `Enter` to execute
+4. Press `ESC` to return to Gemini
 
-You want to understand how three competitors price their services and what features they offer. You'd normally spend 2 hours manually visiting websites, taking notes, and comparing. Let's see how AI tools help.
+**When to ask AI first:**
+- ✅ You're unsure of the exact syntax
+- ✅ You want the safest/best approach
+- ✅ You need the command explained before running it
+- ✅ Complex tasks (multiple steps, flags, conditions)
 
-**Step 1: Fetch Competitor A's Pricing**
+**When to run directly:**
+- ✅ You know the command and just need quick execution
+- ✅ Simple commands like `ls`, `pwd`, `cd`
+- ✅ You've run this specific command before
 
-You ask: "Fetch Competitor A's pricing page and summarize their tier structure."
+#### 🎓 Expert Insight
+> In AI-native development, you don't memorize terminal commands. You ask your AI partner for the right command, understand what it does, then execute. The skill isn't memorization—it's knowing how to describe what you want accomplished and validating the AI's suggestion before running it.
 
-Your AI fetches the page and returns:
+---
+
+## How Tools Work Together
+
+Tools don't work in isolation—Gemini combines them automatically based on your question. Here's what that looks like:
+
+**You ask one question:**
 ```
-Tier 1 (Basic): $29/month
-- Up to 100 users
-- Standard support
-
-Tier 2 (Pro): $99/month
-- Unlimited users
-- Priority support
-- Advanced analytics
-
-Tier 3 (Enterprise): Custom pricing
+Compare Notion and Coda pricing, then tell me which is better for a 20-person startup
 ```
 
-**Step 2: Fetch Competitor B's Pricing**
+**Behind the scenes, Gemini automatically:**
+1. 🌐 Fetches Notion pricing page
+2. 🌐 Fetches Coda pricing page
+3. Analyzes both datasets
+4. Applies your constraint (20-person startup)
+5. Provides recommendation with reasoning
 
-You ask: "Now fetch Competitor B's pricing page."
+**You see:**
+```
+> Compare Notion and Coda pricing...
 
-Your AI returns similar structured data.
+🌐 Fetching https://notion.so/pricing...
+🌐 Fetching https://coda.io/pricing...
 
-**Step 3: Search for Recent Pricing Changes**
+[Comparison table with both pricing structures]
 
-You ask: "Search the web for any recent pricing changes announced by these competitors in 2024."
+For a 20-person startup, Coda's Team plan ($10/user = $200/month) offers better
+value than Notion's Team plan ($15/user = $300/month) if you need advanced
+automations. However, if you prioritize databases and wikis, Notion provides
+more robust features at that tier.
 
-Your AI searches and finds announcements:
-- Competitor A raised prices 10% in Q2
-- Competitor B introduced a new free tier in March
-- Industry-wide inflation averaging 8%
+Recommendation: Start with Coda to save $1,200/year, migrate to Notion if you
+outgrow Coda's database features.
 
-**Step 4: Analyze and Compare**
+Sources: notion.so/pricing, coda.io/pricing (retrieved 2024-01-14)
+```
 
-You ask: "Based on what you fetched and found, how does our pricing strategy compare? Should we adjust?"
+**The key:** You asked naturally. Gemini orchestrated multiple tools. You got actionable intelligence.
 
-Your AI synthesizes everything:
-- Shows side-by-side feature comparison
-- Identifies gaps in your offering
-- Notes pricing trends
-- Recommends strategy
+---
 
-**Total time:** 5 minutes of conversation
-**Without tools:** 2+ hours of manual research, spreadsheets, notes
-**Data quality:** Current, sourced, verifiable
+## Understanding Errors and Data Privacy
+
+### When Something Goes Wrong: The AI-Native Approach
+
+You'll encounter error messages. Instead of memorizing error codes, **ask your AI to explain and fix them.**
+
+**Example:** You get this error:
+```
+ERROR: File not found: sales.txt
+```
+
+**Ask Gemini:**
+```
+I got this error: "File not found: sales.txt". What does this mean and how do I fix it?
+```
+
+**Gemini will explain:**
+- The file doesn't exist in the current directory
+- Show you how to check where you are (`pwd`)
+- Suggest how to find the file or create it
+- Explain the next steps
+
+**Common tool indicators you'll see:**
+- ✅ `🔍 Searching...` or `🌐 Fetching...` → Normal, tool is working
+- ✅ `Sources: [URLs]` → Good! You can verify the data
+- ⚠️ `ERROR:` → Something failed, ask AI to explain
+- ⚠️ `Rate limited` → You're requesting too fast, wait a moment
+
+**The pattern:** Don't troubleshoot alone. Copy the error, paste it to Gemini, ask what happened and how to fix it.
+
+---
+
+### 🔐 Privacy & Data Safety: Critical Rules
+
+When tools access data, you need to understand what's being shared:
+
+**What Stays Private:**
+- ✅ **File reading** → Your files stay on your computer, only you and Gemini see them
+- ✅ Gemini processes data temporarily, doesn't permanently store your file contents
+
+**What Goes to the Web:**
+- ⚠️ **Web search/fetch** → Your queries may be logged (like Google searches)
+- ⚠️ **Shell commands** → Execute on your computer but Gemini sees the commands
+
+**Never Ask AI to Access:**
+- 🚫 Files with passwords, API keys, or secrets
+- 🚫 Personal Identifiable Information (PII): SSN, medical records, financial data
+- 🚫 Private account pages (email, bank, social media logged-in views)
+- 🚫 Customer data (GDPR/CCPA violations)
+- 🚫 Confidential business documents
+
+**Safe to Use:**
+- ✅ Public websites (pricing pages, documentation, news)
+- ✅ Your own files with test/anonymized data
+- ✅ General searches ("industry trends 2024" not "my company's confidential strategy")
+
+**Rule of thumb:** If you wouldn't share it in a public coffee shop, don't share it with AI.
 
 #### 🤝 Practice Exercise
+> **Ask your AI**: "What are the privacy risks when I ask you to fetch a pricing page from a competitor's website? What data is shared and what stays private?"
 
-> **Ask your AI**: "I want to compare pricing and features across 3 competitors in the [your industry] space. Use web fetching to gather their pricing pages, then create a comparison table. Cite your sources so I can verify."
-
-**Expected Outcome**: You'll receive a comparison table with current data and source URLs—practicing multi-tool workflow (web fetch + analysis + synthesis) while validating AI outputs through citations.
-
----
-
-## Red Flags to Watch: Errors and Privacy
-
-When you're using tools, some messages are normal. Others mean something went wrong or you should be cautious.
-
-### ✅ Normal (Safe to Ignore or Expected)
-
-| Message | What It Means | Your Action |
-|---------|---------------|-------------|
-| "Fetching [URL]..." | Your AI is visiting the website | Wait, it's working |
-| "Found 5 results for..." | Search found matches | Your AI will summarize them |
-| "File read successfully: 50 KB" | Your AI accessed the file | Information is coming next |
-| "Command executed" | Terminal command ran successfully | Check the results your AI provides |
-| "Citation: source.com, retrieved 2024-10-31" | Your AI tracked where data came from | Good! You can verify this |
-
-### ⚠️ Problems (Ask Your AI for Help)
-
-| Message | What It Means | Your Action |
-|---------|---------------|-------------|
-| "ERROR: File not found" | File doesn't exist or wrong path | Verify filename with your AI, check location |
-| "ERROR: Access denied" | Permission problem on file or website | Ask your AI why; may need different approach |
-| "No results found" | Search returned nothing | Refine question or try different search terms |
-| "Timeout: request took too long" | Website didn't respond fast enough | Try again, or ask your AI for alternative source |
-| "SSL certificate error" | Website security issue | Ask your AI; may indicate fake or compromised site |
-| "Rate limited: Too many requests" | You're requesting too much too fast | Wait, or your AI will use a different approach |
-
-### 🔐 Privacy & Data Safety: What You Should Know
-
-When your AI uses tools, it's accessing or sending data. This is powerful but requires awareness:
-
-**File Operations (Lowest Risk):**
-- ✅ Your AI reads files on your computer (stays private)
-- ✅ Data stays between you and your AI tool
-- ⚠️ Never share files containing passwords, API keys, or PII (personally identifiable information) with your AI
-- ✅ Use test data or anonymized data when possible
-
-**Web Fetching (Medium Risk):**
-- ✅ Your AI visits public websites (like you would in a browser)
-- ⚠️ Websites can see that *something* accessed them (but not who, unless you're logged in)
-- ⚠️ Don't ask your AI to fetch pages from private accounts (your email, bank, etc.)
-- ✅ Public pricing pages, documentation, news sites are fine
-- ⚠️ Rule: If you wouldn't paste the URL in a shared Slack message, don't ask your AI to fetch it
-
-**Search Grounding (Medium Risk):**
-- ✅ Your AI searches the public web (like Google)
-- ⚠️ Your search query may be logged (just like Google searches)
-- ✅ Use general terms ("GDPR updates 2024") instead of specific ones ("my company's GDPR violations")
-- ⚠️ Don't search for confidential competitive information; search for public knowledge
-
-**Shell Commands (High Risk if Misused):**
-- ⚠️ Commands can delete files, change settings, or expose data
-- ✅ Always understand the command before running it
-- ✅ Ask your AI to explain what each part does
-- ⚠️ Never run commands you don't understand
-- ✅ Test on unimportant files first if you're learning
-
-### What NOT to Ask Your AI to Read or Fetch
-
-- 🚫 Bank statements or financial accounts (private data)
-- 🚫 Medical or health records
-- 🚫 Passwords, API keys, or tokens
-- 🚫 Social security numbers or IDs
-- 🚫 Private emails or messages
-- 🚫 Proprietary source code (unless you own it and want privacy)
-- 🚫 Customer personal data (GDPR, CCPA violations possible)
-- 🚫 Confidential contracts or NDAs (unless for legal review)
-
-**Rule of thumb:** If a human wouldn't read it aloud in a public coffee shop, don't ask your AI to process it.
+**Expected outcome:** Your AI will explain what happens during web fetching, what the website sees (a request, but not your identity), and how to stay safe.
 
 ---
 
-## Try With AI
+## Try With AI: Your First Multi-Tool Workflow
 
-Use your AI companion tool (Gemini CLI, ChatGPT web, Claude Code, etc.)—the prompts work with any tool.
+Now that you've seen each tool individually, try this complete workflow combining all three tools.
 
-### Prompt 1: Fetch Live Pricing Data
+### Real-World Scenario: Product Pricing Research
+
+You're launching a new SaaS product and need to research competitor pricing. Here's a complete workflow:
+
+**Step 1: Search for Market Overview**
 ```
-Fetch the Stripe pricing page (stripe.com/pricing) and summarize their main pricing tiers, costs, and what each tier includes.
-```
-
-**Expected outcome**: Clear list of pricing tiers, costs, key features, and citation of data source.
-
-### Prompt 2: Compare Competitor Pricing
-```
-Fetch the Shopify pricing page (shopify.com/pricing) and summarize their pricing tiers and what each includes. Then compare it to the Stripe pricing you just fetched. What are the main differences?
+Search for SaaS pricing trends in project management tools for 2024
 ```
 
-**Expected outcome**: Shopify tier summary, side-by-side comparison with Stripe, and key differences identified.
+Watch for: `🔍 Searching...` — Gemini finds industry trends across multiple sources
 
-### Prompt 3: Search Current Industry Trends
-```
-Search the web for "payment processing pricing trends 2024" and tell me: What are the main price changes happening in this industry? Are most providers raising or lowering prices?
-```
+---
 
-**Expected outcome**: Summary of recent pricing announcements, trend analysis (up/down/stable), and cited sources.
-
-### Prompt 4: Synthesize Strategic Recommendations
+**Step 2: Fetch Specific Competitor Data**
 ```
-Based on what we found about Stripe and Shopify pricing, and the 2024 trends: If you were advising a new payments startup on pricing strategy, what would you recommend? What market gap could they fill?
+Fetch Monday.com's pricing page and summarize their tiers and features
 ```
 
-**Expected outcome**: Strategic recommendations, identified market opportunities, and competitive positioning advice.
+Watch for: `🌐 Fetching...` — Gemini reads the specific pricing page
+
+---
+
+**Step 3: Compare with Another Competitor**
+```
+Now fetch Asana's pricing and create a comparison table with Monday.com
+```
+
+Watch for: Second `🌐 Fetching...` then synthesis of both datasets
+
+---
+
+**Step 4: Analyze Your Own Data**
+
+Create a file called `our_costs.txt`:
+```
+Development: $8,000/month
+Hosting: $1,200/month
+Support: $3,500/month
+Total: $12,700/month
+```
+
+Then ask:
+```
+Read our_costs.txt. Based on our monthly costs and the competitor pricing you found, what should our pricing strategy be to achieve 40% profit margin?
+```
+
+Watch for: `📄 Reading file...` then strategic analysis combining all data
+
+---
+
+**Step 5: Get Strategic Recommendation**
+```
+Based on everything we've researched, what pricing tier structure would you recommend and why?
+```
+
+Watch for: Synthesis of all previous data (no new tool use, pure analysis)
+
 
