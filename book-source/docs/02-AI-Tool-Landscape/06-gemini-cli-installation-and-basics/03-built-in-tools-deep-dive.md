@@ -1,417 +1,787 @@
 ---
-title: "How Your AI Reads the World: Built-In Tools in Action"
-chapter: 2
-lesson: 3
-estimated_time: "20-25 minutes"
+sidebar_position: 3
+title: "What Gemini Can Do: Built-In Tools in Action"
+cefr_level: A2
+proficiency: Beginner
+teaching_stage: 2
+stage_name: "AI Collaboration"
+stage_description: "Students actively use AI tools and understand their capabilities"
+cognitive_load:
+  concepts_count: 7
+  a2_compliant: true
+  scaffolding_level: "Heavy"
 learning_objectives:
-  - "Understand how AI tools extend beyond text to access files, the web, and real-time information"
-  - "Recognize when and why AI needs to use specific tools (files vs. web vs. search)"
-  - "Apply tools in natural dialogue without memorizing commands"
-  - "Identify what data you're sharing and privacy implications of web-based tools"
-  - "Combine multiple tools to answer complex business questions"
+  - id: LO1
+    description: "Identify the four built-in tools Gemini uses (Google Search, File Operations, Shell, Web Fetch)"
+    bloom_level: "Remember"
+  - id: LO2
+    description: "Recognize visual indicators showing which tool Gemini is using"
+    bloom_level: "Understand"
+  - id: LO3
+    description: "Explain when Gemini chooses each tool based on query context"
+    bloom_level: "Understand"
+  - id: LO4
+    description: "Apply tools by crafting queries that trigger appropriate tool usage"
+    bloom_level: "Apply"
+  - id: LO5
+    description: "Analyze tool output to verify Gemini used correct tool for the task"
+    bloom_level: "Analyze"
+  - id: LO6
+    description: "Practice using tools through realistic developer scenarios"
+    bloom_level: "Apply"
+  - id: LO7
+    description: "Evaluate when to use Gemini's tools vs manual methods for development tasks"
+    bloom_level: "Evaluate"
+digcomp_mapping:
+  - objective_id: LO1
+    competency_area: "1. Information and Data Literacy"
+    competency: "1.1 Browsing, searching and filtering data, information and digital content"
+  - objective_id: LO2
+    competency_area: "1. Information and Data Literacy"
+    competency: "1.2 Evaluating data, information and digital content"
+  - objective_id: LO3
+    competency_area: "5. Problem Solving"
+    competency: "5.2 Identifying needs and technological responses"
+  - objective_id: LO4
+    competency_area: "3. Digital Content Creation"
+    competency: "3.4 Programming"
+  - objective_id: LO5
+    competency_area: "1. Information and Data Literacy"
+    competency: "1.2 Evaluating data, information and digital content"
+  - objective_id: LO6
+    competency_area: "3. Digital Content Creation"
+    competency: "3.4 Programming"
+  - objective_id: LO7
+    competency_area: "5. Problem Solving"
+    competency: "5.1 Solving technical problems"
 ---
 
-## The Collaboration Shift: AI Becomes Your Research Partner
+# What Gemini Can Do: Built-In Tools in Action
 
-Let's start with a simple experiment. Open your Gemini CLI and ask:
+You're building a web application and need to check the latest React documentation for server components. You could:
+- Open a browser
+- Search Google
+- Navigate through docs
+- Find the right section
+- Read and synthesize information
+
+Or you could just ask Gemini:
 
 ```
-What is the current temperature in San Francisco?
+What are the new features in React 19?
 ```
 
-Here's what happens when you run this:
+Within seconds, Gemini searches the web, finds official sources, and gives you a clear answer with citations. **This is the power of built-in tools** - your AI doesn't just answer from memory, it actively reaches out to get current information, read your files, and execute commands.
+
+In this lesson, you'll learn what Gemini can actually do for you as a developer.
+
+---
+
+## Tools Activate Automatically
+
+Here's the key insight that changes everything: **You don't invoke tools manually.** You ask naturally, and Gemini decides which tool to use.
+
+When you ask Gemini a question, it analyzes what you need:
+- Current information from the web? → Google Search tool activates
+- Read a file in your project? → File operations tool activates
+- Run a terminal command? → Shell integration activates
+- Fetch a specific webpage? → Web fetch tool activates
+
+You'll know a tool is active when you see visual indicators:
+- 🔍 **Searching the web...**
+- 📁 **Reading file...**
+- ⚡ **Running command...**
+- 🌐 **Fetching webpage...**
+
+Let's see each tool in action.
+
+---
+
+## Tool 1: Google Search — Getting Current Information
+
+**When Gemini uses this**: You need current information from across the web, and you don't know which specific site has it.
+
+### Example: Checking Latest Framework Versions
+
+You ask Gemini:
 
 ```
-> What is the current temperature in San Francisco?
+What's the latest stable version of Node.js?
+```
+
+**What you'll see:**
+
+```
+> What's the latest stable version of Node.js?
 
 🔍 Searching the web...
 
-The current temperature in San Francisco is approximately 62°F (17°C) with partly
-cloudy skies. Conditions vary by neighborhood, with coastal areas typically cooler.
+The latest stable version of Node.js is 20.11.0 (LTS), released January 2025.
+
+Key features in this release:
+- Performance improvements for module loading (up to 15% faster)
+- Updated V8 engine to version 11.8
+- Security patches for CVE-2024-27980 and CVE-2024-27982
+- Improved support for ES modules
+
+The next LTS release (version 22) is planned for April 2025.
 
 Sources:
-- weather.com (retrieved 2024-01-14)
-- National Weather Service
+- nodejs.org (official release page)
+- GitHub nodejs/node releases
 ```
 
-Notice something important: You didn't tell Gemini HOW to get this information. You didn't type a command like `/search-web` or configure APIs. You just asked naturally, and Gemini knew it needed current data, so it automatically used its web search tool.
+**What happened**: Gemini recognized you needed current version information (not in its training data), activated Google Search, found official sources, and synthesized the answer.
 
-This is the shift we're exploring today. Your AI doesn't just respond from memory—it actively reaches out to find fresh information, read files, and access the world beyond its training data. The key difference from traditional software: **you don't memorize commands. You ask naturally.**
+### When Google Search Activates
 
-This lesson shows you what tools your AI has available, when it uses them, and what's happening behind the scenes. By the end, you'll understand how to work with AI tools safely and effectively.
+Gemini uses Google Search when you ask about:
+- **Current versions**: "What's the latest TypeScript version?"
+- **Recent events**: "What breaking changes were in Python 3.13?"
+- **Live data**: "What's the current best practice for React state management?"
+- **Comparisons**: "Compare Next.js vs Remix for 2025"
+- **Trends**: "What are developers saying about Bun.js adoption?"
 
 ---
 
-## The Three Tools: When Gemini Reaches Beyond Its Training Data
+## Tool 2: File Operations — Reading Your Project Files
 
-Your AI has three ways to get information beyond what it learned during training. Let's see each in action.
+**When Gemini uses this**: You need Gemini to read or analyze files in your current project.
 
----
+### Example: Analyzing Your Dependencies
 
-## Tool 1: Web Search — Finding Current Information Across the Web
-
-**When to use:** You need current information but don't know which specific website has it.
-
-Ask Gemini:
+You ask Gemini:
 
 ```
-What is the current stock price of Tesla?
+Read my package.json and list my dependencies
 ```
 
 **What you'll see:**
-```
-> What is the current stock price of Tesla?
 
+```
+> Read my package.json and list my dependencies
+
+📁 Reading package.json...
+
+Your project has 8 dependencies:
+
+**Production Dependencies:**
+- react: ^18.2.0
+- react-dom: ^18.2.0
+- next: ^14.0.4
+- axios: ^1.6.2
+
+**Development Dependencies:**
+- typescript: ^5.3.3
+- eslint: ^8.56.0
+- @types/react: ^18.2.47
+- @types/node: ^20.10.6
+
+You're using React 18 with Next.js 14. Would you like me to check if there
+are any security vulnerabilities in these versions?
+```
+
+**What happened**: Gemini accessed your project's package.json file, parsed the JSON structure, categorized dependencies, and offered a helpful follow-up.
+
+### Example: Understanding Configuration Files
+
+You ask Gemini:
+
+```
+Read my .eslintrc.json and explain what rules are enabled
+```
+
+**What you'll see:**
+
+```
+> Read my .eslintrc.json and explain what rules are enabled
+
+📁 Reading .eslintrc.json...
+
+Your ESLint configuration has these rules enabled:
+
+**Strict Rules:**
+- no-unused-vars: Error (prevents unused variables)
+- no-console: Warning (alerts on console.log statements)
+- eqeqeq: Error (requires === instead of ==)
+
+**TypeScript Rules:**
+- @typescript-eslint/no-explicit-any: Error (prevents using 'any' type)
+- @typescript-eslint/explicit-function-return-type: Warning
+
+**React Rules:**
+- react/prop-types: Off (disabled because you're using TypeScript)
+- react-hooks/rules-of-hooks: Error (enforces Hook rules)
+
+This is a fairly strict configuration focused on type safety and avoiding common bugs.
+```
+
+**What happened**: Gemini read your configuration file, interpreted the rules, and explained them in plain language.
+
+### When File Operations Activate
+
+Gemini reads files when you ask about:
+- **Configuration**: "Show me my .env variables"
+- **Code analysis**: "Read main.py and suggest improvements"
+- **Documentation**: "Analyze my README.md and suggest additions"
+- **Data files**: "Read data.json and count how many users we have"
+- **Logs**: "Check error.log and tell me what's failing"
+
+---
+
+## Tool 3: Shell Integration — Running Terminal Commands
+
+**When Gemini uses this**: You need to execute terminal commands and get the results.
+
+### Example: Checking Your Environment
+
+You ask Gemini:
+
+```
+Check what Git branch I'm currently on
+```
+
+**What you'll see:**
+
+```
+> Check what Git branch I'm currently on
+
+⚡ Running: git branch --show-current
+
+You're currently on the 'feature/user-authentication' branch.
+
+Would you like me to:
+- Show you the status of uncommitted changes?
+- List recent commits on this branch?
+- Compare this branch to main?
+```
+
+**What happened**: Gemini executed the `git branch --show-current` command, captured the output, and offered relevant next steps.
+
+### Example: Checking Versions
+
+You ask Gemini:
+
+```
+What Node.js and npm versions am I running?
+```
+
+**What you'll see:**
+
+```
+> What Node.js and npm versions am I running?
+
+⚡ Running: node --version
+⚡ Running: npm --version
+
+You're running:
+- Node.js: v20.10.0
+- npm: v10.2.3
+
+Both are up-to-date! Node.js 20.10.0 is the current LTS release.
+```
+
+**What happened**: Gemini ran both version check commands, compared against current releases (using Google Search), and confirmed your setup is current.
+
+### When Shell Integration Activates
+
+Gemini runs commands when you ask about:
+- **System info**: "What's my current directory?"
+- **Git operations**: "Show me the last 5 commits"
+- **File listings**: "List all .ts files in the src folder"
+- **Process checking**: "Is the development server running?"
+- **Testing**: "Run npm test and show me the results"
+
+---
+
+## Tool 4: Web Fetch — Retrieving Specific Pages
+
+**When Gemini uses this**: You know the exact URL and want Gemini to fetch and analyze that specific page.
+
+### Example: Getting API Documentation
+
+You ask Gemini:
+
+```
+Fetch the Stripe API docs for payment intents and show me a basic example
+```
+
+**What you'll see:**
+
+```
+> Fetch the Stripe API docs for payment intents and show me a basic example
+
+🌐 Fetching https://stripe.com/docs/api/payment_intents...
+
+Here's how to create a Payment Intent with Stripe:
+
+**Basic Example (Node.js):**
+
+const stripe = require('stripe')('sk_test_...');
+
+const paymentIntent = await stripe.paymentIntents.create({
+  amount: 2000,  // $20.00 in cents
+  currency: 'usd',
+  payment_method_types: ['card'],
+  description: 'Software subscription'
+});
+
+**Key Parameters:**
+- amount: Integer in smallest currency unit (cents for USD)
+- currency: Three-letter ISO code ('usd', 'eur', etc.)
+- payment_method_types: Array of allowed payment methods
+
+**Next Steps:**
+1. Send paymentIntent.client_secret to your frontend
+2. Use Stripe.js to complete payment with the client secret
+3. Listen for payment_intent.succeeded webhook event
+
+Source: Stripe API Documentation (retrieved January 2025)
+```
+
+**What happened**: Gemini fetched the specific Stripe documentation page, extracted the relevant section on Payment Intents, and provided a clear example with explanation.
+
+### Example: Checking Service Pricing
+
+You ask Gemini:
+
+```
+Fetch the Vercel pricing page and summarize the free tier
+```
+
+**What you'll see:**
+
+```
+> Fetch the Vercel pricing page and summarize the free tier
+
+🌐 Fetching https://vercel.com/pricing...
+
+Vercel's Free (Hobby) tier includes:
+
+**Deployments:**
+- Unlimited deployments
+- Automatic HTTPS and SSL certificates
+- Preview deployments for every Git push
+- Edge Network (global CDN)
+
+**Resources:**
+- 100 GB bandwidth per month
+- 6,000 build execution minutes per month
+- Serverless functions: 100 GB-hours per month
+- Edge functions: 100,000 invocations per month
+
+**Features:**
+- Custom domains (unlimited)
+- Automatic CI/CD from Git
+- Web Analytics (basic)
+- DDoS mitigation
+
+**Limitations:**
+- 1 concurrent build at a time
+- Community support only
+- No team collaboration features
+
+Perfect for personal projects, prototyping, and learning. Upgrade to Pro ($20/month)
+for team features and higher limits.
+```
+
+**What happened**: Gemini fetched the Vercel pricing page, extracted free tier details, organized them clearly, and provided upgrade context.
+
+### When Web Fetch Activates
+
+Gemini fetches specific pages when you ask about:
+- **Documentation**: "Get the FastAPI authentication docs"
+- **Pricing**: "Fetch AWS S3 pricing and explain storage costs"
+- **Release notes**: "Get the Python 3.13 release notes from python.org"
+- **Changelogs**: "Fetch the Next.js 14 changelog"
+- **Specific guides**: "Get the React Router tutorial from their docs"
+
+---
+
+## How Gemini Decides Which Tool to Use
+
+Understanding the decision logic helps you craft better queries:
+
+| Your Need | Tool Gemini Uses | Example Query |
+|-----------|------------------|---------------|
+| Latest version/current info | 🔍 Google Search | "What's new in Python 3.13?" |
+| Read project files | 📁 File Operations | "Show my .env variables" |
+| Check system state | ⚡ Shell Integration | "What's my current directory?" |
+| Specific documentation | 🌐 Web Fetch | "Get FastAPI docs for authentication" |
+| Compare multiple sources | 🔍 Google Search | "Compare React vs Vue in 2025" |
+| Analyze your code | 📁 File Operations | "Read app.py and suggest improvements" |
+| Git operations | ⚡ Shell Integration | "Show uncommitted changes" |
+| API reference | 🌐 Web Fetch | "Fetch OpenAI API pricing from their site" |
+
+**The Pattern**:
+- **Broad/current/comparative** → Google Search
+- **Your project files** → File Operations
+- **Commands to execute** → Shell Integration
+- **Exact URL to retrieve** → Web Fetch
+
+---
+
+## Recognizing When Tools Are Active
+
+As you use Gemini, watch for these indicators:
+
+### Visual Indicators
+
+**Status messages appear before results:**
+```
+🔍 Searching the web...
+📁 Reading package.json...
+⚡ Running: git status
+🌐 Fetching https://docs.python.org/3.13/...
+```
+
+### Source Citations
+
+When Gemini uses tools, it cites sources:
+```
+Sources:
+- nodejs.org (official release page)
+- GitHub nodejs/node releases
+- Retrieved: January 17, 2025
+```
+
+### Structured Output
+
+Tool responses often have clear structure:
+```
+Your project has 8 dependencies:
+
+Production Dependencies:
+- react: ^18.2.0
+- next: ^14.0.4
+
+Development Dependencies:
+- typescript: ^5.3.3
+```
+
+### Command Echo
+
+Shell integration shows the exact command run:
+```
+⚡ Running: node --version
+
+v20.10.0
+```
+
+**Why this matters**: Knowing which tool activated helps you verify Gemini did what you expected and learn when each tool is appropriate.
+
+---
+
+## Real-World Developer Scenarios
+
+Here's how tools work together in actual development workflows:
+
+### Scenario 1: Starting a New Project
+
+**You**: "Create a new Next.js project called 'my-store' and show me the generated file structure"
+
+**Gemini**:
+```
+⚡ Running: npx create-next-app@latest my-store
+
+✓ Next.js project 'my-store' created successfully!
+
+📁 Reading my-store directory...
+
+Your project structure:
+my-store/
+├── app/
+│   ├── page.tsx (home page)
+│   ├── layout.tsx (root layout)
+│   └── globals.css
+├── public/ (static assets)
+├── package.json
+├── next.config.js
+├── tsconfig.json
+└── README.md
+
+The project is using:
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS (configured)
+- ESLint
+
+Ready to start! Run 'cd my-store && npm run dev' to launch the dev server.
+```
+
+**Tools used**: Shell (create project), File Operations (read structure), Google Search (verify Next.js version)
+
+---
+
+### Scenario 2: Debugging an Error
+
+**You**: "Read my error.log file and tell me what's causing the crash"
+
+**Gemini**:
+```
+📁 Reading error.log...
+
+I found the issue! Your application is crashing because of this error:
+
+Error: Cannot find module 'dotenv'
+at Function.Module._resolveFilename (node:internal/modules/cjs/loader:1039:15)
+
+**Root Cause**:
+You're trying to use environment variables with dotenv, but the package isn't installed.
+
+**Fix**:
+⚡ Running: npm list dotenv
+
+dotenv is not installed.
+
+**Solution**:
+Run: npm install dotenv
+
+Then make sure your code has:
+require('dotenv').config();  // CommonJS
+// or
+import 'dotenv/config';      // ES modules
+
+Would you like me to check if dotenv is in your package.json?
+```
+
+**Tools used**: File Operations (read log), Shell (check package), Google Search (verify current dotenv usage patterns)
+
+---
+
+### Scenario 3: Researching Best Practices
+
+**You**: "What are the best practices for React Server Components in 2025?"
+
+**Gemini**:
+```
 🔍 Searching the web...
 
-Tesla (TSLA) is currently trading at $242.84, up 2.3% today. The stock opened
-at $238.12 and has a 52-week range of $138.80 - $299.29.
+Current best practices for React Server Components (2025):
 
-Market cap: $769 billion
-P/E ratio: 76.45
-Volume: 89.2M shares
+**1. Data Fetching**
+- Fetch data directly in Server Components (no useEffect needed)
+- Use async/await at component level
+- Cache data with React's built-in cache() function
+
+**2. Component Boundaries**
+- Server Components by default
+- Add 'use client' only when you need:
+  - Event handlers (onClick, onChange)
+  - Browser APIs (localStorage, window)
+  - React hooks (useState, useEffect)
+
+**3. Performance**
+- Keep Server Components at the tree root
+- Pass Server Components as props to Client Components
+- Avoid passing large objects from Server to Client
+
+**4. Patterns to Avoid**
+- ❌ Don't fetch data in Client Components if Server Components can do it
+- ❌ Don't serialize functions from Server to Client
+- ❌ Don't use Server Components inside Client Components (composition is fine)
+
+**Example (Correct)**:
+// app/page.tsx (Server Component)
+async function Page() {
+  const data = await fetch('https://api.example.com/data');
+  return <ClientComponent data={data} />;
+}
+
+// components/ClientComponent.tsx
+'use client';
+export function ClientComponent({ data }) {
+  const [state, setState] = useState(data);
+  // Client-side interactivity here
+}
 
 Sources:
-- Yahoo Finance (retrieved 2024-01-14, 14:23 UTC)
-- NASDAQ real-time data
+- React.dev official documentation
+- Next.js 14 documentation
+- Vercel blog posts (January 2025)
 ```
 
-**What happened:** Gemini searched multiple sources, synthesized the answer, and cited where it got the data.
-
-**Watch for:** `🔍 Searching the web...` indicator
+**Tools used**: Google Search (current best practices), Web Fetch (React official docs)
 
 ---
 
-## Tool 2: Web Fetching — Reading Specific Websites
+### Scenario 4: Checking Your Setup
 
-**When to use:** You know exactly which website has the information you need.
+**You**: "Check my Node.js, npm, and Git versions, then tell me if I need to update anything"
 
-Ask Gemini:
-
+**Gemini**:
 ```
-Fetch the Stripe pricing page and summarize their main pricing tiers
-```
+⚡ Running: node --version
+⚡ Running: npm --version
+⚡ Running: git --version
 
-**What you'll see:**
-```
-> Fetch the Stripe pricing page and summarize their main pricing tiers
+Your current versions:
+- Node.js: v20.10.0
+- npm: v10.2.3
+- Git: v2.43.0
 
-🌐 Fetching https://stripe.com/pricing...
+🔍 Checking latest releases...
 
-Based on Stripe's pricing page, here are the main tiers:
+**Status**: ✅ All up-to-date!
 
-**Integrated Pricing (Pay-as-you-go)**
-- 2.9% + $0.30 per successful card charge
-- No monthly fees
-- Best for: Startups and small businesses
+- Node.js 20.10.0 is the current LTS release (supported until April 2026)
+- npm 10.2.3 is the latest stable version
+- Git 2.43.0 is current (released December 2024)
 
-**Custom Pricing**
-- Volume discounts available
-- Contact sales for rates
-- Best for: High-volume businesses
-
-Additional services:
-- Stripe Billing: Subscription management
-- Stripe Terminal: In-person payments (different rates)
-- International cards: +1.5% fee
-
-Source: stripe.com/pricing (retrieved 2024-01-14)
+No updates needed. Your development environment is current!
 ```
 
-**What happened:** Gemini visited the specific URL, read the page, extracted pricing info, and organized it.
-
-**Watch for:** `🌐 Fetching https://...` indicator
-
-**Difference from web search:**
-- **Web Search** (Tool 1): "Find me current Tesla stock price" → AI searches to find the answer
-- **Web Fetch** (Tool 2): "Read Stripe's pricing page" → AI reads the specific page you named
+**Tools used**: Shell (check versions), Google Search (verify latest releases)
 
 ---
 
-## Tool 3: File Reading — Analyzing Your Local Data
+### Scenario 5: Understanding API Documentation
 
-**When to use:** You have data in a file on your computer and want insights from it.
+**You**: "Fetch the Stripe webhook documentation and explain how to verify webhook signatures"
 
-Create a file called `sales.txt`:
-
+**Gemini**:
 ```
-Q1: $45,000
-Q2: $52,000
-Q3: $48,000
-Q4: $61,000
+🌐 Fetching https://stripe.com/docs/webhooks/signatures...
+
+Here's how to verify Stripe webhook signatures:
+
+**Why Verification Matters**:
+Ensures webhook requests actually come from Stripe (not attackers).
+
+**Step-by-Step Verification (Node.js)**:
+
+1. **Get your webhook signing secret** from Stripe Dashboard:
+   - Go to Developers → Webhooks
+   - Click your endpoint
+   - Copy "Signing secret" (starts with whsec_...)
+
+2. **Install Stripe SDK**:
+npm install stripe
+
+3. **Verify signature in your webhook handler**:
+
+const stripe = require('stripe')('sk_test_...');
+
+app.post('/webhook', express.raw({type: 'application/json'}), (req, res) => {
+  const sig = req.headers['stripe-signature'];
+  const endpointSecret = 'whsec_...';  // Your signing secret
+
+  let event;
+
+  try {
+    event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+  } catch (err) {
+    console.log('⚠️ Webhook signature verification failed:', err.message);
+    return res.sendStatus(400);
+  }
+
+  // Handle verified event
+  switch (event.type) {
+    case 'payment_intent.succeeded':
+      const paymentIntent = event.data.object;
+      console.log('💰 Payment succeeded:', paymentIntent.id);
+      break;
+    default:
+      console.log(`Unhandled event type ${event.type}`);
+  }
+
+  res.sendStatus(200);
+});
+
+**Important**:
+- Use express.raw() middleware (not express.json())
+- Stripe needs the raw request body to verify signature
+- Store endpointSecret in environment variables (.env file)
+
+**Testing Locally**:
+Use Stripe CLI to forward webhooks:
+stripe listen --forward-to localhost:3000/webhook
+
+Source: Stripe Webhooks Documentation (stripe.com/docs/webhooks)
 ```
 
-Ask Gemini:
-
-```
-Read sales.txt and tell me which quarter had the highest revenue
-```
-
-**What you'll see:**
-```
-> Read sales.txt and tell me which quarter had the highest revenue
-
-📄 Reading file: sales.txt...
-
-Based on the data in sales.txt, Q4 had the highest revenue at $61,000.
-
-Breakdown:
-- Q1: $45,000
-- Q2: $52,000
-- Q3: $48,000
-- Q4: $61,000 ← Highest
-
-Q4 exceeded Q1 by 35.6%, showing strong year-end performance.
-```
-
-**What happened:** Gemini read your local file, analyzed the data, and gave you insights.
-
-**Watch for:** `📄 Reading file:` indicator
-
-**What files can Gemini read?**
-- ✅ Text files (.txt, .md)
-- ✅ CSV files (spreadsheet data)
-- ✅ JSON files (structured data)
-- ✅ Code files (.py, .js, etc.)
-
-#### 💬 AI Colearning Prompt
-> "When Gemini reads a CSV file, what's actually happening behind the scenes? How does it convert rows and columns into understanding that answers business questions?"
+**Tools used**: Web Fetch (Stripe docs), Google Search (current best practices)
 
 ---
 
-## Tool 4: Shell Integration — AI-Assisted Terminal Commands
+## Try With AI
 
-**When to use:** You need to run terminal commands but don't remember the exact syntax, or you want AI to suggest the best approach.
+Now practice using Gemini's tools with these exercises. Use your preferred AI companion (Gemini CLI or Claude Code) - the prompts work with any tool.
 
-### The AI-Native Way: Ask First, Run Second
-
-**Step 1:** Ask Gemini for the command
-
-In Gemini CLI, ask:
+### Prompt 1: Practice Google Search
 
 ```
-I need to find all Excel files modified in the last month. What command should I use?
+What are the new features in the latest TypeScript version released in 2025?
 ```
 
-**What you'll see:**
-```
-> I need to find all Excel files modified in the last month. What command should I use?
+**Expected outcome**: You'll see 🔍 indicator, Gemini searches the web, returns current TypeScript features with version number and sources.
 
-To find all Excel files modified in the last 30 days, use this command:
-
-find . -name "*.xlsx" -mtime -30 -type f
-
-Breaking it down:
-- find .           → Search in current directory and subdirectories
-- -name "*.xlsx"   → Match files ending in .xlsx
-- -mtime -30       → Modified within last 30 days
-- -type f          → Only files (not directories)
-
-This searches recursively. If you want to search a specific folder instead of
-the current one, replace . with the folder path.
-```
-
-**Step 2:** Run the command using Shell Mode
-
-Press `!` to enter shell mode in Gemini CLI, then run the command:
-
-```
-!find . -name "*.xlsx" -mtime -30 -type f
-```
-
-Press `ESC` to exit shell mode and return to Gemini.
+**What to observe**: Notice how Gemini cites multiple sources and synthesizes information from official TypeScript docs and release notes.
 
 ---
 
-### Alternative: Direct Shell Commands (When You Know the Command)
+### Prompt 2: Practice File Operations
 
-If you already know the command you want to run, you can execute it directly in shell mode without asking Gemini first:
+```
+Read my package.json file and suggest 3 improvements to make my project more maintainable
+```
 
-1. Press `!` to enter shell mode
-2. Type your command: `ls -la`
-3. Press `Enter` to execute
-4. Press `ESC` to return to Gemini
+**Expected outcome**: You'll see 📁 indicator, Gemini reads your package.json, analyzes dependencies, scripts, and configuration, then provides specific suggestions based on actual content.
 
-**When to ask AI first:**
-- ✅ You're unsure of the exact syntax
-- ✅ You want the safest/best approach
-- ✅ You need the command explained before running it
-- ✅ Complex tasks (multiple steps, flags, conditions)
-
-**When to run directly:**
-- ✅ You know the command and just need quick execution
-- ✅ Simple commands like `ls`, `pwd`, `cd`
-- ✅ You've run this specific command before
-
-#### 🎓 Expert Insight
-> In AI-native development, you don't memorize terminal commands. You ask your AI partner for the right command, understand what it does, then execute. The skill isn't memorization—it's knowing how to describe what you want accomplished and validating the AI's suggestion before running it.
+**What to observe**: Gemini references actual values from your file (specific dependencies, versions, scripts) - not generic advice.
 
 ---
 
-## How Tools Work Together
+### Prompt 3: Practice Shell Integration
 
-Tools don't work in isolation—Gemini combines them automatically based on your question. Here's what that looks like:
-
-**You ask one question:**
 ```
-Compare Notion and Coda pricing, then tell me which is better for a 20-person startup
+Show me the last 5 git commits in my repository with their commit messages and dates
 ```
 
-**Behind the scenes, Gemini automatically:**
-1. 🌐 Fetches Notion pricing page
-2. 🌐 Fetches Coda pricing page
-3. Analyzes both datasets
-4. Applies your constraint (20-person startup)
-5. Provides recommendation with reasoning
+**Expected outcome**: You'll see ⚡ indicator, Gemini runs `git log` command, displays formatted commit history with hashes, messages, authors, and dates.
 
-**You see:**
-```
-> Compare Notion and Coda pricing...
-
-🌐 Fetching https://notion.so/pricing...
-🌐 Fetching https://coda.io/pricing...
-
-[Comparison table with both pricing structures]
-
-For a 20-person startup, Coda's Team plan ($10/user = $200/month) offers better
-value than Notion's Team plan ($15/user = $300/month) if you need advanced
-automations. However, if you prioritize databases and wikis, Notion provides
-more robust features at that tier.
-
-Recommendation: Start with Coda to save $1,200/year, migrate to Notion if you
-outgrow Coda's database features.
-
-Sources: notion.so/pricing, coda.io/pricing (retrieved 2024-01-14)
-```
-
-**The key:** You asked naturally. Gemini orchestrated multiple tools. You got actionable intelligence.
+**What to observe**: Gemini shows the exact command it ran and formats the output in a readable way.
 
 ---
 
-## Understanding Errors and Data Privacy
+### Prompt 4: Practice Web Fetch
 
-### When Something Goes Wrong: The AI-Native Approach
-
-You'll encounter error messages. Instead of memorizing error codes, **ask your AI to explain and fix them.**
-
-**Example:** You get this error:
 ```
-ERROR: File not found: sales.txt
+Fetch the official Python documentation page for asyncio and explain the basic event loop concept
 ```
 
-**Ask Gemini:**
-```
-I got this error: "File not found: sales.txt". What does this mean and how do I fix it?
-```
+**Expected outcome**: You'll see 🌐 indicator, Gemini retrieves docs.python.org page, extracts asyncio event loop explanation, and provides code examples.
 
-**Gemini will explain:**
-- The file doesn't exist in the current directory
-- Show you how to check where you are (`pwd`)
-- Suggest how to find the file or create it
-- Explain the next steps
-
-**Common tool indicators you'll see:**
-- ✅ `🔍 Searching...` or `🌐 Fetching...` → Normal, tool is working
-- ✅ `Sources: [URLs]` → Good! You can verify the data
-- ⚠️ `ERROR:` → Something failed, ask AI to explain
-- ⚠️ `Rate limited` → You're requesting too fast, wait a moment
-
-**The pattern:** Don't troubleshoot alone. Copy the error, paste it to Gemini, ask what happened and how to fix it.
+**What to observe**: Gemini cites the specific documentation URL and explains concepts in beginner-friendly language while staying accurate to the official docs.
 
 ---
 
-### 🔐 Privacy & Data Safety: Critical Rules
+### Bonus Challenge: Combine Multiple Tools
 
-When tools access data, you need to understand what's being shared:
+```
+Check what Node.js version I'm running, then search for the latest LTS version, and tell me if I should upgrade
+```
 
-**What Stays Private:**
-- ✅ **File reading** → Your files stay on your computer, only you and Gemini see them
-- ✅ Gemini processes data temporarily, doesn't permanently store your file contents
+**Expected outcome**: Gemini will use:
+1. ⚡ Shell Integration (check your version)
+2. 🔍 Google Search (find latest LTS)
+3. Analysis (compare and recommend)
 
-**What Goes to the Web:**
-- ⚠️ **Web search/fetch** → Your queries may be logged (like Google searches)
-- ⚠️ **Shell commands** → Execute on your computer but Gemini sees the commands
-
-**Never Ask AI to Access:**
-- 🚫 Files with passwords, API keys, or secrets
-- 🚫 Personal Identifiable Information (PII): SSN, medical records, financial data
-- 🚫 Private account pages (email, bank, social media logged-in views)
-- 🚫 Customer data (GDPR/CCPA violations)
-- 🚫 Confidential business documents
-
-**Safe to Use:**
-- ✅ Public websites (pricing pages, documentation, news)
-- ✅ Your own files with test/anonymized data
-- ✅ General searches ("industry trends 2024" not "my company's confidential strategy")
-
-**Rule of thumb:** If you wouldn't share it in a public coffee shop, don't share it with AI.
-
-#### 🤝 Practice Exercise
-> **Ask your AI**: "What are the privacy risks when I ask you to fetch a pricing page from a competitor's website? What data is shared and what stays private?"
-
-**Expected outcome:** Your AI will explain what happens during web fetching, what the website sees (a request, but not your identity), and how to stay safe.
+**What to observe**: Watch how Gemini chains tools together to answer a complex question that requires both local system info and current web data.
 
 ---
 
-## Try With AI: Your First Multi-Tool Workflow
+## Key Takeaways
 
-Now that you've seen each tool individually, try this complete workflow combining all three tools.
+You've learned that Gemini CLI has four built-in tools that activate automatically:
 
-### Real-World Scenario: Product Pricing Research
+1. **🔍 Google Search** - Current information from across the web
+2. **📁 File Operations** - Reading and analyzing your project files
+3. **⚡ Shell Integration** - Running terminal commands and capturing output
+4. **🌐 Web Fetch** - Retrieving specific webpage content
 
-You're launching a new SaaS product and need to research competitor pricing. Here's a complete workflow:
+**The Power**: You ask naturally, Gemini decides which tool to use.
 
-**Step 1: Search for Market Overview**
-```
-Search for SaaS pricing trends in project management tools for 2024
-```
+**The Skill**: Recognizing when tools are active (visual indicators, citations, command echo) and understanding when each tool is appropriate.
 
-Watch for: `🔍 Searching...` — Gemini finds industry trends across multiple sources
-
----
-
-**Step 2: Fetch Specific Competitor Data**
-```
-Fetch Monday.com's pricing page and summarize their tiers and features
-```
-
-Watch for: `🌐 Fetching...` — Gemini reads the specific pricing page
-
----
-
-**Step 3: Compare with Another Competitor**
-```
-Now fetch Asana's pricing and create a comparison table with Monday.com
-```
-
-Watch for: Second `🌐 Fetching...` then synthesis of both datasets
-
----
-
-**Step 4: Analyze Your Own Data**
-
-Create a file called `our_costs.txt`:
-```
-Development: $8,000/month
-Hosting: $1,200/month
-Support: $3,500/month
-Total: $12,700/month
-```
-
-Then ask:
-```
-Read our_costs.txt. Based on our monthly costs and the competitor pricing you found, what should our pricing strategy be to achieve 40% profit margin?
-```
-
-Watch for: `📄 Reading file...` then strategic analysis combining all data
-
----
-
-**Step 5: Get Strategic Recommendation**
-```
-Based on everything we've researched, what pricing tier structure would you recommend and why?
-```
-
-Watch for: Synthesis of all previous data (no new tool use, pure analysis)
-
-
+**Next Steps**: In Lesson 4, you'll learn how Gemini manages conversation context so it remembers what you're working on across multiple questions.
