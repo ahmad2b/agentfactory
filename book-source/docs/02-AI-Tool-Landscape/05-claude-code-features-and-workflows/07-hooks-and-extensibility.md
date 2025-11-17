@@ -2,6 +2,10 @@
 sidebar_position: 7
 title: "Hooks and Extensibility"
 duration: "5-7 min"
+stage: "L2"
+prerequisites:
+  - "Lessons 2-6: Claude Code, CLAUDE.md, MCP, Subagents, Skills"
+  - "Understanding of event-driven automation"
 learning_objectives:
   - "Understand hooks as event-triggered automation"
   - "Create a simple SessionStart hook"
@@ -13,6 +17,7 @@ skills:
     category: "Technical"
     bloom_level: "Apply"
     digcomp_area: "Problem-Solving"
+concept_count: 5
 ---
 
 # Hooks and Extensibility
@@ -193,6 +198,29 @@ Project: my-project | Files: 15 | Last modified: Nov 14 10:23
 ```
 
 Useful project context **automatically** every session!
+
+### Step 5: Co-Design a Hook for Your Workflow (Optional but Recommended)
+
+Now that you understand hooks, let's collaborate with Claude Code to design one for YOUR specific needs.
+
+**🤝 Practice Exercise: Three Roles Co-Design**
+
+Ask Claude Code:
+
+```
+"I want to create a hook that automates [YOUR SPECIFIC TASK].
+What event should trigger it? What command should run?
+What should I watch out for?"
+```
+
+**What happens in this collaboration**:
+1. **AI as Teacher**: Claude suggests appropriate hook design patterns you might not have considered
+2. **AI as Student**: You provide context about your specific workflow that Claude doesn't know
+3. **AI as Co-Worker**: Together you refine the design, converging on a hook that actually solves your problem
+
+This is the Three Roles Framework in action—not just "asking AI to do something," but genuine collaboration where both you and Claude Code learn from each other.
+
+**Try it now** with a real automation you need in your current project.
 
 ---
 

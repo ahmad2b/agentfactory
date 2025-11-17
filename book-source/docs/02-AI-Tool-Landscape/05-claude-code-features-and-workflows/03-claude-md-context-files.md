@@ -2,6 +2,10 @@
 sidebar_position: 3
 title: "CLAUDE.md Context Files"
 duration: "8-10 min"
+stage: "L2"
+prerequisites:
+  - "Lesson 2: Claude Code installed and authenticated"
+  - "Understanding of project directory structure basics"
 learning_objectives:
   - "Understand how CLAUDE.md provides persistent project context across sessions"
   - "Create a complete CLAUDE.md file with all six standard sections"
@@ -14,6 +18,7 @@ skills:
     category: "Technical"
     bloom_level: "Create"
     digcomp_area: "Digital Content Creation"
+concept_count: 6
 ---
 
 # CLAUDE.md Context Files
@@ -145,6 +150,8 @@ Here's what you've accomplished:
 - ✅ **Team alignment**: New team members read CLAUDE.md to understand the project
 
 This is the principle of **"specify once, benefit always"**—define your project context one time, and every future session starts with full understanding.
+
+In later lessons, you'll see how subagents (Lesson 5) and skills (Lesson 6) inherit and extend this CLAUDE.md context—making it the foundation for all Claude Code intelligence.
 
 #### 💬 AI Colearning Prompt
 
@@ -309,39 +316,19 @@ alembic/             # Database migrations
 
 ### Unclear What Goes in CLAUDE.md?
 
-**Symptom**: You're unsure whether something belongs in CLAUDE.md.
-
-**Simple rule**: Ask yourself: *"Does Claude need to know this to give good suggestions?"*
-
-- Claude needs to know your tech stack? **Yes, goes in CLAUDE.md.**
-- Claude needs to know your file naming convention? **Yes.**
-- Claude needs to know that your coffee machine is broken? **No.**
-
-If Claude would ask "What's your tech stack?" without CLAUDE.md, then that information belongs in CLAUDE.md.
+**Simple rule**: Ask yourself: *"Does Claude need to know this to give good suggestions?"* If Claude would ask "What's your tech stack?" without CLAUDE.md, then that information belongs in CLAUDE.md.
 
 ### Concerns About File Size?
 
-**Symptom**: "Isn't CLAUDE.md taking up context space? Won't it fill up?"
-
-**Reassurance**: A typical CLAUDE.md is 1-3 KB. Context is cheap; clarity is expensive.
-
-A well-organized 2 KB CLAUDE.md saves you 10+ KB of repeated explanations every session. And it improves Claude's suggestions because the context is structured and accurate.
+A typical CLAUDE.md is 1-3 KB. Context is cheap; clarity is expensive. A well-organized CLAUDE.md saves repeated explanations every session and improves Claude's suggestions.
 
 ---
 
 ## Try With AI
 
-Open Claude Code in your project directory and run these prompts to create your first CLAUDE.md:
+Open Claude Code in your project directory:
 
-**Prompt 1: Analyze Your Project**
-```
-Analyze the structure and technology of this project.
-What are the main components, tech stack, and key directories?
-```
-
-**Expected Outcome**: Claude describes your project structure, identifying the primary language, frameworks, and file organization.
-
-**Prompt 2: Generate CLAUDE.md**
+**Prompt 1: Generate CLAUDE.md**
 ```
 Create a complete CLAUDE.md file with these sections:
 - Project Overview (1-2 sentences)
@@ -354,23 +341,16 @@ Create a complete CLAUDE.md file with these sections:
 Base it on what you see in the codebase.
 ```
 
-**Expected Outcome**: Claude generates a full CLAUDE.md ready to save to your project root.
+**Expected Outcome**: Claude generates a full CLAUDE.md ready to save.
 
-**Prompt 3: Refine Based on Your Project**
+**Prompt 2: Refine Based on Your Project**
 ```
 Review the CLAUDE.md. Make these adjustments:
 [Add your specific corrections, missing sections, or clarifications]
 ```
 
-**Expected Outcome**: Claude refines CLAUDE.md based on your feedback, ensuring it's accurate and complete.
+**Expected Outcome**: Claude refines CLAUDE.md based on your feedback.
 
-**Prompt 4 (Optional): Test Auto-Loading**
-```
-I've saved CLAUDE.md to my project root. I'm going to exit this session
-and start a new one. In the next session, ask me about my project without
-me re-explaining it. Ready?
-```
+**Prompt 3: Test Auto-Loading**
 
-*Exit Claude Code. Start a new session. Ask Claude a question about your project.*
-
-**Expected Outcome**: Claude references your tech stack, structure, or conventions—proving CLAUDE.md auto-loaded.
+Exit Claude Code, start a new session, and ask about your project. Claude should reference your tech stack without you repeating it—proving CLAUDE.md auto-loaded.

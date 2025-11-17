@@ -2,6 +2,10 @@
 sidebar_position: 5
 title: "Subagents and Orchestration"
 duration: "6-8 min"
+stage: "L2"
+prerequisites:
+  - "Lessons 2-4: Claude Code, CLAUDE.md, MCP understanding"
+  - "Understanding of problem decomposition"
 learning_objectives:
   - "Understand subagents as specialized AI assistants with isolated context"
   - "Recognize when the built-in Plan subagent automatically activates for complex tasks"
@@ -14,6 +18,7 @@ skills:
     category: "Technical"
     bloom_level: "Create"
     digcomp_area: "Problem-Solving"
+concept_count: 6
 ---
 
 # Subagents and Orchestration
@@ -46,6 +51,21 @@ Think of Claude Code as a project manager with a team of specialists:
 - **Custom subagents**: You can create specialists for your team's specific needs (content planning, research synthesis, document structuring, etc.)
 
 **Key benefit**: Each subagent has **clean context** (no clutter from other conversations) and **focused expertise** (specialized instructions for its task).
+
+---
+
+## Why This Matters: Specialized Expertise
+
+**Workflow Impact**: Subagents let you delegate complex, multi-step tasks to specialists. Instead of a single AI trying to do everything, you have a team—one expert for research, one for code review, one for testing, one for documentation. Each maintains cleaner context, produces better results.
+
+**Paradigm Connection**: This is the orchestration pattern in AI-driven development. Like a software architect delegating to specialists (frontend dev, backend dev, DBA), you orchestrate AI specialists. The main Claude Code session is your architect; subagents are your specialists.
+
+**Real-World Context**: In production work, you'll create subagents for:
+- Research-heavy tasks (gather requirements, analyze documentation)
+- Specialized code reviews (security audits, performance optimization)
+- Domain-specific work (database design, API integration, testing strategies)
+
+Subagents are how you scale AI collaboration beyond single tasks.
 
 ---
 
@@ -122,30 +142,21 @@ Claude Code: *invokes startup-planner, waits for results, presents findings*
 
 ## More Subagent Ideas
 
-Now that you've created your first subagent, here are other ideas you can try:
+Once you understand the pattern, you can create subagents for any specialized task:
 
-**Blog Writer Subagent**:
-```
-Help me write engaging blog posts: research topics, create outlines,
-suggest headlines, and draft compelling introductions.
-Use when I say "help me write a blog post" or "draft article about X."
-```
+- **Research Subagents**: Deep-dive into documentation, gather requirements, analyze existing solutions
+- **Code Review Subagents**: Security audits, performance analysis, pattern compliance checks
+- **Testing Subagents**: Test strategy design, edge case generation, coverage analysis
+- **Documentation Subagents**: API documentation, architecture diagrams, onboarding guides
 
-**Learning Guide Subagent**:
-```
-Create structured learning plans for any topic: break down concepts,
-suggest resources, design practice exercises, and track progress.
-Use when I say "help me learn X" or "create study plan for Y."
-```
+**The pattern is always**:
+1. Define the specialist's focus (what domain expertise does this subagent have?)
+2. Identify key decisions (what autonomy does it need?)
+3. Specify output format (how should results be delivered?)
 
-**Meeting Notes Organizer Subagent**:
-```
-Transform messy meeting notes into structured summaries: identify action items,
-extract key decisions, organize by topic, and create follow-up tasks.
-Use when I say "organize these meeting notes" or "summarize this discussion."
-```
+You learned this pattern in Step 2.5 (Co-learn Subagent Design). Apply it to create any subagent your workflow needs.
 
-**Try creating one of these** using the same `/agents` workflow you just learned!
+For detailed subagent architecture, see `.claude/agents/` directory for real examples from this book's production system.
 
 ---
 
@@ -205,6 +216,42 @@ Select **"Create new agent"**
 
 **Choose 1** (Project) — this makes the agent available only in this project.
 
+### Step 2.5: Co-learn Subagent Design (Optional but Recommended)
+
+Before finalizing your subagent, collaborate with Claude Code to design it better.
+
+**🤝 Practice Exercise: Three Roles Subagent Design**
+
+Ask Claude Code:
+```
+I'm about to create a [YOUR PURPOSE] subagent. Before I finalize it,
+help me think through:
+1. What are 3 core decisions this subagent needs to make autonomously?
+2. What questions should it ask users to gather the right context?
+3. What principles should guide its recommendations?
+```
+
+**What happens in this collaboration**:
+
+1. **AI as Teacher**: Claude suggests subagent design patterns you might not know
+   - "For a code review subagent, consider asking about performance requirements"
+   - "A documentation subagent should check existing style guides first"
+   - "Testing subagents benefit from knowing your deployment environment"
+
+2. **Student as Teacher**: You provide domain expertise Claude doesn't have
+   - "In our codebase, we use [SPECIFIC PATTERN]"
+   - "Our team has a strong preference for [APPROACH]"
+   - "We've tried [X BEFORE] and it didn't work because [Y]"
+
+3. **Convergence**: Together you design a subagent that's better than either of you would create alone
+   - Not generic (Claude's default patterns)
+   - Not overly specific (your initial idea)
+   - But optimized for YOUR workflow and team needs
+
+**This co-learning makes subagents more useful**. Instead of copying examples, you understand WHY certain design choices matter.
+
+**Try this now** before completing your subagent creation.
+
 ### Step 3: Choose Creation Method
 
 ```
@@ -262,14 +309,6 @@ Use the startup-planner subagent to analyze this business idea:
 5. Main Claude presents the business plan to you
 
 **Key insight**: You just created a reusable specialist that you can invoke anytime with a simple request.
-
-### What You Just Learned
-
-- ✅ Creating subagents is **easy** (4 steps via `/agents`)
-- ✅ Claude generates the agent from your plain-language description
-- ✅ Subagents are stored as Markdown files (`.claude/agents/`)
-- ✅ You can invoke them explicitly: "Use the [name] subagent to..."
-- ✅ Subagents complete one task and return results to main Claude Code
 
 ---
 

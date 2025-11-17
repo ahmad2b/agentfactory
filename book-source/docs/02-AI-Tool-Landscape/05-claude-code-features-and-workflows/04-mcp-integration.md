@@ -2,6 +2,10 @@
 sidebar_position: 4
 title: "MCP Integration"
 duration: "12-15 min"
+stage: "L2"
+prerequisites:
+  - "Lessons 2-3: Claude Code working, CLAUDE.md understanding"
+  - "Understanding of external APIs and web services"
 learning_objectives:
   - "Understand Model Context Protocol (MCP) as safe external system access for Claude Code"
   - "Install and configure Playwright MCP for web browsing capabilities"
@@ -14,6 +18,7 @@ skills:
     category: "Technical"
     bloom_level: "Apply"
     digcomp_area: "Safety and Security"
+concept_count: 6
 ---
 
 # MCP Integration: Connecting to External Systems
@@ -43,6 +48,22 @@ Imagine Claude Code is a brilliant assistant who works in your office (your comp
 **With MCP**: You give your assistant a **phone directory** with approved contacts—a web browser expert, a documentation specialist, a database consultant. Now when your assistant needs outside information, they can call the right expert and get answers safely.
 
 **MCP is that phone directory.** It connects Claude Code (your AI agent) to external tools and data sources in a **standardized, safe way**.
+
+---
+
+## Why This Matters: Safe External Integration
+
+**Workflow Impact**: MCP gives Claude Code safe, standardized access beyond your local files. Without it, AI is limited to your codebase. With it, AI can browse documentation, fetch real-time data, interact with external services—all through secure, permission-controlled protocols.
+
+**Paradigm Connection**: This is where AI-driven development becomes truly powerful. CLAUDE.md (Lesson 3) gives AI your project context. MCP gives AI access to the *entire world* of external knowledge and tools—documentation, APIs, databases, web content—while maintaining security boundaries.
+
+**Real-World Context**: When building production applications, you'll use MCP to:
+- Fetch latest library documentation (Context7 MCP)
+- Test web interfaces automatically (Playwright MCP)
+- Query databases safely (PostgreSQL MCP)
+- Access internal company APIs (custom MCP servers)
+
+MCP is the bridge between local context and external intelligence.
 
 ---
 
@@ -166,6 +187,46 @@ What happens:
 ## Try With AI
 
 Use Claude Code for this activity (preferred, since you just installed it). If you already have another AI companion tool set up (e.g., ChatGPT web, Gemini CLI), you may use that instead—the prompts are the same.
+
+### 🤝 Practice Exercise: Three Roles MCP Exploration
+
+Now that you've added an MCP server, let's collaborate with Claude Code to explore what it can do.
+
+**Step 1: AI as Teacher** (Claude suggests capabilities)
+
+Ask Claude Code:
+```
+I've successfully added the Playwright MCP. What are 3 web testing
+tasks you could help me with using this MCP? Show me examples.
+```
+
+Claude will suggest testing patterns you might not have considered—form submissions, screenshot comparisons, accessibility checks, etc.
+
+**Step 2: Student as Teacher** (You provide context Claude needs)
+
+Respond with your specific needs:
+```
+I need to test [YOUR SPECIFIC WEB APPLICATION]. Here's what I'm
+trying to verify: [YOUR TEST SCENARIO]. How would you approach
+this using Playwright MCP?
+```
+
+You teach Claude about your application, your requirements, your constraints.
+
+**Step 3: Convergence** (Together, refine the solution)
+
+Claude proposes a testing approach. You might say:
+- "That's close, but we also need to test mobile viewports"
+- "Can we make this test run faster?"
+- "How do we handle authentication in our tests?"
+
+Through this back-and-forth, you converge on a testing strategy that actually works for YOUR project—not a generic example, but a real solution.
+
+**This is AI collaboration**: Not just "asking Claude to do something," but teaching each other until you reach a better answer together.
+
+**Try this exercise now** with whichever MCP server you installed (Playwright or Context7).
+
+---
 
 ### Prompt 1: MCP Troubleshooting
 

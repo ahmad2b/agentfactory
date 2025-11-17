@@ -2,6 +2,10 @@
 sidebar_position: 8
 title: "Settings Hierarchy"
 duration: "4-6 min"
+stage: "L3"
+prerequisites:
+  - "Lessons 2-7: All prior Claude Code features understood"
+  - "Understanding of configuration management and team coordination"
 learning_objectives:
   - "Understand Claude Code's three-level settings hierarchy"
   - "Recognize precedence order: local > project > user"
@@ -13,6 +17,7 @@ skills:
     category: "Conceptual"
     bloom_level: "Understand"
     digcomp_area: "Problem-Solving"
+concept_count: 5
 ---
 
 # Settings Hierarchy
@@ -109,9 +114,23 @@ Claude Code settings exist at three levels, from general to specific:
 }
 ```
 
-#### 🎓 Expert Insight
+---
 
-> In AI-native development, settings hierarchy mirrors **real-world team dynamics**. Your personal style (user level) is your default. The team's standards (project level) override your defaults when working together. Your local experiments (local level) override both without affecting the team. This is how distributed teams collaborate without constant conflicts.
+## Why Settings Hierarchy Matters for Team Intelligence
+
+**Team Collaboration Without Conflicts**: Settings hierarchy enables teams to share standards (user-level defaults) while allowing personal customization (project-level overrides) and local experimentation (local-level testing)—all without stepping on each other's toes.
+
+**Organizational Intelligence**: Think of this hierarchy as three layers of context:
+- **User settings**: Your personal AI preferences that follow you across all projects
+- **Project settings**: Team-agreed standards that everyone on the project shares (shared via git)
+- **Local settings**: Your private testing and experiments (gitignored, never committed)
+
+This connects to earlier lessons:
+- **CLAUDE.md (Lesson 3)** provides content context at the project level
+- **Skills (Lesson 6)** can be enabled at any hierarchy level
+- **Plugins (Lesson 9)** will use this same hierarchy to configure bundled capabilities
+
+**Real-World Impact**: Without this hierarchy, teams either enforce rigid standards (no personal customization) or descend into chaos (everyone's setup is different). The three-level system gives you both consistency AND flexibility.
 
 ---
 

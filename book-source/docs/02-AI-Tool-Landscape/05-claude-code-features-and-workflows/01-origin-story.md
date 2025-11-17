@@ -2,6 +2,9 @@
 sidebar_position: 1
 title: "The Claude Code Origin Story and Paradigm Shift"
 duration: "8-10 min"
+stage: "L1"
+prerequisites:
+  - "Understanding of what AI is and basic terminal usage"
 learning_objectives:
   - "Understand the fundamental difference between passive AI assistance and agentic AI collaboration"
   - "Recognize how context-aware file integration enables better AI suggestions"
@@ -13,6 +16,7 @@ skills:
     category: "Conceptual"
     bloom_level: "Understand"
     digcomp_area: "Information Literacy"
+concept_count: 5
 ---
 
 # The Claude Code Origin Story and Paradigm Shift

@@ -2,6 +2,10 @@
 sidebar_position: 2
 title: "Installing and Authenticating Claude Code"
 duration: "15-20 min"
+stage: "L1"
+prerequisites:
+  - "Terminal access (Windows/macOS/Linux)"
+  - "Claude account (Claude.ai or Console API)"
 learning_objectives:
   - "Choose appropriate Claude Code installation method for your operating system"
   - "Install Claude Code successfully using one of four installation methods"
@@ -14,6 +18,7 @@ skills:
     category: "Technical"
     bloom_level: "Apply"
     digcomp_area: "Problem-Solving"
+concept_count: 8
 ---
 
 # Installing and Authenticating Claude Code
@@ -24,7 +29,17 @@ In Lesson 1, you learned why Claude Code is revolutionary. Now comes the crucial
 
 This isn't just about following installation commands. It's about crossing the bridge from "interesting concept" to "tool I can actually use." By the end of this lesson, Claude Code will be installed, authenticated, and ready to assist with your development work.
 
-Let's get started.
+---
+
+## Why This Matters: Terminal Integration for AI Workflows
+
+Terminal-based AI integration changes how you work with AI assistance. Unlike web-based tools where you describe code problems and manually copy-paste solutions, terminal-integrated AI sees your actual project context—files, dependencies, structure—and proposes changes to your real codebase.
+
+**Workflow Impact**: You stay in your development environment (terminal + editor) instead of context-switching to a browser. Claude Code reads files, proposes diffs, executes commands, and sees results—all within the same workspace where you code. This removes the friction between intent (what you want) and execution (making it happen).
+
+**Paradigm Connection**: This is the agentic difference from Lesson 1 in action. Web-based AI is a consultant you visit for advice. Terminal-integrated AI is a pair programmer actively collaborating in your workspace. The terminal access enables the paradigm shift from passive assistance to active collaboration.
+
+**Real-World Context**: You'll use this terminal integration for automated file operations (creating, editing, refactoring), git workflows (commits, branches, PRs), and testing integration (run tests, see results, iterate). Installation isn't just setup—it's enabling a fundamentally different development workflow.
 
 ---
 
@@ -38,12 +53,8 @@ Before we begin, verify you have the following:
 - **Linux**: Any terminal emulator (GNOME Terminal, Konsole, etc.)
 
 **2. Claude Account** (one of the following):
-- **Option A**: Claude.ai subscription (Pro or free tier)
-  - Sign up at: https://claude.ai
-  - You'll use this account to authenticate Claude Code
-- **Option B**: Claude Console account with API credits
-  - Create account at: https://console.anthropic.com
-  - Requires payment method for API usage
+- **Option A**: Claude.ai subscription (Pro or free tier) - Sign up at: https://claude.ai
+- **Option B**: Claude Console account with API credits - Create account at: https://console.anthropic.com
 
 ---
 
@@ -85,10 +96,7 @@ npm install -g @anthropic-ai/claude-code
 
 **What this does**: Installs Claude Code via npm package manager (requires Node.js 18+).
 
-**Which method should I use?**
-- **macOS/Linux users**: Use Method 1 (curl) or Method 2 (Homebrew)
-- **Windows users**: Use Method 3 (PowerShell)
-- **Developers with Node.js**: Method 4 (npm) works on all platforms
+**Which method?** macOS/Linux: Method 1 (curl) or 2 (Homebrew); Windows: Method 3 (PowerShell); Node.js users: Method 4 (npm, cross-platform)
 
 #### 🎓 Expert Insight
 > In AI-native development, terminal comfort is a skill multiplier. The 5 minutes you invest learning basic terminal commands unlocks 10x productivity with AI tools. You're not becoming a "terminal expert"—you're removing the friction between intent and execution.
@@ -130,8 +138,6 @@ Do you have a Claude.ai account?
 
 ### Authentication Method A: Claude.ai Account (Most Common)
 
-**Step 1: Start the Authentication Flow**
-
 In your terminal, run:
 
 ```bash
@@ -150,15 +156,7 @@ claude
    2. Anthropic Console account · API usage billing
 ```
 
-Select Option 1. **What happens**: Your default browser opens to the Claude.ai authentication page.
-
-**Step 2: Log In to Claude.ai**
-
-1. If not already logged in, enter your Claude.ai credentials
-2. Review the permissions Claude Code is requesting
-3. Click "Allow" or "Authorize"
-
-**Step 3: Confirm Authentication**
+Select Option 1. Your default browser opens to Claude.ai authentication. Log in, review permissions, and authorize.
 
 Return to your terminal. You should see:
 
@@ -167,15 +165,13 @@ Logged in as mr.abc@gmail.com
 Login successful. Press Enter to continue
 ```
 
-**Step 4: Test Your Setup**
-
-Run a simple test command:
+Test your setup:
 
 ```bash
 claude "Hello! Can you confirm Claude Code is working?"
 ```
 
-**Expected output**: Claude responds with a greeting confirming the connection works.
+**Expected output**: Claude responds confirming the connection works.
 
 #### 🤝 Practice Exercise
 
@@ -187,9 +183,7 @@ claude "Hello! Can you confirm Claude Code is working?"
 
 ### Authentication Method B: Claude Console API Account (Developers)
 
-**When to use this**: You have Claude Console API credits but no Claude.ai subscription. Common for developers using Anthropic's API directly.
-
-**Step 1: Start the Authentication Flow**
+Use this if you have Claude Console API credits but no Claude.ai subscription.
 
 In your terminal, run:
 
@@ -209,16 +203,7 @@ claude
  ❯ 2. Anthropic Console account · API usage billing
 ```
 
-Select Option 2.
-
-**Step 2: Enter Your API Key**
-
-1. Go to Claude Console: https://console.anthropic.com/settings/keys
-2. Create a new API key (if you don't have one)
-3. Copy the API key
-4. Return to your terminal and paste the key when prompted
-
-**Step 3: Confirm Authentication**
+Select Option 2. Go to https://console.anthropic.com/settings/keys, create an API key, copy it, and paste when prompted.
 
 You should see:
 
@@ -227,15 +212,13 @@ API key validated successfully
 Login successful. Press Enter to continue
 ```
 
-**Step 4: Test Your Setup**
-
-Run a simple test command:
+Test your setup:
 
 ```bash
 claude "Hello! Can you confirm Claude Code is working?"
 ```
 
-**Expected output**: Claude responds with a greeting confirming the connection works.
+**Expected output**: Claude responds confirming the connection works.
 
 **⚠️ Important for Console API Users**:
 - Set usage limits in Console: https://console.anthropic.com/settings/limits
