@@ -903,7 +903,3 @@ This is how real developers learn with AI—you identify the gap, ask specifical
 ---
 
 **Remember**: The goal is not to memorize syntax. The goal is to understand **why types exist**, **how to use the tools** that work with types, and **how to write clear type-hinted code**.
-
-You're ready to move to Chapter 15 (Operators). There, you'll use these types in operations, combining them, comparing them, and building logic. The types are the vocabulary; operators are the grammar.
-
-**Congratulations on completing Chapter 14!** You've mastered a foundational pillar of Python programming.
