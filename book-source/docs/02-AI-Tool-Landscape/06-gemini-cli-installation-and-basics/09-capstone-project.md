@@ -344,7 +344,7 @@ Before you start building, use this checklist. Each "yes" answer means your spec
 **Count your checkmarks**:
 - 10-12 "yes": Spec is excellent, ready to implement
 - 7-9 "yes": Spec is good, ready to implement with minor refinements
-- <7 "yes": Spec needs clarification before you build
+- Less than 7 "yes": Spec needs clarification before you build
 
 ### Common Spec Problems (And How to Fix Them)
 

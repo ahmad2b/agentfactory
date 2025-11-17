@@ -18,7 +18,7 @@ learning_objectives:
     bloom_level: "Apply"
     digcomp: "3.2 Integrating and re-elaborating digital content"
   - id: LO3
-    description: "Use argument injection ({{args}}) to make commands flexible for different topics"
+    description: "Use argument injection (double curly braces with args) to make commands flexible for different topics"
     bloom_level: "Apply"
     digcomp: "3.2 Integrating and re-elaborating digital content"
   - id: LO4
@@ -171,11 +171,11 @@ Can be multiple lines.
 **The `description`**: Shows up when you type `/help` to list all your commands
 **The `prompt`**: The actual text sent to Gemini when you run the command
 
-### Making Commands Flexible with {{args}}
+### Making Commands Flexible with Arguments
 
-The magic part is `{{args}}` (called a "placeholder"):
+The magic part is `{'{{args}}'}` (called a "placeholder"):
 
-**Without {{args}}** - Fixed command:
+**Without arguments** - Fixed command:
 ```toml
 description = "Get motivation for learning"
 prompt = "Give me an encouraging message about learning to code"
@@ -183,7 +183,7 @@ prompt = "Give me an encouraging message about learning to code"
 
 Usage: `/motivate` (always says the same thing)
 
-**With {{args}}** - Flexible command:
+**With arguments** - Flexible command:
 ```toml
 description = "Get motivation for any learning topic"
 prompt = "Give me an encouraging message about learning {{args}}"
@@ -194,7 +194,7 @@ Usage:
 - `/motivate Git` → motivation for learning Git
 - `/motivate programming` → motivation for learning programming
 
-The `{{args}}` placeholder gets **replaced** with whatever you type after the command.
+The `{'{{args}}'}` placeholder gets **replaced** with whatever you type after the command.
 
 ### Real Example: Study Helper
 
@@ -458,12 +458,12 @@ Now you have three organized study-related commands!
    - ✅ Correct: `prompt = """Multi-line text here"""`
    - ❌ Wrong: `prompt = "Multi-line text here"`
 
-### "The command runs but {{args}} shows up literally"
+### "The command runs but arguments show up literally"
 
 **Problem**: Wrong bracket type.
 
 **Check**:
-- ✅ Correct: `{{args}}` (double curly braces)
+- ✅ Correct: `{'{{args}}'}` (double curly braces)
 - ❌ Wrong: `{args}` (single braces)
 - ❌ Wrong: `[[args]]` (square brackets)
 
