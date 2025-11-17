@@ -240,7 +240,7 @@ This framework is your superpower. **When you're unsure about types, ask: "What 
 
 ## Introducing type() — Your Type Detective
 
-Now we introduce our first **type inspection tool**: the `type()` function.
+Python provides three type inspection tools: `type()`, `isinstance()`, and `id()`. In this lesson, we'll focus on `type()`. You'll learn `isinstance()` and `id()` in Lesson 5.
 
 ### What Does type() Do?
 
