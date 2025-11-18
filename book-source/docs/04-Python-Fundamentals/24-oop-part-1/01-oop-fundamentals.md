@@ -94,7 +94,7 @@ This is discovery-based learning: you'll encounter the problem before seeing the
 
 ---
 
-## Part 1: Student Discovers Procedural Pain Points
+## Part 1: Experience Procedural Pain Points
 
 **Your Role**: Code explorer discovering why OOP exists through experimentation
 
@@ -201,7 +201,7 @@ Instead of creating manual files, **use AI to synthesize** what you learned:
 
 ---
 
-## Part 2: AI Explains OOP as a Solution
+## Part 2: Learn OOP as a Solution
 
 **Your Role**: Student receiving instruction from AI Teacher
 
@@ -264,7 +264,7 @@ Ask AI: "In your class-based solution, show me how 100 different accounts can co
 
 ---
 
-## Part 3: Student Challenges AI with Design Edge Cases
+## Part 3: Challenge AI with Design Edge Cases
 
 **Your Role**: Student teaching AI by testing its understanding
 

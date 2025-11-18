@@ -122,7 +122,7 @@ Now you'll master professional-grade class design through access control and mul
 
 ---
 
-## Part 1: Student Discovers Access Control and Method Types
+## Part 1: Experience Access Control and Method Types
 
 **Your Role**: Code explorer discovering why data protection and method organization matter
 
@@ -260,7 +260,7 @@ Document in `method_type_analysis.md`:
 
 ---
 
-## Part 2: AI Explains Access Control and Method Design
+## Part 2: Learn Access Control and Method Design
 
 **Your Role**: Student receiving instruction from AI Teacher
 
@@ -285,7 +285,7 @@ After AI explains, ask: "Show me how the @property decorator works for protectin
 
 ---
 
-## Part 3: Student Challenges AI with Method Design
+## Part 3: Challenge AI with Method Design
 
 **Your Role**: Student teaching AI by testing design understanding
 

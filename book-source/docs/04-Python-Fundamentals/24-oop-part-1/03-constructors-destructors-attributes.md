@@ -89,7 +89,7 @@ In this lesson, you'll discover why these patterns matter through hands-on exper
 
 ---
 
-## Part 1: Student Discovers Default Parameters and Attribute Types
+## Part 1: Experience Default Parameters and Attribute Types
 
 **Your Role**: Code experimenter discovering initialization patterns and attribute scoping
 
@@ -222,7 +222,7 @@ Instead of manual files, **use AI to synthesize**:
 
 ---
 
-## Part 2: AI Explains Advanced Constructor Patterns
+## Part 2: Learn Advanced Constructor Patterns
 
 **Your Role**: Student receiving instruction from AI Teacher
 
@@ -260,7 +260,7 @@ After AI explains, ask:
 
 ---
 
-## Part 3: Student Challenges AI with Edge Cases
+## Part 3: Challenge AI with Edge Cases
 
 **Your Role**: Student teaching AI by testing edge case understanding
 

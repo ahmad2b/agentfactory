@@ -530,7 +530,7 @@ In this challenge, you'll move through all four roles: discovering requirements 
 
 ---
 
-## Part 1: Student Discovers Inheritance Problems in Agent Systems
+## Part 1: Experience Inheritance Problems in Agent Systems
 
 **Your Role**: System architect identifying design gaps with AI collaboration
 
@@ -579,7 +579,7 @@ Imagine you're building a multi-agent system. Each agent type (ChatAgent, CodeAg
 
 ---
 
-## Part 2: AI Teaches Inheritance and MRO as the Solution
+## Part 2: Learn Inheritance and MRO as the Solution
 
 **Your Role**: Student learning from AI Teacher
 
@@ -646,7 +646,7 @@ Write 1-paragraph summary: "How Inheritance Solves Agent Duplication" explaining
 
 ---
 
-## Part 3: Student Challenges AI with Design Edge Cases
+## Part 3: Challenge AI with Design Edge Cases
 
 **Your Role**: Student testing AI's understanding
 

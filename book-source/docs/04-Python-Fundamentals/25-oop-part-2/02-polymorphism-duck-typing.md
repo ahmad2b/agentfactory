@@ -695,7 +695,7 @@ In this challenge, you'll discover why polymorphism matters, learn how both ABC 
 
 ---
 
-## Part 1: Student Discovers Type-Checking Problems in Agent Dispatch
+## Part 1: Experience Type-Checking Problems in Agent Dispatch
 
 **Your Role**: System architect identifying design gaps with AI collaboration
 
@@ -744,7 +744,7 @@ Imagine you're building a multi-agent dispatcher that routes messages to differe
 
 ---
 
-## Part 2: AI Teaches Polymorphism and Duck Typing as Solutions
+## Part 2: Learn Polymorphism and Duck Typing as Solutions
 
 **Your Role**: Student learning from AI Teacher
 
@@ -821,7 +821,7 @@ Write 1-paragraph summary: "How Polymorphism Eliminates Type Checking" explainin
 
 ---
 
-## Part 3: Student Challenges AI with Design Edge Cases
+## Part 3: Challenge AI with Design Edge Cases
 
 **Your Role**: Student testing AI's understanding
 

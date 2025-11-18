@@ -547,7 +547,7 @@ In this challenge, you'll discover why inheritance creates rigid designs, learn 
 
 ---
 
-## Part 1: Student Discovers Inheritance Rigidity in Agent Design
+## Part 1: Experience Inheritance Rigidity in Agent Design
 
 **Your Role**: System architect identifying design constraints with AI collaboration
 
@@ -601,7 +601,7 @@ Imagine you're building an agent framework where agents need different capabilit
 
 ---
 
-## Part 2: AI Teaches Composition as the Flexible Solution
+## Part 2: Learn Composition as the Flexible Solution
 
 **Your Role**: Student learning from AI Teacher
 
@@ -669,7 +669,7 @@ Write 1-paragraph summary: "How Composition Replaces Inheritance in Agent Design
 
 ---
 
-## Part 3: Student Challenges AI with Architecture Edge Cases
+## Part 3: Challenge AI with Architecture Edge Cases
 
 **Your Role**: Student testing AI's understanding
 

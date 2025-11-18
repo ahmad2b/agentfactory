@@ -450,7 +450,7 @@ The big insight: **Class creation is not magic. It's just Python code that you c
 
 ---
 
-## Part 1: Discover Class Creation by Tracing `type()`
+## Part 1: Experience Class Creation by Tracing `type()`
 
 **Your Role**: Active experimenter discovering the class creation mechanism with AI collaboration
 
@@ -500,7 +500,7 @@ Before you can understand metaclasses, you need to see that classes are objects 
 
 ---
 
-## Part 2: AI Explains the Metaclass Hierarchy
+## Part 2: Learn the Metaclass Hierarchy
 
 **Your Role**: Student learning from AI Teacher
 
@@ -557,7 +557,7 @@ Write 2-paragraph summary in your notes:
 
 ---
 
-## Part 3: Student Challenges AI with Edge Cases
+## Part 3: Challenge AI with Edge Cases
 
 **Your Role**: Student teaching AI by finding boundaries of understanding
 

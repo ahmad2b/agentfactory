@@ -744,7 +744,7 @@ In this capstone challenge, you'll integrate all four design patterns (plus addi
 
 ---
 
-## Part 1: Student Plans Multi-Pattern System with AI
+## Part 1: Plan Multi-Pattern System with AI
 
 **Your Role**: System architect planning integration of 4 design patterns with AI collaboration
 
@@ -817,7 +817,7 @@ You'll understand the DEPENDENCIES between patterns before implementing.
 
 ---
 
-## Part 2: AI Generates System, Student Validates Design
+## Part 2: Generate System and Validate Design
 
 **Your Role**: Design validator working with AI to generate and refine the multi-pattern system
 
@@ -928,7 +928,7 @@ Write 2-paragraph summary: "How I Validated and Enhanced a Multi-Pattern System"
 
 ---
 
-## Part 3: Student Challenges AI with Complex Architecture Questions
+## Part 3: Challenge AI with Complex Architecture Questions
 
 **Your Role**: Student testing AI's understanding of pattern interactions
 

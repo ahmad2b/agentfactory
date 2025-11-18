@@ -603,7 +603,7 @@ In this challenge, you'll discover why custom objects need special methods, lear
 
 ---
 
-## Part 1: Student Discovers the Limitation of Objects Without Special Methods
+## Part 1: Experience the Limitation of Objects Without Special Methods
 
 **Your Role**: Developer discovering protocol limitations with AI collaboration
 
@@ -651,7 +651,7 @@ Imagine you're building a Vector class for mathematical computations. You want t
 
 ---
 
-## Part 2: AI Teaches Special Methods as Protocol Support
+## Part 2: Learn Special Methods as Protocol Support
 
 **Your Role**: Student learning from AI Teacher
 
@@ -731,7 +731,7 @@ Write 1-paragraph summary: "How Special Methods Enable Protocol-Driven Design" e
 
 ---
 
-## Part 3: Student Challenges AI with Protocol Edge Cases
+## Part 3: Challenge AI with Protocol Edge Cases
 
 **Your Role**: Student testing AI's understanding
 

@@ -103,7 +103,7 @@ This capstone integrates everything from Lessons 1-4, but instead of manually ty
 
 ---
 
-## Part 1: Student Plans Game Architecture with AI
+## Part 1: Plan Game Architecture with AI
 
 **Your Role**: Game designer collaborating with AI to plan (not write formal specs - just plain language planning)
 
@@ -177,7 +177,7 @@ After your conversation with AI, write down a simple plan (no formal template ne
 
 ---
 
-## Part 2: AI Generates Code, Student Validates Design
+## Part 2: Generate Code and Validate Design
 
 **Your Role**: Design validator working with AI to generate and refine the system
 
@@ -381,7 +381,7 @@ Create `game_character_system.py` with:
 
 ---
 
-## Part 3: Student Challenges AI with "What If" Extensions
+## Part 3: Challenge AI with "What If" Extensions
 
 **Your Role**: Game designer testing design flexibility
 

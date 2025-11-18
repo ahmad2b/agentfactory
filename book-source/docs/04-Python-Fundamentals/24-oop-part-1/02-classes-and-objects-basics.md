@@ -101,7 +101,7 @@ In Lesson 1, you discovered WHY OOP exists. Now you'll learn the syntax for HOW 
 
 ---
 
-## Part 1: Student Discovers Classes by Experimentation
+## Part 1: Experience Classes by Experimentation
 
 **Your Role**: Code explorer discovering how Python implements objects
 
@@ -241,7 +241,7 @@ Instead of manual documentation, **use AI to synthesize** what you learned:
 
 ---
 
-## Part 2: AI Explains Class Syntax and Constructors
+## Part 2: Learn Class Syntax and Constructors
 
 **Your Role**: Student receiving instruction from AI Teacher
 
@@ -305,7 +305,7 @@ Ask AI: "Show me what happens in memory when I call `Dog('Max', 'Labrador', 5)`.
 
 ---
 
-## Part 3: Student Challenges AI with Edge Cases
+## Part 3: Challenge AI with Edge Cases
 
 **Your Role**: Student teaching AI by testing its understanding
 
