@@ -134,7 +134,7 @@ You ask Claude Code: "Generate a recipe for chocolate chip cookies as JSON." Cla
 Now comes the validation:
 
 ```python
-llm_response = '''
+llm_response: str = '''
 {
     "name": "Chocolate Chip Cookies",
     "ingredients": ["2 cups flour", "1 cup sugar", "2 eggs", "chocolate chips"],
@@ -214,7 +214,7 @@ def generate_recipe_attempt_1() -> Recipe | None:
     # llm_response = claude_code.generate(prompt)
 
     # For demo, simulating what a vague prompt might produce:
-    llm_response = '''
+    llm_response: str = '''
     {
         "name": "Chocolate Cookies",
         "ingredients": ["flour", "sugar", "chocolate"],

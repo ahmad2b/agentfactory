@@ -479,7 +479,7 @@ from typing import Any
 class Field:
     """Descriptor representing a database field."""
 
-    def __init__(self, field_type: type, required: bool = True, default: Any = None):
+    def __init__(self, field_type: type, required: bool = True, default: object = None) -> None:
         self.field_type = field_type
         self.required = required
         self.default = default
@@ -521,7 +521,7 @@ class ModelMeta(type):
     @staticmethod
     def _generate_init(cls: type, fields: dict[str, Field]) -> None:
         """Generate __init__ method based on fields."""
-        def __init__(self, **kwargs):
+        def __init__(self, **kwargs: Any) -> None:
             # Set all field values from kwargs
             for field_name, field_obj in fields.items():
                 if field_name in kwargs:

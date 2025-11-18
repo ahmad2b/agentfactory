@@ -136,7 +136,7 @@ class Stack[T]:
 
 
 # Type-safe usage with integers
-int_stack = Stack[int]()
+int_stack: Stack[int] = Stack[int]()
 int_stack.push(1)
 int_stack.push(2)
 int_stack.push(3)
@@ -145,7 +145,7 @@ top: int | None = int_stack.pop()  # Type: int | None
 print(top)  # Output: 3
 
 # Type-safe usage with strings
-str_stack = Stack[str]()
+str_stack: Stack[str] = Stack[str]()
 str_stack.push("hello")
 str_stack.push("world")
 
@@ -157,7 +157,7 @@ class Book:
     def __init__(self, title: str):
         self.title = title
 
-book_stack = Stack[Book]()
+book_stack: Stack[Book] = Stack[Book]()
 book_stack.push(Book("Python Guide"))
 book_stack.push(Book("Web Dev"))
 
@@ -188,10 +188,10 @@ class UntypedStack:
         return self._items.pop() if self._items else None
 
 # Using it—no type safety
-stack = UntypedStack()
+stack: UntypedStack = UntypedStack()
 stack.push(1)
 stack.push("string")  # ✅ IDE allows this (but shouldn't!)
-mixed = stack.pop()  # ❌ IDE has no idea what type this is
+mixed: Any = stack.pop()  # ❌ IDE has no idea what type this is
 
 # You could accidentally call wrong methods
 if mixed:
@@ -246,7 +246,7 @@ class Cache[K, V]:
 
 
 # Cache mapping strings to integers (user IDs)
-user_cache = Cache[str, int]()
+user_cache: Cache[str, int] = Cache[str, int]()
 user_cache.set("alice", 1001)
 user_cache.set("bob", 1002)
 
@@ -259,7 +259,7 @@ class User:
         self.name = name
         self.email = email
 
-user_object_cache = Cache[int, User]()
+user_object_cache: Cache[int, User] = Cache[int, User]()
 user_object_cache.set(1001, User("Alice", "alice@example.com"))
 user_object_cache.set(1002, User("Bob", "bob@example.com"))
 
@@ -269,7 +269,7 @@ if user:
     # IDE knows user has .name and .email attributes
 
 # Cache mapping tuples to strings
-location_cache = Cache[tuple[float, float], str]()
+location_cache: Cache[tuple[float, float], str] = Cache[tuple[float, float], str]()
 location_cache.set((37.7749, -122.4194), "San Francisco")
 location_cache.set((40.7128, -74.0060), "New York")
 
@@ -367,17 +367,17 @@ def find_max[T: Comparable](items: list[T]) -> T | None:
 
 # Works with int (supports comparison)
 numbers = [3, 1, 4, 1, 5, 9, 2, 6]
-largest_num = find_max(numbers)  # Type: int | None
+largest_num: int | None = find_max(numbers)  # Type: int | None
 print(largest_num)  # Output: 9
 
 # Works with str (supports comparison)
 names = ["Charlie", "Alice", "Bob"]
-last_name = find_max(names)  # Type: str | None
+last_name: str | None = find_max(names)  # Type: str | None
 print(last_name)  # Output: Charlie
 
 # Works with float
 values = [3.14, 2.71, 1.41]
-largest_value = find_max(values)  # Type: float | None
+largest_value: float | None = find_max(values)  # Type: float | None
 print(largest_value)  # Output: 3.14
 
 # Custom types must implement the protocol
@@ -411,7 +411,7 @@ products = [
     Product(9.99),
     Product(49.99)
 ]
-most_expensive = find_max(products)  # Type: Product | None
+most_expensive: Product | None = find_max(products)  # Type: Product | None
 if most_expensive:
     print(f"Most expensive: ${most_expensive.price}")  # Output: Most expensive: $49.99
 ```

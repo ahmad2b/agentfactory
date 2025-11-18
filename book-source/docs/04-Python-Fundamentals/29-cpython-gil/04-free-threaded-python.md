@@ -386,7 +386,6 @@ Here's working code that detects free-threading and handles all cases:
 
 ```python
 import sys
-from typing import Optional
 
 def check_free_threading() -> dict[str, bool | str]:
     """
@@ -402,7 +401,7 @@ def check_free_threading() -> dict[str, bool | str]:
         >>> print(result)
         {'build_supports_free_threading': True, 'gil_currently_enabled': False, 'free_threading_active': True}
     """
-    gil_status: Optional[bool] = sys._is_gil_enabled()
+    gil_status: bool | None = sys._is_gil_enabled()
 
     # Determine support: None means the build doesn't support free-threading options
     supports_free_threading: bool = gil_status is not None
@@ -559,7 +558,6 @@ The speedup depends on:
 import threading
 import time
 import sys
-from typing import Optional
 
 def cpu_task(n: int) -> int:
     """
@@ -581,7 +579,7 @@ def benchmark_threaded(n: int, num_threads: int) -> float | str:
 
     Returns elapsed time in seconds, or error message if not applicable.
     """
-    gil_status: Optional[bool] = sys._is_gil_enabled()
+    gil_status: bool | None = sys._is_gil_enabled()
 
     # If GIL is enabled, threading won't provide parallelism for CPU-bound work
     if gil_status == True:

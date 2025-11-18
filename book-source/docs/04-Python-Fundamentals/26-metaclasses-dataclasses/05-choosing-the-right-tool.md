@@ -526,13 +526,13 @@ class models:
     class Model:
         pass
     class CharField:
-        def __init__(self, max_length=100):
+        def __init__(self, max_length: int = 100) -> None:
             self.max_length = max_length
     class EmailField:
-        def __init__(self, unique=False):
+        def __init__(self, unique: bool = False) -> None:
             self.unique = unique
     class DateTimeField:
-        def __init__(self, auto_now_add=False):
+        def __init__(self, auto_now_add: bool = False) -> None:
             self.auto_now_add = auto_now_add
 
 class User(models.Model):

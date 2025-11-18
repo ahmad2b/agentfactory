@@ -453,8 +453,9 @@ One of the most common async bugs is forgetting the `await` keyword:
 
 ```python
 import asyncio
+from typing import Any
 
-async def fetch_data(url: str) -> dict:
+async def fetch_data(url: str) -> dict[str, Any]:
     """Fetch data (simulated)."""
     await asyncio.sleep(0.5)
     return {"data": "result"}
@@ -482,8 +483,9 @@ RuntimeWarning: coroutine 'fetch_data' was never awaited
 
 ```python
 import asyncio
+from typing import Any
 
-async def fetch_data(url: str) -> dict:
+async def fetch_data(url: str) -> dict[str, Any]:
     """Fetch data (simulated)."""
     await asyncio.sleep(0.5)
     return {"data": "result"}

@@ -538,7 +538,9 @@ def measure_baseline(n: int, runs: int = 3) -> float:
 ### Step 3: Measure Each Approach
 
 ```python
-def measure_approach(approach_name: str, func, n: int, runs: int = 3) -> tuple[float, float]:
+from collections.abc import Callable
+
+def measure_approach(approach_name: str, func: Callable[[int], None], n: int, runs: int = 3) -> tuple[float, float]:
     """Measure any approach and compare to baseline."""
     times = []
     for _ in range(runs):

@@ -109,7 +109,9 @@ Before we dive into syntax, let's understand the problem Generics solve. In Pyth
 
 **Option 1: No Type Hints**
 ```python
-def get_first_item(items: list) -> None:
+from typing import Any
+
+def get_first_item(items: list) -> Any:
     return items[0] if items else None
 ```
 
@@ -159,11 +161,11 @@ def get_first_item[T](items: list[T]) -> T | None:
 
 # Works with integers
 numbers: list[int] = [1, 2, 3]
-first_num = get_first_item(numbers)  # Type: int | None
+first_num: int | None = get_first_item(numbers)  # Type: int | None
 
 # Works with strings
 names: list[str] = ["Alice", "Bob"]
-first_name = get_first_item(names)  # Type: str | None
+first_name: str | None = get_first_item(names)  # Type: str | None
 
 # Works with custom objects
 class Book:
@@ -171,7 +173,7 @@ class Book:
         self.title = title
 
 books: list[Book] = [Book("Python Guide"), Book("Web Dev")]
-first_book = get_first_item(books)  # Type: Book | None
+first_book: Book | None = get_first_item(books)  # Type: Book | None
 ```
 
 **What's happening here?**
@@ -254,14 +256,18 @@ One of the elegant features of Generics is that Python infers the type automatic
 
 ```python
 # Call 1: Python sees list[int] and infers T = int
-result1 = get_first_item([1, 2, 3])  # T is inferred as int
+result1: int | None = get_first_item([1, 2, 3])  # T is inferred as int
 
 # Call 2: Python sees list[str] and infers T = str
-result2 = get_first_item(["hello", "world"])  # T is inferred as str
+result2: str | None = get_first_item(["hello", "world"])  # T is inferred as str
 
 # Call 3: Python sees list[Book] and infers T = Book
-result3 = get_first_item([Book("A"), Book("B")])  # T is inferred as Book
+result3: Book | None = get_first_item([Book("A"), Book("B")])  # T is inferred as Book
 ```
+
+:::info Production Code Note
+While this lesson demonstrates type inference to show how Generics work, **production code should include explicit type annotations on variable declarations** like the examples above. This makes your code more readable and helps IDEs provide better autocomplete and error detection.
+:::
 
 You never explicitly tell Python what T is. It infers it from the argument you pass. This is why the function "just works" with any type.
 
@@ -271,7 +277,7 @@ In very rare cases, you might need to explicitly specify the type parameter:
 
 ```python
 # Explicit specification (rarely needed)
-result = get_first_item[int]([1, 2, 3])
+result: int | None = get_first_item[int]([1, 2, 3])
 ```
 
 This says "I'm explicitly telling you that T is int." In practice, inference handles 99% of cases. You'll almost never use explicit type parameters.
@@ -282,11 +288,11 @@ Your IDE and type checkers like mypy and Pylance use Generics to validate your c
 
 ```python
 numbers: list[int] = [1, 2, 3]
-first = get_first_item(numbers)  # Type checker knows this is int | None
+first: int | None = get_first_item(numbers)  # Type checker knows this is int | None
 
 # This is safe (int supports +)
 if first is not None:
-    value = first + 10  # ✅ Type checker allows this
+    value: int = first + 10  # ✅ Type checker allows this
 
 # This is an error (int doesn't support .upper())
 if first is not None:
@@ -319,7 +325,7 @@ def get_first_item[T](items: list[T]) -> T | None:
 
 # At runtime, this works (Python is dynamically typed)
 weird_list: list[int] = [1, 2, 3]  # Type says this is list[int]
-first = get_first_item(weird_list)  # Works fine at runtime
+first: int | None = get_first_item(weird_list)  # Works fine at runtime
 
 # Python doesn't actually check that items is list[int]
 # If you pass list[str], Python runs it anyway (runtime is dynamic)
@@ -333,11 +339,11 @@ The value of Generics is in your development workflow:
 
 ```python
 numbers: list[int] = [1, 2, 3]
-first = get_first_item(numbers)
+first: int | None = get_first_item(numbers)
 
 # IDE knows first is int | None
 if first is not None:
-    text = first.upper()  # ❌ IDE shows red squiggly (int has no .upper())
+    text: str = first.upper()  # ❌ IDE shows red squiggly (int has no .upper())
 ```
 
 You see the error in your editor BEFORE running the code. You fix it BEFORE it becomes a production bug. This is the real power—catch mistakes during development, not after deployment.
