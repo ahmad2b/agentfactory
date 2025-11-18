@@ -795,7 +795,7 @@ This is a **5-part bidirectional learning challenge** where you complete, evalua
 3. Verify concurrent fetching: all 3 sources start within 100ms of each other
 4. Verify parallel processing: CPU work happens on multiple cores simultaneously
 5. Test error handling: simulate one source timing out; system should continue
-6. Document timing: {fetch_time, process_time, total_time, speedup_vs_sequential}
+6. Document timing: `{fetch_time, process_time, total_time, speedup_vs_sequential}`
 
 **Expected Behavior**:
 - Concurrent fetch: 3 seconds (longest single source, not sum)

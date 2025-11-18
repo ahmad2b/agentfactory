@@ -518,7 +518,7 @@ This is a **4-part bidirectional learning challenge** where you explore CPython'
 - Detect Python implementation (CPython, PyPy, Jython, etc.)
 - For CPython: show bytecode of a function using `dis`
 - Measure function execution time on current implementation
-- Create a report: {implementation, version, bytecode, execution_time}
+- Create a report: `{implementation, version, bytecode, execution_time}`
 - Test with different implementations if possible (or document what you'd test)
 - Show reference counting (CPython only) using `sys.getrefcount()`
 - Type hints throughout

@@ -932,7 +932,7 @@ This is a **4-part bidirectional learning challenge** where you explore Python 3
 - Measure performance: single-thread, multi-thread on current Python
 - Analyze workload: CPU-bound, I/O-bound, or hybrid
 - Recommend: use free-threading, traditional Python, or multiprocessing
-- Document: {python_version, free_threading_available, speedup_measured, recommendation, caveats}
+- Document: `{python_version, free_threading_available, speedup_measured, recommendation, caveats}`
 - Include migration checklist if switching to free-threading
 - Type hints throughout
 

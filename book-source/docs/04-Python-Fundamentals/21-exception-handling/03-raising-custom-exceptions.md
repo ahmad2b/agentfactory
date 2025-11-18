@@ -93,12 +93,12 @@ You're building a user authentication system. Identify what can go wrong and des
 
 | Error Scenario | Exception Name | Parent Class | Error Message Pattern |
 |---------------|---------------|--------------|----------------------|
-| Username not found | UserNotFoundError | Exception | "User '{username}' does not exist" |
-| Password incorrect | InvalidCredentialsError | Exception | "Invalid password for user '{username}'" |
+| Username not found | UserNotFoundError | Exception | `"User '{username}' does not exist"` |
+| Password incorrect | InvalidCredentialsError | Exception | `"Invalid password for user '{username}'"` |
 | Password too weak | WeakPasswordError | ValueError | "Password must be 8+ chars with mixed types" |
-| Account locked | AccountLockedError | Exception | "Account '{username}' is locked (too many failed attempts)" |
-| Account expired | AccountExpiredError | Exception | "Account '{username}' expired on {date}" |
-| Session timeout | SessionExpiredError | Exception | "Session expired after {minutes} minutes of inactivity" |
+| Account locked | AccountLockedError | Exception | `"Account '{username}' is locked (too many failed attempts)"` |
+| Account expired | AccountExpiredError | Exception | `"Account '{username}' expired on {date}"` |
+| Session timeout | SessionExpiredError | Exception | `"Session expired after {minutes} minutes of inactivity"` |
 
 ### Design Questions
 
@@ -145,14 +145,14 @@ Exception
 **When raised**: User lookup fails in database
 **Parent**: AuthenticationError
 **Required info**: username attempted
-**Error message**: "User '{username}' does not exist in the system"
+**Error message**: `"User '{username}' does not exist in the system"`
 **Recovery strategy**: Prompt user to check spelling or register
 
 ### InvalidCredentialsError
 **When raised**: Password doesn't match stored hash
 **Parent**: AuthenticationError
 **Required info**: username (NOT password for security)
-**Error message**: "Invalid credentials for user '{username}'"
+**Error message**: `"Invalid credentials for user '{username}'"`
 **Recovery strategy**: Prompt user to retry or reset password
 
 [Continue for all exception types...]

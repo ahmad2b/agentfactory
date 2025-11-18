@@ -762,7 +762,7 @@ This is a **4-part bidirectional learning challenge** where you master decision-
 **Your Capstone for This Challenge**: Build an interactive concurrency strategy recommendation engine.
 
 **Specification**:
-- Accept workload characteristics: {workload_type, latency_requirement_ms, memory_budget_mb, cpu_cores, has_expensive_startup}
+- Accept workload characteristics: `{workload_type, latency_requirement_ms, memory_budget_mb, cpu_cores, has_expensive_startup}`
 - Apply decision framework: return recommended approach + reasoning
 - Show alternatives with tradeoffs
 - Include benchmark template for validation
