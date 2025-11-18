@@ -11,7 +11,7 @@ Test your understanding of modern Python package management with UV through AI-d
   title="Chapter 12: Python UV Assessment"
   questions={[
     {
-      question: "A developer argues that UV's 10-100x speed improvement over pip doesn't matter because 'waiting a few seconds for package installation is fine.' What is the most significant flaw in this reasoning from a professional development perspective?",
+      question: "A developer argues that UV's 10–100x speed improvement over pip doesn't matter because 'waiting a few seconds for package installation is fine.' What is the most significant flaw in this reasoning from a professional development perspective?",
       options: [
         "Speed matters for large projects with hundreds of dependencies installed daily",
         "Fast installation enables rapid experimentation and iteration during development cycles",
@@ -247,7 +247,7 @@ Test your understanding of modern Python package management with UV through AI-d
         "Specify minimal Python base image and uv add only production dependencies without development tools"
       ],
       correctOption: 1,
-      explanation: "Option B directly addresses the root cause: production containers don't need development dependencies (pytest for testing, black for formatting, mypy for type checking). These tools are only used during development and CI/CD pipelines, not in production runtime. `uv sync --no-dev` installs only the core dependencies (from [project.dependencies], excluding [project.optional-dependencies.dev]), typically reducing dependency size by 30-50% (testing frameworks and their transitive dependencies are substantial). Option A is a Docker layer caching optimization but doesn't reduce size. Option C might save 100-200 MB but is secondary to removing entire packages (Option B). Option D is essentially the same as Option B but less precise (--no-dev is the specific UV flag for this). The broader principle: production environments should be minimal (reduce attack surface, improve startup time, lower costs). This applies beyond Python to Node (devDependencies), Java (test scope), etc. Always distinguish build-time from runtime dependencies.",
+      explanation: "Option B directly addresses the root cause: production containers don't need development dependencies (pytest for testing, black for formatting, mypy for type checking). These tools are only used during development and CI/CD pipelines, not in production runtime. `uv sync --no-dev` installs only the core dependencies (from [project.dependencies], excluding [project.optional-dependencies.dev]), typically reducing dependency size by 30–50% (testing frameworks and their transitive dependencies are substantial). Option A is a Docker layer caching optimization but doesn't reduce size. Option C might save 100-200 MB but is secondary to removing entire packages (Option B). Option D is essentially the same as Option B but less precise (--no-dev is the specific UV flag for this). The broader principle: production environments should be minimal (reduce attack surface, improve startup time, lower costs). This applies beyond Python to Node (devDependencies), Java (test scope), etc. Always distinguish build-time from runtime dependencies.",
       source: "Lesson 6: Team Collaboration and Reproducible Environments with AI"
     },
     {

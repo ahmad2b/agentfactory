@@ -131,7 +131,7 @@ The most important table in concurrent programming is simple: **workload type ma
 | **Workload Type** | **Nature** | **Best Approach** | **Why** | **Python 3.14 Notes** |
 |---|---|---|---|---|
 | **CPU-Bound (Sequential)** | Compute-heavy, single task | **Single-threaded** | No concurrency overhead; fastest | Still the baseline—measure it first |
-| **CPU-Bound (Parallel, Shared State)** | Compute-heavy, parallel, needs shared memory | **Free-Threaded Python** | True parallelism without process overhead; 5-10% single-threaded cost for 2-4x parallel gain | *New in 3.14* — this is revolutionary |
+| **CPU-Bound (Parallel, Shared State)** | Compute-heavy, parallel, needs shared memory | **Free-Threaded Python** | True parallelism without process overhead; 5–10% single-threaded cost for 2–4x parallel gain | *New in 3.14* — this is revolutionary |
 | **CPU-Bound (Parallel, Isolated)** | Compute-heavy, parallel, processes are independent | **Multiprocessing** | Process isolation when needed; `forkserver` default safer than `fork` | *Improved in 3.14* — safer defaults |
 | **I/O-Bound (Low Concurrency)** | Network/file I/O, event-driven, 10-100 concurrent tasks | **Asyncio** | Single-threaded event loop; no context switching overhead | *Improved in 3.14* — CLI debugging (ps, pstree) |
 | **Hybrid (CPU + I/O)** | Both CPU reasoning and I/O operations | **Free-Threaded + Asyncio** | Threads for CPU work; asyncio for I/O within/across threads | *New in 3.14* — official support for combination |
@@ -208,7 +208,7 @@ Free-threaded Python (introduced in Lesson 4) removes the GIL, enabling true par
 - No process isolation overhead
 - No IPC/serialization
 - Shared memory means data sharing is direct
-- 5-10% single-threaded overhead for 2-4x parallel gains on 4 cores
+- 5–10% single-threaded overhead for 2–4x parallel gains on 4 cores
 
 ### Real Example: AI Multi-Agent System
 
@@ -249,19 +249,19 @@ def benchmark_free_threaded(num_agents: int = 4) -> float:
     return elapsed
 
 # With free-threaded Python 3.14:
-# Expected: ~3-4x speedup on 4-core machine (not the 4x you'd get without overhead)
+# Expected: ~3–4x speedup on 4-core machine (not the 4x you'd get without overhead)
 if __name__ == "__main__":
     free_threaded_time = benchmark_free_threaded(4)
     print(f"Free-threaded (4 agents): {free_threaded_time:.3f}s")
 ```
 
-**The gain**: On a 4-core machine with free-threaded Python, this runs in ~1/3 to 1/4 the time of single-threaded. The 5-10% overhead is more than compensated by true parallelism.
+**The gain**: On a 4-core machine with free-threaded Python, this runs in ~1/3 to 1/4 the time of single-threaded. The 5–10% overhead is more than compensated by true parallelism.
 
 #### 🚀 CoLearning Challenge (25 min mark)
 
 Ask your AI Companion:
 
-> "Compare free-threaded Python to traditional threading with the GIL. Create a benchmark that shows: (1) traditional GIL threading stays around baseline time (no speedup), (2) free-threaded achieves 2-4x speedup. Explain why the GIL prevented the speedup and free-threading enables it."
+> "Compare free-threaded Python to traditional threading with the GIL. Create a benchmark that shows: (1) traditional GIL threading stays around baseline time (no speedup), (2) free-threaded achieves 2–4x speedup. Explain why the GIL prevented the speedup and free-threading enables it."
 
 **Expected outcome**: You'll understand viscerally why free-threading is revolutionary. You'll see that traditional threading doesn't actually parallelize CPU work.
 
@@ -421,7 +421,7 @@ if __name__ == "__main__":
 
 ### 2. Faster Event Loop Performance
 
-Python 3.14 improves event loop speed by ~10-20% through optimizations in task switching. This compounds for systems handling 100s of concurrent connections.
+Python 3.14 improves event loop speed by ~10–20% through optimizations in task switching. This compounds for systems handling 100s of concurrent connections.
 
 ### 3. Better Error Reporting
 

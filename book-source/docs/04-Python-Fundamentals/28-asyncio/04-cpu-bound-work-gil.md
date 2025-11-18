@@ -18,7 +18,7 @@ learning_objectives:
   - objective: "Measure performance differences between threading and InterpreterPoolExecutor"
     proficiency_level: "B2"
     bloom_level: "Analyze"
-    assessment_method: "Benchmark showing 3-4x speedup on 4-core machine with InterpreterPoolExecutor"
+    assessment_method: "Benchmark showing 3–4x speedup on 4-core machine with InterpreterPoolExecutor"
 
   - objective: "Choose between InterpreterPoolExecutor and ProcessPoolExecutor based on requirements"
     proficiency_level: "B2"
@@ -51,7 +51,7 @@ skills:
     category: "Technical"
     bloom_level: "Analyze"
     digcomp_area: "Problem-Solving"
-    measurable_at_this_level: "Student measures and interprets 3-4x speedup on 4-core machine"
+    measurable_at_this_level: "Student measures and interprets 3–4x speedup on 4-core machine"
 
   - name: "Executor Selection and Tradeoffs"
     proficiency_level: "B2"

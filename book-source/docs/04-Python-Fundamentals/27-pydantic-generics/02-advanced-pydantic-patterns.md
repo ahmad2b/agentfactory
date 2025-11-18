@@ -228,7 +228,7 @@ class Product(BaseModel):
     price: float = Field(ge=0, le=1_000_000, description="Price in dollars")
     quantity: int = Field(ge=0, description="Stock quantity (non-negative)")
     sku: str = Field(pattern=r"^[A-Z]{3}-\d{4}$", description="Format: ABC-1234")
-    discount_percent: float = Field(ge=0, le=100, description="Discount 0-100%")
+    discount_percent: float = Field(ge=0, le=100, description="Discount 0–100%")
 
 # Valid product: all constraints satisfied
 product1: Product = Product(

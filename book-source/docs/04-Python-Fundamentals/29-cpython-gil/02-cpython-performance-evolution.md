@@ -68,7 +68,7 @@ learning_objectives:
   - objective: "Connect performance improvements to AI workload requirements and develop intuition for compounding speedups"
     proficiency_level: "B1"
     bloom_level: "Analyze"
-    assessment_method: "Student explains why 3-5% interpreter speedup matters for multi-billion operation loops; calculates examples"
+    assessment_method: "Student explains why 3–5% interpreter speedup matters for multi-billion operation loops; calculates examples"
 
 cognitive_load:
   new_concepts: 6
@@ -94,7 +94,7 @@ In Lesson 1, you learned what CPython is—the reference implementation written 
 
 Now here's the exciting part: after three decades with essentially the same interpreter architecture, Python 3.14 (released October 2025) introduces multiple performance improvements that compound together. These aren't minor tweaks—they represent a fundamental rethinking of how the interpreter executes bytecode. In this lesson, you'll explore what changed, why it matters, and how these improvements set the stage for the GIL evolution you'll learn about in Lesson 3.
 
-Why is this important for you? Every 1-5% interpreter speedup multiplies across millions of operations. For AI workloads—where your agent might execute billions of operations per second—these improvements translate to lower latency, faster inference, and more responsive real-time systems.
+Why is this important for you? Every 1–5% interpreter speedup multiplies across millions of operations. For AI workloads—where your agent might execute billions of operations per second—these improvements translate to lower latency, faster inference, and more responsive real-time systems.
 
 ## Section 1: Python 3.14 Performance Improvements Overview
 
@@ -105,7 +105,7 @@ Here's what changed in a nutshell:
 **From Experimental to Production**:
 - Python 3.13 added initial performance features (behind experimental flags)
 - Python 3.14 activates these by default, stabilizes them, adds new optimizations
-- Result: 3-5% faster interpreter for typical workloads, with bigger gains (10-15%) for specific patterns
+- Result: 3–5% faster interpreter for typical workloads, with bigger gains (10–15%) for specific patterns
 
 **Multiple Improvements Compound**:
 These improvements don't work in isolation. When combined, they create multiplicative speedups:
@@ -121,7 +121,7 @@ Python developers use the **pyperformance benchmark suite**—a collection of re
 
 Before we dive deeper into the "how," let's build intuition:
 
-> "Ask your AI: 'Python 3.14 is 3-5% faster than 3.13. Show me a concrete example: if I have a loop that runs 1 billion times, how much time do I save with 5% speedup? Why does this matter for AI agents?' Then explore: 'What's the timeline for CPython getting faster—has there been a performance improvement trend over the last 5 years?'"
+> "Ask your AI: 'Python 3.14 is 3–5% faster than 3.13. Show me a concrete example: if I have a loop that runs 1 billion times, how much time do I save with 5% speedup? Why does this matter for AI agents?' Then explore: 'What's the timeline for CPython getting faster—has there been a performance improvement trend over the last 5 years?'"
 
 You'll discover that interpreter performance improvements follow predictable patterns, and you'll learn to think in terms of compounding effects over billions of operations.
 
@@ -150,7 +150,7 @@ Python 3.14 optimizes this with **adaptive bytecode specialization**: the interp
 The traditional interpreter spends a surprising amount of time on housekeeping—fetching, decoding, dispatching instructions—rather than on the actual computation. By reducing this overhead:
 - Each bytecode instruction executes faster
 - Tight loops (common in computation) see biggest gains
-- Cumulative effect: 3-5% speedup for typical workloads
+- Cumulative effect: 3–5% speedup for typical workloads
 
 ### When It Matters Most
 
@@ -353,7 +353,7 @@ Here's how professional developers approach this: they don't calculate latency b
 
 #### 💬 AI Colearning Prompt
 
-> "Ask your AI: 'A 3-5% interpreter speedup doesn't sound like much. But for an AI agent processing tokens continuously, why does it matter? Show me the math: if a single token takes 1ms to process and I generate 1 million tokens per day, how much time does 5% speedup save? What about 50 million tokens (typical large model)?' Then explore: 'Why would I care about saving minutes per day on token generation?'"
+> "Ask your AI: 'A 3–5% interpreter speedup doesn't sound like much. But for an AI agent processing tokens continuously, why does it matter? Show me the math: if a single token takes 1ms to process and I generate 1 million tokens per day, how much time does 5% speedup save? What about 50 million tokens (typical large model)?' Then explore: 'Why would I care about saving minutes per day on token generation?'"
 
 **Expected Exploration**: You'll develop intuition for compounding effects. You'll understand why performance optimization at scale is not vanity—it directly impacts inference cost, latency, and user experience.
 
