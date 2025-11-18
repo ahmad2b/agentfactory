@@ -1,20 +1,196 @@
+---
+title: "Chapter 10: Prompt Engineering for AI-Driven Development"
+sidebar_label: "Chapter 10: Prompt Engineering"
+sidebar_position: 10
+description: "Learn to communicate clearly with AI through effective prompt writing, iteration, validation, and reusable templates"
+---
+
 # Chapter 10: Prompt Engineering for AI-Driven Development
 
-Clear prompts equal working code on the first try. Vague prompts equal hours spent debugging AI-generated mistakes. Mastering prompting techniques is essential for effective AI collaboration.
+Clear prompts get better AI responses. Vague prompts waste time with back-and-forth clarification. This chapter teaches you how to communicate your intent effectively so AI can help you accomplish development tasks.
 
-This chapter teaches **prompt engineering** as a **specification skill** for AI-native development—the ability to communicate intent, constraints, and success criteria to AI systems with the same precision product managers use to specify requirements. You'll learn the frameworks that Jake Heller (Casetext founder, $650M exit to Thomson Reuters) used to refine AI prompts from 60% accuracy to 97% accuracy through iterative specification writing.
-
-By the end of this chapter, you'll write prompts that consistently produce high-quality AI outputs and create reusable prompt templates for recurring development tasks. This chapter focuses exclusively on **what you SAY** to your AI agent. Chapter 11 will teach context engineering—**what your AI agent KNOWS** when you say it.
+You'll learn to structure prompts clearly, iterate through collaboration with AI, validate outputs systematically, and build reusable prompt templates for recurring tasks. By the end of this chapter, you'll have your own prompt toolkit—a collection of tested templates you'll use in daily development work.
 
 ## What You'll Learn
 
-By the end of this chapter, you will be able to:
+This chapter focuses exclusively on **what you SAY** to your AI agent (prompt engineering). Chapter 11 will teach **what your AI agent KNOWS** when you say it (context engineering).
 
-- **Explain prompt engineering as specification skill** — Distinguish between specification prompts (WHAT) and vague requests, analyze prompts for completeness using Intent-Constraints-Success framework
-- **Write structured prompts with clear intent** — Construct prompts using Intent → Constraints → Success Criteria structure, apply 8 technical action verbs (Create, Debug, Refactor, Analyze, Optimize, Generate, Explain, Validate)
-- **Apply iterative refinement to improve prompt quality** — Identify specification gaps in AI outputs, refine prompts through iteration to achieve 90%+ quality (Jake Heller's 60% → 97% framework)
-- **Write specification documents before prompting** — Define measurable success criteria, specify constraints and non-goals explicitly, create validation tests for acceptance criteria
-- **Use Question-Driven Development to elicit requirements** — Prompt AI to ask clarifying questions, transform AI questions and answers into structured specifications
-- **Create reusable prompt templates** — Recognize recurring prompt patterns (2+ occurrences), design templates with placeholders and usage guidance, evolve templates based on usage patterns
-- **Apply template selection decision frameworks** — Classify tasks by category (Diagnostic, Transformative, Generative, Explanatory, Evaluative), evaluate template applicability in &lt;30 seconds, decide between template, custom prompt, or hybrid approach
-- **Write peer-reviewable specifications** — Produce specification documents implementable without clarification, define measurable success criteria and validation tests, identify and document open questions
+### Learning Objectives
+
+**LO-001: Distinguish vague from specific prompts**
+- Identify what makes prompts effective through comparison
+- Explain why AI needs context, task, and format information
+- Improve vague prompts by adding specific details
+
+**LO-002: Structure prompts using Task + Context + Format**
+- Write prompts with clear action verbs (explain, create, debug, optimize)
+- Provide context about your experience level and situation
+- Specify the output format you need (bullet points, code blocks, examples)
+
+**LO-003: Enhance prompts with examples and constraints**
+- Add examples showing desired output style or structure
+- Use constraints to limit scope, complexity, and length
+- Combine examples and constraints for precise prompts
+
+**LO-004: Demonstrate collaboration through iterative refinement**
+- Evaluate AI responses and identify gaps
+- Refine prompts based on what's missing
+- Work with AI through multiple iterations to converge on solutions
+
+**LO-005: Apply Question-Driven Development**
+- Prompt AI to ask clarifying questions before solving tasks
+- Provide thoughtful answers that shape tailored solutions
+- Compare direct prompting vs. question-driven approaches
+
+**LO-006: Validate AI outputs systematically**
+- Use validation checklist: Read → Understand → Test → Question
+- Identify red flags in AI-generated code (hardcoded values, missing error handling, security issues)
+- Test AI outputs in safe environments before production use
+- Ask AI to explain unfamiliar parts
+
+**LO-007: Create reusable prompt templates**
+- Recognize recurring tasks that warrant templates
+- Design templates with placeholders and usage notes
+- Test and refine templates based on actual use
+
+**LO-008: Build a personal prompt toolkit**
+- Audit your recurring development tasks
+- Create 5-7 templates covering common tasks
+- Build a decision guide mapping tasks to templates
+- Validate each template through real-world testing
+
+## Chapter Structure
+
+This chapter uses a progressive three-phase approach:
+
+### Phase 1: Manual Foundation (Lessons 1-3)
+
+Build mental models for effective prompting WITHOUT relying on AI initially.
+
+**Lesson 1: Why Prompting Matters**
+- Compare vague vs. specific prompts
+- Understand why AI needs clarity
+- Practice improving prompts manually
+
+**Lesson 2: Basic Prompt Structure**
+- Learn Task + Context + Format pattern
+- Write structured prompts for Bash, Git, Markdown tasks
+- Test prompts with AI
+
+**Lesson 3: Adding Examples and Constraints**
+- Enhance prompts with examples showing desired style
+- Add constraints limiting scope and complexity
+- Compare basic vs. enhanced prompt results
+
+### Phase 2: AI Collaboration (Lessons 4-6)
+
+Partner with AI through iteration, questions, and validation.
+
+**Lesson 4: Iterative Refinement**
+- Work through three-iteration pattern (initial → refined → final)
+- Experience collaboration where AI suggests improvements and you correct assumptions
+- Learn from Jake Heller's 60%→97% iterative approach
+
+**Lesson 5: Question-Driven Development**
+- Prompt AI to ask clarifying questions before answering
+- Compare tailored vs. generic solutions
+- Use QDD for complex tasks with multiple valid approaches
+
+**Lesson 6: Validating AI Outputs**
+- Apply systematic validation checklist
+- Identify common AI mistakes and red flags
+- Test AI-generated code safely before production use
+
+### Phase 3: Intelligence Design (Lessons 7-8)
+
+Create reusable prompt patterns for recurring tasks.
+
+**Lesson 7: Building Your Prompt Library**
+- Recognize recurring tasks worth templating
+- Create templates with placeholders and usage notes
+- Version control templates (iterate and improve)
+
+**Lesson 8: Capstone - Your First Prompt Toolkit**
+- Audit your actual recurring tasks
+- Build 5-7 tested templates
+- Create decision guide for template selection
+- Validate toolkit through peer review and real-world use
+
+## Prerequisites
+
+You should have completed:
+- **Chapter 7: Bash Basics** — Command-line operations, scripting fundamentals
+- **Chapter 8: Git Fundamentals** — Version control, commits, branches
+- **Chapter 9: Markdown Syntax** — Documentation formatting, markdown files
+
+## What This Chapter Does NOT Cover
+
+**Context Engineering** (Chapter 11):
+- Context windows and token limits
+- Progressive loading strategies
+- Memory files (CLAUDE.md, architecture.md)
+- Session management
+- Context compression techniques
+
+**Python Programming** (Part 4):
+- Python syntax or examples
+- Python-specific prompting
+- Python debugging with AI
+
+**Advanced AI Concepts**:
+- Fine-tuning, RAG, or LLM internals
+- Agentic workflows
+- Model architecture
+
+This chapter teaches prompt CONTENT (what you say). Chapter 11 teaches context MANAGEMENT (what AI knows).
+
+## Tools Used
+
+This chapter uses:
+- **Claude Code** (Anthropic) — AI coding assistant
+- **Gemini CLI** (Google) — Command-line AI interface
+
+Both tools accept natural language prompts. Specific syntax differences are noted when relevant.
+
+## What You'll Build
+
+By the end of this chapter, you'll have:
+
+**A Personal Prompt Toolkit**: 5-7 tested templates for recurring development tasks (git commits, bash debugging, markdown documentation, etc.)
+
+**A Decision Guide**: Clear mapping from tasks to templates, so you know which template to use when
+
+**Validated Templates**: Each template tested on real tasks and refined based on results
+
+**Reusable Skills**: Patterns you'll apply throughout the book and in professional development
+
+This toolkit will grow as you learn Python (Part 4), specification writing (Part 5), and advanced AI collaboration (Parts 6+).
+
+## Key Concepts
+
+**Task + Context + Format**: The three-element structure for effective prompts
+
+**Iterative Refinement**: Working with AI through multiple rounds to improve results
+
+**Question-Driven Development**: Prompting AI to ask clarifying questions before solving problems
+
+**Validation Checklist**: Read → Understand → Test → Question (systematic approach to checking AI outputs)
+
+**Template Placeholders**: Using [BRACKETS] for variables that change between uses
+
+**Decision Guide**: Mapping common tasks to specific templates for fast selection
+
+## Success Criteria
+
+You've mastered this chapter when you can:
+- Write clear prompts using Task + Context + Format structure
+- Iterate with AI to refine prompts and improve outputs
+- Apply Question-Driven Development for complex tasks
+- Validate AI-generated code systematically before use
+- Create reusable templates for tasks you do 2+ times
+- Build and maintain a personal prompt toolkit
+- Select the right template for common development tasks in under 30 seconds
+
+---
+
+**Ready to start?** Begin with [Lesson 1: Why Prompting Matters](./01-why-prompting-matters.md)
