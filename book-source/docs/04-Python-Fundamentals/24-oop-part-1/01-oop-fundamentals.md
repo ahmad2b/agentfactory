@@ -434,24 +434,20 @@ Once your framework is complete, validate it:
 
 ---
 
-## Summary: Bidirectional Learning Pattern
+## Try With AI
 
-In this lesson, you experienced all three roles:
+Ready to decide when OOP is the right tool and understand why it exists?
 
-**Part 1 (Student discovers)**: You built procedural code and discovered why it fails at scale
-**Part 2 (AI teaches)**: AI explained how OOP solves those exact problems
-**Part 3 (Student teaches)**: You challenged AI with edge cases testing its understanding
-**Part 4 (Knowledge synthesis)**: You built a reusable decision framework
+**🔍 Explore Procedural vs OOP:**
+> "Show me the same feature (user management with add/delete/update) implemented two ways: procedural with separate functions and variables, then OOP with a User class. Compare: lines of code, maintainability, adding a 100th user, fixing a bug in update logic. Which scales better and why?"
 
-This pattern ensures you understand OOP not as abstract theory, but as a practical response to real coding problems.
+**🎯 Practice Identifying OOP Scenarios:**
+> "Analyze these scenarios and tell me if OOP is appropriate: 1) script that calculates pi to 1000 digits, 2) game with players/enemies/NPCs, 3) web scraper that fetches 3 URLs, 4) inventory system tracking 500 products. For each, explain whether to use classes or functions and why."
 
-### What You've Built
+**🧪 Test Object Independence:**
+> "Create a BankAccount class with balance attribute and deposit method. Make two objects: alice and bob. Deposit 100 into alice's account. What's bob's balance? Explain why objects have independent state and what would happen with global variables instead."
 
-1. `procedural_analysis.md` — Your analysis of procedural approach pain points
-2. `procedural_problem_statement.md` — Clear statement of scaling problems
-3. Challenge documentation — Three edge cases you posed to AI
-4. `oop_decision_framework.md` — Your reusable decision framework
+**🚀 Apply to Your Project:**
+> "I'm building [describe your actual project]. Help me identify: what are the entities (potential classes)? Do I have 3+ similar entities with shared behavior? Would bug fixes need to happen in multiple places? Should I use OOP or stick with functions? Give me a decision framework."
 
-### Next Steps
-
-Lesson 2 will build on this foundation by teaching the syntax for creating classes and objects. You'll use this decision framework to understand not just HOW to write classes, but WHY that syntax exists.
+---

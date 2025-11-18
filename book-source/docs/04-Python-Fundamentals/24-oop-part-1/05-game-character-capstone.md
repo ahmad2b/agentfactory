@@ -409,31 +409,20 @@ Ask AI:
 
 ---
 
-## Summary: Capstone Integration Pattern
+## Try With AI
 
-**Part 1 (Discover)**: You clarified requirements through AI conversation
-**Part 2 (Implement)**: You built a complete system from specification
-**Part 3 (Review)**: AI reviewed your code for design quality
-**Part 4 (Extend)**: You added features demonstrating deeper understanding
-**Part 5 (Polish)**: You validated against professional standards
+Ready to build a complete multi-class system that demonstrates OOP mastery?
 
-### What You've Demonstrated
+**🔍 Explore System Design:**
+> "I want to build a game character system with Warriors, Mages, and Archers. Each has health, name, and class-specific abilities (warrior: melee_attack, mage: cast_spell, archer: shoot_arrow). Help me design: should they share a base Character class? What attributes are common vs specific? How should abilities differ?"
 
-1. **Specification Design**: Translating requirements into class hierarchies
-2. **Implementation**: Building working OOP systems
-3. **Refactoring**: Improving design based on feedback
-4. **Extension**: Adding features without breaking existing code
-5. **Professional Quality**: Code that meets production standards
+**🎯 Practice Class Hierarchy:**
+> "Guide me through building the character system step-by-step. Start with base Character class (__init__ with name, health, level). Then create Warrior subclass adding strength attribute and attack() method. Show me how Warrior inherits from Character and extends it. What goes in base vs subclass?"
 
-### Connections to Chapter 24
+**🧪 Test Encapsulation and Validation:**
+> "Add validation to the character system: health can't go below 0 or above max_health (100), level starts at 1, name can't be empty. Use properties or validation in __init__. Then create a take_damage(amount) method. Show me how validation prevents invalid states (negative health, empty name)."
 
-This capstone uses:
-- **Lesson 1 (OOP Why)**: You built a real system that justifies OOP
-- **Lesson 2 (Classes)**: You designed and created multiple classes
-- **Lesson 3 (Attributes)**: You managed public, protected, and instance attributes
-- **Lesson 4 (Methods)**: You used inheritance, instance methods, and access control
-- **Lesson 5 (Capstone)**: You integrated everything into a coherent system
+**🚀 Apply Complete System:**
+> "Build a complete battle system: create 3 characters (Warrior, Mage, Archer), implement attacks that reduce target health, add is_alive() method, create fight_round(attacker, defender) function. Demonstrate full combat until one character's health reaches 0. Show all OOP principles: encapsulation, methods, independent object state."
 
-### What's Next
-
-Chapter 25 introduces inheritance in depth, abstract base classes (ABC), and composition patterns. Your Game Character System is ready for those advanced topics.
+---

@@ -593,22 +593,20 @@ Once your patterns are complete, validate them:
 
 ---
 
-## Summary: Bidirectional Learning Pattern
+## Try With AI
 
-In this lesson, you experienced all three roles:
+Ready to master class syntax and understand how objects manage independent state?
 
-**Part 1 (Student discovers)**: You created objects manually and discovered the limitations
-**Part 2 (AI teaches)**: AI explained `__init__`, `self`, and constructor syntax
-**Part 3 (Student teaches)**: You challenged AI with edge cases about independence and defaults
-**Part 4 (Knowledge synthesis)**: You built reusable patterns for class design
+**🔍 Explore `__init__` and `self`:**
+> "Explain __init__ and self like I'm 10 years old. Then show me a Car class with brand, model, year attributes. Create three car objects. When I call car1.display_info(), how does Python know to show car1's data, not car2's? Trace through what 'self' means in memory."
 
-### What You've Built
+**🎯 Practice Class Design:**
+> "Help me build a Product class for an e-commerce system. It needs: name, price, stock_count attributes; and methods: apply_discount(percentage), restock(quantity), is_available(). Guide me through: what goes in __init__, what are instance methods, how to validate inputs (negative price/stock)."
 
-1. `object_discovery.md` — Your findings from manual object creation
-2. Constructor syntax summary — Your understanding of `__init__` and `self`
-3. Challenge documentation — Three edge cases you posed to AI
-4. `class_design_patterns.md` — Reusable patterns for designing classes
+**🧪 Test Object Independence:**
+> "Create a Counter class with value attribute (starts at 0) and increment() method. Make three counters. Increment the first twice, the second once, the third zero times. Predict final values. Then explain: why don't all counters share the same value? What makes each object independent?"
 
-### Next Steps
+**🚀 Apply to Data Modeling:**
+> "I'm building [describe your system: library, blog, game, etc.]. Help me identify one core entity and design its class. Walk me through: what attributes describe it? What actions can it perform? What should __init__ accept as parameters vs set as defaults?"
 
-Lesson 3 will deepen your understanding with constructors with default parameters, class vs instance attributes, and destructors. You'll use these patterns as a foundation.
+---

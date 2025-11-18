@@ -487,20 +487,20 @@ When designing a constructor, ask:
 
 ---
 
-## Summary: Bidirectional Learning Pattern
+## Try With AI
 
-**Part 1 (Student discovers)**: You experimented with default parameters and discovered instance vs class attributes
-**Part 2 (AI teaches)**: AI explained advanced constructor patterns and attribute design
-**Part 3 (Student teaches)**: You challenged AI with edge cases about mutability and inheritance
-**Part 4 (Knowledge synthesis)**: You built patterns for advanced constructors and attributes
+Ready to master constructors with defaults, understand attribute scoping, and avoid mutable default traps?
 
-### What You've Built
+**🔍 Explore Default Parameters:**
+> "Show me a User class with required name parameter and optional email, role (default='user'), created_at (default=now). Create users with: all params, only name, name+email. Explain when defaults help vs when they hide required data. What's the tradeoff?"
 
-1. `attribute_types_analysis.md` — Your findings on attribute scoping
-2. Summary — Understanding defaults and instance/class distinctions
-3. Challenge documentation — Edge cases you posed to AI
-4. `constructor_and_attributes_guide.md` — Comprehensive reference
+**🎯 Practice Instance vs Class Attributes:**
+> "Build a BankAccount class where: interest_rate is shared by all accounts (class attribute), but balance is per-account (instance attribute). Create accounts, change interest_rate on the class, show how all accounts see the new rate. When should attributes be shared vs independent?"
 
-### Next Steps
+**🧪 Test Mutable Default Danger:**
+> "Create a Team class with members parameter defaulting to []. Add members to team1. Create team2 without members. What's in team2.members? Why? Show me the fix (members=None, then self.members = members or []). Explain the Python default parameter gotcha."
 
-Lesson 4 builds on these foundations with encapsulation, access control (public/protected/private), and three types of methods (instance, class, static). You now understand the data layer; next you'll master method design.
+**🚀 Apply to Configuration:**
+> "I'm building a database connection class. It needs: required host/database, optional port (default 5432), user (default 'admin'), connection_pool settings (dict). Design the __init__ with appropriate defaults. Which params must be provided vs can have sensible defaults?"
+
+---
