@@ -1,5 +1,7 @@
 ---
 sidebar_position: 8
+chapter: 6
+lesson: 8
 title: Extensions, Security & Tool Safety
 cefr_level: A2
 proficiency: Beginner

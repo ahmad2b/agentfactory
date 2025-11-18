@@ -1,5 +1,7 @@
 ---
 sidebar_position: 5
+chapter: 6
+lesson: 5
 title: Configuration & Settings
 cefr_level: A2
 proficiency: Beginner

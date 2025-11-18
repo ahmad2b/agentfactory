@@ -1,5 +1,7 @@
 ---
 sidebar_position: 2
+chapter: 8
+lesson: 2
 title: "Viewing Changes & Safe Undo"
 description: "Discover safe error recovery through deliberate mistake exploration—learn git diff, git restore, and git reset to undo changes fearlessly"
 duration_minutes: 45

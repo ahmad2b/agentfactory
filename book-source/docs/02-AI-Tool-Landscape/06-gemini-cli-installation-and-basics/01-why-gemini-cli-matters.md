@@ -1,6 +1,8 @@
 ---
 sidebar_position: 1
 title: Why Gemini CLI Matters
+chapter: 6
+lesson: 1
 cefr_level: A2
 proficiency: Beginner
 teaching_stage: 1

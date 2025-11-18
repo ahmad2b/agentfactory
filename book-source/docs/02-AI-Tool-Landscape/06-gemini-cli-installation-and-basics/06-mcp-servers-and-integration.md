@@ -1,5 +1,7 @@
 ---
 sidebar_position: 6
+chapter: 6
+lesson: 6
 title: MCP Servers & Integration
 duration: "20 minutes"
 cefr_level: A2

@@ -1,5 +1,7 @@
 ---
 sidebar_position: 7
+chapter: 6
+lesson: 7
 title: Personalizing Your AI Learning Experience
 cefr_level: A2
 proficiency: Beginner

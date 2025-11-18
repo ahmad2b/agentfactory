@@ -1,5 +1,7 @@
 ---
 sidebar_position: 4
+chapter: 6
+lesson: 4
 title: Memory & Context Management
 cefr_level: A2
 proficiency: Beginner
