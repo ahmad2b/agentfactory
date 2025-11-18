@@ -191,7 +191,9 @@ print(counter)  # 1
 ### 💻 Code Idea: Nested Functions and Closures
 
 ```python
-def outer_function(multiplier: int):
+from collections.abc import Callable
+
+def outer_function(multiplier: int) -> Callable[[int], int]:
     """Create a multiplier function."""
 
     def inner_function(number: int) -> int:
