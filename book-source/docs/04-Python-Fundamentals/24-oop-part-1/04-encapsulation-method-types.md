@@ -372,21 +372,21 @@ def balance(self, value: float):
 
 ---
 
-## Summary: Bidirectional Learning Pattern
+## Try With AI
 
-**Part 1 (Student discovers)**: You explored why encapsulation matters and discovered three method types
-**Part 2 (AI teaches)**: AI explained when to use each method type and properties
-**Part 3 (Student teaches)**: You challenged AI with design decisions
-**Part 4 (Knowledge synthesis)**: You built a method design guide
+Ready to understand encapsulation, master method types, and control attribute access with properties?
 
-### What You've Built
+**🔍 Explore Public vs Protected vs Private:**
+> "Build a BankAccount class with three attributes: account_number (public), _balance (protected, convention), __pin (private, name-mangled). Show me how to access each from outside the class. Explain why balance should be protected and what Python's name mangling does with __pin."
 
-1. `method_type_analysis.md` — Your discoveries about method types
-2. Summary — Understanding access control and method selection
-3. Challenge documentation — Real-world design decisions
-4. `method_types_and_encapsulation_guide.md` — Design reference
+**🎯 Practice Instance vs Class vs Static Methods:**
+> "Create a MathHelper class. Add three methods: 1) instance method square_value(self, x) using instance state, 2) class method create_with_preset(cls, preset_name) returning new object, 3) static method is_prime(n) with no self or cls. Explain when to use each type."
 
-### Next Steps
+**🧪 Test Properties for Validation:**
+> "Build a Person class with age property. Use @property for getter, @age.setter for setter that validates (0 <= age <= 150). Try: person.age = -5, person.age = 200, person.age = 25. Show how properties enable validation without breaking the attribute access API. Why is this better than get_age()/set_age()?"
 
-Lesson 5 is the capstone where you'll design and build the Game Character System, using all lessons 1-4 concepts together to create a professional multi-class system.
+**🚀 Apply to Data Validation:**
+> "I'm building a Product class. Price must be positive, stock can't be negative, discount must be 0-100%. Design the class with properties that validate on every set. Show validation error messages. How do properties make the API cleaner than validate_and_set_price() methods?"
+
+---
 

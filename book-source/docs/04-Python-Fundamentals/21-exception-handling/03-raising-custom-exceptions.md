@@ -820,39 +820,20 @@ Once your library is complete, validate it by asking AI:
 
 ---
 
-## Summary: Bidirectional Learning Pattern
+## Try With AI
 
-In this lesson, you experienced all three roles:
+Ready to design custom exceptions that communicate domain logic and enable intelligent error recovery?
 
-**Part 1 (Student designs)**: You designed domain exceptions for authentication system
-**Part 2 (AI teaches)**: AI explained when to create custom vs use built-in exceptions
-**Part 3 (Student teaches)**: You challenged AI with exception inheritance and `__init__` customization
-**Part 4 (Knowledge synthesis)**: You built a reusable exception library for domain modeling
+**🔍 Explore Custom vs Built-In:**
+> "Compare these approaches: 1) raising ValueError for invalid email vs 2) creating InvalidEmailError exception. For each, explain when it's appropriate, what callers can do differently, and how error messages differ. When does custom exception add value?"
 
-This pattern ensures you understand exceptions not just as error handling, but as a domain modeling tool that communicates business logic through type systems.
+**🎯 Practice Exception Hierarchies:**
+> "Help me design exceptions for a payment system: payment declined (insufficient funds, card expired, fraud detected), payment timeout, invalid payment method. Create a hierarchy with base PaymentError. Show how callers catch specific errors vs all payment errors."
 
-### What You've Built
+**🧪 Test Exception Chaining:**
+> "Show me a function that loads JSON config, catches JSONDecodeError, and raises custom ConfigurationError with 'from e' chaining. Explain what's preserved in the traceback and why this is better than just raising ConfigurationError without chaining. How do callers access the original exception?"
 
-1. `auth_exceptions_design.md` — Your exception hierarchy design with rationale
-2. Custom vs built-in summary — Understanding of when each approach is appropriate
-3. Advanced exception challenges — Three patterns exploring `__init__`, inheritance, and chaining
-4. `domain_exceptions.py` — Production-ready exception library for 4 domains
+**🚀 Apply to API Client:**
+> "I'm building an API client that can fail with: network timeout, invalid response format, authentication error, rate limit exceeded. Design custom exceptions with `__init__` parameters that store context (URL, status code, retry-after). Show how callers use exception attributes for retry logic."
 
-### Key Insights
-
-**Exception design principles**:
-- **Custom exceptions for domain logic** (business rules, not generic validation)
-- **Built-in exceptions for generic errors** (ValueError for input validation)
-- **Base exception classes** enable catching categories of errors
-- **Custom `__init__` methods** store context for programmatic error handling
-- **Exception chaining** preserves debugging information while adding business context
-
-**Error message best practices**:
-- Explain what went wrong (the error)
-- Show what was expected (the rule)
-- Include relevant context (values, timestamps, IDs)
-- Suggest recovery actions when possible
-
-### Next Steps
-
-Lesson 4 builds on this foundation, teaching error handling strategies: when to retry, when to fall back to defaults, when to degrade gracefully, and how to log errors for debugging. Your custom exception library will serve as the foundation for strategic error recovery.
+---

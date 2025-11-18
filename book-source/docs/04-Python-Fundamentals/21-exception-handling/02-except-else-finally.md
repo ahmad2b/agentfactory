@@ -606,38 +606,20 @@ Once your template is complete, validate it by asking AI:
 
 ---
 
-## Summary: Bidirectional Learning Pattern
+## Try With AI
 
-In this lesson, you experienced all three roles:
+Ready to master control flow in exception handling and build bulletproof file operations?
 
-**Part 1 (Student predicts)**: You predicted flow control before running code, building intuition
-**Part 2 (AI teaches)**: AI explained the semantic purpose of else (success) vs finally (cleanup)
-**Part 3 (Student teaches)**: You challenged AI with return statement edge cases
-**Part 4 (Knowledge synthesis)**: You built production-ready file operation templates
+**🔍 Explore Flow Control:**
+> "Show me code with all four blocks (try/except/else/finally) and trace execution for three scenarios: no error, caught error, uncaught error. For each scenario, list which blocks execute in what order. Explain why else is skipped when except runs."
 
-This pattern ensures you understand exception handling control flow not just as syntax, but as a reasoning framework for robust resource management.
+**🎯 Practice File Cleanup:**
+> "Help me write a function that reads a file, processes each line, logs success in the else block, and closes the file in finally. Walk me through what happens if: file doesn't exist, file exists but is empty, processing raises unexpected error."
 
-### What You've Built
+**🧪 Test Return Edge Cases:**
+> "Create a function with try/except/else/finally blocks where try has a return statement. Predict what gets returned when: no error occurs, error occurs and except has return, finally has return (bad practice). Explain why finally with return is dangerous."
 
-1. `flow_control_predictions.txt` — Your predictions vs actual behavior for each scenario
-2. Semantic distinction summary — Understanding of else vs finally purposes
-3. Return statement edge case analysis — Three challenges and best practices
-4. `file_operations_template.py` — Reusable file operation templates with proper cleanup
+**🚀 Apply to Database Operations:**
+> "I'm building a database query function that must close the connection no matter what. Show me proper exception handling with: try for query execution, except for SQL errors, else for commit, finally for connection cleanup. Include rollback on error."
 
-### Key Insights
-
-**Flow control rules**:
-- **try**: Runs first, stops at first exception
-- **except**: Runs only if matching exception occurs
-- **else**: Runs only if try completed without exception (no return)
-- **finally**: ALWAYS runs, even with return statements
-
-**Best practices**:
-- Use **else** for success-specific logic (separates concerns)
-- Use **finally** for guaranteed cleanup (resource management)
-- Avoid **return in finally** (overrides other returns)
-- Use **multiple except blocks** for different error types (specific handling)
-
-### Next Steps
-
-Lesson 3 builds on this foundation, teaching you how to raise your own exceptions and create custom exception classes for domain-specific errors. Your file operation templates will serve as examples of where custom exceptions make code clearer.
+---

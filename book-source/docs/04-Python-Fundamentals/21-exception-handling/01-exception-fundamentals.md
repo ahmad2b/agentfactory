@@ -480,24 +480,20 @@ Once your guide is complete, validate it by asking AI:
 
 ---
 
-## Summary: Bidirectional Learning Pattern
+## Try With AI
 
-In this lesson, you experienced all three roles:
+Ready to master exception handling through experimentation and real-world debugging?
 
-**Part 1 (Student explores)**: You intentionally broke code to discover exception types
-**Part 2 (AI teaches)**: AI explained the exception hierarchy and organization
-**Part 3 (Student teaches)**: You challenged AI with edge cases and exception chaining
-**Part 4 (Knowledge synthesis)**: You built a reusable reference guide
+**🔍 Explore Exception Patterns:**
+> "Show me code that raises ValueError, TypeError, and ZeroDivisionError in the same function. For each exception, explain what triggers it and what recovery strategy makes sense. Then show me how to catch all three with separate except blocks."
 
-This pattern ensures you understand exceptions not just as syntax, but as a conceptual framework for robust error handling.
+**🎯 Practice Reading Tracebacks:**
+> "Generate a Python function with nested calls (main → process_data → validate_input → int(value)). Make it crash with ValueError. Show me the full traceback and teach me to read it bottom-to-top: identify the error type, locate where it occurred, and trace the call chain."
 
-### What You've Built
+**🧪 Test Exception Hierarchy:**
+> "I want to catch all arithmetic errors (ZeroDivisionError, OverflowError, etc.) with one except block. Explain Python's exception hierarchy and show me how catching ArithmeticError catches all its subclasses. What's the tradeoff between specific exceptions vs parent classes?"
 
-1. `exception_discoveries.txt` — Your experimental findings
-2. Exception hierarchy summary — Your understanding of Python's exception organization
-3. Challenge documentation — Three edge cases you posed to AI
-4. `exception_reference_guide.md` — Your comprehensive exception handling reference
+**🚀 Apply to Input Validation:**
+> "I'm building a form that accepts age (must be positive integer). Help me write a validation function that raises appropriate exceptions for: non-numeric input, negative numbers, decimal numbers. Show me exception handling that gives users helpful error messages for each case."
 
-### Next Steps
-
-Lesson 2 will build on this foundation, exploring `except`, `else`, and `finally` blocks for more sophisticated error handling. You'll use this reference guide throughout Chapter 21.
+---
