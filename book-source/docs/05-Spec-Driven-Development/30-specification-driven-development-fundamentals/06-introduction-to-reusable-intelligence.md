@@ -4,471 +4,519 @@ chapter: 30
 lesson: 6
 duration: "60-75 minutes"
 skills:
-  - name: "Pattern Recognition"
-    proficiency: "B1"
-    category: "Analytical"
-  - name: "Reusable Intelligence Design"
-    proficiency: "B1"
-    category: "Technical"
-  - name: "Decision Framework Application"
+  - name: "Strategic Asset Recognition"
     proficiency: "B1"
     category: "Conceptual"
+  - name: "Agent Architecture Understanding"
+    proficiency: "B1"
+    category: "Technical"
+  - name: "Component Distinction"
+    proficiency: "B1"
+    category: "Analytical"
 learning_objectives:
-  - "Transform recurring specification patterns into reusable components (Skills and Subagents) (B1)"
-  - "Distinguish between Skills (2-4 decisions, guidance frameworks) and Subagents (5+ decisions, autonomous reasoning) (B1)"
-  - "Apply decision framework to identify when to encode patterns versus write fresh specifications (B1)"
+  - "Understand the paradigm shift from reusable code to reusable intelligence in AI-native development (B1)"
+  - "Identify the three components of reusable intelligence: Skills, Subagents, and Orchestration Patterns (B1)"
+  - "Distinguish between Skills (horizontal expertise) and Subagents (vertical specialization) by their characteristics (B1)"
 ---
 
 # Introduction to Reusable Intelligence
 
-In Lessons 1-5, you've learned the foundation: writing clear specifications, collaborating with AI to refine them, and creating shared governance rules (Constitutions) to ensure consistency across your team.
+In Lessons 1-5, you've mastered specification-driven development fundamentals:
+- **L1-3**: Write clear specifications (intent, requirements, constraints)
+- **L4**: Collaborate with AI to refine specifications
+- **L5**: Create Constitutions to ensure consistency across all specs
 
-But you've probably noticed something: **specifications for authentication, validation, error handling, and security reviews start to look similar**. The same decisions appear again and again. The same questions get asked. The same principles apply.
+But specifications and constitutions alone don't capture the full value of SDD-RI. **The "RI" in SDD-RI stands for Reusable Intelligence**—and it represents a fundamental shift in what we consider valuable in software development.
 
-This lesson introduces the next level of SDD-RI thinking: **Reusable Intelligence (RI)**—the idea that once you've solved a pattern well, you can capture that solution and reuse it across projects, features, and teams.
-
----
-
-## Real Skill Example — Error Handling Pattern
-
-Let's start with a concrete example from actual professional practice.
-
-### The Pattern You've Seen Before
-
-Imagine you've written specifications for three features:
-
-1. **User Authentication API**: "If login fails, return 401 Unauthorized with error message"
-2. **Payment Processing API**: "If payment fails, return 402 Payment Required with error details"
-3. **File Upload Service**: "If upload exceeds size limit, return 413 Payload Too Large with guidance"
-
-Same pattern repeating:
-- HTTP status codes (4xx for client errors, 5xx for server errors)
-- Structured error responses (JSON with `error`, `message`, `code`)
-- Logging requirements (errors logged with request ID for debugging)
-
-**Question**: Do you want to re-specify this every time? Or can you capture the pattern once and reuse it?
-
-### Meet a Real Skill: `assessment-builder`
-
-In the `.claude/skills/` directory, there's a skill called **`assessment-builder`** that captures this exact kind of pattern:
-
-**What it does**:
-- Provides a framework for designing assessments aligned with learning objectives
-- Suggests appropriate question types (MCQ, code-writing, debugging, projects)
-- Guides you toward meaningful distractors based on common misconceptions
-- Ensures cognitive distribution (not just memorization questions)
-
-**When you use it**:
-- Any time you're creating a quiz or test
-- When designing chapter assessments
-- When you want consistent assessment quality across the book
-
-**What it encodes**:
-- Evals-first design: Define success criteria BEFORE creating questions
-- Bloom's taxonomy alignment: Match question type to cognitive level
-- Question design patterns: MCQ structure, code-challenge structure, rubric criteria
-- Quality checks: Is this assessment measuring what we intend?
-
-**Reusable across**:
-- All 50+ chapters of the book
-- Different domains (Python chapters, AI chapters, architecture chapters)
-- Different question types (still uses same framework)
-
-**Example**: Instead of writing "Create a challenging question about decorators," you specify:
-```
-Learning objective: Students understand decorator syntax and use cases
-Bloom's level: Apply (not just Remember)
-Question type: Code-completion challenge
-Domain: Python syntax
-```
-
-The skill provides the framework—you fill in domain specifics. The framework is reusable; the domain details are context-specific.
-
-### Anatomy of a Skill
-
-A Skill is **2-4 decisions with guidance**. It answers recurring questions:
-
-```
-Skill: "Error Handling Pattern"
-
-Decision 1: What HTTP status codes apply?
-  → Guidance: Use 4xx for client errors, 5xx for server errors
-  → Reference table: 400 Bad Request, 401 Unauthorized, 404 Not Found, etc.
-
-Decision 2: What should error response JSON contain?
-  → Guidance: Always include: error code, human-readable message, request ID for debugging
-  → Template: { "code": "...", "message": "...", "request_id": "..." }
-
-Decision 3: How should errors be logged?
-  → Guidance: Log at ERROR level with full context for server errors, INFO for expected 4xx
-  → Pattern: Include request ID in every log line
-
-Decision 4: Should errors include stack traces?
-  → Guidance: In development (helpful), NOT in production (security risk)
-  → Implementation: Check environment variable, log stacktrace conditionally
-```
-
-**Skill characteristics**:
-- Horizontal applicability (applies broadly across many features)
-- Guidance-based (provides framework, not rigid rules)
-- Reusable across projects without major modification
-- Typically 2-4 decision points
-
-### Practice: Which Patterns from L1-5 Could Be Skills?
-
-Look at the specifications you've written (or reviewed) in Lessons 1-5:
-
-1. **Password validation** (strength requirements, hashing, rate limiting)
-   - Would this be a good Skill? Why/Why not?
-   - How often would you reuse it?
-
-2. **API pagination** (page size limits, cursor management, response format)
-   - Pattern? Reusable? Decision count?
-
-3. **Database transaction handling** (rollback, retry logic, deadlock recovery)
-   - Could this be captured as guidance?
-
-**Reflection**: _Write 1-2 sentences about which patterns from your own experience could become Reusable Intelligence._
+This lesson introduces the three components of Reusable Intelligence and explains why they've become strategic assets in AI-native development.
 
 ---
 
-## Real Subagent Example — Validation Auditor
+## From Reusable Code to Reusable Intelligence
 
-Now let's look at something more complex. Some patterns have more decisions and deeper expertise.
+### The Traditional Model: Code as Primary Asset
 
-### The Complex Pattern: Quality Assurance
+For decades, software engineering organized around **human-authored source code** as the canonical representation of system behavior. Reusability meant:
 
-Imagine you're building a large system with multiple development teams. Each team writes features—database features, API features, UI features, infrastructure features.
+- **Modular libraries and frameworks** (import React, use Stripe SDK)
+- **Design patterns** that encode proven solutions (Singleton, Factory, Observer)
+- **Abstraction hierarchies** that minimize duplication (base classes, interfaces)
+- **Components designed for composition** (plug-and-play modules)
 
-You need consistent quality validation across all features:
-- **Technical correctness**: Does code execute? Are dependencies managed?
-- **Security**: Are inputs validated? Secrets hardcoded?
-- **Performance**: Could this become a bottleneck?
-- **Accessibility**: Are UI components accessible?
-- **Pedagogical effectiveness** (if teaching code): Does it explain concepts clearly?
+The goal: **Write code once, reuse everywhere**. The value: Code was the primary asset.
 
-This isn't a simple checklist. Different features need different emphasis. A database feature needs different validation than a UI component. A security feature needs different scrutiny than a logging utility.
-
-**Question**: Could you capture this as a simple 4-decision Skill? Or does it need autonomous reasoning?
-
-### Meet a Real Subagent: `validation-auditor`
-
-In the `.claude/agents/` directory, there's a subagent called **`validation-auditor`** that does exactly this:
-
-**What it does**:
-- Reviews content (lessons, code, features) across 4 quality dimensions
-- Makes independent quality judgments (not just checklists)
-- Requires reasoning: "This is pedagogically weak because..."
-- Adapts validation based on context (lesson vs code vs infrastructure)
-
-**When you use it**:
-- Any time content is complete and needs publication review
-- When you need multi-dimensional quality assessment
-- When simple checklists aren't enough (context matters)
-
-**What it reviews**:
-- **Dimension 1**: Technical correctness (code execution, best practices)
-- **Dimension 2**: Pedagogical effectiveness (clarity, scaffolding, examples)
-- **Dimension 3**: Factual accuracy (verifiable claims, citations)
-- **Dimension 4**: Accessibility (inclusive, clear language)
-
-**Autonomous reasoning**:
-- Makes independent judgments ("This lesson is pedagogically weak because X")
-- Provides reasoning ("The example is disconnected from real use because...")
-- Identifies complex issues (not just checklist violations)
-- Adapts to context (validation differs by artifact type)
-
-**Reusable across**:
-- All chapters and lessons
-- Code features and architecture decisions
-- Documentation and design artifacts
-- Different domains (Python chapters, AI chapters, etc.)
-
-### Anatomy of a Subagent
-
-A Subagent is **5+ decisions with autonomous reasoning**. It requires domain expertise and contextual judgment:
-
-```
-Subagent: "validation-auditor"
-
-Decision 1: Is code technically correct?
-  → Checks: Execution, best practices, dependencies, security
-  → Reasoning: Makes judgment calls ("This async pattern could deadlock because...")
-  → Autonomy: Doesn't just verify checklist; provides analysis
-
-Decision 2: Is pedagogy effective?
-  → Checks: Learning objectives, scaffolding, examples, engagement
-  → Reasoning: "This example doesn't connect to real use because..."
-  → Autonomy: Decides whether pedagogical effectiveness meets bar
-
-Decision 3: Is content factually accurate?
-  → Checks: Verifiable claims, citations, current best practices
-  → Reasoning: "This claim about GIL is outdated; here's the 2025 context..."
-  → Autonomy: Makes judgment about accuracy level needed
-
-Decision 4: Is content accessible?
-  → Checks: Inclusive language, clear terminology, multiple explanations
-  → Reasoning: "This assumes prior knowledge of decorators that isn't taught..."
-  → Autonomy: Evaluates accessibility independently
-
-Decision 5+: Synthesis and recommendations
-  → Integrates findings across dimensions
-  → Prioritizes issues (critical vs. nice-to-have)
-  → Provides actionable remediation guidance
-```
-
-**Subagent characteristics**:
-- Vertical applicability (deep expertise in specific domain)
-- Autonomous reasoning (not just guided by checklist)
-- Requires contextual judgment (not rule-based)
-- Typically 5+ decision points
-- Provides explanations and trade-off analysis
-
-### Practice: When Would You Need the Validation Auditor?
-
-Think about your project context:
-
-1. **If you're teaching a Python lesson**: Would validation-auditor help catch pedagogy issues you might miss?
-2. **If you're writing infrastructure code**: Could autonomous security reasoning catch vulnerabilities?
-3. **If you're designing a feature spec**: Would multi-dimensional validation improve quality?
-
-**Reflection**: _Describe one situation in L1-5 where you would have benefited from this Subagent's reasoning. What issue might it have caught?_
+**What shaped this model**:
+- Version control systems (Git tracks code changes)
+- Software architecture patterns (MVC, microservices organize code)
+- Career paths (junior developer → senior developer → architect)
+- Educational curricula (learn to write better code)
 
 ---
 
-## Decision Framework — When to Use What
+### The Shift: AI Commoditizes Implementation
 
-Now that you've seen a Skill and a Subagent, how do you decide which type of Reusable Intelligence to create?
+The maturation of Large Language Models and AI coding agents introduces capabilities that challenge code-centric assumptions:
 
-### The Decision Matrix
+**What AI can now do**:
+- Generate code on-demand from natural language descriptions
+- Refactor automatically while preserving behavior
+- Synchronize implementations continuously as requirements evolve
+- Migrate across frameworks with reduced manual intervention
 
-Three types of reusable patterns emerge as you practice SDD:
+**The bottleneck shifts**:
+- **Old bottleneck**: "Writing code" (skilled human labor, time-intensive)
+- **New bottleneck**: "Expressing intent with precision" (clear specifications, decision guidance)
 
-#### Type 1: Constitutional Rules (Applies to ALL Specs)
+**What this means**:
+```
+When AI can reliably generate idiomatic implementations from clear specifications,
+the bottleneck moves from "writing code" to "expressing intent with precision."
+```
+
+AI tools excel at producing implementations that match specified patterns, but **human judgment remains essential** for:
+- System architecture decisions
+- Performance optimization strategies
+- Security requirements and threat modeling
+- Domain-specific logic and business rules
+
+---
+
+### The New Paradigm: Intelligence as Strategic Asset
+
+Instead of focusing exclusively on reusable code, organizations must now cultivate **reusable intelligence**—structured knowledge and decision-making capabilities that can be applied consistently across projects.
+
+**The competitive advantage shifts**:
+```
+Two teams using similar AI models and programming languages may achieve
+vastly different productivity based on how well they've structured their
+specifications and intelligence libraries.
+```
+
+**Consider the historical evolution of programming**:
+
+| Era | Abstraction | What Humans Write | What's Generated |
+|-----|-------------|-------------------|------------------|
+| **1950s-60s** | Machine code → Assembly | Assembly instructions | Machine code (via assembler) |
+| **1970s-90s** | Assembly → High-level languages | C/Java/Python | Assembly (via compiler) |
+| **2020s+** | High-level code → Specifications + AI | Specs + Intelligence | Code (via AI agents) |
+
+In this emerging paradigm, **languages like Python and TypeScript serve increasingly as intermediate representations**—analogous to how assembly functions in compiled language workflows. The "source" shifts upward to specifications, constraints, and architectural decisions that guide AI-powered implementation.
+
+**Critical qualification**: This transformation applies most strongly to certain categories:
+- ✅ Infrastructure code, API implementations, data pipelines, testing frameworks
+- ❌ Novel algorithms, performance-critical systems, domains requiring deep optimization
+
+The spec-driven approach **complements** rather than replaces traditional development.
+
+---
+
+## What Is Reusable Intelligence?
+
+**Reusable Intelligence manifests as three primary components:**
+
+### Component 1: Skills (Horizontal Expertise)
+
+**Definition**: Packaged expertise that can be broadly applied across many features and domains.
+
+**Characteristics**:
+- **Horizontal applicability**: Works across different projects, domains, technologies
+- **Broadly useful**: "Every API needs error handling" (applies to all APIs)
+- **Guidance-based**: Provides decision frameworks, not rigid implementations
+- **Examples**: Logging patterns, error handling, input validation, API pagination
+
+**What a Skill bundles**:
+- Custom instructions (how to think about this pattern)
+- Decision frameworks (when to choose option A vs B)
+- Templates and conventions (standard structures)
+- Reference documentation (why these decisions matter)
+
+**Example Skills**:
+- **Error Handling Skill**: How to structure error responses, status codes, logging
+- **Input Validation Skill**: How to validate data at boundaries, handle invalid input
+- **API Pagination Skill**: How to design paginated endpoints, cursor vs offset
+
+**Why "horizontal"?** These patterns apply broadly—error handling is relevant whether you're building authentication APIs, payment processors, or search endpoints.
+
+---
+
+### Component 2: Subagents (Vertical Specialization)
+
+**Definition**: Specialized agents with focused expertise in specific domains, invokable from primary coding agents.
+
+**Characteristics**:
+- **Vertical applicability**: Deep expertise in specific domain (security, performance, accessibility)
+- **Specialized focus**: Each subagent maintains domain expertise while accessing shared context
+- **Autonomous reasoning**: Makes independent judgments, not just checklist verification
+- **Examples**: Security auditors, performance analyzers, test generators, documentation curators
+
+**What a Subagent provides**:
+- **Persona and behavioral profile**: Identity that shapes how it interprets tasks (e.g., "security auditor evaluating threat surfaces")
+- **Tooling and environment access**: Integration with relevant systems (code repos, build systems, testing frameworks)
+- **Domain expertise**: Specialized knowledge (OWASP Top 10 for security, Big-O analysis for performance)
+
+**Example Subagents**:
+- **@security**: Reviews code for vulnerabilities, evaluates threat models, suggests defenses
+- **@performance**: Analyzes scalability, identifies N+1 queries, recommends caching strategies
+- **@tests**: Generates test suites, ensures coverage, identifies edge cases
+- **@docs**: Maintains documentation, ensures clarity, updates on code changes
+
+**Why "vertical"?** These agents specialize deeply in one domain—a security auditor focuses exclusively on security concerns across all features.
+
+---
+
+### Component 3: Orchestration Patterns (Multi-Agent Collaboration)
+
+**Definition**: Workflows that coordinate multiple Skills and Subagents to solve complex problems.
+
+**Characteristics**:
+- **Multi-agent coordination**: Combines horizontal Skills + vertical Subagents
+- **Workflow definition**: Defines sequence, dependencies, failure handling
+- **Systematic quality**: Ensures every feature goes through same validation pipeline
+- **Repeatable process**: Organizational memory of "how we build quality software"
+
+**What an Orchestration Pattern defines**:
+- **Stage sequence**: Specification → Design → Implementation → Validation
+- **Agent roles**: Which Subagents review which aspects
+- **Collaboration protocol**: How agents share context and findings
+- **Failure handling**: What happens when validation fails (iterate? block? escalate?)
+
+**Example Orchestration**:
+```
+Feature Development Workflow
+
+Stage 1: Specification Design
+- Human writes initial spec
+- Apply Skills: Error Handling, Input Validation, Authentication
+
+Stage 2: Architecture Review
+- @security subagent: Reviews for vulnerabilities
+- @performance subagent: Analyzes scalability
+- @accessibility subagent: Checks inclusive design
+
+Stage 3: Implementation
+- AI generates code guided by spec + Skills + Subagent feedback
+
+Stage 4: Validation
+- @tests subagent: Generates test suite
+- Run tests → If pass, proceed; If fail, refine and retry
+
+Stage 5: Documentation
+- @docs subagent: Generates documentation from spec + code
+
+Result: Every feature gets security review, performance analysis,
+accessibility check, comprehensive tests, and clear documentation—systematically.
+```
+
+**Why "orchestration"?** Complex features need coordination across multiple expertise areas. Orchestration ensures no step is skipped.
+
+---
+
+## The Microservices Analogy
+
+Designing agent systems parallels designing distributed systems:
+
+**Microservices Architecture**:
+- Decompose application into manageable units
+- Each service has specific responsibility
+- Services communicate via API contracts
+- Compose services to solve complex problems
+
+**Agent Architecture**:
+- Decompose problem-solving into modular intelligence units
+- Each agent/skill has specialized persona and expertise
+- Agents share context and findings
+- Compose agents to deliver comprehensive solutions
+
+**Just as you wouldn't put all logic in one monolithic service, you don't put all intelligence in one generic "helpful AI."** You design specialized components that work together.
+
+---
+
+## Skills vs Subagents: Understanding the Distinction
+
+Both Skills and Subagents are reusable intelligence, but they serve different purposes:
+
+### When to Create a Skill (Horizontal Expertise)
 
 **Recognition signals**:
-- Applies to literally every specification in your organization
-- Non-negotiable governance rule
-- Prevents common mistakes across all domains
-
-**Examples**:
-- "All specs must have Intent, Requirements, Constraints, Non-Goals"
-- "All API specs must define error responses"
-- "All password systems must use bcrypt hashing"
-
-**What you already did**: L5 (Constitutions) covers this. Constitutional rules are the highest level of reusable intelligence—they apply universally.
-
-#### Type 2: Skills (2-4 Decisions, Horizontal Applicability)
-
-**Recognition signals**:
-- Pattern repeats 2-3 times across similar features
-- 2-4 key decision points
+- Pattern repeats across many different features
 - Applies broadly without major customization
-- Answers recurring questions
+- Provides guidance for common decisions
+- Answers recurring questions (2-4 decision points)
 
-**Examples**:
-- **Error Handling Skill**: "How should APIs return errors?" (applies to ALL APIs)
-- **Pagination Skill**: "How should paginated responses work?" (applies to LIST endpoints)
-- **Authentication Skill**: "What authentication patterns suit my project?" (applies to protected endpoints)
-- **Validation Skill**: "How should I validate user input?" (applies to ALL user-facing features)
+**Example**: Error Handling Skill
+- **Applies to**: Every API, every service, every endpoint
+- **Provides**: Decision framework for status codes, error format, logging
+- **Reusable across**: Authentication APIs, payment APIs, search APIs, analytics APIs
+- **Horizontal because**: Every feature needs error handling
 
-**Format**: Decision 1 → Decision 2 → Decision 3 → Decision 4 → Reusable framework
+---
 
-**Reusability test**:
-```
-If I'm writing spec #3 with similar needs to specs #1-2:
-- Do I ask the same questions?
-- Are the answers similar?
-- Could I apply the same guidance with minor tweaks?
-→ YES: Create a Skill
-```
-
-#### Type 3: Subagents (5+ Decisions, Vertical Expertise)
+### When to Create a Subagent (Vertical Specialization)
 
 **Recognition signals**:
-- Pattern requires domain expertise (not just process)
-- 5+ decision points with complex reasoning
-- Applies deeply in specific domain
-- Requires autonomous judgment (not just guided decisions)
+- Requires deep domain expertise (security, performance, compliance)
+- Makes complex judgments (5+ interconnected decisions)
+- Needs autonomous reasoning (not just checklist)
+- Adapts analysis to context (different features need different scrutiny)
 
-**Examples**:
-- **Security Auditor**: Reviews input validation, encryption, authentication, authorization (5+ security decisions)
-- **Performance Optimizer**: Analyzes data volumes, latency requirements, caching strategies, query patterns (5+ performance decisions)
-- **Accessibility Reviewer**: Checks color contrast, screen reader compatibility, keyboard navigation, cognitive load (5+ accessibility decisions)
-- **API Designer**: Reviews endpoint design, resource modeling, versioning, backward compatibility (5+ design decisions)
+**Example**: Security Auditor Subagent
+- **Specializes in**: Security threat modeling, vulnerability detection
+- **Analyzes**: Threat actors, data sensitivity, compliance requirements, attack vectors
+- **Reasoning**: "This file upload endpoint → HIGH RCE risk, requires sandboxing"
+- **Vertical because**: Deep security expertise, not needed for every aspect
 
-**Format**: Domain expertise + 5+ decision points + Autonomous reasoning = Subagent
+---
 
-**Autonomy test**:
+### Comparison Table
+
+| Characteristic | Skills (Horizontal) | Subagents (Vertical) |
+|----------------|---------------------|----------------------|
+| **Scope** | Broad (many features) | Deep (one domain) |
+| **Expertise** | Generalist patterns | Specialist knowledge |
+| **Decision Points** | 2-4 questions | 5+ complex questions |
+| **Autonomy** | Guidance (human decides) | Autonomous (agent decides) |
+| **Application** | "All APIs need this" | "Security review needed here" |
+| **Examples** | Error handling, Pagination, Validation | Security audit, Performance analysis, Accessibility review |
+
+---
+
+## Why This Matters: The Strategic Value
+
+### For Individuals
+
+**Traditional career path**: Junior Developer → Senior Developer → Architect
+- Value: Write better code faster
+- Bottleneck: Coding skill and time
+
+**AI-native career path**: Junior Developer → Intelligence Designer → Spec Architect
+- Value: Design better specifications and intelligence
+- Multiplier: AI executes at scale
+
+**Emerging roles**:
+- **AI Systems Designer**: Designs agent architectures and workflows
+- **Intelligence Engineer**: Creates Skills and Subagents that encode expertise
+- **Spec Architect**: Designs specifications that guide AI generation effectively
+- **Agent Orchestrator**: Coordinates multi-agent systems for complex projects
+
+---
+
+### For Teams and Organizations
+
+**Traditional engineering practices**:
+- Version control for code (Git)
+- CI/CD for code deployment
+- Code review for quality
+- Documentation of implementations
+
+**AI-native engineering practices**:
+- Version control for **specifications and agent configurations**
+- CI/CD with **specification validation and agent orchestration**
+- Review for **specification quality and alignment**
+- Documentation of **intent, constraints, and decision frameworks**
+
+**The shift in investment priorities**:
 ```
-If I give a Subagent a spec and ask "Does this meet our quality bar?"
-- Can it reason independently about the answer?
-- Does it need expertise (not just process)?
-- Does it make judgment calls (not just verify checklist)?
-→ YES: Create a Subagent
+Old focus: Building code assets (libraries, frameworks)
+New focus: Curating intelligence libraries (Skills, Subagents, Orchestrations)
+
+Old asset: Python authentication library (works only in Python)
+New asset: Authentication Intelligence (generates Python, TypeScript, Go, Rust)
 ```
 
-### Decision Tree: Skill vs Subagent vs Constitution
+**Why this matters**: When new frameworks emerge, code becomes legacy. Intelligence persists.
 
+---
+
+### For the Industry
+
+**The competitive advantage shifts**:
+
+**Team A** (Traditional):
+- Uses AI to generate code from vague descriptions
+- Every developer makes ad-hoc decisions
+- Inconsistent quality across features
+- Knowledge lost when developers leave
+
+**Team B** (SDD-RI):
+- Uses AI guided by comprehensive specifications + intelligence library
+- Skills ensure consistent patterns (error handling, validation)
+- Subagents provide expert review (security, performance)
+- Orchestration ensures systematic quality
+- Intelligence library accumulates and compounds over time
+
+**Result**: Team B builds higher-quality software faster, despite using similar AI models and languages. **The differentiator is intelligence architecture.**
+
+---
+
+## The Three-Layer Knowledge Stack (Revisited)
+
+Now you understand all three layers of SDD-RI:
+
+### Layer 1: Specifications (WHAT to Build)
 ```
-Does this rule apply to ALL specs?
-├─ YES → Constitution (L5 already taught this)
-└─ NO ↓
-
-How many decision points?
-├─ 2-4 decisions → Skill
-│  (Framework guidance for common questions)
-│
-└─ 5+ decisions → Subagent
-   (Domain expertise + autonomous reasoning)
-
-
-How broadly applicable?
-├─ Horizontal (many features) → Skill
-│  (Error handling applies to all APIs)
-│
-└─ Vertical (specific domain) → Subagent
-   (Performance optimization requires deep expertise)
-
-
-Does it require autonomous judgment?
-├─ NO → Skill
-│  (Guided decisions, framework-based)
-│
-└─ YES → Subagent
-   (Autonomous reasoning, expertise-driven)
+Purpose: Define system boundaries and requirements
+Example: "Build user authentication with email/password"
+Captures: Intent, requirements, constraints, non-goals
+Missing: Universal rules, decision frameworks, expert review
 ```
 
-### Practice: Categorize Patterns from L1-5
-
-From the specifications you've written in Lessons 1-5, identify patterns and categorize them:
-
-**Exercise**:
-
-1. **List 5 patterns** you noticed repeating in multiple specs (e.g., "error handling format," "pagination structure," "input validation approach")
-
-2. **For each pattern, answer**:
-   - Does it apply to ALL specs? (Constitution?)
-   - How many decision points? (2-4 = Skill, 5+ = Subagent)
-   - Is it horizontal or vertical? (Broad or domain-specific?)
-   - Does it need autonomous judgment?
-
-3. **Categorize** each pattern:
-   - Constitution (global rule)
-   - Skill (2-4 decisions, horizontal)
-   - Subagent (5+ decisions, vertical, autonomous)
-
-**Example analysis**:
-
+### Layer 2: Constitutions (UNIVERSAL RULES)
 ```
-Pattern: "Error Response Format"
+Purpose: Ensure consistency across ALL specifications
+Example: "All passwords must use bcrypt hashing"
+Captures: Non-negotiable standards, governance rules
+Missing: Context-specific decision guidance, domain expertise
+```
 
-Decision points:
-1. HTTP status code (4xx for client, 5xx for server)
-2. JSON structure { code, message, request_id }
-3. Should stacktrace be included?
-4. How should errors be logged?
+### Layer 3: Reusable Intelligence (DECISION-MAKING EXPERTISE)
+```
+Purpose: Provide decision frameworks and expert review
+Components:
+  - Skills (horizontal patterns)
+  - Subagents (vertical expertise)
+  - Orchestration (multi-agent workflows)
+Captures: How to make good decisions, expert reasoning, quality validation
+```
 
-Count: 4 decisions → SKILL ✓
-
-Applicability: ALL APIs need this → Horizontal ✓
-
-Judgment: Mostly guided by standards → Not Subagent ✓
-
-Conclusion: This is a SKILL (Error Handling Framework)
+**How they work together**:
+```
+Specification defines: "Build authentication"
+Constitution requires: "Use bcrypt hashing"
+Skills provide: Error handling pattern, Input validation pattern
+Subagents review: @security (threat model), @performance (scalability)
+Orchestration ensures: All reviews happen, nothing skipped
+→ Result: High-quality, expert-level authentication system
 ```
 
 ---
 
-## The Bigger Picture — Intelligence Accumulation
+## Platform Generalization: Beyond Claude Code
 
-You now understand three levels of Reusable Intelligence:
+While this lesson uses terminology from Claude Code (Skills, Subagents), the **underlying pattern is universal**:
 
-### Level 1: Constitutional Rules (L5)
-- **Apply to**: Every specification
-- **Purpose**: Ensure consistency and quality at scale
-- **Example**: "All specs must have Intent, Requirements, Constraints"
+**All major coding agents are converging toward**:
+- Separation of agent roles and capabilities
+- Reusable configuration rather than repeated prompting
+- Tool/skill composition for complex workflows
+- Specification-driven approaches
 
-### Level 2: Skills (L6 - This Lesson)
-- **Apply to**: Related features that share patterns
-- **Purpose**: Capture recurring decisions and guidance
-- **Example**: "Error Handling Skill" (applies to all error responses)
+**Platform-specific terminology**:
+- **Anthropic Claude Code**: Skills + Subagents (most explicit)
+- **OpenAI**: Custom GPTs + Assistants + Function calling
+- **Google Gemini**: Extensions + Tools + Multi-agent patterns
+- **Microsoft**: Agent configurations + Semantic Kernel skills
 
-### Level 3: Subagents (L6 - This Lesson)
-- **Apply to**: Domain-specific concerns requiring expertise
-- **Purpose**: Provide autonomous reasoning for complex judgments
-- **Example**: "Security Auditor" (reviews all security-sensitive features)
+**Universal concepts** (regardless of platform):
+- ✅ Specialized agent personas with focused expertise
+- ✅ Packaged capabilities that bundle knowledge and tools
+- ✅ Orchestration patterns for multi-agent collaboration
+- ✅ Reusable configuration files (not repeated prompts)
 
-**What this means**: SDD-RI isn't just writing better specs. It's building organizational intelligence:
-- First, you write consistent specs (Constitution)
-- Then, you capture recurring patterns (Skills)
-- Then, you encode domain expertise (Subagents)
-- Finally, you orchestrate intelligence at scale (Chapter 31+)
+**The good news**: Even platforms without explicit "Subagent" constructs can achieve similar outcomes by designing **MCP servers** that act as specialized agents with domain skills.
 
 ---
 
-## Reflection: Your SDD-RI Journey So Far
+## What You've Learned
 
-**What you've accomplished**:
-- L1-3: Learned to write clear, quality specifications
-- L4: Discovered AI as collaborative partner for spec refinement
-- L5: Built team governance (Constitutions ensure consistency)
-- **L6: Identified patterns and created Reusable Intelligence (Skills and Subagents)**
+You now understand:
 
-**What you can do now**:
-- Recognize when patterns repeat
-- Distinguish between Constitutions (universal), Skills (horizontal), Subagents (vertical)
-- Know when to encode intelligence vs write fresh specs
+✅ **The paradigm shift**: From reusable code → reusable intelligence
+✅ **The three components**:
+  - Skills (horizontal expertise, 2-4 decisions, guidance)
+  - Subagents (vertical specialization, 5+ decisions, autonomous)
+  - Orchestration (multi-agent workflows, systematic quality)
+✅ **The microservices analogy**: Modular intelligence units with specialized roles
+✅ **The strategic value**: Intelligence becomes organizational competitive advantage
+✅ **Platform generalization**: Concepts apply across all AI coding platforms
 
-**What's next (L7)**:
-- Learn **HOW** to design Skills and Subagents using the **Persona + Questions + Principles (P+Q+P)** pattern
-- Design your own Skill and Subagent (documented, not yet implemented)
-- Understand why P+Q+P activates reasoning instead of just pattern matching
+---
+
+## What's Next: Learning to Design Reusable Intelligence
+
+**You now know WHAT reusable intelligence is, but not HOW to design it.**
+
+**Lesson 7 teaches**: The **Persona + Questions + Principles (P+Q+P) pattern** for designing Skills and Subagents that activate reasoning (not just pattern matching).
+
+**You'll learn**:
+- How to define effective Personas that activate domain expertise
+- How to articulate Questions that force context-specific analysis
+- How to establish Principles that guide consistent decisions
+- Why P+Q+P activates reasoning mode instead of prediction mode
+
+**Preparation**: Think about patterns you've encountered in your work:
+- What decisions have you made repeatedly across multiple features?
+- What domain expertise would have improved your designs?
+- What quality checks do you wish happened automatically?
+
+Bring these observations to Lesson 7, where you'll learn to design your own Skills and Subagents.
 
 ---
 
 ## Try With AI
 
-**Setup**: Open Claude (or your AI assistant) and explore reusable intelligence patterns in your own experience.
+**Setup**: Open your AI coding assistant and explore the concept of reusable intelligence.
 
 **Prompt Set**:
 
-**Prompt 1 (Pattern Recognition)**:
+**Prompt 1 (Understanding the Shift)**:
 ```
-I'm thinking about the last 3 projects I worked on.
-What patterns appeared in ALL of them?
-(Error handling, logging, authentication, validation, pagination, etc.)
+I'm learning about the shift from reusable code to reusable intelligence.
 
-For each pattern, tell me:
-- What decisions did I face repeatedly?
-- How many decisions? (2-4 or 5+?)
-- Could I have reused guidance instead of re-deciding?
-```
+Help me understand:
+- In traditional development, I'd write an authentication library (code)
+- In AI-native development, I'd create authentication intelligence (specs + skills)
 
-**Prompt 2 (Skill vs Subagent)**:
-```
-I have a pattern that repeats often: [describe pattern from Prompt 1]
-
-Is this a Skill (2-4 guided decisions) or Subagent (5+ domain expertise decisions)?
-
-Help me count the decision points and explain my reasoning.
+What's the difference? Why is intelligence more valuable than code in the AI era?
 ```
 
-**Prompt 3 (Design Exploration)**:
+**Prompt 2 (Skills vs Subagents)**:
 ```
-If I were to document this pattern as reusable intelligence for my team,
-what would they need to know?
+I'm trying to understand the difference between Skills and Subagents.
 
-What framework could I provide that others could reuse without my help?
+Skills (horizontal): Apply broadly, provide guidance (e.g., error handling)
+Subagents (vertical): Deep domain expertise (e.g., security auditor)
+
+Give me 3 examples of each:
+- 3 Skills that would apply across many features
+- 3 Subagents that would provide specialized expertise
+```
+
+**Prompt 3 (Recognizing Patterns)**:
+```
+I've worked on these features: [describe 2-3 recent features]
+
+What patterns repeated across these features?
+Which patterns would be good Skills (horizontal)?
+Which patterns would benefit from Subagent expertise (vertical)?
 ```
 
 **Expected Outcomes**:
-- Recognition of patterns in your own work
-- Clear understanding of when patterns warrant Reusable Intelligence
-- Language to discuss Skills vs Subagents with your team
+- Clear understanding of why intelligence is the new strategic asset
+- Ability to distinguish Skills (horizontal) from Subagents (vertical)
+- Recognition of patterns in your own work worth capturing as RI
 
 **Optional Stretch**:
 ```
-Describe a time when you WISHED you had captured a pattern as reusable intelligence.
-What would the team have gained by doing so?
+Imagine I'm building a healthcare application with HIPAA compliance requirements.
+
+What Skills would I need? (horizontal patterns)
+What Subagents would I need? (specialized expertise)
+How would Orchestration ensure compliance?
 ```
+
+---
+
+## Summary
+
+**The paradigm shift**: AI commoditizes code implementation → Intelligence becomes the strategic differentiator
+
+**The three components of Reusable Intelligence**:
+1. **Skills**: Horizontal expertise, broadly applicable patterns (error handling, validation)
+2. **Subagents**: Vertical specialization, domain expertise (security, performance, accessibility)
+3. **Orchestration**: Multi-agent workflows, systematic quality validation
+
+**The microservices analogy**: Just as microservices decompose applications, agent architectures decompose problem-solving into modular intelligence units
+
+**The strategic value**: Two teams with similar AI models achieve vastly different productivity based on intelligence library quality
+
+**Next lesson**: You'll learn HOW to design Skills and Subagents using the Persona + Questions + Principles (P+Q+P) pattern.
