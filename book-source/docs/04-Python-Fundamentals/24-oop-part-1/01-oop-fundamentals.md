@@ -88,7 +88,9 @@ version: "1.0.0"
 
 # What is OOP? Why OOP?
 
-In this lesson, you'll discover why Object-Oriented Programming exists by first experiencing the pain of procedural code, then learning how OOP solves real problems, then challenging AI's explanations with edge cases, and finally building your own mental model for when to use OOP.
+Real developers don't memorize OOP definitions—they discover problems that OOP solves. In this lesson, you'll experience the pain of procedural code at scale, learn from AI how OOP fixes these problems, challenge AI with design edge cases, and build your own decision framework for choosing OOP vs procedural approaches.
+
+This is discovery-based learning: you'll encounter the problem before seeing the solution, making OOP concepts stick because you understand WHY they exist.
 
 ---
 
@@ -324,12 +326,13 @@ Now integrate everything into a practical decision framework you'll use througho
 
 ### Your OOP Decision Framework
 
-Create a markdown file called `oop_decision_framework.md` with this structure:
+Create a markdown file called `oop_decision_framework.md` with these sections:
 
-```markdown
-# When Should I Use OOP? Decision Framework
+**Template structure:**
 
-## Core Problem OOP Solves
+### When Should I Use OOP? Decision Framework
+
+**Core Problem OOP Solves:**
 
 OOP solves the **scaling and organization problem**: When you have many entities (accounts, users, game characters) with similar data and behavior, OOP lets you:
 - Define structure once (the class)
@@ -337,100 +340,66 @@ OOP solves the **scaling and organization problem**: When you have many entities
 - Each instance manages its own data independently
 - Changes to logic affect all instances automatically
 
-## Procedural vs OOP Comparison
+**Procedural vs OOP Comparison:**
 
-### When Procedural is Fine
+*When Procedural is Fine:*
 - Script with <5 variables
 - No repetition of similar logic
 - One-time use, never maintained
+- Example: A script that calculates π to 1000 digits
 
-**Example**: A script that calculates π to 1000 digits
-
-### When OOP is Necessary
+*When OOP is Necessary:*
 - 3+ entities with similar data structure
 - Duplicate functions for similar operations
 - Code will grow over time
 - Multiple instances of same concept
+- Example: Game with Player, Enemy, NPC classes
 
-**Example**: Game with Player, Enemy, NPC classes
-
----
-
-## Real-World Recognition Pattern
+**Real-World Recognition Pattern:**
 
 When building a system, ask:
+1. Are there multiple similar entities? (If NO → Procedural might work)
+2. Does each entity have the same type of data? (If NO → Procedural might work)
+3. Does each entity perform the same type of operations? (If YES → OOP is the right choice)
 
-**Question 1**: Are there multiple similar entities?
-- Yes → Go to Q2
-- No → Procedural might work
+**The Four Pillars (Conceptual Overview):**
 
-**Question 2**: Does each entity have the same type of data?
-- Yes → Go to Q3
-- No → Procedural might work
+1. **Encapsulation**: Bundle data and methods, control access (prevents data corruption)
+2. **Abstraction**: Show only essential interface, hide implementation (reduces complexity)
+3. **Inheritance**: Base class holds shared code, child classes specialize (reuses code)
+4. **Polymorphism**: Different objects respond differently to same method call (flexible interfaces)
 
-**Question 3**: Does each entity perform the same type of operations?
-- Yes → OOP is the right choice
-- No → OOP might still help, but carefully design inheritance
-
----
-
-## The Four Pillars (Conceptual Overview)
-
-### 1. Encapsulation: Bundle and Protect
-**Problem it solves**: Data corruption (external code modifying critical data incorrectly)
-**Solution**: Bind data and methods together, control access
-
-### 2. Abstraction: Hide Complexity
-**Problem it solves**: Overwhelming users with unnecessary detail
-**Solution**: Show only essential interface, hide implementation
-
-### 3. Inheritance: Reuse Code
-**Problem it solves**: Duplicate code across similar classes
-**Solution**: Base class holds shared code, child classes specialize
-
-### 4. Polymorphism: Flexible Interface
-**Problem it solves**: Code that works with only one type is inflexible
-**Solution**: Different objects respond differently to same method call
-
----
-
-## Decision Tree: Procedural or OOP?
-
+**Decision Tree:**
 ```
 START: "Do I have 3+ similar entities?"
 ├─ NO → Stay procedural
-│
 └─ YES: "Will this system grow over time?"
    ├─ NO → Could work either way
-   │
    └─ YES: "Would a bug fix need to happen in multiple places?"
       ├─ NO → Procedural is fine
-      │
       └─ YES: "Use OOP!" → Create a class, instantiate multiple objects
 ```
 
----
-
-## Testing Your Understanding
-
-Ask yourself these questions about a system you're building:
-
-1. What are the entities?
+**Testing Questions:**
+1. What are the entities in my system?
 2. What data does each entity store?
 3. What operations does each entity perform?
-4. Would you ever need 100 of these entities?
-5. If you discovered a bug in an operation, how many places would you fix it?
+4. Would I ever need 100 of these entities?
+5. If I fix a bug in an operation, how many places do I change?
 
 **If answers suggest many similar entities and operations → Use OOP**
-```
+
+---
 
 ### Validation with AI
 
-Once your framework is complete, validate it:
+Once your framework is complete, validate it with AI collaboration:
 
-> "Review my OOP decision framework. Is my 'when to use OOP' advice sound? What common mistakes do students make when deciding between procedural and OOP? Give me 3 real-world examples where procedural is correct (and students wrongly use OOP)."
+> "Review my OOP decision framework. Is my 'when to use OOP' advice sound? What common mistakes do students make when deciding between procedural and OOP? Give me 3 real-world examples where procedural is actually correct (and students wrongly use OOP)."
 
-**Deliverable**: Complete `oop_decision_framework.md` that you'll reference throughout Chapter 24 and beyond.
+### Deliverable
+
+Complete `oop_decision_framework.md` following the template structure above. This framework becomes your reference throughout Chapter 24 and your entire Python career—you'll use it to make architecture decisions in real projects.
 
 ---
 
