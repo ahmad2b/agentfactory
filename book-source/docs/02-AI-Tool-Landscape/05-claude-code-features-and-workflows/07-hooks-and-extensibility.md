@@ -184,11 +184,15 @@ Edit `.claude/settings.json` and add:
 
 ```json
 {
-  "hooks": [
+  "SessionStart": [
     {
-      "event": "SessionStart",
-      "type": "command",
-      "command": "echo 'Welcome to your project! Claude Code session started.'"
+      "matcher": {},
+      "hooks": [
+        {
+          "type": "command",
+          "command": "echo 'Welcome to your project! Claude Code session started.'"
+        }
+      ]
     }
   ]
 }
@@ -221,14 +225,19 @@ Update `.claude/settings.json` to show project info:
 
 ```json
 {
-  "hooks": [
+  "SessionStart": [
     {
-      "event": "SessionStart",
-      "type": "command",
-      "command": "echo 'Project: $(basename $(pwd)) | Files: $(ls -1 | wc -l) | Last modified: $(ls -lt | head -2 | tail -1 | awk \"{print \\$6, \\$7, \\$8}\")'"
+      "matcher": {},
+      "hooks": [
+        {
+          "type": "command",
+          "command": "echo \"Project: $(basename $(pwd)) | Files: $(ls -1 | wc -l) | Last modified: $(ls -lt | head -2 | tail -1 | awk '{print \\$6, \\$7, \\$8}')\""
+        }
+      ]
     }
   ]
 }
+
 ```
 
 Restart Claude Code:
