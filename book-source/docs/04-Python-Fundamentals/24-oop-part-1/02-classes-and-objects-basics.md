@@ -109,7 +109,11 @@ Before reading syntax explanations, you'll experiment with creating classes to d
 
 ### Discovery Exercise: Build Classes Step by Step
 
+**What is a class?** A class is a blueprint (template) for creating objects. Think of it like a cookie cutter: the class is the cutter shape, and objects are the individual cookies you make from it. The `class` keyword in Python defines this blueprint.
+
 **Stage 1: The Simplest Possible Class**
+
+Let's create the simplest possible class - a blueprint with no details yet.
 
 Create a file called `class_experiments.py` and run this code:
 
@@ -133,6 +137,8 @@ print(dir(my_dog))  # What attributes/methods does it have?
 - What's in `dir(my_dog)`? What default methods does Python give every object?
 
 **Stage 2: Add Data to Objects**
+
+**Pedagogical Note**: In this stage, we'll show you a way to add data to objects that WORKS but isn't the professional pattern. We're doing this deliberately so you understand WHY the proper pattern (constructors with `__init__`) exists. Discovery through contrast is powerful.
 
 Now modify the code:
 
@@ -170,11 +176,13 @@ print(f"Second dog name: {other_dog.name}")
 
 **Stage 3: Notice the Problem with Manual Attributes**
 
+You've seen that adding attributes manually works. Now let's see why it's problematic at scale.
+
 ```python
 class Dog:
     pass
 
-# This works, but is repetitive
+# This works, but is repetitive and error-prone
 dog1 = Dog()
 dog1.name = "Max"
 dog1.breed = "Labrador"
@@ -186,13 +194,16 @@ dog2.breed = "Golden Retriever"
 dog2.age = 3
 
 # What if you create 100 dogs? You'd repeat setup code 100 times
-# What if you forget to set breed for a dog? (Silent error)
-# How do you FORCE every dog to have name, breed, age?
+# What if you forget to set breed for a dog? (Silent error - no type safety)
+# How do you FORCE every Dog object to have name, breed, age with correct types?
 ```
 
 **Your task 3**: Before reading further, predict:
 - What would solve the repetition problem?
-- How could you ensure every Dog object MUST have name, breed, age?
+- How could you ensure every Dog object MUST have name: str, breed: str, age: int?
+- What language feature would enforce this at object creation time?
+
+**Answer Preview**: The solution is the constructor (`__init__` method) with type hints. You'll learn this in the next section. This discovery exercise showed you the PAIN that constructors solve.
 
 ### Your Discoveries
 

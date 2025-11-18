@@ -317,19 +317,18 @@ Document challenges and AI responses with your analysis.
 
 Create `method_types_and_encapsulation_guide.md`:
 
-```markdown
-# Method Types and Encapsulation Guide
+**Template structure:**
 
-## Instance Methods
-Use when: Method operates on specific object's data
+### Method Types and Encapsulation Guide
+
+**Instance Methods** - Use when: Method operates on specific object's data
 
 ```python
 def deposit(self, amount: float):
     self._balance += amount
 ```
 
-## Class Methods (@classmethod)
-Use when: Method operates on class data or creates instances
+**Class Methods (@classmethod)** - Use when: Method operates on class data or creates instances
 
 ```python
 @classmethod
@@ -337,8 +336,7 @@ def from_dict(cls, data: dict):
     return cls(data['name'], data['balance'])
 ```
 
-## Static Methods (@staticmethod)
-Use when: Utility function grouped with class but doesn't need instance or class
+**Static Methods (@staticmethod)** - Use when: Utility function grouped with class but doesn't need instance or class
 
 ```python
 @staticmethod
@@ -346,14 +344,13 @@ def is_valid_account_number(num: str) -> bool:
     return len(num) == 10
 ```
 
-## Access Levels
+**Access Levels:**
 
 - **Public**: `self.name` - Direct access encouraged
 - **Protected**: `self._balance` - Convention, don't access directly
 - **Private**: `self.__ssn` - Name mangled, discourage access
 
-## Properties (@property/@setter)
-Make attributes look like data while using method validation
+**Properties (@property/@setter)** - Make attributes look like data while using method validation
 
 ```python
 @property
@@ -365,7 +362,6 @@ def balance(self, value: float):
     if value < 0:
         raise ValueError("Balance cannot be negative")
     self._balance = value
-```
 ```
 
 **Deliverable**: Complete guide with method type selection criteria.
