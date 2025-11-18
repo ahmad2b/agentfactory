@@ -1,5 +1,5 @@
 ---
-title: Lesson 1 - Context Windows and Token Counting
+title: Context Windows and Token Counting
 sidebar_position: 1
 chapter: 11
 lesson: 1
@@ -15,7 +15,7 @@ created: 2025-01-18
 version: 1.0.0
 ---
 
-# Lesson 1: Context Windows and Token Counting
+# Context Windows and Token Counting
 
 ## Your Context Window Is Your Working Memory
 

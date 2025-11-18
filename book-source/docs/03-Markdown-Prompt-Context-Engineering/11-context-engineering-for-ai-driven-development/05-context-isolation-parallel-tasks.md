@@ -1,5 +1,5 @@
 ---
-title: Lesson 5 - Context Isolation for Parallel Tasks
+title: Context Isolation for Parallel Tasks
 sidebar_position: 5
 chapter: 11
 lesson: 5
@@ -16,7 +16,7 @@ created: 2025-01-18
 version: 1.0.0
 ---
 
-# Lesson 5: Context Isolation for Parallel Tasks
+# Context Isolation for Parallel Tasks
 
 ## The Problem You're About to Solve
 

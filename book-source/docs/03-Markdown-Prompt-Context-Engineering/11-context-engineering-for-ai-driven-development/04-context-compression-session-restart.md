@@ -1,5 +1,5 @@
 ---
-title: Lesson 4 - Context Compression and Session Restart
+title: Context Compression and Session Restart
 sidebar_position: 4
 chapter: 11
 lesson: 4
@@ -16,7 +16,7 @@ created: 2025-01-18
 version: 1.0.0
 ---
 
-# Lesson 4: Context Compression and Session Restart
+# Context Compression and Session Restart
 
 ## The Problem You're About to Solve
 

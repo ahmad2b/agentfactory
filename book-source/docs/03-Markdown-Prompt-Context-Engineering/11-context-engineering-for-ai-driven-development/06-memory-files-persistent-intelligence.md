@@ -1,5 +1,5 @@
 ---
-title: Lesson 6 - Memory Files and Persistent Intelligence
+title: Memory Files and Persistent Intelligence
 sidebar_position: 6
 chapter: 11
 lesson: 6
@@ -16,7 +16,7 @@ created: 2025-01-18
 version: 1.0.0
 ---
 
-# Lesson 6: Memory Files and Persistent Intelligence
+# Memory Files and Persistent Intelligence
 
 ## The Problem You're About to Solve
 

@@ -1,5 +1,5 @@
 ---
-title: Lesson 2 - Degradation Symptoms and Manual Tracking
+title: Degradation Symptoms and Manual Tracking
 sidebar_position: 2
 chapter: 11
 lesson: 2
@@ -15,7 +15,7 @@ created: 2025-01-18
 version: 1.0.0
 ---
 
-# Lesson 2: Degradation Symptoms and Manual Tracking
+# Degradation Symptoms and Manual Tracking
 
 ## The Feeling When Context Window Fills
 

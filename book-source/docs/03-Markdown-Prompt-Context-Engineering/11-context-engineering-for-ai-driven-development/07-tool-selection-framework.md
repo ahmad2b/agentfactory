@@ -1,5 +1,5 @@
 ---
-title: Lesson 7 - Tool Selection Framework
+title: Tool Selection Framework
 sidebar_position: 7
 chapter: 11
 lesson: 7
@@ -16,7 +16,7 @@ created: 2025-01-18
 version: 1.0.0
 ---
 
-# Lesson 7: Tool Selection Framework — Claude Code vs Gemini CLI
+# Tool Selection Framework — Claude Code vs Gemini CLI
 
 ## The Problem You're About to Solve
 

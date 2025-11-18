@@ -1,5 +1,5 @@
 ---
-title: Lesson 8 - Hands-On Debugging and Optimization
+title: Hands-On Debugging and Optimization
 sidebar_position: 8
 chapter: 11
 lesson: 8
@@ -16,7 +16,7 @@ created: 2025-01-18
 version: 1.0.0
 ---
 
-# Lesson 8: Hands-On Debugging and Optimization
+# Hands-On Debugging and Optimization
 
 ## The Problem You're About to Solve
 

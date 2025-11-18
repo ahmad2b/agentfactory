@@ -1,5 +1,5 @@
 ---
-title: Lesson 9 - Capstone Spec-Driven Orchestration
+title: Capstone Spec-Driven Orchestration
 sidebar_position: 9
 chapter: 11
 lesson: 9
@@ -16,7 +16,7 @@ created: 2025-01-18
 version: 1.0.0
 ---
 
-# Lesson 9: Capstone — Spec-Driven Context Orchestration
+# Capstone — Spec-Driven Context Orchestration
 
 ## The Problem You're About to Solve
 

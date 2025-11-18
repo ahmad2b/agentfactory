@@ -735,7 +735,7 @@ class StringStack:
 > Show me how to write ONE generic Stack[T] class that works for all types while preserving type information. Explain:
 > 1. How PEP 695 syntax works for classes: `class Stack[T]:`
 > 2. How methods like push(item: T) and pop() -> T | None preserve type
-> 3. How to use it: Stack[int](), Stack[str](), etc.
+> 3. How to use it: `Stack[int]()`, `Stack[str]()`, etc.
 > 4. Why type information matters—show an example where IDE catches an error with generics but not without"
 
 **What AI Should Show You**:
@@ -759,7 +759,7 @@ class StringStack:
 >
 > 2. **Type Bounds**: What if I need a Sortable container that can order items? Create a Comparable protocol and show a SortedList[T: Comparable] class. Explain why the bound is necessary.
 >
-> 3. **Multiple Type Parameters**: Create a Cache[K, V] that maps keys to values. Show usage: Cache[str, int]() for string->int mapping.
+> 3. **Multiple Type Parameters**: Create a `Cache[K, V]` that maps keys to values. Show usage: `Cache[str, int]()` for string->int mapping.
 >
 > For each, show: a) Working code, b) Concrete usage example, c) How type safety works, d) Where bounds matter"
 

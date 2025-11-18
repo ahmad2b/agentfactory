@@ -16,5 +16,5 @@ By the end of this chapter, you will be able to:
 - **Write specification documents before prompting** — Define measurable success criteria, specify constraints and non-goals explicitly, create validation tests for acceptance criteria
 - **Use Question-Driven Development to elicit requirements** — Prompt AI to ask clarifying questions, transform AI questions and answers into structured specifications
 - **Create reusable prompt templates** — Recognize recurring prompt patterns (2+ occurrences), design templates with placeholders and usage guidance, evolve templates based on usage patterns
-- **Apply template selection decision frameworks** — Classify tasks by category (Diagnostic, Transformative, Generative, Explanatory, Evaluative), evaluate template applicability in <30 seconds, decide between template, custom prompt, or hybrid approach
+- **Apply template selection decision frameworks** — Classify tasks by category (Diagnostic, Transformative, Generative, Explanatory, Evaluative), evaluate template applicability in &lt;30 seconds, decide between template, custom prompt, or hybrid approach
 - **Write peer-reviewable specifications** — Produce specification documents implementable without clarification, define measurable success criteria and validation tests, identify and document open questions

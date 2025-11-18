@@ -1,5 +1,5 @@
 ---
-title: Lesson 3 - Progressive Loading Strategy
+title: Progressive Loading Strategy
 sidebar_position: 3
 chapter: 11
 lesson: 3
@@ -15,7 +15,7 @@ created: 2025-01-18
 version: 1.0.0
 ---
 
-# Lesson 3: Progressive Loading Strategy
+# Progressive Loading Strategy
 
 ## The Problem You're About to Solve
 
