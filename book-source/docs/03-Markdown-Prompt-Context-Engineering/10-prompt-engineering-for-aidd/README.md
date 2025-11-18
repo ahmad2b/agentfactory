@@ -1,6 +1,6 @@
 # Chapter 10: Prompt Engineering for AI-Driven Development
 
-Clear prompts equal working code on the first try. Vague prompts equal hours spent debugging AI-generated mistakes. Studies show developers using AI agents are 55% more productive, but only when they master prompting techniques.
+Clear prompts equal working code on the first try. Vague prompts equal hours spent debugging AI-generated mistakes. Mastering prompting techniques is essential for effective AI collaboration.
 
 This chapter teaches **prompt engineering** as a **specification skill** for AI-native development—the ability to communicate intent, constraints, and success criteria to AI systems with the same precision product managers use to specify requirements. You'll learn the frameworks that Jake Heller (Casetext founder, $650M exit to Thomson Reuters) used to refine AI prompts from 60% accuracy to 97% accuracy through iterative specification writing.
 

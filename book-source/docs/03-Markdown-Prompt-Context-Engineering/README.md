@@ -14,7 +14,7 @@ You're no longer just writing code—you're directing intelligent agents like Cl
 
 **What it is:** Prompt engineering is the skill of communicating effectively with AI coding agents to get production-quality code.
 
-**Why it matters:** Clear prompts = working code on the first try. Vague prompts = hours spent debugging AI-generated mistakes. Studies show developers using AI agents are 55% more productive, but only when they master prompting techniques.
+**Why it matters:** Clear prompts = working code on the first try. Vague prompts = hours spent debugging AI-generated mistakes. Mastering prompting techniques is essential for effective AI collaboration.
 
 ### Chapter 11: Context Engineering for AI-Driven Development
 
