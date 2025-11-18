@@ -351,7 +351,6 @@ In production systems, you often need to know which Python implementation is run
 ```python
 import platform
 import sys
-from typing import dict
 
 def detect_python_implementation() -> dict[str, str]:
     """

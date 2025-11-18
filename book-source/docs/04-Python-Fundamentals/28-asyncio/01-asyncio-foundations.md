@@ -351,7 +351,9 @@ For I/O-bound tasks, asyncio shines because it lets other tasks run *while waiti
 
 **Example**:
 ```python
-async def fetch_weather(city: str) -> dict[str, any]:
+from typing import Any
+
+async def fetch_weather(city: str) -> dict[str, Any]:
     """Fetch weather data. The network wait blocks, but other tasks can run."""
     async with httpx.AsyncClient() as client:
         response = await client.get(f"https://api.weather.com/city/{city}")

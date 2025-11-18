@@ -411,7 +411,7 @@ class AppSettings(BaseSettings):
 # Reads from .env file or environment
 # Validates types and constraints
 # Fails fast with clear error if required fields missing
-settings = AppSettings()
+settings: AppSettings = AppSettings()
 
 # Type-safe access
 print(f"Debug: {settings.debug_mode}")  # Actually a bool, not string
@@ -477,7 +477,7 @@ class AppSettings(BaseSettings):
 # API_TIMEOUT_SECONDS=60
 
 # Load and validate
-settings = AppSettings()
+settings: AppSettings = AppSettings()
 
 # Type-safe access to nested settings
 print(f"Connecting to {settings.database.host}:{settings.database.port}")
@@ -497,7 +497,7 @@ class AppSettings(BaseSettings):
     api_key: str = Field(repr=False)  # Won't appear in str(settings)
     debug: bool = True
 
-settings = AppSettings(api_key="secret-key-123", debug=True)
+settings: AppSettings = AppSettings(api_key="secret-key-123", debug=True)
 print(settings)
 # Output: api_key=PydanticUndefinedType debug=True
 # Notice: api_key is hidden even though it's set

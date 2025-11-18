@@ -143,7 +143,7 @@ Creating a valid book works exactly as you'd expect:
 
 ```python
 # Valid data - no errors
-book = Book(
+book: Book = Book(
     title="Python Guide",
     author="Jane Doe",
     year=2024,
@@ -236,7 +236,7 @@ One of Pydantic's superpowers is reporting ALL validation problems simultaneousl
 
 ```python
 try:
-    bad_user = User(
+    bad_user: User = User(
         name=123,           # Error: not a string
         age="not a number", # Error: not an int
         email="missing-at-sign"  # Error: invalid format
@@ -278,17 +278,17 @@ Creating a book with authors:
 
 ```python
 # Method 1: Create Author objects first
-author1 = Author(name="Alice Smith", bio="Python expert")
-author2 = Author(name="Bob Johnson", bio="Data scientist")
+author1: Author = Author(name="Alice Smith", bio="Python expert")
+author2: Author = Author(name="Bob Johnson", bio="Data scientist")
 
-book = Book(
+book: Book = Book(
     title="Advanced Python",
     authors=[author1, author2],
     publication_date="2024-01-15"
 )
 
 # Method 2: Pass dictionaries - Pydantic converts them
-book2 = Book(
+book2: Book = Book(
     title="Web Development",
     authors=[
         {"name": "Charlie Brown", "bio": "Full-stack developer"},
@@ -313,7 +313,7 @@ Validation happens at all levels. If an Author's `name` is missing, Pydantic cat
 
 ```python
 try:
-    bad_book = Book(
+    bad_book: Book = Book(
         title="Test",
         authors=[
             {"name": "Valid Author", "bio": "Good"},
@@ -347,7 +347,7 @@ class Book:  # Missing: BaseModel
     title: str
     author: str
 
-book = Book(title="Test", author="Author")
+book: Book = Book(title="Test", author="Author")
 # This works but does NO validation!
 
 # CORRECT - inherits from BaseModel
@@ -357,7 +357,7 @@ class Book(BaseModel):  # Inherits validation
     title: str
     author: str
 
-book = Book(title="Test", author="Author")
+book: Book = Book(title="Test", author="Author")
 # Now validation works
 ```
 
@@ -367,11 +367,11 @@ If you don't catch `ValidationError`, your program crashes:
 
 ```python
 # WRONG - will crash if data is invalid
-book = Book(title="Test", author=123)  # Crash!
+book: Book = Book(title="Test", author=123)  # Crash!
 
 # CORRECT - handle the error gracefully
 try:
-    book = Book(title="Test", author=123)
+    book: Book = Book(title="Test", author=123)
 except ValidationError as e:
     print(f"Invalid data: {e}")
     # Program continues, user sees helpful message
@@ -393,11 +393,11 @@ class Post(BaseModel):
     tags: list[str]  # Pydantic validates each tag
 
 # Valid
-post = Post(title="AI", tags=["python", "pydantic"])
+post: Post = Post(title="AI", tags=["python", "pydantic"])
 
 # Invalid - number in a list that should contain strings
 try:
-    post = Post(title="AI", tags=["python", 123])  # ERROR
+    post: Post = Post(title="AI", tags=["python", 123])  # ERROR
 except ValidationError as e:
     print(e)  # tags.1: Expected string, got int
 ```

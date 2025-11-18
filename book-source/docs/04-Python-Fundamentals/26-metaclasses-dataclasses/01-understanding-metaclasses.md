@@ -148,11 +148,20 @@ When you use `type()` as a function, the signature is:
 # Specification Reference: Demonstrate type() as class factory
 # Prompt: Show me how to create a class using type() with name, bases, and dict
 
+# Define methods as regular functions (better typing than lambdas)
+def dog_init(self, name: str) -> None:
+    """Initialize a Dog with a name."""
+    self.name = name
+
+def dog_bark(self) -> str:
+    """Return a bark message."""
+    return f"{self.name} says woof!"
+
 # Define class attributes and methods in a dictionary
 class_attributes: dict[str, object] = {
     'species': 'Canis familiaris',  # Class variable
-    '__init__': lambda self, name: setattr(self, 'name', name),
-    'bark': lambda self: f"{self.name} says woof!",
+    '__init__': dog_init,
+    'bark': dog_bark,
 }
 
 # Create the class using type()

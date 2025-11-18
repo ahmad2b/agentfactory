@@ -203,7 +203,6 @@ Let's start with Example 8: a scaffolded multi-agent system that you'll extend t
 import threading
 import sys
 import time
-from typing import List
 from dataclasses import dataclass
 from threading import Lock
 
@@ -280,7 +279,7 @@ class ThreadSafeResultCollector:
 
     def __init__(self):
         """Initialize empty results list and lock."""
-        self._results: List[AgentResult] = []
+        self._results: list[AgentResult] = []
         self._lock = Lock()
 
     def add_result(self, result: AgentResult) -> None:
@@ -292,7 +291,7 @@ class ThreadSafeResultCollector:
         with self._lock:
             self._results.append(result)
 
-    def get_all_results(self) -> List[AgentResult]:
+    def get_all_results(self) -> list[AgentResult]:
         """Get all collected results.
 
         Returns:
@@ -309,7 +308,7 @@ class ThreadSafeResultCollector:
 def run_multi_agent_system(
     num_agents: int,
     data_size: int
-) -> tuple[List[AgentResult], float]:
+) -> tuple[list[AgentResult], float]:
     """Run multiple agents in parallel.
 
     Args:
@@ -330,7 +329,7 @@ def run_multi_agent_system(
     # Create agents and results collector
     agents = [AIAgent(i) for i in range(num_agents)]
     collector = ThreadSafeResultCollector()
-    threads: List[threading.Thread] = []
+    threads: list[threading.Thread] = []
 
     def agent_worker(agent: AIAgent, data: int) -> None:
         """Worker function for agent thread.
@@ -505,7 +504,7 @@ We already used `threading.Lock` in Example 8. Let's understand when and why it'
 # WITHOUT lock - DANGEROUS
 results: list[int] = []
 
-def agent_worker(agent_id: int):
+def agent_worker(agent_id: int) -> None:
     result = agent.reason()
     results.append(result)  # ✗ Race condition: multiple threads modifying simultaneously
 
@@ -513,7 +512,7 @@ def agent_worker(agent_id: int):
 results: list[int] = []
 results_lock = threading.Lock()
 
-def agent_worker(agent_id: int):
+def agent_worker(agent_id: int) -> None:
     result = agent.reason()
     with results_lock:  # ✓ Only one thread modifies at a time
         results.append(result)
@@ -529,7 +528,7 @@ import queue
 # Using Queue (thread-safe by design)
 results_queue = queue.Queue()
 
-def agent_worker(agent_id: int):
+def agent_worker(agent_id: int) -> None:
     result = agent.reason()
     results_queue.put(result)  # ✓ Thread-safe; no explicit lock needed
 

@@ -260,7 +260,7 @@ from typing import Any
 
 def load_yaml_config(filepath: str) -> dict[str, Any]:
     """Load configuration from a YAML file."""
-    config_path = Path(filepath)
+    config_path: Path = Path(filepath)
 
     if not config_path.exists():
         raise FileNotFoundError(f"Config file not found: {filepath}")
@@ -285,12 +285,12 @@ def load_env_config() -> dict[str, Any]:
 
         # APP_DEBUG=true → debug: true
         # APP_DATABASE__HOST=localhost → database.host: localhost
-        config_key = key[4:].lower()  # Remove "APP_" prefix
+        config_key: str = key[4:].lower()  # Remove "APP_" prefix
 
         if "__" in config_key:
             # Handle nested keys: DATABASE__HOST → database.host
-            parts = config_key.split("__")
-            current = result
+            parts: list[str] = config_key.split("__")
+            current: dict[str, Any] = result
             for part in parts[:-1]:
                 if part not in current:
                     current[part] = {}
@@ -381,7 +381,7 @@ def merge_configs(*configs: dict[str, Any]) -> dict[str, Any]:
     Later arguments override earlier ones.
     """
     def merge_dict(base: dict[str, Any], override: dict[str, Any]) -> dict[str, Any]:
-        result = base.copy()
+        result: dict[str, Any] = base.copy()
         for key, value in override.items():
             if isinstance(value, dict) and key in result and isinstance(result[key], dict):
                 result[key] = merge_dict(result[key], value)
@@ -407,15 +407,15 @@ def load_config(yaml_file: str = "config.yaml") -> AppConfig:
     """
     # Load from each source
     try:
-        yaml_config = load_yaml_config(yaml_file)
+        yaml_config: dict[str, Any] = load_yaml_config(yaml_file)
     except FileNotFoundError:
-        yaml_config = {}
+        yaml_config: dict[str, Any] = {}
 
-    env_config = load_env_config()
-    cli_config = load_cli_config()
+    env_config: dict[str, Any] = load_env_config()
+    cli_config: dict[str, Any] = load_cli_config()
 
     # Merge with precedence: later overrides earlier
-    merged = merge_configs(yaml_config, env_config, cli_config)
+    merged: dict[str, Any] = merge_configs(yaml_config, env_config, cli_config)
 
     # Validate with Pydantic
     try:
@@ -498,7 +498,7 @@ class AppConfig(BaseSettings):
 
 ```python
 # Load configuration
-config = load_config()
+config: AppConfig = load_config()
 
 # Type-safe access with full IDE autocomplete
 db_config: DatabaseConfig = config.database
@@ -508,7 +508,7 @@ api_config: APIConfig = config.api
 print(f"API timeout: {api_config.timeout} seconds")
 
 # Using ConfigValue wrapper (if you prefer explicit typing)
-db = ConfigValue[DatabaseConfig](config.database)
+db: ConfigValue[DatabaseConfig] = ConfigValue[DatabaseConfig](config.database)
 actual_db: DatabaseConfig = db.get()
 ```
 
@@ -528,11 +528,11 @@ def load_config_safe(yaml_file: str = "config.yaml") -> AppConfig:
     """Load configuration with detailed error reporting."""
 
     # Load from all sources
-    yaml_config = load_yaml_config(yaml_file) if Path(yaml_file).exists() else {}
-    env_config = load_env_config()
-    cli_config = load_cli_config()
+    yaml_config: dict[str, Any] = load_yaml_config(yaml_file) if Path(yaml_file).exists() else {}
+    env_config: dict[str, Any] = load_env_config()
+    cli_config: dict[str, Any] = load_cli_config()
 
-    merged = merge_configs(yaml_config, env_config, cli_config)
+    merged: dict[str, Any] = merge_configs(yaml_config, env_config, cli_config)
 
     # Validate and provide helpful errors
     try:
@@ -544,9 +544,9 @@ def load_config_safe(yaml_file: str = "config.yaml") -> AppConfig:
         print("="*60 + "\n")
 
         for error in e.errors():
-            field_path = ".".join(str(x) for x in error["loc"])
-            error_type = error["type"]
-            message = error["msg"]
+            field_path: str = ".".join(str(x) for x in error["loc"])
+            error_type: str = error["type"]
+            message: str = error["msg"]
 
             print(f"Field: {field_path}")
             print(f"  Error: {message}")
@@ -571,9 +571,9 @@ logger = logging.getLogger(__name__)
 def load_config_with_logging(yaml_file: str = "config.yaml") -> AppConfig:
     """Load configuration and log what sources were used."""
 
-    yaml_config = load_yaml_config(yaml_file) if Path(yaml_file).exists() else {}
-    env_config = load_env_config()
-    cli_config = load_cli_config()
+    yaml_config: dict[str, Any] = load_yaml_config(yaml_file) if Path(yaml_file).exists() else {}
+    env_config: dict[str, Any] = load_env_config()
+    cli_config: dict[str, Any] = load_cli_config()
 
     if yaml_config:
         logger.info(f"Loaded YAML config from {yaml_file}")
@@ -582,8 +582,8 @@ def load_config_with_logging(yaml_file: str = "config.yaml") -> AppConfig:
     if cli_config:
         logger.debug(f"Loaded CLI arguments: {list(cli_config.keys())}")
 
-    merged = merge_configs(yaml_config, env_config, cli_config)
-    config = AppConfig(**merged)
+    merged: dict[str, Any] = merge_configs(yaml_config, env_config, cli_config)
+    config: AppConfig = AppConfig(**merged)
 
     # Log final configuration (without secrets)
     logger.info(f"Debug mode: {config.debug}")
@@ -641,7 +641,7 @@ api:
 ```python
 def test_load_yaml_config(temp_yaml_config):
     """Test that YAML files are loaded correctly."""
-    config = load_config(yaml_file=temp_yaml_config)
+    config: AppConfig = load_config(yaml_file=temp_yaml_config)
 
     assert config.debug is False
     assert config.log_level == "INFO"
@@ -660,7 +660,7 @@ def test_env_override(temp_yaml_config, monkeypatch):
     monkeypatch.setenv("APP_DEBUG", "true")
     monkeypatch.setenv("APP_DATABASE__HOST", "prod-db.example.com")
 
-    config = load_config(yaml_file=temp_yaml_config)
+    config: AppConfig = load_config(yaml_file=temp_yaml_config)
 
     # Environment variables override YAML
     assert config.debug is True
@@ -685,7 +685,7 @@ def test_cli_overrides_all(temp_yaml_config, monkeypatch):
         "--api-timeout=60"
     ])
 
-    config = load_config(yaml_file=temp_yaml_config)
+    config: AppConfig = load_config(yaml_file=temp_yaml_config)
 
     # CLI wins over environment
     assert config.log_level == "ERROR"
@@ -805,7 +805,7 @@ def main():
     """Example application using ConfigManager."""
 
     # Load configuration
-    config = ConfigManager.load(yaml_file="configs/dev.yaml")
+    config: AppConfig = ConfigManager.load(yaml_file="configs/dev.yaml")
 
     # Set up logging based on config
     logging.getLogger().setLevel(config.log_level)
@@ -814,11 +814,11 @@ def main():
     logger.info(f"Debug mode: {config.debug}")
 
     # Access database configuration with type safety
-    db_config = config.database
+    db_config: DatabaseConfig = config.database
     logger.info(f"Connecting to {db_config.host}:{db_config.port}/{db_config.name}")
 
     # Access API configuration with type safety
-    api_config = config.api
+    api_config: APIConfig = config.api
     logger.info(f"API base URL: {api_config.base_url} (timeout: {api_config.timeout}s)")
 
     logger.info("Application running successfully")
@@ -846,10 +846,10 @@ Aim for 90%+ test coverage of your ConfigManager code.
 
 ```python
 # ❌ WRONG: Missing required field isn't caught until runtime
-def get_database_password():
+def get_database_password() -> str | None:
     return os.environ.get("DATABASE_PASSWORD")  # Returns None if missing!
 
-password = get_database_password()
+password: str | None = get_database_password()
 # Crashes hours later when you try to use the connection
 ```
 
@@ -858,7 +858,7 @@ password = get_database_password()
 class DatabaseConfig(BaseModel):
     password: str  # Required field—no default
 
-config = load_config()  # Raises ValidationError if password missing
+config: AppConfig = load_config()  # Raises ValidationError if password missing
 ```
 
 ### Mistake 2: Hardcoding Defaults in Code
