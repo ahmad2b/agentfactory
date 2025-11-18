@@ -620,7 +620,7 @@ Imagine you're building a Vector class for mathematical computations. You want t
 > 4. Iterate: `for component in v1`
 > 5. Use in set: `{v1, v2, v3}`
 >
-> Without special methods, which operations fail? Why does print() show '<__main__.Vector object at 0x...>' instead of something readable? What makes built-in types like list and dict feel natural to use?"
+> Without special methods, which operations fail? Why does print() show ugly memory address output instead of something readable? What makes built-in types like list and dict feel natural to use?"
 
 **Expected Understanding**: AI will show you that without special methods, custom objects don't integrate with Python's syntax. No `+` operator, ugly print output, can't iterate, can't use with len(). Built-in types work because they implement special methods.
 

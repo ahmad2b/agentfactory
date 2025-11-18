@@ -379,7 +379,7 @@ Ready to understand encapsulation, master method types, and control attribute ac
 > "Create a MathHelper class. Add three methods: 1) instance method square_value(self, x) using instance state, 2) class method create_with_preset(cls, preset_name) returning new object, 3) static method is_prime(n) with no self or cls. Explain when to use each type."
 
 **🧪 Test Properties for Validation:**
-> "Build a Person class with age property. Use @property for getter, @age.setter for setter that validates (0 <= age <= 150). Try: person.age = -5, person.age = 200, person.age = 25. Show how properties enable validation without breaking the attribute access API. Why is this better than get_age()/set_age()?"
+> "Build a Person class with age property. Use @property for getter, @age.setter for setter that validates (0 to 150 range). Try: person.age = -5, person.age = 200, person.age = 25. Show how properties enable validation without breaking the attribute access API. Why is this better than get_age()/set_age()?"
 
 **🚀 Apply to Data Validation:**
 > "I'm building a Product class. Price must be positive, stock can't be negative, discount must be 0-100%. Design the class with properties that validate on every set. Show validation error messages. How do properties make the API cleaner than validate_and_set_price() methods?"

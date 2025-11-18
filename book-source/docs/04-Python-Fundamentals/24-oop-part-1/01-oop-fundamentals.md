@@ -347,7 +347,7 @@ OOP solves the **scaling and organization problem**: When you have many entities
 **Procedural vs OOP Comparison:**
 
 *When Procedural is Fine:*
-- Script with <5 variables
+- Script with less than 5 variables
 - No repetition of similar logic
 - One-time use, never maintained
 - Example: A script that calculates π to 1000 digits
