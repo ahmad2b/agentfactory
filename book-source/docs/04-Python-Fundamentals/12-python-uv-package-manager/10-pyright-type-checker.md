@@ -30,7 +30,7 @@ learning_objectives:
   - objective: "Understand why type hints exist: catch bugs before running code"
     proficiency_level: "A1"
     bloom_level: "Remember"
-    assessment_method: "Student explains: types catch ~30-50% of bugs statically (no runtime needed)"
+    assessment_method: "Student explains: types catch ~30–50% of bugs statically (no runtime needed)"
 
   - objective: "Write basic type hints in Python 3.13+ syntax"
     proficiency_level: "B1"
@@ -98,7 +98,7 @@ result = greet(42)  # Type checker: ERROR! 42 is not a str
 
 Now the error is **caught immediately**, before running code.
 
-**Benefit**: Catch 30-50% of bugs statically (without running code). That's huge.
+**Benefit**: Catch 30–50% of bugs statically (without running code). That's huge.
 
 **Source**: Verified in intelligence/001-verified-tool-documentation.md
 

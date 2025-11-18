@@ -73,7 +73,7 @@ Before **Ruff**, Python developers needed three separate tools to write clean co
 
 A beginner would ask: "Which tool do I use?" Answer: "All three, in that order."
 
-**Ruff solves this: One tool does the job of all three—and runs 10-100x faster.**
+**Ruff solves this: One tool does the job of all three—and runs 10–100x faster.**
 
 **Source**: Verified in intelligence/001-verified-tool-documentation.md
 

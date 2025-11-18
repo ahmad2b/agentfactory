@@ -19,7 +19,7 @@ skills:
     category: "Technical"
     bloom_level: "Remember"
     digcomp_area: "Information Literacy"
-    measurable_at_this_level: "Student can identify the value of 10-100x faster package installation in their workflow and give examples of when speed matters"
+    measurable_at_this_level: "Student can identify the value of 10–100x faster package installation in their workflow and give examples of when speed matters"
 
   - name: "Understand AI-Driven Development Approach"
     proficiency_level: "A2"
@@ -144,7 +144,7 @@ Here's what UV does:
 4. **Manages Python versions** ✓ (conditional; covered in advanced lessons)
 5. **Runs code in project context** ✓ (no manual activation needed)
 
-And it does all of this **10-100x faster** than the traditional tools.
+And it does all of this **10–100x faster** than the traditional tools.
 
 ### Why Is UV So Fast?
 

@@ -47,7 +47,7 @@ skills:
     category: "Technical"
     bloom_level: "Analyze"
     digcomp_area: "Problem-Solving & Computational Thinking"
-    measurable_at_this_level: "Student understands 5-10% single-threaded overhead; 2-10x multi-threaded gains; knows when overhead is justified; measures with real workloads"
+    measurable_at_this_level: "Student understands 5–10% single-threaded overhead; 2–10x multi-threaded gains; knows when overhead is justified; measures with real workloads"
 
   - name: "Runtime GIL Control"
     proficiency_level: "B1"
@@ -101,7 +101,7 @@ learning_objectives:
   - objective: "Analyze when free-threading overhead is justified by speedup"
     proficiency_level: "B1-B2"
     bloom_level: "Analyze"
-    assessment_method: "Student performs benchmarking and explains when 5-10% overhead is worth the 2-10x gains"
+    assessment_method: "Student performs benchmarking and explains when 5–10% overhead is worth the 2–10x gains"
 
   - objective: "Understand that thread safety remains programmer responsibility in free-threaded Python"
     proficiency_level: "B1-B2"
@@ -110,7 +110,7 @@ learning_objectives:
 
 cognitive_load:
   new_concepts: 10
-  assessment: "10 concepts (B1-B2 MAXIMUM for primary lesson): (1) free-threading paradigm shift, (2) per-thread GIL, (3) lock-free data structures, (4) three-phase roadmap, (5) installation methods, (6) detection via sys._is_gil_enabled, (7) PYTHON_GIL runtime control, (8) 5-10% overhead vs 2-10x gains, (9) thread safety remains critical, (10) AI-native multi-agent foundation. JUSTIFIED: This is the centerpiece lesson—free-threading is revolutionary and requires deep understanding."
+  assessment: "10 concepts (B1-B2 MAXIMUM for primary lesson): (1) free-threading paradigm shift, (2) per-thread GIL, (3) lock-free data structures, (4) three-phase roadmap, (5) installation methods, (6) detection via sys._is_gil_enabled, (7) PYTHON_GIL runtime control, (8) 5–10% overhead vs 2–10x gains, (9) thread safety remains critical, (10) AI-native multi-agent foundation. JUSTIFIED: This is the centerpiece lesson—free-threading is revolutionary and requires deep understanding."
 
 differentiation:
   extension_for_advanced: "For B2 students: Implement lock-free algorithms using atomic operations; explore how biased locking optimizes common patterns; connect to memory models and happens-before relationships"
@@ -134,11 +134,11 @@ For 30 years, Python had a fundamental constraint: the Global Interpreter Lock p
 
 In October 2025, this changed forever.
 
-Python 3.14 made free-threading production-ready. For the first time in Python's history, you can now write truly parallel multi-threaded Python code that scales across CPU cores. A 4-agent AI system running on a 4-core machine can achieve 2-4x performance gains instead of pseudo-concurrency. This is not a minor optimization—it's the biggest architectural change Python has experienced since its inception.
+Python 3.14 made free-threading production-ready. For the first time in Python's history, you can now write truly parallel multi-threaded Python code that scales across CPU cores. A 4-agent AI system running on a 4-core machine can achieve 2–4x performance gains instead of pseudo-concurrency. This is not a minor optimization—it's the biggest architectural change Python has experienced since its inception.
 
 The GIL isn't removed (backward compatibility matters). It's now **optional**. You can choose to disable it.
 
-This lesson is the centerpiece of Chapter 29 because free-threading transforms how you'll design multi-agent AI systems in Parts 10-14. You'll learn what changed, why it matters, how to use it, and when it's worth the 5-10% single-threaded overhead.
+This lesson is the centerpiece of Chapter 29 because free-threading transforms how you'll design multi-agent AI systems in Parts 10-14. You'll learn what changed, why it matters, how to use it, and when it's worth the 5–10% single-threaded overhead.
 
 ---
 
@@ -148,7 +148,7 @@ This lesson is the centerpiece of Chapter 29 because free-threading transforms h
 
 **Python 3.13 (2024)**: Free-threading was experimental. You could build Python without the GIL, but it had 40% overhead on single-threaded code. Too slow for production.
 
-**Python 3.14 (October 2025)**: Free-threading is officially supported and production-ready. Overhead dropped from 40% to 5-10%. The GIL is now optional, not fundamental.
+**Python 3.14 (October 2025)**: Free-threading is officially supported and production-ready. Overhead dropped from 40% to 5–10%. The GIL is now optional, not fundamental.
 
 This is the tipping point. For the first time in Python's history, you can choose: Do I want true parallelism on my CPU cores, or do I want to avoid the overhead?
 
@@ -199,11 +199,11 @@ At this phase, free-threading was a research project. You could build it from so
 ### Phase 2: Python 3.14 (October 2025) — Production Ready (WE ARE HERE)
 
 **Status**: Officially supported, production-ready
-**Overhead**: ~5-10% single-threaded (acceptable for most workloads)
-**Multi-threaded Gains**: 2-10x on CPU-bound workloads
+**Overhead**: ~5–10% single-threaded (acceptable for most workloads)
+**Multi-threaded Gains**: 2–10x on CPU-bound workloads
 **Use Case**: Production AI systems, data processing, multi-agent reasoning
 
-Python 3.14 is the inflection point. The overhead dropped dramatically (40% → 5-10%), making free-threading practical for production. Official installers include free-threaded builds. This is where you choose to adopt (or not).
+Python 3.14 is the inflection point. The overhead dropped dramatically (40% → 5–10%), making free-threading practical for production. Official installers include free-threaded builds. This is where you choose to adopt (or not).
 
 ### Phase 3: Python 3.15+ (2026+) — Likely Default
 
@@ -218,7 +218,7 @@ Eventually, free-threading will likely become the default build. Traditional GIL
 Three reasons for this phased approach:
 
 1. **Ecosystem Compatibility**: Third-party packages need time to validate compatibility. Some C extensions may need updates.
-2. **Performance Stabilization**: The overhead improved 40% → 5-10% in one year. More optimizations are likely in 3.15+.
+2. **Performance Stabilization**: The overhead improved 40% → 5–10% in one year. More optimizations are likely in 3.15+.
 3. **Developer Adoption**: Pushing too fast causes friction. Gradual rollout lets teams evaluate and migrate on their timeline.
 
 #### 🚀 CoLearning Challenge
@@ -282,10 +282,10 @@ Free-threading uses **biased locking**: if a thread accesses an object repeatedl
 
 Think of it like this: "This dict is usually accessed by Thread 1, so optimize for that case. If another thread tries to access it, revoke the bias and use slower but correct locking."
 
-This optimization keeps the 5-10% overhead small. If every lock access required expensive synchronization, overhead would be much higher.
+This optimization keeps the 5–10% overhead small. If every lock access required expensive synchronization, overhead would be much higher.
 
 #### 🎓 Expert Insight
-> Benchmarks show 2-10x gains, but YOUR workload may differ. Always measure. Professional developers don't trust marketing claims—they validate with real data. Free-threading's benefits depend on: (1) CPU-bound workloads, (2) multi-core hardware, (3) sufficient parallelism to justify overhead.
+> Benchmarks show 2–10x gains, but YOUR workload may differ. Always measure. Professional developers don't trust marketing claims—they validate with real data. Free-threading's benefits depend on: (1) CPU-bound workloads, (2) multi-core hardware, (3) sufficient parallelism to justify overhead.
 
 ---
 
@@ -513,23 +513,23 @@ time PYTHON_GIL=0 python benchmark.py
 
 This is where theory meets reality. Free-threading comes with tradeoffs.
 
-### Single-Threaded Overhead: 5-10%
+### Single-Threaded Overhead: 5–10%
 
-A single-threaded Python program running on free-threaded Python is 5-10% slower than traditional Python.
+A single-threaded Python program running on free-threaded Python is 5–10% slower than traditional Python.
 
 Why? Every object access now involves potential locking, biased locking revocation checks, and per-thread state management. It's small overhead, but it's real.
 
 **Is it worth it?** Depends on your program:
 
 - **Single-threaded program**: No. Use traditional Python.
-- **Multi-threaded CPU-bound program**: Yes. The 5-10% overhead is tiny compared to 2-10x parallelism gains.
+- **Multi-threaded CPU-bound program**: Yes. The 5–10% overhead is tiny compared to 2–10x parallelism gains.
 
-### Multi-Threaded Gains: 2-10x
+### Multi-Threaded Gains: 2–10x
 
 On a 4-core machine, a free-threaded program with 4 threads solving a CPU-bound problem sees:
 
 - **Ideal case** (perfect parallelism, no contention): ~4x speedup (1 thread baseline, 4 threads)
-- **Real case** (some contention, biased locking revocation): 2-4x speedup (depends on workload)
+- **Real case** (some contention, biased locking revocation): 2–4x speedup (depends on workload)
 - **Heavy contention case** (all threads access same objects): Close to 1x (no gain)
 
 The speedup depends on:
@@ -542,8 +542,8 @@ The speedup depends on:
 
 | Workload | Traditional Python | Free-Threaded Python | Multiprocessing |
 |----------|------------------|----------------------|-----------------|
-| Single-threaded | ✅ Optimal (0% overhead) | ❌ 5-10% slowdown | ❌ IPC overhead |
-| Multi-threaded CPU-bound | ❌ No parallelism | ✅ 2-10x speedup | ✅ Parallelism, high memory |
+| Single-threaded | ✅ Optimal (0% overhead) | ❌ 5–10% slowdown | ❌ IPC overhead |
+| Multi-threaded CPU-bound | ❌ No parallelism | ✅ 2–10x speedup | ✅ Parallelism, high memory |
 | Multi-threaded I/O-bound | ✅ Works well | ✅ Works slightly better | ❌ Overkill |
 | High contention | N/A | ❌ Lock contention | ✅ Process isolation |
 
@@ -656,12 +656,12 @@ if __name__ == "__main__":
 ```
 
 **Validation Steps**:
-1. Run on free-threaded Python 3.14: Should show ~2-4x speedup
+1. Run on free-threaded Python 3.14: Should show ~2–4x speedup
 2. Run on traditional Python 3.14: Should show ~1x speedup (no parallelism)
 3. Adjust `ITERATIONS` if benchmark is too fast or slow
 
 #### 💬 AI Colearning Prompt
-> "I'm concerned about 5-10% single-threaded overhead. When is this worth paying? Show me the math: at what thread count does the speedup justify the cost? Give real examples."
+> "I'm concerned about 5–10% single-threaded overhead. When is this worth paying? Show me the math: at what thread count does the speedup justify the cost? Give real examples."
 
 **Expected Outcome**: You'll understand the break-even analysis and when to choose free-threading.
 
@@ -849,7 +849,7 @@ On a 4-core machine:
 - 3 agents: ~2.8x speedup (almost 3x)
 - 4 agents: ~3.7x speedup (almost 4x)
 
-The 5-10% overhead is absorbed in the 2-4x parallelism gains.
+The 5–10% overhead is absorbed in the 2–4x parallelism gains.
 
 #### 🚀 CoLearning Challenge
 
@@ -879,7 +879,7 @@ This is a **4-part bidirectional learning challenge** where you explore Python 3
 
 **Expected Observation**:
 - With GIL (traditional): 4 threads = 1x speedup (no improvement)
-- With free-threading (Python 3.14 optional): 4 threads = 3-4x speedup (true parallelism)
+- With free-threading (Python 3.14 optional): 4 threads = 3–4x speedup (true parallelism)
 
 **Self-Validation**:
 - What's the difference at the code level between GIL and no-GIL Python?

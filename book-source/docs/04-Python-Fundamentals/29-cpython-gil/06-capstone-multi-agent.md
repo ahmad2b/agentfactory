@@ -173,7 +173,7 @@ Consider a scenario: You have 4 AI agents analyzing different datasets in parall
 **Free-threaded Python (GIL optional)**:
 - Agents 1-4 execute simultaneously on separate cores
 - No GIL overhead; true parallelism
-- 4 agents on 4-core machine: ~3.5-4x performance gain (linear scaling)
+- 4 agents on 4-core machine: ~3.5–4x performance gain (linear scaling)
 
 This difference is revolutionary for AI-native development—multi-agent reasoning finally gets the performance it deserves.
 
@@ -796,8 +796,8 @@ This is a **5-part bidirectional learning challenge** where you complete, evalua
 
 **Expected Behavior**:
 - Traditional threading: 1.0x speedup (GIL blocks parallelism)
-- Free-threaded Python: 3-4x speedup on 4 cores (true parallelism)
-- ProcessPoolExecutor: 2-3x speedup (process overhead overhead)
+- Free-threaded Python: 3–4x speedup on 4 cores (true parallelism)
+- ProcessPoolExecutor: 2–3x speedup (process overhead overhead)
 - All approaches produce identical results (correctness verified)
 
 **Deliverable**: Create `/tmp/multi_agent_verification.md` documenting:

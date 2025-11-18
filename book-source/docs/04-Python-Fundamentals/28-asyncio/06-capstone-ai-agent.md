@@ -50,7 +50,7 @@ skills:
     category: "Technical"
     bloom_level: "Analyze"
     digcomp_area: "Problem-Solving"
-    measurable_at_this_level: "Student benchmarks and optimizes system achieving 2-3x speedup vs sequential"
+    measurable_at_this_level: "Student benchmarks and optimizes system achieving 2–3x speedup vs sequential"
 
   - name: "AI System Architecture"
     proficiency_level: "B2"
@@ -96,7 +96,7 @@ Now imagine building a real AI system. A production language model agent that ne
 2. **Process each response in parallel** — Simulate LLM inference on each result using multiple CPU cores
 3. **Handle failures gracefully** — If one source times out, continue with others
 4. **Aggregate results** — Combine partial results into a cohesive response
-5. **Measure performance** — Prove that hybrid execution is 2-3x faster than doing everything sequentially
+5. **Measure performance** — Prove that hybrid execution is 2–3x faster than doing everything sequentially
 
 That's what this capstone builds. You'll create a production-style AI agent system that integrates **every concept from Lessons 1-5** into one working example. This isn't a learning exercise—it's a pattern you'll use in real applications.
 
@@ -195,7 +195,7 @@ Your system must:
    - Error messages from failed sources
    - Total execution time
    - Count of parallel cores used
-6. **Demonstrate performance**: Complete 2-3x faster than sequential execution
+6. **Demonstrate performance**: Complete 2–3x faster than sequential execution
 
 ### Non-Functional Requirements
 
@@ -700,7 +700,7 @@ async def fetch_weather(...):
 
 ### Test 4: Run Benchmark
 
-**What to check**: Hybrid execution is 2-3x faster than sequential.
+**What to check**: Hybrid execution is 2–3x faster than sequential.
 
 ```python
 asyncio.run(run_benchmarks())
@@ -801,7 +801,7 @@ This is a **5-part bidirectional learning challenge** where you complete, evalua
 - Concurrent fetch: 3 seconds (longest single source, not sum)
 - Parallel process: 2 seconds (3 tasks on multiple cores)
 - Total: 5-6 seconds (stages overlap, not sequential)
-- Speedup: 1.5-2x vs sequential (~10 seconds)
+- Speedup: 1.5–2x vs sequential (~10 seconds)
 
 **Deliverable**: Create `/tmp/capstone_verification.md` documenting:
 - Actual measured timings

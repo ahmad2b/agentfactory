@@ -290,7 +290,7 @@ Compile to machine code
 Execute machine code (MUCH faster)
 ```
 
-**Tradeoff**: PyPy's startup time is slower (compilation overhead), but repeated code runs much faster—sometimes 2-10x faster than CPython on compute-intensive workloads.
+**Tradeoff**: PyPy's startup time is slower (compilation overhead), but repeated code runs much faster—sometimes 2–10x faster than CPython on compute-intensive workloads.
 
 **Use when**: Your code has computational bottlenecks (matrix math, data processing, simulations). Avoid when you need immediate startup (CLI tools, serverless functions).
 
@@ -333,7 +333,7 @@ led.off()  # Turn off LED
 | Implementation | Speed | Memory | Python Compatibility | Best For | Key Tech |
 |---|---|---|---|---|---|
 | **CPython** | Baseline | Standard | 100% | General purpose, production | Reference counting + GC |
-| **PyPy** | 2-10x faster | More | ~95% | Compute-heavy workloads | JIT compilation |
+| **PyPy** | 2–10x faster | More | ~95% | Compute-heavy workloads | JIT compilation |
 | **Jython** | Slower | JVM | ~95% | Java integration | Runs on JVM |
 | **IronPython** | Slower | CLR | ~95% | .NET integration | Runs on .NET |
 | **MicroPython** | Fast (tiny) | Tiny | ~70% | Embedded/IoT | Minimal footprint |
