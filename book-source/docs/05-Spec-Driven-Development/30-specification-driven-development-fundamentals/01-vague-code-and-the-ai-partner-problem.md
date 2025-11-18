@@ -251,7 +251,7 @@ Now imagine a different approach—one where you and your AI companion work toge
 
 This isn't just "AI answers your questions." This is **bidirectional learning**—both you and AI improve through collaboration.
 
-### Step 1: AI Teaches You (Missing Requirements)
+### Step 1: Discover Missing Requirements
 
 Instead of writing specs alone, you start with intent and let AI help you think through the details.
 

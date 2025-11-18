@@ -380,7 +380,7 @@ I've updated my spec. Before you implement, tell me:
 
 ---
 
-## Test Your Specification (Co-Learning in Action)
+## Test Your Specification (Collaborative Validation)
 
 Now comes the crucial moment. Ask your companion:
 
@@ -473,7 +473,7 @@ This is **AI-native specification development** in action:
 2. **AI generated code from your spec** (showing its understanding)
 3. **You validated output** (testing if spec was clear)
 4. **Gaps revealed** (Scenario 2: AI asked questions; Scenario 3: AI made wrong assumptions)
-5. **You refined spec with AI's help** (learning from failures)
+5. **You refined spec with AI's help** (identifying gaps through iteration)
 6. **AI regenerated** (both improved together)
 
 **Key insight:** Specifications improve through iteration. When AI generated wrong code (Scenario 3), it wasn't AI's fault—it was an **ambiguous specification**. The failure revealed where precision was needed. Professional specs are written iteratively, using AI as a co-reasoning partner to catch gaps early.
@@ -607,7 +607,7 @@ Think about:
 Write complete specification before implementing.
 ```
 
-This teaches you how **new features extend existing specs** while maintaining consistency.
+This demonstrates how **new features extend existing specs** while maintaining consistency.
 
 ---
 
@@ -671,7 +671,7 @@ Questions:
 - What if you wrote specs FIRST, then used TDD to implement them?
 ```
 
-This teaches you **when different methodologies apply** in AI-native development.
+This demonstrates **when different methodologies apply** in AI-native development.
 
 ---
 

@@ -73,7 +73,7 @@ You've experienced SpecifyPlus's power in Chapters 30-32. The opinionated workfl
 
 By the end of 2027, Guy Podjarny predicts developers won't look at code most of the time. They'll work at the specification level, with AI agents handling implementation details.
 
-This chapter prepares you for that future by teaching you to marry SpecifyPlus's opinionated workflow with Tessl's infrastructure. Together, they create the most powerful specification-driven development system available today.
+This chapter prepares you for that future by showing you how to integrate SpecifyPlus's opinionated workflow with Tessl's infrastructure. Together, they create the most powerful specification-driven development system available today.
 
 This is how you build production-grade software in the AI era.
 
