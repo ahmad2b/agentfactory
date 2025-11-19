@@ -92,7 +92,7 @@ version: "1.0.0"
 
 You've learned how to make decisions with conditionals (Lessons 1-2) and automate repetition with loops (Lessons 3-4). Now it's time to combine these tools to solve more complex problems that require both decision-making **and** repetition working together.
 
-Think of nested control structures like a set of Russian nesting dolls: each layer contains another layer inside. When you nest an `if` statement inside a loop, or a loop inside another loop, you create powerful patterns that can solve multi-step problems.
+Think of nested control structures like boxes inside boxes. You open a big box, and inside it there’s a smaller one, and inside that, another one. Each layer fits inside the previous one. In the same way, when you place an `if` statement inside a loop, or a loop inside another loop, you build powerful structures that can handle multi-step, layered problems.
 
 In this lesson, you'll integrate everything you've learned in Chapter 17 to handle scenarios like:
 - Checking multiple criteria before making a decision (nested `if` statements)
