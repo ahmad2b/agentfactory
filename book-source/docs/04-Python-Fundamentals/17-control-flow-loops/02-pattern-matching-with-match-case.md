@@ -48,8 +48,6 @@ Think of `match-case` as a structured decision table. Instead of reading through
 - How to ask your AI companion to convert between styles
 
 **Prerequisites:** Lesson 1 (Making Decisions with Conditionals)
-**CEFR Level:** A2-B1 (Transitional)
-**Time:** 50-65 minutes
 
 ---
 
