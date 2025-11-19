@@ -68,7 +68,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "content-implementer v3.0.0"
-source_spec: "specs/001-part-4-chapter-27/spec.md"
+source_spec: "specs/001-part-4-chapter-29/spec.md"
 created: "2025-11-09"
 last_modified: "2025-11-09"
 git_author: "Claude Code"
@@ -104,7 +104,7 @@ When Claude Code generates JSON for you, you need to validate it's correct BEFOR
 
 ### Installing Pydantic
 
-Like any Python library, Pydantic needs to be installed first. You've already learned this pattern in Chapter 12 with `uv`:
+Like any Python library, Pydantic needs to be installed first. You've already learned this pattern in Chapter 14 with `uv`:
 
 ```bash
 uv add pydantic

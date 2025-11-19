@@ -68,7 +68,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "lesson-writer v3.0.0"
-source_spec: "specs/013-chapter-14-redesign/spec.md"
+source_spec: "specs/013-chapter-16-redesign/spec.md"
 created: "2025-01-15"
 last_modified: "2025-01-15"
 git_author: "Claude Code"
@@ -291,7 +291,7 @@ Notice something: We already used **type hints** (the `: str`, `: int`, `: float
 
 ### Quick Review of print()
 
-From Chapter 13, you remember `print()`. It displays output. Here, we're using it to show what `type()` returns:
+From Chapter 15, you remember `print()`. It displays output. Here, we're using it to show what `type()` returns:
 
 ```python
 print(type(42))  # Displays: <class 'int'>

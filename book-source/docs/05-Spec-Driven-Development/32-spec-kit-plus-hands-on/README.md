@@ -1,17 +1,17 @@
 ---
 sidebar_position: 31
-title: "Chapter 31: Spec-Kit Plus Hands-On"
+title: "Chapter 33: Spec-Kit Plus Hands-On"
 ---
 
-# Chapter 31: Spec-Kit Plus Hands-On
+# Chapter 33: Spec-Kit Plus Hands-On
 
-Welcome to hands-on specification-driven development. This chapter transforms understanding (from Chapter 30) into practice. You won't read about specifications-you'll write them. You won't learn about AI collaboration - you'll build project with your AI companion from specifications to implementation.
+Welcome to hands-on specification-driven development. This chapter transforms understanding (from Chapter 32) into practice. You won't read about specifications-you'll write them. You won't learn about AI collaboration - you'll build project with your AI companion from specifications to implementation.
 
 ---
 
-## From Chapter 30 to Chapter 31
+## From Chapter 32 to Chapter 33
 
-**Chapter 30** taught you the foundations:
+**Chapter 32** taught you the foundations:
 - Why specification-driven development matters (the vague code problem)
 - What SDD is (spec-first, spec-anchored, spec-as-source levels)
 - How to write your first spec (calculator exercise)
@@ -19,7 +19,7 @@ Welcome to hands-on specification-driven development. This chapter transforms un
 - When SDD became essential (AI convergence moment)
 - Which tools exist (Kiro, Spec-Kit, **Spec-Kit Plus**, Tessel)
 
-**Chapter 31** teaches you the workflow:
+**Chapter 33** teaches you the workflow:
 - How to install and configure Spec-Kit Plus
 - How to create project Constitutions
 - How to collaborate with AI on specifications
@@ -29,7 +29,7 @@ Welcome to hands-on specification-driven development. This chapter transforms un
 - How to implement with validation protocols
 - How to complete end-to-end workflows independently
 
-**The Bridge**: Chapter 30 gave you the map. Chapter 31 teaches you to drive.
+**The Bridge**: Chapter 32 gave you the map. Chapter 33 teaches you to drive.
 
 ---
 

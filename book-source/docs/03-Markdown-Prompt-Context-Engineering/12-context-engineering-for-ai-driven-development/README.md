@@ -1,17 +1,17 @@
 ---
-title: "Chapter 11: Context Engineering for AI-Driven Development"
-sidebar_label: "Chapter 11: Context Engineering"
+title: "Chapter 13: Context Engineering for AI-Driven Development"
+sidebar_label: "Chapter 13: Context Engineering"
 sidebar_position: 11
 description: "Master context window management, progressive loading, compression techniques, and persistent memory to engineer productive AI collaborations across sessions and projects"
 ---
 
-# Chapter 11: Context Engineering for AI-Driven Development
+# Chapter 13: Context Engineering for AI-Driven Development
 
 Context windows are the "working memory" of AI development tools. Just as engineers optimize RAM allocation in systems, AI-native developers engineer context windows for AI tools. Context engineering is the foundation of productive AI collaboration.
 
 This chapter teaches you to engineer context windows using hands-on discovery pedagogy. You'll master manual observation, AI collaboration, compression techniques, persistent memory, and tool selection through progressive experiments that build deep understanding. You'll experience context degradation, pollution, and recovery firsthand before learning systematic frameworks.
 
-Chapter 10 taught you **what to SAY** to your AI agent. This chapter teaches you **what your AI agent KNOWS** when you say it—and how to manage that knowledge effectively across sessions and projects.
+Chapter 12 taught you **what to SAY** to your AI agent. This chapter teaches you **what your AI agent KNOWS** when you say it—and how to manage that knowledge effectively across sessions and projects.
 
 ## What You'll Learn
 
@@ -84,7 +84,7 @@ You've mastered this chapter when you can:
 
 ## Prerequisites
 
-- **Chapter 10**: Three Roles framework (AI as Teacher/Student/Co-Worker)
+- **Chapter 12**: Three Roles framework (AI as Teacher/Student/Co-Worker)
 - **Chapters 1-9**: Markdown syntax, prompt engineering basics
 - **Part 3 Status**: Students have ZERO programming knowledge (programming starts in Part 4)
 
@@ -94,8 +94,8 @@ You've mastered this chapter when you can:
 
 ## Teaching Modality
 
-**Chapter 10** taught conversational pedagogy (role-playing, dialogue, human-like interaction).
+**Chapter 12** taught conversational pedagogy (role-playing, dialogue, human-like interaction).
 
-**Chapter 11** teaches systems thinking (architecture, decision frameworks, optimization).
+**Chapter 13** teaches systems thinking (architecture, decision frameworks, optimization).
 
-**Differentiation**: Chapter 10 answers "what to SAY", Chapter 11 answers "what AI KNOWS" (anti-convergence: vary teaching modality across chapters).
+**Differentiation**: Chapter 12 answers "what to SAY", Chapter 13 answers "what AI KNOWS" (anti-convergence: vary teaching modality across chapters).

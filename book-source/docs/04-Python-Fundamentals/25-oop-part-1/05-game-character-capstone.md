@@ -54,7 +54,7 @@ skills:
     category: "Conceptual"
     bloom_level: "Create"
     digcomp_area: "Problem-Solving"
-    measurable_at_this_level: "Student integrates all Chapter 24 concepts (classes, constructors, encapsulation, methods, ABC) into working system"
+    measurable_at_this_level: "Student integrates all Chapter 26 concepts (classes, constructors, encapsulation, methods, ABC) into working system"
 
 learning_objectives:
   - objective: "Design a multi-class object system that models a real-world scenario (turn-based game) using proper OOP principles"
@@ -65,7 +65,7 @@ learning_objectives:
   - objective: "Integrate encapsulation, properties, constructors, and all method types into a cohesive, working system"
     proficiency_level: "B2"
     bloom_level: "Synthesize"
-    assessment_method: "Implementation demonstrates all Chapter 24 concepts in context"
+    assessment_method: "Implementation demonstrates all Chapter 26 concepts in context"
 
   - objective: "Apply abstract base classes to enforce contracts across multiple character types"
     proficiency_level: "B2"
@@ -79,15 +79,15 @@ learning_objectives:
 
 cognitive_load:
   new_concepts: 0
-  assessment: "Integration lesson - no new concepts, only synthesis of Chapter 24 (classes, constructors, attributes, properties, methods, ABC). All concepts taught in Lessons 1-4 ✓"
+  assessment: "Integration lesson - no new concepts, only synthesis of Chapter 26 (classes, constructors, attributes, properties, methods, ABC). All concepts taught in Lessons 1-4 ✓"
 
 differentiation:
-  extension_for_advanced: "Add Boss class with special abilities, Shop system for buying/selling, save/load game state with JSON, networking for multiplayer turn-based combat. Refactor using composition vs inheritance patterns from Chapter 25."
+  extension_for_advanced: "Add Boss class with special abilities, Shop system for buying/selling, save/load game state with JSON, networking for multiplayer turn-based combat. Refactor using composition vs inheritance patterns from Chapter 27."
   remedial_for_struggling: "Build Character class completely before Player/Enemy. Test each class independently before integration. Focus on one feature at a time (health system → inventory → combat) rather than implementing everything at once."
 
 # Generation metadata
 generated_by: "content-implementer v1.0.0"
-source_spec: "specs/020-oop-part-1-2/spec-chapter-24.md"
+source_spec: "specs/020-oop-part-1-2/spec-chapter-26.md"
 created: "2025-11-09"
 last_modified: "2025-11-09"
 git_author: "Claude Code"
@@ -234,7 +234,7 @@ Instead of typing 200+ lines manually, you'll have AI generate the system, then 
    - Negative health: Does take_damage() clamp at 0? ✓
    - Overheal: Does heal() cap at max_health? ✓
 
-4. **Type Hints (Chapter 24 standard)**:
+4. **Type Hints (Chapter 26 standard)**:
    - Does every method have parameter and return type hints? ✓
    - Are attributes typed in `__init__`? ✓
 
@@ -340,7 +340,7 @@ Player heals! New health: 100
 Enemy is alive: True
 ```
 
-Note: See Chapter 24 validation section for test execution. For this capstone, students generate code via AI and validate against the design
+Note: See Chapter 26 validation section for test execution. For this capstone, students generate code via AI and validate against the design
         old_health = self._health
         self._health = min(self._max_health, self._health + amount)
         return self._health - old_health

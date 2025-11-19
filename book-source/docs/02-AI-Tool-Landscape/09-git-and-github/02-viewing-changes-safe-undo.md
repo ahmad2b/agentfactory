@@ -73,9 +73,9 @@ modality: "Discovery-based error recovery (varying from Lesson 1's basic executi
 
 # Generation metadata
 generated_by: "content-implementer v1.0.0"
-source_spec: "specs/028-chapter-8-git-redesign/spec.md (US1 Priority P1)"
-source_plan: "specs/028-chapter-8-git-redesign/plan.md (Lesson 2 details, lines 141-203)"
-source_tasks: "specs/028-chapter-8-git-redesign/tasks.md (T019-T029)"
+source_spec: "specs/028-chapter-10-git-redesign/spec.md (US1 Priority P1)"
+source_plan: "specs/028-chapter-10-git-redesign/plan.md (Lesson 2 details, lines 141-203)"
+source_tasks: "specs/028-chapter-10-git-redesign/tasks.md (T019-T029)"
 created: "2025-01-17"
 last_modified: "2025-01-17"
 version: "1.0.0"

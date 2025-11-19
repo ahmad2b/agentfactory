@@ -66,7 +66,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "content-implementer v3.0.0"
-source_spec: "specs/001-part-4-chapter-18/spec.md"
+source_spec: "specs/001-part-4-chapter-20/spec.md"
 created: "2025-11-09"
 last_modified: "2025-11-09"
 git_author: "Claude Code"
@@ -235,7 +235,7 @@ latitude, longitude = coordinates
 
 Unpacking is especially useful when functions return multiple values:
 
-> **📘 Note**: Don't worry about the `def` syntax below—we'll learn functions in detail in Chapter 20. For now, just understand that `get_player_position()` is a reusable piece of code that returns a tuple `(5, 10)`, and we can unpack it into separate variables `x` and `y`. Focus on the **unpacking pattern**, not the function definition.
+> **📘 Note**: Don't worry about the `def` syntax below—we'll learn functions in detail in Chapter 22. For now, just understand that `get_player_position()` is a reusable piece of code that returns a tuple `(5, 10)`, and we can unpack it into separate variables `x` and `y`. Focus on the **unpacking pattern**, not the function definition.
 
 ```python
 def get_player_position() -> tuple[int, int]:

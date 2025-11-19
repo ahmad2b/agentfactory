@@ -90,7 +90,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "content-implementer v3.0.0"
-source_spec: "specs/020-oop-part-1-2/spec-chapter-25.md"
+source_spec: "specs/020-oop-part-1-2/spec-chapter-27.md"
 created: "2025-11-09"
 last_modified: "2025-11-09"
 git_author: "Claude Code"
@@ -1191,7 +1191,7 @@ Complete multi-agent system with:
 
 ---
 
-## Part 5: Reflect on All Chapter 25 Concepts
+## Part 5: Reflect on All Chapter 27 Concepts
 
 **Your Role**: Educational synthesist integrating all learning
 
@@ -1240,7 +1240,7 @@ Reflect on:
 
 ### Deliverable
 
-Complete `chapter_25_integration_reflection.md` with thoughtful answers to all reflection questions, demonstrating deep understanding of how all Chapter 25 concepts interconnect.
+Complete `chapter_25_integration_reflection.md` with thoughtful answers to all reflection questions, demonstrating deep understanding of how all Chapter 27 concepts interconnect.
 
 ---
 
@@ -1258,6 +1258,6 @@ How do you coordinate Singleton (AgentManager), Factory (agent creation), Observ
 > "What happens when AgentFactory creates an agent that registers with EventBus and AgentManager simultaneously? Show the sequence of method calls and explain potential race conditions."
 
 **🚀 Apply to Production Architecture:**
-> "Build a complete multi-agent system using all Chapter 25 concepts: inheritance (agent types), polymorphism (dispatch), composition (capabilities), special methods (Event __eq__), and all 4 patterns. Explain design decisions."
+> "Build a complete multi-agent system using all Chapter 27 concepts: inheritance (agent types), polymorphism (dispatch), composition (capabilities), special methods (Event __eq__), and all 4 patterns. Explain design decisions."
 
 ---

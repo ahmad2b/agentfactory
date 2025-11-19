@@ -12,7 +12,7 @@ skills:
     category: "Technical"
     bloom_level: "Understand"
     digcomp_area: "Problem-Solving"
-    measurable_at_this_level: "Student can identify collection types by sight, understand their purpose, select appropriate type for scenarios, and recognize when deep dives (Chapter 18) are needed"
+    measurable_at_this_level: "Student can identify collection types by sight, understand their purpose, select appropriate type for scenarios, and recognize when deep dives (Chapter 20) are needed"
 
   - name: "Binary Type Awareness"
     proficiency_level: "B1"
@@ -37,7 +37,7 @@ learning_objectives:
     bloom_level: "Remember"
     assessment_method: "Awareness of bytes, bytearray, memoryview; recognition of use cases (files, networks, low-level operations)"
 
-  - objective: "Know that Chapter 18 covers deep dive into collection methods and operations"
+  - objective: "Know that Chapter 20 covers deep dive into collection methods and operations"
     proficiency_level: "A2"
     bloom_level: "Remember"
     assessment_method: "Explanation that syntax shown here is 'just the beginning' and that modification methods come later"
@@ -47,13 +47,13 @@ cognitive_load:
   assessment: "7 new concepts (list, tuple, dict, set, range, bytes awareness, binary intro) within B1 limit of 10 ✓"
 
 differentiation:
-  extension_for_advanced: "Research Chapter 18 documentation; predict what methods each collection type might have based on its purpose. Create a specification for a real-world data structure using combinations of collections."
+  extension_for_advanced: "Research Chapter 20 documentation; predict what methods each collection type might have based on its purpose. Create a specification for a real-world data structure using combinations of collections."
   remedial_for_struggling: "Focus on three core types first (list, dict, set). Understand their basic purpose before exploring tuple, range, and binary types. Use single-line examples."
 
 # Generation metadata
 generated_by: "lesson-writer v3.0"
-source_spec: "specs/013-chapter-14-redesign/spec.md"
-source_plan: "specs/013-chapter-14-redesign/plan.md"
+source_spec: "specs/013-chapter-16-redesign/spec.md"
+source_plan: "specs/013-chapter-16-redesign/plan.md"
 created: "2025-01-15"
 last_modified: "2025-01-15"
 git_author: "Claude Code"
@@ -82,7 +82,7 @@ But what if you need to store multiple related pieces of data together?
 
 **Collections** are Python's way of grouping related data together in one variable. Think of them as containers—each organized slightly differently depending on what you're storing and how you'll access it.
 
-This lesson covers five main collection types plus a brief introduction to binary types. Your goal: **know they exist, understand their purpose, and recognize which one fits each situation.** The detailed methods and operations come in Chapter 18.
+This lesson covers five main collection types plus a brief introduction to binary types. Your goal: **know they exist, understand their purpose, and recognize which one fits each situation.** The detailed methods and operations come in Chapter 20.
 
 ## Five Core Collection Types
 
@@ -123,7 +123,7 @@ print(type(students))  # Output: <class 'list'>
 
 A **tuple** stores multiple items in a specific order. Once you create it, you CANNOT change it. It's fixed.
 
-**When to use**: When you have a fixed set of related items that shouldn't change. Tuples are often used to return multiple values from functions (you'll learn about this in Chapter 20).
+**When to use**: When you have a fixed set of related items that shouldn't change. Tuples are often used to return multiple values from functions (you'll learn about this in Chapter 22).
 
 **What it looks like:**
 
@@ -220,7 +220,7 @@ print(type(product_ids))  # Output: <class 'set'>
 
 A **range** generates a sequence of numbers. It's memory-efficient because it doesn't store every number—it calculates them as needed.
 
-**When to use**: Primarily for loops (Chapter 17) and when you need a sequence of numbers without creating a list manually.
+**When to use**: Primarily for loops (Chapter 19) and when you need a sequence of numbers without creating a list manually.
 
 **What it looks like:**
 
@@ -337,7 +337,7 @@ When you work with files or networks, data comes as raw bytes. You can't treat `
 ### When You'll Use Binary Types
 
 **Advanced topic**: Binary types come into play when you:
-- Read binary files (Chapter 22: Files and Data)
+- Read binary files (Chapter 24: Files and Data)
 - Work with network communication (Part 8-9: Advanced topics)
 - Process images or multimedia
 - Interact with hardware or databases
@@ -425,8 +425,8 @@ employees_unclear = {
 - How to create your own types
 
 **These skills come next in:**
-- **Chapter 18: Collections Deep Dive** — Methods and operations for list, tuple, dict, set
-- **Chapter 22: Files and Data** — Where you'll actually use binary types with file I/O
+- **Chapter 20: Collections Deep Dive** — Methods and operations for list, tuple, dict, set
+- **Chapter 24: Files and Data** — Where you'll actually use binary types with file I/O
 
 When you reach those chapters, you'll return to collections and learn everything you can DO with them.
 

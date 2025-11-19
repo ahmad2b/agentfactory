@@ -1,13 +1,13 @@
 ---
 sidebar_position: 20
-title: "Chapter 20: Modules and Functions"
+title: "Chapter 22: Modules and Functions"
 ---
 
-# Chapter 20: Modules and Functions
+# Chapter 22: Modules and Functions
 
 As programs grow, copy-pasting code becomes unsustainable. You need to organize code into reusable pieces—**functions** that perform specific tasks with clear inputs and outputs, and **modules** (`.py` files) that group related functions together. This is how professional Python developers build maintainable applications.
 
-This chapter bridges foundational Python syntax (Chapters 13-19) with production-oriented patterns by teaching you to describe intent through function signatures with type hints, organize code into logical modules with clear separation of concerns, reuse code through imports and function calls, and validate behavior through testing.
+This chapter bridges foundational Python syntax (Chapters 15-19) with production-oriented patterns by teaching you to describe intent through function signatures with type hints, organize code into logical modules with clear separation of concerns, reuse code through imports and function calls, and validate behavior through testing.
 
 By the end of this chapter, you'll build a real multi-module project (Calculator Utility) that demonstrates professional Python organization patterns.
 

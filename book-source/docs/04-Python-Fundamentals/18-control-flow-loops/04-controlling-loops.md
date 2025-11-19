@@ -79,7 +79,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "content-implementer v3.0.0"
-source_spec: "specs/001-part-4-chapter-17/spec.md"
+source_spec: "specs/001-part-4-chapter-19/spec.md"
 created: "2025-11-09"
 last_modified: "2025-11-09"
 git_author: "Claude Code"
@@ -406,7 +406,7 @@ Ask your AI to generate this scenario:
 
 #### 🎓 Expert Insight: You Might See try-except in AI Responses
 
-When you ask your AI to validate user input, it might generate code using `try` and `except` keywords. This is **exception handling**—a powerful Python feature you'll learn in **Chapter 21**. For now:
+When you ask your AI to validate user input, it might generate code using `try` and `except` keywords. This is **exception handling**—a powerful Python feature you'll learn in **Chapter 23**. For now:
 
 - **Don't worry if you see it**: Your AI is showing you professional Python code
 - **You don't need to memorize it yet**: Focus on the loop control (`break`, `continue`, `while...else`)
@@ -542,7 +542,7 @@ for i in range(100):
             break  # Which loop does this exit?
 ```
 
-**✅ CLEARER with Functions** (coming in Chapter 18):
+**✅ CLEARER with Functions** (coming in Chapter 20):
 ```python
 def find_pair(limit: int) -> tuple[int, int] | None:
     for i in range(limit):
@@ -591,7 +591,7 @@ for i in range(5):
         break  # Exit outer loop
 ```
 
-(Better solutions involve functions with `return`, which you'll learn in Chapter 18.)
+(Better solutions involve functions with `return`, which you'll learn in Chapter 20.)
 
 ## Try With AI
 

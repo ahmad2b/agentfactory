@@ -78,7 +78,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "lesson-writer v3.0.0"
-source_spec: "specs/013-chapter-14-redesign/spec.md"
+source_spec: "specs/013-chapter-16-redesign/spec.md"
 created: "2025-01-15"
 last_modified: "2025-01-15"
 git_author: "Claude Code"
@@ -248,7 +248,7 @@ print(f"'{val1}' is text: {is_text}")      # True
 print(f"{val2} is integer: {is_integer}")  # True
 print(f"{val3} is decimal: {is_decimal}")  # True
 
-# You'll learn to use these checks in conditional logic in Chapter 17
+# You'll learn to use these checks in conditional logic in Chapter 19
 ```
 
 **Exercise**: Write code that checks whether a value is a number (int or float), text, or something else using isinstance().
@@ -404,7 +404,7 @@ Create a program that:
 4. Converts the result back to a string
 5. Prints a complete sentence
 
-**Note**: What happens if the user enters "twenty five" instead of "25"? Your program will crash. We'll learn how to handle such errors gracefully in Chapter 21 (Exception Handling).
+**Note**: What happens if the user enters "twenty five" instead of "25"? Your program will crash. We'll learn how to handle such errors gracefully in Chapter 23 (Exception Handling).
 
 ---
 
@@ -455,7 +455,7 @@ print(f"Age is 25 (using 'is'): {result2}")  # Might be True or False!
 
 But understanding interning helps you grasp how Python manages memory behind the scenes.
 
-**Note**: You'll learn conditional statements (`if`/`else`) in Chapter 17. For now, focus on understanding comparisons return `True` or `False`.
+**Note**: You'll learn conditional statements (`if`/`else`) in Chapter 19. For now, focus on understanding comparisons return `True` or `False`.
 
 ### Detecting Interning
 
@@ -625,7 +625,7 @@ print(f"  - Has content: {name_has_content}")
 
 # Step 3: Validate and convert age
 # Convert age_input (string) to int
-# Note: Checking if age is valid requires Chapter 15 (operators)
+# Note: Checking if age is valid requires Chapter 17 (operators)
 age: int = int(age_input)  # Assumes valid number for now
 age_is_int: bool = isinstance(age, int)
 print(f"Age {age}:")
@@ -639,7 +639,7 @@ email_has_content: bool = bool(email)  # True if not empty
 print(f"Email '{email}':")
 print(f"  - Is string: {email_is_string}")
 print(f"  - Has content: {email_has_content}")
-# Note: Checking email format (@) requires operators from Chapter 15
+# Note: Checking email format (@) requires operators from Chapter 17
 
 # Step 5: Summary
 print("\n--- Summary ---")
@@ -686,7 +686,7 @@ This project teaches you:
 - **Type casting** — Converting user input (always strings) to appropriate types
 - **isinstance()** — Verifying types programmatically
 - **Real-world patterns** — This is how production systems validate user data
-- **Note**: Full error handling with try/except is covered in Chapter 21
+- **Note**: Full error handling with try/except is covered in Chapter 23
 
 ### Capstone Extensions (Stretch Goals)
 

@@ -55,7 +55,7 @@ By the end of this lesson, you'll create three prompt templates for tasks you en
 
 ## Templates Encode Framework Elements
 
-Before defining what templates are, recognize this: **Every good template encodes elements from Zia Kaukab's 8-Element Framework** (from Chapter 10 README):
+Before defining what templates are, recognize this: **Every good template encodes elements from Zia Kaukab's 8-Element Framework** (from Chapter 12 README):
 
 **Zia's 8 Elements**:
 1. Command — Task action verb

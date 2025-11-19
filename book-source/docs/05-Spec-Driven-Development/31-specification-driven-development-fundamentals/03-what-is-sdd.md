@@ -47,7 +47,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "content-implementer v3.0.0"
-source_spec: "specs/book/chapter-30-sdd-fundamentals/spec.md"
+source_spec: "specs/book/chapter-32-sdd-fundamentals/spec.md"
 created: "2025-01-15"
 last_modified: "2025-11-18"
 git_author: "Claude Code"

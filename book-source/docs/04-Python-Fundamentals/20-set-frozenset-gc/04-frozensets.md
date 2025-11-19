@@ -79,8 +79,8 @@ cognitive_load:
 
 generation_metadata:
   generated_by: "Claude (Haiku 4.5)"
-  source_spec: "specs/001-part-4-chapter-19/spec.md (FR-019 to FR-023)"
-  source_plan: "specs/001-part-4-chapter-19/plan.md (Lesson 4, lines 728-959)"
+  source_spec: "specs/001-part-4-chapter-21/spec.md (FR-019 to FR-023)"
+  source_plan: "specs/001-part-4-chapter-21/plan.md (Lesson 4, lines 728-959)"
   created: "2025-11-09"
   last_modified: "2025-11-09"
   git_author: "claude-code"

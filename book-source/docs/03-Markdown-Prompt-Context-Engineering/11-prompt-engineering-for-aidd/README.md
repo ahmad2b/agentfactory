@@ -1,11 +1,11 @@
 ---
-title: "Chapter 10: Prompt Engineering for AI-Driven Development"
-sidebar_label: "Chapter 10: Prompt Engineering"
+title: "Chapter 12: Prompt Engineering for AI-Driven Development"
+sidebar_label: "Chapter 12: Prompt Engineering"
 sidebar_position: 10
 description: "Learn to communicate clearly with AI through effective prompt writing, iteration, validation, and reusable templates"
 ---
 
-# Chapter 10: Prompt Engineering for AI-Driven Development
+# Chapter 12: Prompt Engineering for AI-Driven Development
 
 Clear prompts get better AI responses. Vague prompts waste time with back-and-forth clarification. This chapter teaches you how to communicate your intent effectively so AI can help you accomplish development tasks.
 
@@ -13,7 +13,7 @@ You'll learn to structure prompts clearly, iterate through collaboration with AI
 
 ## What You'll Learn
 
-This chapter focuses exclusively on **what you SAY** to your AI agent (prompt engineering). Chapter 11 will teach **what your AI agent KNOWS** when you say it (context engineering).
+This chapter focuses exclusively on **what you SAY** to your AI agent (prompt engineering). Chapter 13 will teach **what your AI agent KNOWS** when you say it (context engineering).
 
 ### Informed By Industry Best Practices
 
@@ -131,12 +131,12 @@ Create reusable prompt patterns for recurring tasks.
 
 You should have completed:
 - **Chapter 7: Bash Basics** — Command-line operations, scripting fundamentals
-- **Chapter 8: Git Fundamentals** — Version control, commits, branches
-- **Chapter 9: Markdown Syntax** — Documentation formatting, markdown files
+- **Chapter 10: Git Fundamentals** — Version control, commits, branches
+- **Chapter 11: Markdown Syntax** — Documentation formatting, markdown files
 
 ## What This Chapter Does NOT Cover
 
-**Context Engineering** (Chapter 11):
+**Context Engineering** (Chapter 13):
 - Context windows and token limits
 - Progressive loading strategies
 - Memory files (CLAUDE.md, architecture.md)
@@ -153,7 +153,7 @@ You should have completed:
 - Agentic workflows
 - Model architecture
 
-This chapter teaches prompt CONTENT (what you say). Chapter 11 teaches context MANAGEMENT (what AI knows).
+This chapter teaches prompt CONTENT (what you say). Chapter 13 teaches context MANAGEMENT (what AI knows).
 
 ## Tools Used
 

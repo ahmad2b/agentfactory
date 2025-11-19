@@ -86,9 +86,9 @@ modality: "Discovery-based (varying from Chapter 7 direct teaching) ✓"
 
 # Generation metadata
 generated_by: "content-implementer v1.0.0"
-source_spec: "specs/028-chapter-8-git-redesign/spec.md (US1 Priority P1)"
-source_plan: "specs/028-chapter-8-git-redesign/plan.md (Lesson 1 details, lines 75-138)"
-source_tasks: "specs/028-chapter-8-git-redesign/tasks.md (T007-T018)"
+source_spec: "specs/028-chapter-10-git-redesign/spec.md (US1 Priority P1)"
+source_plan: "specs/028-chapter-10-git-redesign/plan.md (Lesson 1 details, lines 75-138)"
+source_tasks: "specs/028-chapter-10-git-redesign/tasks.md (T007-T018)"
 created: "2025-01-17"
 last_modified: "2025-01-17"
 version: "1.0.0"

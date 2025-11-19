@@ -48,7 +48,7 @@ differentiation:
   remedial_for_struggling: "Focus on one type at a time; practice only int and str before float and bool"
 
 generated_by: "content-implementer v3.0.0"
-source_spec: "specs/016-part-4-chapter-13/spec.md"
+source_spec: "specs/016-part-4-chapter-15/spec.md"
 created: "2025-11-09"
 last_modified: "2025-11-09"
 git_author: "Claude Code"
@@ -62,7 +62,7 @@ You've learned what Python is. You've got it installed. Now you're ready for you
 
 In this lesson, you'll learn the most fundamental concept in programming: **variables**. A variable is simply a named container that holds data. Type hints are how you describe what kind of data goes in that container.
 
-But here's where Chapter 13 differs from traditional Python courses: **Type hints aren't optional or advanced. They're core.** Type hints are how you describe intent—and describing intent is the core of AI-Driven Development.
+But here's where Chapter 15 differs from traditional Python courses: **Type hints aren't optional or advanced. They're core.** Type hints are how you describe intent—and describing intent is the core of AI-Driven Development.
 
 ## Variables: Names for Values
 

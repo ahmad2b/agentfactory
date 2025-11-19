@@ -74,9 +74,9 @@ modality: "Three Roles demonstration with hands-on activities"
 
 # Generation metadata
 generated_by: "content-implementer v1.0.0 (reasoning-activated)"
-source_spec: "specs/028-chapter-8-git-redesign/spec.md (US2 Priority P2)"
-source_plan: "specs/028-chapter-8-git-redesign/plan.md (Lesson 4 details, lines 265-320)"
-source_tasks: "specs/028-chapter-8-git-redesign/tasks.md (T044-T057)"
+source_spec: "specs/028-chapter-10-git-redesign/spec.md (US2 Priority P2)"
+source_plan: "specs/028-chapter-10-git-redesign/plan.md (Lesson 4 details, lines 265-320)"
+source_tasks: "specs/028-chapter-10-git-redesign/tasks.md (T044-T057)"
 created: "2025-01-17"
 last_modified: "2025-01-17"
 version: "1.0.0"

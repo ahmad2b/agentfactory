@@ -80,7 +80,7 @@ cognitive_load:
 # Generation metadata
 generation:
   generated_by: "Claude Code (lesson-writer)"
-  source_spec: "specs/001-part-4-chapter-26/spec.md — Lesson 2"
+  source_spec: "specs/001-part-4-chapter-28/spec.md — Lesson 2"
   created: "2025-11-09"
   last_modified: "2025-11-09"
   git_author: "Claude Code"
@@ -1024,7 +1024,7 @@ Create a file called `plugin_system_patterns.md` with this structure:
 
 ```markdown
 # Plugin System Design Patterns with Metaclasses
-*Chapter 26, Lesson 2*
+*Chapter 28, Lesson 2*
 
 ## Why Metaclasses for Plugins?
 

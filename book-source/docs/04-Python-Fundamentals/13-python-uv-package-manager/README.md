@@ -1,9 +1,9 @@
 ---
 sidebar_position: 12
-title: "Chapter 12: The Lightning Python Stack — uv, Zed, Ruff & Pyright"
+title: "Chapter 14: The Lightning Python Stack — uv, Zed, Ruff & Pyright"
 ---
 
-# Chapter 12: The Lightning Python Stack — uv, Zed, Ruff & Pyright
+# Chapter 14: The Lightning Python Stack — uv, Zed, Ruff & Pyright
 
 Before you write Python programs, you need the right tools installed and working. Professional Python developers use modern toolchains that make development faster, catch errors early, and maintain code quality automatically.
 

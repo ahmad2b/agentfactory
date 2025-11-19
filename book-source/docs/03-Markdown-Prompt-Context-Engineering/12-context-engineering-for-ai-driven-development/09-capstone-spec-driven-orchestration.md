@@ -1,6 +1,6 @@
 ---
 title: "Capstone: Spec-Driven Context Orchestration"
-description: "Write complete specification for context-aware CLI tool orchestrating all Chapter 11 techniques"
+description: "Write complete specification for context-aware CLI tool orchestrating all Chapter 13 techniques"
 sidebar_label: "Capstone: Spec-Driven Orchestration"
 sidebar_position: 9
 chapter: 11

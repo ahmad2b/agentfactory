@@ -68,7 +68,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "content-implementer v3.0.0"
-source_spec: "specs/part-4-chapter-16/spec.md"
+source_spec: "specs/part-4-chapter-18/spec.md"
 created: "2025-11-08"
 last_modified: "2025-11-08"
 git_author: "Claude Code"
@@ -396,7 +396,7 @@ person2_name: str = "Bob"
 person2_age: int = 30
 person2_score: float = 88.3
 
-# Create formatted output (note: this shows the concept; real tables use loops in Chapter 18)
+# Create formatted output (note: this shows the concept; real tables use loops in Chapter 20)
 data_line: str = f"{person1_name:15} | Age: {person1_age:2} | Score: {person1_score:.1f}"
 print(data_line)  # "Alice           | Age: 25 | Score: 92.5"
 ```

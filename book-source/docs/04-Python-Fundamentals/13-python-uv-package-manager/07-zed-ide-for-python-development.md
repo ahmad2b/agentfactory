@@ -51,7 +51,7 @@ differentiation:
   remedial_for_struggling: "Focus on basic: 'Zed is a text editor that shows your code and terminal together'"
 
 generated_by: "content-implementer v3.0.0"
-source_spec: "specs/001-chapter-12-lightning-python-stack/plan.md"
+source_spec: "specs/001-chapter-14-lightning-python-stack/plan.md"
 created: "2025-01-15"
 last_modified: "2025-01-15"
 git_author: "Claude Code"

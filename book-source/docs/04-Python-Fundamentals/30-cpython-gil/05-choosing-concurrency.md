@@ -106,7 +106,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "content-implementer v3.0.0"
-source_spec: "specs/part-4-chapter-29/spec.md (Lesson 5)"
+source_spec: "specs/part-4-chapter-31/spec.md (Lesson 5)"
 created: "2025-11-09"
 last_modified: "2025-11-09"
 git_author: "Claude Code"
@@ -333,7 +333,7 @@ Asyncio uses a single thread with an event loop. When one task waits for I/O (ne
 - Scales to high concurrency
 - Limited by CPU (you need threads/processes for CPU work alongside I/O)
 
-This connects directly to Chapter 28 (Asyncio fundamentals). Lesson 5 adds Python 3.14 improvements.
+This connects directly to Chapter 30 (Asyncio fundamentals). Lesson 5 adds Python 3.14 improvements.
 
 ### Python 3.14 Asyncio Improvements: CLI Debugging
 

@@ -94,7 +94,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "claude-haiku-4-5"
-source_spec: "specs/001-part-4-chapter-26/spec.md"
+source_spec: "specs/001-part-4-chapter-28/spec.md"
 created: "2025-11-09"
 last_modified: "2025-11-09"
 git_author: "Claude Code"
@@ -563,10 +563,10 @@ This loses automatic schema generation. The framework choice reflects Django's p
 
 ### Pydantic: Dataclass-Inspired for Data Validation
 
-Pydantic (Chapter 27) builds on dataclass philosophy but adds powerful validation:
+Pydantic (Chapter 29) builds on dataclass philosophy but adds powerful validation:
 
 ```python
-# Pydantic-style (preview of Chapter 27)
+# Pydantic-style (preview of Chapter 29)
 # Note: Requires pydantic package (pip install pydantic)
 try:
     from pydantic import BaseModel, EmailStr
@@ -900,4 +900,4 @@ When AI generates code for you:
 - **Understand what each line does**—don't just copy-paste. Understanding is your learning goal, not code generation.
 - **Check for security issues**: Are there any assumptions about input validation? Does the code handle edge cases properly?
 
-This lesson concludes Chapter 26. You've learned that Python's advanced class features each solve specific problems. The mark of a skilled Python architect is knowing which tool to reach for in each situation. Use this knowledge wisely, and your code will be cleaner, more maintainable, and more professional.
+This lesson concludes Chapter 28. You've learned that Python's advanced class features each solve specific problems. The mark of a skilled Python architect is knowing which tool to reach for in each situation. Use this knowledge wisely, and your code will be cleaner, more maintainable, and more professional.

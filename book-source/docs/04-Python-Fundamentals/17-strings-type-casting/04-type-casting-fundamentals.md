@@ -68,7 +68,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "content-implementer v1.0.0"
-source_spec: "specs/part-4-chapter-16/spec.md"
+source_spec: "specs/part-4-chapter-18/spec.md"
 created: "2025-11-08"
 last_modified: "2025-11-08"
 git_author: "Claude Code"
@@ -309,9 +309,9 @@ print(f"isinstance check: {isinstance(converted, bool)}")  # True
 - **Numbers**: `0` and `0.0` → False; any other number → True
 - **Use this for**: Understanding what Python considers "empty" vs "has a value"
 
-#### 🔮 Coming in Chapter 17
+#### 🔮 Coming in Chapter 19
 
-> You'll use boolean conversions in **conditionals** (Chapter 17: Control Flow and Loops). There, you'll learn why understanding True/False matters for `if` statements and decision-making in your programs. For now, focus on how `bool()` converts different types.
+> You'll use boolean conversions in **conditionals** (Chapter 19: Control Flow and Loops). There, you'll learn why understanding True/False matters for `if` statements and decision-making in your programs. For now, focus on how `bool()` converts different types.
 
 ---
 

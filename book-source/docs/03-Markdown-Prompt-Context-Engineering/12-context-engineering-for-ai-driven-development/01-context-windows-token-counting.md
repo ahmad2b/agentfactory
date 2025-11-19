@@ -137,10 +137,10 @@ Here's what a real session note might look like:
 ```markdown
 # Development Session — 2025-11-18
 
-## Task: Write user guide for Chapter 9 markdown syntax
+## Task: Write user guide for Chapter 11 markdown syntax
 
 ## Context Loaded:
-- Chapter 9 outline (chapter-09-outline.md) — Est. 800 tokens
+- Chapter 11 outline (chapter-09-outline.md) — Est. 800 tokens
 - Markdown syntax reference — Est. 1,200 tokens
 - Previous chapter examples — Est. 2,000 tokens
 - Total loaded: ~4,000 tokens

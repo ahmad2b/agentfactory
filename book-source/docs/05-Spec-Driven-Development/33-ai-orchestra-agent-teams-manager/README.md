@@ -1,12 +1,12 @@
 ---
-title: "Chapter 32: AI Orchestra - Agent Teams Manager"
+title: "Chapter 34: AI Orchestra - Agent Teams Manager"
 chapter: 32
 part: 5
 sidebar_position: 32
 description: "Master decomposition thinking and task management to coordinate 5-7 autonomous agents (AI or human)"
 ---
 
-# Chapter 32: AI Orchestra – Manage Agent Teams
+# Chapter 34: AI Orchestra – Manage Agent Teams
 
 This chapter transforms you into an **AI team lead** — someone who can coordinate multiple agents to achieve complex goals. The skills you’ll build here apply equally to managing AI agents and leading human teams.
 
@@ -38,17 +38,17 @@ By the end, you'll embody **creative independence** — leading both human and A
 
 ## Proficiency Transition
 
-**Note**: This chapter represents a proficiency level transition from **A2-B1** (Aspiring/Intermediate, Chapters 30-31) to **B1-B2** (Intermediate/Advanced). You'll move from learning individual workflow phases to coordinating multiple autonomous agents—a strategic skill that requires higher-level systems thinking.
+**Note**: This chapter represents a proficiency level transition from **A2-B1** (Aspiring/Intermediate, Chapters 32-31) to **B1-B2** (Intermediate/Advanced). You'll move from learning individual workflow phases to coordinating multiple autonomous agents—a strategic skill that requires higher-level systems thinking.
 
 **What this means for you**:
 - Concepts increase from 5-7 per lesson to 7-10 per lesson
 - Less scaffolding, more independent problem-solving
 - Shift from "follow the workflow" to "design the coordination strategy"
 
-If you've completed Chapters 30-31 and feel confident with the SpecKit Plus workflow (Constitution → Specify → Plan → Tasks → Implement), you're ready for this transition.
+If you've completed Chapters 32-31 and feel confident with the SpecKit Plus workflow (Constitution → Specify → Plan → Tasks → Implement), you're ready for this transition.
 
 ---
 
 ## What's Next?
 
-**Chapter 33 (Tessl Integration)** is planned for a future release. Chapters 30-32 provide a complete, production-ready foundation in Specification-Driven Development. When Chapter 33 releases, it will extend this foundation with advanced Tessl Framework and Registry integration for even greater reliability in AI-native development.
+**Chapter 35 (Tessl Integration)** is planned for a future release. Chapters 32-32 provide a complete, production-ready foundation in Specification-Driven Development. When Chapter 35 releases, it will extend this foundation with advanced Tessl Framework and Registry integration for even greater reliability in AI-native development.

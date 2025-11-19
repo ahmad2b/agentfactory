@@ -39,13 +39,13 @@ The command line is the native language of serious development. This chapter is 
 
 The practical focus: master the 90% of Bash workflows that matter for AI-driven development. Skip the esoteric corner cases. Focus on what you actually use.
 
-### Chapter 8: AI-Native IDEs: Zed, Cursor, and the Future of Development
+### Chapter 10: AI-Native IDEs: Zed, Cursor, and the Future of Development
 
 Modern development environments integrate AI directly into the editor. This chapter explores AI-native IDEs—development tools designed from the ground up for AI collaboration. You'll install and configure Zed (Anthropic's blazingly fast IDE with built-in AI), explore Cursor (VS Code fork with enhanced AI features), and compare different approaches to AI-assisted editing.
 
 Critical insight: The IDE is where you spend most of your development time. Choosing the right AI-native environment dramatically impacts productivity. You'll learn selection criteria, installation processes, and essential workflows for each tool.
 
-### Chapter 9: Git & GitHub for AI-Driven Development
+### Chapter 11: Git & GitHub for AI-Driven Development
 
 Git and GitHub aren't optional when working with AI agents—they're essential safety mechanisms. This chapter is also split into two parts: **Part I** covers essential Git commands (init, add, commit, push, branches, pull requests). **Part II** shows natural language workflows for requesting AI tools handle Git operations.
 

@@ -66,7 +66,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "content-implementer v3.0.0"
-source_spec: "specs/book/chapter-30-sdd-fundamentals/spec.md"
+source_spec: "specs/book/chapter-32-sdd-fundamentals/spec.md"
 created: "2025-01-15"
 last_modified: "2025-11-18"
 git_author: "Claude Code"
@@ -662,7 +662,7 @@ You can now:
 ✅ **Distinguish Skills from Subagents** by complexity and autonomy
 ✅ **Create documentation** that produces consistent AI outputs
 
-**Key insight**: RI design ≠ RI implementation. In this lesson, you designed components. In Chapter 31+, you'll implement them using specific frameworks (skills architecture, subagent runtimes, etc.).
+**Key insight**: RI design ≠ RI implementation. In this lesson, you designed components. In Chapter 33+, you'll implement them using specific frameworks (skills architecture, subagent runtimes, etc.).
 
 ---
 

@@ -51,7 +51,7 @@ differentiation:
   remedial_for_struggling: "Focus on basic: type hints are optional; function parameters and return types are the essential pieces"
 
 generated_by: "content-implementer v3.0.0"
-source_spec: "specs/001-chapter-12-lightning-python-stack/plan.md"
+source_spec: "specs/001-chapter-14-lightning-python-stack/plan.md"
 created: "2025-01-15"
 last_modified: "2025-01-15"
 git_author: "Claude Code"
@@ -206,7 +206,7 @@ uv run pyright types.py
 
 Success! No type errors.
 
-**Note**: This code demonstrates type checking, not Python programming. You'll learn more about functions and types in Chapter 13.
+**Note**: This code demonstrates type checking, not Python programming. You'll learn more about functions and types in Chapter 15.
 
 **Source**: Verified in intelligence/001-verified-tool-documentation.md
 

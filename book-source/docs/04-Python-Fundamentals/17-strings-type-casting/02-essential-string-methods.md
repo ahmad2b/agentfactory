@@ -68,7 +68,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "content-implementer v3.0.0"
-source_spec: "specs/part-4-chapter-16/spec.md"
+source_spec: "specs/part-4-chapter-18/spec.md"
 created: "2025-11-08"
 last_modified: "2025-11-08"
 git_author: "Claude Code"
@@ -289,7 +289,7 @@ tags: list[str] = tags_input.strip().split(",")  # ["JavaScript", " Python", " R
 
 # Note: Each tag has spaces—let's fix that
 cleaned_tags: list[str] = [tag.strip() for tag in tags]  # Clean each tag
-# (list comprehension is Chapter 18+; shown for reference here)
+# (list comprehension is Chapter 20+; shown for reference here)
 
 # Simpler chaining without comprehension:
 single_tag: str = "  HELLO  "

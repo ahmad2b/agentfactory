@@ -1,9 +1,9 @@
 ---
 sidebar_position: 33
-title: "Chapter 33: Tessl and SpecifyPlus - The Ultimate Workflow"
+title: "Chapter 35: Tessl and SpecifyPlus - The Ultimate Workflow"
 ---
 
-# Chapter 33: Tessl and SpecifyPlus - The Ultimate Workflow
+# Chapter 35: Tessl and SpecifyPlus - The Ultimate Workflow
 
 You've mastered SpecifyPlus's opinionated workflow: Constitution → Specify → Plan → Tasks → Implement. The PHRs and ADRs are there. You've learned how specifications serve as the coordination layer for AI agents. Now you're ready for the next evolution: **integrating Tessl with SpecifyPlus** to create the most powerful specification-driven development workflow available in 2025.
 
@@ -59,7 +59,7 @@ The lessons build progressively:
 
 ## Why SpecifyPlus Alone Isn't Enough
 
-You've experienced SpecifyPlus's power in Chapters 30-32. The opinionated workflow works. But you've probably also noticed friction points:
+You've experienced SpecifyPlus's power in Chapters 32-32. The opinionated workflow works. But you've probably also noticed friction points:
 
 **Scenario**: Your plan says "Use FastAPI 0.104.1 for the REST API."
 

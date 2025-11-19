@@ -48,7 +48,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "lesson-writer v3.0.0"
-source_spec: "specs/part-4-chapter-15/spec.md"
+source_spec: "specs/part-4-chapter-17/spec.md"
 created: "2025-11-08"
 last_modified: "2025-11-08"
 git_author: "Claude Code"
@@ -60,7 +60,7 @@ version: "1.0.0"
 
 You've learned to ask simple True/False questions with comparison operators. Now it's time to ask more complex questions. "Is this value between 5 and 10?" That's not one comparison—it's two comparisons combined: "Is it greater than 5 AND less than 10?"
 
-Logical operators let you combine True/False values (or comparisons) into more sophisticated reasoning. They're the foundation for all decision-making in Chapter 17's control flow.
+Logical operators let you combine True/False values (or comparisons) into more sophisticated reasoning. They're the foundation for all decision-making in Chapter 19's control flow.
 
 ## What It Is: Combining True/False Values
 
@@ -188,7 +188,7 @@ not_in_range: bool = not ((x > 5) and (x < 10))  # False (it IS in range)
 print(f"Is {x} NOT in range? {not_in_range}")  # False
 ```
 
-These are the kinds of conditions you'll use constantly in Chapter 17 when writing `if` statements.
+These are the kinds of conditions you'll use constantly in Chapter 19 when writing `if` statements.
 
 ### Real-World Permission Logic
 

@@ -53,8 +53,8 @@ cognitive_load:
 
 # Generation metadata
 generated_by: "content-implementer v1.0.0"
-source_spec: "specs/028-chapter-8-git-redesign/spec.md"
-source_plan: "specs/028-chapter-8-git-redesign/plan.md"
+source_spec: "specs/028-chapter-10-git-redesign/spec.md"
+source_plan: "specs/028-chapter-10-git-redesign/plan.md"
 created: "2025-11-17"
 last_modified: "2025-11-17"
 version: "1.0.0"

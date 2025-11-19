@@ -5,7 +5,7 @@ description: "Learn Python's modern match-case syntax for clearer decision-makin
 reading_level: "Grade 7-9"
 time_estimate: "50-65 minutes"
 generated_by: "content-implementer"
-source_spec: "specs/001-part-4-chapter-17/spec.md"
+source_spec: "specs/001-part-4-chapter-19/spec.md"
 created: "2025-11-09"
 last_modified: "2025-11-09"
 git_author: "content-implementer-agent"

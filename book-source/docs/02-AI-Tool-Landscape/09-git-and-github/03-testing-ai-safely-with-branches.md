@@ -20,7 +20,7 @@ skills:
 # stage: 2 (AI Collaboration with Three Roles) # Internal scaffolding - hidden from students
 teaching_modality: Three Roles demonstrations (AI as Teacher, Student as Teacher, Co-Worker convergence)
 generated_by: content-implementer v1.0.0
-source_spec: specs/028-chapter-8-git-redesign/spec.md
+source_spec: specs/028-chapter-10-git-redesign/spec.md
 created: 2025-01-17
 last_modified: 2025-01-17
 git_author: content-implementer (Claude Code)

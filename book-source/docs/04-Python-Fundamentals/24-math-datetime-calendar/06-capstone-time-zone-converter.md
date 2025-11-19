@@ -75,7 +75,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "content-implementer v3.0.2"
-source_spec: "specs/001-part-4-chapter-23/spec.md"
+source_spec: "specs/001-part-4-chapter-25/spec.md"
 created: "2025-11-09"
 last_modified: "2025-11-09"
 git_author: "Claude Code"
@@ -348,7 +348,7 @@ Debug Info (from Lesson 2):
 **What just happened**: You saw a complete, working Time Zone Converter. Every function has:
 - Type hints (from Lesson 1: validation)
 - Docstrings explaining purpose
-- Error handling (try/except from Chapter 21)
+- Error handling (try/except from Chapter 23)
 - Clear responsibility (one thing per function)
 
 Now let's understand how to build this with your AI companion.

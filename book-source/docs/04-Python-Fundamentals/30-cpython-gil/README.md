@@ -1,9 +1,9 @@
 ---
 sidebar_position: 29
-title: "Chapter 29: CPython and GIL"
+title: "Chapter 31: CPython and GIL"
 ---
 
-# Chapter 29: CPython and GIL
+# Chapter 31: CPython and GIL
 
 Master the CPython interpreter and Python's revolutionary free-threading capabilities—the biggest change in Python's 30-year history.
 

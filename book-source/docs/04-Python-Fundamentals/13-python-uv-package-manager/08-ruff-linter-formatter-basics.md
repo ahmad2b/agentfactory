@@ -51,7 +51,7 @@ differentiation:
   remedial_for_struggling: "Focus on two commands: `uv run ruff format .` (fixes style) and `uv run ruff check .` (finds problems)"
 
 generated_by: "content-implementer v3.0.0"
-source_spec: "specs/001-chapter-12-lightning-python-stack/plan.md"
+source_spec: "specs/001-chapter-14-lightning-python-stack/plan.md"
 created: "2025-01-15"
 last_modified: "2025-01-15"
 git_author: "Claude Code"
@@ -161,7 +161,7 @@ def foo(x, y, z):
 - Operators have spaces: `x + y + z`
 - Two blank lines before function definition (PEP 8 standard)
 
-**Note**: This code demonstrates Ruff's formatting, not Python programming. You'll learn Python functions in Chapter 13.
+**Note**: This code demonstrates Ruff's formatting, not Python programming. You'll learn Python functions in Chapter 15.
 
 ---
 

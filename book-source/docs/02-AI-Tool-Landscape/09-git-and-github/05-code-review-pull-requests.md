@@ -70,7 +70,7 @@ prerequisites:
   - "Lesson 4: Cloud Backup & Portfolio"
 
 generated_by: "content-implementer v1.0.0"
-source_spec: "specs/028-chapter-8-git-redesign/spec.md"
+source_spec: "specs/028-chapter-10-git-redesign/spec.md"
 created: "2025-01-17"
 last_modified: "2025-01-17"
 git_author: "Claude Code"

@@ -118,7 +118,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "content-implementer v3.0.0"
-source_spec: "specs/part-4-chapter-29/spec.md (Lesson 4)"
+source_spec: "specs/part-4-chapter-31/spec.md (Lesson 4)"
 created: "2025-11-09"
 last_modified: "2025-11-09"
 git_author: "Claude Code"
@@ -138,7 +138,7 @@ Python 3.14 made free-threading production-ready. For the first time in Python's
 
 The GIL isn't removed (backward compatibility matters). It's now **optional**. You can choose to disable it.
 
-This lesson is the centerpiece of Chapter 29 because free-threading transforms how you'll design multi-agent AI systems in Parts 10-14. You'll learn what changed, why it matters, how to use it, and when it's worth the 5–10% single-threaded overhead.
+This lesson is the centerpiece of Chapter 31 because free-threading transforms how you'll design multi-agent AI systems in Parts 10-14. You'll learn what changed, why it matters, how to use it, and when it's worth the 5–10% single-threaded overhead.
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Capstone: Prompt Template Library Specification"
-description: "Write complete specification for a Prompt Template Library tool orchestrating all Chapter 10 concepts"
+description: "Write complete specification for a Prompt Template Library tool orchestrating all Chapter 12 concepts"
 sidebar_label: "Capstone: Template Library"
 sidebar_position: 8
 chapter: 10
@@ -20,7 +20,7 @@ skills:
     measurable_at_this_level: "Student writes complete specification for Prompt Template Library tool"
 
 learning_objectives:
-  - objective: "Create complete specification for Prompt Template Library tool using Chapter 10 principles"
+  - objective: "Create complete specification for Prompt Template Library tool using Chapter 12 principles"
     proficiency_level: "B1"
     bloom_level: "Create"
     assessment_method: "Peer-reviewable specification document with success criteria and validation tests"
@@ -608,7 +608,7 @@ $ prompt-library fill bug-fix
 
 ## Framework Integration Checklist
 
-Before finalizing your specification, verify it demonstrates understanding of **all four frameworks** taught in Chapter 10:
+Before finalizing your specification, verify it demonstrates understanding of **all four frameworks** taught in Chapter 12:
 
 ### Anthropic's Progressive Prompting
 - ✅ QDD implements "ask before implementing" (Anthropic's step-by-step thinking)?
@@ -664,7 +664,7 @@ Evaluate your specification against these criteria:
 
 ## What You've Learned
 
-This capstone integrates all Chapter 10 concepts:
+This capstone integrates all Chapter 12 concepts:
 
 1. **Prompts as specifications** → You wrote a specification (not implementation)
 2. **Specification-first** → You defined success criteria before describing features
@@ -680,7 +680,7 @@ This capstone integrates all Chapter 10 concepts:
 
 ## Next Steps After This Chapter
 
-**You've completed Chapter 10: Prompt Engineering for AI-Driven Development.**
+**You've completed Chapter 12: Prompt Engineering for AI-Driven Development.**
 
 You now understand:
 - ✅ Prompts as specifications (WHAT, not HOW)
@@ -692,7 +692,7 @@ You now understand:
 - ✅ Template selection decision frameworks
 - ✅ Writing peer-reviewable specifications
 
-**Coming in Chapter 11**: Context Engineering for AI-Driven Development
+**Coming in Chapter 13**: Context Engineering for AI-Driven Development
 - Context windows and token limits
 - Progressive loading strategies
 - Context compression techniques

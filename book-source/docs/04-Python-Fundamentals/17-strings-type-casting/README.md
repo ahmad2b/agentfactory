@@ -1,9 +1,9 @@
 ---
 sidebar_position: 16
-title: "Chapter 16: Strings and Type Casting"
+title: "Chapter 18: Strings and Type Casting"
 ---
 
-# Chapter 16: Strings and Type Casting
+# Chapter 18: Strings and Type Casting
 
 Text is everywhere in programming. User input, error messages, file names, web content, chat messages—all are strings. In this chapter, you'll learn how to create, manipulate, and validate text data using Python's powerful string capabilities.
 

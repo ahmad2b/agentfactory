@@ -102,7 +102,7 @@ Estimated tokens: ~25K (12.5% of 200K context)
 
 **Example Current for specific task**:
 ```markdown
-Task: Write user guide for Chapter 9 (Markdown syntax)
+Task: Write user guide for Chapter 11 (Markdown syntax)
 
 Current Files (Task-Specific):
 - chapter-09-outline.md: Structure for this chapter

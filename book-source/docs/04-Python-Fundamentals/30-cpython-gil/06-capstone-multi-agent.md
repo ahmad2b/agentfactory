@@ -84,7 +84,7 @@ learning_objectives:
     bloom_level: "Understand"
     assessment_method: "Student explains scaling from single machine (threading) to distributed (pods, virtual actors)"
 
-  - objective: "Synthesize all Chapter 29 concepts (CPython, GIL, free-threading, concurrency decisions) into coherent capstone project"
+  - objective: "Synthesize all Chapter 31 concepts (CPython, GIL, free-threading, concurrency decisions) into coherent capstone project"
     proficiency_level: "B2"
     bloom_level: "Evaluate"
     assessment_method: "Student builds project demonstrating mastery of all prior lessons"
@@ -99,7 +99,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "content-implementer v3.0.0"
-source_spec: "specs/part-4-chapter-29/spec.md"
+source_spec: "specs/part-4-chapter-31/spec.md"
 created: "2025-11-09"
 last_modified: "2025-11-09"
 git_author: "Claude Code"

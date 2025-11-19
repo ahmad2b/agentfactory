@@ -85,7 +85,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "lesson-writer v3.0.0"
-source_spec: "specs/001-part-4-chapter-26/spec.md"
+source_spec: "specs/001-part-4-chapter-28/spec.md"
 created: "2025-11-09"
 last_modified: "2025-11-09"
 git_author: "Claude Code"
@@ -957,7 +957,7 @@ Create a file called `advanced_dataclass_patterns.md`:
 
 ```markdown
 # Advanced Dataclass Patterns and Validation
-*Chapter 26, Lesson 4*
+*Chapter 28, Lesson 4*
 
 ## Pattern 1: Basic Validation in `__post_init__()`
 

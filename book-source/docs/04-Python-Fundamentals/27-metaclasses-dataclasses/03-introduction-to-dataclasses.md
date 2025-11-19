@@ -89,7 +89,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "content-implementer v3.0.2"
-source_spec: "specs/001-part-4-chapter-26/spec.md"
+source_spec: "specs/001-part-4-chapter-28/spec.md"
 created: "2025-11-09"
 last_modified: "2025-11-09"
 git_author: "Claude Code"
@@ -735,7 +735,7 @@ Create a file called `dataclass_patterns_guide.md` with this structure:
 
 ```markdown
 # Dataclass Design Patterns and Best Practices
-*Chapter 26, Lesson 3*
+*Chapter 28, Lesson 3*
 
 ## Why Dataclasses?
 

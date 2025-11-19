@@ -54,7 +54,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "content-implementer v3.0.0"
-source_spec: "specs/015-part-4-chapter-21/spec.md"
+source_spec: "specs/015-part-4-chapter-23/spec.md"
 created: "2025-11-09"
 last_modified: "2025-01-18"
 git_author: "Claude Code"
@@ -492,7 +492,7 @@ Create a Python file called `domain_exceptions.py` with these patterns:
 ```python
 """
 Custom Exception Library for Domain Modeling
-Chapter 21, Lesson 3
+Chapter 23, Lesson 3
 
 This library demonstrates professional exception design patterns:
 - Base exception classes for domains

@@ -75,7 +75,7 @@ cognitive_load:
 
 # Generation metadata
 generated_by: "content-implementer"
-source_spec: "specs/001-part-4-chapter-19/spec.md (FR-013 to FR-018)"
+source_spec: "specs/001-part-4-chapter-21/spec.md (FR-013 to FR-018)"
 created: "2025-11-09"
 last_modified: "2025-11-09"
 git_author: "Claude Code"
@@ -292,7 +292,7 @@ print(f"Final set size: {len(my_set)}")              # 1,000,000
 
 Now let's tie this together with a concrete example showing why immutability is foundational:
 
-**SPECIFICATION REFERENCE**: Chapter 19, Lesson 3, Functional Requirements FR-014
+**SPECIFICATION REFERENCE**: Chapter 21, Lesson 3, Functional Requirements FR-014
 
 **AI PROMPTS USED**:
 1. "Explain why lists can't be in sets with an example showing what would break"

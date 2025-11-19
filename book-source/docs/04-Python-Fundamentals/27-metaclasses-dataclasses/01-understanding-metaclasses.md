@@ -61,7 +61,7 @@ cognitive_load:
 # Generation metadata
 generation:
   generated_by: "Claude Code (content-implementer)"
-  source_spec: "specs/001-part-4-chapter-26/spec.md — Lesson 1"
+  source_spec: "specs/001-part-4-chapter-28/spec.md — Lesson 1"
   created: "2025-11-09"
   last_modified: "2025-11-09"
   git_author: "Claude Code"
@@ -730,7 +730,7 @@ Here's the reference structure AI should generate:
 
 ```markdown
 # Metaclass Understanding Reference
-*Chapter 26, Lesson 1*
+*Chapter 28, Lesson 1*
 
 ## What is a Metaclass?
 

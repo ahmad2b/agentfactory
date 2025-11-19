@@ -90,7 +90,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "content-implementer v1.0.0"
-source_spec: "specs/001-part-4-chapter-19/spec.md"
+source_spec: "specs/001-part-4-chapter-21/spec.md"
 created: "2025-11-09"
 last_modified: "2025-11-09"
 git_author: "Claude Code"

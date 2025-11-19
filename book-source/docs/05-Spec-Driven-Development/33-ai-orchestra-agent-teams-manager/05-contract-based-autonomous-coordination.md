@@ -66,7 +66,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "content-implementer v3.0.0"
-source_spec: "specs/002-chapter-32-redesign/spec.md"
+source_spec: "specs/002-chapter-34-redesign/spec.md"
 created: "2025-11-06"
 last_modified: "2025-11-06"
 git_author: "Claude Code"

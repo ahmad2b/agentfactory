@@ -55,7 +55,7 @@ differentiation:
 
 # Generation metadata
 generated_by: "lesson-writer v3.0.0"
-source_spec: "specs/part-4-chapter-15/spec.md"
+source_spec: "specs/part-4-chapter-17/spec.md"
 created: "2025-11-08"
 last_modified: "2025-11-08"
 git_author: "Claude Code"
@@ -125,14 +125,14 @@ loop_count: int = 5          # Descriptive name
 iterations: int = 5          # Alternative name
 
 # Common keywords and what they do
-# if, elif, else — conditional logic (Chapter 17)
-# for, while — loops (Chapter 17)
-# def — define functions (Chapter 20)
-# class — define classes (Chapter 24)
-# import, from — import modules (Chapter 20)
-# return — return from function (Chapter 20)
-# try, except, finally — error handling (Chapter 21)
-# True, False, None — special values (Chapter 14)
+# if, elif, else — conditional logic (Chapter 19)
+# for, while — loops (Chapter 19)
+# def — define functions (Chapter 22)
+# class — define classes (Chapter 26)
+# import, from — import modules (Chapter 22)
+# return — return from function (Chapter 22)
+# try, except, finally — error handling (Chapter 23)
+# True, False, None — special values (Chapter 16)
 # and, or, not — logical operators (Lesson 3, this chapter!)
 ```
 
@@ -323,9 +323,9 @@ Calculation complete!
 ==================================================
 ```
 
-**That's the complete calculator!** You've now integrated all four operator types (arithmetic, comparison, logical, assignment) plus keyword awareness and type validation—all using only the Python concepts you've learned so far (Chapters 13-15).
+**That's the complete calculator!** You've now integrated all four operator types (arithmetic, comparison, logical, assignment) plus keyword awareness and type validation—all using only the Python concepts you've learned so far (Chapters 15-15).
 
-**What about functions?** You might wonder why the calculator code is all in one block instead of organized into functions. That's intentional! Functions are taught in Chapter 20. For now, focus on understanding how operators work together. When you reach Chapter 20, you can come back and refactor this calculator using functions as practice.
+**What about functions?** You might wonder why the calculator code is all in one block instead of organized into functions. That's intentional! Functions are taught in Chapter 22. For now, focus on understanding how operators work together. When you reach Chapter 22, you can come back and refactor this calculator using functions as practice.
 
 ---
 
@@ -349,12 +349,12 @@ Ready to integrate all 4 operator types into one comprehensive calculator?
 
 ---
 
-## Chapter 15 Complete
+## Chapter 17 Complete
 
 Congratulations! You've mastered all four operator types: arithmetic, comparison, logical, and assignment. You understand how to combine them, validate types, and recognize Python's language boundaries (keywords).
 
-**What's Next (Chapter 16)**: Strings and text manipulation—you'll see that operators work with strings too (concatenation with `+`, repetition with `*`).
+**What's Next (Chapter 18)**: Strings and text manipulation—you'll see that operators work with strings too (concatenation with `+`, repetition with `*`).
 
-**Looking Ahead (Chapter 17)**: Control flow and loops—you'll use comparison and logical operators in `if` statements and loops, applying everything you learned here to make decisions and repeat code.
+**Looking Ahead (Chapter 19)**: Control flow and loops—you'll use comparison and logical operators in `if` statements and loops, applying everything you learned here to make decisions and repeat code.
 
 Your foundation is solid. Keep this chapter's concepts close as you move forward.

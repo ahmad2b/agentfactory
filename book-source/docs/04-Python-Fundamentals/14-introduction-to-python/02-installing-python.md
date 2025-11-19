@@ -34,7 +34,7 @@ differentiation:
   remedial_for_struggling: "Focus on Windows installation first; use step-by-step screenshots"
 
 generated_by: "content-implementer v3.0.0"
-source_spec: "specs/016-part-4-chapter-13/spec.md"
+source_spec: "specs/016-part-4-chapter-15/spec.md"
 created: "2025-11-09"
 last_modified: "2025-11-09"
 git_author: "Claude Code"
