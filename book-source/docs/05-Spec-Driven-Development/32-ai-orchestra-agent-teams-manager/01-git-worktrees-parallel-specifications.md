@@ -333,7 +333,7 @@ Creating new branch: 002-user-auth
 
 ### Why This Works
 
-You're teaching your AI agent to be **context-aware**:
+You're configuring your AI agent to be **context-aware**:
 
 - **In worktree** → Already on feature branch → Skip creation
 - **Not in worktree** → Create new branch → Standard flow
