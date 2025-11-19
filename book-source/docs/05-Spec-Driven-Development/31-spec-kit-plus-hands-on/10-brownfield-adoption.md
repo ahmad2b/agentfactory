@@ -97,7 +97,7 @@ Before we proceed, let's establish honest expectations about the current state o
 
 ---
 
-## Layer 1: Manual Foundation - Understanding What Actually Happens
+## Foundation - Understanding What Actually Happens
 
 ### The Brownfield Command
 
@@ -378,7 +378,7 @@ wc -l CLAUDE.md CLAUDE.md.recovered
 
 ---
 
-## Layer 2: AI Collaboration - Safe Brownfield Testing Workflow
+## AI Collaboration - Safe Brownfield Testing Workflow
 
 Now that you understand exactly what gets overwritten, let's work with AI to execute a safe testing workflow that prevents data loss through redundant safety measures.
 
@@ -688,7 +688,7 @@ If "no": What specific uncertainty remains? (Surface it before moving to Layer 3
 
 ---
 
-## Layer 3: Hands-On Practice - Full Brownfield Workflow
+## Hands-On Practice - Full Brownfield Workflow
 
 Now execute the complete workflow yourself on a practice project. This section is **step-by-step executable commands** you can run to experience the entire process safely.
 
@@ -1133,7 +1133,7 @@ Verify you completed the full workflow:
 
 ---
 
-## Layer 4: Real-World Application - Client Project Strategy
+## Real-World Application - Client Project Strategy
 
 You've tested on a practice project with controlled conditions. Real client projects bring additional complexity: active development teams, larger codebases, more valuable custom content, and organizational constraints. Let's develop a decision framework for navigating real-world brownfield adoption.
 
@@ -1787,223 +1787,6 @@ cp -r /tmp/speckit-learning/.specify .
 
 ---
 
-## Practice Challenges (Hands-On Skill Building)
-
-### Challenge 1: Triple Recovery Verification
-
-**Objective**: Prove you can recover custom CLAUDE.md content three different ways after accidental overwrite.
-
-**Scenario**: You have a project with custom CLAUDE.md. You run `init --here`, realize you want the original content back.
-
-**Tasks**:
-1. Create a test project with custom CLAUDE.md (50+ lines of realistic content)
-2. Run safe brownfield init workflow (branch + backup + commit)
-3. After init completes, demonstrate ALL THREE recovery methods:
-   - **Method 1**: Restore from `.backup` file
-   - **Method 2**: Extract from git history using `git show`
-   - **Method 3**: Rollback entire experiment branch (return to main)
-4. Document which method is fastest, which is most reliable
-
-**Success criteria**:
-- ✅ All three recovery methods successfully restore original 50+ line CLAUDE.md
-- ✅ You can explain when to use each recovery method
-- ✅ You complete all recoveries in <5 minutes (demonstrates procedural fluency)
-
----
-
-### Challenge 2: Intelligent Content Categorization
-
-**Objective**: Given a complex custom CLAUDE.md with mixed content types, correctly categorize where each section belongs in SpecKit Plus structure.
-
-**Scenario**: You inherit this CLAUDE.md (200 lines, mixed categories):
-
-```markdown
-# Team AI Instructions
-
-## Python Style
-- Type hints required (PEP 484)
-- Docstrings use Google style
-- Max line length: 100 chars
-
-## When Suggesting Solutions
-Always explain why this approach is better than alternatives.
-Helps team learn rather than blindly following suggestions.
-
-## Database Schema
-- PostgreSQL primary database
-- Snake_case for table/column names
-- Always include created_at/updated_at timestamps
-
-## Code Review Process
-Before accepting AI code:
-1. Read and understand the implementation
-2. Check for security issues
-3. Verify test coverage
-
-## API Design
-- REST endpoints follow OpenAPI 3.0
-- Versioning: /v1/, /v2/ in URL
-- Authentication: JWT tokens
-```
-
-**Tasks**:
-1. Categorize each section (where it belongs):
-   - `.specify/memory/constitution.md` (project standards)
-   - `CLAUDE.md` (AI behavioral instructions)
-   - Other location (document, README, etc.)
-2. Justify each categorization decision
-3. Write the actual integrated content (show exactly what constitution.md and CLAUDE.md look like after merge)
-
-**Success criteria**:
-- ✅ Correct categorization (standards to constitution, patterns to CLAUDE.md)
-- ✅ Clear justification for each decision (why this location?)
-- ✅ Merged files are coherent (no duplicates, no missing content)
-- ✅ An experienced developer would agree with your categorization
-
----
-
-### Challenge 3: Real Project Evaluation and Migration Plan
-
-**Objective**: Analyze an actual client project (or realistic simulation) and create an executable brownfield adoption plan documenting all risks, procedures, and timelines.
-
-**Scenario**: Client provides access to their repository:
-```
-client-analytics-platform/
-├── CLAUDE.md (450 lines: 10 months refinement, only source, daily team usage)
-├── .claude/commands/ (8 custom commands)
-├── src/ (120,000 lines production Python/TypeScript)
-├── tests/ (40,000 lines)
-└── .git (active development, 35 commits/day, 8 developers)
-```
-
-**Tasks**:
-1. **Risk Assessment**:
-   - Evaluate custom content value (use 3-dimension framework)
-   - Identify all data loss risks
-   - Determine appropriate backup strategy
-
-2. **Migration Plan**:
-   - Week-by-week execution plan (team coordination, testing phases, decision points)
-   - Detailed merge strategy (which content goes where)
-   - Rollback procedures (what if it fails)
-   - Timeline estimate (realistic hours/weeks)
-
-3. **Documentation**:
-   - Create written plan you could hand to client
-   - Include decision rationale (why this approach vs alternatives)
-   - Specify success criteria (how to know it worked)
-
-**Success criteria**:
-- ✅ Plan accounts for all data loss risks (no scenario left unaddressed)
-- ✅ Timeline is realistic (not overly optimistic)
-- ✅ Rollback procedures are detailed and tested
-- ✅ Client could execute plan without your supervision (complete documentation)
-- ✅ Plan protects 10 months of team knowledge (zero data loss)
-
----
-
-## Appendix: Quick Reference Materials
-
-### Safe Brownfield Workflow (Copy-Paste Template)
-
-```bash
-# ============================================
-# SAFE BROWNFIELD TESTING WORKFLOW
-# ============================================
-# Purpose: Test specifyplus init --here without data loss risk
-# Recovery: Three methods (branch rollback, backup file, git history)
-# ============================================
-
-# STEP 1: Create experimental branch (isolate risk from main)
-git checkout -b experiment/speckit-plus
-
-# Verify branch creation
-git branch  # Should show: * experiment/speckit-plus
-
-# STEP 2: Create explicit backup files (manual recovery option)
-cp CLAUDE.md CLAUDE.md.backup
-cp -r .claude .claude.backup
-
-# Verify backup creation
-ls -la | grep backup  # Should show: CLAUDE.md.backup, .claude.backup/
-
-# STEP 3: Commit backup state (git recovery option)
-git add CLAUDE.md.backup .claude.backup
-git commit -m "backup: preserve team knowledge before SpecKit Plus brownfield init"
-
-# Verify commit succeeded
-git log --oneline  # Should show backup commit at top
-
-# STEP 4: Run brownfield init (experimental command)
-specifyplus init --here
-# Prompt: "Do you want to continue? [y/N]:"
-# Type: y
-
-# STEP 5: Inspect what changed
-git status           # See modified/new files
-git diff CLAUDE.md   # See complete overwrite (all old lines removed, new added)
-ls -la .specify/     # See new SpecKit Plus structure
-ls .claude/commands/ # Verify custom commands preserved
-
-# STEP 6: Merge your content intelligently
-vim .specify/memory/constitution.md  # Add standards/architecture
-vim CLAUDE.md                         # Append AI collaboration patterns
-
-# STEP 7: Commit merged result
-git add -A
-git commit -m "feat: integrate SpecKit Plus with team conventions
-
-- Adopted SpecKit Plus using init --here (experimental brownfield)
-- Moved coding/architecture standards to constitution.md
-- Preserved AI collaboration patterns in CLAUDE.md
-- All custom commands intact
-- Kept .backup files for reference"
-
-# STEP 8a: If successful → Merge to main
-git checkout main
-git merge experiment/speckit-plus
-
-# STEP 8b: If failed → Rollback (main untouched)
-git checkout main
-git branch -D experiment/speckit-plus
-# Your original CLAUDE.md intact on main
-
-# ============================================
-# RECOVERY METHODS (if something goes wrong)
-# ============================================
-
-# Method 1: Restore from backup file
-cp CLAUDE.md.backup CLAUDE.md
-
-# Method 2: Extract from git history
-git show HEAD~1:CLAUDE.md > CLAUDE.md.recovered
-
-# Method 3: Rollback entire experiment
-git checkout main  # Original CLAUDE.md intact here
-```
-
----
-
-### File Impact Reference Table
-
-| File/Directory | Impact During init --here | Recovery Method |
-|---------------|---------------------------|-----------------|
-| `CLAUDE.md` | ❌ **OVERWRITTEN** (complete replacement) | Git history (`git show HEAD~1:CLAUDE.md`) OR `.backup` file |
-| `.claude/commands/*.md` | ✅ **PRESERVED** (custom commands intact) | N/A (safe, no recovery needed) |
-| `.specify/` | 🆕 **CREATED** (new directory structure) | Delete directory (`rm -rf .specify/`) |
-| `src/`, `lib/`, code | ✅ **PRESERVED** (completely untouched) | N/A (safe, no recovery needed) |
-| `tests/` | ✅ **PRESERVED** (completely untouched) | N/A (safe, no recovery needed) |
-| `README.md` | ✅ **PRESERVED** (completely untouched) | N/A (safe, no recovery needed) |
-| `package.json`, `pyproject.toml` | ✅ **PRESERVED** (completely untouched) | N/A (safe, no recovery needed) |
-| `.gitignore` | ✅ **PRESERVED** (completely untouched) | N/A (safe, no recovery needed) |
-
-**Legend**:
-- ❌ **OVERWRITTEN**: File replaced completely, no automatic preservation
-- ✅ **PRESERVED**: File untouched, safe from changes
-- 🆕 **CREATED**: New file/directory added (wasn't there before)
-
----
-
 ### Decision Framework Checklist
 
 Use this checklist BEFORE running `specifyplus init --here` on any project:
@@ -2135,7 +1918,7 @@ You've safely adopted SpecKit Plus and preserved your team's explicit knowledge:
 SpecKit Plus includes a command to extract specifications and intelligence FROM existing code:
 
 ```bash
-claude code
+claude
 > /reverse-engineer src/
 ```
 
@@ -2164,7 +1947,7 @@ specifyplus init --here
 # (Merge content, commit result)
 
 # PHASE 2: Extract codebase intelligence (optional)
-claude code
+claude
 > /reverse-engineer src/
 # Generates: spec.md, plan.md, tasks.md, intelligence-object.md
 
@@ -2286,8 +2069,3 @@ Include timeline, risks, and success criteria.
 - **Prompt 1**: AI should suggest experimental branch + backup files + git commit (three-layer safety). If it suggests anything less redundant, push back: "What if the backup file gets deleted?"
 - **Prompt 2**: AI should recommend standards/architecture → constitution.md, AI patterns → append to CLAUDE.md. It might suggest reviewing for conflicts between your patterns and SpecKit Plus patterns (good reasoning).
 - **Prompt 3**: AI should identify CRITICAL BLOCKER (no git), recommend phased approach (git init → isolated learning → manual integration, NOT init --here). If it suggests immediate init --here, that's a red flag.
-
-**Safety Reminder**: When testing brownfield init, ALWAYS use the safety workflow (branch + backup + commit). Treat this like a real client project—practice your disaster recovery procedures.
-
-**Stretch Challenge**: After completing the prompts above, try brownfield init on one of YOUR actual projects (a low-risk side project, not production code). Document every decision and observation. What surprised you? What would you do differently next time?
-
