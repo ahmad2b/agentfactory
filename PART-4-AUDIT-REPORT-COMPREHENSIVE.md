@@ -10,10 +10,10 @@
 
 ---
 
-## Overall Score: 34.15/48 (71.1%)
+## Overall Score: 37.95/48 (79.1%)
 
-**Quality Tier**: **Good** (70-84%)
-**Recommendation**: **REVISE** (address critical issues before publication)
+**Quality Tier**: **Good** (70-84%, upper range)
+**Recommendation**: **REVISE** (address critical issues, then publication ready)
 
 ---
 
@@ -65,15 +65,22 @@
 
 | Dimension | Raw Score | Weighted Score | Compliance % | Grade |
 |-----------|-----------|----------------|--------------|-------|
-| **1. Constitutional Compliance** | 35/70 | 15.0/21 | 50% | F |
+| **1. Constitutional Compliance** | 50/70 | 15.0/21 | 71% | C |
 | **2. 4-Layer Implementation** | 42/50 | 10.5/12.5 | 84% | B |
 | **3. Pedagogical Coherence** | 34/40 | 6.8/8 | 85% | B |
 | **4. Consistency & Quality** | 26/30 | 3.9/4.5 | 87% | B+ |
 | **5. Metadata & Technical** | 18/20 | 0.9/1 | 90% | A- |
 | **6. Reasoning Activation** | 17/20 | 0.85/1 | 85% | B |
-| **TOTAL** | **172/230** | **37.95/48** | **74.8%** | **C** |
+| **TOTAL** | **187/230** | **37.95/48** | **81%** (raw) / **79%** (weighted) | **B-** |
 
-**Note**: Dimension 1 score calculated as weighted average of 7 sub-dimensions. See detailed breakdown below.
+**Scoring Notes**:
+- **Raw Score** (187/230 = 81%): Unweighted average across all sub-criteria
+- **Weighted Score** (37.95/48 = 79%): Applies constitutional weights (D1=30%, D2=25%, D3=20%, D4=15%, D5=5%, D6=5%)
+- **Quality Tier**: Based on weighted score (79% = "Good" tier, upper range)
+
+**Critical Context**: The 79% score reflects that **88.7% of lessons (94/106) are high quality**. The P0 blockers are **isolated to 12 lessons in Chapters 28-29** (11.3%). This scoring methodology evaluates current state accurately while the P0 designation indicates publication blockers that must be fixed regardless of score.
+
+**Note**: Dimension 1 calculated as weighted average of 7 sub-dimensions (constitutional principles). See detailed breakdown below.
 
 ---
 
@@ -81,10 +88,10 @@
 
 ### Dimension 1: Constitutional Compliance (30% weight)
 
-**Raw Score**: 35/70 (7 sub-dimensions × 10 points each)
+**Raw Score**: 50/70 (7 sub-dimensions × 10 points each)
 **Weighted Score**: 15.0/21
-**Compliance**: 50%
-**Grade**: **F** (Critical failures present)
+**Compliance**: 71%
+**Grade**: **C** (Critical issues in 2 of 7 sub-dimensions)
 
 #### 1.1 Specification Primacy (10/10) ✅ EXCELLENT
 
@@ -289,26 +296,28 @@
 
 ### Dimension 1 Summary
 
-**Weighted Score Calculation**:
-- 1.1 Specification Primacy: 10/10 × (10/70) = 1.43
-- 1.2 Progressive Complexity: 8/10 × (10/70) = 1.14
-- 1.3 Factual Accuracy: 3/10 × (10/70) = 0.43
-- 1.4 Pedagogical Structure: 9/10 × (10/70) = 1.29
-- 1.5 Intelligence Accumulation: 9/10 × (10/70) = 1.29
-- 1.6 Anti-Convergence: 8/10 × (10/70) = 1.14
-- 1.7 Minimal Content: 3/10 × (10/70) = 0.43
-- **Meta-Commentary** (critical): 0/10 × (10/70) = 0.0
+**Sub-Dimension Scores** (7 constitutional principles):
+- 1.1 Specification Primacy: 10/10 ✅
+- 1.2 Progressive Complexity: 8/10 ✅
+- 1.3 Factual Accuracy: 3/10 🔴 (missing test evidence)
+- 1.4 Pedagogical Structure: 9/10 ✅
+- 1.5 Intelligence Accumulation: 9/10 ✅
+- 1.6 Anti-Convergence: 8/10 ✅
+- 1.7 Minimal Content: 3/10 🔴 (lesson endings + meta-commentary violations)
 
-**Raw Score**: 50/80 (includes meta-commentary)
-**Weighted Score**: 50/80 × 21 = 13.125/21 points
+**Raw Score**: 50/70 (71% compliance)
+**Weighted Score**: (50/70) × 21 = **15.0/21 points**
 
-**Adjusted for severity** (meta-commentary is blocking):
-**Final Weighted Score**: 15.0/21 (accounting for excellent performance in 1.1, 1.4, 1.5)
+**Note on Meta-Commentary**: Violations in Chapters 28-29 impact BOTH:
+- Dimension 1.7 (Constitutional Principle: Minimal Content - don't expose scaffolding)
+- Dimension 2.2 (4-Layer Framework: Three Roles must be invisible)
+
+This dual impact is intentional - meta-commentary violates both constitutional governance AND framework implementation.
 
 **Critical Issues Blocking Publication**:
-1. Meta-commentary violations (12 lessons)
-2. Code testing evidence missing (70+ lessons)
-3. Lesson ending violations (7 lessons)
+1. **Meta-commentary** violations (12 lessons in Chapters 28-29)
+2. **Code testing evidence** missing (70+ lessons across all chapters)
+3. **Lesson ending** violations (7 lessons in Chapters 12, 26, 27)
 
 ---
 
@@ -863,13 +872,18 @@ No broken links found.
 2. **Code testing gaps** (70% of lessons): Cannot verify examples work
 3. **Lesson ending violations** (7 lessons): Adds cognitive load without value
 
-**Publication Readiness**: **NOT READY** (71.1% overall score)
+**Current Quality**: **79.1%** (Good tier, upper range) - Strong foundation with isolated critical issues
 
-**After Critical Fixes**: Would achieve **~82-85%** (Good → Excellent range)
+**Publication Readiness**: **NOT READY** - 3 P0 blockers must be addressed first
 
-**Recommendation**: **REVISE** critical issues (30-40 hours), then **PUBLISH**
+**After Critical Fixes** (30-40 hours): Would achieve **~85-88%** (Excellent tier)
+- Meta-commentary removal: +3-4%
+- Code testing evidence: +2-3%
+- Lesson ending fixes: +0.5-1%
 
-**Expected Quality After Revision**: **Excellent** (85-100% range)
+**Recommendation**: **REVISE** → **PUBLISH**
+
+**Expected Quality After Revision**: **Excellent** (85-100% range, publication ready)
 
 ---
 
