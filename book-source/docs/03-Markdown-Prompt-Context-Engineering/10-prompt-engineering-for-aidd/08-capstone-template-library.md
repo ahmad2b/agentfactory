@@ -703,6 +703,181 @@ You now understand:
 
 ---
 
+## Layer 3 Intelligence: Using the Prompt Template Designer Skill
+
+You've learned to USE templates (Layer 2). Now learn to CREATE reusable templates as intelligence design (Layer 3).
+
+The `@prompt-template-designer` skill encodes the template creation process using the **Persona + Questions + Principles (P+Q+P)** pattern you've practiced throughout this chapter.
+
+### When to Create a Template
+
+Use the skill's **6 Analysis Questions** to decide if a prompt should become a template:
+
+**Question 1: Recurrence Check** — "Have I used this prompt pattern 2+ times?"
+- **If YES**: Pattern recurs, create template
+- **If NO**: Keep as one-off prompt
+
+**Question 2: Variation Analysis** — "What stays constant vs what changes?"
+- **Constants**: Template structure (Intent format, core constraints, validation criteria)
+- **Variants**: Parameters (file names, error messages, project context)
+
+**Question 3: Complexity Check** — "Does this prompt have 5+ decision points?"
+- Count decisions: action verb, constraints, format, validation, edge cases, thresholds, context
+- **5+ decisions** = High template value (reduces cognitive load)
+- **1-3 decisions** = Low template value (just write prompt directly)
+
+**Question 4: Domain Knowledge Check** — "Does this encode project-specific intelligence?"
+- High-value templates capture: team conventions, quality standards, architecture patterns, best practices
+- Low-value templates are generic: "Ask AI a question", "Generate code"
+
+**Question 5: Parameter Design** — "What parameters make this flexible but not vague?"
+- Use descriptive names: `{{TARGET_FILE}}` not `{{X}}`
+- Add type hints: `{{ERROR_MESSAGE}}` (Type: text)
+- Provide examples: `Example: Permission denied`
+
+**Question 6: Template Organization** — "How should I organize for discoverability?"
+- By development phase (requirements, implementation, testing, docs)
+- By action verb (create, debug, refactor, optimize)
+- By domain (backend-api, frontend-components, devops)
+
+### Applying the Skill to Your Capstone
+
+For your Prompt Template Library specification, use the skill to design the template creation workflow:
+
+**Workflow: Creating a New Template**
+1. User writes successful prompt 2+ times → Recognizes pattern
+2. System asks 6 analysis questions → Evaluates template worthiness
+3. User identifies constants vs variants → Extracts structure
+4. System generates template with parameters → Adds metadata
+5. User provides example → Validates template
+6. System stores template → Enables future reuse
+
+**This workflow IS the prompt-template-designer skill operationalized.**
+
+### Practice: Design a Template Using the Skill
+
+**Your task**: You've written Git commit messages 5+ times using Conventional Commits format. Create a reusable template.
+
+**Apply the 6 questions**:
+1. Recurrence: 5 uses → YES, create template
+2. Variation:
+   - **Constants**: Conventional Commits format, imperative mood, &lt;50 char limit
+   - **Variants**: `CHANGES_MADE`, `TICKET_ID`, `SCOPE`, `TYPE`
+3. Complexity: 7 decisions (type, scope, ticket, subject length, body format, business value, imperative mood) → High value
+4. Domain knowledge: Team's Jira convention, business value focus → Project-specific
+5. Parameters: Descriptive (`CHANGES_MADE` with examples), typed, required vs optional marked
+6. Organization: Store in `templates/generate/git-commit.md`
+
+**Result**: Here's the complete template you would create:
+
+```markdown
+---
+template_name: git-commit-message-conventional
+category: generate
+domain: general
+complexity: simple
+version: 2.0.0
+created: 2025-10-15
+last_updated: 2025-11-18
+success_rate: 95%
+usage_count: 47
+---
+
+# Git Commit Message Generator (Conventional Commits)
+
+## When to Use
+After staging changes (git add), before committing. Use when you need a commit message that:
+- Follows Conventional Commits format
+- Includes team's Jira ticket convention
+- Explains business value (not just technical changes)
+
+## Parameters
+
+### CHANGES_MADE
+- **Type**: composite (list of changes with context)
+- **Description**: List of changes made in this commit with technical details
+- **Example**:
+  - Added JWT refresh endpoint (/auth/refresh)
+  - Extended token expiration from 1h to 24h
+  - Fixed logout race condition in session handler
+- **Required**: yes
+
+### JIRA_TICKET
+- **Type**: text (format: PROJ-NNNN)
+- **Description**: Jira ticket ID from current branch name
+- **Example**: PROJ-1234
+- **Required**: yes (use "NO-TICKET" if no ticket exists)
+
+### SCOPE
+- **Type**: enum [auth, api, ui, db, devops, docs, test]
+- **Description**: Area of codebase affected
+- **Example**: auth
+- **Required**: yes
+
+### TYPE
+- **Type**: enum [feat, fix, docs, refactor, test, chore, perf]
+- **Description**: Type of change being made
+- **Example**: feat
+- **Required**: yes
+
+## Template
+
+GENERATE Git commit message using Conventional Commits format
+
+CHANGES MADE:
+[Insert your changes here]
+
+CONSTRAINTS:
+- Format: [TYPE]([SCOPE]): <description> [[JIRA_TICKET]]
+- Subject line: Imperative mood, <50 characters
+- Body: Bullet list explaining WHY (business value, not just technical what)
+- Include Jira ticket in brackets at end of subject line
+- Each change in body should explain impact/value
+
+SUCCESS CRITERIA:
+- Passes commitlint validation
+- Subject ≤50 characters
+- Body explains business value for each change
+- Teammate can understand changes without reading diff
+- Follows team's commit message style
+
+## Example (Filled)
+
+GENERATE Git commit message using Conventional Commits format
+
+CHANGES MADE:
+- Added JWT refresh endpoint (/auth/refresh)
+- Extended token expiration from 1h to 24h
+- Fixed logout race condition in session handler
+
+CONSTRAINTS:
+- Format: feat(auth): <description> [PROJ-1234]
+- Subject line: Imperative mood, <50 characters
+- Body: Bullet list explaining WHY (business value, not just technical what)
+- Include Jira ticket in brackets at end of subject line
+- Each change in body should explain impact/value
+
+SUCCESS CRITERIA:
+- Passes commitlint validation
+- Subject ≤50 characters
+- Body explains business value for each change
+- Teammate can understand changes without reading diff
+- Follows team's commit message style
+
+AI Response:
+---
+feat(auth): add JWT refresh and extend token lifetime [PROJ-1234]
+
+- Add /auth/refresh endpoint: improves mobile UX by eliminating frequent re-logins
+- Extend token expiration to 24h: reduces authentication friction for daily users
+- Fix logout race condition: ensures users are fully logged out (security improvement)
+---
+```
+
+**Key insight**: The skill teaches you to think systematically about template design, not just copy existing templates. This is Layer 3 intelligence—creating reusable patterns.
+
+---
+
 ## Try With AI
 
 Ready to apply all 8 prompt engineering elements to create a specification-quality capstone project?
