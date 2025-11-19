@@ -748,10 +748,10 @@ description: Run our custom test suite with coverage
 
 Run pytest with coverage reporting and fail if below 80%:
 
-```bash
+\`\`\`bash
 pytest --cov=src --cov-report=html --cov-report=term --cov-fail-under=80
 open htmlcov/index.html  # View detailed coverage report
-```
+\`\`\`
 EOF
 
 # Step 5: Create realistic project structure
@@ -1154,7 +1154,7 @@ You've tested on a practice project with controlled conditions. Real client proj
 
 | Content Volume | Refinement Time | Risk Level | Backup Strategy |
 |---------------|----------------|------------|-----------------|
-| 0-50 lines | <1 month | **LOW** | Single backup sufficient |
+| 0-50 lines | &lt;1 month | **LOW** | Single backup sufficient |
 | 50-200 lines | 1-6 months | **MODERATE** | Redundant backups (git + file) |
 | 200-500 lines | 6-12 months | **HIGH** | Redundant backups + team review |
 | 500+ lines | 12+ months | **VERY HIGH** | Consider manual integration instead |
@@ -1248,7 +1248,7 @@ Assessment: BLOCKED → Must initialize git first, then reassess
 
 | Content Lines | Content Clarity | Conflicts | Estimated Merge Time |
 |--------------|----------------|-----------|---------------------|
-| <50 lines | Clear categories | None | **15-30 minutes** |
+| &lt;50 lines | Clear categories | None | **15-30 minutes** |
 | 50-200 lines | Mostly clear | Minor | **30-60 minutes** |
 | 200-500 lines | Mixed categories | Some | **1-2 hours** |
 | 500+ lines | Complex/unclear | Significant | **3-6 hours** |
@@ -1260,7 +1260,7 @@ Assessment: BLOCKED → Must initialize git first, then reassess
 - ❌ **No backup reference**: Lost access to original content, reconstructing from memory (+200% time)
 
 **Decision criteria**:
-- **<1 hour**: Low complexity, proceed with standard workflow
+- **&lt;1 hour**: Low complexity, proceed with standard workflow
 - **1-2 hours**: Moderate complexity, allocate sufficient time, don't rush
 - **2-4 hours**: High complexity, consider pair programming for merge quality
 - **>4 hours**: Very high complexity, evaluate whether manual integration is more efficient
@@ -1969,7 +1969,7 @@ git commit -m "feat: extract codebase intelligence"
 - ✅ Planning major refactor (need baseline spec)
 
 **Skip when**:
-- ❌ Small codebase (<1,000 lines) - manual docs faster
+- ❌ Small codebase (&lt;1,000 lines) - manual docs faster
 - ❌ Code is throwaway prototype - not worth investment
 - ❌ Architecture is chaotic - no clear patterns
 
