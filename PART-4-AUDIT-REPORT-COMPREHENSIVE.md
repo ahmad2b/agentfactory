@@ -10,6 +10,48 @@
 
 ---
 
+## Quick Reference: Executive Decision Matrix
+
+| Question | Answer | Details |
+|----------|--------|---------|
+| **Can we publish Part 4 now?** | ❌ NO | 3 P0 blockers must be fixed first |
+| **Is Part 4 fundamentally sound?** | ✅ YES | 79.1% quality, strong foundation |
+| **What % of lessons are excellent?** | 88.7% (94/106) | Only 12 lessons have critical issues |
+| **How much work to fix?** | 30-40 hours | Concentrated in Chapters 28-29 |
+| **Quality after fixes?** | 85-88% (Excellent) | Publication-ready |
+| **Timeline to publish?** | 4-6 weeks | Fix P0s → Review → Publish |
+| **Main issue?** | Meta-commentary | Framework exposed in Chapters 28-29 |
+| **Most urgent fix?** | Rewrite 12 lessons | Remove explicit role labels |
+
+**Decision Recommendation**: Allocate 1 week for remediation → Part 4 ready for publication
+
+---
+
+## How to Use This Report
+
+**For Leadership**:
+- Read: Executive Summary, Dimension Scores, Priority Issue Summary, Conclusion
+- Decision: Approve 30-40 hour remediation budget
+- Timeline: 4-6 weeks to publication-ready state
+
+**For Content Team**:
+- Priority: Fix P0 blockers first (see Priority Issue Summary table)
+- Start with: Chapters 28-29 rewrite (24-36h) - highest impact
+- Quick wins: Add test output blocks (3.5h), fix lesson endings (1.75h)
+- Reference: Detailed Findings sections for specific guidance
+
+**For Developers/Reviewers**:
+- Evidence: See Evidence Appendix for validation commands
+- Methodology: See Methodology section for sampling approach
+- Quality Benchmarks: Code Quality Examples section
+
+**For Project Management**:
+- Timeline: See Recommendations by Timeline
+- Effort Estimates: Priority Issue Summary table
+- Success Metrics: After fixes, expect 85-88% (Excellent tier)
+
+---
+
 ## Overall Score: 37.95/48 (79.1%)
 
 **Quality Tier**: **Good** (70-84%, upper range)
@@ -890,3 +932,87 @@ No broken links found.
 **Audit Completed**: 2025-11-18
 **Confidence Level**: High (comprehensive sampling, constitutional alignment verified)
 **Next Review**: After critical fixes implemented (~6-8 weeks)
+
+---
+
+## Appendix: Action Plan Template
+
+**For Content Team Implementation**
+
+### Week 1: P0 Critical Fixes (30-40 hours)
+
+**Day 1-3: Meta-Commentary Removal (24-36h)**
+- [ ] **Chapter 28 Asyncio** (6 lessons)
+  - [ ] Lesson 1: Remove "Part 2: AI as Teacher" headers → Use "Understanding..." headers
+  - [ ] Lesson 2: Remove "Student as Scientist" labels → Use action prompts
+  - [ ] Lesson 3-6: Same pattern (remove all role labels)
+  - [ ] Validation: Grep for "AI as\|Part 1:\|Part 2:\|Part 3:" → 0 matches
+
+- [ ] **Chapter 29 CPython/GIL** (6 lessons)
+  - [ ] Lesson 1-6: Same meta-commentary removal pattern
+  - [ ] Validation: Framework invisible, students experience Three Roles without seeing labels
+
+- [ ] **Chapter 26 Lesson 2**
+  - [ ] Remove "Summary: Bidirectional Learning Pattern"
+  - [ ] Add "Try With AI" section
+
+**Day 4: Code Testing Evidence (3.5h)**
+- [ ] Priority: All 14 capstones MUST have test output
+- [ ] Add `**Output:**` blocks after major code examples
+- [ ] Format: Show execution result immediately after code block
+- [ ] Sample validation: Pick 5 lessons, verify all Python blocks have output
+
+**Day 5: Lesson Endings (1.75h)**
+- [ ] **Chapter 12** (Lessons 7, 9, 10): Move "Red Flags to Watch" INTO "Try With AI"
+- [ ] **Chapter 27** (Lessons 4, 5, 6): Move "Time Estimate" to frontmatter metadata
+- [ ] **Chapter 26 Lesson 2**: Add "Try With AI" section
+- [ ] Validation: All lessons end with "## Try With AI" ONLY
+
+**Day 5 (cont): Metadata Update (1h)**
+- [ ] **Chapter 20** (3 lessons): Update `cefr_level` → `proficiency_level`
+- [ ] Add `cognitive_load.new_concepts` field
+- [ ] Validation: All Chapter 20 lessons match constitutional format
+
+### Week 2-3: Validation & Review
+
+**Week 2: Internal Review**
+- [ ] Run validation commands from Evidence Appendix
+- [ ] Verify meta-commentary: 0 matches
+- [ ] Verify lesson endings: All end with "Try With AI"
+- [ ] Verify test evidence: All capstones have output
+- [ ] Peer review changes
+
+**Week 3: Constitutional Re-Audit (Spot Check)**
+- [ ] Sample 10 lessons from Chapters 28-29
+- [ ] Verify Three Roles invisible
+- [ ] Verify no framework exposure
+- [ ] Expected new score: 85-88%
+
+**Week 4: Final Preparation**
+- [ ] Update chapter-index.md status
+- [ ] Generate final quality report
+- [ ] Prepare for publication
+
+### Success Criteria Checklist
+
+**P0 Blockers Resolved**:
+- [ ] Meta-commentary: 0 explicit framework labels found
+- [ ] Code testing: All capstones have execution output
+- [ ] Lesson endings: All lessons end with "Try With AI"
+
+**Expected Metrics**:
+- [ ] Dimension 1 (Constitutional): 50/70 → 60/70 (85%)
+- [ ] Overall score: 37.95/48 → 41/48 (85-88%)
+- [ ] Quality tier: Good → Excellent
+
+**Publication Ready**:
+- [ ] All P0 items marked complete
+- [ ] Validation commands return clean results
+- [ ] Spot audit confirms 85%+ quality
+- [ ] Leadership approval obtained
+
+---
+
+**Report Status**: ✅ PUBLICATION READY
+**Audit Version**: 1.0.0
+**Last Updated**: 2025-11-18
