@@ -761,7 +761,7 @@ For your Prompt Template Library specification, use the skill to design the temp
 **Apply the 6 questions**:
 1. Recurrence: 5 uses → YES, create template
 2. Variation:
-   - **Constants**: Conventional Commits format, imperative mood, <50 char limit
+   - **Constants**: Conventional Commits format, imperative mood, &lt;50 char limit
    - **Variants**: `CHANGES_MADE`, `TICKET_ID`, `SCOPE`, `TYPE`
 3. Complexity: 7 decisions (type, scope, ticket, subject length, body format, business value, imperative mood) → High value
 4. Domain knowledge: Team's Jira convention, business value focus → Project-specific
