@@ -84,8 +84,7 @@ Let's see all seven operators in action. Each one takes two numbers (called **op
 
 ### Addition and Subtraction: The Basics
 
-```python
-# Arithmetic operators: doing math with Python
+<InteractivePython initialCode={`# Arithmetic operators: doing math with Python
 x: int = 10
 y: int = 3
 
@@ -95,8 +94,7 @@ print(f"{x} + {y} = {add_result}")  # 10 + 3 = 13
 
 # Subtraction: find the difference
 sub_result: int = x - y
-print(f"{x} - {y} = {sub_result}")  # 10 - 3 = 7
-```
+print(f"{x} - {y} = {sub_result}")  # 10 - 3 = 7`} />
 
 Both addition and subtraction keep the type consistent. When you add two integers, you get an integer back. Same with subtraction.
 
@@ -108,8 +106,7 @@ Notice something: we're asking AI to explain the **design choice** behind operat
 
 ### Multiplication, Division, and Floor Division
 
-```python
-# Continuing from previous example (x=10, y=3)
+<InteractivePython initialCode={`# Continuing from previous example (x=10, y=3)
 x: int = 10
 y: int = 3
 
@@ -123,8 +120,7 @@ print(f"{x} / {y} = {div_result}")  # 10 / 3 = 3.3333...
 
 # Floor division: counts whole groups (integer result)
 floor_result: int = x // y
-print(f"{x} // {y} = {floor_result}")  # 10 // 3 = 3
-```
+print(f"{x} // {y} = {floor_result}")  # 10 // 3 = 3`} />
 
 Here's something important: **division with `/` always returns a float, even when both numbers are integers**. This surprises many beginners because they expect `10 / 5` to give `2` (an int), but it actually gives `2.0` (a float).
 
@@ -136,8 +132,7 @@ Why? Because division often produces decimals, so Python designed `/` to always 
 
 Let's verify this with `type()`:
 
-```python
-# Continuing from previous example (x=10, y=3)
+<InteractivePython initialCode={`# Continuing from previous example (x=10, y=3)
 x: int = 10
 y: int = 3
 
@@ -153,23 +148,20 @@ print(f"Type of 10 // 3: {type(floor_result)}")  # <class 'int'>
 f1: float = 10.5
 f2: float = 3.0
 float_floor: float = f1 // f2
-print(f"Type of 10.5 // 3.0: {type(float_floor)}")  # <class 'float'> (not int!)
-```
+print(f"Type of 10.5 // 3.0: {type(float_floor)}")  # <class 'float'> (not int!)`} />
 
 Notice: when you floor divide two floats, the result is still a float. Python follows this rule: **if either operand is a float, the result is a float**.
 
 ### Modulus: The Remainder Operator
 
-```python
-# Continuing from previous example (x=10, y=3)
+<InteractivePython initialCode={`# Continuing from previous example (x=10, y=3)
 x: int = 10
 y: int = 3
 
 # Modulus: finds the remainder
 mod_result: int = x % y
 print(f"{x} % {y} = {mod_result}")  # 10 % 3 = 1
-# (10 divided by 3 is 3 with remainder 1)
-```
+# (10 divided by 3 is 3 with remainder 1)`} />
 
 The modulus operator `%` is useful when you care about what's left over. For example:
 - Check if a number is even: `5 % 2` gives 1 (odd), `4 % 2` gives 0 (even)
@@ -178,8 +170,7 @@ The modulus operator `%` is useful when you care about what's left over. For exa
 
 ### Exponentiation: Raising to a Power
 
-```python
-# Continuing from previous example (x=10)
+<InteractivePython initialCode={`# Continuing from previous example (x=10)
 x: int = 10
 
 # Exponentiation: raising to a power
@@ -189,8 +180,7 @@ print(f"{x} ** 2 = {exp_result}")  # 10 ** 2 = 100
 # More examples
 print(f"2 ** 3 = {2 ** 3}")        # 8 (2 × 2 × 2)
 print(f"5 ** 0 = {5 ** 0}")        # 1 (anything to the 0th power is 1)
-print(f"2 ** 10 = {2 ** 10}")      # 1024 (exponents grow fast!)
-```
+print(f"2 ** 10 = {2 ** 10}")      # 1024 (exponents grow fast!)`} />
 
 Notice the symbol: `**` (two asterisks), not `^`. The caret symbol `^` does something different in Python (bitwise XOR), so don't use it for exponentiation.
 
@@ -204,8 +194,7 @@ Notice the symbol: `**` (two asterisks), not `^`. The caret symbol `^` does some
 
 Here's where it gets interesting. When you combine operands of different types, Python follows rules about what type the result is.
 
-```python
-# All integer operations
+<InteractivePython initialCode={`# All integer operations
 int_add: int = 5 + 3           # 8 (int)
 int_mult: int = 5 * 3          # 15 (int)
 
@@ -219,8 +208,7 @@ mixed2: float = 5 * 2.5        # 12.5 (float)
 # Verify with type()
 print(type(int_add))           # <class 'int'>
 print(type(int_div))           # <class 'float'>
-print(type(mixed))             # <class 'float'>
-```
+print(type(mixed))             # <class 'float'>`} />
 
 **The pattern**: When you mix `int` and `float`, the result is always `float`. Python considers this safe because a float can represent any integer value (though with potential precision loss for very large numbers).
 
@@ -264,8 +252,7 @@ Parentheses aren't just for changing order—they're for **clarifying your inten
 
 Let's see all seven operators working together:
 
-```python
-# Working with arithmetic operators
+<InteractivePython initialCode={`# Working with arithmetic operators
 x: int = 20
 y: int = 7
 
@@ -282,8 +269,7 @@ print(f"Exponentiation: {x} ** 2 = {x ** 2}")           # 400 (20 squared)
 print(f"\nType verification:")
 print(f"Type of {x} + {y}: {type(x + y)}")              # <class 'int'>
 print(f"Type of {x} / {y}: {type(x / y)}")              # <class 'float'>
-print(f"Type of {x} // {y}: {type(x // y)}")            # <class 'int'>
-```
+print(f"Type of {x} // {y}: {type(x // y)}")            # <class 'int'>`} />
 
 This example shows:
 - All seven operators working

@@ -83,8 +83,7 @@ Let's see all six in action. Each one asks a different question about two values
 
 ### Equality and Inequality: Are They the Same?
 
-```python
-# Equality: asking if values are the same
+<InteractivePython initialCode={`# Equality: asking if values are the same
 x: int = 10
 y: int = 5
 
@@ -96,8 +95,7 @@ not_equal: bool = x != y        # True - 10 is different from 5
 print(f"{x} != {y}: {not_equal}")  # 10 != 5: True
 
 # Type verification - comparisons return bool
-print(f"Type of result: {type(equal)}")  # <class 'bool'>
-```
+print(f"Type of result: {type(equal)}")  # <class 'bool'>`} />
 
 Important distinction: In Lesson 1, we saw that `=` assigns a value to a variable. Here, `==` compares two values. One `=` stores; two `==` compare. This is a common mistake, so remember it well.
 
@@ -109,8 +107,7 @@ Notice that we're asking AI to explain the **design choice** behind the operator
 
 ### Magnitude Comparisons: Which is Bigger?
 
-```python
-# Greater than and less than
+<InteractivePython initialCode={`# Greater than and less than
 x: int = 10
 y: int = 5
 
@@ -129,8 +126,7 @@ print(f"{x} <= {y}: {less_equal}")     # 10 <= 5: False
 
 # What about comparing a value with itself?
 same: bool = x >= x             # True - 10 is equal to 10
-print(f"{x} >= {x}: {same}")    # 10 >= 10: True
-```
+print(f"{x} >= {x}: {same}")    # 10 >= 10: True`} />
 
 The operators `>`, `<`, `>=`, `<=` compare magnitude—which value is bigger. They answer: "Is the left side bigger, smaller, or equal?" The `=` in `>=` and `<=` means "or equal to," so `10 >= 10` is True (they're equal).
 
@@ -142,8 +138,7 @@ The operators `>`, `<`, `>=`, `<=` compare magnitude—which value is bigger. Th
 
 Here's something that surprises many beginners: Python compares **values**, not types.
 
-```python
-# Integer 5 and float 5.0 are VALUE-equal (but different types)
+<InteractivePython initialCode={`# Integer 5 and float 5.0 are VALUE-equal (but different types)
 int_five: int = 5
 float_five: float = 5.0
 
@@ -160,8 +155,7 @@ string_five: str = "5"
 string_int_compare: bool = int_five == string_five  # False - different types AND values
 
 print(f"5 == 5.0: {int_five == float_five}")   # True (value equality)
-print(f"5 == '5': {int_five == string_five}")  # False (different types)
-```
+print(f"5 == '5': {int_five == string_five}")  # False (different types)`} />
 
 This is crucial: `5 == 5.0` returns True because the **values** are the same, even though one is int and one is float. But `5 == "5"` returns False because "5" is text, not a number.
 
@@ -173,8 +167,7 @@ This is crucial: `5 == 5.0` returns True because the **values** are the same, ev
 
 ### Comparisons in Real Scenarios
 
-```python
-# Real scenario: Checking age eligibility
+<InteractivePython initialCode={`# Real scenario: Checking age eligibility
 user_age: int = 16
 voting_age: int = 18
 driving_age: int = 16
@@ -199,8 +192,7 @@ perfect_score: int = 100
 
 is_passing: bool = test_score >= passing_score  # True
 is_perfect: bool = test_score == perfect_score  # False
-is_valid: bool = test_score <= perfect_score    # True (score can't exceed 100)
-```
+is_valid: bool = test_score <= perfect_score    # True (score can't exceed 100)`} />
 
 ## Why Comparisons Matter for Chapter 19
 
