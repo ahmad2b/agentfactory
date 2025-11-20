@@ -1197,7 +1197,7 @@ Test 4: Test on different pages
 
 **Performance**:
 - CSS variables update all colors in 0ms (no layout recalculation) ✓
-- localStorage write on every toggle (acceptable, <1ms) ✓
+- localStorage write on every toggle (acceptable, less than 1ms) ✓
 
 ### Summary
 All 4 feature tests passed. All browser tests passed.

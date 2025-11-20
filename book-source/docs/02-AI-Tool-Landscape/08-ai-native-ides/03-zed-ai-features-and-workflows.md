@@ -827,14 +827,14 @@ Notice in your multi-model setup, you use fast models for autocomplete and slow 
 - User experience priority: Responsiveness
 - Tolerance for mistakes: High (user can ignore suggestions easily)
 - Context: Single line or few lines ahead
-- Latency budget: <200ms (faster than user can type)
+- Latency budget: Less than 200ms (faster than user can type)
 - Quality acceptable: 70% (user accepts/rejects suggestions immediately)
 
 **Inline Assistant (Claude Sonnet)**:
 - User experience priority: Correctness
 - Tolerance for mistakes: Low (generates larger code blocks)
 - Context: Full file or multiple files
-- Latency budget: <2 seconds (user waits for generation)
+- Latency budget: Less than 2 seconds (user waits for generation)
 - Quality acceptable: 95%+ (code should be production-grade)
 
 By understanding these trade-offs, you can anticipate how Zed will behave and adjust your expectations accordingly.

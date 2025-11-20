@@ -577,7 +577,7 @@ When the AI generates changes:
 **Message 1**: "This endpoint needs three new constraints:
 - Rate limiting: Max 5 login attempts per IP per hour
 - Password requirements: 12+ chars, 1 uppercase, 1 number
-- Response format: Always return {"status": "success"|"error", "data": {...}, "message": "..."}
+- Response format: Always return `{"status": "success"|"error", "data": {...}, "message": "..."}`
 
 Does this require changes to the endpoint?"
 
