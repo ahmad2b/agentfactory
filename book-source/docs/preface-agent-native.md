@@ -17,6 +17,23 @@ For the first time in human history, you can ship production AI-native software 
 
 ---
 
+## Visual Overview: The AI-Native Development Journey
+
+<div style={{position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', maxWidth: '100%'}}>
+  <iframe
+    src="https://docs.google.com/presentation/d/1UGvCUk1-O8m5i-aTWQNxzg8EXoKzPa8fgcwfNh8vRjQ/embed?start=false&loop=false&delayms=3000"
+    frameborder="0"
+    style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}}
+    allowfullscreen="true"
+    mozallowfullscreen="true"
+    webkitallowfullscreen="true">
+  </iframe>
+</div>
+
+_This presentation provides a visual journey through AI-native development concepts. You can navigate through the slides to explore the paradigm shift at your own pace._
+
+---
+
 ## What This Book Is About
 
 This book, **"AI Native Software Development: Colearning Agentic AI with Python and TypeScript — Spec Driven Reusable Intelligence,"** teaches you a fundamentally different approach to building software.
