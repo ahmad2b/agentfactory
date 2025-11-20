@@ -80,8 +80,7 @@ const config: Config = {
     defaultLocale: "en",
     locales: ["en"],
   },
-
-  themes:['docusaurus-live-brython'],
+  
   presets: [
     [
       "classic",
@@ -121,6 +120,25 @@ const config: Config = {
                 "@": path.resolve(__dirname, "src"),
               },
             },
+          };
+        },
+      };
+    },
+    // Webpack fix for react-py (Pyodide) compatibility
+    function (context, options) {
+      return {
+        name: "react-py-webpack-fix",
+        configureWebpack(config, isServer, utils) {
+          if (isServer) return {};
+          return {
+            plugins: [
+              new (require("webpack").BannerPlugin)({
+                banner: `if (typeof __webpack_require__ === 'undefined') {
+                  var __webpack_require__ = {};}`,
+                raw: true,
+                test: /\.js$/,
+              }),
+            ],
           };
         },
       };
