@@ -77,7 +77,7 @@ export const InteractivePython: React.FC<InteractivePythonProps> = ({
   const lineCount = code.split('\n').length;
   const lineHeight = 19; // Monaco default line height in pixels
   const padding = 32; // Top + bottom padding
-  const minHeight = 100;
+  const minHeight = 51;
   const maxHeight = 400;
   const editorHeight = Math.min(
     Math.max(lineCount * lineHeight + padding, minHeight),

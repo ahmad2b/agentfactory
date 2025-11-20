@@ -100,7 +100,7 @@
   border-left: none !important;
   border-right: none;
   overflow: hidden;
-  min-height: 100px;
+  min-height: 51px;
 }
 
 /* Target Monaco Editor's internal div */
