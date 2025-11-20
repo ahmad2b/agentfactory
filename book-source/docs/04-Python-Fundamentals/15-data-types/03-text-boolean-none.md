@@ -338,8 +338,8 @@ Understanding truthy/falsy values prepares you for Chapter 19, where you'll lear
 ""Create a Python script that demonstrates truthy and falsy values. Show examples of False-evaluating values (0, '', [], \{\}, None) and truthy values (1, 'hello', [1,2], \{'a': 1\}). Use bool() to convert each to True/False.""
 
 **Generated Code**:
-```python
-# Truthy and falsy demonstration
+
+<InteractivePython initialCode={`# Truthy and falsy demonstration
 # (Full loop version requires Chapter 19 - Control Flow)
 
 print("=== FALSY VALUES ===")
@@ -352,15 +352,14 @@ print(f"{repr([]):20} → bool() = {bool([])}")
 print(f"{repr({}):20} → bool() = {bool({})}")
 print(f"{repr(None):20} → bool() = {bool(None)}")
 
-print("\n=== TRUTHY VALUES ===")
+print("\\n=== TRUTHY VALUES ===")
 # Demonstrating each truthy value individually
 print(f"{repr(True):20} → bool() = {bool(True)}")
 print(f"{repr(1):20} → bool() = {bool(1)}")
 print(f"{repr(-5):20} → bool() = {bool(-5)}")
 print(f"{repr('hello'):20} → bool() = {bool('hello')}")
 print(f"{repr([1, 2]):20} → bool() = {bool([1, 2])}")
-print(f"{repr({'a': 1}):20} → bool() = {bool({'a': 1})}")
-```
+print(f"{repr({'a': 1}):20} → bool() = {bool({'a': 1})}")`} />
 
 **Validation Steps**:
 - ✓ Ran on Windows, Mac, and Linux—works across platforms
@@ -379,15 +378,13 @@ print(f"{repr({'a': 1}):20} → bool() = {bool({'a': 1})}")
 
 Many beginners confuse `None` with `0` or `""`. They're completely different:
 
-```python
-value1: int = 0           # Zero: a number that exists (just happens to be 0)
+<InteractivePython initialCode={`value1: int = 0           # Zero: a number that exists (just happens to be 0)
 value2: str = ""          # Empty string: text that exists (just has no characters)
 value3: None = None       # None: no data at all
 
 print(value1 == 0)        # True: 0 is indeed zero
 print(value2 == "")       # True: "" is indeed empty
-print(value3 is None)     # True: None is specifically None
-```
+print(value3 is None)     # True: None is specifically None`} />
 
 **The semantic difference**:
 - `0` = "The count is zero" (a count that exists)
@@ -398,13 +395,11 @@ print(value3 is None)     # True: None is specifically None
 
 There is **exactly ONE** `None` object in the entire Python program:
 
-```python
-a: None = None
+<InteractivePython initialCode={`a: None = None
 b: None = None
 
 print(a is b)   # True: both refer to the exact same None object
-print(id(a) == id(b))  # True: same memory address
-```
+print(id(a) == id(b))  # True: same memory address`} />
 
 This singleton property means checking `if x is None:` is the correct Python idiom (not `if x == None:`).
 
@@ -418,8 +413,7 @@ This singleton property means checking `if x is None:` is the correct Python idi
 
 ### Examples of None
 
-```python
-# Optional user phone (user might not provide it)
+<InteractivePython initialCode={`# Optional user phone (user might not provide it)
 user_phone: str | None = None
 
 # Checking for None
@@ -432,8 +426,7 @@ is_none = user_phone is None
 print(f"Phone is None: {is_none}")  # False
 print(f"Phone: {user_phone}")       # Phone: 555-1234
 
-# Note: Functions that return None are covered in Chapter 22
-```
+# Note: Functions that return None are covered in Chapter 22`} />
 
 **Key syntax**: Use `str | None` (read as "string or None") to indicate a value that could be text OR nothing.
 
