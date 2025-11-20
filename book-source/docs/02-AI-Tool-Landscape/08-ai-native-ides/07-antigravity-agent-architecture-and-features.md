@@ -615,7 +615,7 @@ The agent spawns a background task to research APIs. While it researches, you ca
 
 **Caching Strategy:**
 - localStorage stores last API response + timestamp
-- Check: if (now - lastFetch < 10min) use cache, else fetch new data
+- Check: if (now - lastFetch less than 10min) use cache, else fetch new data
 - Simple and reliable for this use case
 
 ### Architecture Decisions
@@ -1487,8 +1487,8 @@ Response format:
 ### Caching Implementation
 
 - Key: `recipes_${ingredient}` (e.g., "recipes_chicken")
-- Value: { results: [...], timestamp: 1234567890 }
-- Check: if (now - timestamp < 1 hour) use cache, else fetch
+- Value: `{ results: [...], timestamp: 1234567890 }`
+- Check: if (now - timestamp less than 1 hour) use cache, else fetch
 
 ### Verification Strategy
 
