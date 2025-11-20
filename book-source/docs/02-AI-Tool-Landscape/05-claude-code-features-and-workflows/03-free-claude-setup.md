@@ -71,7 +71,7 @@ prerequisites:
 
 # Extension: Free Claude Code Setup with Google Gemini
 
-**This lesson provides a free alternative to use Claude Code** using Google's free Gemini API as the backend ($0/month, 1,500 requests/day). You'll learn the same Claude Code CLI interface and features covered in Lesson 2.
+**This lesson provides a free alternative to use Claude Code** using Google's free Gemini API as the backend. You'll learn the same Claude Code CLI interface and features covered in Lesson 2.
 
 **All features work identically**: Subagents, skills, MCP servers, hooks, and all other capabilities covered in Lessons 3-9 function the same way with this free setup. The only difference is the backend AI model (Gemini instead of Claude) and the setup process (router configuration instead of direct authentication).
 
