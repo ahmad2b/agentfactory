@@ -12,18 +12,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 12px;
-  background: white;
+  height: 36px;
+  padding: 0 12px;
+  background: #f9fafb;
   border-bottom: 1px solid #e5e7eb;
+  border-left: none;
 }
 
 .title {
   margin: 0;
+  padding: 0;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.05em;
   color: #111827;
   text-transform: uppercase;
+  flex-shrink: 0;
+  white-space: nowrap;
+  line-height: 1;
 }
 
 .iconButtons {
@@ -59,8 +65,8 @@
 }
 
 .playButton {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,7 +97,18 @@
   background: #2d2d2d;
   border-top: 1px solid #e5e7eb;
   border-bottom: 1px solid #e5e7eb;
+  border-left: none !important;
+  border-right: none;
+  overflow: hidden;
   min-height: 100px;
+}
+
+/* Target Monaco Editor's internal div */
+.editorWrapper > div {
+  border: none !important;
+  border-left: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .loadingOverlay {
@@ -173,59 +190,58 @@
 }
 
 /* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-  .container {
-    background: #1e1e1e;
-  }
+[data-theme="dark"] .container {
+  background: #1e1e1e;
+}
 
-  .header {
-    background: #1e1e1e;
-    border-bottom-color: #444;
-  }
+[data-theme="dark"] .header {
+  background: #1e1e1e;
+  border-bottom-color: #444;
+}
 
-  .title {
-    color: #e0e0e0;
-  }
+[data-theme="dark"] .title {
+  color: #e0e0e0;
+}
 
-  .iconButton {
-    color: #9ca3af;
-  }
+[data-theme="dark"] .iconButton {
+  color: #9ca3af;
+}
 
-  .iconButton:hover:not(:disabled) {
-    background: #2d2d2d;
-    color: #f3f4f6;
-  }
+[data-theme="dark"] .iconButton:hover:not(:disabled) {
+  background: #2d2d2d;
+  color: #f3f4f6;
+}
 
-  .editorWrapper {
-    background: #2d2d2d;
-    border-top-color: #444;
-    border-bottom-color: #444;
-  }
+[data-theme="dark"] .editorWrapper {
+  background: #2d2d2d;
+  border-top-color: #444;
+  border-bottom-color: #444;
+}
 
-  .outputSection {
-    background: #1f2937;
-    border-top-color: #444;
-    color: #e0e0e0;
-  }
+[data-theme="dark"] .outputSection {
+  background: #1f2937;
+  border-top-color: #444;
+  color: #e0e0e0;
+}
 
-  .outputSection.hasError {
-    background: #7f1d1d;
-    border-top-color: #dc2626;
-  }
+[data-theme="dark"] .outputSection.hasError {
+  background: #7f1d1d;
+  border-top-color: #dc2626;
+}
 
-  .outputText {
-    color: #e0e0e0;
-  }
+[data-theme="dark"] .outputText {
+  color: #e0e0e0;
+}
 
-  .errorText {
-    color: #fca5a5;
-  }
+[data-theme="dark"] .errorText {
+  color: #fca5a5;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .header {
-    padding: 6px 10px;
+    height: 32px;
+    padding: 0 10px;
   }
 
   .title {

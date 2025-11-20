@@ -129,7 +129,7 @@ export const InteractivePython: React.FC<InteractivePythonProps> = ({
     <div className={styles.container}>
       {/* Header with title and icon buttons */}
       <div className={styles.header}>
-        {title && <h3 className={styles.title}>{title.toUpperCase()}</h3>}
+        {title && <h4 className={styles.title}>{title.toUpperCase()}</h4>}
         <div className={styles.iconButtons}>
           <button
             className={styles.iconButton}
