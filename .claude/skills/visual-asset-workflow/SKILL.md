@@ -1,6 +1,6 @@
 # Visual Asset Workflow Skill v4.0 (Gemini 3 Era)
 
-**Version**: 4.0.0
+**Version**: 4.0.1
 **Pattern**: Persona + Questions + Principles
 **Layer**: 1-2 (Cognitive Load Analysis + AI Collaboration)
 **Activation Mode**: Reasoning (not prediction)
@@ -705,6 +705,59 @@ ALT TEXT: "Kubernetes architecture overview showing Control Plane at top managin
 
 All prompts embedded in lesson markdown as HTML comments, ready for Gemini 3 Pro Image generation.
 ```
+
+---
+
+## Output Workflow (v4.0.1)
+
+**After completing visual analysis, automatically create these artifacts:**
+
+### 1. Audit Report
+**Location**: `history/visual-assets/audits/chapters/chapter-{NN}-visual-audit.md`
+
+**Format**:
+```markdown
+# Chapter X Visual Audit Report
+
+**Date**: YYYY-MM-DD
+**Proficiency**: A2/B1/C2
+**Skill Version**: visual-asset-workflow v4.0.1
+
+## Summary
+- Approved Visuals: [N]
+- Rejected Opportunities: [M]
+- Text-in-Image: [X]
+- Interactive: [Y]
+- Static: [Z]
+
+## Approved Visual Assets
+[List each approved visual with reasoning]
+
+## Rejected Opportunities
+[List each rejected with reasoning]
+```
+
+### 2. Extract Prompts
+**Location**: `history/visual-assets/prompts/chapter-{NN}/visual-{NN}-{slug}.prompt.md`
+
+**Extract each reasoning-activated prompt from markdown comments to separate files for archival/reuse**
+
+### 3. Initialize Asset Registry Entries
+**Location**: `history/visual-assets/metadata/asset-registry.json`
+
+**Add entry for each approved visual** (status: "pending" until generated):
+```json
+{
+  "id": "visual-{chapter}-{number}",
+  "filename": "{slug}.png",
+  "chapter": N,
+  "status": "pending",
+  "created_date": "YYYY-MM-DD"
+}
+```
+
+### 4. Embed Prompts in Markdown
+**Continue existing behavior**: Embed complete prompts as HTML comments in lesson files
 
 ---
 

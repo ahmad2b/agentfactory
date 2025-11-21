@@ -1,6 +1,6 @@
 # Image Generator Skill v4.0 (Gemini 3-Native)
 
-**Version**: 4.0.0
+**Version**: 4.0.1
 **Pattern**: Persona + Questions + Principles
 **Layer**: 2 (AI Collaboration - Three Roles Framework)
 **Activation Mode**: Reasoning (not prediction)
@@ -618,6 +618,58 @@ image.save("docker-container-lifecycle-states.png")
 4. Paste prompt → Generate
 5. For interactive: Design Tier 2/3 specs based on Tier 1 output
 6. Export for embedding in lessons
+
+---
+
+## Output Workflow (v4.0.1)
+
+**After completing image generation, automatically create these artifacts:**
+
+### 1. Generation Log
+**Location**: `history/visual-assets/generation-logs/chapter-{NN}/visual-{NN}-{slug}.log.md`
+
+**Format**:
+```markdown
+# Generation Log: {Visual Name}
+
+**Visual ID**: visual-{chapter}-{number}
+**Date**: YYYY-MM-DD
+**Iterations**: N
+**Final Status**: ✅ Production-ready
+
+## Turn 1: Initial Generation
+[Prompt used, output filename, evaluation]
+
+## Turn 2: Principle-Based Refinement
+[Feedback given, reasoning taught, output]
+
+## Turn 3: Validation
+[Final checks, Gemini learning outcomes, quality assessment]
+```
+
+### 2. Save Images
+**Location**: `book-source/static/img/visuals/{filename}.png`
+
+**Continue existing behavior**: Save final images to static directory
+
+### 3. Update Asset Registry
+**Location**: `history/visual-assets/metadata/asset-registry.json`
+
+**Update entry** (change status from "pending" to "production", add metadata):
+```json
+{
+  "id": "visual-{chapter}-{number}",
+  "filename": "{slug}.png",
+  "status": "production",
+  "file_size_kb": 287,
+  "resolution": "2K",
+  "created_date": "YYYY-MM-DD",
+  "generation_log": "history/visual-assets/generation-logs/..."
+}
+```
+
+### 4. Update Markdown
+**Continue existing behavior**: Add image references to lesson files with alt text
 
 ---
 
