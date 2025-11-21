@@ -291,10 +291,10 @@ Test your understanding of UV package management, dependency handling, code qual
         "Run uv run ruff check with fix argument",
         "Run uv run ruff format dot command",
         "Edit pyproject toml to enable auto format",
-        "Install Ruff extension in Zed for magic"
+        "Install Ruff extension in your IDE for magic"
       ],
       correctOption: 1,
-      explanation: "'uv run ruff format .' formats all Python files in your project, fixing spacing, quotes, indentation automatically. The dot (.) means 'current directory and subdirectories.' 'ruff check' is for linting (finding problems), not formatting—adding --fix to 'ruff check --fix' auto-fixes linting errors but that's different from formatting. Editing pyproject.toml configures rules but doesn't run formatting. Zed extensions can format-on-save, but the manual command is 'uv run ruff format .'. Formatting is a command you run, not magic configuration.",
+      explanation: "'uv run ruff format .' formats all Python files in your project, fixing spacing, quotes, indentation automatically. The dot (.) means 'current directory and subdirectories.' 'ruff check' is for linting (finding problems), not formatting—adding --fix to 'ruff check --fix' auto-fixes linting errors but that's different from formatting. Editing pyproject.toml configures rules but doesn't run formatting. IDE extensions can format-on-save, but the manual command is 'uv run ruff format .'. Formatting is a command you run, not magic configuration.",
       source: "Lesson 8: Ruff Linter & Formatter Basics"
     },
     {
