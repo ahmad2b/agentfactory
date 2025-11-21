@@ -20,7 +20,7 @@
  * />
  */
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Editor from '@monaco-editor/react';
 import { usePyodide } from '@/contexts/PyodideContext';
 import styles from './styles.module.css';
@@ -104,7 +104,7 @@ export const InteractivePython: React.FC<InteractivePythonProps> = ({
     }
   }, [output, error]);
 
-  const handleRun = async () => {
+  const handleRun = useCallback(async () => {
     setIsRunning(true);
     setOutput('');
     setError('');
@@ -122,7 +122,13 @@ export const InteractivePython: React.FC<InteractivePythonProps> = ({
     } finally {
       setIsRunning(false);
     }
-  };
+  }, [code, pyodide]);
+
+  // Keep a ref to the latest handleRun so keyboard shortcuts always run fresh code
+  const handleRunRef = useRef(handleRun);
+  useEffect(() => {
+    handleRunRef.current = handleRun;
+  }, [handleRun]);
 
   const handleReset = () => {
     setCode(initialCode);
@@ -207,7 +213,7 @@ export const InteractivePython: React.FC<InteractivePythonProps> = ({
             // Use refs to avoid stale closure capturing initial state values
             editor.addCommand(2048 + 13, () => {
               if (!isLoadingRef.current && !isRunningRef.current) {
-                handleRun();
+                handleRunRef.current?.();
               }
             });
           }}
