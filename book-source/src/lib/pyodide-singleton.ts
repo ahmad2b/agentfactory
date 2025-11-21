@@ -77,6 +77,8 @@ export class PyodideRunner {
       // Create script tag to load Pyodide from CDN
       const script = document.createElement('script');
       script.src = 'https://cdn.jsdelivr.net/pyodide/v0.29.0/full/pyodide.js';
+      script.integrity = 'sha384-l95tshxQlbjf4kdyWZf10uUL5Dw8/iN9q16SQ+ttOEWA8SN0cLG6BGDGY17GxToh';
+      script.crossOrigin = 'anonymous';
       script.async = true;
       script.onload = () => resolve();
       script.onerror = () => reject(new Error('Failed to load Pyodide from CDN'));
