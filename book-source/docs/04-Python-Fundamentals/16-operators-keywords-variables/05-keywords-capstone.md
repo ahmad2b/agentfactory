@@ -79,7 +79,8 @@ Python has **35 keywords** (as of Python 3.14). You don't need to memorize them�
 
 Python provides a simple way to see all keywords:
 
-<InteractivePython initialCode={`# Import the keyword module
+```python
+# Import the keyword module
 import keyword
 
 # See all Python keywords
@@ -99,7 +100,8 @@ print(f"Total keywords: {len(keyword.kwlist)}")  # 35
 # Check if a specific word is a keyword
 print(keyword.iskeyword("for"))        # True (reserved)
 print(keyword.iskeyword("forloop"))    # False (not reserved)
-print(keyword.iskeyword("count"))      # False (not reserved)`} />
+print(keyword.iskeyword("count"))      # False (not reserved)
+```
 
 These 35 keywords are Python's grammar. They define language structure: loops (`for`, `while`), conditionals (`if`, `else`), functions (`def`), classes (`class`), and more.
 
@@ -144,7 +146,8 @@ The reason `for`, `if`, `def` are reserved is that Python needs them for languag
 
 A smart programming practice is to check before using a word as a variable name:
 
-<InteractivePython initialCode={`import keyword
+```python
+import keyword
 
 # Function to check if a name is valid (simplified)
 def is_valid_name(word: str) -> bool:
@@ -165,7 +168,8 @@ for name in potential_names:
 # for is RESERVED - use for_var instead
 # result is OK
 # while is RESERVED - use while_var instead
-# data is OK`} />
+# data is OK
+```
 
 This pattern—checking before using—is good defensive programming.
 

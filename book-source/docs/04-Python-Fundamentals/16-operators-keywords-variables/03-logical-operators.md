@@ -76,7 +76,8 @@ With these three operators, you can express complex logic: "Is the user logged i
 
 ### AND: Both Conditions Must Be True
 
-<InteractivePython initialCode={`# AND operator: both must be True
+```python
+# AND operator: both must be True
 condition1: bool = True
 condition2: bool = False
 
@@ -95,7 +96,8 @@ print("AND Truth Table:")
 print(f"True and True = {True and True}")      # True
 print(f"True and False = {True and False}")    # False
 print(f"False and True = {False and True}")    # False
-print(f"False and False = {False and False}")  # False`} />
+print(f"False and False = {False and False}")  # False
+```
 
 The `and` operator has a simple rule: it returns True **only if both conditions are True**. If even one is False, the whole expression is False. This is useful for checking multiple requirements.
 
@@ -107,7 +109,8 @@ This question digs into how Python optimizes logical evaluation—a valuable und
 
 ### OR: At Least One Condition Must Be True
 
-<InteractivePython initialCode={`# OR operator: at least one must be True
+```python
+# OR operator: at least one must be True
 condition1: bool = True
 condition2: bool = False
 
@@ -126,7 +129,8 @@ print("OR Truth Table:")
 print(f"True or True = {True or True}")      # True
 print(f"True or False = {True or False}")    # True
 print(f"False or True = {False or True}")    # True
-print(f"False or False = {False or False}")  # False`} />
+print(f"False or False = {False or False}")  # False
+```
 
 The `or` operator returns True if **at least one condition is True**. It's False only when both are False. Use `or` when you want to check if any of multiple conditions is satisfied.
 
@@ -136,7 +140,8 @@ The `or` operator returns True if **at least one condition is True**. It's False
 
 ### NOT: Reversing a Value
 
-<InteractivePython initialCode={`# NOT operator: flips the value
+```python
+# NOT operator: flips the value
 condition: bool = True
 not_result: bool = not condition     # False (True becomes False)
 print(f"not True = {not_result}")    # False
@@ -148,7 +153,8 @@ print(f"not False = {not_result2}")  # True
 # Combining NOT with other operators
 is_admin: bool = False
 is_not_admin: bool = not is_admin    # True
-print(f"Is not admin: {is_not_admin}")  # True`} />
+print(f"Is not admin: {is_not_admin}")  # True
+```
 
 The `not` operator is the simplest: it just flips the value. If the condition is True, `not condition` is False. If it's False, `not condition` is True.
 
@@ -164,7 +170,8 @@ Now let's combine what you learned in Lesson 2 (comparisons) with logical operat
 
 ### Checking if a Value is in a Range
 
-<InteractivePython initialCode={`# Is x between 5 and 10?
+```python
+# Is x between 5 and 10?
 x: int = 7
 
 in_range: bool = (x > 5) and (x < 10)  # True (both conditions are met)
@@ -178,13 +185,15 @@ print(f"Is {x} outside [5, 10]? {out_of_range}")  # False
 
 # Is x NOT in the range?
 not_in_range: bool = not ((x > 5) and (x < 10))  # False (it IS in range)
-print(f"Is {x} NOT in range? {not_in_range}")  # False`} />
+print(f"Is {x} NOT in range? {not_in_range}")  # False
+```
 
 These are the kinds of conditions you'll use constantly in Chapter 19 when writing `if` statements.
 
 ### Real-World Permission Logic
 
-<InteractivePython initialCode={`# Permission check: User can post if logged in AND account is verified
+```python
+# Permission check: User can post if logged in AND account is verified
 is_logged_in: bool = True
 account_verified: bool = False
 
@@ -203,7 +212,8 @@ is_moderator: bool = True
 account_active: bool = True
 
 can_moderate: bool = (is_admin or is_moderator) and account_active  # True
-print(f"Can moderate: {can_moderate}")  # True`} />
+print(f"Can moderate: {can_moderate}")  # True
+```
 
 Notice how parentheses control the order of evaluation. `(is_admin or is_moderator) and account_active` evaluates the OR part first, then checks if the account is active.
 
@@ -211,7 +221,8 @@ Notice how parentheses control the order of evaluation. `(is_admin or is_moderat
 
 When you combine multiple logical operators, Python evaluates them in a specific order: `not` first, then `and`, then `or`.
 
-<InteractivePython initialCode={`# Without explicit parentheses, Python follows operator precedence
+```python
+# Without explicit parentheses, Python follows operator precedence
 result: bool = True or False and False  # What's the result?
 # Python evaluates: (True or (False and False))
 # False and False = False
@@ -222,7 +233,8 @@ print(f"True or False and False = {result}")  # True
 result2: bool = (True or False) and False  # Different result
 # (True or False) = True
 # True and False = False
-print(f"(True or False) and False = {result2}")  # False`} />
+print(f"(True or False) and False = {result2}")  # False
+```
 
 This is why using parentheses is smart—even when not required, they make your intent clear to anyone reading your code (including yourself three months from now).
 

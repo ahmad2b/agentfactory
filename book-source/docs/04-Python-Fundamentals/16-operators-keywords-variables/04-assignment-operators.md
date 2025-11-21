@@ -84,7 +84,8 @@ Before we go further, let's reinforce something from Lesson 2. There are three d
 
 Using the wrong one is a common mistake. Here's why it matters:
 
-<InteractivePython initialCode={`# CORRECT: x = 5 (assignment)
+```python
+# CORRECT: x = 5 (assignment)
 x: int = 5
 print(x)  # 5
 
@@ -97,7 +98,8 @@ if x == 5:
 
 # CORRECT: x += 5 (assignment with addition)
 x += 5
-print(x)  # 10`} />
+print(x)  # 10
+```
 
 Assignment operators start with a symbol from Lesson 1 (arithmetic), then end with `=`. So `+=` means "add and assign," `*=` means "multiply and assign," etc.
 
@@ -113,7 +115,8 @@ Let's see each assignment operator with equivalent expanded forms.
 
 ### Addition and Subtraction Assignment
 
-<InteractivePython initialCode={`# Addition assignment: +=
+```python
+# Addition assignment: +=
 count: int = 10
 
 # Method 1: Expanded form (long way)
@@ -135,7 +138,8 @@ balance: float = 100.0
 balance -= 25.0  # Subtract and assign
 print(f"Balance after withdrawal: {balance}")  # 75.0
 
-# Equivalent to: balance = balance - 25.0`} />
+# Equivalent to: balance = balance - 25.0
+```
 
 The `+=` operator adds a value to the current value and stores the result back. `count += 5` means "take the current value of count, add 5, and store the result back in count." Same for `-=`, just with subtraction.
 
@@ -145,12 +149,13 @@ The `+=` operator adds a value to the current value and stores the result back. 
 
 ### Multiplication and Division Assignment
 
-<InteractivePython initialCode={`# Multiplication assignment: *=
+```python
+# Multiplication assignment: *=
 price: float = 100.0
 
 # Apply a 10% price increase
 price *= 1.10  # Multiply and assign
-print(f"New price: \${price:.2f}")  # $110.00
+print(f"New price: ${price:.2f}")  # $110.00
 
 # Equivalent to: price = price * 1.10
 
@@ -159,10 +164,11 @@ total: float = 100.0
 
 # Split cost equally among 4 people
 total /= 4
-print(f"Cost per person: \${total:.2f}")  # $25.00
+print(f"Cost per person: ${total:.2f}")  # $25.00
 
 # Equivalent to: total = total / 4
-# Note: This returns a float, even if total was an int!`} />
+# Note: This returns a float, even if total was an int!
+```
 
 The `*=` operator is very useful for percentages and scaling. The `/=` operator is useful for averaging or dividing quantities. Remember: `/=` always produces a float result (same as `/` from Lesson 1).
 
@@ -185,7 +191,8 @@ The `*=` operator is very useful for percentages and scaling. The `/=` operator 
 
 The most common use of `+=` is counting:
 
-<InteractivePython initialCode={`# Pattern: Starting a counter at 0, incrementing it
+```python
+# Pattern: Starting a counter at 0, incrementing it
 count: int = 0
 
 # Simulate processing items
@@ -195,7 +202,8 @@ for item in items:
     count += 1  # Increment by 1
     print(f"Item {count}: {item}")
 
-print(f"Total items: {count}")  # 4`} />
+print(f"Total items: {count}")  # 4
+```
 
 You'll see `count += 1` everywhere in Chapter 19 (loops). This pattern is so common it's almost universal.
 
@@ -203,7 +211,8 @@ You'll see `count += 1` everywhere in Chapter 19 (loops). This pattern is so com
 
 Another common pattern is accumulating a total:
 
-<InteractivePython initialCode={`# Pattern: Starting a total at 0, adding values to it
+```python
+# Pattern: Starting a total at 0, adding values to it
 total: float = 0.0
 
 # Simulate processing prices
@@ -211,9 +220,10 @@ prices: list[float] = [10.50, 20.99, 15.00]
 
 for price in prices:
     total += price  # Add to the running total
-    print(f"Running total: \${total:.2f}")
+    print(f"Running total: ${total:.2f}")
 
-print(f"Final total: \${total:.2f}")  # $46.49`} />
+print(f"Final total: ${total:.2f}")  # $46.49
+```
 
 Again, you'll see this pattern frequently in Chapter 19.
 
@@ -221,7 +231,8 @@ Again, you'll see this pattern frequently in Chapter 19.
 
 Remember from Lesson 1 that types can change during operations. Assignment operators follow the same rules:
 
-<InteractivePython initialCode={`# Integer arithmetic with +=
+```python
+# Integer arithmetic with +=
 value: int = 5
 value += 2  # Still int
 print(f"value = {value}, type = {type(value)}")  # 7, <class 'int'>
@@ -239,7 +250,8 @@ print(f"mixed = {mixed}, type = {type(mixed)}")  # 7.5, <class 'float'>
 # String concatenation (string + is supported)
 greeting: str = "Hello"
 greeting += " World"  # String concatenation
-print(greeting)  # "Hello World"`} />
+print(greeting)  # "Hello World"
+```
 
 Type behavior with assignment operators follows the same rules as regular operators from Lesson 1. This consistency makes it predictable.
 
