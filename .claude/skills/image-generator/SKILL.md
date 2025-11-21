@@ -556,68 +556,121 @@ texture, and perspective. Product should look professionally photographed."
 
 ---
 
-## Workflow: Gemini 3-Native Generation
+## Workflow: Browser-Based Generation via Playwright MCP
 
-### Method 1: Gemini API/Studio (Recommended)
+### Method: Gemini.google.com Interactive Generation
 
-```python
-import google.generativeai as genai
+**Use Playwright MCP to automate Gemini web interface for image generation**
 
-# Configure Gemini 3 Pro Image
-genai.configure(api_key='YOUR_API_KEY')
-
-# Full reasoning-activated prompt from visual-asset-workflow
-prompt = """
-Subject: Docker container lifecycle showing three states (Building, Running, Stopped)
-Composition: Horizontal flow diagram, left-to-right progression, 16:9 (2048x1152px)
-Action: Container transitioning through states (build → run → stop commands)
-Location: Abstract technical diagram space with subtle grid background
-Style: Clean technical infographic, modern minimalist, educational clarity
-Camera: Straight-on orthographic view (no perspective distortion)
-Lighting: Flat even lighting for maximum readability, subtle drop shadows for depth
-Color Grading: Semantic colors - blue (#2563eb) building, green (#10b981) running, gray (#6b7280) stopped
-Text Integration:
-  - State labels: Bold sans-serif 24px (Building, Running, Stopped)
-  - Commands: Monospace 18px (docker build, docker run, docker stop)
-  - Visual hierarchy: States (largest) > Commands (medium)
-Resolution: 2K (2048x1152px)
-
-TEACHING GOAL: Docker containers move through lifecycle states
-PROFICIENCY: A2 (Beginner - first exposure to containers)
-VISUAL TYPE: Static diagram (workflow is linear and complete)
-GOOGLE SEARCH GROUNDING: No (conceptual architecture)
-"""
-
-response = genai.generate_image(
-    model="gemini-3-pro-image",
-    prompt=prompt,
-    config={
-        "aspect_ratio": "16:9",
-        "resolution": "2K"
-    }
-)
-
-image = response.images[0]
-image.save("docker-container-lifecycle-states.png")
+#### Step 1: Initialize Browser Session
+```
+1. Use mcp__playwright__browser_navigate to open: https://gemini.google.com
+2. User logs in once (session persists across all generations)
+3. Click "Create images" or prepare for image generation
 ```
 
-### Method 2: Google AI Studio (Interactive Exploration)
+#### Step 2: Generate Image from Prompt
+```
+For each visual from visual-asset-workflow:
 
-1. Navigate to ai.google.dev/aistudio
-2. Select "Gemini 3 Pro Image" model
-3. Paste full reasoning-activated prompt
-4. Generate → Evaluate pedagogically
-5. Iterate with principle-based feedback
-6. Download when pedagogy satisfied
+1. Start NEW CHAT (click "New chat" button to prevent context contamination)
 
-### Method 3: Gemini App (For Interactive Images)
+2. Paste full reasoning-activated prompt into Gemini chat:
+   [Complete Subject/Composition/Action/Location/Style/Camera/Lighting prompt]
 
-1. Open gemini.google.com
-2. Select "Thinking" model (Gemini 3 Pro)
-3. Choose "Create images"
-4. Paste prompt → Generate
-5. For interactive: Design Tier 2/3 specs based on Tier 1 output
-6. Export for embedding in lessons
+3. Click generate/submit
+
+4. WAIT for image generation (15-30 seconds)
+```
+
+#### Step 3: Verify Quality IMMEDIATELY
+```
+Use browser_take_screenshot or browser_snapshot to VIEW the generated image
+
+CHECK:
+- ✅ Spelling accuracy (company names, technical terms)
+- ✅ Layout precision (proportions, alignment, hierarchy)
+- ✅ Brand colors (if specified)
+- ✅ Typography hierarchy (sizing reflects importance)
+- ✅ Teaching effectiveness (< 5 second concept grasp)
+```
+
+#### Step 4: Iterate with Principle-Based Feedback
+```
+If issues found, refine in SAME CHAT SESSION:
+
+❌ BAD: "Make text bigger"
+✅ GOOD: "The '$3T' impact number is too small (current looks ~18px).
+For A2 proficiency, key learning insights must be visually prominent.
+Increase to 72px bold (largest element) - visual hierarchy = information hierarchy."
+
+ITERATION STRATEGY:
+- Tries 1-3: Refine prompt in same session
+- After 3 failures: Try COMPLETELY DIFFERENT approach
+- After 4 iterations: Document issue, proceed or remove visual
+
+COMMON FIXES:
+- Spelling errors: Letter-by-letter spelling "Combinator (C-O-M-B-I-N-A-T-O-R)"
+- Layout failures: Switch from visual proportions to explicit text labels
+- Color issues: Specify hex codes explicitly
+```
+
+#### Step 5: Download When Quality Passes
+```
+1. Right-click generated image in Gemini interface
+2. Save to: book-source/static/img/visuals/{filename}.png
+3. Verify file saved correctly (check file size, dimensions)
+```
+
+#### Step 6: Update Markdown & Create Generation Log
+```
+1. Replace HTML comment prompt with image reference:
+   ![Alt text](/img/visuals/filename.png)
+
+2. Create generation log at:
+   history/visual-assets/generation-logs/chapter-{NN}/visual-{NN}-{slug}.log.md
+
+   Document:
+   - Initial prompt used
+   - Iterations (what feedback, what changed)
+   - Gemini learning outcomes (did it generalize principles?)
+   - Final quality assessment
+```
+
+#### Step 7: Update Asset Registry
+```
+Update history/visual-assets/metadata/asset-registry.json:
+- Change status: "pending" → "production"
+- Add: file_size_kb, resolution, generation_log path
+```
+
+---
+
+### One Session Per Image
+
+**IMPORTANT**: Start NEW CHAT between each image generation
+
+**Why**:
+- Prevents context contamination from previous visual
+- Makes iteration clearer (all refinements in one thread)
+- Easier to review generation log later
+
+**Workflow**:
+```
+Image 1: Generate → Verify → Iterate → Download → NEW CHAT
+Image 2: Generate → Verify → Iterate → Download → NEW CHAT
+Image 3: Generate → Verify → Iterate → Download → NEW CHAT
+```
+
+---
+
+### Playwright MCP Tools Used
+
+- `mcp__playwright__browser_navigate` - Open gemini.google.com
+- `mcp__playwright__browser_snapshot` - Check current page state
+- `mcp__playwright__browser_click` - Click "New chat", "Generate", etc.
+- `mcp__playwright__browser_type` - Paste prompts into chat
+- `mcp__playwright__browser_take_screenshot` - Verify generated image quality
 
 ---
 
