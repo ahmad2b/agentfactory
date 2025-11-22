@@ -24,8 +24,8 @@ You can modify any code and click "Run" to execute it directly in your browser!
 ### 1. Hello World
 
 <InteractivePython
-  initialCode="print('Hello, World!')
-print('Welcome to InteractivePython')"
+  initialCode={`print('Hello, World!')
+print('Welcome to InteractivePython')`}
 />
 
 ---
@@ -33,7 +33,7 @@ print('Welcome to InteractivePython')"
 ### 2. Variables and Types
 
 <InteractivePython
-  initialCode="name = 'Alice'
+  initialCode={`name = 'Alice'
 age = 25
 price = 19.99
 is_student = True
@@ -44,7 +44,7 @@ print(price)
 print(is_student)
 
 print(type(name))
-print(type(age))"
+print(type(age))`}
 />
 
 ---
@@ -52,7 +52,7 @@ print(type(age))"
 ### 3. Arithmetic Operations
 
 <InteractivePython
-  initialCode="x = 10
+  initialCode={`x = 10
 y = 3
 
 print(x + y)
@@ -61,7 +61,7 @@ print(x * y)
 print(x / y)
 print(x // y)
 print(x % y)
-print(x ** 2)"
+print(x ** 2)`}
 />
 
 ---
@@ -69,14 +69,14 @@ print(x ** 2)"
 ### 4. String Operations
 
 <InteractivePython
-  initialCode="text = 'hello world'
+  initialCode={`text = 'hello world'
 print(text.upper())
 print(text.capitalize())
 print(len(text))
 
 name = 'Alice'
 greeting = 'Hello ' + name
-print(greeting)"
+print(greeting)`}
 />
 
 ---
@@ -84,7 +84,7 @@ print(greeting)"
 ### 5. Lists
 
 <InteractivePython
-  initialCode="fruits = ['apple', 'banana', 'cherry']
+  initialCode={`fruits = ['apple', 'banana', 'cherry']
 print(fruits)
 
 fruits.append('orange')
@@ -92,7 +92,7 @@ print(fruits)
 
 print(fruits[0])
 print(fruits[-1])
-print(len(fruits))"
+print(len(fruits))`}
 />
 
 ---
@@ -100,7 +100,7 @@ print(len(fruits))"
 ### 6. Dictionaries
 
 <InteractivePython
-  initialCode="student = {
+  initialCode={`student = {
     'name': 'Alice',
     'age': 20,
     'major': 'Computer Science'
@@ -110,7 +110,7 @@ print(student['name'])
 print(student['age'])
 
 student['gpa'] = 3.8
-print(student)"
+print(student)`}
 />
 
 ---
@@ -120,7 +120,7 @@ print(student)"
 ### 7. If/Elif/Else
 
 <InteractivePython
-  initialCode="score = 85
+  initialCode={`score = 85
 
 if score >= 90:
     grade = 'A'
@@ -131,7 +131,7 @@ elif score >= 70:
 else:
     grade = 'F'
 
-print(grade)"
+print(grade)`}
 />
 
 ---
@@ -139,7 +139,7 @@ print(grade)"
 ### 8. For Loops
 
 <InteractivePython
-  initialCode="for i in range(5):
+  initialCode={`for i in range(5):
     print(i)
 
 print()
@@ -151,7 +151,7 @@ print()
 
 fruits = ['apple', 'banana', 'cherry']
 for fruit in fruits:
-    print(fruit)"
+    print(fruit)`}
 />
 
 ---
@@ -159,7 +159,7 @@ for fruit in fruits:
 ### 9. While Loops
 
 <InteractivePython
-  initialCode="count = 1
+  initialCode={`count = 1
 while count <= 5:
     print(count)
     count += 1
@@ -169,7 +169,7 @@ print()
 for i in range(10):
     if i == 5:
         break
-    print(i)"
+    print(i)`}
 />
 
 ---
@@ -179,7 +179,7 @@ for i in range(10):
 ### 10. List Comprehensions
 
 <InteractivePython
-  initialCode="numbers = [1, 2, 3, 4, 5]
+  initialCode={`numbers = [1, 2, 3, 4, 5]
 squares = [x ** 2 for x in numbers]
 print(squares)
 
@@ -187,7 +187,7 @@ evens = [n for n in numbers if n % 2 == 0]
 print(evens)
 
 doubled = [n * 2 for n in numbers]
-print(doubled)"
+print(doubled)`}
 />
 
 ---
@@ -195,7 +195,7 @@ print(doubled)"
 ### 11. Tuples
 
 <InteractivePython
-  initialCode="coordinates = (10, 20)
+  initialCode={`coordinates = (10, 20)
 print(coordinates)
 
 x, y = coordinates
@@ -204,7 +204,7 @@ print('y =', y)
 
 person = ('Alice', 25, 'Portland')
 name, age, city = person
-print(name, age, city)"
+print(name, age, city)`}
 />
 
 ---
@@ -214,7 +214,7 @@ print(name, age, city)"
 ### 12. Simple Functions
 
 <InteractivePython
-  initialCode="def add(a, b):
+  initialCode={`def add(a, b):
     return a + b
 
 result = add(5, 3)
@@ -223,7 +223,7 @@ print(result)
 def greet(name):
     return 'Hello, ' + name
 
-print(greet('Alice'))"
+print(greet('Alice'))`}
 />
 
 ---
@@ -231,7 +231,7 @@ print(greet('Alice'))"
 ### 13. Functions with Lists
 
 <InteractivePython
-  initialCode="def calculate_average(numbers):
+  initialCode={`def calculate_average(numbers):
     if len(numbers) == 0:
         return 0.0
     total = sum(numbers)
@@ -239,7 +239,7 @@ print(greet('Alice'))"
 
 scores = [85.5, 90.0, 78.5, 92.0]
 avg = calculate_average(scores)
-print(avg)"
+print(avg)`}
 />
 
 ---
@@ -247,13 +247,13 @@ print(avg)"
 ### 14. Multiple Return Values
 
 <InteractivePython
-  initialCode="def divide_with_remainder(dividend, divisor):
+  initialCode={`def divide_with_remainder(dividend, divisor):
     quotient = dividend // divisor
     remainder = dividend % divisor
     return quotient, remainder
 
 q, r = divide_with_remainder(17, 5)
-print(q, r)"
+print(q, r)`}
 />
 
 ---
@@ -263,7 +263,7 @@ print(q, r)"
 ### 15. Classes and Objects
 
 <InteractivePython
-  initialCode="class Dog:
+  initialCode={`class Dog:
     def __init__(self, name, breed):
         self.name = name
         self.breed = breed
@@ -274,7 +274,7 @@ print(q, r)"
 dog1 = Dog('Max', 'Labrador')
 print(dog1.name)
 print(dog1.breed)
-print(dog1.bark())"
+print(dog1.bark())`}
 />
 
 ---
@@ -282,7 +282,7 @@ print(dog1.bark())"
 ### 16. Bank Account Example
 
 <InteractivePython
-  initialCode="class BankAccount:
+  initialCode={`class BankAccount:
     def __init__(self, holder, balance=0.0):
         self.holder = holder
         self.balance = balance
@@ -300,7 +300,7 @@ print(dog1.bark())"
 account = BankAccount('Alice', 100.0)
 print(account.deposit(50.0))
 print(account.withdraw(30.0))
-print(account.balance)"
+print(account.balance)`}
 />
 
 ---
@@ -310,7 +310,7 @@ print(account.balance)"
 ### 17. Exception Handling
 
 <InteractivePython
-  initialCode="try:
+  initialCode={`try:
     x = int('hello')
 except ValueError:
     print('Error: Invalid number')
@@ -328,7 +328,7 @@ try:
     value = int('42')
     print(value)
 except ValueError:
-    print('Not a number')"
+    print('Not a number')`}
 />
 
 ---
@@ -336,7 +336,7 @@ except ValueError:
 ### 18. Dataclasses
 
 <InteractivePython
-  initialCode="from dataclasses import dataclass
+  initialCode={`from dataclasses import dataclass
 
 @dataclass
 class Person:
@@ -347,7 +347,7 @@ class Person:
 person1 = Person('Alice', 25, 'Portland')
 print(person1)
 print(person1.name)
-print(person1.age)"
+print(person1.age)`}
 />
 
 ---
@@ -355,7 +355,7 @@ print(person1.age)"
 ### 19. Standard Library
 
 <InteractivePython
-  initialCode="import math
+  initialCode={`import math
 import datetime
 
 print(math.sqrt(16))
@@ -363,7 +363,7 @@ print(math.pi)
 print(math.factorial(5))
 
 today = datetime.date.today()
-print(today)"
+print(today)`}
 />
 
 ---
@@ -373,7 +373,7 @@ print(today)"
 ### 20. Receipt Builder
 
 <InteractivePython
-  initialCode="product_name = 'Laptop'
+  initialCode={`product_name = 'Laptop'
 base_price = 999.50
 discount_percent = 10
 quantity = 1
@@ -392,7 +392,7 @@ print('Discount (10%): -$99.95')
 print('Subtotal: $899.55')
 print('Tax (8%): $71.96')
 print('TOTAL: $971.51')
-print('=================')"
+print('=================')`}
 />
 
 ---
@@ -402,7 +402,7 @@ print('=================')"
 ### 21. User Input Example
 
 <InteractivePython
-  initialCode="name = input('Enter your name: ')
+  initialCode={`name = input('Enter your name: ')
 age_str = input('Enter your age: ')
 age = int(age_str)
 
@@ -412,7 +412,7 @@ print('You are', age, 'years old')
 if age >= 18:
     print('You are an adult')
 else:
-    print('You are a minor')"
+    print('You are a minor')`}
 />
 
 ---
@@ -420,7 +420,7 @@ else:
 ### 22. File Operations - Processing CSV Data
 
 <InteractivePython
-  initialCode="data = 'Alice,25,Portland\\nBob,30,New York\\nCharlie,28,Seattle'
+  initialCode={`data = 'Alice,25,Portland\\nBob,30,New York\\nCharlie,28,Seattle'
 
 lines = data.split('\\n')
 
@@ -435,7 +435,7 @@ for line in lines:
     print('Name:', name, '| Age:', age, '| City:', city)
 
 print()
-print('Total records:', len(lines))"
+print('Total records:', len(lines))`}
 />
 
 ---
@@ -443,7 +443,7 @@ print('Total records:', len(lines))"
 ### 23. Interactive Calculator with Input
 
 <InteractivePython
-  initialCode="print('Simple Calculator')
+  initialCode={`print('Simple Calculator')
 print()
 
 num1_str = input('Enter first number: ')
@@ -465,7 +465,7 @@ else:
     result = 0
 
 print()
-print('Result:', result)"
+print('Result:', result)`}
 />
 
 ---
@@ -473,7 +473,7 @@ print('Result:', result)"
 ### 24. CSV Processing with Data Structures
 
 <InteractivePython
-  initialCode="records = [
+  initialCode={`records = [
     {'name': 'Alice', 'age': 25, 'salary': 60000},
     {'name': 'Bob', 'age': 30, 'salary': 75000},
     {'name': 'Charlie', 'age': 28, 'salary': 70000}
@@ -493,7 +493,7 @@ total_salary = sum(record['salary'] for record in records)
 average_salary = total_salary / len(records)
 
 print('Total salary:', total_salary)
-print('Average salary:', average_salary)"
+print('Average salary:', average_salary)`}
 />
 
 ---
@@ -501,7 +501,7 @@ print('Average salary:', average_salary)"
 ### 25. Form Data Collection with Input
 
 <InteractivePython
-  initialCode="print('Student Registration Form')
+  initialCode={`print('Student Registration Form')
 print('=' * 40)
 print()
 
@@ -529,7 +529,7 @@ for key, value in student_data.items():
 
 if gpa_float >= 3.5:
     print()
-    print('Eligible for Deans List!')"
+    print('Eligible for Deans List!')`}
 />
 
 ---
@@ -537,7 +537,7 @@ if gpa_float >= 3.5:
 ### 26. Validation Pattern with Dataclass
 
 <InteractivePython
-  initialCode="from dataclasses import dataclass
+  initialCode={`from dataclasses import dataclass
 
 @dataclass
 class User:
@@ -555,7 +555,7 @@ try:
     user = User('Alice', 25, 'alice@example.com')
     print('Valid user created')
 except ValueError as e:
-    print('Error:', e)"
+    print('Error:', e)`}
 />
 
 ---
