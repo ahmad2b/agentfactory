@@ -17,6 +17,59 @@
   background: #f9fafb;
   border-bottom: 1px solid #e5e7eb;
   border-left: none;
+  position: relative;
+}
+
+/* macOS Window Controls */
+.windowControls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.windowControl {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.windowControl:hover {
+  transform: scale(1.15);
+}
+
+.windowControlRed {
+  background: #ff5f56;
+  border: 1px solid #e0443e;
+}
+
+.windowControlRed:hover {
+  background: #ff6b63;
+  box-shadow: 0 2px 8px rgba(255, 95, 86, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.windowControlYellow {
+  background: #ffbd2e;
+  border: 1px solid #d39c0c;
+}
+
+.windowControlYellow:hover {
+  background: #ffcc44;
+  box-shadow: 0 2px 8px rgba(255, 189, 46, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.windowControlGreen {
+  background: #27c93f;
+  border: 1px solid #1f9b2d;
+}
+
+.windowControlGreen:hover {
+  background: #38d952;
+  box-shadow: 0 2px 8px rgba(39, 201, 63, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
 }
 
 .titleContainer {
@@ -341,6 +394,36 @@
   color: #10b981;
 }
 
+[data-theme="dark"] .windowControlRed {
+  background: #ff5f56;
+  border-color: #e0443e;
+}
+
+[data-theme="dark"] .windowControlRed:hover {
+  background: #ff6b63;
+  box-shadow: 0 2px 8px rgba(255, 95, 86, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .windowControlYellow {
+  background: #ffbd2e;
+  border-color: #d39c0c;
+}
+
+[data-theme="dark"] .windowControlYellow:hover {
+  background: #ffcc44;
+  box-shadow: 0 2px 8px rgba(255, 189, 46, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .windowControlGreen {
+  background: #27c93f;
+  border-color: #1f9b2d;
+}
+
+[data-theme="dark"] .windowControlGreen:hover {
+  background: #38d952;
+  box-shadow: 0 2px 8px rgba(39, 201, 63, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
 [data-theme="dark"] .iconButton {
   background: #2d2d2d;
   border-color: #444;
@@ -430,6 +513,16 @@
     height: 40px;
     padding: 0 12px;
     gap: 6px;
+  }
+
+  .windowControls {
+    gap: 6px;
+    margin-right: 8px;
+  }
+
+  .windowControl {
+    width: 10px;
+    height: 10px;
   }
 
   .titleContainer {
