@@ -55,8 +55,8 @@ export class PyodideRunner {
             indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.29.0/full/'
           });
 
-          // Pre-load commonly used packages for educational content
-          // requests: For HTTP operations and API interactions
+          // Pre-load the requests package for HTTP operations
+          // It's in the Pyodide distribution but needs explicit loading
           await this.pyodide.loadPackage(['requests']);
         } catch (error) {
           this.initPromise = null; // Reset on error so it can be retried
