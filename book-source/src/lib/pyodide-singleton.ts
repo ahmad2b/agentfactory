@@ -81,6 +81,8 @@ export class PyodideRunner {
       // Create script tag to load Pyodide from CDN
       const script = document.createElement('script');
       script.src = 'https://cdn.jsdelivr.net/pyodide/v0.29.0/full/pyodide.js';
+      // TODO: Verify SRI hash against official Pyodide v0.29.0 documentation
+      // Reference: https://pyodide.org/ or https://www.jsdelivr.com/package/npm/pyodide
       script.integrity = 'sha384-l95tshxQlbjf4kdyWZf10uUL5Dw8/iN9q16SQ+ttOEWA8SN0cLG6BGDGY17GxToh';
       script.crossOrigin = 'anonymous';
       script.async = true;
@@ -147,7 +149,9 @@ def _custom_input(prompt=''):
     # The prompt message is shown in the dialog, not in stdout
     from js import window
     result = window.prompt(prompt)
-    return result if result is not None else ''
+    if result is None:  # User clicked Cancel
+        raise EOFError('User cancelled input')
+    return str(result)
 
 builtins.input = _custom_input
 `;
