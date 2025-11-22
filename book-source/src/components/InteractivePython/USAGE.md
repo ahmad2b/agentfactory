@@ -32,14 +32,18 @@ print(2 + 2)`}
 ## Features
 
 ✅ **Live Code Editing** - Students can write and modify code
-✅ **Execute Python** - Run code directly in the browser
+✅ **Execute Python** - Run code directly in the browser with a prominent "Run" button
 ✅ **Real Python Semantics** - Uses actual CPython via Pyodide
-✅ **Output Display** - See results and errors in real-time
+✅ **Output Display** - See results and errors in real-time with labeled output sections
 ✅ **Loading State** - Graceful initialization of Pyodide
-✅ **Error Handling** - Clear error messages for debugging
-✅ **Reset Code** - Restore original code with one click
+✅ **Error Handling** - Clear error messages for debugging with distinct styling
+✅ **Reset Code** - Restore original code with improved reset icon
+✅ **Copy Code** - Copy code to clipboard with proper copy icon
+✅ **Copy Output** - Copy output/error text to clipboard
 ✅ **Clear Output** - Clear output without resetting code
 ✅ **Responsive Design** - Works on mobile and desktop
+✅ **Dark Mode Support** - Full dark mode theming with contrasting colors
+✅ **Professional Icons** - Using Lucide React icons for better visual clarity
 
 ## Supported Python Features
 
@@ -178,6 +182,25 @@ This means:
 - No server-side execution (everything is client-side)
 - Works offline once loaded
 - Executes in the main thread (no separate workers)
+
+## UI & Keyboard Shortcuts
+
+### Header Controls
+- **Reset Button** (↻) - Restore code to initial state
+- **Copy Button** (📋) - Copy current code to clipboard
+- **Run Button** (⚡ Run) - Execute the code (or press Shift+Enter)
+
+### Output Section
+When code is executed, the output panel appears with:
+- **Output/Error Label** - Indicates whether it's normal output or an error
+- **Copy Button** - Copy the entire output to clipboard
+- **Clear Button** - Clear the output panel
+
+### Keyboard Shortcuts
+| Shortcut | Action |
+|----------|--------|
+| `Shift + Enter` | Run the code |
+| `Tab` | Indent code (within editor) |
 
 ## Tips for Educational Content
 
