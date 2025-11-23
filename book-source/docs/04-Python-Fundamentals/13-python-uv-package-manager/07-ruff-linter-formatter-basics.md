@@ -247,7 +247,7 @@ Ruff uses short codes to identify problem types:
 **Format when:**
 - You're done writing a section of code
 - Before committing to git
-- Every time you save (Zed can do this automatically, Lesson 9)
+- Every time you save (Zed can do this automatically, Chapter 8)
 
 **Lint when:**
 - You finish a function or module
