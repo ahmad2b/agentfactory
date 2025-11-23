@@ -258,9 +258,9 @@ The status bar shows three important pieces of information:
 - **Middle**: Sandbox mode
   - `no sandbox` = not using containerized environment
   - `docker` or `gvisor` when sandbox is active
-- **Right**: Tool execution mode
-  - `auto` = Gemini automatically decides when to use tools
-  - `manual` = You approve each tool use
+- **Right**: Model execution mode
+  - `auto` = Gemini automatically selects the most suitable model 
+  - If you want, you can choose a specific model, such as `gemini-2.5-flash`
 
 ### Context Information (When Configured)
 
