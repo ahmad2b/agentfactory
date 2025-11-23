@@ -32,7 +32,7 @@ export default function PDFViewer({
   title = 'PDF Document',
   height = 600,
   showDownload = true,
-}: PDFViewerProps): JSX.Element {
+}: PDFViewerProps): React.ReactElement {
   // Construct full URL - PDFs should be in /static directory
   const pdfUrl = src.startsWith('/') ? src : `/${src}`;
 
