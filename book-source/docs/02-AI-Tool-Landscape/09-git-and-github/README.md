@@ -17,6 +17,8 @@ This chapter integrates skills from earlier chapters in Part 2:
 
 **Skills Composition**: By combining Bash navigation + Git version control + AI assistance, you can safely experiment with AI-generated code while maintaining full control over your project.
 
+![Workflow showing AI helping at each stage: analyzing diffs for commit messages, reviewing PR changes for suggestions, resolving conflicts by understanding context, with Three Roles framework (Teacher/Student/Co-Worker) highlighted](/img/part-2/chapter-09/ai-assisted-git-workflow.png)
+
 ## What You'll Learn
 
 By completing this chapter, you will be able to:
