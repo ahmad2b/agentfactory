@@ -198,8 +198,18 @@ NARRATIVE ARC:
 - Click **"Add source"** → Choose upload method:
   - **Website**: Paste deployed lesson URLs (recommended for published content)
   - **Upload**: Upload markdown files directly (for draft content)
-- Upload ALL lesson files + chapter README (not just the README alone)
-- **Verify**: Source count should match your lesson count + 1 (for README)
+- Upload ALL lesson files + chapter README + quiz file (if exists)
+- **Verify with Source Upload Checklist**:
+  - [ ] **Count matches**: Total sources = lesson files + README + quiz
+    - Example: Chapter 31 has 8 lessons + 1 README + 1 quiz = 10 sources
+  - [ ] **All files uploaded**: No "Upload failed" errors in UI
+  - [ ] **Processing complete**: NotebookLM shows "X sources" (not "Processing...")
+- **If mismatch detected**:
+  1. Check for missing quiz file (often forgotten)
+  2. Verify README was included (provides chapter overview context)
+  3. Re-upload any failed files individually
+  4. **Do NOT proceed to slide generation** with incomplete sources
+- **Why verification matters**: Missing sources = incomplete slides missing key concepts
 - **Tip**: For consistency, use the same source method (Website OR Upload) for all lessons in a chapter
 
 **2. Configure Slide Deck** (1 min)
@@ -221,8 +231,19 @@ NARRATIVE ARC:
 - **Review**: Ensure all 5 dimensions are explicitly stated
 - Click **"Generate"** button
 
-**4. Generate & Review** (10-15 min)
-- **Wait**: Generation takes 2-5 minutes (longer for more sources)
+**4. Generate & Review** (10-30 min - VARIABLE!)
+- **Wait**: Generation typically takes 5-10 minutes
+- **IMPORTANT**: Some chapters may take 20-35+ minutes (observed with complex content or longer sources)
+- **Do NOT assume failure** if progress indicator shows "Generating..." beyond 15 minutes
+- **Signs generation is working normally**:
+  - Progress indicator animating (not frozen)
+  - Browser tab responsive (not crashed)
+  - No error messages displayed
+- **If stuck beyond 30 minutes**:
+  - Check browser console for errors (F12 → Console tab)
+  - Verify NotebookLM hasn't shown "daily limit reached" message
+  - Consider checking page in new tab (generation may have completed but UI not updated)
+  - If after 45+ minutes with no progress: Cancel and regenerate with simplified prompt
 - **Review with structured success criteria** when slides appear:
 
 <success_criteria>
@@ -255,40 +276,197 @@ CONFIDENCE LEVEL: ___/10
 If score < 8/10 confidence → Iterate with refined prompt
 </success_criteria>
 
+- **Quick Validation Commands**:
+
+**Check slide count** (after download, macOS):
+```bash
+mdls -name kMDItemNumberOfPages "chapter-XX-slides.pdf"
+```
+
+**Verify themes coverage** (manual):
+  - Open PDF and scan slide titles
+  - Check each of 5-7 numbered themes from prompt appears
+  - Flag any missing themes for iteration
+
+**Confidence Scoring Guide**:
+  - **9-10/10**: All 7 criteria pass, themes fully covered, tone perfect → Deploy
+  - **7-8/10**: 5-6 criteria pass, minor tone/format adjustments needed → Consider iteration
+  - **5-6/10**: 3-4 criteria pass, significant iteration required → Refine prompt
+  - **<5/10**: Start over with refined prompt focusing on failed dimensions
+
 - **Iterate if needed**: If slides miss the mark, click **"Edit"** and refine prompt with more explicit constraints focusing on failed criteria
 
 **5. Deploy** (3 min)
 - Click **"Download"** button (appears after generation)
 - PDF downloads to your browser's default location
-- **Rename**: `[original-name].pdf` → `chapter-XX-slides.pdf` (e.g., `chapter-02-slides.pdf`)
-- **Move**: `~/Downloads/chapter-XX-slides.pdf` → `book-source/static/slides/chapter-XX-slides.pdf`
 
-**6. Integrate into Documentation** (2 min)
-- Open chapter README: `book-source/docs/[part]/[chapter]/readme.md`
-- Add PDFViewer component after "What You'll Learn" section:
+**File Naming Standard**:
+- **Format**: `chapter-{NN}-slides.pdf` where NN is zero-padded
+- **Examples**:
+  - Chapter 1 → `chapter-01-slides.pdf` (NOT `chapter-1-slides.pdf`)
+  - Chapter 12 → `chapter-12-slides.pdf`
+  - Chapter 31 → `chapter-31-slides.pdf`
+- **Why zero-padding**: Ensures correct alphabetical sorting in file systems
 
-```markdown
-import PDFViewer from '@site/src/components/PDFViewer';
+**Renaming & Moving**:
+```bash
+# Example for Chapter 1:
+mv ~/Downloads/"The-AI-Coding-Revolution.pdf" "book-source/static/slides/chapter-01-slides.pdf"
 
-## 📊 Chapter Slides
-
-<PDFViewer
-  src="slides/chapter-XX-slides.pdf"
-  title="Chapter X: [Chapter Title]"
-  height={700}
-/>
+# Example for Chapter 31:
+mv ~/Downloads/"Designing-Reusable-Intelligence.pdf" "book-source/static/slides/chapter-31-slides.pdf"
 ```
 
+- **Integration Path**: All slides must be in `book-source/static/slides/` directory
+
+**6. Integrate into Documentation** (2 min)
+- Open chapter README: `book-source/docs/[part]/[chapter]/README.md`
+- Add PDFViewer component BEFORE "What You'll Learn" section:
+
+```markdown
+---
+
+## 🎯 Before You Begin
+
+<PDFViewer
+  src="slides/chapter-01-slides.pdf"
+  title="Chapter 1: [Chapter Title]"
+  height={700}
+/>
+
+---
+
+## What You'll Learn
+
+By the end of this chapter, you'll understand:
+- [Learning objectives...]
+```
+
+- **Heading**: Use "## 🎯 Before You Begin" (NOT "Chapter Slides")
+- **Placement**: BEFORE "What You'll Learn" section (NOT after)
+- **Rationale**: Progressive disclosure - students see big picture (slides) before detailed objectives
+- **Note**: Use relative path `slides/chapter-XX-slides.pdf` (NOT absolute path)
 - Save file and verify slides appear on Docusaurus site
 
 ### Time Estimates by Experience Level
 
 | Experience | First Chapter | Subsequent Chapters | Batch (3 chapters) |
 |------------|---------------|---------------------|-------------------|
-| **First-time user** | 35-45 min | 25-30 min | 90-120 min |
-| **Experienced user** | 20-25 min | 15-20 min | 60-75 min |
+| **First-time user** | 35-50 min | 25-35 min | 90-150 min |
+| **Experienced user** | 20-30 min | 15-25 min | 60-90 min |
 
 **Efficiency gains**: After 2-3 chapters, you'll develop muscle memory for prompt engineering and can reuse/adapt previous successful prompts.
+
+**Time Variability Notes**:
+- Generation time varies widely (5-35 minutes per chapter)
+- Complex chapters with more sources take longer
+- Daily limits may require splitting work across multiple days
+- Batch processing saves ~25% time through parallel preparation/generation
+
+## 🚨 Daily Limit Troubleshooting
+
+**Symptom**: "You have reached your daily Slides limits" message appears after clicking "Generate"
+
+**What this means**:
+- NotebookLM enforces per-account daily slide generation limits
+- Limit resets at midnight Pacific Time (Google servers)
+- Notebooks remain available; only slide generation is blocked
+- Exact limit unknown (observed: 3-5 chapters per day depending on complexity)
+
+**Recovery Options**:
+1. **Wait Method**: Return after 24 hours and continue from Step 4 (notebooks persist)
+2. **Account Switching**: Use different Google account if available (requires re-creating notebooks)
+3. **Batch Planning**: Plan to generate 3-5 chapters per day maximum across multiple days
+
+**Prevention Strategy**:
+- Track chapters completed per day in project progress tracker
+- Schedule batch work across multiple days for large parts (e.g., Part 4 with 18 chapters = 4-6 days)
+- Generate slides for highest-priority chapters first each day
+
+**If blocked mid-batch**:
+- Notebooks with uploaded sources are saved
+- Resume slide generation next day starting at Step 2 (Configure Slide Deck)
+- No need to re-upload sources
+
+---
+
+## Batch Processing Multiple Chapters
+
+For processing 3+ chapters in one session (recommended for Parts with multiple chapters):
+
+### Preparation Phase (10-15 min)
+1. **Create all notebooks with titles FIRST** (before any slide generation)
+2. **Upload sources for all chapters** (notebooks persist independently)
+3. **Prepare all prompts in text editor** (adapt from proficiency-calibrated templates)
+4. **Review chapter-index.md** to confirm proficiency levels match templates
+
+### Generation Phase (per chapter, 15-30 min each)
+5. Generate slides for Chapter N
+6. **While Chapter N generates**, prepare/refine prompt for Chapter N+1 in text editor
+7. Download Chapter N PDF when ready
+8. **Start Chapter N+1 generation immediately**
+9. Rename/move Chapter N PDF while N+1 generates (parallel work)
+
+### Integration Phase (bulk, 10-15 min)
+10. Move all PDFs to `book-source/static/slides/` at once
+11. Integrate all PDFViewers into READMEs sequentially
+12. Verify all slides load correctly in local Docusaurus build
+
+### Time Savings
+- **Sequential approach**: 3 chapters × 25 min = 75 min
+- **Batch approach**: Setup (15 min) + Generation (45 min overlapped) + Integration (15 min) = ~60 min
+- **Savings**: ~25% reduction through parallel preparation/generation
+
+### Daily Limit Awareness
+- Plan for **3-5 chapters maximum per day**
+- If limit hit: Stop, update progress tracker, resume next day
+- For large parts (e.g., Part 4 with 18 chapters): Schedule 4-6 days of work
+
+---
+
+## Automation via Playwright MCP (Optional Advanced)
+
+For batch processing multiple chapters with browser automation:
+
+### Prerequisites
+- Playwright MCP server installed and configured in Claude Code
+- Google account credentials ready
+- Access to NotebookLM sources (markdown files or deployed URLs)
+
+### Workflow Pattern (per chapter)
+1. Navigate to `notebooklm.google.com` and authenticate
+2. Create notebook with standardized title
+3. Upload sources via file upload dialog (automate file selection)
+4. Navigate to "Slide Deck" in Studio panel
+5. Configure format (Presenter Slides, Default/Long length)
+6. Paste prompt into customization field
+7. Click "Generate" and monitor (5-30 min wait)
+8. Detect completion (download button appears)
+9. Download PDF to `.playwright-mcp/` directory
+10. Move PDF to `book-source/static/slides/` with standardized naming
+
+### Benefits
+- **Time Savings**: ~40% faster for 3+ chapters due to reduced context switching
+- **Consistency**: Standardized naming, no manual typos
+- **Automation**: Can queue multiple chapters
+
+### Limitations
+- **Technical Setup Required**: MCP server configuration, browser automation knowledge
+- **Daily Limits Still Apply**: Cannot bypass NotebookLM's per-account limits
+- **Extended Wait Times**: Require patient monitoring (30+ min generations)
+- **Error Handling**: Must handle stuck generations, timeouts, UI changes
+
+### When to Use
+- Processing 5+ chapters in batch
+- Repetitive workflow across similar chapters
+- Team environment with automation infrastructure
+
+### When NOT to Use
+- First 1-2 chapters (learn manual workflow first)
+- Chapters requiring significant prompt iteration
+- One-off slide generation
+
+---
 
 ## Required Behaviors (Positive Framing)
 

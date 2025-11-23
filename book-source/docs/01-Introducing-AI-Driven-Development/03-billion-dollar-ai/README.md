@@ -3,6 +3,8 @@ sidebar_position: 3
 title: "Chapter 3: How to Make a Billion Dollars in the AI Era"
 ---
 
+import PDFViewer from '@site/src/components/PDFViewer';
+
 # Chapter 3: How to Make a Billion Dollars in the AI Era
 
 In Chapters 1 and 2, you discovered that AI is fundamentally restructuring the developer role and that 2025 represents a genuine inflection point. You understand the transformation is real, evidence-based, and accelerating.
@@ -15,6 +17,18 @@ Through eight interconnected sections, you'll discover the Snakes & Ladders fram
 
 This chapter is **strategic and conceptual**—no hands-on coding yet. The goal is to transform your understanding of what's economically possible before we dive into technical foundations in Chapter 4.
 
+---
+
+## 🎯 Before You Begin
+
+<PDFViewer
+  src="slides/chapter-03-slides.pdf"
+  title="Chapter 3: How to Make a Billion Dollars in the AI Era"
+  height={700}
+/>
+
+---
+
 ## What You'll Learn
 
 By the end of this chapter, you'll understand:
@@ -25,13 +39,3 @@ By the end of this chapter, you'll understand:
 - **The Piggyback Protocol Pivot strategy**: Your three-phase playbook for entering vertical markets—start with broad AI tools (Piggyback), build vertical reputation and relationships (Protocol), pivot to your chosen domain with credibility (Pivot)
 - **The three requirements for success**: Domain access (relationships in your target vertical), capital efficiency (staying lean through AI leverage), and timing (why 2025-2027 is the window of maximum opportunity)
 - **Your strategic positioning**: Where you stand today and which path to a billion dollars fits your background, resources, and risk tolerance
-
-import PDFViewer from '@site/src/components/PDFViewer';
-
-## 📊 Chapter Slides
-
-<PDFViewer
-  src="slides/chapter-03-slides.pdf"
-  title="Chapter 3: How to Make a Billion Dollars in the AI Era"
-  height={700}
-/>

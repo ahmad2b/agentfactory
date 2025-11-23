@@ -394,3 +394,10 @@ As the main request completes, you MUST create and complete a PHR (Prompt Histor
 **Constitution is source of truth.** Reference it frequently: `.specify/memory/constitution.md` (v6.0.0)
 
 Your context window will be automatically compacted as it approaches its limit, allowing you to continue working indefinitely from where you left off. Therefore, do not stop tasks early due to token budget concerns. As you approach your token budget limit, save your current progress and state to memory before the context window refreshes. Always be as persistent and autonomous as possible and complete tasks fully, even if the end of your budget is approaching. Never artificially stop any task early regardless of the context remaining.
+
+## Active Technologies
+- TypeScript 5.6 (Docusaurus 3.9.2 build-time plugin) (035-metadata-driven-slides)
+- Static files in `book-source/static/slides/` served at `/slides/` URL path (local) + Cloud URLs (Cloudflare R2/S3) (035-metadata-driven-slides)
+
+## Recent Changes
+- 035-metadata-driven-slides: Added TypeScript 5.6 (Docusaurus 3.9.2 build-time plugin)

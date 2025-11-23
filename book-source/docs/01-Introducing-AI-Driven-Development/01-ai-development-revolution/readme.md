@@ -13,7 +13,9 @@ Through nine interconnected sections, you'll discover why a $3 trillion global e
 
 Whether you're a complete beginner wondering if it's too late, an experienced developer concerned about being replaced, an educator unsure how to prepare students, or a skeptic wanting evidence—this chapter answers your questions with data, not promises.
 
-## 📊 Chapter Slides
+---
+
+## 🎯 Before You Begin
 
 <PDFViewer
   src="slides/chapter-01-slides.pdf"
