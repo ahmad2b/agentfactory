@@ -1,3 +1,8 @@
+---
+sidebar_position: 3
+title: "Part 3: Markdown, Prompt & Context Engineering"
+---
+
 # Part 3: Markdown, Prompt & Context Engineering
 
 You're no longer just writing code—you're directing intelligent agents like Claude Code and Gemini CLI to implement what you specify. The developers who thrive in this new era aren't those who type the fastest, but those who communicate most clearly with their AI partners. The three foundational skills — markdown formatting, prompt engineering, and context engineering — determine whether AI helps you build faster or slows you down with buggy, generic code.

@@ -1,3 +1,8 @@
+---
+sidebar_position: 8
+title: "Part 8: AI Cloud Native Development"
+---
+
 # Part 8: AI Cloud Native Development
 
 You've built AI agents locally in Parts 1-7—designing agent architectures, implementing integrations, and mastering spec-driven development. Part 8 bridges local development to production deployment at scale. You'll learn containerization strategies, orchestration patterns, and operational excellence practices that transform agents from learning projects into production systems serving real users.
