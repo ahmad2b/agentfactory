@@ -408,12 +408,12 @@ class MeetingScheduler:
             "Tokyo": timezone(timedelta(hours=9)),
         }
 
-        lines = ["MEETING AGENDA\n"]
+        lines = ["MEETING AGENDA"]
         for city, tz in timezones.items():
             local = self.meeting_utc.astimezone(tz)
             lines.append(f"{city}: {local.strftime('%A %I:%M %p')}")
 
-        return "\n".join(lines)
+        return r"\n".join(lines)
 
 # Use it
 meeting = MeetingScheduler(datetime(2025, 11, 9, 14, 30, tzinfo=timezone.utc))
