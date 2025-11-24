@@ -1,4 +1,5 @@
 ---
+id: chapter-36-placeholder
 sidebar_position: 36
 title: "Chapter 36: [Placeholder]"
 ---
