@@ -192,23 +192,23 @@ Here's why this all matters. Let's see the real performance difference:
 ```python
 import time
 
-# Create a large list and set with the same million elements
-elements: list[int] = list(range(1_000_000))
+# Create a large list and set with the same hundred thousand elements
+elements: list[int] = list(range(100_000))
 element_set: set[int] = set(elements)
 
-# Test: Find if 999_999 exists
-target: int = 999_999
+# Test: Find if 99_999 exists
+target: int = 99_999
 
 # SET LOOKUP (O(1) average case)
 start = time.perf_counter()
-for _ in range(100_000):
+for _ in range(10_000):
     result_set = target in element_set
 end = time.perf_counter()
 set_time = end - start
 
 # LIST LOOKUP (O(n) — must check elements until found)
 start = time.perf_counter()
-for _ in range(100_000):
+for _ in range(10_000):
     result_list = target in elements  # Might find it last!
 end = time.perf_counter()
 list_time = end - start
@@ -217,13 +217,12 @@ print(f"Set lookup time: {set_time:.6f} seconds")    # Very fast (microseconds)
 print(f"List lookup time: {list_time:.6f} seconds")  # Much slower (milliseconds)
 print(f"Set is {list_time / set_time:.0f}x faster")  # Often 1000x+ faster
 ```
-
 **What's happening?**
 
 - **Set lookup**: Uses hash to jump directly to element's location. One comparison. O(1).
-- **List lookup**: Starts at position 0, checks each element. 999,999 comparisons. O(n).
+- **List lookup**: Starts at position 0, checks each element. 99,999 comparisons. O(n).
 
-With 1 million elements, that's the difference between "instant" and "takes time you can see."
+With 100,000 elements, that's the difference between "instant" and "takes time you can see."
 
 This is why sets matter: **They scale differently than lists.** As data grows, set performance stays fast while list performance gets slower.
 
