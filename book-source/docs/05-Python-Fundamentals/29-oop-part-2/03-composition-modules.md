@@ -99,7 +99,7 @@ In this lesson, you'll learn when to choose composition over inheritance, how to
 
 **Composition** means building classes by combining other objects. Instead of inheriting behavior, a class *contains* other objects and delegates work to them.
 
-![Side-by-side comparison of composition versus inheritance design patterns showing when to use has-a relationships with flexible component composition versus is-a relationships with rigid class hierarchies](/img/part-4/chapter-26/python-composition-vs-inheritance.png)
+![Side-by-side comparison of composition versus inheritance design patterns showing when to use has-a relationships with flexible component composition versus is-a relationships with rigid class hierarchies](/img/part-5/chapter-29/python-composition-vs-inheritance.png)
 
 Let's start with a concrete example. Imagine designing a `Car` class:
 
