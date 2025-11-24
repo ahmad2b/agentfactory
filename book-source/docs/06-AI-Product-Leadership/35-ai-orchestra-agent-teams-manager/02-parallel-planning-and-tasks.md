@@ -86,7 +86,7 @@ This is a **realistic decomposition**. Real systems don't have perfectly isolate
 
 Let's visualize it:
 
-![Timeline comparison showing sequential workflow (tasks done one after another) versus parallel workflow (multiple tasks executed simultaneously), highlighting 3x speedup potential](/img/part-5/chapter-33/sequential-vs-parallel-timeline.png)
+![Timeline comparison showing sequential workflow (tasks done one after another) versus parallel workflow (multiple tasks executed simultaneously), highlighting 3x speedup potential](/img/part-6/chapter-35/sequential-vs-parallel-timeline.png)
 
 ```
 ┌─────────────┐
