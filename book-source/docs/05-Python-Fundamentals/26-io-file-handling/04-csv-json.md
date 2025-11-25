@@ -623,7 +623,7 @@ data = safe_load_json("valid.json")
 print(f"Loaded JSON: {data}")
 
 valid_csv = Path("valid.csv")
-valid_csv.write_text("name,age, Alice,28, Bob,35")
+valid_csv.write_text("name,age\\nAlice,28\\nBob,35")
 data = safe_load_csv("valid.csv")
 print(f"Loaded CSV: {data}")
 
