@@ -2,14 +2,15 @@
  * Docusaurus PanaversityFS Plugin
  *
  * Fetches educational content from PanaversityFS MCP server via HTTP
- * and writes it to the docs/ folder before Docusaurus processes it.
+ * and writes it to the docsfs/ folder before Docusaurus processes it.
  *
  * Features:
  * - Fetch all book content at build time using read_content (scope=book)
- * - Write content to docs/ folder for Docusaurus to process
- * - Preserves directory structure from server (content/ -> docs/)
- * - Cleans docs/ folder before writing (when enabled)
+ * - Write content to docsfs/ folder for Docusaurus to process
+ * - Preserves directory structure from server (content/ -> docsfs/)
+ * - Cleans docsfs/ folder before writing (when enabled)
  * - Filters out .summary.md files (stored in R2 but not rendered in book)
+ * - Keeps docs/ separate for local sample content (no server needed)
  *
  * @param {Object} context - Docusaurus context
  * @param {Object} options - Plugin options
@@ -23,9 +24,9 @@ module.exports = function panaversityFSPlugin(context, options) {
     bookId = 'ai-native-dev',
     enabled = false, // Disabled by default
     serverUrl = process.env.PANAVERSITY_SERVER_URL || 'http://localhost:8000/mcp',
-    docsDir = 'docs', // Output directory relative to siteDir
-    cleanDocsDir = true, // Clean docs/ before writing
-    // Files matching these patterns are stored in R2 but NOT written to docs/
+    docsDir = 'docsfs', // Output directory relative to siteDir (separate from docs/)
+    cleanDocsDir = true, // Clean docsfs/ before writing
+    // Files matching these patterns are stored in R2 but NOT written to docsfs/
     // They remain accessible via MCP server for other purposes (AI summaries, etc.)
     excludePatterns = [
       /\.summary\.md$/,  // AI-generated summaries (e.g., lesson.summary.md)
@@ -101,7 +102,7 @@ module.exports = function panaversityFSPlugin(context, options) {
             continue;
           }
 
-          // Transform path: content/01-Part/01-Chapter/lesson.md -> docs/01-Part/01-Chapter/lesson.md
+          // Transform path: content/01-Part/01-Chapter/lesson.md -> docsfs/01-Part/01-Chapter/lesson.md
           const relativePath = file.path.replace(/^content\//, '');
           const outputPath = path.join(docsPath, relativePath);
           const outputDir = path.dirname(outputPath);

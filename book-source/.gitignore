@@ -1,9 +1,9 @@
 # Dependencies
 /node_modules
 
-# PanaversityFS: docs/ is fetched from server at build time
-# Uncomment this line when using PanaversityFS plugin in production:
-# /docs
+# PanaversityFS: docsfs/ is fetched from server at build time (always generated)
+# docs/ contains local sample content for development without server
+/docsfs
 
 # Production
 /build

@@ -19,7 +19,7 @@ RUN uv pip compile \
 FROM python:3.13-slim
 
 # Set metadata
-LABEL maintainer="devops-team" \
+LABEL maintainer="mjunaidca" \
       description="Production-ready FastAPI application" \
       version="0.1.0"
 
