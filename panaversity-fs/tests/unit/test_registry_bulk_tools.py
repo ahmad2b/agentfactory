@@ -38,11 +38,11 @@ class TestListBooks:
 
         op = get_operator()
 
-        # Create multiple book directories with a file inside each
-        # (directories need content to be recognized by some backends)
-        await op.write("books/book-alpha/book.yaml", b"title: Alpha Book")
-        await op.write("books/book-beta/book.yaml", b"title: Beta Book")
-        await op.write("books/book-gamma/book.yaml", b"title: Gamma Book")
+        # Create multiple book directories with a placeholder file inside each
+        # (directories need content to be recognized by some storage backends)
+        await op.write("books/book-alpha/.gitkeep", b"")
+        await op.write("books/book-beta/.gitkeep", b"")
+        await op.write("books/book-gamma/.gitkeep", b"")
 
         result = await list_books(ListBooksInput())
         data = json.loads(result)

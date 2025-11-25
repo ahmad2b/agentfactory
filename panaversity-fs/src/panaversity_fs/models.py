@@ -130,7 +130,7 @@ class ReadContentInput(BaseModel):
     model_config = ConfigDict(str_strip_whitespace=True, extra='forbid')
 
     book_id: str = Field(..., description="Book identifier", pattern=r'^[a-z0-9-]+$', min_length=3, max_length=50)
-    path: str = Field(..., description="Lesson path relative to book root (e.g., 'lessons/part-1/chapter-01/lesson-01.md')", min_length=1, max_length=255)
+    path: str = Field(..., description="Content path relative to book root (e.g., 'content/01-Part/01-Chapter/01-lesson.md')", min_length=1, max_length=255)
 
 
 class WriteContentInput(BaseModel):
@@ -159,17 +159,17 @@ class DeleteContentInput(BaseModel):
 class UploadAssetInput(BaseModel):
     """Input model for upload_asset tool (hybrid pattern).
 
-    Supports two upload methods:
-    - Direct upload (binary_data provided, <10MB)
-    - Presigned URL (file_size provided, ≥10MB)
+    Supports two upload methods based on PANAVERSITY_MAX_DIRECT_UPLOAD_MB config (default 10MB):
+    - Direct upload (binary_data provided, below threshold)
+    - Presigned URL (file_size provided, at or above threshold)
     """
     model_config = ConfigDict(str_strip_whitespace=True, extra='forbid')
 
     book_id: str = Field(..., description="Book identifier", pattern=r'^[a-z0-9-]+$', min_length=3, max_length=50)
     asset_type: AssetType = Field(..., description="Asset category (slides/images/videos/audio)")
     filename: str = Field(..., description="Asset filename with extension", min_length=1, max_length=255)
-    binary_data: str | None = Field(default=None, description="Base64-encoded binary data for direct upload (<10MB)")
-    file_size: int | None = Field(default=None, description="File size in bytes for presigned URL request (≥10MB)", ge=10*1024*1024, le=100*1024*1024)
+    binary_data: str | None = Field(default=None, description="Base64-encoded binary data for direct upload (below config threshold)")
+    file_size: int | None = Field(default=None, description="File size in bytes for presigned URL request (at or above config threshold)", ge=10*1024*1024, le=100*1024*1024)
 
 
 class GetAssetInput(BaseModel):
@@ -197,7 +197,7 @@ class ListBooksInput(BaseModel):
     """Input model for list_books tool (FR-024)."""
     model_config = ConfigDict(str_strip_whitespace=True, extra='forbid')
 
-    # No parameters needed - lists all books from registry
+    # No parameters needed - lists all books by scanning books/ directory
 
 
 # ============================================================================

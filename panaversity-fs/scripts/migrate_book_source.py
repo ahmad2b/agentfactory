@@ -28,7 +28,6 @@ Target structure (data/books/{book-id}/):
         images/                 # Renamed from img/
         slides/
         ...
-    book.yaml
 
 Usage:
     # Dry run (preview changes)
@@ -48,35 +47,7 @@ import argparse
 import os
 import shutil
 import sys
-import yaml
 from pathlib import Path
-from datetime import datetime, timezone
-
-
-def get_book_metadata(book_id: str, source_dir: Path) -> dict:
-    """Generate book.yaml metadata."""
-    return {
-        "book_id": book_id,
-        "title": "AI-Native Software Development",
-        "description": "Comprehensive guide to AI-driven development practices",
-        "version": "1.0.0",
-        "authors": ["Panaversity Team"],
-        "storage_backend": "fs",
-        "created_at": datetime.now(timezone.utc).isoformat(),
-        "source_migrated_from": str(source_dir),
-        "adr": "ADR-0018"
-    }
-
-
-def create_registry_entry(book_id: str, title: str) -> dict:
-    """Create registry.yaml entry for the book."""
-    return {
-        "book_id": book_id,
-        "title": title,
-        "storage_backend": "fs",
-        "created_at": datetime.now(timezone.utc).isoformat(),
-        "status": "active"
-    }
 
 
 def migrate_content(source_docs: Path, target_content: Path, dry_run: bool, verbose: bool) -> dict:
@@ -207,8 +178,6 @@ def migrate_book(
     stats = {
         "content": {},
         "static": {},
-        "registry_created": False,
-        "book_yaml_created": False,
         "errors": []
     }
 
@@ -242,37 +211,8 @@ def migrate_book(
     stats["static"] = migrate_static(source_static, target_static, dry_run, verbose)
     print(f"  ✓ {stats['static']['files_copied']} files, {stats['static']['dirs_created']} directories")
 
-    # Create book.yaml
-    print("\nCreating book.yaml...")
-    book_yaml_path = target_book / "book.yaml"
-    if not dry_run:
-        book_metadata = get_book_metadata(book_id, source_dir)
-        with open(book_yaml_path, 'w') as f:
-            yaml.dump(book_metadata, f, default_flow_style=False, sort_keys=False)
-        stats["book_yaml_created"] = True
-    print(f"  ✓ {book_yaml_path}")
-
-    # Create/update registry.yaml
-    print("\nUpdating registry.yaml...")
-    registry_path = target_dir / "registry.yaml"
-    if not dry_run:
-        registry_entry = create_registry_entry(book_id, "AI-Native Software Development")
-
-        if registry_path.exists():
-            with open(registry_path, 'r') as f:
-                registry = yaml.safe_load(f) or {"books": []}
-        else:
-            registry = {"books": []}
-
-        # Check if book already exists
-        existing_ids = [b.get("book_id") for b in registry.get("books", [])]
-        if book_id not in existing_ids:
-            registry["books"].append(registry_entry)
-
-        with open(registry_path, 'w') as f:
-            yaml.dump(registry, f, default_flow_style=False, sort_keys=False)
-        stats["registry_created"] = True
-    print(f"  ✓ {registry_path}")
+    # Note: book.yaml and registry.yaml are no longer created
+    # Books are discovered dynamically by list_books tool scanning books/ directory
 
     # Summary
     total_files = stats["content"]["files_copied"] + stats["static"]["files_copied"]

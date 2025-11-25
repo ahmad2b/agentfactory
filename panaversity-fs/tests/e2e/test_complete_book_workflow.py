@@ -23,26 +23,16 @@ class TestCompleteBookCreation:
         op = get_operator()
         book_id = "complete-book"
 
-        # 1. Create book directory with metadata (list_books uses dynamic discovery)
-        book_yaml = """title: Complete Test Book
-author: Test Author
-version: 1.0.0
-storage_backend: fs
-"""
-        await op.write(f"books/{book_id}/book.yaml", book_yaml.encode('utf-8'))
+        # 1. Create book directory (list_books uses dynamic discovery)
+        # Just need any file to make the directory exist
+        await op.write(f"books/{book_id}/.gitkeep", b"")
 
         # Verify book appears in list
         books_result = await list_books(ListBooksInput())
         books = json.loads(books_result)
         assert any(b["book_id"] == book_id for b in books)
 
-        # 2. Create book metadata (already done above)
-        book_yaml = """title: Complete Test Book
-author: Test Author
-version: 1.0.0
-storage_backend: fs
-"""
-        await op.write(f"books/{book_id}/book.yaml", book_yaml.encode('utf-8'))
+        # 2. Book directory already created above
 
         # 3. Create lessons for Part 1, Chapter 1 (ADR-0018: content/ structure)
         lessons = [

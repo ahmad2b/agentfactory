@@ -451,7 +451,6 @@ Generate ZIP archive of entire book.
 **Archive Contents** (ADR-0018: Docusaurus-aligned):
 - All content (`content/**/*.md`) - lessons and summaries
 - All static assets (`static/**/*`)
-- Book metadata (`book.yaml`)
 
 ---
 

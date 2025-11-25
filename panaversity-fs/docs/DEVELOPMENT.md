@@ -160,7 +160,6 @@ await grep_search({
 
 ```
 books/{book-id}/
-├── book.yaml                           # Book metadata
 ├── content/                            # Maps to Docusaurus docs/
 │   ├── 01-Introducing-AI-Driven-Development/
 │   │   ├── README.md                   # Part intro

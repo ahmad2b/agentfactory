@@ -30,10 +30,8 @@ ai-native-software-development/
 ```
 panaversity-fs/               # Standalone MCP server
 └── data/                     # OR cloud storage (R2/Supabase)
-    ├── registry.yaml
-    └── books/
+    └── books/                # Books discovered dynamically by list_books
         └── ai-native-dev/
-            ├── book.yaml
             ├── content/      # 299 markdown files
             └── static/       # 202 asset files
 ```

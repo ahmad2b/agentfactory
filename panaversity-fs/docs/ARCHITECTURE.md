@@ -76,11 +76,9 @@ Each book is isolated with Docusaurus-aligned structure:
 
 ```
 storage-root/
-├── registry.yaml              # Book registry (list_books source)
 ├── archives/                  # Generated ZIP archives
-└── books/
+└── books/                     # Book directories (list_books scans this)
     └── {book-id}/
-        ├── book.yaml          # Book metadata
         ├── content/           # Maps to Docusaurus docs/
         │   └── {NN-Part}/
         │       ├── README.md              # Part intro
