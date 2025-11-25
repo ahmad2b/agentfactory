@@ -34,7 +34,7 @@ if __name__ == "__main__":
     print("PanaversityFS MCP Server")
     print(f"Storage Backend: {config.storage_backend}")
     print(f"Server: http://{config.server_host}:{config.server_port}/mcp")
-    print(f"Auth: {'Enabled (API Key)' if config.api_key else 'Disabled (Dev Mode)'}")
+    print(f"Auth: {'Enabled (JWT)' if config.auth_enabled else 'Disabled (Dev Mode)'}")
     print(f"Tools: {len(mcp._tool_manager._tools)} registered")
 
     # Use correct module path (not src.panaversity_fs, just panaversity_fs)

@@ -4,7 +4,8 @@ Uses pydantic-settings for environment variable loading with validation.
 """
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from typing import Literal
+from pydantic import field_validator
+from typing import Literal, List
 
 
 class Config(BaseSettings):
@@ -38,8 +39,32 @@ class Config(BaseSettings):
     supabase_url: str | None = None
     supabase_service_role_key: str | None = None
 
-    # Authentication (API Key for MVP)
-    api_key: str | None = None  # If None, auth disabled (dev mode)
+    # Authentication (Legacy API Key - DEPRECATED and non-functional, use JWT instead)
+    # This field exists only for backwards compatibility and does nothing
+    api_key: str | None = None
+
+    # JWT Authentication (OAuth 2.1 compliant)
+    # If jwt_secret is set, JWT auth is enabled; otherwise server runs in dev mode
+    jwt_secret: str | None = None  # Secret key for HS256 JWT verification
+    jwt_algorithm: str = "HS256"  # JWT algorithm (HS256, HS384, HS512)
+    auth_issuer: str | None = None  # JWT issuer URL (iss claim validation)
+    auth_audience: str | None = None  # JWT audience (aud claim validation)
+    required_scopes_str: str = "read,write"  # Scopes as comma-separated string
+    resource_server_url: str | None = None  # This server's public URL (RFC 9728)
+
+    @property
+    def required_scopes(self) -> List[str]:
+        """Get required scopes as a list."""
+        return [s.strip() for s in self.required_scopes_str.split(",") if s.strip()]
+
+    @property
+    def auth_enabled(self) -> bool:
+        """Check if authentication is enabled.
+
+        Auth is enabled only if jwt_secret is set to a non-empty value.
+        Empty string is treated as disabled (for easier test isolation).
+        """
+        return bool(self.jwt_secret)
 
     # Server Configuration
     server_host: str = "0.0.0.0"

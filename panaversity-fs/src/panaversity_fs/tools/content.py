@@ -36,21 +36,22 @@ import fnmatch
 async def read_content(params: ReadContentInput) -> str:
     """Read markdown content with metadata (FR-009).
 
-    Supports three scopes:
+    Supports four scopes:
     - file (default): Read single file, return content + metadata
     - chapter: Read all .md files in a chapter directory
     - part: Read all .md files in a part directory (all chapters)
+    - book: Read all .md files in the entire book's content/ directory
 
     Args:
         params (ReadContentInput): Validated input containing:
             - book_id (str): Book identifier (e.g., 'ai-native-python')
-            - path (str): Content path relative to book root
-            - scope (ContentScope): file/chapter/part (default: file)
+            - path (str): Content path relative to book root (ignored for book scope)
+            - scope (ContentScope): file/chapter/part/book (default: file)
 
     Returns:
         str: JSON-formatted response
             - scope=file: Single ContentMetadata object
-            - scope=chapter/part: Array of ContentMetadata objects with path field
+            - scope=chapter/part/book: Array of ContentMetadata objects with path field
 
     Example:
         ```
@@ -70,6 +71,16 @@ async def read_content(params: ReadContentInput) -> str:
         Output: [
           {"path": "content/01-Part/README.md", "content": "...", ...},
           {"path": "content/01-Part/01-Chapter/README.md", "content": "...", ...},
+          ...
+        ]
+
+        # Read entire book
+        Input: {"book_id": "my-book", "scope": "book"}
+        Output: [
+          {"path": "content/01-Part/README.md", "content": "...", ...},
+          {"path": "content/01-Part/01-Chapter/README.md", "content": "...", ...},
+          {"path": "content/01-Part/01-Chapter/01-lesson.md", "content": "...", ...},
+          {"path": "content/02-Part/README.md", "content": "...", ...},
           ...
         ]
         ```
@@ -122,14 +133,18 @@ async def read_content(params: ReadContentInput) -> str:
             return response.model_dump_json(indent=2)
 
         else:
-            # Bulk read: chapter or part scope
-            base_path = f"books/{params.book_id}/{params.path.rstrip('/')}/"
+            # Bulk read: chapter, part, or book scope
+            if params.scope == ContentScope.BOOK:
+                # For book scope, always scan content/ directory
+                base_path = f"books/{params.book_id}/content/"
+            else:
+                base_path = f"books/{params.book_id}/{params.path.rstrip('/')}/"
             results = []
 
-            # List entries: use scan() for PART (recursive), list() for CHAPTER (one level)
+            # List entries: use scan() for PART/BOOK (recursive), list() for CHAPTER (one level)
             try:
-                if params.scope == ContentScope.PART:
-                    # Recursive scan for parts (includes all subdirectories)
+                if params.scope in (ContentScope.PART, ContentScope.BOOK):
+                    # Recursive scan for parts and books (includes all subdirectories)
                     entries = await op.scan(base_path)
                 else:
                     # Non-recursive list for chapters (only direct children)

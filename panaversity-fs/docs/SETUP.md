@@ -15,6 +15,115 @@ uv run python -c "import opendal; print('OpenDAL version:', opendal.__version__)
 
 ---
 
+## JWT Authentication (Optional)
+
+PanaversityFS supports OAuth 2.1 compliant JWT authentication. Authentication is **optional** - if not configured, the server runs in development mode without auth.
+
+### Enable Authentication
+
+Set the `PANAVERSITY_JWT_SECRET` environment variable to enable JWT authentication:
+
+```bash
+# Required: Secret key for HS256 JWT verification
+export PANAVERSITY_JWT_SECRET=your-secret-key-min-32-chars
+
+# Optional: JWT algorithm (default: HS256)
+export PANAVERSITY_JWT_ALGORITHM=HS256
+
+# Optional: JWT issuer URL validation
+export PANAVERSITY_AUTH_ISSUER=https://auth.example.com
+
+# Optional: JWT audience validation
+export PANAVERSITY_AUTH_AUDIENCE=panaversity-fs
+
+# Optional: Required scopes (comma-separated, default: read,write)
+export PANAVERSITY_REQUIRED_SCOPES_STR=read,write
+
+# Optional: Server URL for RFC 9728 metadata
+export PANAVERSITY_RESOURCE_SERVER_URL=https://api.panaversity.com
+```
+
+### Authentication Modes
+
+| Mode | `JWT_SECRET` | Behavior |
+|------|--------------|----------|
+| **Dev Mode** | Not set | No authentication required |
+| **Production** | Set | All requests require valid JWT |
+
+### Making Authenticated Requests
+
+When authentication is enabled, include a JWT in the `Authorization` header:
+
+```bash
+# Get a test token (for development)
+TOKEN=$(uv run python -c "
+from panaversity_fs.auth import create_test_token
+print(create_test_token())
+")
+
+# Make authenticated request
+curl -X POST http://localhost:8000/mcp \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $TOKEN" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}'
+```
+
+### JWT Token Requirements
+
+Tokens must include:
+
+| Claim | Required | Description |
+|-------|----------|-------------|
+| `sub` | Yes | Subject (client identifier) |
+| `scopes` | Yes | List or comma-separated string of scopes |
+| `exp` | Yes | Expiration timestamp |
+| `iat` | Yes | Issued-at timestamp |
+| `iss` | If configured | Issuer URL (validated against `AUTH_ISSUER`) |
+| `aud` | If configured | Audience (validated against `AUTH_AUDIENCE`) |
+
+Example token payload:
+```json
+{
+  "sub": "agent-123",
+  "scopes": ["read", "write"],
+  "iat": 1700000000,
+  "exp": 1700003600,
+  "iss": "https://auth.example.com"
+}
+```
+
+### Generate Test Tokens
+
+```python
+from panaversity_fs.auth import create_test_token
+
+# Default token (read, write scopes, 1 hour expiry)
+token = create_test_token()
+
+# Custom scopes
+admin_token = create_test_token(scopes=["read", "write", "admin"])
+
+# Custom expiry (5 minutes)
+short_token = create_test_token(expires_in_seconds=300)
+
+# Custom subject
+agent_token = create_test_token(subject="my-agent-id")
+```
+
+### Server Startup Messages
+
+```bash
+# Without auth (dev mode)
+[PanaversityFS] Running in dev mode (no authentication)
+
+# With auth enabled
+[PanaversityFS] JWT authentication enabled
+[PanaversityFS] Issuer: https://auth.example.com
+[PanaversityFS] Required scopes: ['read', 'write']
+```
+
+---
+
 ## 1. Local Filesystem (fs) - Easiest Setup
 
 ### Configuration
