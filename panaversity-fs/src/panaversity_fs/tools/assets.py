@@ -107,10 +107,11 @@ async def upload_asset(params: UploadAssetInput) -> str:
 
             file_size = len(binary_content)
 
-            # Check size limit for direct upload
-            if file_size >= 10 * 1024 * 1024:  # 10MB
+            # Check size limit for direct upload (use config)
+            max_direct_bytes = config.max_direct_upload_mb * 1024 * 1024
+            if file_size >= max_direct_bytes:
                 raise ValueError(
-                    f"File size {file_size} bytes exceeds direct upload limit (10MB). "
+                    f"File size {file_size} bytes exceeds direct upload limit ({config.max_direct_upload_mb}MB). "
                     "Use presigned URL method instead (provide file_size, omit binary_data)."
                 )
 
@@ -152,10 +153,11 @@ async def upload_asset(params: UploadAssetInput) -> str:
 
         # Method 2: Presigned URL (≥10MB)
         elif params.file_size:
-            # Check size is reasonable for presigned URL
-            if params.file_size < 10 * 1024 * 1024:  # 10MB
+            # Check size is reasonable for presigned URL (use config)
+            max_direct_bytes = config.max_direct_upload_mb * 1024 * 1024
+            if params.file_size < max_direct_bytes:
                 raise ValueError(
-                    f"File size {params.file_size} bytes is below presigned URL threshold (10MB). "
+                    f"File size {params.file_size} bytes is below presigned URL threshold ({config.max_direct_upload_mb}MB). "
                     "Use direct upload instead (provide base64 binary_data, omit file_size)."
                 )
 

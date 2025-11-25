@@ -131,8 +131,8 @@ async def get_book_archive(params: GetBookArchiveInput) -> str:
         # Clean up temporary file
         os.unlink(temp_zip_path)
 
-        # Calculate expiration (1 hour from now)
-        expires_at = datetime.now(timezone.utc).timestamp() + 3600
+        # Calculate expiration (use config for presign expiry)
+        expires_at = datetime.now(timezone.utc).timestamp() + config.presign_expiry_seconds
 
         # Build response
         # TODO: Generate actual presigned URL using OpenDAL presign API
@@ -143,7 +143,7 @@ async def get_book_archive(params: GetBookArchiveInput) -> str:
             "file_count": file_count,
             "total_size_bytes": total_size,
             "format": "zip",
-            "valid_for_seconds": 3600,
+            "valid_for_seconds": config.presign_expiry_seconds,
             "note": "Presigned URL generation not yet implemented. URL is public CDN path for now."
         }
 

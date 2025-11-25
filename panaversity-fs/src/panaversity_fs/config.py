@@ -56,6 +56,7 @@ class Config(BaseSettings):
 
     # Archive Generation Configuration
     archive_timeout_seconds: int = 60  # FR-030: <60s for 500 files / 200MB
+    presign_expiry_seconds: int = 3600  # Presigned URL validity (1 hour default)
 
     def validate_backend_config(self) -> None:
         """Validate that required configuration exists for selected backend.
