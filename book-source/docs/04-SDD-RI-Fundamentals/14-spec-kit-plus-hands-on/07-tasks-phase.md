@@ -129,8 +129,8 @@ A **task** is a unit of work that:
 ### Task Properties
 
 **Size**: 15-30 minutes
-- Too small (<10 minutes) = too many micro-tasks, checkpoint overhead
-- Too large (45+ minutes) = hard to review, hard to fix if wrong
+- Too small (under 10 minutes) = too many micro-tasks, checkpoint overhead
+- Too large (over 45 minutes) = hard to review, hard to fix if wrong
 
 **Criterion**: Single, testable
 - "Verify Playwright MCP configured" ✅
