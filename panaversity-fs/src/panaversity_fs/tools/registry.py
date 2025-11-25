@@ -4,7 +4,7 @@ Implements 1 MCP tool for book registry operations:
 - list_books: List all registered books from registry.yaml
 """
 
-from panaversity_fs.server import mcp
+from panaversity_fs.app import mcp
 from panaversity_fs.models import ListBooksInput, BookMetadata, OperationType, OperationStatus
 from panaversity_fs.storage import get_operator
 from panaversity_fs.audit import log_operation

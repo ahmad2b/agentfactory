@@ -6,7 +6,7 @@ Implements 3 MCP tools for binary asset management:
 - list_assets: List assets with filtering
 """
 
-from panaversity_fs.server import mcp
+from panaversity_fs.app import mcp
 from panaversity_fs.models import (
     UploadAssetInput, GetAssetInput, ListAssetsInput,
     AssetMetadata, OperationType, OperationStatus

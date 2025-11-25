@@ -5,7 +5,7 @@ Implements 2 MCP tools for content search:
 - grep_search: Content regex search across markdown files
 """
 
-from panaversity_fs.server import mcp
+from panaversity_fs.app import mcp
 from panaversity_fs.models import GlobSearchInput, GrepSearchInput, OperationType, OperationStatus
 from panaversity_fs.storage import get_operator
 from panaversity_fs.audit import log_operation

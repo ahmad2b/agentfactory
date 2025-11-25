@@ -4,7 +4,7 @@ Implements 1 MCP tool for bulk operations:
 - get_book_archive: Generate presigned URL for downloading entire book as archive
 """
 
-from panaversity_fs.server import mcp
+from panaversity_fs.app import mcp
 from panaversity_fs.models import GetBookArchiveInput, OperationType, OperationStatus
 from panaversity_fs.storage import get_operator
 from panaversity_fs.audit import log_operation

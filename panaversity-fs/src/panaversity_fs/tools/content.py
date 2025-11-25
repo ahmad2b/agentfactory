@@ -10,7 +10,7 @@ Path structure (Docusaurus-aligned):
 - Summaries: content/{part}/{chapter}/{lesson}.summary.md
 """
 
-from panaversity_fs.server import mcp
+from panaversity_fs.app import mcp
 from panaversity_fs.models import ReadContentInput, WriteContentInput, DeleteContentInput, ContentMetadata
 from panaversity_fs.storage import get_operator
 from panaversity_fs.storage_utils import compute_sha256, validate_path

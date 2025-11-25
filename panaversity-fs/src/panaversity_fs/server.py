@@ -3,17 +3,9 @@
 Main entry point for the MCP server with Stateless Streamable HTTP transport.
 """
 
-from mcp.server.fastmcp import FastMCP
+from panaversity_fs.app import mcp  # Import from app.py to avoid double-import issue
 from panaversity_fs.config import get_config
 import sys
-
-# Initialize FastMCP server with stateless HTTP transport
-# This singleton is imported by all tool modules
-mcp = FastMCP(
-    "panaversity_fs",
-    stateless_http=True,      # Enable Stateless Streamable HTTP (FR-004)
-    json_response=True        # Disable SSE, use pure JSON responses
-)
 
 
 def main():
@@ -34,17 +26,15 @@ def main():
         print(f"Server: http://{config.server_host}:{config.server_port}/mcp", file=sys.stderr)
         print(f"Auth: {'Enabled (API Key)' if config.api_key else 'Disabled (Dev Mode)'}", file=sys.stderr)
         print(f"", file=sys.stderr)
-        print(f"Importing tools...", file=sys.stderr)
-
-        # Import all tool modules to register tools (9 tools per ADR-0018)
-        # This must happen after mcp is created
+        # Import all tool modules to register tools (10 tools total)
+        # This must happen after mcp is created (which is now in app.py)
         from panaversity_fs.tools import content    # read, write, delete (also handles summaries)
         from panaversity_fs.tools import assets     # upload, get, list
         from panaversity_fs.tools import registry   # list_books
         from panaversity_fs.tools import search     # glob, grep
         from panaversity_fs.tools import bulk       # get_book_archive
 
-        print(f"Tools registered successfully", file=sys.stderr)
+        print(f"Tools: {len(mcp._tool_manager._tools)} registered", file=sys.stderr)
         print(f"Starting server...", file=sys.stderr)
 
         # Run server with streamable HTTP transport
