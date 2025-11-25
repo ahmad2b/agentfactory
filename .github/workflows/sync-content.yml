@@ -1,12 +1,17 @@
 # Sync Content to PanaversityFS (R2 Storage)
 #
-# Uploads changed markdown files from book-source/docs/ to PanaversityFS MCP server.
-# The server stores content in Cloudflare R2, which Docusaurus fetches at build time.
+# CONTENT-ONLY sync. Assets are managed separately by authors/agents.
+#
+# Design (Composable):
+# - Content (markdown) = synced via this workflow
+# - Assets (images, slides) = uploaded by authors to CDN, referenced by full URL
+# - PR validation rejects local asset references (/img/, /slides/)
 #
 # Workflow:
-# 1. Content changes merged to main (book-source/docs/**)
-# 2. This workflow uploads changed files to R2 via MCP server
-# 3. deploy.yml workflow builds site (fetches from R2 via plugin)
+# 1. Author uploads assets to CDN (via agent or manually)
+# 2. Author uses full CDN URLs in markdown
+# 3. PR merged → this workflow syncs markdown to R2
+# 4. deploy.yml builds site (fetches content from R2)
 
 name: Sync Content to R2
 
@@ -25,7 +30,7 @@ on:
 
 jobs:
   sync:
-    name: Upload to PanaversityFS
+    name: Upload Content to PanaversityFS
     runs-on: ubuntu-latest
     # Only run if PanaversityFS is configured
     if: ${{ vars.PANAVERSITY_PLUGIN_ENABLED == 'true' }}
@@ -35,11 +40,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 2 # Need previous commit to detect changes
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
 
       - name: Get changed files
         id: changed
@@ -53,9 +53,8 @@ jobs:
       - name: Sync content to R2
         env:
           PANAVERSITY_SERVER_URL: ${{ secrets.PANAVERSITY_SERVER_URL }}
-          PANAVERSITY_API_KEY: ${{ secrets.PANAVERSITY_API_KEY }}
         run: |
-          # Upload changed files to PanaversityFS MCP server
+          # Upload changed markdown files to PanaversityFS MCP server
           # Uses write_content tool via JSON-RPC
 
           BOOK_ID="ai-native-dev"
@@ -75,6 +74,8 @@ jobs:
           fi
 
           echo "Syncing files to $SERVER_URL"
+          SUCCESS=0
+          FAILED=0
 
           # Process each file
           for FILE in $FILES; do
@@ -92,22 +93,23 @@ jobs:
             CONTENT=$(cat "$FILE" | jq -Rs .)
 
             # Create JSON-RPC request for write_content tool
-            REQUEST=$(cat <<EOF
-          {
-            "jsonrpc": "2.0",
-            "id": 1,
-            "method": "tools/call",
-            "params": {
-              "name": "write_content",
-              "arguments": {
-                "book_id": "$BOOK_ID",
-                "path": "$CONTENT_PATH",
-                "content": $CONTENT
-              }
-            }
-          }
-          EOF
-          )
+            REQUEST=$(jq -n \
+              --arg book_id "$BOOK_ID" \
+              --arg path "$CONTENT_PATH" \
+              --argjson content "$CONTENT" \
+              '{
+                jsonrpc: "2.0",
+                id: 1,
+                method: "tools/call",
+                params: {
+                  name: "write_content",
+                  arguments: {
+                    book_id: $book_id,
+                    path: $path,
+                    content: $content
+                  }
+                }
+              }')
 
             # Send to MCP server
             RESPONSE=$(curl -s -X POST "$SERVER_URL" \
@@ -117,12 +119,20 @@ jobs:
 
             # Check for errors
             if echo "$RESPONSE" | jq -e '.error' > /dev/null 2>&1; then
-              echo "Error uploading $FILE:"
+              echo "✗ Error uploading $FILE:"
               echo "$RESPONSE" | jq '.error'
-              exit 1
+              FAILED=$((FAILED + 1))
+            else
+              echo "✓ Uploaded: $CONTENT_PATH"
+              SUCCESS=$((SUCCESS + 1))
             fi
-
-            echo "✓ Uploaded: $CONTENT_PATH"
           done
 
-          echo "Content sync complete!"
+          echo ""
+          echo "=== Sync Complete ==="
+          echo "Success: $SUCCESS"
+          echo "Failed: $FAILED"
+
+          if [ $FAILED -gt 0 ]; then
+            exit 1
+          fi
