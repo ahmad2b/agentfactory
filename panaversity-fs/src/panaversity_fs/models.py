@@ -223,7 +223,19 @@ class ListBooksInput(BaseModel):
     """Input model for list_books tool (FR-024)."""
     model_config = ConfigDict(str_strip_whitespace=True, extra='forbid')
 
-    # No parameters needed - lists all books by scanning books/ directory
+    # Optional: include hierarchical structure of each book
+    include_structure: Literal["none", "content", "assets", "all"] | None = Field(
+        default=None,
+        description="Include book structure: 'none' (default), 'content' (parts/chapters/lessons), 'assets' (images/slides), 'all' (both)"
+    )
+    # Optional: filter to specific book
+    book_id: str | None = Field(
+        default=None,
+        description="Filter to specific book (optional)",
+        pattern=r'^[a-z0-9-]+$',
+        min_length=3,
+        max_length=50
+    )
 
 
 # ============================================================================
@@ -253,8 +265,24 @@ class GrepSearchInput(BaseModel):
 # Bulk Operations Input Models
 # ============================================================================
 
+class ArchiveScope(str, Enum):
+    """Scope for get_book_archive operations.
+
+    - ALL: Archive entire book (content + assets) - may timeout for large books
+    - CONTENT: Archive only content/ directory (markdown files) - faster
+    - ASSETS: Archive only static/ directory (images, slides, etc.)
+    """
+    ALL = "all"
+    CONTENT = "content"
+    ASSETS = "assets"
+
+
 class GetBookArchiveInput(BaseModel):
     """Input model for get_book_archive tool (FR-029)."""
     model_config = ConfigDict(str_strip_whitespace=True, extra='forbid')
 
     book_id: str = Field(..., description="Book identifier", pattern=r'^[a-z0-9-]+$', min_length=3, max_length=50)
+    scope: ArchiveScope = Field(
+        default=ArchiveScope.CONTENT,
+        description="Archive scope: 'content' (markdown only, default), 'assets' (images/slides), 'all' (entire book - may timeout)"
+    )

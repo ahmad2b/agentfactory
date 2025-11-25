@@ -5,7 +5,7 @@ Implements 1 MCP tool for bulk operations:
 """
 
 from panaversity_fs.app import mcp
-from panaversity_fs.models import GetBookArchiveInput, OperationType, OperationStatus
+from panaversity_fs.models import GetBookArchiveInput, OperationType, OperationStatus, ArchiveScope
 from panaversity_fs.storage import get_operator
 from panaversity_fs.audit import log_operation
 from panaversity_fs.config import get_config
@@ -27,36 +27,38 @@ import os
     }
 )
 async def get_book_archive(params: GetBookArchiveInput) -> str:
-    """Generate presigned URL for downloading entire book as archive (FR-029, FR-030).
+    """Generate presigned URL for downloading book content as archive (FR-029, FR-030).
 
-    Creates ZIP archive of all book content (lessons, assets, summaries, metadata).
+    Creates ZIP archive of book content based on scope parameter.
     Returns presigned download URL valid for 1 hour.
 
     Args:
         params (GetBookArchiveInput): Validated input containing:
             - book_id (str): Book identifier
+            - scope (str): Archive scope - 'content' (default), 'assets', or 'all'
 
     Returns:
         str: JSON response with archive URL and metadata
 
     Example:
         ```
-        Input: {"book_id": "ai-native-python"}
+        Input: {"book_id": "ai-native-python", "scope": "content"}
         Output: {
           "status": "success",
-          "archive_url": "https://storage.panaversity.com/archives/ai-native-python-2025-11-24.zip?token=...",
+          "archive_url": "https://storage.panaversity.com/archives/ai-native-python-content-2025-11-24.zip?token=...",
           "expires_at": "2025-11-24T13:00:00Z",
-          "file_count": 487,
-          "total_size_bytes": 185432100,
+          "file_count": 300,
+          "total_size_bytes": 15432100,
           "format": "zip",
+          "scope": "content",
           "valid_for_seconds": 3600
         }
         ```
 
     Note:
-        Archive generation must complete within 60 seconds for books with:
-        - Up to 500 files
-        - Total size up to 200MB uncompressed
+        - scope='content' (default): Only markdown files from content/ directory (~300 files, fast)
+        - scope='assets': Only files from static/ directory (images, slides)
+        - scope='all': Entire book - may timeout for large books with many assets
     """
     start_time = datetime.now(timezone.utc)
 
@@ -65,7 +67,18 @@ async def get_book_archive(params: GetBookArchiveInput) -> str:
         op = get_operator()
         config = get_config()
 
-        # Build book path
+        # Build scan path based on scope
+        scope = params.scope
+        if scope == ArchiveScope.CONTENT:
+            scan_path = f"books/{params.book_id}/content/"
+            scope_suffix = "-content"
+        elif scope == ArchiveScope.ASSETS:
+            scan_path = f"books/{params.book_id}/static/"
+            scope_suffix = "-assets"
+        else:  # ALL
+            scan_path = f"books/{params.book_id}/"
+            scope_suffix = ""
+
         book_path = f"books/{params.book_id}/"
 
         # Create temporary ZIP file
@@ -78,8 +91,8 @@ async def get_book_archive(params: GetBookArchiveInput) -> str:
                 total_size = 0
 
                 try:
-                    # List all files in book directory
-                    entries = await op.list(book_path)
+                    # Recursively scan files based on scope
+                    entries = await op.scan(scan_path)
 
                     async for entry in entries:
                         # Skip directories
@@ -118,7 +131,7 @@ async def get_book_archive(params: GetBookArchiveInput) -> str:
         # For MVP: Return local file path as placeholder
         # TODO: Implement presigned URL generation for production
 
-        archive_filename = f"{params.book_id}-{datetime.now(timezone.utc).strftime('%Y-%m-%d')}.zip"
+        archive_filename = f"{params.book_id}{scope_suffix}-{datetime.now(timezone.utc).strftime('%Y-%m-%d')}.zip"
         archive_storage_path = f"archives/{archive_filename}"
 
         # Read archive bytes
@@ -143,6 +156,7 @@ async def get_book_archive(params: GetBookArchiveInput) -> str:
             "file_count": file_count,
             "total_size_bytes": total_size,
             "format": "zip",
+            "scope": scope.value,
             "valid_for_seconds": config.presign_expiry_seconds,
             "note": "Presigned URL generation not yet implemented. URL is public CDN path for now."
         }
