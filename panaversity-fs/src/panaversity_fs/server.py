@@ -36,14 +36,13 @@ def main():
         print(f"", file=sys.stderr)
         print(f"Importing tools...", file=sys.stderr)
 
-        # Import all tool modules to register tools
+        # Import all tool modules to register tools (9 tools per ADR-0018)
         # This must happen after mcp is created
-        from panaversity_fs.tools import content
-        from panaversity_fs.tools import assets
-        from panaversity_fs.tools import summaries
-        from panaversity_fs.tools import registry
-        from panaversity_fs.tools import search
-        from panaversity_fs.tools import bulk
+        from panaversity_fs.tools import content    # read, write, delete (also handles summaries)
+        from panaversity_fs.tools import assets     # upload, get, list
+        from panaversity_fs.tools import registry   # list_books
+        from panaversity_fs.tools import search     # glob, grep
+        from panaversity_fs.tools import bulk       # get_book_archive
 
         print(f"Tools registered successfully", file=sys.stderr)
         print(f"Starting server...", file=sys.stderr)

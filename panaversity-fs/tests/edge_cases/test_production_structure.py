@@ -5,13 +5,14 @@ Tests realistic scenarios based on actual book-source/docs structure:
 - Chapters numbered 01-33
 - Lessons numbered 01-06 with various formats
 - Complex frontmatter with skills, learning_objectives, cognitive_load
-- Multiple summaries per part
+- Multiple summaries per part (ADR-0018: via .summary.md naming convention)
+
+Updated for ADR-0018: Summaries use content tools with .summary.md naming convention.
 """
 
 import pytest
 import json
 from panaversity_fs.tools.content import write_content, read_content, delete_content
-from panaversity_fs.tools.summaries import write_summary, read_summary
 from panaversity_fs.tools.search import glob_search, grep_search
 from panaversity_fs.tools.bulk import get_book_archive
 from panaversity_fs.models import *
@@ -25,16 +26,16 @@ class TestMultiPartBookStructure:
         """Test creating a book with 13 parts (like production)."""
         book_id = "ai-native-dev"
 
-        # Create lessons across 13 parts
+        # Create lessons across 13 parts (ADR-0018: content/ structure)
         parts_data = []
         for part_num in range(1, 14):
-            part_id = f"part-{part_num}"
+            part_id = f"{part_num:02d}-Part"
             # Each part has 2-3 chapters
             for chapter_num in range(1, 4):
-                chapter_id = f"chapter-{part_num * 10 + chapter_num:02d}"
+                chapter_id = f"{chapter_num:02d}-Chapter"
                 # Each chapter has 3-5 lessons
                 for lesson_num in range(1, 4):
-                    lesson_path = f"lessons/{part_id}/{chapter_id}/lesson-{lesson_num:02d}.md"
+                    lesson_path = f"content/{part_id}/{chapter_id}/{lesson_num:02d}-lesson.md"
                     content = f"""---
 title: "Part {part_num} Chapter {chapter_num} Lesson {lesson_num}"
 chapter: {part_num * 10 + chapter_num}
@@ -58,10 +59,10 @@ Content for part {part_num}, chapter {chapter_num}, lesson {lesson_num}.
         # Verify we created lessons across all parts
         assert len(parts_data) == 13 * 3 * 3  # 13 parts * 3 chapters * 3 lessons = 117 lessons
 
-        # Search for lessons in specific part
+        # Search for lessons in specific part (ADR-0018: content/ structure)
         part5_result = await glob_search(GlobSearchInput(
             book_id=book_id,
-            pattern="lessons/part-5/**/*.md"
+            pattern="content/05-Part/**/*.md"
         ))
         part5_files = json.loads(part5_result)
         # OpenDAL async iterator may return 0 in test environment
@@ -76,8 +77,8 @@ Content for part {part_num}, chapter {chapter_num}, lesson {lesson_num}.
         chapters = [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33]
 
         for chapter_num in chapters[:5]:  # Test first 5
-            chapter_id = f"chapter-{chapter_num}"
-            lesson_path = f"lessons/part-5/{chapter_id}/01-intro.md"
+            chapter_id = f"{chapter_num:02d}-Chapter"
+            lesson_path = f"content/05-Part/{chapter_id}/01-intro.md"
             content = f"""---
 title: "Chapter {chapter_num} Introduction"
 chapter: {chapter_num}
@@ -172,7 +173,7 @@ Python's simplicity and extensive libraries make it ideal...
 
         result = await write_content(WriteContentInput(
             book_id=book_id,
-            path="lessons/part-5/chapter-17/01-what-is-python.md",
+            path="content/05-Part/17-Chapter/01-what-is-python.md",
             content=content
         ))
 
@@ -182,7 +183,7 @@ Python's simplicity and extensive libraries make it ideal...
         # Read back and verify frontmatter preserved
         read_result = await read_content(ReadContentInput(
             book_id=book_id,
-            path="lessons/part-5/chapter-17/01-what-is-python.md"
+            path="content/05-Part/17-Chapter/01-what-is-python.md"
         ))
         read_data = json.loads(read_result)
         assert "skills:" in read_data["content"]
@@ -216,7 +217,7 @@ Content here...
 
         result = await write_content(WriteContentInput(
             book_id=book_id,
-            path="lessons/chapter-01/lesson-01.md",
+            path="content/01-Part/01-Chapter/01-lesson.md",
             content=content
         ))
 
@@ -226,7 +227,7 @@ Content here...
         # Verify content preserved
         read_result = await read_content(ReadContentInput(
             book_id=book_id,
-            path="lessons/chapter-01/lesson-01.md"
+            path="content/01-Part/01-Chapter/01-lesson.md"
         ))
         read_data = json.loads(read_result)
         assert "Type Hints" in read_data["content"]
@@ -263,16 +264,16 @@ Content for {filename}
 """
             result = await write_content(WriteContentInput(
                 book_id=book_id,
-                path=f"lessons/chapter-17/{filename}",
+                path=f"content/05-Part/17-Chapter/{filename}",
                 content=content
             ))
             data = json.loads(result)
             assert data["status"] == "success"
 
-        # Verify all lessons can be found
+        # Verify all lessons can be found (ADR-0018: content/ structure)
         glob_result = await glob_search(GlobSearchInput(
             book_id=book_id,
-            pattern="lessons/chapter-17/*.md"
+            pattern="content/05-Part/17-Chapter/*.md"
         ))
         # May return 0 in test environment
         assert isinstance(json.loads(glob_result), list)
@@ -282,7 +283,7 @@ Content for {filename}
         """Test README.md files in chapter directories."""
         book_id = "readme-test"
 
-        # Create README in chapter directory
+        # Create README in chapter directory (ADR-0018: content/ structure)
         readme_content = """# Chapter 17: Introduction to Python
 
 This chapter covers the fundamentals of Python programming.
@@ -300,7 +301,7 @@ None - this is an introductory chapter.
 
         result = await write_content(WriteContentInput(
             book_id=book_id,
-            path="lessons/part-5/chapter-17/README.md",
+            path="content/05-Part/17-Chapter/README.md",
             content=readme_content
         ))
 
@@ -310,7 +311,7 @@ None - this is an introductory chapter.
         # Verify README can be read
         read_result = await read_content(ReadContentInput(
             book_id=book_id,
-            path="lessons/part-5/chapter-17/README.md"
+            path="content/05-Part/17-Chapter/README.md"
         ))
         read_data = json.loads(read_result)
         assert "Prerequisites" in read_data["content"]
@@ -324,7 +325,7 @@ class TestLargeContentVolume:
         """Test creating a book with 100 lessons."""
         book_id = "large-book"
 
-        # Create 100 lessons across multiple chapters
+        # Create 100 lessons across multiple chapters (ADR-0018: content/ structure)
         for i in range(1, 101):
             chapter_num = (i - 1) // 10 + 1
             lesson_num = (i - 1) % 10 + 1
@@ -359,7 +360,7 @@ Key takeaways from lesson {i}.
 
             result = await write_content(WriteContentInput(
                 book_id=book_id,
-                path=f"lessons/chapter-{chapter_num:02d}/lesson-{lesson_num:02d}.md",
+                path=f"content/01-Part/{chapter_num:02d}-Chapter/{lesson_num:02d}-lesson.md",
                 content=content
             ))
             data = json.loads(result)
@@ -402,7 +403,7 @@ This was a comprehensive guide.
 
         result = await write_content(WriteContentInput(
             book_id=book_id,
-            path="lessons/chapter-01/lesson-01.md",
+            path="content/01-Part/01-Chapter/01-lesson.md",
             content=long_content
         ))
 
@@ -413,7 +414,7 @@ This was a comprehensive guide.
         # Verify content can be read back
         read_result = await read_content(ReadContentInput(
             book_id=book_id,
-            path="lessons/chapter-01/lesson-01.md"
+            path="content/01-Part/01-Chapter/01-lesson.md"
         ))
         read_data = json.loads(read_result)
         assert "Comprehensive Python Guide" in read_data["content"]
@@ -421,17 +422,39 @@ This was a comprehensive guide.
 
 
 class TestMultipleSummariesPerPart:
-    """Test handling multiple chapter summaries within a part."""
+    """Test handling multiple lesson summaries within a part (ADR-0018)."""
 
     @pytest.mark.asyncio
-    async def test_part_with_multiple_chapter_summaries(self, setup_fs_backend):
-        """Test creating summaries for multiple chapters in a part."""
+    async def test_part_with_multiple_lesson_summaries(self, setup_fs_backend):
+        """Test creating summaries for multiple lessons in a part.
+
+        ADR-0018: Summaries now use content tools with .summary.md naming convention.
+        """
         book_id = "multi-summary-book"
 
-        # Create summaries for chapters 16-20 (typical for part 5)
+        # Create lessons and their summaries for chapters 16-20 (typical for part 5)
         for chapter_num in range(16, 21):
-            chapter_id = f"chapter-{chapter_num}"
-            summary_content = f"""# Chapter {chapter_num} Summary
+            chapter_id = f"{chapter_num:02d}-Chapter"
+
+            # First create a lesson
+            lesson_content = f"""---
+title: "Lesson 1 in Chapter {chapter_num}"
+chapter: {chapter_num}
+lesson: 1
+---
+
+# Lesson 1
+
+Content for chapter {chapter_num}, lesson 1.
+"""
+            await write_content(WriteContentInput(
+                book_id=book_id,
+                path=f"content/05-Part/{chapter_id}/01-lesson.md",
+                content=lesson_content
+            ))
+
+            # Then create its summary using .summary.md convention
+            summary_content = f"""# Lesson 1 Summary - Chapter {chapter_num}
 
 ## Key Concepts Covered
 
@@ -448,27 +471,27 @@ Students can now:
 
 ## Next Steps
 
-Proceed to chapter {chapter_num + 1}.
+Proceed to lesson 2.
 """
 
-            result = await write_summary(WriteSummaryInput(
+            result = await write_content(WriteContentInput(
                 book_id=book_id,
-                chapter_id=chapter_id,
+                path=f"content/05-Part/{chapter_id}/01-lesson.summary.md",
                 content=summary_content
             ))
             data = json.loads(result)
             assert data["status"] == "success"
 
-        # Verify summaries can be read back
+        # Verify summaries can be read back using content tools
         for chapter_num in range(16, 21):
-            chapter_id = f"chapter-{chapter_num:02d}"
-            read_result = await read_summary(ReadSummaryInput(
+            chapter_id = f"{chapter_num:02d}-Chapter"
+            read_result = await read_content(ReadContentInput(
                 book_id=book_id,
-                chapter_id=chapter_id
+                path=f"content/05-Part/{chapter_id}/01-lesson.summary.md"
             ))
             read_data = json.loads(read_result)
             assert "content" in read_data
-            assert "sha256" in read_data
+            assert "file_hash_sha256" in read_data
             assert f"Chapter {chapter_num}" in read_data["content"]
 
 
@@ -480,7 +503,7 @@ class TestSearchAcrossComplexStructure:
         """Test searching for content across multiple parts."""
         book_id = "search-test"
 
-        # Create lessons in different parts with common keyword
+        # Create lessons in different parts with common keyword (ADR-0018: content/ structure)
         parts = [1, 3, 5, 7, 9]
         for part_num in parts:
             content = f"""---
@@ -495,7 +518,7 @@ Learning Python programming concepts in part {part_num}.
 """
             result = await write_content(WriteContentInput(
                 book_id=book_id,
-                path=f"lessons/part-{part_num}/chapter-{part_num * 10}/lesson-01.md",
+                path=f"content/{part_num:02d}-Part/{part_num * 10:02d}-Chapter/01-lesson.md",
                 content=content
             ))
             data = json.loads(result)
@@ -516,13 +539,13 @@ Learning Python programming concepts in part {part_num}.
         """Test glob search with complex wildcard patterns."""
         book_id = "glob-test"
 
-        # Create diverse file structure
+        # Create diverse file structure (ADR-0018: content/ structure)
         paths = [
-            "lessons/part-1/chapter-01/lesson-01.md",
-            "lessons/part-1/chapter-01/lesson-02.md",
-            "lessons/part-1/chapter-02/lesson-01.md",
-            "lessons/part-2/chapter-05/lesson-01.md",
-            "lessons/part-2/chapter-05/README.md",
+            "content/01-Part/01-Chapter/01-lesson.md",
+            "content/01-Part/01-Chapter/02-lesson.md",
+            "content/01-Part/02-Chapter/01-lesson.md",
+            "content/02-Part/05-Chapter/01-lesson.md",
+            "content/02-Part/05-Chapter/README.md",
         ]
 
         for path in paths:
@@ -534,11 +557,11 @@ Learning Python programming concepts in part {part_num}.
             data = json.loads(result)
             assert data["status"] == "success"
 
-        # Test various glob patterns
+        # Test various glob patterns (ADR-0018: content/ structure)
         patterns = [
-            "lessons/part-1/**/*.md",  # All files in part-1
-            "lessons/*/chapter-01/*.md",  # All chapter-01 files
-            "lessons/part-*/chapter-05/lesson-*.md",  # Specific pattern
+            "content/01-Part/**/*.md",  # All files in part-1
+            "content/*/01-Chapter/*.md",  # All chapter-01 files
+            "content/*-Part/05-Chapter/*-lesson.md",  # Specific pattern
         ]
 
         for pattern in patterns:
@@ -559,7 +582,7 @@ class TestEdgeCaseFileNames:
         """Test files with dashes, underscores, and numbers."""
         book_id = "special-names"
 
-        # Various naming conventions found in production
+        # Various naming conventions found in production (ADR-0018: content/ structure)
         filenames = [
             "01-introduction.md",
             "02_chapter_quiz.md",
@@ -571,7 +594,7 @@ class TestEdgeCaseFileNames:
         for filename in filenames:
             result = await write_content(WriteContentInput(
                 book_id=book_id,
-                path=f"lessons/chapter-01/{filename}",
+                path=f"content/01-Part/01-Chapter/{filename}",
                 content=f"# {filename}"
             ))
             data = json.loads(result)
@@ -582,7 +605,8 @@ class TestEdgeCaseFileNames:
         """Test deeply nested paths (5+ levels)."""
         book_id = "deep-nested"
 
-        deep_path = "lessons/part-05/chapter-17/section-01/subsection-02/lesson-01.md"
+        # ADR-0018: content/ structure with deep nesting
+        deep_path = "content/05-Part/17-Chapter/01-Section/02-Subsection/01-lesson.md"
 
         result = await write_content(WriteContentInput(
             book_id=book_id,

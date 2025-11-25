@@ -2,13 +2,14 @@
 
 Agent-Native Multi-Book Storage System - MCP server for educational content management.
 
-**[Specification](../specs/030-panaversity-fs/spec.md)** | **[Architecture](docs/ARCHITECTURE.md)** | **[MCP Tools](docs/MCP-TOOLS.md)** | **[Setup](docs/SETUP.md)**
+**[Specification](../specs/030-panaversity-fs/spec.md)** | **[Architecture](docs/ARCHITECTURE.md)** | **[MCP Tools](docs/MCP-TOOLS.md)** | **[Setup](docs/SETUP.md)** | **[ADR-0018](../history/adr/0018-panaversityfs-docusaurus-aligned-structure.md)**
 
 ## Features
 
-- **12 MCP Tools**: Content, summaries, assets, search, bulk operations
+- **9 MCP Tools**: Content, assets, search, bulk operations (ADR-0018)
 - **3 Storage Backends**: Local filesystem, Cloudflare R2, Supabase
-- **52 Tests**: Unit, integration, e2e, edge cases (100% passing)
+- **45 Tests**: Unit, integration, e2e, edge cases (100% passing)
+- **Docusaurus-Aligned**: Storage structure mirrors Docusaurus docs/ convention
 
 ## Quick Start
 
@@ -22,22 +23,23 @@ export PANAVERSITY_STORAGE_ROOT=/tmp/panaversity-test
 
 # Test
 uv run pytest tests/ -q
-# Expected: 52 passed
+# Expected: 45 passed
 
 # Run server
 uv run python -m panaversity_fs.server
 ```
 
-## MCP Tools (12 Total)
+## MCP Tools (9 Total - ADR-0018)
 
 | Category | Tools | Description |
 |----------|-------|-------------|
-| Content | `read_content`, `write_content`, `delete_content` | Lesson CRUD with conflict detection |
-| Summaries | `read_summary`, `write_summary`, `delete_summary` | Chapter summary management |
+| Content | `read_content`, `write_content`, `delete_content` | Lesson/summary CRUD with conflict detection |
 | Assets | `upload_asset`, `get_asset`, `list_assets` | Binary assets with CDN URLs |
 | Search | `glob_search`, `grep_search` | File pattern and content search |
 | Registry | `list_books` | Book discovery |
 | Bulk | `get_book_archive` | ZIP archive generation |
+
+**Note**: Summary operations use content tools with `.summary.md` naming convention (ADR-0018).
 
 See **[MCP Tools Reference](docs/MCP-TOOLS.md)** for complete API documentation.
 
@@ -73,9 +75,8 @@ panaversity-fs/
 │   ├── storage.py      # OpenDAL storage abstraction
 │   ├── audit.py        # Operation logging
 │   ├── errors.py       # Custom error types
-│   └── tools/          # 12 MCP tool implementations
-│       ├── content.py  # read/write/delete_content
-│       ├── summaries.py # read/write/delete_summary
+│   └── tools/          # 9 MCP tool implementations (ADR-0018)
+│       ├── content.py  # read/write/delete_content (handles summaries too)
 │       ├── assets.py   # upload/get/list_assets
 │       ├── search.py   # glob/grep_search
 │       ├── registry.py # list_books
@@ -84,7 +85,7 @@ panaversity-fs/
 │   ├── unit/           # Component tests
 │   ├── integration/    # Workflow tests
 │   ├── e2e/            # End-to-end tests
-│   └── edge_cases/     # Error handling tests
+│   └── edge_cases/     # Production-like scenario tests
 └── docs/
     ├── ARCHITECTURE.md # System design
     ├── MCP-TOOLS.md    # Tool API reference

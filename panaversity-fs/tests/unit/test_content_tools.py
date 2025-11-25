@@ -1,4 +1,7 @@
-"""Unit tests for content operation tools."""
+"""Unit tests for content operation tools.
+
+Updated for ADR-0018: Uses Docusaurus-aligned content/ structure.
+"""
 
 import pytest
 import json
@@ -30,7 +33,7 @@ class TestReadContent:
         """Test reading non-existent content returns error string."""
         result = await read_content(ReadContentInput(
             book_id="test-book",
-            path="lessons/nonexistent.md"
+            path="content/01-Part/01-Chapter/nonexistent.md"
         ))
 
         # MCP tools return error strings instead of raising exceptions
@@ -60,7 +63,7 @@ class TestWriteContent:
         """Test creating new content."""
         result = await write_content(WriteContentInput(
             book_id="test-book",
-            path="lessons/new-lesson.md",
+            path="content/01-Part/01-Chapter/new-lesson.md",
             content=sample_lesson_content
         ))
 
@@ -112,7 +115,7 @@ class TestWriteContent:
         # Create
         result1 = await write_content(WriteContentInput(
             book_id="test-book",
-            path="lessons/upsert.md",
+            path="content/01-Part/01-Chapter/upsert.md",
             content=sample_lesson_content
         ))
         data1 = json.loads(result1)
@@ -121,7 +124,7 @@ class TestWriteContent:
         # Update (overwrite)
         result2 = await write_content(WriteContentInput(
             book_id="test-book",
-            path="lessons/upsert.md",
+            path="content/01-Part/01-Chapter/upsert.md",
             content="# Updated"
         ))
         data2 = json.loads(result2)
@@ -156,7 +159,7 @@ class TestDeleteContent:
         """Test that deleting non-existent content is idempotent."""
         result = await delete_content(DeleteContentInput(
             book_id="test-book",
-            path="lessons/nonexistent.md"
+            path="content/01-Part/01-Chapter/nonexistent.md"
         ))
 
         data = json.loads(result)

@@ -50,7 +50,10 @@ def setup_fs_backend(temp_storage_root):
 
 @pytest.fixture
 async def sample_book_data(setup_fs_backend):
-    """Create sample book data for testing."""
+    """Create sample book data for testing.
+
+    ADR-0018: Updated to use Docusaurus-aligned content/ structure.
+    """
     from panaversity_fs.storage import get_operator
 
     op = get_operator()
@@ -65,7 +68,7 @@ async def sample_book_data(setup_fs_backend):
 """
     await op.write("registry.yaml", registry.encode('utf-8'))
 
-    # Create sample lesson
+    # Create sample lesson (ADR-0018: content/ structure)
     lesson = """---
 title: Test Lesson
 chapter: 1
@@ -80,19 +83,19 @@ def test():
     return "Hello"
 ```
 """
-    await op.write("books/test-book/lessons/chapter-01/lesson-01.md", lesson.encode('utf-8'))
+    await op.write("books/test-book/content/01-Part/01-Chapter/01-lesson.md", lesson.encode('utf-8'))
 
-    # Create sample summary
-    summary = """# Chapter 1 Summary
+    # Create sample lesson summary (ADR-0018: .summary.md naming convention)
+    summary = """# Lesson 1 Summary
 
 Test summary content.
 """
-    await op.write("books/test-book/chapters/chapter-01/.summary.md", summary.encode('utf-8'))
+    await op.write("books/test-book/content/01-Part/01-Chapter/01-lesson.summary.md", summary.encode('utf-8'))
 
     return {
         "book_id": "test-book",
-        "lesson_path": "lessons/chapter-01/lesson-01.md",
-        "chapter_id": "chapter-01"
+        "lesson_path": "content/01-Part/01-Chapter/01-lesson.md",
+        "summary_path": "content/01-Part/01-Chapter/01-lesson.summary.md"
     }
 
 

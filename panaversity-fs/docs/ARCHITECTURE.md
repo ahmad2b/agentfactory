@@ -3,10 +3,11 @@
 > Agent-Native Multi-Book Storage System
 
 **Specification**: [specs/030-panaversity-fs/spec.md](../../specs/030-panaversity-fs/spec.md)
+**ADR-0018**: [Docusaurus-Aligned Storage Structure](../../history/adr/0018-panaversityfs-docusaurus-aligned-structure.md)
 
 ## Overview
 
-PanaversityFS is an MCP (Model Context Protocol) server that provides unified storage operations for educational content across multiple books. It enables AI agents to read, write, search, and manage lesson content, chapter summaries, and binary assets.
+PanaversityFS is an MCP (Model Context Protocol) server that provides unified storage operations for educational content across multiple books. It enables AI agents to read, write, search, and manage lesson content, summaries, and binary assets.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -25,9 +26,8 @@ PanaversityFS is an MCP (Model Context Protocol) server that provides unified st
 │  └───────────────────────────────────────────────────────────┘  │
 │                              │                                  │
 │  ┌───────────────────────────▼───────────────────────────────┐  │
-│  │                     12 MCP Tools                          │  │
-│  │  Content: read, write, delete                             │  │
-│  │  Summary: read, write, delete                             │  │
+│  │                     9 MCP Tools (ADR-0018)                │  │
+│  │  Content: read, write, delete (+ summaries via naming)    │  │
 │  │  Assets:  upload, get, list                               │  │
 │  │  Search:  glob, grep                                      │  │
 │  │  Registry: list_books                                     │  │
@@ -70,9 +70,9 @@ await op.read("books/test/lesson.md")
 await op.delete("books/test/lesson.md")
 ```
 
-### 3. Multi-Book Architecture
+### 3. Multi-Book Architecture (ADR-0018)
 
-Each book is isolated with consistent structure:
+Each book is isolated with Docusaurus-aligned structure:
 
 ```
 storage-root/
@@ -81,30 +81,33 @@ storage-root/
 └── books/
     └── {book-id}/
         ├── book.yaml          # Book metadata
-        ├── lessons/
-        │   └── part-{n}/
-        │       └── chapter-{nn}/
-        │           └── lesson-{nn}.md
-        ├── chapters/
-        │   └── chapter-{nn}/
-        │       └── .summary.md
-        └── assets/
+        ├── content/           # Maps to Docusaurus docs/
+        │   └── {NN-Part}/
+        │       ├── README.md              # Part intro
+        │       └── {NN-Chapter}/
+        │           ├── README.md          # Chapter intro
+        │           ├── {NN-lesson}.md     # Lesson content
+        │           └── {NN-lesson}.summary.md  # Lesson summary (sibling)
+        └── static/            # Maps to Docusaurus static/
             ├── images/
             ├── slides/
             ├── videos/
             └── audio/
 ```
 
-### 4. Tool Categories
+**Summary Convention (ADR-0018)**: Summaries use `.summary.md` suffix as sibling files to lessons (e.g., `01-intro.summary.md` for `01-intro.md`).
+
+### 4. Tool Categories (ADR-0018: 9 Tools)
 
 | Category | Tools | Purpose |
 |----------|-------|---------|
-| **Content** | `read_content`, `write_content`, `delete_content` | Lesson CRUD with conflict detection |
-| **Summary** | `read_summary`, `write_summary`, `delete_summary` | Chapter summary management |
+| **Content** | `read_content`, `write_content`, `delete_content` | Lesson/summary CRUD with conflict detection |
 | **Assets** | `upload_asset`, `get_asset`, `list_assets` | Binary asset management with CDN URLs |
 | **Search** | `glob_search`, `grep_search` | File pattern and content search |
 | **Registry** | `list_books` | Book discovery from registry.yaml |
 | **Bulk** | `get_book_archive` | ZIP archive generation |
+
+**Note**: Summary tools were removed in ADR-0018. Summaries are now managed via content tools using the `.summary.md` naming convention.
 
 ## Core Components
 
@@ -220,8 +223,7 @@ result = await write_content(
 
 All tools designed for safe retry:
 
-- `write_content`: Upsert semantics (create or update)
-- `write_summary`: Always overwrites
+- `write_content`: Upsert semantics (create or update) - works for lessons and summaries
 - `delete_content`: No error if file doesn't exist
 - `upload_asset`: Overwrites existing asset
 

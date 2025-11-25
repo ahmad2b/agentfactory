@@ -1,8 +1,8 @@
 """MCP tools for PanaversityFS.
 
-This package contains 12 MCP tool implementations organized by category:
+This package contains 9 MCP tool implementations organized by category (ADR-0018):
 - content.py: Content operations (read_content, write_content, delete_content)
-- summaries.py: Summary operations (read_summary, write_summary, delete_summary)
+              Also handles summaries via .summary.md naming convention
 - assets.py: Asset management (upload_asset, get_asset, list_assets)
 - search.py: Search operations (glob_search, grep_search)
 - registry.py: Registry operations (list_books)

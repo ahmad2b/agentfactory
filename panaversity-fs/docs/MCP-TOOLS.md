@@ -3,35 +3,47 @@
 > Complete API documentation for PanaversityFS MCP tools
 
 **Specification**: [specs/030-panaversity-fs/spec.md](../../specs/030-panaversity-fs/spec.md)
+**ADR-0018**: [Docusaurus-Aligned Storage Structure](../../history/adr/0018-panaversityfs-docusaurus-aligned-structure.md)
 
 ## Overview
 
-PanaversityFS exposes **12 MCP tools** organized into 6 categories:
+PanaversityFS exposes **9 MCP tools** organized into 5 categories (ADR-0018):
 
 | Category | Tools | Count |
 |----------|-------|-------|
 | [Content](#content-tools) | `read_content`, `write_content`, `delete_content` | 3 |
-| [Summary](#summary-tools) | `read_summary`, `write_summary`, `delete_summary` | 3 |
 | [Assets](#asset-tools) | `upload_asset`, `get_asset`, `list_assets` | 3 |
 | [Search](#search-tools) | `glob_search`, `grep_search` | 2 |
 | [Registry](#registry-tools) | `list_books` | 1 |
 | [Bulk](#bulk-tools) | `get_book_archive` | 1 |
 
+**Note**: Summary tools were removed in ADR-0018. Summaries are now managed via content tools using the `.summary.md` naming convention.
+
 ---
 
 ## Content Tools
 
+Content tools handle both lessons and summaries (ADR-0018).
+
 ### `read_content`
 
-Read lesson markdown content with metadata.
+Read markdown content with metadata. Works for lessons and summaries.
 
 **Annotations**: `readOnlyHint=true`, `idempotentHint=true`
 
-**Input**:
+**Input (Lesson)**:
 ```json
 {
   "book_id": "ai-native-python",
-  "path": "lessons/part-1/chapter-01/lesson-01.md"
+  "path": "content/01-Part/01-Chapter/01-intro.md"
+}
+```
+
+**Input (Summary - ADR-0018)**:
+```json
+{
+  "book_id": "ai-native-python",
+  "path": "content/01-Part/01-Chapter/01-intro.summary.md"
 }
 ```
 
@@ -53,32 +65,41 @@ Read lesson markdown content with metadata.
 
 ### `write_content`
 
-Write lesson content with upsert semantics and optional conflict detection.
+Write content with upsert semantics and optional conflict detection. Works for lessons and summaries.
 
 **Annotations**: `idempotentHint=true`
 
-**Input**:
+**Input (Lesson)**:
 ```json
 {
   "book_id": "ai-native-python",
-  "path": "lessons/part-1/chapter-01/lesson-01.md",
+  "path": "content/01-Part/01-Chapter/01-intro.md",
   "content": "---\ntitle: Introduction\n---\n\n# Updated content...",
   "file_hash": "a591a6d40bf420404a011733cfb7b190d62c65bf..."
+}
+```
+
+**Input (Summary - ADR-0018)**:
+```json
+{
+  "book_id": "ai-native-python",
+  "path": "content/01-Part/01-Chapter/01-intro.summary.md",
+  "content": "# Lesson 1 Summary\n\nKey concepts..."
 }
 ```
 
 | Field | Required | Description |
 |-------|----------|-------------|
 | `book_id` | Yes | Book identifier (lowercase alphanumeric + hyphens) |
-| `path` | Yes | Relative path within book |
-| `content` | Yes | Markdown content (max 1MB) |
+| `path` | Yes | Relative path within book (use `.summary.md` for summaries) |
+| `content` | Yes | Markdown content (max 500KB) |
 | `file_hash` | No | SHA256 hash for conflict detection |
 
 **Output**:
 ```json
 {
   "status": "success",
-  "path": "books/ai-native-python/lessons/part-1/chapter-01/lesson-01.md",
+  "path": "books/ai-native-python/content/01-Part/01-Chapter/01-intro.md",
   "file_size": 2456,
   "file_hash": "b7a9c3d4e5f6...",
   "mode": "updated"
@@ -103,15 +124,23 @@ Write lesson content with upsert semantics and optional conflict detection.
 
 ### `delete_content`
 
-Delete lesson content file.
+Delete content file (lesson or summary).
 
 **Annotations**: `destructiveHint=true`, `idempotentHint=true`
 
-**Input**:
+**Input (Lesson)**:
 ```json
 {
   "book_id": "ai-native-python",
-  "path": "lessons/part-1/chapter-01/lesson-01.md"
+  "path": "content/01-Part/01-Chapter/01-intro.md"
+}
+```
+
+**Input (Summary - ADR-0018)**:
+```json
+{
+  "book_id": "ai-native-python",
+  "path": "content/01-Part/01-Chapter/01-intro.summary.md"
 }
 ```
 
@@ -119,109 +148,13 @@ Delete lesson content file.
 ```json
 {
   "status": "success",
-  "path": "books/ai-native-python/lessons/part-1/chapter-01/lesson-01.md",
+  "path": "books/ai-native-python/content/01-Part/01-Chapter/01-intro.md",
   "existed": true,
   "message": "File deleted"
 }
 ```
 
 **Note**: Idempotent - returns success even if file doesn't exist (`existed: false`).
-
----
-
-## Summary Tools
-
-### `read_summary`
-
-Read chapter summary with metadata.
-
-**Annotations**: `readOnlyHint=true`, `idempotentHint=true`
-
-**Input**:
-```json
-{
-  "book_id": "ai-native-python",
-  "chapter_id": "chapter-01"
-}
-```
-
-**Output**:
-```json
-{
-  "path": "books/ai-native-python/chapters/chapter-01/.summary.md",
-  "content": "# Chapter 1 Summary\n\n## Key Concepts...",
-  "file_size": 1234,
-  "last_modified": "2025-11-24T12:00:00Z",
-  "storage_backend": "fs",
-  "sha256": "c8d9e0f1a2b3..."
-}
-```
-
-**Errors**:
-- `ContentNotFoundError`: Summary does not exist
-
-**Storage Path**: `books/{book_id}/chapters/{chapter_id}/.summary.md`
-
----
-
-### `write_summary`
-
-Create or update chapter summary (idempotent upsert).
-
-**Annotations**: `idempotentHint=true`
-
-**Input**:
-```json
-{
-  "book_id": "ai-native-python",
-  "chapter_id": "chapter-01",
-  "content": "# Chapter 1 Summary\n\n## Key Concepts\n- Python basics..."
-}
-```
-
-| Field | Required | Description |
-|-------|----------|-------------|
-| `book_id` | Yes | Book identifier |
-| `chapter_id` | Yes | Chapter identifier (format: `chapter-NN`) |
-| `content` | Yes | Summary markdown (max 100KB) |
-
-**Output**:
-```json
-{
-  "status": "success",
-  "path": "books/ai-native-python/chapters/chapter-01/.summary.md",
-  "file_size": 1234,
-  "sha256": "d1e2f3a4b5c6..."
-}
-```
-
----
-
-### `delete_summary`
-
-Delete chapter summary.
-
-**Annotations**: `destructiveHint=true`, `idempotentHint=true`
-
-**Input**:
-```json
-{
-  "book_id": "ai-native-python",
-  "chapter_id": "chapter-01"
-}
-```
-
-**Output**:
-```json
-{
-  "status": "success",
-  "path": "books/ai-native-python/chapters/chapter-01/.summary.md",
-  "message": "Summary deleted"
-}
-```
-
-**Errors**:
-- `ContentNotFoundError`: Summary does not exist (not idempotent for delete)
 
 ---
 
@@ -266,14 +199,14 @@ Upload binary asset with hybrid pattern.
 {
   "status": "success",
   "method": "direct",
-  "cdn_url": "https://cdn.panaversity.com/books/ai-native-python/assets/images/diagram.png",
+  "cdn_url": "https://cdn.panaversity.com/books/ai-native-python/static/images/diagram.png",
   "file_size": 45231,
   "mime_type": "image/png",
-  "path": "books/ai-native-python/assets/images/diagram.png"
+  "path": "books/ai-native-python/static/images/diagram.png"
 }
 ```
 
-**Storage Path**: `books/{book_id}/assets/{asset_type}/{filename}`
+**Storage Path**: `books/{book_id}/static/{asset_type}/{filename}` (ADR-0018: Docusaurus-aligned)
 
 ---
 
@@ -295,7 +228,7 @@ Get asset metadata including CDN URL.
 **Output**:
 ```json
 {
-  "cdn_url": "https://cdn.panaversity.com/books/ai-native-python/assets/images/diagram.png",
+  "cdn_url": "https://cdn.panaversity.com/books/ai-native-python/static/images/diagram.png",
   "file_size": 45231,
   "mime_type": "image/png",
   "upload_timestamp": "2025-11-24T12:00:00Z",
@@ -333,7 +266,7 @@ List assets for a book with optional type filtering.
 ```json
 [
   {
-    "cdn_url": "https://cdn.panaversity.com/.../diagram.png",
+    "cdn_url": "https://cdn.panaversity.com/books/ai-native-python/static/images/diagram.png",
     "file_size": 45231,
     "mime_type": "image/png",
     "upload_timestamp": "2025-11-24T12:00:00Z",
@@ -342,7 +275,7 @@ List assets for a book with optional type filtering.
     "filename": "diagram.png"
   },
   {
-    "cdn_url": "https://cdn.panaversity.com/.../screenshot.png",
+    "cdn_url": "https://cdn.panaversity.com/books/ai-native-python/static/images/screenshot.png",
     "file_size": 12345,
     "mime_type": "image/png",
     ...
@@ -378,17 +311,18 @@ Search for files matching glob pattern.
 **Output**:
 ```json
 [
-  "books/ai-native-python/lessons/part-1/chapter-01/lesson-01.md",
-  "books/ai-native-python/lessons/part-1/chapter-01/lesson-02.md",
-  "books/ai-native-python/chapters/chapter-01/.summary.md"
+  "books/ai-native-python/content/01-Part/01-Chapter/01-intro.md",
+  "books/ai-native-python/content/01-Part/01-Chapter/01-intro.summary.md",
+  "books/ai-native-python/content/01-Part/01-Chapter/02-variables.md"
 ]
 ```
 
-**Pattern Examples**:
+**Pattern Examples** (ADR-0018: Docusaurus-aligned):
 - `**/*.md` - All markdown files
-- `lessons/**/*.md` - All lesson files
-- `assets/images/**/*.png` - All PNG images
-- `chapters/chapter-01/*` - All files in chapter-01
+- `content/**/*.md` - All content files (lessons + summaries)
+- `content/**/*.summary.md` - All summaries only
+- `static/images/**/*.png` - All PNG images
+- `content/01-Part/01-Chapter/*` - All files in a specific chapter
 
 ---
 
@@ -419,12 +353,12 @@ Search content using regex pattern.
 ```json
 [
   {
-    "file_path": "books/ai-native-python/lessons/part-4/chapter-12/lesson-03.md",
+    "file_path": "books/ai-native-python/content/04-Part/12-Chapter/03-storage.md",
     "line_number": 42,
     "matched_line": "OpenDAL provides unified storage abstraction..."
   },
   {
-    "file_path": "books/ai-native-python/lessons/part-4/chapter-12/lesson-04.md",
+    "file_path": "books/ai-native-python/content/04-Part/12-Chapter/04-backends.md",
     "line_number": 15,
     "matched_line": "We use OpenDAL to access S3 and local filesystem..."
   }
@@ -514,10 +448,9 @@ Generate ZIP archive of entire book.
 - Must complete in <60 seconds
 - Supports up to 500 files / 200MB uncompressed
 
-**Archive Contents**:
-- All lessons (`lessons/**/*.md`)
-- All summaries (`chapters/**/.summary.md`)
-- All assets (`assets/**/*`)
+**Archive Contents** (ADR-0018: Docusaurus-aligned):
+- All content (`content/**/*.md`) - lessons and summaries
+- All static assets (`static/**/*`)
 - Book metadata (`book.yaml`)
 
 ---

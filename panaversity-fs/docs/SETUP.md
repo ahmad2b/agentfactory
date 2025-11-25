@@ -44,11 +44,11 @@ books:
     status: active
 EOF
 
-# Create sample book structure
-mkdir -p /tmp/panaversity-fs-data/books/ai-native-python/{lessons/part-1/chapter-01,chapters/chapter-01,assets/images}
+# Create sample book structure (ADR-0018: Docusaurus-aligned)
+mkdir -p /tmp/panaversity-fs-data/books/ai-native-python/{content/01-Part/01-Chapter,static/images}
 
 # Create sample lesson
-cat > /tmp/panaversity-fs-data/books/ai-native-python/lessons/part-1/chapter-01/lesson-01.md << 'EOF'
+cat > /tmp/panaversity-fs-data/books/ai-native-python/content/01-Part/01-Chapter/01-intro.md << 'EOF'
 ---
 title: Introduction to Python
 ---
@@ -63,11 +63,11 @@ def hello():
 ```
 EOF
 
-# Create sample summary
-cat > /tmp/panaversity-fs-data/books/ai-native-python/chapters/chapter-01/.summary.md << 'EOF'
-# Chapter 1 Summary
+# Create sample summary (ADR-0018: sibling file with .summary.md suffix)
+cat > /tmp/panaversity-fs-data/books/ai-native-python/content/01-Part/01-Chapter/01-intro.summary.md << 'EOF'
+# Lesson 1 Summary
 
-Key concepts covered in this chapter.
+Key concepts covered in this lesson.
 EOF
 ```
 
@@ -174,7 +174,7 @@ Python programming basics.
 
     await write_content(WriteContentInput(
         book_id="ai-native-python",
-        path="lessons/part-1/chapter-01/lesson-01.md",
+        path="content/01-Part/01-Chapter/01-intro.md",
         content=lesson
     ))
 
@@ -193,15 +193,15 @@ uv run python test_all_tools.py
 ### Verify Data in R2 Dashboard
 
 1. Go to **R2 → Your Bucket**
-2. You should see:
+2. You should see (ADR-0018 structure):
    ```
    registry.yaml
    books/
    └── ai-native-python/
-       └── lessons/
-           └── part-1/
-               └── chapter-01/
-                   └── lesson-01.md
+       └── content/
+           └── 01-Part/
+               └── 01-Chapter/
+                   └── 01-intro.md
    ```
 
 ---
@@ -287,7 +287,7 @@ Learn Python basics with Supabase storage.
 
     await write_content(WriteContentInput(
         book_id="ai-native-python",
-        path="lessons/part-1/chapter-01/lesson-01.md",
+        path="content/01-Part/01-Chapter/01-intro.md",
         content=lesson
     ))
 
@@ -372,13 +372,13 @@ npx @modelcontextprotocol/inspector http://localhost:8000/mcp
 ### MCP Inspector Usage
 
 1. Browser opens to inspector UI
-2. You'll see all 14 tools listed
+2. You'll see all 9 tools (ADR-0018) listed
 3. Click a tool to test it
 4. Example: **read_content**
    ```json
    {
      "book_id": "ai-native-python",
-     "path": "lessons/part-1/chapter-01/lesson-01.md"
+     "path": "content/01-Part/01-Chapter/01-intro.md"
    }
    ```
 5. Click **Execute** to test
@@ -507,7 +507,7 @@ curl https://<project-ref>.supabase.co/rest/v1/ \
 
 After testing all backends:
 
-1. ✅ Verify all 14 tools work with each backend
+1. ✅ Verify all 9 tools (ADR-0018) work with each backend
 2. ✅ Test conflict detection (try concurrent writes)
 3. ✅ Verify audit logs are created
 4. ✅ Test archive generation performance

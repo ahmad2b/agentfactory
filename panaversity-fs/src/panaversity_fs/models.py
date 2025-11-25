@@ -1,11 +1,12 @@
 """Pydantic domain models for PanaversityFS.
 
 Defines all entity models used throughout the system:
-- Content operations (lessons, markdown files)
+- Content operations (lessons and summaries - ADR-0018)
 - Asset management (images, slides, videos, audio)
-- Summary management (chapter summaries)
 - Registry (book catalog)
 - Audit trail (operation logs)
+
+Note: Summary files use content tools with .summary.md naming convention (ADR-0018).
 """
 
 from pydantic import BaseModel, Field, field_validator, ConfigDict
@@ -27,16 +28,13 @@ class AssetType(str, Enum):
 
 
 class OperationType(str, Enum):
-    """Audit log operation types."""
+    """Audit log operation types (9 tools per ADR-0018)."""
     READ_CONTENT = "read_content"
     WRITE_CONTENT = "write_content"
     DELETE_CONTENT = "delete_content"
     UPLOAD_ASSET = "upload_asset"
     GET_ASSET = "get_asset"
     LIST_ASSETS = "list_assets"
-    READ_SUMMARY = "read_summary"
-    WRITE_SUMMARY = "write_summary"
-    DELETE_SUMMARY = "delete_summary"
     GET_BOOK_ARCHIVE = "get_book_archive"
     LIST_BOOKS = "list_books"
     GLOB_SEARCH = "glob_search"
@@ -86,24 +84,6 @@ class AssetMetadata(BaseModel):
     uploaded_by_agent_id: str = Field(..., description="Agent ID that uploaded the asset")
     asset_type: AssetType = Field(..., description="Asset category")
     filename: str = Field(..., description="Original filename")
-
-
-# ============================================================================
-# Summary Models
-# ============================================================================
-
-class SummaryMetadata(BaseModel):
-    """Metadata for chapter summary files (FR-016).
-
-    Returned by get_summary and list_summaries tools.
-    """
-    model_config = ConfigDict(str_strip_whitespace=True)
-
-    file_size: int = Field(..., description="File size in bytes", ge=0)
-    last_modified: datetime = Field(..., description="Last modification timestamp")
-    storage_backend: Literal["fs", "s3", "supabase"] = Field(..., description="Storage backend used")
-    file_hash_sha256: str = Field(..., description="SHA256 hash", min_length=64, max_length=64)
-    path: str = Field(..., description="Full path to summary file")
 
 
 # ============================================================================
@@ -225,35 +205,6 @@ class ListAssetsInput(BaseModel):
 
     book_id: str = Field(..., description="Book identifier", pattern=r'^[a-z0-9-]+$', min_length=3, max_length=50)
     asset_type: AssetType | None = Field(default=None, description="Filter by asset type (optional)")
-
-
-# ============================================================================
-# Summary Input Models
-# ============================================================================
-
-class ReadSummaryInput(BaseModel):
-    """Input model for read_summary tool."""
-    model_config = ConfigDict(str_strip_whitespace=True, extra='forbid')
-
-    book_id: str = Field(..., description="Book identifier", pattern=r'^[a-z0-9-]+$', min_length=3, max_length=50)
-    chapter_id: str = Field(..., description="Chapter identifier (e.g., 'chapter-01')", pattern=r'^chapter-\d{2}$')
-
-
-class WriteSummaryInput(BaseModel):
-    """Input model for write_summary tool."""
-    model_config = ConfigDict(str_strip_whitespace=True, extra='forbid')
-
-    book_id: str = Field(..., description="Book identifier", pattern=r'^[a-z0-9-]+$', min_length=3, max_length=50)
-    chapter_id: str = Field(..., description="Chapter identifier (e.g., 'chapter-01')", pattern=r'^chapter-\d{2}$')
-    content: str = Field(..., description="Summary markdown content", min_length=1, max_length=100_000)
-
-
-class DeleteSummaryInput(BaseModel):
-    """Input model for delete_summary tool."""
-    model_config = ConfigDict(str_strip_whitespace=True, extra='forbid')
-
-    book_id: str = Field(..., description="Book identifier", pattern=r'^[a-z0-9-]+$', min_length=3, max_length=50)
-    chapter_id: str = Field(..., description="Chapter identifier (e.g., 'chapter-01')", pattern=r'^chapter-\d{2}$')
 
 
 # ============================================================================

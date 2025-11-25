@@ -1,9 +1,13 @@
 """Content operation tools for PanaversityFS.
 
-Implements 3 MCP tools for lesson content management:
-- read_content: Read lesson markdown with metadata
+Implements 3 MCP tools for content management (lessons and summaries per ADR-0018):
+- read_content: Read markdown content with metadata
 - write_content: Upsert with conflict detection (file_hash)
-- delete_content: Delete lesson file
+- delete_content: Delete content file
+
+Path structure (Docusaurus-aligned):
+- Lessons: content/{part}/{chapter}/{lesson}.md
+- Summaries: content/{part}/{chapter}/{lesson}.summary.md
 """
 
 from panaversity_fs.server import mcp
@@ -21,7 +25,7 @@ import json
 @mcp.tool(
     name="read_content",
     annotations={
-        "title": "Read Lesson Content",
+        "title": "Read Content",
         "readOnlyHint": True,
         "destructiveHint": False,
         "idempotentHint": True,
@@ -29,21 +33,27 @@ import json
     }
 )
 async def read_content(params: ReadContentInput) -> str:
-    """Read lesson markdown content with metadata (FR-009).
+    """Read markdown content with metadata (FR-009).
 
-    Returns lesson content plus metadata: file_size, last_modified, storage_backend, file_hash.
+    Returns content plus metadata: file_size, last_modified, storage_backend, file_hash.
+    Works for lessons and summaries (ADR-0018).
 
     Args:
         params (ReadContentInput): Validated input containing:
             - book_id (str): Book identifier (e.g., 'ai-native-python')
-            - path (str): Lesson path relative to book root (e.g., 'lessons/part-1/chapter-01/lesson-01.md')
+            - path (str): Content path relative to book root
 
     Returns:
         str: JSON-formatted response with content and metadata
 
     Example:
         ```
-        Input: {"book_id": "ai-native-python", "path": "lessons/part-1/chapter-01/lesson-01.md"}
+        # Read lesson
+        Input: {"book_id": "my-book", "path": "content/01-Part/01-Chapter/01-lesson.md"}
+
+        # Read summary
+        Input: {"book_id": "my-book", "path": "content/01-Part/01-Chapter/01-lesson.summary.md"}
+
         Output: {
           "content": "# Lesson 1\\n\\nIntroduction...",
           "file_size": 1234,
@@ -126,7 +136,7 @@ async def read_content(params: ReadContentInput) -> str:
 @mcp.tool(
     name="write_content",
     annotations={
-        "title": "Write Lesson Content (Upsert)",
+        "title": "Write Content (Upsert)",
         "readOnlyHint": False,
         "destructiveHint": False,
         "idempotentHint": True,
@@ -134,7 +144,9 @@ async def read_content(params: ReadContentInput) -> str:
     }
 )
 async def write_content(params: WriteContentInput) -> str:
-    """Write lesson content with upsert semantics and conflict detection (FR-007, FR-008).
+    """Write content with upsert semantics and conflict detection (FR-007, FR-008).
+
+    Works for lessons and summaries (ADR-0018).
 
     Supports two modes:
     - Update mode (file_hash provided): Verify hash matches before write, detect conflicts
@@ -143,8 +155,8 @@ async def write_content(params: WriteContentInput) -> str:
     Args:
         params (WriteContentInput): Validated input containing:
             - book_id (str): Book identifier
-            - path (str): Lesson path relative to book root
-            - content (str): Markdown content with YAML frontmatter
+            - path (str): Content path relative to book root
+            - content (str): Markdown content
             - file_hash (str | None): SHA256 hash for conflict detection (optional)
 
     Returns:
@@ -152,17 +164,24 @@ async def write_content(params: WriteContentInput) -> str:
 
     Example:
         ```
-        # Create new file
+        # Create lesson
         Input: {
-          "book_id": "ai-native-python",
-          "path": "lessons/part-1/chapter-01/lesson-01.md",
+          "book_id": "my-book",
+          "path": "content/01-Part/01-Chapter/01-lesson.md",
           "content": "# Lesson 1\\n\\nContent..."
+        }
+
+        # Create summary for that lesson
+        Input: {
+          "book_id": "my-book",
+          "path": "content/01-Part/01-Chapter/01-lesson.summary.md",
+          "content": "# Summary\\n\\nKey points..."
         }
 
         # Update with conflict detection
         Input: {
-          "book_id": "ai-native-python",
-          "path": "lessons/part-1/chapter-01/lesson-01.md",
+          "book_id": "my-book",
+          "path": "content/01-Part/01-Chapter/01-lesson.md",
           "content": "# Lesson 1 (Updated)\\n\\nNew content...",
           "file_hash": "a591a6d40bf420404a011733cfb7b190..."
         }
@@ -251,7 +270,7 @@ async def write_content(params: WriteContentInput) -> str:
 @mcp.tool(
     name="delete_content",
     annotations={
-        "title": "Delete Lesson Content",
+        "title": "Delete Content",
         "readOnlyHint": False,
         "destructiveHint": True,
         "idempotentHint": True,
@@ -259,22 +278,28 @@ async def write_content(params: WriteContentInput) -> str:
     }
 )
 async def delete_content(params: DeleteContentInput) -> str:
-    """Delete lesson content file.
+    """Delete content file (lesson or summary).
 
     Idempotent: Deleting non-existent file returns success.
+    Works for lessons and summaries (ADR-0018).
 
     Args:
         params (DeleteContentInput): Validated input containing:
             - book_id (str): Book identifier
-            - path (str): Lesson path to delete
+            - path (str): Content path to delete
 
     Returns:
         str: Success confirmation message
 
     Example:
         ```
-        Input: {"book_id": "ai-native-python", "path": "lessons/part-1/chapter-01/lesson-01.md"}
-        Output: {"status": "success", "path": "books/ai-native-python/...", "existed": true}
+        # Delete lesson
+        Input: {"book_id": "my-book", "path": "content/01-Part/01-Chapter/01-lesson.md"}
+
+        # Delete summary
+        Input: {"book_id": "my-book", "path": "content/01-Part/01-Chapter/01-lesson.summary.md"}
+
+        Output: {"status": "success", "path": "books/my-book/...", "existed": true}
         ```
     """
     start_time = datetime.now(timezone.utc)

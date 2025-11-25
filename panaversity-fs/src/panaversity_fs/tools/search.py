@@ -78,8 +78,8 @@ async def glob_search(params: GlobSearchInput) -> str:
         matches = []
 
         try:
-            # List all files recursively
-            entries = await op.list(search_base)
+            # Scan all files recursively (scan() is recursive, list() is not)
+            entries = await op.scan(search_base)
 
             async for entry in entries:
                 # Skip directories
@@ -141,14 +141,21 @@ def _glob_matches(path: str, pattern: str) -> bool:
         bool: True if path matches pattern
     """
     # Convert glob pattern to regex
-    # ** matches zero or more directories
-    # * matches anything except /
-    # ? matches single character except /
+    # Order matters: process ** before * to avoid double-replacement
 
-    regex_pattern = pattern.replace('.', '\\.')  # Escape dots
-    regex_pattern = regex_pattern.replace('**/', '(?:.*/)?')  # ** matches zero or more dirs
-    regex_pattern = regex_pattern.replace('*', '[^/]*')  # * matches anything except /
-    regex_pattern = regex_pattern.replace('?', '[^/]')  # ? matches single char except /
+    # First, escape special regex chars except glob wildcards
+    regex_pattern = re.escape(pattern)
+
+    # Now unescape and convert glob patterns
+    # \*\*/ -> match zero or more path segments
+    regex_pattern = regex_pattern.replace(r'\*\*/', '(?:[^/]+/)*')
+    # \*\* -> match everything (including /)
+    regex_pattern = regex_pattern.replace(r'\*\*', '.*')
+    # \* -> match anything except /
+    regex_pattern = regex_pattern.replace(r'\*', '[^/]*')
+    # \? -> match single char except /
+    regex_pattern = regex_pattern.replace(r'\?', '[^/]')
+
     regex_pattern = f'^{regex_pattern}$'
 
     return bool(re.match(regex_pattern, path))
@@ -238,8 +245,8 @@ async def grep_search(params: GrepSearchInput) -> str:
         result_count = 0
 
         try:
-            # List all files recursively
-            entries = await op.list(search_base)
+            # Scan all files recursively (scan() is recursive, list() is not)
+            entries = await op.scan(search_base)
 
             async for entry in entries:
                 # Only search markdown files

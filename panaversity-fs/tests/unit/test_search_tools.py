@@ -1,4 +1,7 @@
-"""Unit tests for search operation tools."""
+"""Unit tests for search operation tools.
+
+Updated for ADR-0018: Uses Docusaurus-aligned content/ structure.
+"""
 
 import pytest
 import json
@@ -24,16 +27,16 @@ class TestGlobSearch:
         assert len(data) >= 0
 
     @pytest.mark.asyncio
-    async def test_glob_find_lessons_only(self, sample_book_data):
-        """Test finding only lesson files."""
+    async def test_glob_find_content_only(self, sample_book_data):
+        """Test finding only content files (ADR-0018: content/ structure)."""
         result = await glob_search(GlobSearchInput(
             book_id=sample_book_data["book_id"],
-            pattern="lessons/**/*.md"
+            pattern="content/**/*.md"
         ))
 
         data = json.loads(result)
         assert isinstance(data, list)
-        assert all("lessons" in path for path in data)
+        assert all("content" in path for path in data)
 
     @pytest.mark.asyncio
     async def test_glob_no_matches(self, sample_book_data):
@@ -48,10 +51,10 @@ class TestGlobSearch:
 
     @pytest.mark.asyncio
     async def test_glob_specific_pattern(self, sample_book_data):
-        """Test glob with specific pattern."""
+        """Test glob with specific pattern (ADR-0018: .summary.md convention)."""
         result = await glob_search(GlobSearchInput(
             book_id=sample_book_data["book_id"],
-            pattern="chapters/**/.summary.md"
+            pattern="content/**/*.summary.md"
         ))
 
         data = json.loads(result)

@@ -1,9 +1,11 @@
-"""End-to-end tests for complete book management workflows."""
+"""End-to-end tests for complete book management workflows.
+
+Updated for ADR-0018: Summaries use content tools with .summary.md naming convention.
+"""
 
 import pytest
 import json
-from panaversity_fs.tools.content import write_content
-from panaversity_fs.tools.summaries import write_summary, read_summary
+from panaversity_fs.tools.content import write_content, read_content
 from panaversity_fs.tools.registry import list_books
 from panaversity_fs.tools.search import glob_search, grep_search
 from panaversity_fs.tools.bulk import get_book_archive
@@ -44,10 +46,10 @@ storage_backend: fs
 """
         await op.write(f"books/{book_id}/book.yaml", book_yaml.encode('utf-8'))
 
-        # 3. Create lessons for Part 1, Chapter 1
+        # 3. Create lessons for Part 1, Chapter 1 (ADR-0018: content/ structure)
         lessons = [
             {
-                "path": f"lessons/part-1/chapter-01/lesson-01.md",
+                "path": "content/01-Part/01-Chapter/01-lesson.md",
                 "content": """---
 title: Introduction
 chapter: 1
@@ -73,7 +75,7 @@ print("Hello, World!")
 """
             },
             {
-                "path": f"lessons/part-1/chapter-01/lesson-02.md",
+                "path": "content/01-Part/01-Chapter/02-lesson.md",
                 "content": """---
 title: Variables
 chapter: 1
@@ -99,11 +101,11 @@ age = 25
                 content=lesson["content"]
             ))
 
-        # 4. Create chapter summary
-        await write_summary(WriteSummaryInput(
+        # 4. Create lesson summary (ADR-0018: using .summary.md convention)
+        await write_content(WriteContentInput(
             book_id=book_id,
-            chapter_id="chapter-01",
-            content="""# Chapter 1 Summary
+            path="content/01-Part/01-Chapter/01-lesson.summary.md",
+            content="""# Lesson 1 Summary
 
 ## Key Concepts
 
@@ -113,7 +115,7 @@ age = 25
 
 ## Next Steps
 
-Proceed to Chapter 2 for control flow.
+Proceed to Lesson 2.
 """
         ))
 
@@ -169,7 +171,7 @@ class TestBookEvolutionWorkflow:
 """
         await op.write("registry.yaml", registry.encode('utf-8'))
 
-        # Version 1: Initial lesson
+        # Version 1: Initial lesson (ADR-0018: content/ structure)
         v1_content = """---
 title: Lesson V1
 version: 1
@@ -181,13 +183,13 @@ Initial content.
 """
         write_v1 = await write_content(WriteContentInput(
             book_id=book_id,
-            path="lessons/evolving-lesson.md",
+            path="content/01-Part/01-Chapter/01-evolving-lesson.md",
             content=v1_content
         ))
         v1_data = json.loads(write_v1)
         hash_v1 = v1_data["file_hash"]
 
-        # Version 2: Add more content
+        # Version 2: Add more content (ADR-0018: content/ structure)
         v2_content = """---
 title: Lesson V2
 version: 2
@@ -203,7 +205,7 @@ Added in version 2.
 """
         write_v2 = await write_content(WriteContentInput(
             book_id=book_id,
-            path="lessons/evolving-lesson.md",
+            path="content/01-Part/01-Chapter/01-evolving-lesson.md",
             content=v2_content,
             file_hash=hash_v1
         ))
@@ -255,12 +257,12 @@ class TestMultiBookManagement:
 """
         await op.write("registry.yaml", registry.encode('utf-8'))
 
-        # Create content in each book
+        # Create content in each book (ADR-0018: content/ structure)
         books = ["book-python", "book-rust", "book-go"]
         for book_id in books:
             await write_content(WriteContentInput(
                 book_id=book_id,
-                path="lessons/intro.md",
+                path="content/01-Part/01-Chapter/01-intro.md",
                 content=f"# Introduction to {book_id}"
             ))
 
@@ -269,13 +271,14 @@ class TestMultiBookManagement:
         book_list = json.loads(list_result)
         assert len(book_list) == 3
 
-        # Search within specific book
+        # Search within specific book (ADR-0018: content/ structure)
         python_search = await glob_search(GlobSearchInput(
             book_id="book-python",
-            pattern="**/*.md"
+            pattern="content/**/*.md"
         ))
         python_files = json.loads(python_search)
-        assert all("book-python" in f for f in python_files)
+        # Files from book-python will have book-python in their full path
+        assert all("book-python" in f for f in python_files) if python_files else True
 
         # Generate archive for each book
         for book_id in books:
