@@ -414,7 +414,7 @@ class MeetingScheduler:
             local = self.meeting_utc.astimezone(tz)
             lines.append(f"{city}: {local.strftime('%A %I:%M %p')}")
 
-        return r"\n".join(lines)
+        return "\\n".join(lines)
 
 # Use it
 meeting = MeetingScheduler(datetime(2025, 11, 9, 14, 30, tzinfo=timezone.utc))
