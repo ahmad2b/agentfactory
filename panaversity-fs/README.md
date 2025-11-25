@@ -7,8 +7,10 @@ Agent-Native Multi-Book Storage System - MCP server for educational content mana
 ## Features
 
 - **9 MCP Tools**: Content, assets, search, bulk operations (ADR-0018)
+- **Bulk Content Reads**: `read_content` supports `scope` parameter (file/chapter/part)
+- **Binary Asset Download**: `get_asset` with `include_binary=true` for direct data
 - **3 Storage Backends**: Local filesystem, Cloudflare R2, Supabase
-- **45 Tests**: Unit, integration, e2e, edge cases (100% passing)
+- **60 Tests**: Unit, integration, e2e, edge cases (100% passing)
 - **Docusaurus-Aligned**: Storage structure mirrors Docusaurus docs/ convention
 
 ## Quick Start
@@ -23,7 +25,7 @@ export PANAVERSITY_STORAGE_ROOT=/tmp/panaversity-test
 
 # Test
 uv run pytest tests/ -q
-# Expected: 45 passed
+# Expected: 60 passed
 
 # Run server
 uv run python -m panaversity_fs.server
@@ -33,10 +35,10 @@ uv run python -m panaversity_fs.server
 
 | Category | Tools | Description |
 |----------|-------|-------------|
-| Content | `read_content`, `write_content`, `delete_content` | Lesson/summary CRUD with conflict detection |
-| Assets | `upload_asset`, `get_asset`, `list_assets` | Binary assets with CDN URLs |
+| Content | `read_content`, `write_content`, `delete_content` | Lesson/summary CRUD with conflict detection. Supports `scope` for bulk reads |
+| Assets | `upload_asset`, `get_asset`, `list_assets` | Binary assets with CDN URLs. `get_asset` supports `include_binary` |
 | Search | `glob_search`, `grep_search` | File pattern and content search |
-| Registry | `list_books` | Book discovery |
+| Registry | `list_books` | Dynamic book discovery (no registry.yaml required) |
 | Bulk | `get_book_archive` | ZIP archive generation |
 
 **Note**: Summary operations use content tools with `.summary.md` naming convention (ADR-0018).

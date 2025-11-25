@@ -27,6 +27,18 @@ class AssetType(str, Enum):
     AUDIO = "audio"
 
 
+class ContentScope(str, Enum):
+    """Scope for read_content operations (Option B enhancement).
+
+    - FILE: Read single file (default, original behavior)
+    - CHAPTER: Read all .md files in the chapter directory
+    - PART: Read all .md files in the part directory (all chapters)
+    """
+    FILE = "file"
+    CHAPTER = "chapter"
+    PART = "part"
+
+
 class OperationType(str, Enum):
     """Audit log operation types (9 tools per ADR-0018)."""
     READ_CONTENT = "read_content"
@@ -74,6 +86,7 @@ class AssetMetadata(BaseModel):
     """Metadata for binary assets (FR-012).
 
     Returned by get_asset and list_assets tools.
+    When include_binary=true on get_asset, binary_data field is populated.
     """
     model_config = ConfigDict(str_strip_whitespace=True)
 
@@ -84,6 +97,7 @@ class AssetMetadata(BaseModel):
     uploaded_by_agent_id: str = Field(..., description="Agent ID that uploaded the asset")
     asset_type: AssetType = Field(..., description="Asset category")
     filename: str = Field(..., description="Original filename")
+    binary_data: str | None = Field(default=None, description="Base64-encoded binary data (only when include_binary=true)")
 
 
 # ============================================================================
@@ -126,11 +140,18 @@ class AuditEntry(BaseModel):
 # ============================================================================
 
 class ReadContentInput(BaseModel):
-    """Input model for read_content tool."""
+    """Input model for read_content tool.
+
+    Supports single file or bulk reads via scope parameter:
+    - scope=file (default): Read single file at path
+    - scope=chapter: Read all .md files in the chapter (path should be chapter directory)
+    - scope=part: Read all .md files in the part (path should be part directory)
+    """
     model_config = ConfigDict(str_strip_whitespace=True, extra='forbid')
 
     book_id: str = Field(..., description="Book identifier", pattern=r'^[a-z0-9-]+$', min_length=3, max_length=50)
-    path: str = Field(..., description="Content path relative to book root (e.g., 'content/01-Part/01-Chapter/01-lesson.md')", min_length=1, max_length=255)
+    path: str = Field(..., description="Content path relative to book root (e.g., 'content/01-Part/01-Chapter/01-lesson.md' for file, 'content/01-Part/01-Chapter' for chapter)", min_length=1, max_length=255)
+    scope: ContentScope = Field(default=ContentScope.FILE, description="Read scope: 'file' (single file), 'chapter' (all .md in chapter), 'part' (all .md in part)")
 
 
 class WriteContentInput(BaseModel):
@@ -173,12 +194,17 @@ class UploadAssetInput(BaseModel):
 
 
 class GetAssetInput(BaseModel):
-    """Input model for get_asset tool."""
+    """Input model for get_asset tool.
+
+    By default returns metadata + CDN URL. Use include_binary=true to also
+    return base64-encoded binary data (for Docusaurus plugin or direct download).
+    """
     model_config = ConfigDict(str_strip_whitespace=True, extra='forbid')
 
     book_id: str = Field(..., description="Book identifier", pattern=r'^[a-z0-9-]+$', min_length=3, max_length=50)
     asset_type: AssetType = Field(..., description="Asset category")
     filename: str = Field(..., description="Asset filename", min_length=1, max_length=255)
+    include_binary: bool = Field(default=False, description="Include base64-encoded binary data in response (default: false, metadata only)")
 
 
 class ListAssetsInput(BaseModel):

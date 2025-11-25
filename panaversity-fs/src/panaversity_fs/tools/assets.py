@@ -2,8 +2,11 @@
 
 Implements 3 MCP tools for binary asset management:
 - upload_asset: Hybrid upload (direct <10MB, presigned ≥10MB)
-- get_asset: Get asset metadata + CDN URL
+- get_asset: Get asset metadata + CDN URL (optional: include binary data)
 - list_assets: List assets with filtering
+
+Storage path (ADR-0018 Docusaurus-aligned):
+    books/{book_id}/static/{asset_type}/{filename}
 """
 
 from panaversity_fs.app import mcp
@@ -64,7 +67,7 @@ async def upload_asset(params: UploadAssetInput) -> str:
         Output: {
           "status": "success",
           "method": "direct",
-          "cdn_url": "https://cdn.panaversity.com/books/ai-native-python/assets/images/diagram.png",
+          "cdn_url": "https://cdn.panaversity.com/books/ai-native-python/static/images/diagram.png",
           "file_size": 45231
         }
 
@@ -79,7 +82,7 @@ async def upload_asset(params: UploadAssetInput) -> str:
           "status": "presigned_url",
           "method": "presigned",
           "upload_url": "https://...",
-          "cdn_url": "https://cdn.panaversity.com/books/ai-native-python/assets/videos/tutorial.mp4",
+          "cdn_url": "https://cdn.panaversity.com/books/ai-native-python/static/videos/tutorial.mp4",
           "expires_in": 3600
         }
         ```
@@ -91,7 +94,7 @@ async def upload_asset(params: UploadAssetInput) -> str:
         safe_filename = sanitize_filename(params.filename)
 
         # Build storage path
-        asset_path = f"books/{params.book_id}/assets/{params.asset_type.value}/{safe_filename}"
+        asset_path = f"books/{params.book_id}/static/{params.asset_type.value}/{safe_filename}"
 
         # Get operator and config
         op = get_operator()
@@ -201,7 +204,7 @@ async def upload_asset(params: UploadAssetInput) -> str:
         # Log error
         await log_operation(
             operation=OperationType.UPLOAD_ASSET,
-            path=f"books/{params.book_id}/assets/{params.asset_type.value}/{params.filename}",
+            path=f"books/{params.book_id}/static/{params.asset_type.value}/{params.filename}",
             agent_id="system",
             status=OperationStatus.ERROR,
             error_message=str(e)
@@ -223,30 +226,44 @@ async def upload_asset(params: UploadAssetInput) -> str:
 async def get_asset(params: GetAssetInput) -> str:
     """Get asset metadata including CDN URL (FR-012).
 
+    Optionally include base64-encoded binary data for direct download.
+
     Args:
         params (GetAssetInput): Validated input containing:
             - book_id (str): Book identifier
             - asset_type (AssetType): Asset category
             - filename (str): Asset filename
+            - include_binary (bool): Include base64 binary data (default: false)
 
     Returns:
-        str: JSON response with asset metadata
+        str: JSON response with asset metadata (and binary_data if requested)
 
     Example:
         ```
+        # Metadata only (default)
         Input: {
           "book_id": "ai-native-python",
           "asset_type": "images",
           "filename": "diagram.png"
         }
         Output: {
-          "cdn_url": "https://cdn.panaversity.com/books/ai-native-python/assets/images/diagram.png",
+          "cdn_url": "https://cdn.panaversity.com/books/ai-native-python/static/images/diagram.png",
           "file_size": 45231,
           "mime_type": "image/png",
-          "upload_timestamp": "2025-11-24T12:00:00Z",
-          "uploaded_by_agent_id": "system",
+          ...
+        }
+
+        # With binary data (for Docusaurus plugin)
+        Input: {
+          "book_id": "ai-native-python",
           "asset_type": "images",
-          "filename": "diagram.png"
+          "filename": "diagram.png",
+          "include_binary": true
+        }
+        Output: {
+          "cdn_url": "...",
+          "file_size": 45231,
+          "binary_data": "iVBORw0KGgoAAAANSUhEUgAA..."
         }
         ```
     """
@@ -257,7 +274,7 @@ async def get_asset(params: GetAssetInput) -> str:
         safe_filename = sanitize_filename(params.filename)
 
         # Build storage path
-        asset_path = f"books/{params.book_id}/assets/{params.asset_type.value}/{safe_filename}"
+        asset_path = f"books/{params.book_id}/static/{params.asset_type.value}/{safe_filename}"
 
         # Get operator and config
         op = get_operator()
@@ -277,6 +294,12 @@ async def get_asset(params: GetAssetInput) -> str:
             safe_filename
         )
 
+        # Optionally read binary data
+        binary_data_b64 = None
+        if params.include_binary:
+            binary_content = await op.read(asset_path)
+            binary_data_b64 = base64.b64encode(binary_content).decode('ascii')
+
         # Build response
         asset_metadata = AssetMetadata(
             cdn_url=cdn_url,
@@ -285,7 +308,8 @@ async def get_asset(params: GetAssetInput) -> str:
             upload_timestamp=metadata.last_modified,
             uploaded_by_agent_id="system",  # TODO: Track uploader in metadata
             asset_type=params.asset_type,
-            filename=safe_filename
+            filename=safe_filename,
+            binary_data=binary_data_b64
         )
 
         # Log success
@@ -304,7 +328,7 @@ async def get_asset(params: GetAssetInput) -> str:
         # Log error
         await log_operation(
             operation=OperationType.GET_ASSET,
-            path=f"books/{params.book_id}/assets/{params.asset_type.value}/{params.filename}",
+            path=f"books/{params.book_id}/static/{params.asset_type.value}/{params.filename}",
             agent_id="system",
             status=OperationStatus.ERROR,
             error_message="Asset not found"
@@ -316,7 +340,7 @@ async def get_asset(params: GetAssetInput) -> str:
         # Log error
         await log_operation(
             operation=OperationType.GET_ASSET,
-            path=f"books/{params.book_id}/assets/{params.asset_type.value}/{params.filename}",
+            path=f"books/{params.book_id}/static/{params.asset_type.value}/{params.filename}",
             agent_id="system",
             status=OperationStatus.ERROR,
             error_message=str(e)
@@ -380,12 +404,12 @@ async def list_assets(params: ListAssetsInput) -> str:
         # Determine search paths
         if params.asset_type:
             # List specific type
-            search_paths = [f"books/{params.book_id}/assets/{params.asset_type.value}/"]
+            search_paths = [f"books/{params.book_id}/static/{params.asset_type.value}/"]
         else:
             # List all types
             from panaversity_fs.models import AssetType
             search_paths = [
-                f"books/{params.book_id}/assets/{asset_type.value}/"
+                f"books/{params.book_id}/static/{asset_type.value}/"
                 for asset_type in AssetType
             ]
 
@@ -394,7 +418,7 @@ async def list_assets(params: ListAssetsInput) -> str:
 
         for search_path in search_paths:
             # Extract asset_type from path
-            # Path format: books/{book_id}/assets/{asset_type}/
+            # Path format: books/{book_id}/static/{asset_type}/
             path_parts = search_path.rstrip('/').split('/')
             current_asset_type = path_parts[-1]  # Last part is asset_type
 
@@ -435,7 +459,7 @@ async def list_assets(params: ListAssetsInput) -> str:
                             filename=filename
                         )
 
-                        assets.append(asset_metadata.model_dump())
+                        assets.append(asset_metadata.model_dump(mode='json'))
 
                     except Exception as e:
                         # Skip files that can't be accessed
@@ -449,7 +473,7 @@ async def list_assets(params: ListAssetsInput) -> str:
         execution_time = int((datetime.now(timezone.utc) - start_time).total_seconds() * 1000)
         await log_operation(
             operation=OperationType.LIST_ASSETS,
-            path=f"books/{params.book_id}/assets/",
+            path=f"books/{params.book_id}/static/",
             agent_id="system",
             status=OperationStatus.SUCCESS,
             execution_time_ms=execution_time
@@ -461,7 +485,7 @@ async def list_assets(params: ListAssetsInput) -> str:
         # Log error
         await log_operation(
             operation=OperationType.LIST_ASSETS,
-            path=f"books/{params.book_id}/assets/",
+            path=f"books/{params.book_id}/static/",
             agent_id="system",
             status=OperationStatus.ERROR,
             error_message=str(e)

@@ -11,7 +11,7 @@ Path structure (Docusaurus-aligned):
 """
 
 from panaversity_fs.app import mcp
-from panaversity_fs.models import ReadContentInput, WriteContentInput, DeleteContentInput, ContentMetadata
+from panaversity_fs.models import ReadContentInput, WriteContentInput, DeleteContentInput, ContentMetadata, ContentScope
 from panaversity_fs.storage import get_operator
 from panaversity_fs.storage_utils import compute_sha256, validate_path
 from panaversity_fs.errors import ContentNotFoundError, ConflictError, InvalidPathError
@@ -20,6 +20,7 @@ from panaversity_fs.models import OperationType, OperationStatus
 from panaversity_fs.config import get_config
 from datetime import datetime, timezone
 import json
+import fnmatch
 
 
 @mcp.tool(
@@ -35,32 +36,42 @@ import json
 async def read_content(params: ReadContentInput) -> str:
     """Read markdown content with metadata (FR-009).
 
-    Returns content plus metadata: file_size, last_modified, storage_backend, file_hash.
-    Works for lessons and summaries (ADR-0018).
+    Supports three scopes:
+    - file (default): Read single file, return content + metadata
+    - chapter: Read all .md files in a chapter directory
+    - part: Read all .md files in a part directory (all chapters)
 
     Args:
         params (ReadContentInput): Validated input containing:
             - book_id (str): Book identifier (e.g., 'ai-native-python')
             - path (str): Content path relative to book root
+            - scope (ContentScope): file/chapter/part (default: file)
 
     Returns:
-        str: JSON-formatted response with content and metadata
+        str: JSON-formatted response
+            - scope=file: Single ContentMetadata object
+            - scope=chapter/part: Array of ContentMetadata objects with path field
 
     Example:
         ```
-        # Read lesson
+        # Read single file (default)
         Input: {"book_id": "my-book", "path": "content/01-Part/01-Chapter/01-lesson.md"}
+        Output: {"content": "...", "file_size": 1234, ...}
 
-        # Read summary
-        Input: {"book_id": "my-book", "path": "content/01-Part/01-Chapter/01-lesson.summary.md"}
+        # Read entire chapter
+        Input: {"book_id": "my-book", "path": "content/01-Part/01-Chapter", "scope": "chapter"}
+        Output: [
+          {"path": "content/01-Part/01-Chapter/README.md", "content": "...", ...},
+          {"path": "content/01-Part/01-Chapter/01-lesson.md", "content": "...", ...}
+        ]
 
-        Output: {
-          "content": "# Lesson 1\\n\\nIntroduction...",
-          "file_size": 1234,
-          "last_modified": "2025-11-24T12:00:00Z",
-          "storage_backend": "fs",
-          "file_hash_sha256": "a591a6d40bf420404a011733cfb7b190..."
-        }
+        # Read entire part
+        Input: {"book_id": "my-book", "path": "content/01-Part", "scope": "part"}
+        Output: [
+          {"path": "content/01-Part/README.md", "content": "...", ...},
+          {"path": "content/01-Part/01-Chapter/README.md", "content": "...", ...},
+          ...
+        ]
         ```
     """
     start_time = datetime.now(timezone.utc)
@@ -70,43 +81,123 @@ async def read_content(params: ReadContentInput) -> str:
         if not validate_path(params.path):
             raise InvalidPathError(params.path, "Path contains invalid characters or traversal attempts")
 
-        # Build full path
-        full_path = f"books/{params.book_id}/{params.path}"
-
         # Get operator
         op = get_operator()
         config = get_config()
 
-        # Read content
-        content_bytes = await op.read(full_path)
-        content = content_bytes.decode('utf-8')
+        # Handle different scopes
+        if params.scope == ContentScope.FILE:
+            # Original single-file behavior
+            full_path = f"books/{params.book_id}/{params.path}"
 
-        # Get metadata
-        metadata = await op.stat(full_path)
+            # Read content
+            content_bytes = await op.read(full_path)
+            content = content_bytes.decode('utf-8')
 
-        # Compute hash
-        file_hash = compute_sha256(content_bytes)
+            # Get metadata
+            metadata = await op.stat(full_path)
 
-        # Build response
-        response = ContentMetadata(
-            file_size=metadata.content_length,
-            last_modified=metadata.last_modified,
-            storage_backend=config.storage_backend,
-            file_hash_sha256=file_hash,
-            content=content
-        )
+            # Compute hash
+            file_hash = compute_sha256(content_bytes)
 
-        # Log success
-        execution_time = int((datetime.now(timezone.utc) - start_time).total_seconds() * 1000)
-        await log_operation(
-            operation=OperationType.READ_CONTENT,
-            path=full_path,
-            agent_id="system",  # TODO: Get from auth context
-            status=OperationStatus.SUCCESS,
-            execution_time_ms=execution_time
-        )
+            # Build response
+            response = ContentMetadata(
+                file_size=metadata.content_length,
+                last_modified=metadata.last_modified,
+                storage_backend=config.storage_backend,
+                file_hash_sha256=file_hash,
+                content=content
+            )
 
-        return response.model_dump_json(indent=2)
+            # Log success
+            execution_time = int((datetime.now(timezone.utc) - start_time).total_seconds() * 1000)
+            await log_operation(
+                operation=OperationType.READ_CONTENT,
+                path=full_path,
+                agent_id="system",
+                status=OperationStatus.SUCCESS,
+                execution_time_ms=execution_time
+            )
+
+            return response.model_dump_json(indent=2)
+
+        else:
+            # Bulk read: chapter or part scope
+            base_path = f"books/{params.book_id}/{params.path.rstrip('/')}/"
+            results = []
+
+            # List entries: use scan() for PART (recursive), list() for CHAPTER (one level)
+            try:
+                if params.scope == ContentScope.PART:
+                    # Recursive scan for parts (includes all subdirectories)
+                    entries = await op.scan(base_path)
+                else:
+                    # Non-recursive list for chapters (only direct children)
+                    entries = await op.list(base_path)
+
+                async for entry in entries:
+                    # Skip directories
+                    if entry.path.endswith('/'):
+                        continue
+
+                    # Only process .md files
+                    if not entry.path.endswith('.md'):
+                        continue
+
+                    # For chapter scope, only include files directly in the chapter
+                    if params.scope == ContentScope.CHAPTER:
+                        # Check if file is directly in this directory (not in a subdirectory)
+                        rel_path = entry.path[len(base_path):]
+                        if '/' in rel_path:
+                            continue
+
+                    try:
+                        # Read file content
+                        content_bytes = await op.read(entry.path)
+                        content = content_bytes.decode('utf-8')
+
+                        # Get metadata
+                        metadata = await op.stat(entry.path)
+
+                        # Compute hash
+                        file_hash = compute_sha256(content_bytes)
+
+                        # Extract relative path from book root
+                        rel_path = entry.path.replace(f"books/{params.book_id}/", "")
+
+                        # Build result with path included
+                        result = {
+                            "path": rel_path,
+                            "content": content,
+                            "file_size": metadata.content_length,
+                            "last_modified": metadata.last_modified.isoformat() if metadata.last_modified else None,
+                            "storage_backend": config.storage_backend,
+                            "file_hash_sha256": file_hash
+                        }
+                        results.append(result)
+
+                    except Exception:
+                        # Skip files that can't be read
+                        continue
+
+            except Exception:
+                # Directory doesn't exist
+                raise ContentNotFoundError(base_path)
+
+            # Sort results by path for consistent ordering
+            results.sort(key=lambda x: x["path"])
+
+            # Log success
+            execution_time = int((datetime.now(timezone.utc) - start_time).total_seconds() * 1000)
+            await log_operation(
+                operation=OperationType.READ_CONTENT,
+                path=base_path,
+                agent_id="system",
+                status=OperationStatus.SUCCESS,
+                execution_time_ms=execution_time
+            )
+
+            return json.dumps(results, indent=2)
 
     except FileNotFoundError:
         # Log error
@@ -119,6 +210,10 @@ async def read_content(params: ReadContentInput) -> str:
         )
 
         raise ContentNotFoundError(f"books/{params.book_id}/{params.path}")
+
+    except ContentNotFoundError:
+        # Re-raise without wrapping
+        raise
 
     except Exception as e:
         # Log error

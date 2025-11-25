@@ -27,11 +27,17 @@ Content tools handle both lessons and summaries (ADR-0018).
 
 ### `read_content`
 
-Read markdown content with metadata. Works for lessons and summaries.
+Read markdown content with metadata. Works for lessons and summaries. Supports bulk reading of entire chapters or parts.
 
 **Annotations**: `readOnlyHint=true`, `idempotentHint=true`
 
-**Input (Lesson)**:
+| Field | Required | Description |
+|-------|----------|-------------|
+| `book_id` | Yes | Book identifier |
+| `path` | Yes | Content path (file, chapter directory, or part directory) |
+| `scope` | No | `file` (default), `chapter`, or `part` |
+
+**Input (Single File - Default)**:
 ```json
 {
   "book_id": "ai-native-python",
@@ -39,15 +45,25 @@ Read markdown content with metadata. Works for lessons and summaries.
 }
 ```
 
-**Input (Summary - ADR-0018)**:
+**Input (Entire Chapter)**:
 ```json
 {
   "book_id": "ai-native-python",
-  "path": "content/01-Part/01-Chapter/01-intro.summary.md"
+  "path": "content/01-Part/01-Chapter",
+  "scope": "chapter"
 }
 ```
 
-**Output**:
+**Input (Entire Part)**:
+```json
+{
+  "book_id": "ai-native-python",
+  "path": "content/01-Part",
+  "scope": "part"
+}
+```
+
+**Output (scope=file)**:
 ```json
 {
   "content": "---\ntitle: Introduction\n---\n\n# Lesson 1...",
@@ -58,8 +74,35 @@ Read markdown content with metadata. Works for lessons and summaries.
 }
 ```
 
+**Output (scope=chapter or scope=part)** - Array of files:
+```json
+[
+  {
+    "path": "content/01-Part/01-Chapter/README.md",
+    "content": "# Chapter Overview...",
+    "file_size": 1234,
+    "last_modified": "2025-11-24T12:00:00Z",
+    "storage_backend": "fs",
+    "file_hash_sha256": "..."
+  },
+  {
+    "path": "content/01-Part/01-Chapter/01-intro.md",
+    "content": "# Introduction...",
+    "file_size": 2345,
+    "last_modified": "2025-11-24T12:00:00Z",
+    "storage_backend": "fs",
+    "file_hash_sha256": "..."
+  }
+]
+```
+
+**Scope Behavior**:
+- `file`: Read single file (original behavior)
+- `chapter`: Read all `.md` files directly in the chapter directory (not subdirectories)
+- `part`: Read all `.md` files recursively in the part directory (includes all chapters)
+
 **Errors**:
-- `ContentNotFoundError`: File does not exist
+- `ContentNotFoundError`: File/directory does not exist
 
 ---
 
@@ -212,11 +255,18 @@ Upload binary asset with hybrid pattern.
 
 ### `get_asset`
 
-Get asset metadata including CDN URL.
+Get asset metadata including CDN URL. Optionally include base64-encoded binary data.
 
 **Annotations**: `readOnlyHint=true`, `idempotentHint=true`
 
-**Input**:
+| Field | Required | Description |
+|-------|----------|-------------|
+| `book_id` | Yes | Book identifier |
+| `asset_type` | Yes | One of: `images`, `slides`, `videos`, `audio` |
+| `filename` | Yes | Asset filename |
+| `include_binary` | No | Include base64 binary data (default: false) |
+
+**Input (Metadata Only - Default)**:
 ```json
 {
   "book_id": "ai-native-python",
@@ -225,7 +275,17 @@ Get asset metadata including CDN URL.
 }
 ```
 
-**Output**:
+**Input (With Binary Data)**:
+```json
+{
+  "book_id": "ai-native-python",
+  "asset_type": "images",
+  "filename": "diagram.png",
+  "include_binary": true
+}
+```
+
+**Output (include_binary=false)**:
 ```json
 {
   "cdn_url": "https://cdn.panaversity.com/books/ai-native-python/static/images/diagram.png",
@@ -234,9 +294,29 @@ Get asset metadata including CDN URL.
   "upload_timestamp": "2025-11-24T12:00:00Z",
   "uploaded_by_agent_id": "system",
   "asset_type": "images",
-  "filename": "diagram.png"
+  "filename": "diagram.png",
+  "binary_data": null
 }
 ```
+
+**Output (include_binary=true)**:
+```json
+{
+  "cdn_url": "https://cdn.panaversity.com/books/ai-native-python/static/images/diagram.png",
+  "file_size": 45231,
+  "mime_type": "image/png",
+  "upload_timestamp": "2025-11-24T12:00:00Z",
+  "uploaded_by_agent_id": "system",
+  "asset_type": "images",
+  "filename": "diagram.png",
+  "binary_data": "iVBORw0KGgoAAAANSUhEUgAA..."
+}
+```
+
+**Use Cases for `include_binary`**:
+- Docusaurus plugin fetching assets for local build
+- Direct asset download without CDN
+- Asset migration between storage backends
 
 **Errors**:
 - `ContentNotFoundError`: Asset does not exist
@@ -373,7 +453,7 @@ Search content using regex pattern.
 
 ### `list_books`
 
-List all registered books from registry.yaml.
+List all books by dynamically scanning the `books/` directory.
 
 **Annotations**: `readOnlyHint=true`, `idempotentHint=true`
 
@@ -387,32 +467,18 @@ List all registered books from registry.yaml.
 [
   {
     "book_id": "ai-native-python",
-    "title": "AI-Native Python Development",
-    "storage_backend": "fs",
-    "created_at": "2025-01-01T00:00:00Z",
-    "status": "active"
+    "storage_backend": "fs"
   },
   {
     "book_id": "generative-ai-fundamentals",
-    "title": "Generative AI Fundamentals",
-    "storage_backend": "s3",
-    "created_at": "2025-02-01T00:00:00Z",
-    "status": "active"
+    "storage_backend": "fs"
   }
 ]
 ```
 
-**Book Status Values**: `active`, `archived`, `migrating`
+**Discovery Method**: Books are automatically discovered by scanning subdirectories in the `books/` directory. Any directory matching the book ID pattern (`^[a-z0-9-]+$`) is returned.
 
-**Registry Format** (`registry.yaml`):
-```yaml
-books:
-  - book_id: ai-native-python
-    title: AI-Native Python Development
-    storage_backend: fs
-    created_at: "2025-01-01T00:00:00Z"
-    status: active
-```
+**Note**: No `registry.yaml` file is required. This is a zero-configuration approach.
 
 ---
 
