@@ -44,6 +44,12 @@
 3. **Previous lesson** (if exists) - Understand progression and accumulated knowledge
 4. **Specification** (if exists in `specs/`) - Check for existing design decisions
 
+**When Teaching Patterns Used Elsewhere** (CRITICAL - prevents format drift):
+5. **Find canonical source** - If lesson teaches a pattern (skills, subagents, ADRs, etc.) that's taught in another chapter, FIND and READ that chapter first
+   - Example: Teaching skills in Chapter 14 → Read Chapter 5 Lesson 7 (agent-skills) for correct format
+   - Example: Teaching specifications → Read Chapter 13 for spec structure
+   - **Why**: Prevents teaching incorrect formats that contradict earlier chapters
+
 ### Step 2: Determine Pedagogical Layer (BEFORE designing)
 
 Ask yourself these questions **in order**:
@@ -117,6 +123,39 @@ CONTEXT GATHERED:
 6. ✅ State context understanding and get user confirmation BEFORE proceeding
 
 **Result**: Would have avoided 582-line spec, 1,181-line plan, 5 wrong lessons, and complete revert.
+
+---
+
+## FAILURE MODE: Chapter 14 Format Drift Example
+
+**What I did wrong** (2025-11-27):
+- ❌ Taught skill file format without checking where skills are canonically taught
+- ❌ Used wrong format: `.claude/skills/section-writer.md` (flat file)
+- ❌ Missing YAML frontmatter (`name`, `description`, `version`)
+- ❌ Did NOT read Chapter 5 Lesson 7 which teaches the correct skill format
+
+**What I should have done**:
+1. ✅ Recognize: "This lesson teaches skills" → Skills are also taught in Chapter 5
+2. ✅ Read canonical source: Chapter 5 Lesson 7 (agent-skills.md)
+3. ✅ Extract correct format: `.claude/skills/<skill-name>/SKILL.md` with YAML frontmatter
+4. ✅ Apply consistent format in Chapter 14 lesson
+
+**Correct skill format** (from Chapter 5):
+```
+.claude/skills/
+└── section-writer/          # Directory, not flat file
+    └── SKILL.md             # SKILL.md with YAML frontmatter
+```
+
+```yaml
+---
+name: "section-writer"
+description: "Write sections... Use when user asks..."
+version: "1.0.0"
+---
+```
+
+**Result**: Would have avoided teaching incorrect format that contradicts earlier chapter.
 
 ---
 
