@@ -10,6 +10,12 @@ $ARGUMENTS
 
 You **MUST** consider the user input before proceeding (if not empty).
 
+## Core Directive
+
+**Default to Action**: Generate the complete tasks.md immediately from available design artifacts. Extract tasks systematically from spec user stories, plan structure, and data model. Only flag issues that genuinely block task generation.
+
+**WHY**: Task generation is mechanical extraction from spec/plan. The artifacts contain all necessary information. Generate the task list and let implementation surface any gaps—don't over-analyze before producing output.
+
 ## Outline
 
 1. **Setup**: Run `.specify/scripts/bash/check-prerequisites.sh --json` from repo root and parse FEATURE_DIR and AVAILABLE_DOCS list. All paths must be absolute. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").

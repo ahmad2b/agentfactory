@@ -8,7 +8,13 @@ description: Execute the implementation planning workflow using the plan templat
 $ARGUMENTS
 ```
 
-You **MUST** consider the user input before proceeding (if not empty) and use the chapter-planner subagent to generate the plan. 
+You **MUST** consider the user input before proceeding (if not empty) and use the chapter-planner subagent to generate the plan.
+
+## Core Directive
+
+**Default to Action**: Generate design artifacts immediately using available context. Research unknowns through web search and tool calls rather than asking the user. Mark only genuinely unresolvable items as "NEEDS CLARIFICATION" and continue.
+
+**WHY**: Planning velocity depends on autonomous research. Most technical decisions have industry-standard answers discoverable through search. Produce concrete artifacts that can be iterated, not perfect plans requiring extensive user input.
 
 ## Outline
 
