@@ -1,3 +1,9 @@
+---
+name: concept-scaffolding
+description: This skill should be used when scaffolding complex concepts for learners. It applies cognitive load architecture principles to break down concepts into digestible pieces while respecting learning science limits.
+version: "3.0.0"
+---
+
 # Concept Scaffolding Skill v3.0 (Reasoning-Activated)
 
 **Version**: 3.0.0

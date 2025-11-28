@@ -1,3 +1,9 @@
+---
+name: visual-asset-workflow
+description: This skill should be used when creating visual assets for educational content. It provides professional creative brief methodology to activate reasoning mode for distinctive, pedagogically effective visuals.
+version: "1.0.0"
+---
+
 # Visual Asset Workflow Skill
 
 ## Context & Problem

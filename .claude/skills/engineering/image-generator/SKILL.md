@@ -1,3 +1,9 @@
+---
+name: image-generator
+description: This skill should be used when generating images for educational content. It provides multi-turn reasoning partnership methodology with Gemini for professional quality visual generation.
+version: "1.0.0"
+---
+
 # Image Generator Skill
 
 ## Context & Problem
