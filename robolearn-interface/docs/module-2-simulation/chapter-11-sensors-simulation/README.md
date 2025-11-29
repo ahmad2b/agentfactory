@@ -176,9 +176,9 @@ When adding any sensor to your robot:
 
 ## Navigation
 
-**Previous Chapter**: [← Chapter 10: Gazebo World Design](../chapter-10-gazebo-worlds/README.md)
+**Previous Chapter**: [← Chapter 10: Building Simulation Worlds](../chapter-10-simulation-worlds/README.md)
 
-**Next Chapter**: [Chapter 12: Advanced Simulation →](../chapter-12-advanced-simulation/README.md)
+**Next Chapter**: [Chapter 12: ROS 2 + Gazebo Integration →](../chapter-12-ros2-gazebo-integration/README.md)
 
 **Module Overview**: [← Back to Module 2](../README.md)
 

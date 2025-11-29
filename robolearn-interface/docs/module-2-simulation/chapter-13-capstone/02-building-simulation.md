@@ -65,7 +65,7 @@ Use the `urdf-robot-model` skill from Chapter 9. Your URDF should include:
 - Physical properties (mass, inertia—estimate based on size)
 - Sensor plugins (camera, LIDAR, IMU) matching your specification
 
-**Reference**: [Chapter 9.4 URDF with AI](../chapter-9-robot-description/04-urdf-ai.md) for how to work with AI on URDF generation.
+**Reference**: [Chapter 9.4 URDF with AI](../chapter-9-robot-description/04-urdf-with-ai.md) for how to work with AI on URDF generation.
 
 **Your URDF should**:
 - Load without errors in Gazebo (`gz sim robot.urdf`)
@@ -98,7 +98,7 @@ Use the `gazebo-world-builder` skill from Chapter 10. Your world should include:
 - Initial spawn location for your robot
 - Goal locations (marked with visual indicators)
 
-**Reference**: [Chapter 10.4 World Building with AI](../chapter-10-simulation-worlds/04-world-ai.md) for how to work with AI on SDF generation.
+**Reference**: [Chapter 10.4 World Building with AI](../chapter-10-simulation-worlds/04-world-building-with-ai.md) for how to work with AI on SDF generation.
 
 **Your world should**:
 - Load without physics errors (`gz sim world.sdf`)
