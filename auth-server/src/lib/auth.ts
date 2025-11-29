@@ -6,9 +6,13 @@ import { db } from "./db";
 import * as schema from "./db/schema";
 import { userProfile } from "./db/schema";
 import { eq } from "drizzle-orm";
+import { Resend } from "resend";
 
 // Client ID for robolearn-interface (public client - no secret needed with PKCE)
 const ROBOLEARN_INTERFACE_CLIENT_ID = "robolearn-interface";
+
+// Initialize Resend for email sending (optional - email verification only works if RESEND_API_KEY is set)
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -20,7 +24,33 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 8,
+    // Require email verification before login (only when RESEND_API_KEY is set)
+    requireEmailVerification: !!process.env.RESEND_API_KEY,
   },
+
+  // Email verification configuration (only active when RESEND_API_KEY is set)
+  ...(resend && {
+    emailVerification: {
+      sendOnSignUp: true,
+      autoSignInAfterVerification: true,
+      expiresIn: 3600, // 1 hour
+      sendVerificationEmail: async ({ user, url }) => {
+        const fromEmail = process.env.RESEND_FROM_EMAIL || "noreply@robolearn.com";
+        await resend.emails.send({
+          from: fromEmail,
+          to: user.email,
+          subject: "Verify your RoboLearn account",
+          html: `
+            <h2>Welcome to RoboLearn!</h2>
+            <p>Please verify your email address by clicking the link below:</p>
+            <p><a href="${url}" style="background-color: #2563eb; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">Verify Email</a></p>
+            <p>Or copy and paste this link: ${url}</p>
+            <p>This link expires in 1 hour.</p>
+          `,
+        });
+      },
+    },
+  }),
 
   // Session configuration
   session: {

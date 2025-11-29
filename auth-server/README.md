@@ -87,11 +87,18 @@ ROBOLEARN_INTERFACE_CALLBACK_URL=http://localhost:3000/auth/callback
 NEXT_PUBLIC_BETTER_AUTH_URL=http://localhost:3001
 NEXT_PUBLIC_BOOK_URL=http://localhost:3000
 
+# Email Verification (Optional - Resend)
+# RESEND_API_KEY=re_xxxxxxxxx
+# RESEND_FROM_EMAIL=noreply@yourdomain.com
+
 # Node Environment
 NODE_ENV=development
 ```
 
-**Note**: No client secret is needed for robolearn-interface - it uses PKCE (Proof Key for Code Exchange) for secure authentication without exposing secrets in the browser.
+**Notes**:
+- No client secret is needed for robolearn-interface - it uses PKCE for secure authentication
+- Email verification is optional. Without `RESEND_API_KEY`, users can log in immediately
+- Resend free tier: 100 emails/day (https://resend.com)
 
 ---
 
@@ -292,28 +299,43 @@ Same process - set environment variables and deploy the Next.js app.
 
 For future apps that want to use this auth server:
 
-### Option 1: Pre-register in Code
+### Option 1: Dynamic Registration (Recommended)
 
-```typescript
-// In src/lib/auth.ts, add to trustedClients:
+Dynamic client registration is enabled - clients are stored in the database:
+
+```bash
+curl -X POST https://your-auth-server.com/api/auth/oauth2/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "client_name": "My New App",
+    "redirect_uris": ["https://my-app.com/auth/callback"],
+    "grant_types": ["authorization_code", "refresh_token"],
+    "response_types": ["code"],
+    "token_endpoint_auth_method": "none"
+  }'
+```
+
+Response includes `client_id` (and `client_secret` if confidential client):
+```json
 {
-  clientId: "new-app",
-  clientSecret: process.env.NEW_APP_CLIENT_SECRET,
-  name: "New Application",
-  redirectUrls: ["https://new-app.com/callback"],
-  skipConsent: false,  // Show consent screen
+  "client_id": "generated-uuid",
+  "client_name": "My New App",
+  "redirect_uris": ["https://my-app.com/auth/callback"]
 }
 ```
 
-### Option 2: Dynamic Registration
+### Option 2: Pre-register in Code (First-Party Apps)
 
-The OIDC provider supports dynamic client registration:
+For trusted first-party apps, add to `trustedClients` in `src/lib/auth.ts`:
 
-```bash
-POST /api/auth/oauth2/register
+```typescript
 {
-  "client_name": "New App",
-  "redirect_uris": ["https://new-app.com/callback"]
+  clientId: "new-app",
+  clientSecret: process.env.NEW_APP_CLIENT_SECRET, // For ID token signing
+  name: "New Application",
+  type: "public", // or "confidential" for server-side apps
+  redirectUrls: ["https://new-app.com/callback"],
+  skipConsent: true, // First-party apps skip consent
 }
 ```
 
