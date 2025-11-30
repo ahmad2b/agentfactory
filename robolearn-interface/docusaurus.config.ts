@@ -133,7 +133,16 @@ const config: Config = {
   // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: "en",
-    locales: ["en"],
+    locales: ["en", "ur"],
+    localeConfigs: {
+      en: {
+        label: "EN",
+      },
+      ur: {
+        label: "UR",
+        direction: "rtl",
+      },
+    },
   },
   
   presets: [
@@ -190,6 +199,20 @@ const config: Config = {
     [
       "./plugins/docusaurus-summaries-plugin",
       {
+        docsPath: "docs",
+      },
+    ],
+    // Auto-Translate Plugin - Automatically translates content to Urdu using Gemini API
+    [
+      "./plugins/docusaurus-plugin-auto-translate",
+      {
+        enabled: true,
+        sourceLocale: "en",
+        targetLocales: ["ur"],
+        apiProvider: "gemini",
+        model: "gemini-flash-lite-latest",
+        apiKey: process.env.GEMINI_API_KEY,
+        cacheDir: ".translation-cache",
         docsPath: "docs",
       },
     ],
@@ -302,6 +325,10 @@ const config: Config = {
         {
           href: "https://github.com/mjunaidca/robolearn",
           label: "GitHub",
+          position: "right",
+        },
+        {
+          type: "custom-languageToggle",
           position: "right",
         },
         {
