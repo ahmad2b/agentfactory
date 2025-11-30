@@ -19,6 +19,9 @@ const OAUTH_CLIENT_ID = process.env.OAUTH_CLIENT_ID || "robolearn-public-client"
 // Base URL configuration - defaults to "/" for local development
 const BASE_URL = process.env.BASE_URL || "/";
 
+// ChatKit domain key (optional, dummy value for custom backends)
+const CHATKIT_DOMAIN_KEY = process.env.CHATKIT_DOMAIN_KEY || "domain_pk_local_dev";
+
 const config: Config = {
   title: "RoboLearn",
   tagline:
@@ -30,6 +33,7 @@ const config: Config = {
     authUrl: AUTH_URL,
     oauthClientId: OAUTH_CLIENT_ID,
     backendUrl: process.env.BACKEND_URL || "http://localhost:8000",
+    chatkitDomainKey: CHATKIT_DOMAIN_KEY,
   },
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future

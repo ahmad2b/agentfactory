@@ -27,10 +27,12 @@ export function ChatKitWidget({ backendUrl }: ChatKitWidgetProps): React.ReactEl
   const [isOpen, setIsOpen] = useState(false);
   const [selectedText, setSelectedText] = useState<string>('');
   const [selectionPosition, setSelectionPosition] = useState<{ x: number; y: number } | null>(null);
+  const [showPersonalizeMenu, setShowPersonalizeMenu] = useState(false);
   const [scriptStatus, setScriptStatus] = useState<'pending' | 'ready' | 'error'>(
     isBrowser && window.customElements?.get('openai-chatkit') ? 'ready' : 'pending'
   );
   const selectionRef = useRef<HTMLDivElement>(null);
+  const personalizeMenuRef = useRef<HTMLDivElement>(null);
   const isMountedRef = useRef(true);
   const { session, isLoading: authLoading } = useAuth();
   const { siteConfig } = useDocusaurusContext();
@@ -46,8 +48,8 @@ export function ChatKitWidget({ backendUrl }: ChatKitWidgetProps): React.ReactEl
   const oauthClientId = (siteConfig.customFields?.oauthClientId as string) || 'robolearn-interface';
   
   // Domain key for ChatKit (required by API, but not used for custom backends)
-  // For custom backend, this can be a dummy value
-  const domainKey = 'domain_pk_local_dev';
+  // Read from siteConfig.customFields (set via CHATKIT_DOMAIN_KEY env var in deployment)
+  const domainKey = (siteConfig.customFields?.chatkitDomainKey as string) || 'domain_pk_local_dev';
   
   // Check if user is logged in
   const isLoggedIn = !!session?.user?.id;
@@ -199,7 +201,18 @@ export function ChatKitWidget({ backendUrl }: ChatKitWidgetProps): React.ReactEl
         }
         
         const userId = session!.user!.id; // Safe to use ! since we checked isLoggedIn
+        const user = session!.user!;
         const pageContext = getPageContext();
+        
+        // Build user info for agent awareness
+        const userInfo = {
+          id: user.id,
+          name: user.name || user.email || 'User',
+          email: user.email,
+          role: user.role,
+          softwareBackground: user.softwareBackground,
+          hardwareTier: user.hardwareTier,
+        };
         
         // Modify request body to add metadata if needed
         let modifiedOptions = { ...options };
@@ -209,15 +222,17 @@ export function ChatKitWidget({ backendUrl }: ChatKitWidgetProps): React.ReactEl
             if (parsed.type === 'threads.create' && parsed.params?.input) {
               parsed.params.input.metadata = {
                 userId: userId,
+                userInfo: userInfo, // Add user info for agent awareness
                 pageContext: pageContext, // Add page context to metadata
                 ...parsed.params.input.metadata,
               };
               modifiedOptions.body = JSON.stringify(parsed);
             } else if (parsed.type === 'threads.run' && parsed.params?.input) {
-              // Add page context to run requests as well
+              // Add user info and page context to run requests as well
               if (!parsed.params.input.metadata) {
                 parsed.params.input.metadata = {};
               }
+              parsed.params.input.metadata.userInfo = userInfo;
               parsed.params.input.metadata.pageContext = pageContext;
               modifiedOptions.body = JSON.stringify(parsed);
             }
@@ -570,35 +585,204 @@ export function ChatKitWidget({ backendUrl }: ChatKitWidgetProps): React.ReactEl
   // Handle chat button click - check login first
   const handleChatButtonClick = useCallback(() => {
     if (!isLoggedIn) {
-      // Show login prompt instead of opening chat
+      // Redirect to sign in if not logged in
       handleLogin();
       return;
     }
+    
+    // Toggle chat
     setIsOpen(!isOpen);
+    setShowPersonalizeMenu(false); // Close menu when toggling chat
   }, [isLoggedIn, isOpen, handleLogin]);
+
+  // Handle right-click on chat button for personalization menu
+  const handleChatButtonContextMenu = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    if (isLoggedIn) {
+      setShowPersonalizeMenu(!showPersonalizeMenu);
+    }
+  }, [isLoggedIn, showPersonalizeMenu]);
+
+  // Handle personalize menu actions
+  const handlePersonalize = useCallback(() => {
+    setShowPersonalizeMenu(false);
+    setIsOpen(true);
+    // Send a message asking about personalization
+    setTimeout(async () => {
+      if (sendUserMessage) {
+        await sendUserMessage({
+          text: "How can I personalize my learning experience?",
+          newThread: false,
+        });
+      }
+    }, 500);
+  }, [sendUserMessage]);
+
+  const handleUpdateProfile = useCallback(() => {
+    setShowPersonalizeMenu(false);
+    setIsOpen(true);
+    // Send a message about updating profile
+    setTimeout(async () => {
+      if (sendUserMessage) {
+        await sendUserMessage({
+          text: "Help me update my profile and preferences",
+          newThread: false,
+        });
+      }
+    }, 500);
+  }, [sendUserMessage]);
+
+  // Close personalize menu when clicking outside
+  useEffect(() => {
+    if (!showPersonalizeMenu) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        personalizeMenuRef.current &&
+        !personalizeMenuRef.current.contains(event.target as Node) &&
+        !(event.target as HTMLElement).closest(`.${styles.chatButton}`)
+      ) {
+        setShowPersonalizeMenu(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [showPersonalizeMenu]);
 
   return (
     <>
-      {/* Floating Chat Button */}
-      <button
-        className={styles.chatButton}
-        onClick={handleChatButtonClick}
-        aria-label={isLoggedIn ? "Open AI Assistant" : "Login to use AI Assistant"}
-        title={isLoggedIn ? "Open AI Assistant" : "Login to use AI Assistant"}
-      >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="#ffffff"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+      {/* Floating Chat Button and Settings */}
+      <div className={styles.chatButtonContainer}>
+        {/* Settings/Personalize Button - Visible when logged in */}
+        {isLoggedIn && (
+          <button
+            className={styles.settingsButton}
+            onClick={() => setShowPersonalizeMenu(!showPersonalizeMenu)}
+            aria-label="Personalize Assistant"
+            title="Personalize Assistant"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="12" r="3" />
+              <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24" />
+            </svg>
+          </button>
+        )}
+
+        <button
+          className={styles.chatButton}
+          onClick={handleChatButtonClick}
+          aria-label={isLoggedIn ? "Open AI Assistant" : "Login to use AI Assistant"}
+          title={isLoggedIn ? "Open AI Assistant" : "Login to use AI Assistant"}
         >
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-        </svg>
-      </button>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#ffffff"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+        </button>
+
+        {/* Personalize Menu - Shows when clicking settings button */}
+        {showPersonalizeMenu && isLoggedIn && (
+          <div
+            ref={personalizeMenuRef}
+            className={styles.personalizeMenu}
+          >
+            <div className={styles.personalizeMenuHeader}>
+              <h4>Personalize Assistant</h4>
+              <button
+                className={styles.closeMenuButton}
+                onClick={() => setShowPersonalizeMenu(false)}
+                aria-label="Close menu"
+              >
+                ×
+              </button>
+            </div>
+            <div className={styles.personalizeMenuContent}>
+              <p>Customize your AI assistant:</p>
+              <button
+                className={styles.personalizeButton}
+                onClick={handlePersonalize}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                  <path d="M2 17l10 5 10-5" />
+                  <path d="M2 12l10 5 10-5" />
+                </svg>
+                Set Learning Preferences
+              </button>
+              <button
+                className={styles.personalizeButton}
+                onClick={handleUpdateProfile}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+                Update Profile
+              </button>
+              <button
+                className={styles.personalizeButton}
+                onClick={() => {
+                  setShowPersonalizeMenu(false);
+                  setIsOpen(true);
+                  setTimeout(async () => {
+                    if (sendUserMessage) {
+                      await sendUserMessage({
+                        text: "What can you help me with?",
+                        newThread: false,
+                      });
+                    }
+                  }, 500);
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                  <path d="M12 17h.01" />
+                </svg>
+                What Can You Help With?
+              </button>
+              <button
+                className={styles.personalizeButton}
+                onClick={() => {
+                  setShowPersonalizeMenu(false);
+                  setIsOpen(true);
+                  setTimeout(async () => {
+                    if (sendUserMessage) {
+                      await sendUserMessage({
+                        text: "Show me my learning progress and recommendations",
+                        newThread: false,
+                      });
+                    }
+                  }, 500);
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                </svg>
+                Learning Progress
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
 
       {/* ChatKit Component - Floating widget that opens/closes */}
       {/* Only show if user is logged in */}

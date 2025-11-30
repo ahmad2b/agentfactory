@@ -149,10 +149,26 @@ class RoboLearnChatKitServer(ChatKitServer[RequestContext]):
                 logger.warning("Empty user message")
                 return
 
-            # Extract page context from request headers or metadata
+            # Extract user info and page context from metadata
+            user_info = None
             page_context = None
             if hasattr(context, 'metadata') and context.metadata:
+                user_info = context.metadata.get('userInfo')
                 page_context = context.metadata.get('pageContext')
+            
+            # Build user context string for agent awareness
+            user_context_str = ""
+            if user_info:
+                user_context_str = f"\n\nUser Information:\n"
+                user_context_str += f"- Name: {user_info.get('name', 'Unknown')}\n"
+                if user_info.get('email'):
+                    user_context_str += f"- Email: {user_info.get('email')}\n"
+                if user_info.get('role'):
+                    user_context_str += f"- Role: {user_info.get('role')}\n"
+                if user_info.get('softwareBackground'):
+                    user_context_str += f"- Software Background: {user_info.get('softwareBackground')}\n"
+                if user_info.get('hardwareTier'):
+                    user_context_str += f"- Hardware Tier: {user_info.get('hardwareTier')}\n"
             
             # Build page context string for agent awareness
             page_context_str = ""
@@ -206,11 +222,11 @@ class RoboLearnChatKitServer(ChatKitServer[RequestContext]):
             )
 
             # Create agent with RAG search tool
-            # Include conversation history and page context in the instructions so agent is aware of everything
+            # Include conversation history, user info, and page context in the instructions so agent is aware of everything
             agent = Agent(
                 name="RoboLearnAssistant",
                 tools=[search_tool],
-                instructions=f"Conversation history:\n{history_str}\n{page_context_str}\n\n{ROBOLEARN_SYSTEM}",
+                instructions=f"Conversation history:\n{history_str}\n{user_context_str}{page_context_str}\n\n{ROBOLEARN_SYSTEM}",
             )
 
             # Convert user message with attachments to Agent SDK format
