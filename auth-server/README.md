@@ -1,6 +1,15 @@
 # RoboLearn Auth Server
 
-OAuth 2.1 / OIDC authentication server using Better Auth.
+OAuth 2.1 / OIDC authentication server using Better Auth with PKCE, JWKS, and multi-tenancy support.
+
+## Documentation
+
+- [PKCE OAuth Flow](docs/pkce-flow.md) - Public client authentication
+- [JWT & JWKS](docs/jwt-jwks.md) - Token signing and verification
+- [RBAC & Scopes](docs/rbac-and-scopes.md) - Roles and permissions
+- [FastAPI Integration](docs/fastapi-integration.md) - Backend integration guide
+- [Flow Diagrams](docs/flow-diagrams.md) - Visual authentication flows
+- [Troubleshooting](docs/troubleshooting.md) - Common issues and solutions
 
 ## Setup
 
@@ -104,11 +113,29 @@ NEXT_PUBLIC_BETTER_AUTH_URL=http://localhost:3001
 ## Features
 
 - OAuth 2.1 with PKCE (no client secrets in browser)
-- JWKS (JSON Web Key Set) for client-side token verification
+- JWKS (JSON Web Key Set) for client-side token verification (RS256)
 - Dynamic client registration (`POST /api/auth/oauth2/register`)
+- Multi-tenancy with organizations (tenant_id in tokens)
+- Role-based access control (admin/user + organization roles)
+- Custom claims: software_background, hardware_tier, tenant_id
 - Optional email verification via Resend or SMTP
-- Role-based access (admin/user)
 - 7-day sessions with auto-refresh
+
+## Testing
+
+```bash
+# Seed test clients (public + confidential)
+pnpm seed:clients
+
+# Seed test organization
+pnpm seed:org
+
+# Run OAuth flow tests
+pnpm test-auth
+
+# Test tenant claims
+pnpm test-tenant
+```
 
 ## Endpoints
 

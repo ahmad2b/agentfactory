@@ -2,10 +2,11 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { oidcProvider } from "better-auth/plugins/oidc-provider";
 import { admin } from "better-auth/plugins/admin";
+import { organization } from "better-auth/plugins/organization";
 import { jwt } from "better-auth/plugins";
 import { db } from "./db";
 import * as schema from "./db/schema";
-import { userProfile } from "./db/schema";
+import { userProfile, member } from "./db/schema";
 import { eq } from "drizzle-orm";
 import { Resend } from "resend";
 import * as nodemailer from "nodemailer";
@@ -219,17 +220,34 @@ export const auth = betterAuth({
       ],
       // Allow dynamic client registration for future apps
       allowDynamicClientRegistration: true,
-      // Add custom claims to userinfo endpoint
+      // Add custom claims to userinfo endpoint and ID token
       async getAdditionalUserInfoClaim(user) {
         // Fetch user profile with software_background and hardware_tier
         const profile = await db.query.userProfile.findFirst({
           where: eq(userProfile.userId, user.id),
         });
 
+        // Fetch user's organization memberships for tenant_id
+        const memberships = await db
+          .select()
+          .from(member)
+          .where(eq(member.userId, user.id));
+
+        // Get all organization IDs the user belongs to
+        const organizationIds = memberships.map((m) => m.organizationId);
+
+        // Primary tenant is the first organization (can be extended to support active org)
+        const primaryTenantId = organizationIds[0] || null;
+
         return {
           software_background: profile?.softwareBackground || null,
           hardware_tier: profile?.hardwareTier || null,
           role: user.role || "user",
+          // Tenant/organization claims
+          tenant_id: primaryTenantId,
+          organization_ids: organizationIds,
+          // Organization role from primary tenant
+          org_role: memberships[0]?.role || null,
         };
       },
     }),
@@ -240,6 +258,13 @@ export const auth = betterAuth({
       adminRoles: ["admin"],
       // You can specify admin user IDs directly
       // adminUserIds: ["your-admin-user-id"],
+    }),
+
+    // Organization plugin - Multi-tenancy support
+    // Enables tenant_id in token claims and organization management
+    organization({
+      // Allow any user to create organizations (can be restricted later)
+      allowUserToCreateOrganization: true,
     }),
   ],
 });

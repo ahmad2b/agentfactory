@@ -44,7 +44,7 @@ async function testPKCEFlow() {
   }
 
   // Step 3: Request authorization with PKCE
-  const authUrl = 'http://localhost:3001/api/auth/oauth2/authorize?client_id=robolearn-interface&redirect_uri=' +
+  const authUrl = 'http://localhost:3001/api/auth/oauth2/authorize?client_id=robolearn-public-client&redirect_uri=' +
     encodeURIComponent('http://localhost:3000/auth/callback') +
     '&response_type=code&scope=openid%20profile%20email&state=test&code_challenge=' +
     codeChallenge + '&code_challenge_method=S256';
@@ -55,26 +55,37 @@ async function testPKCEFlow() {
     redirect: 'manual',
   });
 
-  const location = authResponse.headers.get('location');
   console.log('   Auth status: ' + authResponse.status);
-  console.log('   Redirect: ' + (location ? location.slice(0, 80) + '...' : 'none') + '\n');
-
-  if (!location) {
-    console.log('   No redirect - may need consent or login');
-    return;
+  
+  // Better Auth returns JSON with redirect info instead of HTTP redirect
+  let code;
+  if (authResponse.status === 200) {
+    const authBody = await authResponse.json();
+    if (authBody.redirect && authBody.url) {
+      const codeMatch = authBody.url.match(/code=([^&]+)/);
+      if (codeMatch) {
+        code = codeMatch[1];
+        console.log('   Redirect URL: ' + authBody.url.slice(0, 60) + '...');
+      }
+    }
+  } else if (authResponse.status === 302) {
+    const location = authResponse.headers.get('location');
+    const codeMatch = location?.match(/code=([^&]+)/);
+    if (codeMatch) {
+      code = codeMatch[1];
+    }
   }
 
-  // Step 4: Extract code from redirect
-  const codeMatch = location.match(/code=([^&]+)/);
-  if (!codeMatch) {
-    console.log('   No code in redirect');
+  if (!code) {
+    const body = await authResponse.text();
+    console.log('   No code received. Response:', body);
     return;
   }
-  const code = codeMatch[1];
-  console.log('4. Got authorization code: ' + code.slice(0, 20) + '...\n');
+  
+  console.log('   Got authorization code: ' + code.slice(0, 20) + '...\n');
 
-  // Step 5: Exchange code for tokens WITH PKCE (no client_secret!)
-  console.log('5. Exchanging code for tokens (using PKCE, no secret)...');
+  // Step 4: Exchange code for tokens WITH PKCE (no client_secret!)
+  console.log('4. Exchanging code for tokens (using PKCE, no secret)...');
   const tokenResponse = await fetch('http://localhost:3001/api/auth/oauth2/token', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -82,7 +93,7 @@ async function testPKCEFlow() {
       grant_type: 'authorization_code',
       code,
       redirect_uri: 'http://localhost:3000/auth/callback',
-      client_id: 'robolearn-interface',
+      client_id: 'robolearn-public-client',
       code_verifier: codeVerifier,  // PKCE: verifier instead of secret
     }),
   });
@@ -93,10 +104,12 @@ async function testPKCEFlow() {
     const tokens = await tokenResponse.json();
     console.log('   Access token: ' + (tokens.access_token ? 'YES' : 'NO'));
     console.log('   Refresh token: ' + (tokens.refresh_token ? 'YES' : 'NO'));
-    console.log('   ID token: ' + (tokens.id_token ? 'YES' : 'NO') + '\n');
+    console.log('   ID token: ' + (tokens.id_token ? 'YES' : 'NO'));
+    console.log('   Token type: ' + tokens.token_type);
+    console.log('   Expires in: ' + tokens.expires_in + 's\n');
 
-    // Step 6: Get userinfo
-    console.log('6. Fetching userinfo...');
+    // Step 5: Get userinfo
+    console.log('5. Fetching userinfo...');
     const userinfoResponse = await fetch('http://localhost:3001/api/auth/oauth2/userinfo', {
       headers: { Authorization: 'Bearer ' + tokens.access_token },
     });
@@ -107,6 +120,7 @@ async function testPKCEFlow() {
       console.log('\n=== PKCE OAuth Flow: SUCCESS ===');
     } else {
       console.log('   Userinfo error: ' + userinfoResponse.status);
+      console.log('   Error:', await userinfoResponse.text());
     }
   } else {
     const err = await tokenResponse.text();

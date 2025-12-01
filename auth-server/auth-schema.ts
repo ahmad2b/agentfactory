@@ -78,6 +78,14 @@ export const verification = pgTable(
   (table) => [index("verification_identifier_idx").on(table.identifier)],
 );
 
+export const jwks = pgTable("jwks", {
+  id: text("id").primaryKey(),
+  publicKey: text("public_key").notNull(),
+  privateKey: text("private_key").notNull(),
+  createdAt: timestamp("created_at").notNull(),
+  expiresAt: timestamp("expires_at"),
+});
+
 export const oauthApplication = pgTable(
   "oauth_application",
   {
@@ -87,7 +95,7 @@ export const oauthApplication = pgTable(
     metadata: text("metadata"),
     clientId: text("client_id").unique(),
     clientSecret: text("client_secret"),
-    redirectURLs: text("redirect_urls"), // Better Auth expects redirectURLs (capital URLs) - documented field name
+    redirectUrls: text("redirect_urls"),
     type: text("type"),
     disabled: boolean("disabled").default(false),
     userId: text("user_id").references(() => user.id, { onDelete: "cascade" }),
@@ -193,6 +201,86 @@ export const oauthConsentRelations = relations(oauthConsent, ({ one }) => ({
   }),
   user: one(user, {
     fields: [oauthConsent.userId],
+    references: [user.id],
+  }),
+}));
+
+// Organization table for multi-tenancy support
+export const organization = pgTable("organization", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  slug: text("slug").unique(),
+  logo: text("logo"),
+  metadata: text("metadata"),
+  createdAt: timestamp("created_at").notNull(),
+});
+
+// Organization member table
+export const member = pgTable(
+  "member",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    organizationId: text("organization_id")
+      .notNull()
+      .references(() => organization.id, { onDelete: "cascade" }),
+    role: text("role").notNull(),
+    createdAt: timestamp("created_at").notNull(),
+  },
+  (table) => [
+    index("member_userId_idx").on(table.userId),
+    index("member_organizationId_idx").on(table.organizationId),
+  ]
+);
+
+// Organization invitation table
+export const invitation = pgTable(
+  "invitation",
+  {
+    id: text("id").primaryKey(),
+    email: text("email").notNull(),
+    organizationId: text("organization_id")
+      .notNull()
+      .references(() => organization.id, { onDelete: "cascade" }),
+    role: text("role").notNull(),
+    status: text("status").notNull(),
+    inviterId: text("inviter_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    expiresAt: timestamp("expires_at").notNull(),
+    createdAt: timestamp("created_at").notNull(),
+  },
+  (table) => [
+    index("invitation_email_idx").on(table.email),
+    index("invitation_organizationId_idx").on(table.organizationId),
+  ]
+);
+
+export const organizationRelations = relations(organization, ({ many }) => ({
+  members: many(member),
+  invitations: many(invitation),
+}));
+
+export const memberRelations = relations(member, ({ one }) => ({
+  user: one(user, {
+    fields: [member.userId],
+    references: [user.id],
+  }),
+  organization: one(organization, {
+    fields: [member.organizationId],
+    references: [organization.id],
+  }),
+}));
+
+export const invitationRelations = relations(invitation, ({ one }) => ({
+  organization: one(organization, {
+    fields: [invitation.organizationId],
+    references: [organization.id],
+  }),
+  inviter: one(user, {
+    fields: [invitation.inviterId],
     references: [user.id],
   }),
 }));
