@@ -24,33 +24,101 @@ const gateConfig: Record<GateType, {
   title: string;
   description: string;
   icon: string;
-  benefit: string;
+  badge: string;
+  benefits: string[];
 }> = {
   quiz: {
-    title: 'Test Your Knowledge',
-    description: 'Sign in to access chapter quizzes and track your learning progress.',
+    title: 'Unlock Chapter Quiz',
+    description: 'Test your understanding with interactive questions and get instant feedback on your progress.',
     icon: '🎯',
-    benefit: 'Get instant feedback and see how you compare',
+    badge: 'Chapter Quiz',
+    benefits: [
+      'Track your learning progress',
+      'Get detailed explanations',
+      'Retake anytime to improve',
+    ],
   },
   summary: {
-    title: 'Quick Reference',
-    description: 'Sign in to unlock lesson summaries for quick review and revision.',
+    title: 'Unlock Lesson Summary',
+    description: 'Access condensed key takeaways and quick reference notes for efficient review.',
     icon: '📋',
-    benefit: 'Save hours with condensed key takeaways',
+    badge: 'Quick Reference',
+    benefits: [
+      'Key concepts at a glance',
+      'Perfect for revision',
+      'Save study time',
+    ],
   },
   exercise: {
-    title: 'Hands-On Practice',
-    description: 'Sign in to access coding exercises with guided solutions.',
+    title: 'Unlock Practice Exercise',
+    description: 'Get hands-on with coding exercises and guided solutions to build real skills.',
     icon: '💻',
-    benefit: 'Build real skills through practical application',
+    badge: 'Hands-On Practice',
+    benefits: [
+      'Real-world scenarios',
+      'Step-by-step guidance',
+      'Build portfolio projects',
+    ],
   },
   premium: {
-    title: 'Premium Content',
-    description: 'Sign in to unlock this exclusive learning material.',
+    title: 'Unlock Premium Content',
+    description: 'Access exclusive learning materials designed to accelerate your journey.',
     icon: '✨',
-    benefit: 'Get the complete learning experience',
+    badge: 'Premium',
+    benefits: [
+      'Exclusive resources',
+      'Advanced techniques',
+      'Expert insights',
+    ],
   },
 };
+
+// Lock SVG icon
+const LockIcon = () => (
+  <svg
+    className={styles.lockIcon}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+  </svg>
+);
+
+// Check SVG icon
+const CheckIcon = () => (
+  <svg
+    className={styles.checkIcon}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <polyline points="20 6 9 17 4 12" />
+  </svg>
+);
+
+// Arrow icon for button
+const ArrowIcon = () => (
+  <svg
+    className={styles.buttonIcon}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M5 12h14" />
+    <path d="m12 5 7 7-7 7" />
+  </svg>
+);
 
 export function ContentGate({
   children,
@@ -108,7 +176,7 @@ export function ContentGate({
   useEffect(() => {
     if (session && !isLoading) {
       setIsUnlocking(true);
-      const timer = setTimeout(() => setIsUnlocking(false), 800);
+      const timer = setTimeout(() => setIsUnlocking(false), 600);
       return () => clearTimeout(timer);
     }
   }, [session, isLoading]);
@@ -137,62 +205,71 @@ export function ContentGate({
   // User is not authenticated - show gate
   return (
     <div className={styles.gateContainer}>
-      {/* Blurred preview */}
-      <div className={styles.previewContainer}>
-        <div className={styles.blurredContent} aria-hidden="true">
-          {preview || children}
-        </div>
-        <div className={styles.blurOverlay} />
-      </div>
-
-      {/* Gate card */}
-      <div className={styles.gateCard}>
-        <div className={styles.gateIcon}>{config.icon}</div>
-
-        <h3 className={styles.gateTitle}>{displayTitle}</h3>
-
-        <p className={styles.gateDescription}>{displayDescription}</p>
-
-        <div className={styles.benefitBadge}>
-          <svg className={styles.checkIcon} viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-          </svg>
-          <span>{config.benefit}</span>
+      <div className={styles.gateLayout}>
+        {/* Left side - Blurred preview */}
+        <div className={styles.previewSection}>
+          <div className={styles.blurredContent} aria-hidden="true">
+            {preview || children}
+          </div>
+          <div className={styles.previewOverlay}>
+            <div className={styles.lockBadge}>
+              <LockIcon />
+            </div>
+          </div>
         </div>
 
-        <div className={styles.gateActions}>
-          <button
-            onClick={handleSignIn}
-            className={styles.signInButton}
-            disabled={isSigningIn}
-          >
-            {isSigningIn ? (
-              <>
-                <div className={styles.buttonSpinner} />
-                Signing in...
-              </>
-            ) : (
-              <>
-                <svg className={styles.buttonIcon} viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                Sign In
-              </>
-            )}
-          </button>
+        {/* Right side - CTA */}
+        <div className={styles.ctaSection}>
+          <div className={styles.contentBadge}>
+            <span className={styles.badgeIcon}>{config.icon}</span>
+            <span>{config.badge}</span>
+          </div>
 
-          <button
-            onClick={handleSignUp}
-            className={styles.signUpButton}
-            disabled={isSigningIn}
-          >
-            Create Free Account
-          </button>
+          <h3 className={styles.gateTitle}>{displayTitle}</h3>
+
+          <p className={styles.gateDescription}>{displayDescription}</p>
+
+          <ul className={styles.benefitsList}>
+            {config.benefits.map((benefit, index) => (
+              <li key={index} className={styles.benefitItem}>
+                <CheckIcon />
+                <span>{benefit}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div className={styles.gateActions}>
+            <button
+              onClick={handleSignIn}
+              className={styles.signInButton}
+              disabled={isSigningIn}
+            >
+              {isSigningIn ? (
+                <>
+                  <div className={styles.buttonSpinner} />
+                  Signing in...
+                </>
+              ) : (
+                <>
+                  Sign In to Unlock
+                  <ArrowIcon />
+                </>
+              )}
+            </button>
+
+            <button
+              onClick={handleSignUp}
+              className={styles.signUpButton}
+              disabled={isSigningIn}
+            >
+              Create Free Account
+            </button>
+          </div>
+
+          <p className={styles.gateFooter}>
+            Free forever. No credit card required.
+          </p>
         </div>
-
-        <p className={styles.gateFooter}>
-          Free forever. No credit card required.
-        </p>
       </div>
     </div>
   );

@@ -152,26 +152,36 @@
   background: #aaaaaa;
 }
 
-/* Expand/collapse arrow */
-.menu__link--sublist::after {
-  content: '';
-  position: absolute;
-  right: 1rem;
-  width: 0;
-  height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 5px solid #8a8a9a;
-  transition: transform 0.15s ease;
+/* Expand/collapse arrow - ONLY show on desktop, hide on mobile */
+@media (min-width: 997px) {
+  .menu__link--sublist::after {
+    content: '';
+    position: absolute;
+    right: 1rem;
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid #8a8a9a;
+    transition: transform 0.15s ease;
+  }
+
+  [data-theme="dark"] .menu__link--sublist::after {
+    border-top-color: #707070;
+  }
+
+  /* Collapsed state - arrow points right */
+  .menu__list-item--collapsed > .menu__link--sublist::after {
+    transform: rotate(-90deg);
+  }
 }
 
-[data-theme="dark"] .menu__link--sublist::after {
-  border-top-color: #707070;
-}
-
-/* Collapsed state - arrow points right */
-.menu__list-item--collapsed > .menu__link--sublist::after {
-  transform: rotate(-90deg);
+/* Hide arrow on mobile - rely only on indicator dot */
+@media (max-width: 996px) {
+  .menu__link--sublist::after {
+    display: none !important;
+    content: none !important;
+  }
 }
 
 /* Category hover */
@@ -559,25 +569,19 @@
     min-height: 44px !important;
   }
 
-  /* MOBILE: Hide the custom ::after arrow - keep only the indicator dot */
-  .menu__link--sublist::after {
+  /* MOBILE: Hide ALL arrows, carets, and expand icons */
+  .menu__link--sublist::after,
+  .menu__caret,
+  .menu__link--sublist-caret,
+  .menu__link svg,
+  .menu__link--sublist svg,
+  [class*="caret"],
+  [class*="Caret"],
+  [class*="menuCaret"],
+  [class*="collapsibleButton"],
+  [class*="expandButton"] {
     display: none !important;
-  }
-
-  /* MOBILE: Hide ALL arrow/caret icons in mobile sidebar */
-  .navbar-sidebar .menu__link--sublist::after,
-  .navbar-sidebar .menu__caret,
-  .navbar-sidebar .menu__link--sublist-caret,
-  .navbar-sidebar .menu__link svg,
-  .navbar-sidebar [class*="caret"],
-  .navbar-sidebar [class*="Caret"],
-  .navbar-sidebar [class*="arrow"],
-  .navbar-sidebar [class*="Arrow"],
-  .navbar-sidebar [class*="expand"],
-  .navbar-sidebar [class*="Expand"],
-  .navbar-sidebar [class*="collapse"],
-  .navbar-sidebar [class*="Collapse"] {
-    display: none !important;
+    content: none !important;
   }
 }
 

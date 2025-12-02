@@ -144,6 +144,41 @@
 }
 
 /* ============================================
+   Locked Tab — Gold accent for premium feel
+   ============================================ */
+.tabLocked {
+  position: relative;
+}
+
+.tabLocked:not(.tabActive) {
+  color: var(--lc-gray-mid);
+}
+
+.tabLockIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: var(--lc-space-xs);
+  color: #d4a574;
+  opacity: 0.8;
+  transition: opacity var(--lc-duration-fast) var(--lc-ease-out);
+}
+
+.tabLocked:hover .tabLockIcon {
+  opacity: 1;
+}
+
+.tabLockIcon svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2.5;
+}
+
+[data-theme='dark'] .tabLockIcon {
+  color: #e8c9a8;
+}
+
+/* ============================================
    Tab Icon — Refined Scale
    ============================================ */
 .tabIcon {

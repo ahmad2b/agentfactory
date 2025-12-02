@@ -5,10 +5,13 @@
  * Implements "Scholarly Precision" aesthetic with Polar Night theme integration.
  *
  * The Summary tab only appears when summaryElement is provided.
+ * Summary tab is locked for non-authenticated users.
  * Automatically wrapped around doc content via the DocItem/Content theme swizzle.
  */
 
 import React, { useState, useRef, useCallback } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
+import ContentGate from '@/components/ContentGate';
 import styles from './styles.module.css';
 
 interface LessonContentProps {
@@ -63,12 +66,37 @@ const SummaryIcon: React.FC<{ className?: string }> = ({ className }) => (
   </svg>
 );
 
+/**
+ * Lock Icon - Shows when content is locked
+ */
+const LockIcon: React.FC<{ className?: string }> = ({ className }) => (
+  <svg
+    className={className}
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+  </svg>
+);
+
 export const LessonContent: React.FC<LessonContentProps> = ({
   children,
   summaryElement,
 }) => {
   const [activeTab, setActiveTab] = useState<'lesson' | 'summary'>('lesson');
   const contentRef = useRef<HTMLDivElement>(null);
+  const { session, isLoading } = useAuth();
+
+  // Check if user is authenticated
+  const isAuthenticated = !!session && !isLoading;
 
   // If no summary available, just render children without tabs
   if (!summaryElement) {
@@ -112,7 +140,7 @@ export const LessonContent: React.FC<LessonContentProps> = ({
           aria-controls="panel-summary"
           id="tab-summary"
           tabIndex={activeTab === 'summary' ? 0 : -1}
-          className={`${styles.tab} ${activeTab === 'summary' ? styles.tabActive : ''}`}
+          className={`${styles.tab} ${activeTab === 'summary' ? styles.tabActive : ''} ${!isAuthenticated ? styles.tabLocked : ''}`}
           onClick={() => handleTabChange('summary')}
           onKeyDown={(e) => {
             if (e.key === 'ArrowLeft') {
@@ -125,6 +153,11 @@ export const LessonContent: React.FC<LessonContentProps> = ({
             <SummaryIcon />
           </span>
           <span className={styles.tabLabel}>Summary</span>
+          {!isAuthenticated && (
+            <span className={styles.tabLockIcon} title="Sign in to unlock">
+              <LockIcon />
+            </span>
+          )}
         </button>
       </nav>
 
@@ -149,11 +182,21 @@ export const LessonContent: React.FC<LessonContentProps> = ({
           className={`${styles.panel} ${activeTab === 'summary' ? styles.panelActive : ''}`}
           hidden={activeTab !== 'summary'}
         >
-          <div className={styles.summaryContent}>
-            <div className={styles.summaryBody}>
-              {summaryElement}
+          {isAuthenticated ? (
+            <div className={styles.summaryContent}>
+              <div className={styles.summaryBody}>
+                {summaryElement}
+              </div>
             </div>
-          </div>
+          ) : (
+            <ContentGate type="summary">
+              <div className={styles.summaryContent}>
+                <div className={styles.summaryBody}>
+                  {summaryElement}
+                </div>
+              </div>
+            </ContentGate>
+          )}
         </div>
       </div>
     </div>
