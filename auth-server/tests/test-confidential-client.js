@@ -35,7 +35,7 @@ async function testConfidentialClient() {
     authUrl.searchParams.set("client_id", CLIENT_ID);
     authUrl.searchParams.set("redirect_uri", REDIRECT_URI);
     authUrl.searchParams.set("response_type", "code");
-    authUrl.searchParams.set("scope", "openid profile email");
+    authUrl.searchParams.set("scope", "openid profile email offline_access"); // offline_access for refresh token
 
     console.log("Authorization URL:", authUrl.toString());
     console.log("(User would visit this URL, sign in, and approve)\n");
