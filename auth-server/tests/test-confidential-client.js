@@ -17,7 +17,7 @@ const REDIRECT_URI = "http://localhost:8000/callback"; // FastAPI would listen h
 // Test user credentials
 const TEST_USER = {
   email: "admin@robolearn.io",
-  password: "Admin123!"
+  password: "RoboLearnAdmin2024!SecureTest"
 };
 
 async function testConfidentialClient() {

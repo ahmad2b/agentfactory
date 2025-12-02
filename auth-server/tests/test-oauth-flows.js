@@ -5,7 +5,7 @@
  * Prerequisites:
  * 1. Auth server running on port 3001: pnpm dev
  * 2. Test clients seeded: npx tsx scripts/seed-test-clients.ts
- * 3. Test user exists and is verified: admin@robolearn.io / Admin123!
+ * 3. Test user exists and is verified: admin@robolearn.io / RoboLearnAdmin2024!SecureTest
  *
  * Run: node tests/test-oauth-flows.js
  */
