@@ -174,16 +174,20 @@ const TEST_ORG = {
  * Upsert OAuth client from trusted-clients.ts configuration
  */
 async function upsertClient(client: typeof TRUSTED_CLIENTS[0]) {
+  // Determine auth method based on client type
+  const authMethod = client.type === "confidential" ? "client_secret_basic" : "none";
+  const clientSecret = 'clientSecret' in client ? client.clientSecret : null;
+
   const dbClient = {
     id: `${client.clientId}-id`,
     clientId: client.clientId,
-    clientSecret: null, // Public clients have no secret
+    clientSecret: clientSecret,
     name: client.name,
     redirectUrls: client.redirectUrls.join(","),
     type: client.type,
     disabled: client.disabled,
     metadata: JSON.stringify({
-      token_endpoint_auth_method: "none",
+      token_endpoint_auth_method: authMethod,
       grant_types: ["authorization_code", "refresh_token"],
       skip_consent: client.skipConsent,
       ...client.metadata,

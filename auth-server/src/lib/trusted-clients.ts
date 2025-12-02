@@ -71,6 +71,18 @@ export const TRUSTED_CLIENTS = [
     metadata: {},
   },
   {
+    clientId: "robolearn-confidential-client",
+    name: "RoboLearn Backend Service (Test)",
+    type: "confidential" as const,
+    clientSecret: "robolearn-confidential-secret-for-testing-only",
+    redirectUrls: getRedirectUrls([
+      "http://localhost:8000/auth/callback",
+    ]),
+    disabled: false,
+    skipConsent: true,
+    metadata: {},
+  },
+  {
     clientId: "panaversity-sso-public-client",
     name: "Panaversity SSO",
     type: "public" as const,
