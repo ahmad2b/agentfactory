@@ -49,9 +49,9 @@ export function Toast({ message, type = "success", duration = 5000, onClose }: T
       ),
     },
     info: {
-      container: "bg-gradient-to-br from-blue-500 via-pana-500 to-violet-600",
-      glow: "shadow-blue-500/40",
-      particles: "from-blue-300/60 to-violet-400/60",
+      container: "bg-gradient-to-br from-pana-500 via-pana-500 to-violet-600",
+      glow: "shadow-pana-500/40",
+      particles: "from-pana-300/60 to-violet-400/60",
       icon: (
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />

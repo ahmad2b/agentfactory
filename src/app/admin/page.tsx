@@ -57,7 +57,7 @@ export default function AdminDashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-pana-500"></div>
       </div>
     );
   }
@@ -116,7 +116,7 @@ export default function AdminDashboard() {
         <div className="flex flex-wrap gap-4">
           <Link
             href="/admin/users"
-            className="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 text-sm font-medium"
+            className="px-4 py-2 bg-pana-50 text-pana-500 rounded-lg hover:bg-pana-100 text-sm font-medium"
           >
             Manage Users
           </Link>
@@ -135,7 +135,7 @@ export default function AdminDashboard() {
           <h2 className="text-lg font-semibold text-gray-900">Recent Users</h2>
           <Link
             href="/admin/users"
-            className="text-sm text-blue-600 hover:text-blue-500"
+            className="text-sm text-pana-500 hover:text-pana-500"
           >
             View all
           </Link>
@@ -180,7 +180,7 @@ export default function AdminDashboard() {
                     <span
                       className={`px-2 py-1 text-xs font-medium rounded ${
                         user.role === "admin"
-                          ? "bg-blue-100 text-blue-800"
+                          ? "bg-pana-100 text-pana-700"
                           : "bg-gray-100 text-gray-800"
                       }`}
                     >
@@ -230,7 +230,7 @@ function StatCard({
   color: "blue" | "green" | "red" | "purple";
 }) {
   const colors = {
-    blue: "bg-blue-50 text-blue-600",
+    blue: "bg-pana-50 text-pana-500",
     green: "bg-green-50 text-green-600",
     red: "bg-red-50 text-red-600",
     purple: "bg-purple-50 text-purple-600",

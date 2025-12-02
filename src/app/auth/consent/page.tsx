@@ -67,7 +67,7 @@ function ConsentContent() {
   if (isPending) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-pana-500"></div>
       </div>
     );
   }
@@ -92,7 +92,7 @@ function ConsentContent() {
           Authorization Request
         </h2>
         <p className="text-gray-600 text-center mb-6">
-          <span className="font-medium text-blue-600">{clientInfo?.name}</span> wants
+          <span className="font-medium text-pana-500">{clientInfo?.name}</span> wants
           to access your account
         </p>
 
@@ -104,7 +104,7 @@ function ConsentContent() {
             {clientInfo?.scopes.map((scope) => (
               <li key={scope} className="flex items-center gap-2 text-sm text-gray-600">
                 <svg
-                  className="w-4 h-4 text-blue-500"
+                  className="w-4 h-4 text-pana-500"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -140,7 +140,7 @@ function ConsentContent() {
           <button
             onClick={() => handleConsent(true)}
             disabled={isLoading}
-            className="flex-1 py-2.5 px-4 border border-transparent rounded-lg text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+            className="flex-1 py-2.5 px-4 border border-transparent rounded-lg text-sm font-medium text-white bg-pana-500 hover:bg-pana-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pana-500 disabled:opacity-50"
           >
             {isLoading ? "Authorizing..." : "Authorize"}
           </button>
@@ -159,7 +159,7 @@ export default function ConsentPage() {
     <Suspense
       fallback={
         <div className="flex items-center justify-center min-h-screen">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-pana-500"></div>
         </div>
       }
     >

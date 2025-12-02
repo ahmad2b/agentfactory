@@ -61,7 +61,7 @@ export function ForgotPasswordForm() {
         </div>
         <a
           href="/auth/sign-in"
-          className="block text-center text-blue-600 hover:text-blue-500 font-medium"
+          className="block text-center text-pana-500 hover:text-pana-500 font-medium"
         >
           Back to sign in
         </a>
@@ -81,7 +81,7 @@ export function ForgotPasswordForm() {
         </div>
         <a
           href="/auth/sign-in"
-          className="block text-center text-blue-600 hover:text-blue-500 font-medium"
+          className="block text-center text-pana-500 hover:text-pana-500 font-medium"
         >
           Back to sign in
         </a>
@@ -111,7 +111,7 @@ export function ForgotPasswordForm() {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-pana-500 focus:border-pana-500"
           placeholder="you@example.com"
         />
       </div>
@@ -119,14 +119,14 @@ export function ForgotPasswordForm() {
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-pana-500 hover:bg-pana-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pana-500 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isLoading ? "Sending..." : "Send reset link"}
       </button>
 
       <a
         href="/auth/sign-in"
-        className="block text-center text-sm text-blue-600 hover:text-blue-500 font-medium"
+        className="block text-center text-sm text-pana-500 hover:text-pana-500 font-medium"
       >
         Back to sign in
       </a>

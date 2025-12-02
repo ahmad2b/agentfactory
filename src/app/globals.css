@@ -7,11 +7,12 @@
 :root {
   /* Panaversity Brand Colors */
   --color-primary: #1cd98e;
-  --color-primary-dark: #15a776;
+  --color-primary-dark: #0d9668;
+  --color-primary-darker: #065f46;
   --color-primary-light: #4eeaab;
   --color-primary-subtle: rgba(28, 217, 142, 0.1);
-  --color-accent: #1c8ed9;
-  --color-accent-light: #4aa8e8;
+  --color-accent: #0d9668;
+  --color-accent-dark: #065f46;
   
   /* Surfaces */
   --color-surface: #ffffff;
@@ -72,24 +73,24 @@
   /* Panaversity gradient mesh - subtle green energy */
   .gradient-mesh {
     background: 
-      radial-gradient(at 0% 0%, rgba(28, 217, 142, 0.08) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(28, 142, 217, 0.06) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(28, 217, 142, 0.04) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, rgba(28, 142, 217, 0.04) 0px, transparent 50%);
+      radial-gradient(at 0% 0%, rgba(28, 217, 142, 0.1) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(13, 150, 104, 0.08) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(6, 95, 70, 0.06) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(28, 217, 142, 0.04) 0px, transparent 50%);
   }
 
   /* Glass effect with green tint */
   .glass-effect {
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(28, 217, 142, 0.1);
-    box-shadow: 0 4px 24px rgba(28, 217, 142, 0.06);
+    border: 1px solid rgba(28, 217, 142, 0.15);
+    box-shadow: 0 4px 24px rgba(6, 95, 70, 0.08);
   }
 
-  /* Text gradient - green to blue */
+  /* Text gradient - light green to dark green */
   .text-gradient {
-    background: linear-gradient(135deg, #1cd98e 0%, #1c8ed9 100%);
+    background: linear-gradient(135deg, #1cd98e 0%, #0d9668 50%, #065f46 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

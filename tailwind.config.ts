@@ -23,17 +23,18 @@ const config: Config = {
           900: '#145944',
           950: '#053226',
         },
+        // Dark green accent (same family as pana)
         accent: {
-          50: '#eff8ff',
-          100: '#dbeffe',
-          200: '#bfe3fe',
-          300: '#93d2fd',
-          400: '#4aa8e8',
-          500: '#1c8ed9', // Accent Blue
-          600: '#1a73b8',
-          700: '#175c95',
-          800: '#184e7b',
-          900: '#194266',
+          50: '#ecfdf5',
+          100: '#d1fae5',
+          200: '#a7f3d0',
+          300: '#6ee7b7',
+          400: '#34d399',
+          500: '#0d9668', // Dark Emerald
+          600: '#065f46', // Darker
+          700: '#064e3b',
+          800: '#053a2d',
+          900: '#042f24',
         },
       },
       fontFamily: {

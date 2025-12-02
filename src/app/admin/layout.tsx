@@ -26,7 +26,7 @@ export default function AdminLayout({
   if (isPending) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-pana-500"></div>
       </div>
     );
   }
@@ -37,7 +37,7 @@ export default function AdminLayout({
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Access Denied</h1>
           <p className="text-gray-600 mb-4">You need admin privileges to access this page.</p>
-          <Link href="/" className="text-blue-600 hover:text-blue-500">
+          <Link href="/" className="text-pana-500 hover:text-pana-500">
             Go back home
           </Link>
         </div>
@@ -80,7 +80,7 @@ export default function AdminLayout({
               <span className="text-sm text-gray-600">
                 {session.user.name || session.user.email}
               </span>
-              <span className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded">
+              <span className="px-2 py-1 text-xs font-medium bg-pana-100 text-pana-700 rounded">
                 Admin
               </span>
             </div>

@@ -169,7 +169,7 @@ export default function ClientsPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-pana-500"></div>
       </div>
     );
   }
@@ -180,7 +180,7 @@ export default function ClientsPage() {
         <h1 className="text-2xl font-bold text-gray-900">OAuth Clients</h1>
         <button
           onClick={() => setShowCreateForm(true)}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium"
+          className="px-4 py-2 bg-pana-500 text-white rounded-lg hover:bg-pana-600 text-sm font-medium"
         >
           Register New Client
         </button>
@@ -286,7 +286,7 @@ export default function ClientsPage() {
 
             <button
               onClick={() => setCreatedClient(null)}
-              className="mt-6 w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              className="mt-6 w-full py-2 bg-pana-500 text-white rounded-lg hover:bg-pana-600"
             >
               I've saved my credentials
             </button>
@@ -313,7 +313,7 @@ export default function ClientsPage() {
                     setNewClient({ ...newClient, name: e.target.value })
                   }
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pana-500"
                   placeholder="My Application"
                 />
               </div>
@@ -348,13 +348,13 @@ export default function ClientsPage() {
                     onClick={() => setNewClient({ ...newClient, clientType: "confidential" })}
                     className={`p-3 rounded-lg border-2 text-left transition-all ${
                       newClient.clientType === "confidential"
-                        ? "border-blue-500 bg-blue-50"
+                        ? "border-pana-500 bg-pana-50"
                         : "border-gray-200 hover:border-gray-300"
                     }`}
                   >
                     <div className="flex items-center gap-2 mb-1">
                       <div className={`w-3 h-3 rounded-full ${
-                        newClient.clientType === "confidential" ? "bg-blue-500" : "bg-gray-300"
+                        newClient.clientType === "confidential" ? "bg-pana-500" : "bg-gray-300"
                       }`} />
                       <span className="font-medium text-sm">Confidential</span>
                     </div>
@@ -376,7 +376,7 @@ export default function ClientsPage() {
                   }
                   required
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pana-500"
                   placeholder="https://myapp.com/callback"
                 />
               </div>
@@ -390,22 +390,22 @@ export default function ClientsPage() {
                   onChange={(e) =>
                     setNewClient({ ...newClient, scope: e.target.value })
                   }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pana-500"
                   placeholder="openid profile email"
                 />
               </div>
 
               {/* Skip Consent Note */}
-              <div className="border border-blue-200 rounded-lg p-4 bg-blue-50">
+              <div className="border border-pana-200 rounded-lg p-4 bg-pana-50">
                 <div className="flex items-start gap-2">
-                  <svg className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-pana-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <div>
-                    <p className="text-sm font-medium text-blue-900">OAuth Consent Screen</p>
-                    <p className="text-xs text-blue-700 mt-1">
+                    <p className="text-sm font-medium text-pana-800">OAuth Consent Screen</p>
+                    <p className="text-xs text-pana-600 mt-1">
                       All dynamically registered clients will show a consent screen.
-                      To skip consent for first-party apps, configure them as trusted clients in <code className="bg-blue-100 px-1 py-0.5 rounded">auth.ts</code>.
+                      To skip consent for first-party apps, configure them as trusted clients in <code className="bg-pana-100 px-1 py-0.5 rounded">auth.ts</code>.
                       See the pre-configured "RoboLearn Book Interface" client as an example.
                     </p>
                   </div>
@@ -423,7 +423,7 @@ export default function ClientsPage() {
                 <button
                   type="submit"
                   disabled={isCreating}
-                  className="flex-1 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                  className="flex-1 py-2 bg-pana-500 text-white rounded-lg hover:bg-pana-600 disabled:opacity-50"
                 >
                   {isCreating ? "Creating..." : "Create Client"}
                 </button>
@@ -463,7 +463,7 @@ export default function ClientsPage() {
                   onChange={(e) => setEditRedirectUrls(e.target.value)}
                   required
                   rows={5}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-sm"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pana-500 font-mono text-sm"
                   placeholder="https://myapp.com/callback&#10;http://localhost:3000/callback"
                 />
                 <p className="text-xs text-gray-500 mt-1">
@@ -485,7 +485,7 @@ export default function ClientsPage() {
                 <button
                   type="submit"
                   disabled={isUpdating}
-                  className="flex-1 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+                  className="flex-1 py-2 bg-pana-500 text-white rounded-lg hover:bg-pana-600 disabled:opacity-50"
                 >
                   {isUpdating ? "Saving..." : "Save Changes"}
                 </button>
@@ -529,9 +529,9 @@ export default function ClientsPage() {
                 <tr key={client.id} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <div className="flex-shrink-0 h-10 w-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                      <div className="flex-shrink-0 h-10 w-10 bg-pana-100 rounded-lg flex items-center justify-center">
                         <svg
-                          className="w-5 h-5 text-blue-600"
+                          className="w-5 h-5 text-pana-500"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -574,7 +574,7 @@ export default function ClientsPage() {
                           className={`px-2 py-1 text-xs font-medium rounded ${
                             isPublic
                               ? "bg-green-100 text-green-800"
-                              : "bg-blue-100 text-blue-800"
+                              : "bg-pana-100 text-pana-700"
                           }`}
                         >
                           {isPublic ? "Public (PKCE)" : "Confidential"}
@@ -596,7 +596,7 @@ export default function ClientsPage() {
                       <div className="flex items-center justify-end gap-3">
                         <button
                           onClick={() => handleEditClient(client)}
-                          className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                          className="text-pana-500 hover:text-pana-700 text-sm font-medium"
                         >
                           Edit
                         </button>

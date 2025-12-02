@@ -62,7 +62,7 @@ function VerifyCallbackContent() {
         </div>
         <a
           href="/auth/sign-in"
-          className="block w-full text-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700"
+          className="block w-full text-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-pana-500 hover:bg-pana-600"
         >
           Back to Sign In
         </a>
@@ -72,7 +72,7 @@ function VerifyCallbackContent() {
 
   return (
     <div className="flex flex-col items-center justify-center py-8 space-y-4">
-      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-pana-500"></div>
       <p className="text-sm text-gray-600">
         Email verified! Redirecting...
       </p>
@@ -89,7 +89,7 @@ export default function VerifyCallbackPage() {
       <Suspense
         fallback={
           <div className="flex items-center justify-center py-8">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-pana-500"></div>
           </div>
         }
       >

@@ -86,7 +86,7 @@ export default function UsersPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-pana-500"></div>
       </div>
     );
   }
@@ -101,7 +101,7 @@ export default function UsersPage() {
             placeholder="Search users..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pana-500 text-sm"
           />
         </div>
       </div>
@@ -150,7 +150,7 @@ export default function UsersPage() {
                     value={user.role || "user"}
                     onChange={(e) => handleSetRole(user.id, e.target.value as "user" | "admin")}
                     disabled={actionLoading === user.id}
-                    className="text-sm border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="text-sm border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-pana-500"
                   >
                     <option value="user">User</option>
                     <option value="admin">Admin</option>

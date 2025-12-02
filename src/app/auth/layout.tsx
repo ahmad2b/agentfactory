@@ -45,9 +45,8 @@ export default function AuthLayout({
 
         {/* Footer */}
         <div className="mt-8 text-center animate-in slide-in-from-bottom">
-          <p className="text-xs text-slate-500">
-            Secure authentication powered by{' '}
-            <span className="font-medium text-slate-700">Better Auth</span>
+          <p className="text-xs text-slate-400">
+            © {new Date().getFullYear()} {process.env.NEXT_PUBLIC_ORG_NAME || "Panaversity"}
           </p>
         </div>
       </div>
