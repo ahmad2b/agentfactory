@@ -15,6 +15,7 @@ OAuth 2.1 / OIDC authentication server using Better Auth with PKCE, JWKS, and mu
 - [FastAPI Integration](docs/fastapi-integration.md) - Backend integration examples
 
 ### Additional Resources
+- [Redis Setup](docs/redis-setup.md) - Distributed rate limiting for multi-instance deployments
 - [Flow Diagrams](docs/flow-diagrams.md) - Visual authentication flows
 - [Troubleshooting](docs/troubleshooting.md) - Common issues and solutions
 

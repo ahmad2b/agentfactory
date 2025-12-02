@@ -13,6 +13,7 @@ import { eq, and } from "drizzle-orm";
 import { Resend } from "resend";
 import * as nodemailer from "nodemailer";
 import { TRUSTED_CLIENTS, DEFAULT_ORG_ID } from "./trusted-clients";
+import { redis, redisStorage } from "./redis";
 
 // Cached default organization ID (validated at startup)
 let cachedDefaultOrgId: string | null = null;
@@ -386,7 +387,9 @@ export const auth = betterAuth({
   rateLimit: {
     window: 60, // 60 seconds
     max: 3000, // 3000 requests per minute - supports 100k user base
-    storage: "memory", // Memory storage (consider Redis for multi-instance deployments)
+    // Automatically use Redis if configured, otherwise fall back to memory
+    // Redis required for multi-instance deployments (Cloud Run, Kubernetes)
+    storage: redis ? "secondary-storage" : "memory",
 
     // Per-endpoint rules for security-sensitive operations
     customRules: {
@@ -599,6 +602,11 @@ export const auth = betterAuth({
       },
     },
   },
+
+  // Secondary storage for rate limiting with Redis (optional)
+  // Enables distributed rate limiting across multiple server instances
+  // Falls back to memory storage if Redis is not configured
+  ...(redisStorage && { secondaryStorage: redisStorage }),
 });
 
 // Validate default organization at startup
