@@ -6,13 +6,21 @@ on:
       - main
       - feat/**
     paths:
-      - 'auth-server/**'
+      - 'src/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - '*.ts'
+      - '*.json'
       - '.github/workflows/test-auth.yml'
   pull_request:
     branches:
       - main
     paths:
-      - 'auth-server/**'
+      - 'src/**'
+      - 'scripts/**'
+      - 'tests/**'
+      - '*.ts'
+      - '*.json'
       - '.github/workflows/test-auth.yml'
 
 jobs:
@@ -36,10 +44,6 @@ jobs:
         ports:
           - 5432:5432
 
-    defaults:
-      run:
-        working-directory: ./auth-server
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -54,7 +58,7 @@ jobs:
         with:
           node-version: '20'
           cache: 'pnpm'
-          cache-dependency-path: './auth-server/pnpm-lock.yaml'
+          cache-dependency-path: 'pnpm-lock.yaml'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -150,17 +154,13 @@ jobs:
         with:
           name: test-results
           path: |
-            auth-server/test-results.json
-            auth-server/tests/**/*.log
+            test-results.json
+            tests/**/*.log
           retention-days: 7
 
   security-audit:
     name: Security Audit
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: ./auth-server
 
     steps:
       - name: Checkout code
@@ -176,7 +176,7 @@ jobs:
         with:
           node-version: '20'
           cache: 'pnpm'
-          cache-dependency-path: './auth-server/pnpm-lock.yaml'
+          cache-dependency-path: 'pnpm-lock.yaml'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
