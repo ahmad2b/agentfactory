@@ -375,17 +375,23 @@
   }
 
   .signInLink {
-    font-size: 0.75rem;
-    padding: 0.25rem 0.5rem;
-    min-height: auto;
+    font-size: 0.8125rem;
+    padding: 0.5rem 0.75rem;
+    min-height: 36px;
     min-width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .getStartedButton {
-    font-size: 0.75rem;
-    padding: 0.35rem 0.65rem;
-    min-height: auto;
+    font-size: 0.8125rem;
+    padding: 0.5rem 0.875rem;
+    min-height: 36px;
     min-width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .userButton {

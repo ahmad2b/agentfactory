@@ -12,20 +12,18 @@
  */
 
 /* ============================================================================
-   0. FIXED SIDEBAR LAYOUT — Stays in place while content scrolls
+   0. SIDEBAR LAYOUT — Custom width with native collapse support
    ============================================================================ */
 
+/* Set sidebar width via CSS variables - Docusaurus respects these */
+:root {
+  --doc-sidebar-width: 260px;
+  --doc-sidebar-hidden-width: 30px;
+}
+
 @media (min-width: 997px) {
-
-  /* Override Docusaurus clip-path that breaks sticky positioning */
-  [class*='docSidebarContainer'] {
-    clip-path: none !important;
-    overflow: visible !important;
-    contain: none !important;
-  }
-
   /* The sidebar viewport - sticky below the navbar */
-  [class*='sidebarViewport'] {
+  .theme-doc-sidebar-container [class*='sidebarViewport'] {
     position: sticky !important;
     top: var(--ifm-navbar-height) !important;
     height: calc(100vh - var(--ifm-navbar-height)) !important;
@@ -35,7 +33,7 @@
   }
 
   /* Remove default padding since sidebar now starts below navbar */
-  [class*='sidebarViewport']>[class*='sidebar'] {
+  .theme-doc-sidebar-container [class*='sidebarViewport'] > [class*='sidebar'] {
     padding-top: 0 !important;
   }
 }
@@ -48,9 +46,7 @@
   background: #fafbfc !important;
   border-right: 1px solid rgba(0, 31, 63, 0.08) !important;
   position: relative;
-  --doc-sidebar-width: 260px !important;
-  width: var(--doc-sidebar-width) !important;
-  min-width: var(--doc-sidebar-width) !important;
+  /* DO NOT set width here - Docusaurus handles collapse/expand transitions */
 }
 
 [data-theme="dark"] .theme-doc-sidebar-container {
