@@ -51,24 +51,46 @@
         'JetBrains Mono', 'SF Mono', Monaco, Consolas, 'Courier New', monospace;
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* ============================================================================
+   DARK MODE - "Midnight Scholar" Theme
+   Optimized for extended reading with warm undertones and soft blue accents
+   ============================================================================ */
 [data-theme="dark"] {
-    /* Dark Mode - Lighter variants for contrast */
-    --ifm-color-primary: #aaaaaa;
-    --ifm-color-primary-dark: #999999;
-    --ifm-color-primary-darker: #888888;
-    --ifm-color-primary-darkest: #666666;
-    --ifm-color-primary-light: #bbbbbb;
-    --ifm-color-primary-lighter: #cccccc;
-    --ifm-color-primary-lightest: #dddddd;
+    /* Primary colors - Soft blue for links and accents (maintains brand connection) */
+    --ifm-color-primary: #60a5fa;
+    --ifm-color-primary-dark: #3b82f6;
+    --ifm-color-primary-darker: #2563eb;
+    --ifm-color-primary-darkest: #1d4ed8;
+    --ifm-color-primary-light: #93c5fd;
+    --ifm-color-primary-lighter: #bfdbfe;
+    --ifm-color-primary-lightest: #dbeafe;
 
-    /* NAVBAR - SOLID dark background to contrast with hero (#111111) */
-    --ifm-navbar-background-color: #3a3a3a;
-    --ifm-navbar-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    /* NAVBAR - Obsidian Glass: near-black with zinc undertone */
+    --ifm-navbar-background-color: #18181b;
+    --ifm-navbar-shadow: 0 1px 0 rgba(255, 255, 255, 0.06), 0 4px 20px rgba(0, 0, 0, 0.4);
 
-    --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.05);
-    --ifm-background-color: #111111;
-    --ifm-background-surface-color: #1a1a1a;
+    /* Backgrounds - Warm off-blacks for reduced eye strain */
+    --ifm-background-color: #0f0f12;
+    --ifm-background-surface-color: #1a1a1f;
+    --docusaurus-highlighted-code-line-bg: rgba(96, 165, 250, 0.1);
+
+    /* Text colors - Softer whites for comfortable reading */
+    --ifm-font-color-base: #e2e8f0;
+    --ifm-font-color-secondary: #94a3b8;
+    --ifm-heading-color: #f1f5f9;
+
+    /* Accent colors for CTAs and highlights */
+    --midnight-accent-amber: #f59e0b;
+    --midnight-accent-amber-hover: #d97706;
+    --midnight-accent-glow: rgba(245, 158, 11, 0.15);
+
+    /* Borders and dividers */
+    --ifm-color-emphasis-200: rgba(148, 163, 184, 0.15);
+    --ifm-color-emphasis-300: rgba(148, 163, 184, 0.25);
+
+    /* Card/surface shadows */
+    --midnight-card-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+    --midnight-card-shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 /* Smooth scrolling */
@@ -76,9 +98,173 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Enhanced link styles */
+/* ============================================================================
+   LIGHT MODE - Micro-interactions & Polish
+   Subtle hover states, click feedback, and refined transitions
+   ============================================================================ */
+
+/* Enhanced link styles with underline animation */
 a {
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+/* Content links - subtle underline on hover */
+.markdown a:not(.hash-link):not([class*="button"]):not([class*="card"]) {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.markdown a:not(.hash-link):not([class*="button"]):not([class*="card"]):hover {
+    text-decoration-color: currentColor;
+}
+
+/* Button base - enhanced feedback */
+button,
+[role="button"],
+.button {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Primary buttons - light mode polish */
+.button--primary,
+.button.button--primary {
+    position: relative;
+    overflow: hidden;
+}
+
+.button--primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.button--primary:hover::after {
+    opacity: 1;
+}
+
+.button--primary:active {
+    transform: scale(0.98);
+}
+
+/* Card hover effects */
+.card,
+[class*="card"] {
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+article.card:hover,
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 31, 63, 0.12);
+}
+
+[data-theme="dark"] article.card:hover,
+[data-theme="dark"] .card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Sidebar link interactions */
+.menu__link {
+    transition: background-color 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
+}
+
+.menu__link:hover:not(.menu__link--active) {
+    padding-left: calc(var(--ifm-menu-link-padding-horizontal) + 4px);
+}
+
+/* Table of contents - smooth highlight */
+.table-of-contents__link {
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Code blocks - copy button polish */
+.prism-code button {
+    transition: opacity 0.15s ease, background-color 0.15s ease;
+}
+
+/* Input focus states */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 31, 63, 0.15);
+    border-color: var(--ifm-color-primary);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+[data-theme="dark"] input:focus,
+[data-theme="dark"] textarea:focus,
+[data-theme="dark"] select:focus {
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+}
+
+/* Navbar link hover - subtle lift */
+.navbar__link {
+    position: relative;
     transition: color 0.2s ease;
+}
+
+.navbar__link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--ifm-color-primary);
+    transition: width 0.2s ease, left 0.2s ease;
+    border-radius: 1px;
+}
+
+.navbar__link:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+/* Active click/press state - global */
+button:active:not(:disabled),
+[role="button"]:active:not(:disabled),
+.button:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+/* Image hover - subtle zoom */
+.markdown img:not([class*="icon"]):not([class*="logo"]) {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: zoom-in;
+}
+
+.markdown img:not([class*="icon"]):not([class*="logo"]):hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .markdown img:not([class*="icon"]):not([class*="logo"]):hover {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Blockquote - left border animation */
+blockquote {
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+blockquote:hover {
+    border-left-color: var(--ifm-color-primary);
+}
+
+/* Admonition hover - subtle glow */
+.admonition {
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.admonition:hover {
+    transform: translateX(2px);
 }
 
 /* Better code block styling */
@@ -520,16 +706,16 @@ main.docMainContainer {
 }
 
 /* Dark mode navbar - MUST use higher specificity */
-/* Using #3a3a3a for better contrast against hero (#111111) */
+/* Obsidian Glass: near-black with zinc undertone */
 html[data-theme="dark"] .navbar,
 [data-theme="dark"] .navbar {
-    background: #3a3a3a !important;
-    background-color: #3a3a3a !important;
+    background: #18181b !important;
+    background-color: #18181b !important;
     background-image: none !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06), 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Mobile navbar - ensure solid background on all screen sizes */
@@ -545,8 +731,8 @@ html[data-theme="dark"] .navbar,
     /* Dark mode mobile - explicit overrides */
     html[data-theme="dark"] .navbar,
     [data-theme="dark"] .navbar {
-        background: #3a3a3a !important;
-        background-color: #3a3a3a !important;
+        background: #18181b !important;
+        background-color: #18181b !important;
     }
 
     /* Reduce gap between hamburger and Book link */
