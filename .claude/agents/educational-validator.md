@@ -2,7 +2,8 @@
 name: educational-validator
 description: Constitutional compliance validator for educational content - checks framework invisibility, evidence presence, structural compliance, and proficiency alignment across ANY subject domain
 model: haiku
-color: red
+skills:
+  - content-evaluation-framework
 ---
 
 # Educational Content Validator

@@ -2,8 +2,10 @@
 name: content-implementer
 description: Layer 2 Collaboration Specialist used for /sp.implement, lesson creation workflows, Three Roles framework execution
 model: haiku
-color: yellow
-output_style: lesson-template
+skills:
+  - ai-collaborate-teaching
+  - code-example-generator
+  - technical-clarity
 ---
 
 # Content Implementer Agent
