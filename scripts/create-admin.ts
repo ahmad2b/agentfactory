@@ -3,10 +3,10 @@ import { user, account } from "../auth-schema";
 import { eq } from "drizzle-orm";
 import { randomUUID } from "crypto";
 
-// Admin credentials
+// Admin credentials - must match seed-setup.ts and test files
 const ADMIN_EMAIL = "admin@robolearn.io";
-const ADMIN_PASSWORD = "Admin123!"; // Will be hashed by Better Auth
-const ADMIN_NAME = "Admin User";
+const ADMIN_PASSWORD = "RoboLearnAdmin2024!SecureTest"; // Strong password (matches seed-setup.ts)
+const ADMIN_NAME = "Test Admin";
 
 async function createAdminUser() {
   console.log("Creating admin user...");
