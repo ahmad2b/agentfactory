@@ -57,11 +57,18 @@ function getAllowedPostLogoutOrigins(): string[] {
 
 /**
  * Validate post_logout_redirect_uri against allowed origins
- * Security: Prevents open redirect attacks
+ * Security: Prevents open redirect attacks (CWE-601) and dangerous protocols
  */
 function isValidPostLogoutUri(uri: string): boolean {
   try {
     const parsedUri = new URL(uri);
+
+    // Security: Explicitly reject non-HTTP(S) protocols
+    // Prevents javascript:, data:, file: and other dangerous protocols
+    if (parsedUri.protocol !== "http:" && parsedUri.protocol !== "https:") {
+      return false;
+    }
+
     const allowedOrigins = getAllowedPostLogoutOrigins();
 
     // Check if origin matches any allowed origin
@@ -147,15 +154,30 @@ async function handleEndSession(request: NextRequest) {
       return response;
     }
 
-    // No redirect URI - return success JSON
-    return NextResponse.json(
+    // No redirect URI - return success JSON with cookies cleared
+    const response = NextResponse.json(
       { success: true, message: "Session terminated" },
       { status: 200 }
     );
+
+    // Clear auth cookies explicitly for consistency with redirect case
+    for (const name of SESSION_COOKIE_NAMES) {
+      response.cookies.set(name, "", {
+        expires: new Date(0),
+        path: "/",
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+      });
+    }
+
+    return response;
   } catch (error) {
     console.error("[EndSession] Error:", error);
 
-    // On error, still redirect if valid URI was provided
+    // Design decision: Redirect even on error for better UX
+    // The user initiated logout, so redirect them to a sensible destination
+    // rather than showing an error page. The URI was already validated above.
     if (postLogoutRedirectUri) {
       const redirectUrl = new URL(postLogoutRedirectUri);
       if (state) {
