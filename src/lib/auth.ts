@@ -207,98 +207,96 @@ export const auth = betterAuth({
       // Keep using scrypt for new passwords (don't change hash function)
       // Progressive migration: When users change password, they get scrypt hash
     },
-    // Password reset (only when email is configured)
-    ...(emailEnabled && {
-      sendResetPassword: async ({ user, url }) => {
-        const appName = process.env.NEXT_PUBLIC_APP_NAME || "Panaversity SSO";
-        const appDescription = process.env.NEXT_PUBLIC_APP_DESCRIPTION || "Secure Single Sign-On";
-        const orgName = process.env.NEXT_PUBLIC_ORG_NAME || "Panaversity";
+    // Password reset - always register handler, sendEmail() handles "not configured" case
+    sendResetPassword: async ({ user, url }) => {
+      const appName = process.env.NEXT_PUBLIC_APP_NAME || "Panaversity SSO";
+      const appDescription = process.env.NEXT_PUBLIC_APP_DESCRIPTION || "Secure Single Sign-On";
+      const orgName = process.env.NEXT_PUBLIC_ORG_NAME || "Panaversity";
 
-        await sendEmail({
-          to: user.email,
-          subject: `Reset your ${appName} password`,
-          html: `
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-              <meta charset="UTF-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            </head>
-            <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
-              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f5f5f5; padding: 40px 0;">
-                <tr>
-                  <td align="center">
-                    <!-- Main container -->
-                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="max-width: 600px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-                      <!-- Header -->
-                      <tr>
-                        <td style="padding: 40px 40px 30px; text-align: center; border-bottom: 1px solid #e5e7eb;">
-                          <h1 style="margin: 0; font-size: 24px; font-weight: 600; color: #1f2937;">${appName}</h1>
-                          <p style="margin: 8px 0 0; font-size: 14px; color: #6b7280;">${appDescription}</p>
-                        </td>
-                      </tr>
+      await sendEmail({
+        to: user.email,
+        subject: `Reset your ${appName} password`,
+        html: `
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          </head>
+          <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f5f5f5; padding: 40px 0;">
+              <tr>
+                <td align="center">
+                  <!-- Main container -->
+                  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="max-width: 600px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                    <!-- Header -->
+                    <tr>
+                      <td style="padding: 40px 40px 30px; text-align: center; border-bottom: 1px solid #e5e7eb;">
+                        <h1 style="margin: 0; font-size: 24px; font-weight: 600; color: #1f2937;">${appName}</h1>
+                        <p style="margin: 8px 0 0; font-size: 14px; color: #6b7280;">${appDescription}</p>
+                      </td>
+                    </tr>
 
-                      <!-- Content -->
-                      <tr>
-                        <td style="padding: 40px;">
-                          <h2 style="margin: 0 0 16px; font-size: 20px; font-weight: 600; color: #111827;">Password Reset Request</h2>
-                          <p style="margin: 0 0 24px; font-size: 15px; line-height: 24px; color: #374151;">
-                            Hello${user.name ? ` ${user.name}` : ''},
-                          </p>
-                          <p style="margin: 0 0 24px; font-size: 15px; line-height: 24px; color: #374151;">
-                            We received a request to reset your password. Click the button below to create a new password:
-                          </p>
+                    <!-- Content -->
+                    <tr>
+                      <td style="padding: 40px;">
+                        <h2 style="margin: 0 0 16px; font-size: 20px; font-weight: 600; color: #111827;">Password Reset Request</h2>
+                        <p style="margin: 0 0 24px; font-size: 15px; line-height: 24px; color: #374151;">
+                          Hello${user.name ? ` ${user.name}` : ''},
+                        </p>
+                        <p style="margin: 0 0 24px; font-size: 15px; line-height: 24px; color: #374151;">
+                          We received a request to reset your password. Click the button below to create a new password:
+                        </p>
 
-                          <!-- Button -->
-                          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                            <tr>
-                              <td align="center" style="padding: 0 0 24px;">
-                                <a href="${url}" style="display: inline-block; padding: 14px 32px; background-color: #2563eb; color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 15px;">Reset Password</a>
-                              </td>
-                            </tr>
-                          </table>
+                        <!-- Button -->
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td align="center" style="padding: 0 0 24px;">
+                              <a href="${url}" style="display: inline-block; padding: 14px 32px; background-color: #2563eb; color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 15px;">Reset Password</a>
+                            </td>
+                          </tr>
+                        </table>
 
-                          <p style="margin: 0 0 16px; font-size: 14px; line-height: 20px; color: #6b7280;">
-                            Or copy and paste this link into your browser:
-                          </p>
-                          <p style="margin: 0 0 24px; padding: 12px; background-color: #f9fafb; border-radius: 4px; font-size: 13px; color: #374151; word-break: break-all; font-family: monospace;">
-                            ${url}
-                          </p>
+                        <p style="margin: 0 0 16px; font-size: 14px; line-height: 20px; color: #6b7280;">
+                          Or copy and paste this link into your browser:
+                        </p>
+                        <p style="margin: 0 0 24px; padding: 12px; background-color: #f9fafb; border-radius: 4px; font-size: 13px; color: #374151; word-break: break-all; font-family: monospace;">
+                          ${url}
+                        </p>
 
-                          <div style="padding: 16px; background-color: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 24px;">
-                            <p style="margin: 0; font-size: 14px; color: #92400e;">
-                              <strong>⏱️ This link expires in 1 hour</strong> for your security.
-                            </p>
-                          </div>
+                        <div style="padding: 16px; background-color: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 4px; margin-bottom: 24px;">
+                          <p style="margin: 0; font-size: 14px; color: #92400e;">
+                            <strong>⏱️ This link expires in 1 hour</strong> for your security.
+                          </p>
+                        </div>
 
-                          <p style="margin: 0; font-size: 14px; line-height: 20px; color: #6b7280;">
-                            If you didn't request a password reset, you can safely ignore this email. Your password will remain unchanged.
-                          </p>
-                        </td>
-                      </tr>
+                        <p style="margin: 0; font-size: 14px; line-height: 20px; color: #6b7280;">
+                          If you didn't request a password reset, you can safely ignore this email. Your password will remain unchanged.
+                        </p>
+                      </td>
+                    </tr>
 
-                      <!-- Footer -->
-                      <tr>
-                        <td style="padding: 30px 40px; text-align: center; border-top: 1px solid #e5e7eb; background-color: #f9fafb;">
-                          <p style="margin: 0 0 8px; font-size: 13px; color: #6b7280;">
-                            This is an automated message from <strong>${appName}</strong>
-                          </p>
-                          <p style="margin: 0; font-size: 12px; color: #9ca3af;">
-                            Secure authentication for your ${orgName} applications
-                          </p>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </body>
-            </html>
-          `,
-        });
-      },
-    }),
+                    <!-- Footer -->
+                    <tr>
+                      <td style="padding: 30px 40px; text-align: center; border-top: 1px solid #e5e7eb; background-color: #f9fafb;">
+                        <p style="margin: 0 0 8px; font-size: 13px; color: #6b7280;">
+                          This is an automated message from <strong>${appName}</strong>
+                        </p>
+                        <p style="margin: 0; font-size: 12px; color: #9ca3af;">
+                          Secure authentication for your ${orgName} applications
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </body>
+          </html>
+        `,
+      });
+    },
   },
 
   // Email verification configuration - always required for security
