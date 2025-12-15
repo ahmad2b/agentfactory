@@ -3,7 +3,7 @@ title: "Installing and Authenticating Claude Code"
 sidebar_position: 2
 chapter: 5
 lesson: 2
-duration_minutes: 18
+duration_minutes: 20
 
 # PEDAGOGICAL LAYER METADATA
 primary_layer: "Layer 1"
@@ -56,12 +56,12 @@ differentiation:
 
 # Generation metadata
 generated_by: "content-implementer v1.0.0 (029-chapter-5-refinement)"
-source_spec: "specs/029-chapter-5-refinement/spec.md"
+source_spec: "specs/034-lesson2-install-update/spec.md"
 created: "2025-01-17"
-last_modified: "2025-01-17"
+last_modified: "2025-12-06"
 git_author: "Claude Code"
 workflow: "/sp.implement"
-version: "2.0.0"
+version: "2.1.0"
 
 # Legacy compatibility (Docusaurus)
 prerequisites:
@@ -114,64 +114,112 @@ Before we begin, verify you have the following:
 - **Windows**: Command Prompt, PowerShell, or Windows Terminal
 - **macOS**: Terminal app (Applications → Utilities → Terminal)
 - **Linux**: Any terminal emulator (GNOME Terminal, Konsole, etc.)
+- **WSL Users**: Any WSL 2 terminal with Ubuntu 20.04+ or Debian 10+
 
 **2. Claude Account** (one of the following):
-- **Option A**: Claude.ai subscription (Pro or free tier) - Sign up at: https://claude.ai
+- **Option A**: Claude.ai subscription (Pro $20/month, Max $200/month, or Enterprise) - Sign up at: https://claude.ai
 - **Option B**: Claude Console account with API credits - Create account at: https://console.anthropic.com
+- **📍 Location**: Claude Code requires authentication from [Anthropic-supported countries](https://www.anthropic.com/supported-countries). Check availability during signup.
+
+**3. System Requirements**
+- **macOS**: 10.15 (Catalina) or later
+- **Windows**: Windows 10 or later
+- **Linux**: Ubuntu 20.04+ / Debian 10+
+- **RAM**: 4GB minimum
+
+**4. Optional (for npm installation only)**
+- **Node.js**: Version 18 or later (only required if using npm installation method)
 
 ---
 
 ## Installation
 
+Claude Code installation has been simplified with official installers for each platform. Choose your operating system below to see platform-specific installation methods.
+
 ![Installation flowchart showing Node.js check, npx/npm install options, authentication with API key or web login, and verification steps with decision points and success/error paths](/img/part-2/chapter-05/claude-code-installation-authentication-flow.png)
 
-### Step 1: Install Claude Code Globally
+---
 
-Claude Code offers **four installation methods**. Choose the one that matches your operating system:
+### Windows Installation
 
-#### Method 1: macOS/Linux (Recommended)
+**⚠️ Important**: Claude Code requires a bash-compatible shell to run. On Windows, you need **either WSL or Git for Windows** installed—the installer downloads Claude Code, but it runs inside a bash shell.
+
+**Decision Tree**:
+```
+Which shell environment do you have (or want to install)?
+├─ WSL (Windows Subsystem for Linux)
+│   └─ Method 1 (WSL) - RECOMMENDED for best experience
+│
+├─ Git for Windows (Git Bash)
+│   └─ Method 2 (Git Bash + PowerShell installer)
+│
+├─ Neither installed yet
+│   └─ Install WSL first (see below), then use Method 1
+│
+└─ I have Node.js 18+ in WSL or Git Bash
+    └─ Method 3 (npm) - See Cross-Platform npm section below
+```
+
+#### Method 1: WSL (RECOMMENDED)
+
+**Why recommended**: Full Linux environment, best compatibility, recommended by Anthropic.
+
+**Step 1**: If you don't have WSL, install it first (run in PowerShell as Administrator):
+
+```powershell
+wsl --install
+```
+
+Restart your computer after installation.
+
+**Step 2**: Open your WSL terminal (Ubuntu) and run:
 
 ```bash
 curl -fsSL https://claude.ai/install.sh | bash
 ```
 
-**What this does**: Downloads and runs the official installer script, automatically detecting your system and installing Claude Code.
+**What this does**: Downloads and executes the official installer script in your Linux environment.
 
-#### Method 2: Homebrew (macOS)
+**Requirements**: Windows 10 version 2004+ or Windows 11, WSL 1 or WSL 2
 
-```bash
-brew install --cask claude-code
-```
+#### Method 2: Git Bash
 
-**What this does**: Installs Claude Code using Homebrew package manager (if you already use Homebrew).
+**When to use**: You prefer Git for Windows over WSL, or WSL isn't available on your system.
 
-#### Method 3: Windows
+**Step 1**: Install [Git for Windows](https://git-scm.com/downloads/win) if not already installed.
+
+**Step 2**: Install Claude Code using PowerShell:
 
 ```powershell
 irm https://claude.ai/install.ps1 | iex
 ```
 
-**What this does**: Downloads and runs the PowerShell installer script for Windows systems.
+**Step 3**: Configure Claude Code to use Git Bash (run in PowerShell):
 
-#### Method 4: npm (Cross-Platform)
-
-```bash
-npm install -g @anthropic-ai/claude-code
+```powershell
+$env:CLAUDE_CODE_GIT_BASH_PATH="C:\Program Files\Git\bin\bash.exe"
 ```
 
-**What this does**: Installs Claude Code via npm package manager (requires Node.js 18+).
+To make this permanent, add the line to your PowerShell profile:
 
-**Which method?** macOS/Linux: Method 1 (curl) or 2 (Homebrew); Windows: Method 3 (PowerShell); Node.js users: Method 4 (npm, cross-platform)
+```powershell
+notepad $PROFILE
+# Add the line: $env:CLAUDE_CODE_GIT_BASH_PATH="C:\Program Files\Git\bin\bash.exe"
+```
 
-#### 💬 AI Colearning Prompt
-> "Explain why package managers like Homebrew and npm are used for installing developer tools instead of manual downloads. What problem do they solve?"
+**Step 4**: Run Claude Code from Git Bash or PowerShell:
 
-#### 🎓 Expert Insight
-> In AI-native development, terminal comfort is a skill multiplier. The 5 minutes you invest learning basic terminal commands unlocks 10x productivity with AI tools. You're not becoming a "terminal expert"—you're removing the friction between intent and execution.
+```bash
+claude
+```
 
-### Step 2: Verify Installation
+**What this does**: The PowerShell command installs Claude Code; the environment variable tells it where to find bash.
 
-Check that Claude Code is installed correctly:
+**Requirements**: Git for Windows, PowerShell 5.1+
+
+#### Windows Verification
+
+Open your shell (WSL terminal or Git Bash) and check your installation:
 
 ```bash
 claude --version
@@ -182,32 +230,255 @@ claude --version
 2.0.37 (Claude Code)
 ```
 
+#### 💬 AI Colearning Prompt
+> "Explain the difference between WSL and Git Bash for Windows developers. When would you choose one over the other for AI-native development workflows?"
+
+---
+
+### macOS Installation
+
+**Decision Tree**:
+```
+Do you have Homebrew installed?
+├─ Yes → Method 1 (Homebrew) - RECOMMENDED
+│
+├─ No, and I don't want to install Homebrew
+│   └─ Method 2 (curl/bash)
+│
+└─ I have Node.js 18+
+    └─ Method 3 (npm) - See Cross-Platform npm section below
+```
+
+#### Method 1: Homebrew (RECOMMENDED)
+
+**Why recommended**: Standard macOS package manager, handles updates automatically, integrated with macOS ecosystem.
+
+Open Terminal and run:
+
+```bash
+brew install --cask claude-code
+```
+
+**What this does**: Installs Claude Code using Homebrew's cask system (for GUI/binary applications). Installs to `/Applications`.
+
+**Requirements**: Homebrew installed
+
+**Don't have Homebrew?** Install it first:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+#### Method 2: curl/bash
+
+**When to use**: You don't have Homebrew and prefer not to install it.
+
+Open Terminal and run:
+
+```bash
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+**What this does**: Downloads and executes the official installer script.
+
+**Requirements**: curl and bash (pre-installed on macOS)
+
+#### macOS Verification
+
+Check your installation:
+
+```bash
+claude --version
+```
+
+**Expected output** (version number may vary):
+```
+2.0.37 (Claude Code)
+```
+
+#### 🎓 Expert Insight
+> Package managers like Homebrew transform tool management. Instead of manually downloading, installing, and updating dozens of developer tools, `brew upgrade` updates everything. This is why 90%+ of professional macOS developers use Homebrew.
+
+---
+
+### Linux/WSL Installation
+
+**Decision Tree**:
+```
+Are you on Ubuntu/Debian/WSL?
+├─ Yes → Method 1 (curl/bash) - RECOMMENDED
+│
+├─ I'm on Alpine Linux
+│   └─ See Alpine Linux Special Configuration below
+│
+└─ I have Node.js 18+
+    └─ Method 2 (npm) - See Cross-Platform npm section below
+```
+
+#### Method 1: curl/bash (RECOMMENDED)
+
+**Why recommended**: Universal, minimal dependencies, works on all major distributions.
+
+Open your terminal and run:
+
+```bash
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+**What this does**: Downloads and executes the official installer script, automatically detecting your distribution.
+
+**Requirements**: 
+- Ubuntu 20.04+ or Debian 10+
+- curl and bash (pre-installed on most distributions)
+
+**Supported Distributions**:
+- Ubuntu 20.04, 22.04, 24.04
+- Debian 10, 11, 12
+- WSL 2 (with Ubuntu or Debian)
+
+#### Alpine Linux Special Configuration
+
+Alpine Linux requires additional C++ runtime libraries:
+
+```bash
+apk add libgcc libstdc++ ripgrep
+export USE_BUILTIN_RIPGREP=0
+```
+
+**What this does**: 
+1. Installs required libraries (libgcc, libstdc++) and ripgrep
+2. Configures Claude Code to use system ripgrep instead of built-in version
+
+**Make it permanent**: Add `export USE_BUILTIN_RIPGREP=0` to your shell profile (`~/.bashrc` or `~/.zshrc`).
+
+#### Linux/WSL Verification
+
+Check your installation:
+
+```bash
+claude --version
+```
+
+**Expected output** (version number may vary):
+```
+2.0.37 (Claude Code)
+```
+
+---
+
+### Cross-Platform: npm Installation
+
+**When to use this method**:
+- You already have Node.js 18+ installed
+- You prefer npm-based workflows
+- You need to manage Claude Code versions via package.json
+- Your platform isn't officially supported by platform-specific installers
+
+**Platforms**: Windows, macOS, Linux, WSL
+
+Open your terminal and run:
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+**What this does**: Installs Claude Code globally via npm package manager.
+
+**Requirements**: Node.js 18 or later (includes npm)
+
+**Check Node.js version**:
+
+```bash
+node --version
+```
+
+If you see `v18.0.0` or higher, you're good to go.
+
+#### 💬 AI Colearning Prompt
+> "Explain the trade-offs between platform-specific installers (Homebrew, PowerShell) vs npm. When would a developer choose npm over the platform installer?"
+
+---
+
+### Auto-Update Configuration
+
+Claude Code automatically checks for updates and prompts you to install them. To disable auto-updates (useful for corporate environments or version pinning):
+
+**macOS/Linux/WSL**:
+
+```bash
+export DISABLE_AUTOUPDATER=1
+```
+
+Add to your shell profile (`~/.bashrc`, `~/.zshrc`, etc.) to make permanent.
+
+**Windows PowerShell**:
+
+```powershell
+$env:DISABLE_AUTOUPDATER=1
+```
+
+Add to your PowerShell profile (`$PROFILE`) to make permanent.
+
+**Manual update check**:
+
+```bash
+claude update
+```
+
+---
+
+### Advanced: System Diagnostics
+
+After installation, verify your system configuration:
+
+```bash
+claude doctor
+```
+
+**What this checks**:
+- Installation integrity
+- Authentication status
+- System compatibility
+- Network connectivity to Claude API
+
+Use this command if you encounter issues during installation or authentication.
+
+#### 🎓 Expert Insight
+> In AI-native development, terminal comfort is a skill multiplier. The 5 minutes you invest learning basic terminal commands unlocks 10x productivity with AI tools. You're not becoming a "terminal expert"—you're removing the friction between intent and execution.
+
+---
 ## Authentication: Connecting Claude Code to Your Account
 
-Once installed, Claude Code needs to authenticate with your Claude account. There are **two authentication paths** depending on which account type you have.
+Once installed, Claude Code needs to authenticate with your Claude account. There are **three authentication paths** depending on your account type and use case.
 
 ### Which Authentication Method Should I Use?
 
 **Decision Tree**:
 
 ```
-Do you have a Claude.ai account?
-├─ Yes → Use Claude.ai Authentication (Method A)
-│        Most common for individual users
+What type of Claude access do you have?
+├─ Claude.ai subscription (Pro, Max, Team)
+│   └─ Method 1: Claude App Authentication (MOST COMMON)
 │
-└─ No, but I have Claude Console API credits
-   └─ Use Claude Console Authentication (Method B)
-           Common for developers with API access
+├─ Claude Console account with API credits
+│   └─ Method 2: Console API Authentication
+│
+└─ Enterprise account (Bedrock, Vertex AI, Foundry)
+    └─ Method 3: Enterprise Authentication
 ```
 
-**If you have both**: Use Claude.ai authentication (Method A)—it's simpler and you can switch to Console authentication later if needed.
+**If you have both subscription and Console API**: Use Method 1 (Claude App)—it's simpler and provides unified access.
 
 #### 🎓 Expert Insight
-> In AI-native development, authentication isn't just about access—it's about resource management. Claude.ai (subscription) vs Console API (pay-per-use) represents different cost models. Understanding your usage patterns determines which path saves money.
+> In AI-native development, authentication isn't just about access—it's about resource management. Claude.ai (subscription) vs Console API (pay-per-use) vs Enterprise (dedicated capacity) represents different cost models and usage patterns. Understanding your workflow determines which path saves money.
 
 ---
 
-### Authentication Method A: Claude.ai Account (Most Common)
+### Method 1: Claude App Authentication (Most Common)
+
+**Who this is for**: Users with Claude Pro ($20/month), Claude Max ($200/month), or Team subscriptions.
+
+**Benefits**: Unified access across Claude web app and Claude Code, simpler authentication flow.
 
 In your terminal, run:
 
@@ -252,9 +523,11 @@ claude "Hello! Can you confirm Claude Code is working?"
 
 ---
 
-### Authentication Method B: Claude Console API Account (Developers)
+### Method 2: Console API Authentication (Developers)
 
-Use this if you have Claude Console API credits but no Claude.ai subscription.
+**Who this is for**: Developers with Claude Console API credits but no Claude.ai subscription. Pay-per-use model based on token consumption.
+
+**Use case**: API-first workflows, programmatic access, usage-based billing.
 
 In your terminal, run:
 
@@ -295,9 +568,53 @@ claude "Hello! Can you confirm Claude Code is working?"
 - Set usage limits in Console: https://console.anthropic.com/settings/limits
 - Monitor token usage (displayed after each interaction)
 - Console authentication uses API billing, not subscription credits
+- Consider cost management strategies for high-volume usage
 
 ---
 
+### Method 3: Enterprise Authentication (Advanced)
+
+**Who this is for**: Enterprise customers using Amazon Bedrock, Google Vertex AI, or Anthropic Foundry (dedicated capacity).
+
+**Use case**: Organizations with existing cloud infrastructure, compliance requirements, or dedicated capacity needs.
+
+**Platform Options**:
+
+#### Amazon Bedrock Integration
+
+Claude Code can authenticate with Claude via AWS Bedrock:
+
+**Requirements**:
+- AWS account with Bedrock access
+- Claude models enabled in Bedrock
+- AWS CLI configured with appropriate credentials
+
+**Configuration**: Contact your Enterprise administrator for Bedrock configuration details specific to your organization.
+
+#### Google Vertex AI Integration
+
+Claude Code can authenticate with Claude via Google Cloud Vertex AI:
+
+**Requirements**:
+- Google Cloud account with Vertex AI access
+- Claude models enabled in Vertex AI
+- Google Cloud SDK configured
+
+**Configuration**: Contact your Enterprise administrator for Vertex AI configuration details specific to your organization.
+
+#### Anthropic Foundry
+
+Claude Code can connect to dedicated Claude capacity via Anthropic Foundry:
+
+**Requirements**:
+- Anthropic Foundry account with dedicated capacity
+- Enterprise API keys
+
+**Configuration**: Contact your Anthropic Enterprise support for Foundry setup.
+
+**📚 Enterprise Documentation**: For detailed enterprise configuration, see https://docs.anthropic.com/en/api/claude-on-amazon-bedrock or contact your Enterprise administrator.
+
+---
 ## Security and Best Practices
 
 Before moving forward, let's address important security considerations:
