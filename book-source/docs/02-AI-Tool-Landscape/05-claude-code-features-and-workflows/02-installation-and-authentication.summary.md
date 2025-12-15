@@ -8,7 +8,7 @@ Terminal-integrated AI fundamentally changes your development workflow—Claude 
 - **Safety Boundaries**: Claude Code has your permissions. Start sessions in project directories (not system directories) and review commands before approving
 
 ### Critical Patterns
-- **Windows**: PowerShell (recommended) → Git Bash → CMD → npm (if Node.js available)
+- **Windows**: Requires WSL or Git for Windows (Claude Code needs bash). WSL (recommended) → Git Bash → npm (if Node.js available)
 - **macOS**: Homebrew (recommended) → curl/bash → npm (if Node.js available)
 - **Linux/WSL**: curl/bash (recommended) → npm (if Node.js available)
 - **npm cross-platform**: Available on all platforms if Node.js 18+ installed
@@ -21,7 +21,7 @@ Terminal-integrated AI fundamentally changes your development workflow—Claude 
 
 ### Common Mistakes
 - Running Claude Code in system directories (~/Library, /etc, C:\Windows) instead of project folders—Claude Code can modify files where you run it
-- Windows users: Using CMD when PowerShell is available—PowerShell is more reliable and recommended
+- Windows users: Trying to run Claude Code without WSL or Git for Windows—Claude Code requires a bash shell, the installer alone isn't enough
 - Console API users: Not setting usage limits at console.anthropic.com/settings/limits, leading to unexpected bills
 - Approving commands without review, especially `sudo` or administrative operations—Claude Code asks for approval, but you're responsible for understanding what you approve
 - Alpine Linux users: Forgetting to install libgcc/libstdc++ and configure `USE_BUILTIN_RIPGREP=0`, causing runtime errors

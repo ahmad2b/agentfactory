@@ -142,74 +142,84 @@ Claude Code installation has been simplified with official installers for each p
 
 ### Windows Installation
 
+**⚠️ Important**: Claude Code requires a bash-compatible shell to run. On Windows, you need **either WSL or Git for Windows** installed—the installer downloads Claude Code, but it runs inside a bash shell.
+
 **Decision Tree**:
 ```
-Do you have PowerShell?
-├─ Yes → Method 1 (PowerShell) - RECOMMENDED
+Which shell environment do you have (or want to install)?
+├─ WSL (Windows Subsystem for Linux)
+│   └─ Method 1 (WSL) - RECOMMENDED for best experience
 │
-├─ I have Git for Windows installed
-│   └─ Method 2 (Git Bash)
+├─ Git for Windows (Git Bash)
+│   └─ Method 2 (Git Bash + PowerShell installer)
 │
-├─ I prefer Command Prompt
-│   └─ Method 3 (CMD)
+├─ Neither installed yet
+│   └─ Install WSL first (see below), then use Method 1
 │
-└─ I have Node.js 18+
-    └─ Method 4 (npm) - See Cross-Platform npm section below
+└─ I have Node.js 18+ in WSL or Git Bash
+    └─ Method 3 (npm) - See Cross-Platform npm section below
 ```
 
-#### Method 1: PowerShell (RECOMMENDED)
+#### Method 1: WSL (RECOMMENDED)
 
-**Why recommended**: Built into Windows 10+, no additional software needed, most reliable.
+**Why recommended**: Full Linux environment, best compatibility, recommended by Anthropic.
 
-Open PowerShell and run:
+**Step 1**: If you don't have WSL, install it first (run in PowerShell as Administrator):
 
 ```powershell
-irm https://claude.ai/install.ps1 | iex
+wsl --install
 ```
 
-**What this does**: Downloads and executes the official Claude Code installer script using PowerShell's `Invoke-RestMethod` (irm) and `Invoke-Expression` (iex).
+Restart your computer after installation.
 
-**Requirements**: PowerShell 5.1+ (included in Windows 10/11)
-
-#### Method 2: Git Bash
-
-**When to use**: You have Git for Windows installed and prefer bash-style commands.
-
-Open Git Bash and run:
+**Step 2**: Open your WSL terminal (Ubuntu) and run:
 
 ```bash
 curl -fsSL https://claude.ai/install.sh | bash
 ```
 
-**What this does**: Downloads and executes the official installer script using curl and bash.
+**What this does**: Downloads and executes the official installer script in your Linux environment.
 
-**Requirements**: Git for Windows (includes Git Bash)
+**Requirements**: Windows 10 version 2004+ or Windows 11, WSL 1 or WSL 2
 
-**⚙️ Troubleshooting**: If Git Bash is not in your PATH, configure it:
+#### Method 2: Git Bash
+
+**When to use**: You prefer Git for Windows over WSL, or WSL isn't available on your system.
+
+**Step 1**: Install [Git for Windows](https://git-scm.com/downloads/win) if not already installed.
+
+**Step 2**: Install Claude Code using PowerShell:
+
+```powershell
+irm https://claude.ai/install.ps1 | iex
+```
+
+**Step 3**: Configure Claude Code to use Git Bash (run in PowerShell):
 
 ```powershell
 $env:CLAUDE_CODE_GIT_BASH_PATH="C:\Program Files\Git\bin\bash.exe"
 ```
 
-Add this to your PowerShell profile (`$PROFILE`) to make it permanent.
+To make this permanent, add the line to your PowerShell profile:
 
-#### Method 3: Command Prompt
-
-**When to use**: You prefer CMD over PowerShell.
-
-Open Command Prompt and run:
-
-```cmd
-curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd
+```powershell
+notepad $PROFILE
+# Add the line: $env:CLAUDE_CODE_GIT_BASH_PATH="C:\Program Files\Git\bin\bash.exe"
 ```
 
-**What this does**: Downloads the installer batch file, runs it, then deletes it.
+**Step 4**: Run Claude Code from Git Bash or PowerShell:
 
-**Requirements**: Windows 10+ (curl is built-in)
+```bash
+claude
+```
+
+**What this does**: The PowerShell command installs Claude Code; the environment variable tells it where to find bash.
+
+**Requirements**: Git for Windows, PowerShell 5.1+
 
 #### Windows Verification
 
-Check your installation:
+Open your shell (WSL terminal or Git Bash) and check your installation:
 
 ```bash
 claude --version
@@ -221,7 +231,7 @@ claude --version
 ```
 
 #### 💬 AI Colearning Prompt
-> "Explain why PowerShell is recommended over CMD for Windows developers in modern development workflows. What advantages does it have?"
+> "Explain the difference between WSL and Git Bash for Windows developers. When would you choose one over the other for AI-native development workflows?"
 
 ---
 
