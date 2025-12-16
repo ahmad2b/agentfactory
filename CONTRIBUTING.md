@@ -22,7 +22,7 @@ cd ai-native-software-development
 pnpm install
 
 # Install Python dependencies (from root - uv workspace handles all Python projects)
-uv sync --extra dev
+uv sync --all-extras
 ```
 
 ## Project Structure
@@ -216,7 +216,7 @@ members = [
 
 ```bash
 # 4. Sync all Python dependencies from root
-uv sync --extra dev
+uv sync --all-extras
 ```
 
 Create `apps/my-python-app/project.json` for Nx integration:
@@ -326,10 +326,9 @@ GitHub Actions runs on every PR:
 ## Common Issues
 
 ### "Module not found" in Python tests
-Make sure to install dev dependencies:
+Make sure to install dev dependencies from root:
 ```bash
-cd apps/panaversity-fs-py
-uv sync --extra dev
+uv sync --all-extras
 ```
 
 ### pnpm lockfile conflicts
