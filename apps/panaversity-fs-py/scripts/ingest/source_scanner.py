@@ -254,6 +254,120 @@ def scan_source_directory(
     )
 
 
+def scan_specific_files(
+    source_root: Path,
+    file_paths: list[str],
+    verbose: bool = False
+) -> ScanResult:
+    """Scan specific files instead of the entire directory.
+
+    This is an optimized path for incremental syncs where we already know
+    which files changed (e.g., from git diff).
+
+    Args:
+        source_root: Root directory (for resolving relative paths)
+        file_paths: List of file paths relative to source_root
+        verbose: Print verbose output
+
+    Returns:
+        ScanResult with only the specified files
+
+    Example:
+        scan_specific_files(
+            Path("apps/learn-app/docs"),
+            ["03-Part/10-chapter/01-lesson.md", "03-Part/10-chapter/02-lesson.md"]
+        )
+    """
+    source_root = Path(source_root).resolve()
+
+    if not source_root.exists():
+        raise ValueError(f"Source directory does not exist: {source_root}")
+
+    if verbose:
+        print(f"Processing {len(file_paths)} specific files from: {source_root}")
+
+    files: list[SourceFile] = []
+    errors: list[dict] = []
+    valid_count = 0
+    invalid_count = 0
+    total_bytes = 0
+
+    for relative_path in file_paths:
+        # Clean up the path (remove leading source dir if present)
+        # Handle both "apps/learn-app/docs/03-Part/..." and "03-Part/..." formats
+        clean_path = relative_path
+        source_root_str = str(source_root)
+
+        # Strip common prefixes that might be in the git diff output
+        prefixes_to_strip = [
+            "apps/learn-app/docs/",
+            "apps/learn-app/docs",
+        ]
+        for prefix in prefixes_to_strip:
+            if clean_path.startswith(prefix):
+                clean_path = clean_path[len(prefix):]
+                break
+
+        absolute_path = source_root / clean_path
+
+        # Skip if file doesn't exist (might have been deleted)
+        if not absolute_path.exists():
+            if verbose:
+                print(f"  Skipped (not found): {clean_path}")
+            continue
+
+        # Skip if not a content file
+        if not is_content_file(absolute_path):
+            if verbose:
+                print(f"  Skipped (not content): {clean_path}")
+            continue
+
+        # Map to storage path
+        mapped = map_and_validate(clean_path)
+
+        # Compute hash
+        try:
+            content_hash = compute_hash(absolute_path, mapped.content_type)
+            size_bytes = absolute_path.stat().st_size
+        except (OSError, IOError) as e:
+            if verbose:
+                print(f"  Warning: Could not read {clean_path}: {e}")
+            errors.append({"path": clean_path, "error": str(e)})
+            continue
+
+        source_file = SourceFile(
+            relative_path=clean_path,
+            absolute_path=absolute_path,
+            content_hash=content_hash,
+            size_bytes=size_bytes,
+            mapped=mapped
+        )
+        files.append(source_file)
+
+        if mapped.valid:
+            valid_count += 1
+            total_bytes += size_bytes
+            if verbose:
+                print(f"  Found: {clean_path} -> {mapped.storage_path}")
+        else:
+            invalid_count += 1
+            if verbose:
+                print(f"  Skipped: {clean_path} ({mapped.error})")
+            errors.append({"path": clean_path, "error": mapped.error})
+
+    if verbose:
+        print(f"Scan complete: {valid_count} valid, {invalid_count} skipped")
+
+    return ScanResult(
+        source_root=source_root,
+        files=files,
+        valid_count=valid_count,
+        invalid_count=invalid_count,
+        total_bytes=total_bytes,
+        errors=errors
+    )
+
+
 def filter_by_content_type(
     files: list[SourceFile],
     content_type: ContentType

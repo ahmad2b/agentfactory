@@ -5,9 +5,15 @@ storage. It handles path mapping, hash-based change detection, and
 incremental uploads.
 
 Usage:
+    # Full sync (scans all files)
     ingest-book --book-id ai-native-python --source-dir ./book-source/docs
+
+    # Incremental sync (specific files only - FAST)
+    ingest-book --book-id ai-native-python --source-dir ./book-source/docs \
+        --files "03-Part/10-chapter/01-lesson.md 03-Part/10-chapter/02-lesson.md"
+
+    # Dry run
     ingest-book --book-id ai-native-python --source-dir ./book-source/docs --dry-run
-    ingest-book --book-id ai-native-python --source-dir ./book-source/docs --verbose
 """
 
 import asyncio
@@ -18,7 +24,7 @@ from pathlib import Path
 import click
 
 from scripts.common.mcp_client import MCPClient, MCPConfig, MCPError
-from scripts.ingest.source_scanner import scan_source_directory
+from scripts.ingest.source_scanner import scan_source_directory, scan_specific_files
 from scripts.ingest.sync_engine import (
     sync_source_to_storage,
     format_bytes,
@@ -62,11 +68,18 @@ def get_source_dir_from_env() -> Path | None:
     default=False,
     help="Verbose output"
 )
+@click.option(
+    "--files",
+    type=str,
+    default=None,
+    help="Space-separated list of specific files to sync (skips full directory scan)"
+)
 def ingest(
     book_id: str,
     source_dir: Path,
     dry_run: bool,
-    verbose: bool
+    verbose: bool,
+    files: str | None
 ):
     """Ingest book source content to PanaversityFS.
 
@@ -78,19 +91,28 @@ def ingest(
         # First sync (uploads all content)
         ingest-book --book-id ai-native-python --source-dir ./book-source/docs
 
-        # Subsequent syncs (uploads only changes)
-        ingest-book --book-id ai-native-python --source-dir ./book-source/docs
+        # Incremental sync (specific files only - FAST)
+        ingest-book --book-id ai-native-python --source-dir ./book-source/docs \\
+            --files "03-Part/10-chapter/01-lesson.md 03-Part/10-chapter/02-lesson.md"
 
         # Preview what would be synced
         ingest-book --book-id ai-native-python --source-dir ./book-source/docs --dry-run
     """
+    # Parse files list if provided
+    file_list: list[str] | None = None
+    if files:
+        file_list = [f.strip() for f in files.split() if f.strip()]
+        if not file_list:
+            file_list = None
+
     # Run async main
     try:
         result = asyncio.run(_ingest_async(
             book_id=book_id,
             source_dir=source_dir,
             dry_run=dry_run,
-            verbose=verbose
+            verbose=verbose,
+            file_list=file_list
         ))
         sys.exit(0 if result else 1)
     except KeyboardInterrupt:
@@ -108,7 +130,8 @@ async def _ingest_async(
     book_id: str,
     source_dir: Path,
     dry_run: bool,
-    verbose: bool
+    verbose: bool,
+    file_list: list[str] | None = None
 ) -> bool:
     """Async implementation of ingestion."""
 
@@ -117,10 +140,16 @@ async def _ingest_async(
         print(f"Source directory: {source_dir}")
         if dry_run:
             print("Mode: DRY RUN (no changes will be made)")
+        if file_list:
+            print(f"Mode: INCREMENTAL ({len(file_list)} specific files)")
 
-    # Step 1: Scan source directory
-    print("Scanning source directory...")
-    scan_result = scan_source_directory(source_dir, verbose)
+    # Step 1: Scan source directory (or specific files)
+    if file_list:
+        print(f"Processing {len(file_list)} specific files...")
+        scan_result = scan_specific_files(source_dir, file_list, verbose)
+    else:
+        print("Scanning source directory...")
+        scan_result = scan_source_directory(source_dir, verbose)
 
     if scan_result.valid_count == 0:
         print("No valid content files found.")

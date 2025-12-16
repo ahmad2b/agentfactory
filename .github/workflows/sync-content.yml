@@ -89,9 +89,11 @@ jobs:
             echo "No content files changed, skipping sync"
           else
             echo "=== Incremental sync: ${{ steps.changed.outputs.count }} files ==="
+            # Pass specific changed files to avoid scanning all 400+ files
             python scripts/ingest-book.py \
               --book-id "$BOOK_ID" \
               --source-dir "$SOURCE_DIR" \
+              --files "${{ steps.changed.outputs.files }}" \
               --verbose
           fi
 
