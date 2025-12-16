@@ -1,4 +1,4 @@
-# Panaversity SSO Platform — Constitution
+# Panaversity SSO Platform — Constitution Extension
 
 **Version:** 1.0.0
 **Ratified:** 2025-12-04

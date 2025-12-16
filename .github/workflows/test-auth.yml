@@ -7,21 +7,13 @@ on:
       - main
       - feat/**
     paths:
-      - "src/**"
-      - "scripts/**"
-      - "tests/**"
-      - "*.ts"
-      - "*.json"
+      - "apps/sso/**"
       - ".github/workflows/test-auth.yml"
   pull_request:
     branches:
       - main
     paths:
-      - "src/**"
-      - "scripts/**"
-      - "tests/**"
-      - "*.ts"
-      - "*.json"
+      - "apps/sso/**"
       - ".github/workflows/test-auth.yml"
 
 jobs:
@@ -65,6 +57,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Setup environment variables
+        working-directory: apps/sso
         run: |
           cat > .env.local << EOF
           # Database
@@ -94,12 +87,15 @@ jobs:
           EOF
 
       - name: Run database migrations
+        working-directory: apps/sso
         run: pnpm db:push
 
       - name: Seed test data
+        working-directory: apps/sso
         run: pnpm seed:setup
 
       - name: Start auth server in background
+        working-directory: apps/sso
         run: |
           pnpm dev > server.log 2>&1 &
           echo $! > .server.pid
@@ -192,14 +188,17 @@ jobs:
           rm -f "$RESPONSE_FILE"
 
       - name: Run API tests
+        working-directory: apps/sso
         run: pnpm test-api
         timeout-minutes: 5
 
       - name: Run E2E tests
+        working-directory: apps/sso
         run: pnpm test-e2e
         timeout-minutes: 5
 
       - name: Stop auth server
+        working-directory: apps/sso
         if: always()
         run: |
           if [ -f .server.pid ]; then
@@ -213,8 +212,8 @@ jobs:
         with:
           name: test-results
           path: |
-            test-results.json
-            tests/**/*.log
+            apps/sso/test-results.json
+            apps/sso/tests/**/*.log
           retention-days: 7
 
   security-audit:
