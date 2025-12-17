@@ -1,9 +1,8 @@
 ### Core Concept
-Terminal-integrated AI fundamentally changes your development workflow—Claude Code operates directly in your workspace where it reads your actual files, proposes real changes, and executes commands. This eliminates the context-switching friction of browser-based tools where you describe problems and manually copy-paste solutions.
+Claude Code installation bridges the gap from understanding the paradigm (Lesson 1) to hands-on usage. Successful setup requires selecting the right installation method for your platform and authenticating with your preferred cost model (subscription vs pay-per-use vs enterprise).
 
 ### Key Mental Models
-- **Workspace Integration vs Context-Switching**: Web-based AI is a consultant you visit; terminal-integrated AI is a pair programmer in your environment
-- **Platform-Specific Installation**: Each platform (Windows/macOS/Linux) has a recommended primary method optimized for that environment—reducing decision fatigue from evaluating all global options
+- **Platform-Specific Installation**: Each platform (Windows/macOS/Linux) has a recommended primary method optimized for that environment—reducing decision fatigue from evaluating all options
 - **Authentication Economics**: Three cost models exist: Claude App (subscription), Console API (pay-per-use), Enterprise (dedicated capacity)—your usage patterns and organizational requirements determine which to use
 - **Safety Boundaries**: Claude Code has your permissions. Start sessions in project directories (not system directories) and review commands before approving
 

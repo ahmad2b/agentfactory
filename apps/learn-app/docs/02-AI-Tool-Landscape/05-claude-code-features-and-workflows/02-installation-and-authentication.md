@@ -92,18 +92,6 @@ This lesson covers the **official Claude subscription setup** (Pro $20/month or 
 
 ---
 
-## Why This Matters: Terminal Integration for AI Workflows
-
-Terminal-based AI integration changes how you work with AI assistance. Unlike web-based tools where you describe code problems and manually copy-paste solutions, terminal-integrated AI sees your actual project context—files, dependencies, structure—and proposes changes to your real codebase.
-
-**Workflow Impact**: You stay in your development environment (terminal + editor) instead of context-switching to a browser. Claude Code reads files, proposes diffs, executes commands, and sees results—all within the same workspace where you code. This removes the friction between intent (what you want) and execution (making it happen).
-
-**Paradigm Connection**: This is the agentic difference from Lesson 1 in action. Web-based AI is a consultant you visit for advice. Terminal-integrated AI is a pair programmer actively collaborating in your workspace. The terminal access enables the paradigm shift from passive assistance to active collaboration.
-
-**Real-World Context**: You'll use this terminal integration for automated file operations (creating, editing, refactoring), git workflows (commits, branches, PRs), and testing integration (run tests, see results, iterate). Installation isn't just setup—it's enabling a fundamentally different development workflow.
-
----
-
 ## Prerequisites: What You Need Before Installing
 
 Before we begin, verify you have the following:
