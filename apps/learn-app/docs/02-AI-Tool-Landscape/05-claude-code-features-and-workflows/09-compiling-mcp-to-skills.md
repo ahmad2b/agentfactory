@@ -423,7 +423,7 @@ Not every MCP server needs compilation. Use this matrix to decide:
 | **One-off query** | Use MCP directly | Compilation overhead not worth it for single use |
 | **Repeated workflow** (3+ times) | Compile to skill | Amortizes compilation cost across multiple uses |
 | **High token definitions** (5,000+ tokens) | Compile to skill | Token savings justify upfront work |
-| **Low token definitions** (<500 tokens) | Use MCP directly | Compilation provides minimal benefit |
+| **Low token definitions** (&lt;500 tokens) | Use MCP directly | Compilation provides minimal benefit |
 | **Rapidly changing API** | Use MCP directly | Compiled skill becomes stale quickly |
 | **Stable tool set** | Compile to skill | Skill remains accurate over time |
 | **Privacy-sensitive data** | Compile to skill | Local script execution avoids context logging |
