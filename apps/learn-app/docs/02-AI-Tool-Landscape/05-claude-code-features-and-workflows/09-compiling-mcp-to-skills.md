@@ -3,47 +3,51 @@ title: "Compiling MCP to Skills"
 sidebar_position: 9
 chapter: 5
 lesson: 9
-duration_minutes: 25
+duration_minutes: 30
 
 # PEDAGOGICAL LAYER METADATA
 primary_layer: "Layer 2"
-layer_progression: "L2 (AI Collaboration) - applying skills + MCP knowledge from previous lessons"
+layer_progression: "L2 (AI Collaboration) - using skill-creator to compile Playwright MCP into browser-automation skill"
 layer_1_foundation: "Completed in Lessons 04-06 (Skills) and 08 (MCP)"
-layer_2_collaboration: "Introspecting MCP servers with Claude, compiling to skills, validating token reduction"
-layer_3_intelligence: "N/A"
+layer_2_collaboration: "Working with Claude via skill-creator to generate executable scripts that call MCP locally"
+layer_3_intelligence: "N/A - Compilation creates reusable skills, but lesson focuses on Layer 2 process"
 layer_4_capstone: "N/A"
 
 # HIDDEN SKILLS METADATA
 skills:
-  - name: "MCP-to-Skill Compilation"
+  - name: "Code Execution Pattern Compilation"
     proficiency_level: "B1"
     category: "Applied"
     bloom_level: "Apply"
     digcomp_area: "Digital Content Creation"
-    measurable_at_this_level: "Student can identify MCP token bloat, introspect server definitions, and compile to skill + script format"
+    measurable_at_this_level: "Student can identify high-token MCPs, use skill-creator to generate executable scripts, and validate 95-99% token reduction through local execution"
 
 learning_objectives:
-  - objective: "Identify when MCP servers cause token bloat"
+  - objective: "Recognize MCP token bloat and understand code execution pattern solution"
     proficiency_level: "B1"
-    bloom_level: "Analyze"
-    assessment_method: "Recognize high-token MCP patterns and articulate the problem"
-  - objective: "Introspect an MCP server's tool definitions using Claude"
+    bloom_level: "Understand"
+    assessment_method: "Explain why scripts running locally save tokens vs direct MCP calls"
+  - objective: "Use skill-creator to compile Playwright MCP into browser-automation skill"
     proficiency_level: "B1"
     bloom_level: "Apply"
-    assessment_method: "Successfully extract tool definitions from a running MCP server"
-  - objective: "Compile MCP definitions into skill + script format"
-    proficiency_level: "B2"
-    bloom_level: "Apply"
-    assessment_method: "Create a working skill that replaces direct MCP tool calls"
-  - objective: "Validate token reduction through before/after comparison"
+    assessment_method: "Generate SKILL.md + scripts/ folder with executable code"
+  - objective: "Understand progressive disclosure (3-stage loading)"
+    proficiency_level: "B1"
+    bloom_level: "Understand"
+    assessment_method: "Explain how description → SKILL.md → scripts loading saves tokens"
+  - objective: "Validate token reduction through measurement"
     proficiency_level: "B1"
     bloom_level: "Evaluate"
-    assessment_method: "Measure and report token savings"
+    assessment_method: "Calculate and report 95-99% savings with concrete before/after numbers"
+  - objective: "Decide when to compile MCPs vs use direct MCP"
+    proficiency_level: "B2"
+    bloom_level: "Evaluate"
+    assessment_method: "Apply decision framework to multiple MCP servers with reasoning"
 
 # Cognitive load tracking
 cognitive_load:
-  new_concepts: 5
-  assessment: "5 concepts (MCP token bloat, introspection, code execution pattern, skill compilation, progressive disclosure optimization) - within B1-B2 limit"
+  new_concepts: 6
+  assessment: "6 concepts (MCP token bloat, code execution pattern, progressive disclosure, local script execution, sandboxed environment, token savings calculation) - within B1-B2 limit"
 
 # Differentiation guidance
 differentiation:
@@ -83,21 +87,18 @@ Skills you compile here work across all three agents.
 
 ## The Problem: MCP Token Bloat
 
-When Claude Code loads an MCP server, it eagerly loads ALL tool definitions. A single server like Sentry loads **8,000+ tokens of documentation immediately**—before you've asked a single question.
+When Claude Code loads an MCP server, it eagerly loads ALL tool definitions upfront. Here's the real impact:
 
-Here's the real impact. Imagine a workflow that:
-1. Calls an MCP tool to fetch data (8,000 tokens for definitions)
-2. Processes the data
-3. Calls another MCP tool (another 8,000 tokens)
-4. Processes again
-5. Calls a third tool (another 8,000 tokens)
+**Scenario: Agent with 1,000 tools across multiple MCP servers**
 
-In a 2-hour meeting transcript processing workflow, you might consume **50,000+ additional tokens** just from repeated MCP tool definition loading—pure waste.
+- **Without optimization**: 150,000 tokens loaded before processing your first request
+- **Real cost**: Model processes tool metadata before it can even read what you asked
+- **Hidden waste**: Fetching a 2-hour meeting transcript from Google Drive and attaching to Salesforce means processing the full content TWICE through the model—once on retrieval, once on attachment. That's **50,000+ additional tokens for a single workflow**.
 
-> "The description is both too long to eagerly load it, and too short to really tell the agent how to use it."
-> — Armin Ronacher, [Skills vs Dynamic MCP Loadouts](https://lucumr.pocoo.org/2025/12/13/skills-vs-mcp/)
+> "Tool descriptions occupy more context window space, increasing response time and costs. For agents with thousands of tools, this means processing hundreds of thousands of tokens before reading a request."
+> — Anthropic, [Code Execution with MCP](https://www.anthropic.com/engineering/code-execution-with-mcp)
 
-Across 100 MCP-heavy projects, **80-98% of token consumption could be eliminated** through compilation (Anthropic, 2025).
+**The math**: A single Playwright MCP server loads ~8,000 tokens of definitions. Call it 3 times in one session? That's 24,000 tokens of redundant overhead—before you've accomplished anything.
 
 #### 💬 AI Colearning Prompt
 > "I have 3 MCP servers installed. Help me estimate my token overhead: For each server, how many tokens does it load at startup? What's my total context cost before I've even asked a question?"
@@ -106,311 +107,298 @@ Across 100 MCP-heavy projects, **80-98% of token consumption could be eliminated
 
 ## The Solution: Code Execution Pattern
 
-Instead of calling MCP tools directly through Claude's context, use this architecture:
+Instead of calling MCP tools directly through Claude's context, compile them into **skills with executable scripts**:
 
-1. **Introspect** the MCP server once (ask Claude: "What tools does this server provide?")
-2. **Compile** tool definitions into a lean SKILL.md (~100 tokens, loaded once)
-3. **Generate** executable scripts that call the MCP tools locally
-4. **Apply** progressive disclosure—only load the skill when relevant, only execute needed scripts
+### The Architecture
 
-**The math**: 150,000 tokens → 2,000 tokens (98.7% reduction).
+**SKILL.md + Scripts Model:**
+```
+.claude/skills/browser-automation/
+├── SKILL.md                    # High-level procedures (~150 tokens)
+└── scripts/
+    ├── navigate.ts             # Browser navigation
+    ├── extract-data.ts         # Data extraction with filtering
+    ├── take-screenshot.ts      # Screenshot capture
+    ├── fill-form.ts            # Form automation
+    └── inspect-network.ts      # Network/console debugging
+```
 
-From Anthropic's research:
-- Standard MCP loading: ~8,000 tokens per server
-- Compiled skill format: ~100-200 tokens
-- Token savings: 95-98% per tool
-- Additional benefit: Local execution avoids repeated context re-loading
+**How It Works:**
+1. **SKILL.md** provides high-level procedure (loaded once at startup)
+2. **Scripts** execute Playwright MCP tools locally (outside Claude's context)
+3. **Data transformation** happens in sandboxed environment
+4. **Only filtered results** returned to conversation
+
+**Token Comparison:**
+- Direct MCP: 8,000 tokens × 3 calls = 24,000 tokens
+- Compiled skill: 150 tokens (SKILL.md) + 0 tokens (local scripts) = 150 tokens
+- **Savings: 99.4%**
 
 ---
 
-## Hands-On: Introspect an MCP Server
+### Progressive Disclosure: 3-Stage Loading
 
-You'll compile the Playwright MCP (from Lesson 08) into a skill. The process has three steps: introspect, compile, validate.
+Skills use **three-level loading** (covered in Lesson 6) to minimize token consumption:
 
-### Step 1: Ask Claude to Introspect
+1. **Discovery** (startup): Load only `description` field (~30 tokens)
+2. **Activation** (when relevant): Load full SKILL.md (~150 tokens)
+3. **Execution** (when needed): Run `scripts/` locally (0 tokens in context)
 
-Start Claude Code in your project:
+**Key for compiled skills:** Stage 3 executes MCP tools outside Claude's context, so heavy operations consume zero tokens.
+
+**Example:**
+```
+User: "Extract product prices from Amazon"
+
+→ Stage 1: Match description "browser automation"
+→ Stage 2: Load SKILL.md procedures
+→ Stage 3: Execute script locally (filter 1000 → 20 products)
+→ Return only 20 results to Claude
+```
+
+---
+
+### Why Scripts Save Tokens
+
+**Without scripts (direct MCP):**
+```
+User request → Claude calls browser_navigate (2,000 tokens loaded)
+            → Claude calls browser_evaluate (3,000 tokens loaded)
+            → Returns 1,000 product objects (10,000 tokens in context)
+            → Claude filters to 20 relevant (10,000 tokens wasted)
+Total: 15,000 tokens
+```
+
+**With scripts (code execution):**
+```
+User request → Claude executes script (0 tokens - runs locally)
+            → Script calls browser_navigate locally
+            → Script calls browser_evaluate locally
+            → Script filters 1,000 → 20 products locally
+            → Returns only 20 products to Claude (200 tokens)
+Total: 200 tokens
+```
+
+**Savings: 98.7%**
+
+---
+
+## Hands-On: Compile Playwright MCP to Browser-Automation Skill
+
+You'll compile the Playwright MCP into a **browser-automation skill** with executable scripts following the Anthropic pattern.
+
+### Prerequisites
+
+Verify Playwright MCP is installed:
+
+```bash
+claude mcp list
+```
+
+You should see `playwright` in the list. If not, install it:
+
+```bash
+claude mcp add --transport stdio playwright npx @playwright/mcp@latest
+```
+
+### Step 1: Invoke Skill-Creator
+
+Start Claude Code in any directory:
 
 ```bash
 claude
 ```
 
-Ask Claude to analyze the Playwright MCP:
+Use this prompt to invoke skill-creator:
 
 ```
-The Playwright MCP is installed on my system.
-Use it to tell me: What tools does Playwright provide?
-For each tool, describe: name, what it does, main parameters, typical output.
-Keep descriptions concise (2-3 sentences per tool).
+I want to compile the Playwright MCP server into a browser-automation skill
+following the Anthropic code execution pattern from:
+https://www.anthropic.com/engineering/code-execution-with-mcp
+
+The workflow should be:
+
+1. First, introspect the Playwright MCP server:
+   - Call Playwright MCP tools to discover what's available
+   - List all tool names and their signatures
+   - Understand what each tool does
+
+2. Then, create a browser-automation skill that:
+   - Generates executable scripts in scripts/ folder
+   - Scripts call the Playwright MCP tools we just discovered
+   - Each script runs locally (outside Claude's context)
+   - Achieves 95-99% token reduction
+
+3. Finally, help me test it to confirm scripts execute locally.
+
+Guide me through this entire process step by step.
 ```
 
-Claude will call Playwright MCP and extract its tool definitions. You'll get output like:
+### Step 2: Answer Skill-Creator's Questions
 
+Skill-creator will guide you through dialogue. Example answers:
+
+**"What browser automation tasks do you need?"**
 ```
-Playwright MCP Tools:
-
-1. browser_navigate
-   - Navigates to a URL in the browser
-   - Parameters: url (string), timeout (optional)
-   - Output: Page title, loaded status
-
-2. browser_click
-   - Clicks an element on the current page
-   - Parameters: element (selector), button (left/right/middle)
-   - Output: Success/failure status, new page state
-
-3. browser_take_screenshot
-   - Takes a screenshot of the current page
-   - Parameters: fullpage (true/false)
-   - Output: Base64-encoded image
-
-[... more tools ...]
+Web scraping (extracting product data, prices, listings)
+Testing (clicking buttons, filling forms, capturing screenshots)
+Data collection (monitoring sites, tracking changes)
 ```
 
-**Troubleshooting Introspection:**
-
-| Problem | Solution |
-|---------|----------|
-| "MCP not found" | Run `claude mcp list` to verify installation |
-| Output truncated | Ask Claude to "Continue with remaining tools" |
-| Token estimates seem high | Normal—this justifies compilation |
-| No tools returned | Check MCP server is running and accessible |
-
-### Step 2: Compile to Skill Format
-
-Now tell Claude to compile these definitions into a SKILL.md:
-
+**"How often do you use Playwright MCP?"**
 ```
-Based on the Playwright tools you just introspected, create a SKILL.md file
-for browser automation. The skill should:
-
-1. Have YAML frontmatter with: name, description, version
-2. Include "When to Use" section listing trigger conditions
-3. Include "Procedure" section with step-by-step browser workflow patterns
-4. Include "Output Format" showing what results look like
-5. Be lean (under 300 tokens) but complete enough for autonomous activation
-
-Format it exactly like the blog-planner skill from Lesson 06.
-Use this directory structure:
-.claude/skills/browser-automation/SKILL.md
+3-5 times per week across different projects.
+Each use involves multiple operations (navigate, extract, sometimes screenshot).
 ```
 
-Claude will generate the compiled SKILL.md. You copy it to your project. Here's what a compiled skill looks like (abbreviated):
-
-```yaml
----
-name: "browser-automation"
-description: "Automate web browsing tasks: navigate to pages, find elements, extract data, take screenshots. Use when you need to interact with web interfaces programmatically."
-version: "1.0.0"
----
-
-# Browser Automation Skill
-
-## When to Use This Skill
-
-- User needs to navigate to a URL and extract information
-- User wants to automate clicking buttons or filling forms
-- User asks to take a screenshot of a webpage
-- User needs to test web application behavior
-
-## Procedure
-
-1. **Navigate to page**: Load the target URL
-2. **Locate element**: Use selectors (CSS or XPath) to find target elements
-3. **Interact**: Click, type text, or extract data
-4. **Validate**: Take screenshot or verify result
-5. **Extract output**: Format results (links, text, images) for user
-
-## Output Format
-
-**For data extraction**:
-- List items found with relevant attributes (href, text, price)
-- Include any metadata (page load time, errors encountered)
-
-**For screenshots**:
-- Base64 image or visual description
-
-**For interaction**:
-- Success/failure confirmation
-- New page state or loaded content
+**"What data transformations are common?"**
+```
+Filtering large result sets (1000 products → top 20)
+Converting HTML to structured JSON
+Removing duplicates and irrelevant data
 ```
 
-### Step 3: Test the Compiled Skill
+**"What should trigger this skill?"**
+```
+When I ask to:
+- Browse/scrape websites
+- Extract data from pages
+- Automate web interactions
+- Take screenshots
+- Test web applications
+```
 
-Place the SKILL.md in your `.claude/skills/browser-automation/` folder:
+### Step 3: Review Generated Skill Structure
+
+Skill-creator generates the complete skill structure:
+
+```
+.claude/skills/browser-automation/
+├── SKILL.md                    # Procedures + descriptions
+└── scripts/                    # Executable TypeScript/JavaScript
+    ├── navigate.ts
+    ├── extract-data.ts
+    ├── take-screenshot.ts
+    ├── fill-form.ts
+    └── inspect-network.ts
+```
+
+**Key components to verify:**
+
+1. **Description field** - Should trigger on browser automation requests
+2. **Scripts folder** - Contains executable `.ts` or `.js` files
+3. **Procedures** - Each operation explains which script to run and what parameters it needs
+
+The skill-creator will show you the complete SKILL.md and all scripts. Review them to ensure they cover your use cases.
+
+### Step 4: Test the Skill
+
+Start a NEW Claude Code session (so skill loads fresh):
 
 ```bash
-mkdir -p .claude/skills/browser-automation
-# Paste the generated SKILL.md into that folder
+claude
 ```
 
-Now test it. In Claude Code, ask:
+Test with a real automation task:
 
 ```
-I've created a browser-automation skill. Test it by navigating to https://example.com
-and extracting the main heading text. Confirm that the skill activated and worked correctly.
+Extract the top 5 product names from https://example-shop.com
 ```
 
-Claude will load the skill (not the raw Playwright MCP), execute the necessary browser commands, and return results.
+**What to observe:**
+1. Skill activates automatically (description matched your request)
+2. Claude runs a script from `scripts/` folder
+3. You see `node scripts/extract-data.ts` or similar execution
+4. Only filtered results returned (not full page HTML)
 
-**What happened**: You replaced 8,000 tokens of MCP definitions with 150 tokens of lean skill instructions. Same functionality, drastically less context consumption.
+### Step 5: Validate and Iterate
 
-**Troubleshooting Compilation:**
+**5a. Measure Token Savings**
 
-| Problem | Solution |
-|---------|----------|
-| Skill not discovered | Check path: `.claude/skills/[name]/SKILL.md` (not flat file) |
-| Missing YAML frontmatter | Must have `name`, `description`, `version` fields |
-| Description too vague | Use formula: Action + Input + Output + Triggers |
-| Skill never activates | Make description more specific to your use case |
+Ask Claude:
+
+```
+Measure the token savings for this browser-automation skill:
+
+1. Run in Bash: Simulate calling Playwright MCP directly 3 times
+   (estimate token overhead for each tool definition load)
+
+2. Compare with the compiled skill:
+   - How many tokens loaded at startup?
+   - How many tokens during script execution?
+   - What's the percentage reduction?
+
+3. Show me the exact numbers and calculations.
+```
+
+Expected result: **95-99% reduction**
+
+**5b. Test Edge Cases (Iterate if Needed)**
+
+Test different scenarios to ensure the skill works correctly:
+
+```
+1. Test navigation: "Navigate to https://example.com and tell me the page title"
+2. Test screenshot: "Take a screenshot of https://example.com"
+3. Test form filling: "Fill out the contact form at [URL] with [data]"
+4. Test error handling: "Extract data from an invalid URL"
+```
+
+**If any test fails:**
+- Ask Claude to fix the specific script
+- Retest the operation
+- Iterate until all operations work
+
+**5c. Verify Scripts Run Locally**
+
+Ask Claude:
+
+```
+Show me evidence that scripts run outside your context:
+
+1. Check your Bash tool usage - did you execute scripts locally?
+2. How much data was filtered before returning to you?
+3. What would happen if I called Playwright MCP directly instead?
+```
+
+This confirms the code execution pattern is working correctly.
 
 #### 💬 AI Colearning Prompt
-> "Review the SKILL.md I just created. Is the description specific enough to trigger reliably? What edge cases might cause it to activate incorrectly or fail to activate when needed?"
+> "My browser-automation skill is working. Explain: (1) How does running scripts in Bash save tokens vs calling MCP tools? (2) What data filtering happened locally? (3) How would I debug if a script fails?"
 
 ---
 
-## The Compilation Workflow: Spec→Prompt→Script→Validation
+## When to Compile MCP Servers
 
-Let me show you a complete compilation for a more complex MCP server (Context7, from Lesson 08).
+Not every MCP server benefits from compilation. Use this decision framework:
 
-### Step 1: Specification (Intent)
+### Compile to Skill When:
 
-Before compiling, understand what you're compiling FOR:
+✅ **High token overhead** (>5,000 tokens per query)
+- Example: Playwright, Google Drive, Database MCP
 
-```
-MCP Server: Context7
-Goal: Fetch latest documentation for any library
-Current Token Cost: 6,000 tokens (full tool definitions)
-Target Token Cost: 100-150 tokens (compiled skill)
-Use Case: "Get current docs for React 19" queries, not one-off lookups
-```
+✅ **Frequent use** (3+ times per session or across projects)
+- Repeated calls multiply token waste
 
-### Step 2: Introspection Prompt (Extract Definitions)
+✅ **Large datasets returned** (need filtering/transformation)
+- Processing 1,000 items → returning 20 relevant ones
 
-```
-I have Context7 MCP installed. Walk me through:
-1. What tools does it provide? (List names + one-line descriptions)
-2. What parameters does each tool accept?
-3. What does typical output look like?
+✅ **Multi-step workflows** (chaining operations)
+- Navigate → extract → transform → filter
 
-Be concise. I want to compile this into a skill, so focus on the essential information
-a skill user needs to activate this tool correctly.
-```
+### Use Direct MCP When:
 
-Claude introspects and returns the tool catalog.
+❌ **Low token overhead** (<1,500 tokens per query)
+- MCP already efficient, compilation overhead not worth it
 
-### Step 3: Compilation Prompt (Generate Skill)
+❌ **Infrequent use** (once per month or less)
+- Setup cost > token savings
 
-```
-Based on the Context7 tools you just analyzed, generate a SKILL.md file that:
+❌ **Small, well-formatted results** (no transformation needed)
+- Results already optimal for Claude
 
-1. Has name "documentation-fetcher"
-2. Has description that explains when Claude should activate this skill
-   (when user asks about current library docs, requires up-to-date info)
-3. Includes "When to Use" triggers for documentation research queries
-4. Includes "Procedure" for:
-   - Parsing the library/version from user request
-   - Executing the appropriate Context7 tool
-   - Formatting results with citations and URLs
-5. Includes "Output Format" showing structured documentation results
-
-Keep it under 200 tokens. Make it detailed enough that Claude can use it
-without calling you back with clarifications.
-
-Format as SKILL.md with YAML frontmatter.
-```
-
-Claude generates the skill. You save it to `.claude/skills/documentation-fetcher/SKILL.md`.
-
-### Step 4: Script Generation (Optional, for Repeated Calls)
-
-For complex workflows that call the MCP repeatedly, generate a reusable script:
-
-```
-I'm compiling Context7 into a skill. I also want a TypeScript script
-that I can call from other contexts (CLI, cron jobs, etc.)
-to fetch documentation without loading Claude's context.
-
-Generate a TypeScript script that:
-1. Takes library name + version as arguments
-2. Calls the Context7 API (or equivalent) to fetch docs
-3. Formats results as JSON
-4. Outputs to stdout
-
-This script should be in .claude/skills/documentation-fetcher/fetch-docs.ts
-```
-
-Claude generates the script. You save it alongside SKILL.md.
-
-### Step 5: Validation (Measure Impact)
-
-Compare token consumption:
-
-**Before compilation** (direct MCP):
-```
-MCP server loaded: 6,000 tokens
-Context7 definitions: 4,000 tokens
-Tool invocation overhead: 1,000 tokens
-Total per query: ~11,000 tokens
-```
-
-**After compilation** (skill + script):
-```
-SKILL.md loaded: 150 tokens (once per session)
-Script execution: 0 tokens (runs locally, no context)
-Tool invocation overhead: 200 tokens
-Total per query: ~200-350 tokens
-```
-
-**Savings**: 11,000 → 350 tokens (96.8% reduction).
-
-### Reflection: Was It Worth It?
-
-Before moving on, consider:
-
-- **Was the compilation effort worth the token savings?** For a one-off query, probably not. For a workflow you run daily, absolutely.
-- **What would make compilation NOT worth it?** Rapidly changing APIs, one-time lookups, very low-token MCP servers.
-- **How did your understanding change?** You now see MCP tools as raw material to be refined, not final products.
-
----
-
-## Using Skill-Creator to Automate Compilation
-
-Writing introspection prompts manually is tedious. The `skill-creator` meta-skill (from Lesson 06) can automate MCP compilation.
-
-### Workflow: Automate with Skill-Creator
-
-Open Claude Code in the skills lab:
-
-```bash
-cd [path-to-claude-code-skills-lab]
-claude
-```
-
-Ask skill-creator to help:
-
-```
-I want to compile an MCP server into a skill.
-The server is: [MCP server name]
-The goal is: [what I use it for]
-The repetition: [how often do I call this?]
-
-Use the skill-creator to walk me through:
-1. Introspecting the MCP server
-2. Designing the SKILL.md structure
-3. Generating the complete skill file
-4. Testing it in my project
-
-I've already installed the MCP server (run "claude mcp list" to verify it's available).
-```
-
-Skill-creator will:
-1. Guide you through questions about your MCP server
-2. Help you introspect its tools
-3. Generate the complete SKILL.md
-4. Suggest test prompts to verify it works
-
-The skill-creator output is production-ready SKILL.md in the correct format.
+❌ **Rapidly changing API** (MCP tools frequently updated)
+- Skill scripts would need constant maintenance
 
 ---
 
@@ -461,22 +449,26 @@ Research and tools supporting this lesson:
 
 ## Try With AI
 
-**Introspect and Compile Your First MCP:**
+**Compile Playwright MCP to Browser-Automation Skill:**
 
-> "I have the Playwright MCP installed (or Context7 MCP). Walk me through compiling it to a skill: (1) Introspect the server to extract tool definitions, (2) Generate a complete SKILL.md in the correct format, (3) Show me exactly where to save it in my project, (4) Give me a test prompt to verify it works."
+> "I have the Playwright MCP installed. Use skill-creator to compile it into a browser-automation skill following the Anthropic code execution pattern. The skill should: (1) Generate executable scripts in scripts/ folder, (2) Call Playwright MCP tools locally (outside context), (3) Achieve 95-99% token reduction. Guide me through the compilation process with script generation."
 
-**Automate with Skill-Creator:**
+**Measure Real Token Savings:**
 
-> "Use the skill-creator to guide me through compiling [specific MCP server] to a skill. Start by asking me clarifying questions about my use case, then generate the complete SKILL.md and any supporting scripts. Make the output production-ready."
+> "I've compiled Playwright MCP to a skill with scripts. Calculate the actual token savings: (1) Estimate tokens for 3 direct MCP operations (navigate, extract data, screenshot), (2) Estimate tokens with the compiled skill, (3) Show percentage reduction, (4) Explain where each savings comes from (tool definitions, local execution, data filtering)."
 
-**Measure Token Savings:**
+**Validate Script Execution:**
 
-> "I've compiled an MCP server to a skill. Help me measure the token savings: (1) Show me how to log token counts before/after, (2) Calculate the percentage reduction, (3) Determine if the compilation was worthwhile for my use case, (4) Suggest optimizations if needed."
+> "Test my browser-automation skill: Extract product names from https://example-shop.com. Show me: (1) Which script executed, (2) What happened locally vs in context, (3) How much data was filtered before returning to you, (4) Token count comparison if this was direct MCP."
 
-**Build a Skill Suite from Multiple MCPs:**
+**Decide Which MCPs to Compile:**
 
-> "I work with multiple MCP servers (list them). Design a skill suite that composes them efficiently: For each server, should I compile to a skill or use direct MCP? If compiling, what should each skill do? How should they work together? Show me the folder structure and SKILL.md templates."
+> "I have these MCP servers: [list your servers]. For each, analyze: (1) Token overhead per query, (2) How often I use it, (3) Whether it returns large datasets, (4) If data transformation is needed. Recommend which ones to compile to skills with reasoning."
 
-**Design a Script for Standalone Execution:**
+**Debug Skill Execution:**
 
-> "I've compiled an MCP server to a skill. Now I want a TypeScript/Python script that calls this MCP outside of Claude Code (in a cron job, API endpoint, etc.). Generate a script that: (1) Accepts parameters matching the skill's inputs, (2) Executes the MCP functionality, (3) Formats output as JSON, (4) Can be called from CLI."
+> "My browser-automation skill isn't activating when I ask to scrape data. Debug: (1) Check the description field - is it specific enough? (2) Suggest better trigger phrases, (3) Test if the skill loads at all, (4) Verify scripts are executable and in correct location."
+
+**Compare Compilation Strategies:**
+
+> "I compiled Playwright MCP. Now I want to understand: (1) What if I had created an instruction wrapper instead of code execution? (2) How much would token savings differ? (3) When would instruction wrapper be better? (4) Show me the trade-offs between the two approaches."
