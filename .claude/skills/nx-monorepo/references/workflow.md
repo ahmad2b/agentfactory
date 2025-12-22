@@ -1,10 +1,6 @@
----
-name: monorepo-workflow
-description: |
-  Principal-level workflow and collaboration skill for monorepos. This skill should be used when managing trunk-based development, PR stacking, code review, and change management. Use when: creating PRs, reviewing code, managing breaking changes, implementing PR stacking, or coordinating cross-team changes. Essential for collaboration in monorepos.
----
-
 # Monorepo Workflow
+
+> Reference doc for nx-monorepo skill. Covers trunk-based dev, PR stacking, code review.
 
 ## Overview
 

@@ -1,10 +1,6 @@
----
-name: monorepo-team-lead
-description: |
-  Principal-level team leadership and management skill for monorepos. This skill should be used when designing ownership structures, managing teams, routing tasks between humans and AI, and handling cross-team coordination. Use when: setting up CODEOWNERS, onboarding team members, making task routing decisions, writing RFCs, or coordinating cross-domain work. Essential for AI Manager capabilities.
----
-
 # Monorepo Team Lead
+
+> Reference doc for nx-monorepo skill. Covers team leadership and ownership structures.
 
 ## Overview
 
