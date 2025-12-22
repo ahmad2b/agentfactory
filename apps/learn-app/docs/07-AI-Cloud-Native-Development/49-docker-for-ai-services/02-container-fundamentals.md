@@ -9,31 +9,34 @@ teaching_stage: 1
 stage_name: "Manual Foundation"
 stage_description: "Hands-on exploration builds intuition for image/container relationship"
 cognitive_load:
-  concepts_count: 8
+  concepts_count: 9
   scaffolding_level: "Moderate"
 learning_objectives:
   - id: LO1
     description: "Distinguish between images (templates) and containers (running instances)"
     bloom_level: "Understand"
   - id: LO2
+    description: "Explain why images are immutable and how the writable container layer works"
+    bloom_level: "Understand"
+  - id: LO3
     description: "Pull images from Docker Hub and inspect their layers"
     bloom_level: "Apply"
-  - id: LO3
+  - id: LO4
     description: "Run containers in interactive and detached modes"
     bloom_level: "Apply"
-  - id: LO4
+  - id: LO5
     description: "Manage container lifecycle: start, stop, remove"
     bloom_level: "Apply"
-  - id: LO5
+  - id: LO6
     description: "Execute commands inside running containers with docker exec"
     bloom_level: "Apply"
-  - id: LO6
+  - id: LO7
     description: "View container logs and resource usage"
     bloom_level: "Understand"
-  - id: LO7
+  - id: LO8
     description: "Explain how layers enable image sharing and caching"
     bloom_level: "Understand"
-  - id: LO8
+  - id: LO9
     description: "Use docker images and docker ps to inspect local state"
     bloom_level: "Apply"
 digcomp_mapping:
@@ -101,6 +104,60 @@ Think of making coffee:
 - **Run another**: You can make 10 cups from the same recipe at the same time
 
 Each cup exists independently. Changes to one cup (adding sugar) don't affect others.
+
+---
+
+## The Critical Concept: Images Are Immutable
+
+This is one of the most important concepts in Docker: **images are immutable** (unchangeable).
+
+Once an image is built, it never changes. Not modified. Not updated. Not patched. It's frozen forever.
+
+### Why Immutability Matters
+
+**Reproducibility**: If you pull `python:3.12-slim` today and again in 6 months, you get the exact same image (identified by its SHA256 digest). No surprises.
+
+**Security**: You can verify an image hasn't been tampered with. The digest `sha256:8a3f4d9e5c2b...` is a cryptographic fingerprint. If a single byte changes, the digest changes.
+
+**Rollbacks**: Running a bad version? Switch back to the previous image instantly. The old image still exists unchanged.
+
+**Caching**: Docker can aggressively cache because layers never change. If layer `a803e7c4b030` exists locally, Docker doesn't re-download it—ever.
+
+### But Containers Can Write Files?
+
+Yes. Here's how Docker reconciles immutability with runtime changes:
+
+```
+┌─────────────────────────────────────┐
+│     Container (writable layer)      │  ← Your runtime changes go here
+├─────────────────────────────────────┤
+│     Image Layer 4 (read-only)       │  ← Application code
+├─────────────────────────────────────┤
+│     Image Layer 3 (read-only)       │  ← Dependencies
+├─────────────────────────────────────┤
+│     Image Layer 2 (read-only)       │  ← Package updates
+├─────────────────────────────────────┤
+│     Image Layer 1 (read-only)       │  ← Base OS (Alpine, Debian)
+└─────────────────────────────────────┘
+```
+
+When you run a container, Docker adds a thin **writable layer** on top of the immutable image layers. This is called **copy-on-write**:
+
+- **Reading a file**: Docker looks through layers top-to-bottom until it finds the file
+- **Writing a file**: Docker copies the file to the writable layer, then modifies the copy
+- **Deleting a file**: Docker marks it deleted in the writable layer (original unchanged)
+
+When you delete the container, the writable layer is discarded. The image remains pristine.
+
+### Practical Implications
+
+1. **Don't store important data in containers**: When the container dies, writable layer data is lost. Use volumes for persistence (Lesson 6).
+
+2. **Multiple containers, same image**: 10 containers from `nginx:alpine` share the same image layers. Only their writable layers differ. This is why containers are so lightweight.
+
+3. **Debugging in production**: You can `docker exec` into a container to investigate, but any files you create disappear when the container restarts. Logs and metrics should go to external systems.
+
+4. **Image tags can be reassigned**: `python:3.12-slim` might point to different images over time (as Python releases patches). For true immutability, reference images by digest: `python@sha256:8a3f4d9e5c2b...`
 
 ---
 

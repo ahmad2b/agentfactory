@@ -9,25 +9,28 @@ teaching_stage: 1
 stage_name: "Manual Foundation"
 stage_description: "Manual installation builds mental model of Docker components"
 cognitive_load:
-  concepts_count: 6
+  concepts_count: 7
   scaffolding_level: "Heavy"
 learning_objectives:
   - id: LO1
+    description: "Explain why containers exist and how they differ from virtual machines"
+    bloom_level: "Understand"
+  - id: LO2
     description: "Install Docker Desktop on your operating system (macOS, Windows, or Linux)"
     bloom_level: "Apply"
-  - id: LO2
+  - id: LO3
     description: "Verify Docker Engine is running and accessible via the docker version command"
     bloom_level: "Understand"
-  - id: LO3
+  - id: LO4
     description: "Run your first container with docker run hello-world to validate the complete workflow"
     bloom_level: "Apply"
-  - id: LO4
+  - id: LO5
     description: "Configure Docker Desktop resources for AI workloads (memory, CPU, disk)"
     bloom_level: "Apply"
-  - id: LO5
+  - id: LO6
     description: "Explain the relationship between Docker Desktop, Docker Engine, and containerd"
     bloom_level: "Understand"
-  - id: LO6
+  - id: LO7
     description: "Navigate Docker Desktop GUI to view running containers and images"
     bloom_level: "Remember"
 digcomp_mapping:
@@ -56,6 +59,104 @@ digcomp_mapping:
 Your FastAPI agent runs perfectly on your machine. But "works on my machine" doesn't scale to production or your team's machines. Docker solves this fundamental problem by packaging your agent, its dependencies, and its runtime into a container that runs identically everywhere—your laptop, a teammate's Mac, or a cloud server.
 
 Before you experience the power of containerization through AI collaboration, you need to understand what Docker actually is. This lesson walks you through installation and initial setup manually, building the mental model you'll need to optimize containers and debug issues later.
+
+---
+
+## Why Containers? The Problem They Solve
+
+Before diving into Docker, understand the problem it solves and why it's become essential for deploying AI services.
+
+### The Deployment Problem
+
+Your FastAPI agent from Part 6 works on your laptop. But to make it useful, you need to run it somewhere accessible—a server in the cloud, your company's data center, or a colleague's machine. This is where things break:
+
+| Your Machine | Production Server |
+|--------------|-------------------|
+| Python 3.12 | Python 3.9 |
+| macOS | Ubuntu Linux |
+| Dependencies installed globally | Different versions installed |
+| Environment variables set in .zshrc | No environment configured |
+| Model files in ~/Downloads | Where are the model files? |
+
+Every difference is a potential bug. The server says "Module not found." You say "But it works on my machine!"
+
+### Three Ways to Deploy Software
+
+**Option 1: Manual Setup (Fragile)**
+
+SSH into the server, install Python, pip install dependencies, copy files, configure environment variables, hope nothing changed since yesterday.
+
+Problems: Slow, error-prone, not reproducible. Works until someone updates a system package.
+
+**Option 2: Virtual Machines (Heavy)**
+
+Package the entire operating system—kernel, libraries, your application—into a VM image. Run the VM on any hypervisor (VMware, VirtualBox, cloud providers).
+
+```
+┌─────────────────────────────────────┐
+│           Your Application          │
+├─────────────────────────────────────┤
+│    Python, Dependencies, Files      │
+├─────────────────────────────────────┤
+│         Guest OS (Ubuntu)           │
+├─────────────────────────────────────┤
+│         Hypervisor (VMware)         │
+├─────────────────────────────────────┤
+│         Host OS (macOS/Windows)     │
+├─────────────────────────────────────┤
+│            Hardware                 │
+└─────────────────────────────────────┘
+```
+
+Problems: Each VM needs its own OS (gigabytes of storage), boots in minutes, wastes RAM running duplicate kernels. Running 10 services means 10 operating systems.
+
+**Option 3: Containers (Lightweight)**
+
+Package your application and dependencies, but **share the host kernel**. No duplicate operating system. Start in milliseconds. Use megabytes instead of gigabytes.
+
+```
+┌──────────┐  ┌──────────┐  ┌──────────┐
+│  App 1   │  │  App 2   │  │  App 3   │
+├──────────┤  ├──────────┤  ├──────────┤
+│  Deps    │  │  Deps    │  │  Deps    │
+└──────────┴──┴──────────┴──┴──────────┘
+           Container Runtime
+├─────────────────────────────────────┤
+│           Host OS (Linux)           │
+├─────────────────────────────────────┤
+│            Hardware                 │
+└─────────────────────────────────────┘
+```
+
+**Key insight**: Containers share the host's kernel. They're isolated processes, not full operating systems. This makes them:
+- **Fast**: Start in under a second (VMs take minutes)
+- **Small**: 50-200MB typical (VMs are 2-10GB)
+- **Efficient**: Run 100 containers on a laptop (10 VMs would exhaust RAM)
+- **Portable**: Same container runs on any Linux kernel (development to production)
+
+### Why Containers Matter for AI Services
+
+Your AI agent has specific requirements:
+
+1. **Large dependencies**: PyTorch, transformers, numpy—hundreds of megabytes of packages
+2. **Specific versions**: Model trained on transformers 4.35.0 breaks on 4.36.0
+3. **Environment variables**: API keys, model paths, configuration
+4. **GPU access**: Some AI workloads need NVIDIA CUDA (containers support this)
+5. **Reproducibility**: Must reproduce exact behavior for debugging
+
+Containers solve all of these by freezing your entire environment into an immutable, portable package. When you deploy to the cloud, you're not hoping the server is configured correctly—you're shipping the exact environment that works.
+
+### Cloud Computing Context
+
+If you're new to cloud computing, here's the essential context:
+
+**Cloud providers** (AWS, Google Cloud, Azure, DigitalOcean) rent you servers by the hour. These servers run Linux. You deploy your application to these servers.
+
+**Without containers**: You configure each server manually, install dependencies, copy files. Different servers drift out of sync.
+
+**With containers**: You build once, push to a registry (like Docker Hub), and pull onto any server. The container is identical everywhere.
+
+**Kubernetes** (Chapter 50) orchestrates many containers across many servers—handling load balancing, failover, and scaling. But first, you need to know how to build and run a single container. That's what Docker teaches you.
 
 ---
 

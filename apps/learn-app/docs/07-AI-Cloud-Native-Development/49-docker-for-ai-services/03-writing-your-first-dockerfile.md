@@ -59,9 +59,25 @@ In this lesson, you'll write a complete Dockerfile for a Python FastAPI service 
 
 ---
 
+## Connecting to Your Part 6 Agent
+
+In Part 6, you built a FastAPI agent service—an AI-powered application that handles requests, processes them with language models, and returns intelligent responses. That agent is exactly what we want to containerize.
+
+However, your Part 6 agent has complexity that would distract from learning Dockerfiles:
+- Multiple files (routes, models, services)
+- External API dependencies (OpenAI, Anthropic)
+- Environment variables for API keys
+- Potentially a database connection
+
+For this lesson, we'll use a **simplified FastAPI service** that has the same structure as your agent but without the AI dependencies. This lets you focus on Dockerfile mechanics.
+
+**In Lesson 9 (Capstone)**, you'll containerize your actual Part 6 agent—with all its complexity, environment variables, and production requirements. The skills you learn here directly apply there.
+
+---
+
 ## Setting Up Your Application Files
 
-Before writing a Dockerfile, you need a Python application to containerize. Let's create a simple FastAPI service.
+Before writing a Dockerfile, you need a Python application to containerize. We'll create a simplified FastAPI service that mirrors your Part 6 agent's structure.
 
 Create a new directory for your project:
 

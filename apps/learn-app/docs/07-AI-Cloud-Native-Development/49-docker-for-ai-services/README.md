@@ -51,9 +51,20 @@ This chapter follows the **4-Layer Teaching Method**:
 
 ## Prerequisites
 
-- Part 6: A working FastAPI agent service to containerize
-- Basic command-line familiarity
-- Docker Desktop installed (Lesson 1 covers installation)
+- **Part 6 completion**: A working FastAPI agent service—this is the application you'll containerize in the capstone
+- **Basic command-line familiarity**: You should be comfortable running commands in a terminal
+- **No Docker experience required**: Lesson 1 covers installation and explains containers from scratch
+
+## Your Part 6 Agent: The Thread Through This Chapter
+
+Throughout this chapter, we build toward containerizing your Part 6 FastAPI agent:
+
+- **Lessons 1-7**: Learn Docker concepts using simplified examples
+- **Lesson 8**: Use Gordon (Docker's AI) to optimize your Dockerfile
+- **Lesson 9 (Capstone)**: Containerize your actual Part 6 agent for production
+- **Lesson 10**: Create a reusable skill for future containerization work
+
+By the end, "works on my machine" becomes "runs anywhere Docker runs."
 
 ## Looking Ahead
 
