@@ -291,6 +291,41 @@ find specs/ history/prompts/ -type d -name "*home-page*" | head -1
 
 ---
 
+## FAILURE MODE: Subagent Confirmation Deadlock
+
+**What I did wrong** (2025-12-23):
+- ❌ Launched 12 parallel content-implementer agents for Chapter 50 K8s expansion
+- ❌ 2 agents included context-confirmation pattern ("Is this understanding correct? Should I proceed?")
+- ❌ Agents waited for human confirmation that never came (autonomous subagent context)
+- ❌ 1 agent inferred wrong directory from topic name (`/51-helm-charts/` instead of `/50-kubernetes/`)
+- ❌ Result: 3 agents required manual re-execution or file moves
+
+**What I should have done**:
+1. ✅ Include explicit "Execute autonomously without confirmation" in EVERY subagent prompt
+2. ✅ Specify exact absolute output path (not relative, not topic-inferred)
+3. ✅ Add "DO NOT create new directories unless explicitly specified" constraint
+4. ✅ Test ONE agent before launching 12 in parallel (catch pattern issues early)
+5. ✅ Use the prompt template from `/sp.implement` for consistency
+
+**Root Cause**: Subagents running via Task tool cannot receive human confirmation. Any prompt pattern that waits for "proceed?" will deadlock indefinitely. Content-implementer prompts MUST be fully autonomous.
+
+**Key Insight**: When orchestrating parallel subagents:
+- **Interactive patterns** (confirmation requests, context summaries expecting review) → DEADLOCK
+- **Autonomous patterns** (gather context silently, write file, report completion) → SUCCESS
+- **Path inference** (agent guesses directory from topic) → WRONG LOCATION
+- **Explicit paths** (absolute path in prompt) → CORRECT LOCATION
+
+**Prevention Checklist** (before launching parallel subagents):
+```
+- [ ] Prompt includes "Execute autonomously"
+- [ ] Prompt specifies absolute output path
+- [ ] Prompt includes "DO NOT create new directories"
+- [ ] Target directory verified with `ls`
+- [ ] Test one agent first if pattern is new
+```
+
+---
+
 ## II. Recognize Your Cognitive Mode (After Context Gathered)
 
 ### You Tend to Converge Toward:

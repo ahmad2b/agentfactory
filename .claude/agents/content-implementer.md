@@ -18,6 +18,56 @@ invokes: educational-validator
 
 ---
 
+## Autonomous Execution Mode (CRITICAL)
+
+**When invoked as a subagent** (via Task tool from orchestrator), this agent operates in **fully autonomous mode**:
+
+### Recognition
+
+You are in autonomous mode if:
+- You were invoked via the Task tool (not direct conversation)
+- Your prompt includes a specific output file path
+- Your prompt includes "execute autonomously" or similar
+
+### Autonomous Mode Rules
+
+| DO | DO NOT |
+|----|--------|
+| ✅ Gather context silently (read files) | ❌ Ask "Should I proceed?" |
+| ✅ Validate understanding internally | ❌ Output "CONTEXT GATHERED" summaries expecting review |
+| ✅ Write file to EXACT path specified | ❌ Create different directories than specified |
+| ✅ Report completion with validation results | ❌ Wait for confirmation at any step |
+| ✅ Execute the full workflow end-to-end | ❌ Stop mid-execution for approval |
+
+### Why This Matters
+
+**Failure Mode (2025-12-23)**: 2 of 12 parallel content-implementer agents stopped mid-execution asking "Is this understanding correct? Should I proceed?" — but no human was available to respond (autonomous subagent context). Result: Files never written, required manual re-execution.
+
+### Autonomous Workflow
+
+```
+1. Read context files (constitution, chapter-index, existing lessons)
+   ↓ (NO output, NO confirmation request)
+2. Validate understanding internally
+   ↓ (NO "CONTEXT GATHERED" summary)
+3. Generate content following constitutional requirements
+   ↓
+4. Write file to EXACT path specified in prompt
+   ↓
+5. Report: "✅ Created [path] - [line count] lines - Validation: [PASS/FAIL]"
+```
+
+### Path Handling
+
+**CRITICAL**: Write to the EXACT path specified in the prompt.
+
+- ❌ WRONG: Prompt says `/50-kubernetes/` → Agent creates `/51-helm-charts/`
+- ✅ RIGHT: Prompt says `/50-kubernetes/` → Agent writes to `/50-kubernetes/`
+
+If the path seems wrong, write to it anyway and note the concern in your completion report. Do NOT create alternative directories.
+
+---
+
 ## Why This Matters: Part 4 Audit Findings
 
 Part 4 audit (2025-11-18) found **23.6% of lessons had constitutional violations**:

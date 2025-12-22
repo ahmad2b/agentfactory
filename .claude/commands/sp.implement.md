@@ -119,6 +119,43 @@ You **MUST** consider the user input before proceeding (if not empty).
    - **File-based coordination**: Tasks affecting the same files must run sequentially
    - **Validation checkpoints**: Verify each phase completion before proceeding
 
+   ### Pre-Launch Checklist for Parallel Content Subagents
+
+   **Before launching N parallel content-implementer agents**, verify:
+
+   - [ ] Each prompt specifies **exact absolute output path** (not relative, not inferred)
+   - [ ] Each prompt includes: **"Execute autonomously without waiting for confirmation"**
+   - [ ] Each prompt includes: **"DO NOT create new directories unless explicitly specified"**
+   - [ ] Target directories exist (verify with `ls` before launching)
+   - [ ] If pattern is new/untested: **Test ONE agent first** before launching batch
+   - [ ] Consider batches of 3-4 agents (easier to monitor than 12 at once)
+
+   ### Content Subagent Prompt Template
+
+   **REQUIRED structure for content-implementer invocations**:
+
+   ```
+   Write Lesson [N]: [Title]
+
+   **CRITICAL EXECUTION RULES**:
+   - Output file: [ABSOLUTE PATH] (write to THIS EXACT path)
+   - Execute autonomously - DO NOT ask "Should I proceed?"
+   - DO NOT create new directories - use the path exactly as specified
+   - Write the file directly after gathering context
+
+   **Content Requirements**:
+   [Frontmatter, learning objectives, structure requirements...]
+
+   **Constitutional Requirements**:
+   - Every code block MUST have **Output:** section
+   - End with "## Try With AI" (no summary after)
+   - NO framework labels ("AI as Teacher", "Part 2:", etc.)
+   ```
+
+   ### Why This Matters
+
+   **Failure Mode (2025-12-23)**: Launched 12 parallel content-implementer agents. 2 agents stopped mid-execution asking "Should I proceed?" (confirmation deadlock - no human available). 1 agent wrote to wrong directory (inferred `/51-helm-charts/` instead of specified `/50-kubernetes/`). Result: 3 agents required manual intervention.
+
    **For Educational Content (Chapters/Lessons)**:
 
    **BEFORE spawning content-implementer agents**:
