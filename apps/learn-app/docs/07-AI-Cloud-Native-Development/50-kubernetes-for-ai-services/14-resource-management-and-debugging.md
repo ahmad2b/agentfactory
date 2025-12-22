@@ -1,7 +1,7 @@
 ---
-sidebar_position: 7
+sidebar_position: 14
 chapter: 50
-lesson: 7
+lesson: 14
 duration_minutes: 40
 title: "Resource Management and Debugging"
 proficiency_level: B1

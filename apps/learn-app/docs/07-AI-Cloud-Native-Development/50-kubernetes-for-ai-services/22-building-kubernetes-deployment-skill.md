@@ -1,7 +1,7 @@
 ---
-sidebar_position: 10
+sidebar_position: 22
 chapter: 50
-lesson: 10
+lesson: 22
 duration_minutes: 35
 title: "Building the Kubernetes Deployment Skill"
 proficiency_level: B1

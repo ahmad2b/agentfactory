@@ -1,7 +1,7 @@
 ---
-sidebar_position: 6
+sidebar_position: 11
 chapter: 50
-lesson: 6
+lesson: 11
 duration_minutes: 35
 title: "ConfigMaps and Secrets"
 proficiency_level: B1

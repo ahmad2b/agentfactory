@@ -1,7 +1,7 @@
 ---
-sidebar_position: 8
+sidebar_position: 19
 chapter: 50
-lesson: 8
+lesson: 19
 duration_minutes: 45
 title: "AI-Assisted Kubernetes with kubectl-ai"
 proficiency_level: B1
