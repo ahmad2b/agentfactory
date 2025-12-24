@@ -116,9 +116,8 @@ export default function OAuthCallback(): React.JSX.Element {
             <div style={{
               width: '48px',
               height: '48px',
-              border: '4px solid #e5e7eb',
-              borderTopColor: '#001f3f',
-              borderRadius: '50%',
+              border: '4px solid var(--border)',
+              borderTopColor: 'var(--primary)',
               animation: 'spin 1s linear infinite',
             }} />
             <style>{`
@@ -140,8 +139,7 @@ export default function OAuthCallback(): React.JSX.Element {
             <div style={{
               width: '64px',
               height: '64px',
-              backgroundColor: '#10b981',
-              borderRadius: '50%',
+              backgroundColor: 'var(--success)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -164,8 +162,7 @@ export default function OAuthCallback(): React.JSX.Element {
             <div style={{
               width: '64px',
               height: '64px',
-              backgroundColor: '#ef4444',
-              borderRadius: '50%',
+              backgroundColor: 'var(--destructive)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -185,9 +182,8 @@ export default function OAuthCallback(): React.JSX.Element {
               href={getHomeUrl()}
               style={{
                 padding: '0.75rem 1.5rem',
-                backgroundColor: '#001f3f',
-                color: 'white',
-                borderRadius: '0.5rem',
+                backgroundColor: 'var(--primary)',
+                color: 'var(--primary-foreground)',
                 textDecoration: 'none',
               }}
             >

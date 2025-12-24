@@ -41,10 +41,9 @@ export default function PDFViewer({
   return (
     <div className="pdf-viewer-container" style={{
       marginBottom: '1.5rem',
-      backgroundColor: 'var(--ifm-background-surface-color)',
+      backgroundColor: 'var(--background)',
       padding: '1rem',
-      borderRadius: '8px',
-      border: '1px solid var(--ifm-color-emphasis-200)'
+      border: '1px solid var(--border)'
     }}>
       <div style={{
         marginBottom: '0.75rem',
@@ -67,9 +66,8 @@ export default function PDFViewer({
         width="100%"
         height={height}
         style={{
-          border: '1px solid var(--ifm-color-emphasis-300)',
-          borderRadius: '4px',
-          backgroundColor: '#fff'
+          border: '1px solid var(--border)',
+          backgroundColor: 'var(--background)'
         }}
         title={title}
       />

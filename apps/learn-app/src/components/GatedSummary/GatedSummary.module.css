@@ -1,7 +1,7 @@
 /* GatedSummary - Refined summary card styling */
 
 .summaryContainer {
-  --summary-bg: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  --summary-bg: #f8fafc;
   --summary-border: rgba(0, 77, 153, 0.12);
   --summary-accent: var(--ifm-color-primary);
   --summary-text: var(--ifm-font-color-base);
@@ -9,12 +9,12 @@
   padding: 1.5rem;
   background: var(--summary-bg);
   border: 1px solid var(--summary-border);
-  border-radius: 16px;
+
   border-left: 4px solid var(--summary-accent);
 }
 
 [data-theme='dark'] .summaryContainer {
-  --summary-bg: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.5) 100%);
+  --summary-bg: rgba(30, 41, 59, 0.5);
   --summary-border: rgba(148, 163, 184, 0.15);
 }
 
@@ -74,7 +74,7 @@
 .summaryContent code {
   background: rgba(0, 77, 153, 0.08);
   padding: 0.15rem 0.4rem;
-  border-radius: 4px;
+
   font-size: 0.9em;
 }
 
@@ -91,7 +91,7 @@
 @media (max-width: 768px) {
   .summaryContainer {
     padding: 1.25rem;
-    border-radius: 12px;
+
   }
 
   .summaryHeader {
@@ -115,7 +115,7 @@
 @media (max-width: 480px) {
   .summaryContainer {
     padding: 1rem;
-    border-radius: 10px;
+
   }
 
   .summaryIcon {

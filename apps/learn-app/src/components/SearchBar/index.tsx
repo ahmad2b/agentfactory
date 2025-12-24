@@ -1,70 +1,69 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { createPortal } from 'react-dom';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useHistory } from '@docusaurus/router';
 import { searchContent } from '@/lib/search-utils';
-import styles from './styles.module.css';
+import {
+  CommandDialog,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+} from "@/components/ui/command";
+import { Button } from "@/components/ui/button";
+import { Search, Loader2, FileText, Hash } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-/**
- * Search Bar Component
- *
- * A clean search interface that matches the Polar Night design.
- * Features:
- * - Keyboard shortcuts (Cmd/Ctrl + K)
- * - Smooth animations
- * - Full-text search via Lunr.js
- */
-export function SearchBar(): React.ReactElement {
-  const [isOpen, setIsOpen] = useState(false);
+// Detect OS for keyboard shortcut display
+const isMac = typeof navigator !== 'undefined' && /Mac|iPod|iPhone|iPad/.test(navigator.platform);
+
+export function SearchBar({ enableShortcut = true }: { enableShortcut?: boolean }) {
+  const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const modalRef = useRef<HTMLDivElement>(null);
   const history = useHistory();
 
-  // Handle keyboard shortcut (Cmd/Ctrl + K)
+  // Keyboard shortcut display
+  const shortcutKey = isMac ? '⌘' : 'Ctrl';
+
+  // Toggle Command Palette with Cmd+K / Ctrl+K
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+    if (!enableShortcut) return;
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
-        setIsOpen(true);
-        setTimeout(() => inputRef.current?.focus(), 100);
-      }
-      if (e.key === 'Escape' && isOpen) {
-        setIsOpen(false);
-        setQuery('');
+        setOpen((open) => !open);
       }
     };
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, [enableShortcut]);
 
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen]);
-
-  // Close on outside click (clicking the overlay, not the modal)
-  const handleOverlayClick = (e: React.MouseEvent) => {
-    // Only close if clicking directly on the overlay, not on the modal
-    if (e.target === e.currentTarget) {
-      setIsOpen(false);
+  // Clear query when modal closes
+  const handleOpenChange = (isOpen: boolean) => {
+    setOpen(isOpen);
+    if (!isOpen) {
       setQuery('');
+      setResults([]);
     }
   };
 
-  // Perform search using the search utility
+  // Search Logic (Debounced)
   useEffect(() => {
-    if (!isOpen || !query.trim()) {
+    if (!query.trim()) {
       setResults([]);
+      setLoading(false);
       return;
     }
 
-    // Debounce search
+    setLoading(true);
     const timeoutId = setTimeout(async () => {
-      setLoading(true);
-
       try {
         const searchResults = await searchContent(query);
-        setResults(searchResults);
+        // Limit to 8 results for cleaner UI
+        setResults(searchResults.slice(0, 8));
       } catch (error) {
-        // Silently handle errors - search may not be available in dev mode
+        console.error("Search failed:", error);
         setResults([]);
       } finally {
         setLoading(false);
@@ -72,185 +71,97 @@ export function SearchBar(): React.ReactElement {
     }, 300);
 
     return () => clearTimeout(timeoutId);
-  }, [query, isOpen]);
+  }, [query]);
 
-  const handleResultClick = (url: string) => {
-    setIsOpen(false);
-    setQuery('');
+  const handleSelect = (url: string) => {
+    handleOpenChange(false);
     history.push(url);
   };
 
+  // Determine which state to show
+  const showEmptyHint = !query.trim();
+  const showLoading = loading && query.trim();
+  const showNoResults = !loading && query.trim() && results.length === 0;
+  const showResults = !loading && results.length > 0;
+
   return (
-    <div className={styles.searchContainer}>
-      {/* Search Trigger Button */}
-      <button
-        className={styles.searchTrigger}
-        onClick={() => {
-          setIsOpen(!isOpen);
-          if (!isOpen) {
-            setTimeout(() => inputRef.current?.focus(), 100);
-          }
-        }}
-        aria-label="Search"
-        aria-expanded={isOpen}
+    <>
+      <Button
+        variant="outline"
+        className={cn(
+          "relative h-10 w-full justify-start text-sm text-muted-foreground sm:pr-12"
+        )}
+        onClick={() => setOpen(true)}
       >
-        <svg
-          className={styles.searchIcon}
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <circle cx="11" cy="11" r="8" />
-          <path d="m21 21-4.35-4.35" />
-        </svg>
-        <span className={styles.searchLabel}>Search</span>
-        <kbd className={styles.searchShortcut}>
-          <span className={styles.kbdKey}>⌘</span>
-          <span className={styles.kbdKey}>K</span>
+        <Search className="mr-2 h-4 w-4" />
+        <span className="hidden lg:inline-flex">Search docs...</span>
+        <span className="inline-flex lg:hidden">Search...</span>
+        <kbd className="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
+          <span className="text-xs">{shortcutKey}</span>K
         </kbd>
-      </button>
+      </Button>
+      <CommandDialog open={open} onOpenChange={handleOpenChange}>
+        <CommandInput
+          placeholder="Search documentation..."
+          value={query}
+          onValueChange={setQuery}
+        />
+        <CommandList className="min-h-[200px]">
+          {/* Empty state - show hint when no query */}
+          {showEmptyHint && (
+            <div className="py-14 text-center">
+              <Search className="mx-auto h-10 w-10 text-muted-foreground/40 mb-4" />
+              <p className="text-sm text-muted-foreground">
+                Type to search documentation
+              </p>
+              <p className="text-xs text-muted-foreground/60 mt-1">
+                Press <kbd className="px-1.5 py-0.5 rounded bg-muted text-xs font-mono">{shortcutKey}+K</kbd> anytime to open
+              </p>
+            </div>
+          )}
 
-      {/* Search Modal/Overlay - rendered via Portal to escape navbar stacking context */}
-      {isOpen && typeof document !== 'undefined' && createPortal(
-        <div className={styles.searchOverlay} onClick={handleOverlayClick}>
-          <div ref={modalRef} className={styles.searchModal}>
-            {/* Search Input */}
-            <div className={styles.searchInputWrapper}>
-              <svg
-                className={styles.searchInputIcon}
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="11" cy="11" r="8" />
-                <path d="m21 21-4.35-4.35" />
-              </svg>
-              <input
-                ref={inputRef}
-                type="text"
-                className={styles.searchInput}
-                placeholder="Search documentation..."
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                autoFocus
-              />
-              {query && (
-                <button
-                  className={styles.clearButton}
-                  onClick={() => setQuery('')}
-                  aria-label="Clear search"
+          {/* Loading state */}
+          {showLoading && (
+            <div className="py-14 text-center">
+              <Loader2 className="mx-auto h-8 w-8 text-muted-foreground animate-spin mb-4" />
+              <p className="text-sm text-muted-foreground">Searching...</p>
+            </div>
+          )}
+
+          {/* No results state */}
+          {showNoResults && (
+            <CommandEmpty>No results found for "{query}"</CommandEmpty>
+          )}
+
+          {/* Results */}
+          {showResults && (
+            <CommandGroup heading="Results">
+              {results.map((result, index) => (
+                <CommandItem
+                  key={`${result.url}-${index}`}
+                  value={result.title || result.content}
+                  onSelect={() => handleSelect(result.url)}
+                  className="cursor-pointer"
                 >
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                </button>
-              )}
-            </div>
-
-            {/* Search Results */}
-            <div className={styles.searchResults}>
-              {loading && query && (
-                <div className={styles.searchLoading}>
-                  <div className={styles.loadingSpinner} />
-                  <span>Searching...</span>
-                </div>
-              )}
-
-              {!loading && query && results.length === 0 && (
-                <div className={styles.searchEmpty}>
-                  <svg
-                    width="48"
-                    height="48"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                  >
-                    <circle cx="11" cy="11" r="8" />
-                    <path d="m21 21-4.35-4.35" />
-                  </svg>
-                  <p>No results found</p>
-                  <span className={styles.searchEmptyHint}>
-                    Try different keywords
-                  </span>
-                </div>
-              )}
-
-              {!loading && query && results.length > 0 && (
-                <>
-                  <div className={styles.searchResultsHeader}>
-                    <span className={styles.resultsCount}>
-                      {results.length}{' '}
-                      {results.length === 1 ? 'result' : 'results'}
-                    </span>
+                  {result.type === 'heading' ? (
+                    <Hash className="mr-2 h-4 w-4 text-muted-foreground" />
+                  ) : (
+                    <FileText className="mr-2 h-4 w-4 text-muted-foreground" />
+                  )}
+                  <div className="flex flex-col gap-0.5 overflow-hidden">
+                    <span className="truncate font-medium">{result.title}</span>
+                    {result.type && (
+                      <span className="text-xs text-muted-foreground capitalize truncate">
+                        {result.type}
+                      </span>
+                    )}
                   </div>
-                  <div className={styles.resultsList}>
-                    {results.map((result: any, index: number) => (
-                      <button
-                        key={index}
-                        className={styles.resultItem}
-                        onClick={() =>
-                          handleResultClick(result.url || result.href || '')
-                        }
-                      >
-                        <div className={styles.resultHeader}>
-                          <span className={styles.resultTitle}>
-                            {result.title || result.content}
-                          </span>
-                          <span className={styles.resultType}>
-                            {result.type || 'doc'}
-                          </span>
-                        </div>
-                        {result.text && (
-                          <p className={styles.resultSnippet}>{result.text}</p>
-                        )}
-                        {result.url && (
-                          <div className={styles.resultPath}>
-                            {result.url.replace(/^\//, '').replace(/\/$/, '')}
-                          </div>
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                </>
-              )}
-
-              {!query && (
-                <div className={styles.searchEmpty}>
-                  <div className={styles.searchHint}>
-                    <kbd className={styles.hintKbd}>⌘</kbd>
-                    <span>+</span>
-                    <kbd className={styles.hintKbd}>K</kbd>
-                    <span>to search</span>
-                  </div>
-                  <p className={styles.searchPlaceholder}>
-                    Start typing to search documentation...
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>,
-        document.body
-      )}
-    </div>
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          )}
+        </CommandList>
+      </CommandDialog>
+    </>
   );
 }
