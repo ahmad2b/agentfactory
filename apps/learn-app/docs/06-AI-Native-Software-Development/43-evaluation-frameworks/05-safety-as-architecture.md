@@ -1,10 +1,10 @@
 ---
-sidebar_position: 5
+sidebar_position: 2
 title: "Safety as Architecture"
 description: "Design agents with guardrails built in using callbacks"
 keywords: [google adk, callbacks, before_model_callback, before_tool_callback, guardrails, safety]
-chapter: 35
-lesson: 5
+chapter: 43
+lesson: 2
 duration_minutes: 55
 
 # HIDDEN SKILLS METADATA

@@ -1,10 +1,10 @@
 ---
-sidebar_position: 4
+sidebar_position: 3
 title: "Iterative Quality"
 description: "Build LoopAgent for iterative refinement until quality criteria met"
 keywords: [google adk, loop agent, iterative refinement, exit_loop, max_iterations]
-chapter: 35
-lesson: 4
+chapter: 42
+lesson: 3
 duration_minutes: 45
 
 # HIDDEN SKILLS METADATA

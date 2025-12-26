@@ -165,3 +165,8 @@
 {"timestamp":"2025-12-26T06:59:58Z","session_id":"2b3a766c-cf88-4cfc-8390-c3de51b7cefc","prompt":"Q: share if Chapter 54: Dapr Actors & Workflows can be actually after 58/59 ?"}
 {"timestamp":"2025-12-26T07:11:08Z","session_id":"2b3a766c-cf88-4cfc-8390-c3de51b7cefc","prompt":"do it"}
 {"timestamp":"2025-12-26T07:23:05Z","session_id":"2b3a766c-cf88-4cfc-8390-c3de51b7cefc","prompt":"feels like Dapr Fundamentals is actually Dapr Core instead?"}
+{"timestamp":"2025-12-26T07:26:06Z","session_id":"2b3a766c-cf88-4cfc-8390-c3de51b7cefc","prompt":"/sp.git.sync-sso "}
+{"timestamp":"2025-12-26T07:55:56Z","session_id":"2b3a766c-cf88-4cfc-8390-c3de51b7cefc","prompt":"start serve locally"}
+{"timestamp":"2025-12-26T08:01:30Z","session_id":"2b3a766c-cf88-4cfc-8390-c3de51b7cefc","prompt":"restart server"}
+{"timestamp":"2025-12-26T08:05:55Z","session_id":"2b3a766c-cf88-4cfc-8390-c3de51b7cefc","prompt":"Issues: 1. Your Chapter 34 sounds like evals chapter while it shall cover Google ADK @apps/learn-app/docs/06-AI-Native-Software-Development/35-google-adk-reliable-agents 2.  Your Chaoter 37 Lesson 2 says  \"\"\"Mode    Response Type    Session    Best For\nStateless    Single JSON response    None    Simple tools, serverless funct\"\"\" ions, easy scaling\"\"\" While stateless can have mode streaming and single json mode and it;s best when we don't need mcp advanced features or have to scale on cloud > 1 node"}
+{"timestamp":"2025-12-26T08:08:41Z","session_id":"2b3a766c-cf88-4cfc-8390-c3de51b7cefc","prompt":"1. Yes and fix it now also  In chapter 39 lesson 2 your Skill thinking is wrnong in itself what the hell check online how a skill it actually define or see come skill or check skill creater skill. \"\"\"Chapter 39: Agent Skills & MCP Code Execution\"\"\""}

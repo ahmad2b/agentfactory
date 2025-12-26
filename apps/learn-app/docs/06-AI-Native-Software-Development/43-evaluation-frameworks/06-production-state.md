@@ -1,10 +1,10 @@
 ---
-sidebar_position: 6
+sidebar_position: 3
 title: "Production State"
 description: "Manage agent state with SessionService and integrate MCP tools for persistent, reliable agents"
 keywords: [google adk, session service, firestore, tool context, mcp toolset, state persistence, production agents]
-chapter: 35
-lesson: 6
+chapter: 43
+lesson: 3
 duration_minutes: 50
 
 skills:

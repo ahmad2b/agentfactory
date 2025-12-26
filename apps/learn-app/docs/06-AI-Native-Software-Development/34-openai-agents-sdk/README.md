@@ -23,16 +23,6 @@ By the end of this chapter, you'll be able to:
 - **Handle streaming and async**: Build responsive agents that stream responses and handle concurrent operations efficiently
 - **Trace and debug agents**: Use OpenAI's tracing infrastructure to understand agent behavior and diagnose issues
 
-## Chapter Structure
-
-1. **SDK Setup & First Agent** — Environment configuration, API key management, creating your first agent with instructions
-2. **Function Tools Deep Dive** — Defining tools, parameter schemas, error handling, and the tool execution lifecycle
-3. **Multi-Agent Handoffs** — Agent-to-agent communication, context preservation, and handoff patterns
-4. **Guardrails & Safety** — Input validation, output filtering, tripwires, and human approval workflows
-5. **Streaming & Async Patterns** — Real-time responses, concurrent tool execution, and event handling
-6. **Tracing & Observability** — Built-in tracing, custom spans, debugging agent behavior
-7. **Capstone: Customer Support System** — Spec-driven implementation of a multi-agent support system with triage, specialist handoffs, and escalation
-
 ## Prerequisites
 
 - Chapter 33: Introduction to AI Agents (conceptual foundation)

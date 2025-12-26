@@ -1,10 +1,10 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 title: "Evaluation-Driven Development"
 description: "Build TaskManager agent by making eval cases pass with adk eval"
 keywords: [google adk, adk eval, evaluation driven development, pytest, agentevahluator, iterative improvement]
-chapter: 35
-lesson: 2
+chapter: 43
+lesson: 1
 duration_minutes: 60
 
 # HIDDEN SKILLS METADATA

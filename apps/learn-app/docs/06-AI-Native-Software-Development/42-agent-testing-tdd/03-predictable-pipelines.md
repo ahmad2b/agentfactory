@@ -1,10 +1,10 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 title: "Predictable Pipelines"
 description: "Build deterministic multi-agent workflows with SequentialAgent and ParallelAgent"
 keywords: [google adk, sequential agent, parallel agent, workflow agents, multi-agent, deterministic]
-chapter: 35
-lesson: 3
+chapter: 42
+lesson: 2
 duration_minutes: 50
 
 # HIDDEN SKILLS METADATA

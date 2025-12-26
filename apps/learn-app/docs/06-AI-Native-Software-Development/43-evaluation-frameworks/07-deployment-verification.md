@@ -1,10 +1,10 @@
 ---
-sidebar_position: 7
+sidebar_position: 4
 title: "Deployment & Verification"
 description: "Deploy agents to Vertex AI and verify behavior matches local tests"
 keywords: [google adk, vertex ai, agent engine, deployment, adk deploy, agent verification]
-chapter: 35
-lesson: 7
+chapter: 43
+lesson: 4
 duration_minutes: 55
 
 # HIDDEN SKILLS METADATA

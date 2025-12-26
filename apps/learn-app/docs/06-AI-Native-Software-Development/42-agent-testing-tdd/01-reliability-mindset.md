@@ -3,7 +3,7 @@ sidebar_position: 1
 title: "The Reliability Mindset"
 description: "Learn evaluation-first development with Google ADK - write tests before agents"
 keywords: [google adk, agent evaluation, adk eval, evaluation-first, reliable agents]
-chapter: 35
+chapter: 42
 lesson: 1
 duration_minutes: 45
 

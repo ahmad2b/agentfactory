@@ -1,10 +1,10 @@
 ---
-sidebar_position: 8
+sidebar_position: 5
 title: "Capstone: Spec-Driven TaskManager"
 description: "Orchestrate all ADK components into a production-ready Digital FTE"
 keywords: [google adk, capstone, spec-driven development, digital fte, multi-agent, integration testing, deployment]
-chapter: 35
-lesson: 8
+chapter: 43
+lesson: 5
 duration_minutes: 75
 
 # HIDDEN SKILLS METADATA

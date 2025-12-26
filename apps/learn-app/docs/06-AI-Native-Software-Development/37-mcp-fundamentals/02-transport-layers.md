@@ -186,14 +186,15 @@ Streamable HTTP supports **two operational modes**:
 
 | Mode | Response Type | Session | Best For |
 |------|---------------|---------|----------|
-| **Stateless** | Single JSON response | None | Simple tools, serverless functions, easy scaling |
+| **Stateless** | JSON or streaming | None | Cloud scaling (multiple nodes), serverless, no MCP advanced features needed |
 | **Stateful** | SSE stream | Maintained | Long-running operations, progress updates, complex workflows |
 
-**Stateless mode** (recommended for most cases):
+**Stateless mode** (recommended for cloud deployments):
 - Client sends HTTP POST with JSON-RPC request
-- Server returns single JSON response
+- Server can return single JSON OR streaming response
 - No session state between requests
-- Easier to scale horizontally (load balancers, serverless)
+- Essential for horizontal scaling (load balancers, multi-node, serverless)
+- Use when you don't need MCP advanced features (sampling, roots, etc.)
 
 ```
 Client → POST /mcp {"method": "tools/call", ...}

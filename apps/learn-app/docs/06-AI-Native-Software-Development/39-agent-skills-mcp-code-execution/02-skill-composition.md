@@ -1,664 +1,400 @@
 ---
 sidebar_position: 2
-title: "Skill Composition & Dependencies"
-description: "Design skills that work together seamlessly. Learn to compose multiple skills into coordinated workflows by declaring dependencies, managing data flow, and handling errors when skills interact."
-keywords: ["skill composition", "dependencies", "data flow", "error handling", "skill testing", "integration patterns"]
+title: "Skill Composition & Multi-Skill Workflows"
+description: "Design skills that work together effectively. Learn how the orchestrator invokes multiple skills in sequence, how skills can reference shared resources, and patterns for designing complementary skill ecosystems."
+keywords: ["skill composition", "multi-skill workflows", "skill orchestration", "bundled resources", "complementary skills"]
 chapter: 39
 lesson: 2
-duration_minutes: 30
+duration_minutes: 25
 
 # HIDDEN SKILLS METADATA
 skills:
-  - name: "Skill Dependency Design"
-    proficiency_level: "B2"
+  - name: "Understanding Skill Invocation Flow"
+    proficiency_level: "B1"
+    category: "Conceptual"
+    bloom_level: "Understand"
+    digcomp_area: "Problem-Solving"
+    measurable_at_this_level: "Student can explain how Claude selects and invokes skills based on task context and skill descriptions"
+
+  - name: "Designing Complementary Skills"
+    proficiency_level: "B1"
+    category: "Applied"
+    bloom_level: "Apply"
+    digcomp_area: "Digital Content Creation"
+    measurable_at_this_level: "Student can design skills that work together by sharing references or building on each other's outputs"
+
+  - name: "Using Bundled Resources Across Skills"
+    proficiency_level: "B1"
     category: "Technical"
     bloom_level: "Apply"
     digcomp_area: "Problem-Solving"
-    measurable_at_this_level: "Student can design skill dependency graphs without circular dependencies, declare dependencies in YAML, and understand how skills reference each other for reuse"
-
-  - name: "Composition Patterns and Data Flow"
-    proficiency_level: "B2"
-    category: "Technical"
-    bloom_level: "Apply"
-    digcomp_area: "Problem-Solving"
-    measurable_at_this_level: "Student can compose sequential, parallel, and conditional skill workflows; understand data contracts between skills; validate data flow through composition"
-
-  - name: "Error Recovery in Skill Composition"
-    proficiency_level: "B2"
-    category: "Technical"
-    bloom_level: "Analyze"
-    digcomp_area: "Problem-Solving"
-    measurable_at_this_level: "Student can design error propagation strategies that balance robustness with clarity; implement fallback and retry logic for composed workflows"
+    measurable_at_this_level: "Student can organize scripts, references, and assets so multiple skills can leverage shared resources"
 
 learning_objectives:
-  - objective: "Design skill dependency graphs that avoid circular dependencies and enable modular skill reuse across projects"
-    proficiency_level: "B2"
-    bloom_level: "Apply"
-    assessment_method: "Dependency graph design exercise; validation of acyclic structure"
+  - objective: "Explain how Claude orchestrates multiple skills to complete complex tasks"
+    proficiency_level: "B1"
+    bloom_level: "Understand"
+    assessment_method: "Student describes the skill selection and invocation flow for a multi-step task"
 
-  - objective: "Compose multiple skills into coordinated workflows using sequential, parallel, and conditional patterns"
-    proficiency_level: "B2"
+  - objective: "Design complementary skills that work together effectively"
+    proficiency_level: "B1"
     bloom_level: "Apply"
-    assessment_method: "Skill composition exercise; data flow diagram validation"
+    assessment_method: "Student creates two skills that complement each other for a workflow"
 
-  - objective: "Implement skill-to-skill communication patterns that validate data contracts and handle transformation between skill outputs and inputs"
-    proficiency_level: "B2"
+  - objective: "Organize bundled resources for reuse across skill ecosystems"
+    proficiency_level: "B1"
     bloom_level: "Apply"
-    assessment_method: "Data contract definition; integration testing with mock skills"
-
-  - objective: "Test skill composition for integration issues including error propagation, partial failure recovery, and state management"
-    proficiency_level: "B2"
-    bloom_level: "Analyze"
-    assessment_method: "Testing strategy design; validation of error scenarios"
+    assessment_method: "Student structures references and scripts for multi-skill scenarios"
 
 cognitive_load:
-  new_concepts: 8
-  assessment: "8 concepts (dependency declaration, composition patterns, data flow, error propagation, testing, versioning, circular detection, capstone integration) within B2 limit (7-10 concepts) ✓"
+  new_concepts: 4
+  assessment: "4 concepts (orchestration flow, complementary design, shared resources, workflow patterns) within B1 limit (7-10 concepts)"
 
 differentiation:
-  extension_for_advanced: "Design a three-skill pipeline where skill C depends on both A and B (parallel then sequential). Implement version constraints (skill A requires skill B >= 1.2). Design error recovery that rolls back partial changes when a composed workflow fails mid-execution."
-  remedial_for_struggling: "Start with a two-skill composition: data-fetch-skill → data-process-skill. Focus on one composition pattern (sequential). Practice declaring dependencies in YAML. Test with one error scenario (first skill fails)."
+  extension_for_advanced: "Design a three-skill ecosystem where each skill builds on the previous one's output. Create a shared references/ directory that multiple skills read from."
+  remedial_for_struggling: "Focus on a two-skill workflow first. Understand how one skill's output becomes context for the next skill invocation."
 ---
 
-# Skill Composition & Dependencies
+# Skill Composition & Multi-Skill Workflows
 
-You've designed individual execution skills in Lesson 1. But real-world problems rarely fit a single skill. Consider this scenario:
+You've created individual skills in Lesson 1. Each skill has its SKILL.md with name and description, optional scripts, references, and assets. But real-world tasks rarely fit a single skill.
 
-Your data pipeline needs to:
-1. **Fetch data** from an API (via one skill)
-2. **Transform the data** (via another skill)
-3. **Validate results** against acceptance criteria (via a third skill)
+Consider this scenario: A developer asks Claude to "review this PR and create a summary for the team meeting." Two distinct capabilities are needed:
+1. **Code review** (analyze changes, identify issues)
+2. **Meeting summary** (format findings for presentation)
 
-Each skill works individually. But when you combine them, new challenges emerge: What happens if step 2 receives malformed data from step 1? How do they share context? When should the pipeline stop vs retry? How do you prevent skill A from depending on skill B which depends on skill A (circular dependency)?
+These could be one large skill, but that violates the single-responsibility principle. Better: two complementary skills that Claude invokes in sequence based on the task.
 
-This is skill composition—the art and science of making skills work together reliably.
+This lesson explores how skills work together—not through formal dependency declarations, but through intelligent orchestration and thoughtful design.
 
-## From Individual Skills to Skill Ecosystems
+## How Claude Orchestrates Multiple Skills
 
-Lesson 1 taught you to design personas, questions, and principles that make a single skill autonomous. This lesson teaches the next level: designing systems of skills that compose into increasingly sophisticated workflows.
+Skills don't formally depend on each other. Instead, **Claude is the orchestrator**. When you give Claude a complex task, it:
 
-**Why composition matters for Digital FTE production:**
+1. **Reads available skill descriptions** (the `description:` in each SKILL.md frontmatter)
+2. **Matches task requirements to skill capabilities**
+3. **Invokes skills in appropriate sequence**
+4. **Uses output from one skill as context for the next**
 
-When you build a shippable agent (Digital FTE), you're not building from scratch—you're composing existing skills into a coordinated system. The difference between a mediocre agent and a production-grade one often comes down to how well skills integrate. Poor composition means:
-
-- **Cascading failures**: One skill fails, the entire pipeline breaks
-- **Silent data corruption**: Skill A's output doesn't match Skill B's expectations
-- **Maintenance nightmares**: Changing Skill A breaks dependent Skill C
-- **Wasted capability**: 70% of Skill B's functionality unused because data flows wrong
-
-Smart composition means reliability, reusability, and rapid scaling.
-
-## Pattern 1: Dependency Declaration (Preventing Circular Dependencies)
-
-Before writing any code, you declare: "This skill depends on that skill." This declaration has three critical functions:
-
-1. **Makes dependencies visible**: Future developers (including you) see the whole ecosystem
-2. **Prevents circular dependencies**: Declares that Skill A → B → C, never A → B → A
-3. **Enables versioning**: Allows skills to evolve independently when dependencies are clear
-
-### The Spec-First Example: Data Processing Pipeline
-
-Let's look at a specification for a skill that composes three sub-skills:
-
-**Specification: Data Processing Pipeline Skill**
-
-```yaml
-# Skill intent
-name: "data-processing-pipeline-skill"
-description: "Orchestrates a three-step data pipeline: fetch raw data, transform, validate results"
-
-# Explicitly declare what this skill depends on
-dependencies:
-  - skill: "data-fetch-skill"
-    version: ">=1.0"
-    purpose: "Retrieve raw data from source"
-
-  - skill: "transform-skill"
-    version: ">=2.1"
-    purpose: "Apply business logic transformations"
-
-  - skill: "validate-skill"
-    version: ">=1.5"
-    purpose: "Verify output meets acceptance criteria"
-
-# How data flows between dependencies
-data_contracts:
-  fetch_to_transform:
-    source: "data-fetch-skill.output.records"
-    target: "transform-skill.input.data"
-    validation: "Must be list of dicts with 'id' and 'value' keys"
-
-  transform_to_validate:
-    source: "transform-skill.output.results"
-    target: "validate-skill.input.records"
-    validation: "Must include 'status' and 'processed_at' fields"
+```
+┌─────────────────────────────────────────┐
+│              Claude (Orchestrator)       │
+│                                          │
+│  Task: "Review PR and summarize"         │
+│                                          │
+│  1. Reads skill descriptions             │
+│  2. Matches: code-review + meeting-notes │
+│  3. Invokes code-review skill            │
+│  4. Uses review output as context        │
+│  5. Invokes meeting-notes skill          │
+│  6. Returns combined result              │
+└─────────────────────────────────────────┘
+         │                    │
+         ▼                    ▼
+┌─────────────────┐  ┌─────────────────┐
+│  code-review/   │  │  meeting-notes/ │
+│  SKILL.md       │  │  SKILL.md       │
+│  references/    │  │  assets/        │
+└─────────────────┘  └─────────────────┘
 ```
 
-This specification declares:
+**Key insight**: Skills are independent units. Claude connects them based on task context. There's no formal `dependencies:` section—the orchestration happens at runtime based on what the task needs.
 
-- **What dependencies exist**: Three skills this pipeline requires
-- **Version compatibility**: Versions that work together (not "I'll break if dependency updates")
-- **Data contracts**: What format each skill expects vs produces
+## The Skill Description Is Your Contract
 
-**What this prevents:**
+Since Claude selects skills based on descriptions, **your description is your API**. Good descriptions make composition work; vague descriptions cause skill selection failures.
 
-- Circular dependencies (data-fetch depends on data-transform which depends on... data-fetch — invalid!)
-- Silent data mismatches (transform-skill receives data without required fields)
-- Brittle version coupling (skill breaks when dependency updates)
+### Description Anti-Patterns
 
-### How to Declare Dependencies in YAML
+```yaml
+# BAD: Too vague
+name: helper-skill
+description: This skill helps with various tasks.
 
-In your skill's `SKILL.md` file, add a `dependencies` section:
+# BAD: Too narrow
+name: python-formatter
+description: Formats Python code using black with 88-char lines.
+
+# BAD: Overlapping with other skills
+name: code-analyzer
+description: Reviews code for issues and problems.
+# (Overlaps with code-review skill)
+```
+
+### Description Patterns That Enable Composition
+
+```yaml
+# GOOD: Clear capability, clear trigger
+name: code-review
+description: |
+  Analyzes code changes for issues, security vulnerabilities, and style violations.
+  Use this skill when reviewing pull requests, examining diffs, or auditing code quality.
+  Returns structured findings with severity levels and suggested fixes.
+
+# GOOD: Complementary to code-review
+name: meeting-notes
+description: |
+  Formats technical findings into concise meeting summaries.
+  Use this skill when preparing updates for standups, sprint reviews, or team syncs.
+  Takes detailed analysis and produces bullet-point summaries appropriate for non-technical audiences.
+```
+
+With these descriptions, when a user says "review this PR and prepare notes for the team meeting," Claude knows:
+1. `code-review` handles the analysis phase
+2. `meeting-notes` handles the formatting phase
+3. The output of code-review feeds into meeting-notes
+
+## Designing Complementary Skills
+
+Complementary skills are designed to work together without formal dependencies. They complement each other through:
+
+### Pattern 1: Output → Input Flow
+
+One skill produces output that naturally feeds another skill's input.
+
+```
+┌─────────────────────┐     ┌─────────────────────┐
+│   data-fetcher      │────▶│   data-analyzer     │
+│                     │     │                     │
+│ Output: Raw data    │     │ Input: Expects data │
+│ in JSON format      │     │ in JSON format      │
+└─────────────────────┘     └─────────────────────┘
+```
+
+The skills don't reference each other. They're designed with compatible interfaces—data-fetcher outputs JSON, data-analyzer expects JSON. Claude connects them when the task requires both.
+
+### Pattern 2: Shared Domain Knowledge
+
+Multiple skills reference the same domain documentation.
+
+```
+your-skills/
+├── company-api/
+│   ├── SKILL.md
+│   └── references/
+│       └── api-schema.md        ← Shared reference
+│
+├── api-tester/
+│   ├── SKILL.md
+│   └── references/
+│       └── api-schema.md        ← Same schema
+│
+└── api-docs-generator/
+    ├── SKILL.md
+    └── references/
+        └── api-schema.md        ← Same schema
+```
+
+Each skill has its own copy of the schema. When the schema changes, you update all copies. This is intentional—skills remain self-contained and portable.
+
+### Pattern 3: Progressive Refinement
+
+Skills build on each other's work without formal chaining.
+
+```yaml
+# Skill 1: draft-generator
+name: draft-generator
+description: |
+  Creates initial drafts from requirements or specifications.
+  Output is a working first draft that may need refinement.
+
+# Skill 2: content-refiner
+name: content-refiner
+description: |
+  Improves existing content for clarity, accuracy, and style.
+  Takes rough drafts and produces polished versions.
+
+# Skill 3: technical-reviewer
+name: technical-reviewer
+description: |
+  Reviews content for technical accuracy and completeness.
+  Identifies errors, gaps, and improvements needed.
+```
+
+A user could invoke these as: "Draft a blog post about our new feature, refine it, then review for technical accuracy." Claude orchestrates all three in sequence.
+
+## Bundled Resources in Multi-Skill Contexts
+
+Each skill can have bundled resources:
+
+```
+skill-name/
+├── SKILL.md
+├── scripts/          # Executable code
+├── references/       # Documentation loaded on demand
+└── assets/           # Files used in output
+```
+
+### When to Share vs. Duplicate Resources
+
+**Duplicate when**: The resource is small and the skill needs to be portable.
+
+```
+# Each skill has its own copy
+code-review/
+└── references/
+    └── style-guide.md
+
+code-formatter/
+└── references/
+    └── style-guide.md
+```
+
+**Consider central reference when**: Multiple skills need identical large resources and you control the deployment.
+
+```
+# Central knowledge base that skills reference
+company-knowledge/
+├── schemas/
+├── policies/
+└── guidelines/
+
+# Skills point to central location in their instructions
+code-review/
+└── SKILL.md  # Instructions: "See company-knowledge/policies/ for guidelines"
+```
+
+**Trade-off**: Central references reduce duplication but make skills less portable. Duplicated resources increase maintenance but skills remain self-contained.
+
+## Real-World Composition Example
+
+Let's trace through a realistic multi-skill workflow:
+
+**User request**: "Set up a new Python project with testing, then generate API documentation"
+
+**Skills available**:
+1. `python-project-setup` - Initializes Python projects with standard structure
+2. `test-framework-config` - Configures pytest with fixtures and coverage
+3. `api-docs-generator` - Creates OpenAPI documentation from code
+
+**Claude's orchestration**:
+
+1. Reads skill descriptions, identifies three relevant skills
+2. Invokes `python-project-setup`:
+   - Creates project structure
+   - Returns: Directory layout, pyproject.toml created
+3. Uses setup output as context, invokes `test-framework-config`:
+   - Reads existing pyproject.toml
+   - Adds pytest configuration
+   - Returns: Test structure, conftest.py created
+4. Uses project context, invokes `api-docs-generator`:
+   - Scans for API endpoints
+   - Generates OpenAPI spec
+   - Returns: docs/openapi.yaml created
+
+Each skill operates independently. Claude maintains context between invocations. No skill formally depends on another—they're connected by the orchestrator based on task requirements.
+
+## Error Handling in Multi-Skill Workflows
+
+When a skill fails mid-workflow, Claude decides how to proceed:
+
+**Scenario**: `data-fetcher` fails with network error
+
+**Claude's options**:
+1. **Retry** - Attempt the skill again
+2. **Skip** - Continue without that skill's output (if possible)
+3. **Halt** - Stop the workflow and report the failure
+4. **Adapt** - Use a different skill or approach
+
+The orchestrator (Claude) makes this decision based on:
+- Task requirements (is the failed skill critical?)
+- Skill descriptions (is there an alternative?)
+- User context (what did they actually need?)
+
+This is different from traditional dependency systems where failures propagate automatically. Here, intelligence guides recovery.
+
+## Hands-On Exercise: Design Complementary Skills
+
+Design two complementary skills for a content workflow:
+
+**Task**: Help users write and publish blog posts
+
+**Skill 1**: `blog-draft-writer`
+- What does it do?
+- What output format does it produce?
+- When should Claude invoke it?
+
+**Skill 2**: `blog-publisher`
+- What does it do?
+- What input does it expect?
+- When should Claude invoke it?
+
+**Write the SKILL.md frontmatter** for each:
 
 ```yaml
 ---
-name: "data-processing-pipeline-skill"
-version: "1.0"
-
-# Declare what this skill depends on
-dependencies:
-  - skill: "data-fetch-skill"
-    version: ">=1.0"  # This skill requires data-fetch at version 1.0 or higher
-    purpose: "Retrieve data from API"
-
-# Declare the data contracts between skills
-data_contracts:
-  fetch_output_to_transform_input:
-    source: "data-fetch-skill output"
-    target: "transform-skill input"
-    schema: "Must be list[dict] with keys: id, value, timestamp"
+name: blog-draft-writer
+description: |
+  [Your description here - make it clear when this skill applies]
 ---
 ```
 
-**Why versioning matters:**
-
-Imagine `data-fetch-skill` updates from version 1.0 to 2.0. The new version adds an optional `retry_count` field. If your pipeline isn't version-constrained, it might work fine. But what if the update changes the output format entirely? Your pipeline breaks silently.
-
-With explicit version constraints (`>=1.0, <2.0`), you declare "I've tested with version 1.x and that's what I need." When version 2.0 releases, you consciously update and re-test before using it.
-
-### Detecting Circular Dependencies (What to Avoid)
-
-A circular dependency looks like this:
-
-```
-❌ CIRCULAR (INVALID):
-Skill A depends on Skill B
-Skill B depends on Skill C
-Skill C depends on Skill A  ← Loop! This is a bug.
-```
-
-This is invalid because you can't initialize the skills—Skill A needs Skill B, which needs Skill C, which needs Skill A.
-
-**Valid acyclic pattern:**
-
-```
-✓ ACYCLIC (VALID):
-Skill A (data-fetch)
-  ↓ depends on nothing
-Skill B (transform)
-  ↓ depends on A only
-Skill C (validate)
-  ↓ depends on B only
-```
-
-You can initialize A first, then B (which has A), then C (which has B). No loops.
-
-## Pattern 2: Composition Patterns (Sequential, Parallel, Conditional)
-
-Now that dependencies are declared, how do skills actually execute together?
-
-### Sequential Composition: One Skill Feeds the Next
-
-**Pattern**: Skill A completes → output becomes input to Skill B → Skill B completes → output to Skill C
-
-This is the simplest and most common pattern.
-
-```python
-# Pseudocode showing sequential composition
-result_a = fetch_skill.execute(source="API")
-# Skill A outputs: {"records": [{"id": 1, "value": 100}, ...]}
-
-result_b = transform_skill.execute(data=result_a["records"])
-# Skill B outputs: {"transformed": [{"id": 1, "value": 200}, ...]}
-
-result_c = validate_skill.execute(records=result_b["transformed"])
-# Skill C outputs: {"valid": true, "summary": "100 records processed"}
-```
-
-**When to use**: Most data pipelines follow this pattern. Fetch → Process → Validate.
-
-### Parallel Composition: Multiple Skills Run Simultaneously
-
-**Pattern**: Skill A and Skill B run at the same time (if they don't depend on each other), their outputs combine later
-
-```python
-# Pseudocode showing parallel composition
-# Both run simultaneously
-result_fetch_csv = fetch_csv_skill.execute(source="file.csv")
-result_fetch_api = fetch_api_skill.execute(source="https://api.example.com")
-
-# Wait for both to complete, then combine results
-combined = merge_skill.execute(
-    csv_data=result_fetch_csv["records"],
-    api_data=result_fetch_api["records"]
-)
-```
-
-**When to use**: When you need data from multiple sources and sources are independent (CSV file AND API both have data you need).
-
-### Conditional Composition: Choose Skills Based on Context
-
-**Pattern**: If condition X, run Skill A; else run Skill B
-
-```python
-# Pseudocode showing conditional composition
-result_fetch = fetch_skill.execute(source="data_source")
-
-# Choice: which skill comes next depends on data
-if result_fetch["format"] == "csv":
-    result_process = csv_processor_skill.execute(data=result_fetch["raw"])
-else:
-    result_process = json_processor_skill.execute(data=result_fetch["raw"])
-
-result_validate = validate_skill.execute(records=result_process["results"])
-```
-
-**When to use**: When the next step depends on what the previous step found (e.g., "if data is CSV, use CSV parser; if JSON, use JSON parser").
-
-## Pattern 3: Data Flow and Contracts
-
-The most common bug in skill composition happens at the boundaries: Skill A produces JSON with fields `{id, name}`. Skill B expects `{user_id, full_name}`. They don't match. The pipeline breaks silently (data corruption) or loudly (error).
-
-### Data Contracts: Preventing Mismatches
-
-A **data contract** specifies: "When Skill A finishes, its output will have this structure. Skill B expects this structure for input."
-
 ```yaml
-# In the pipeline skill's SKILL.md
-data_contracts:
-  # Contract between fetch and transform
-  fetch_to_transform:
-    source: "data-fetch-skill"
-    source_field: "output.records"
-    target: "transform-skill"
-    target_field: "input.data"
-
-    # Explicitly define what format must be passed
-    schema: |
-      List of dictionaries:
-      [
-        {
-          "id": string,
-          "value": number,
-          "timestamp": ISO8601 datetime
-        },
-        ...
-      ]
-
-    # Transformation rule if format doesn't match exactly
-    transform: "extract records list from fetch output"
+---
+name: blog-publisher
+description: |
+  [Your description here - make it complementary to the draft writer]
+---
 ```
 
-### Testing Data Flow
+**Test your design**: Would Claude correctly invoke both skills if a user said "Write a blog post about our product launch and publish it to our website"?
 
-Before assuming data flows correctly, test it:
+## Try With AI: Collaborative Skill Ecosystem Design
 
-```python
-# Test that skills' output/input contracts align
-
-def test_fetch_to_transform_contract():
-    """Verify fetch output matches transform input expectations"""
-
-    # Step 1: Run fetch skill
-    fetch_result = fetch_skill.execute(source="test_source")
-
-    # Step 2: Verify fetch output has required fields
-    assert "records" in fetch_result, "Fetch missing 'records' field"
-    assert isinstance(fetch_result["records"], list), "Records must be list"
-
-    for record in fetch_result["records"]:
-        assert "id" in record, "Record missing 'id' field"
-        assert "value" in record, "Record missing 'value' field"
-
-    # Step 3: Pass fetch output to transform
-    transform_result = transform_skill.execute(data=fetch_result["records"])
-
-    # Step 4: Verify transform received and processed data
-    assert "transformed" in transform_result
-    assert len(transform_result["transformed"]) == len(fetch_result["records"])
-```
-
-This test proves that Skill A's output actually works as Skill B's input.
-
-## Pattern 4: Error Propagation and Recovery
-
-When Skill A succeeds but Skill B fails, what should happen?
-
-**Three strategies, each with tradeoffs:**
-
-### Strategy 1: Fail Immediately (Simple, Breaks Early)
-
-```python
-# If any skill fails, stop the entire pipeline
-
-result_a = fetch_skill.execute(source="API")  # Succeeds
-
-result_b = transform_skill.execute(data=result_a["records"])  # FAILS
-
-# Pipeline stops here. User sees: "Transform skill failed: Invalid data"
-# Advantage: Clear error, easy to debug
-# Disadvantage: No partial results, might waste work already done
-```
-
-### Strategy 2: Log and Continue (Optimistic, Loses Data)
-
-```python
-# If skill fails, log it and keep going
-
-result_a = fetch_skill.execute(source="API")  # Succeeds
-results = [result_a]
-
-result_b = transform_skill.execute(data=result_a["records"])  # FAILS
-results.append({"error": "Transform failed", "reason": str(error)})
-
-result_c = validate_skill.execute(records=[])  # Validates nothing!
-results.append(result_c)
-
-# Pipeline finishes but with incomplete data. Subtle bugs.
-# Advantage: Doesn't crash
-# Disadvantage: Data corruption, silent failures
-```
-
-### Strategy 3: Rollback on Partial Failure (Safe, Explicit)
-
-```python
-# If any skill fails, undo work already done
-
-try:
-    result_a = fetch_skill.execute(source="API")  # Succeeds
-    checkpoint_a = save_state(result_a)  # Save intermediate state
-
-    result_b = transform_skill.execute(data=result_a["records"])  # FAILS
-
-except SkillError as e:
-    # Rollback: Delete any data written, restore previous state
-    rollback_state(checkpoint_a)
-
-    # Then either retry with different parameters or fail cleanly
-    return {
-        "status": "failed",
-        "last_successful_step": "fetch",
-        "error": str(e),
-        "recoverable": True  # User can retry
-    }
-```
-
-**The right strategy depends on your domain:**
-
-- **Financial transactions**: Strategy 3 (rollback) — never partial updates
-- **Data analysis**: Strategy 1 (fail immediately) — clear error, retry with different approach
-- **Log aggregation**: Strategy 2 (continue) — collect what you can, report gaps
-
-The key: **Choose explicitly, document it, test all three branches** (success, failure with recovery, irrecoverable failure).
-
-## Bringing It Together: Composing Skills With Intelligence
-
-Now let's see how a full composition works, demonstrating the iterative refinement process where intelligence emerges from collaborative effort.
-
-### Initial Composition: Hardcoded References
-
-A developer writes their first version:
-
-```python
-# FIRST ATTEMPT: Hardcoded skill references (rigid, breaks easily)
-
-class DataPipelineSkill:
-    def execute(self):
-        # Hard-coded to use specific skill versions
-        fetch_skill = DataFetchSkill(version="1.0")
-        transform_skill = TransformSkill(version="2.1")
-        validate_skill = ValidateSkill(version="1.5")
-
-        # Execute in sequence
-        fetch_result = fetch_skill.execute(source="api.example.com")
-        transform_result = transform_skill.execute(data=fetch_result["records"])
-        validate_result = validate_skill.execute(records=transform_result["transformed"])
-
-        return validate_result
-```
-
-**Problems with this version:**
-- Hard-coded skill names (can't reuse with different skills)
-- Hard-coded versions (breaks when dependencies update)
-- No error handling (one skill fails, whole pipeline fails)
-- No data contract validation (silent corruption possible)
-
-### Refined Composition: Flexible Dependencies & Error Recovery
-
-Through collaborative iteration, the design improves:
-
-**AI Suggests**: "Here's a pattern used in production systems. Instead of hardcoding skills, accept them as parameters. This lets the same pipeline skill work with different dependencies."
-
-**Developer Responds**: "Good, but we also need error recovery. What if the fetch succeeds but transform fails? How should we handle that?"
-
-**AI Refines**: "Add checkpoints between skills. If a skill fails, log which step failed and offer rollback. For your domain, rollback makes sense—don't process partial data."
-
-**Iteration Result:**
-
-```python
-# REFINED VERSION: Parameterized skills, error recovery, data contracts
-
-class DataPipelineSkill:
-    def __init__(self, fetch_skill=None, transform_skill=None, validate_skill=None):
-        # Accept skill dependencies as parameters (flexible)
-        self.fetch_skill = fetch_skill or DataFetchSkill()
-        self.transform_skill = transform_skill or TransformSkill()
-        self.validate_skill = validate_skill or ValidateSkill()
-
-        # Track checkpoints for rollback
-        self.checkpoints = {}
-
-    def execute(self, source, validation_rules=None):
-        try:
-            # Step 1: Fetch
-            fetch_result = self.fetch_skill.execute(source=source)
-            self.checkpoints["fetch"] = fetch_result
-
-            # Validate fetch output has required fields
-            self._validate_data_contract(
-                fetch_result,
-                expected_schema={"records": list}
-            )
-
-            # Step 2: Transform
-            transform_result = self.transform_skill.execute(
-                data=fetch_result["records"]
-            )
-            self.checkpoints["transform"] = transform_result
-
-            # Validate transform output
-            self._validate_data_contract(
-                transform_result,
-                expected_schema={"transformed": list}
-            )
-
-            # Step 3: Validate
-            validate_result = self.validate_skill.execute(
-                records=transform_result["transformed"],
-                rules=validation_rules
-            )
-
-            return {
-                "status": "success",
-                "result": validate_result,
-                "steps_completed": ["fetch", "transform", "validate"]
-            }
-
-        except Exception as e:
-            # Rollback: Report which step failed
-            return {
-                "status": "failed",
-                "failed_step": self._identify_failed_step(),
-                "error": str(e),
-                "recovered": False,
-                "last_successful": list(self.checkpoints.keys())[-1]
-            }
-
-    def _validate_data_contract(self, data, expected_schema):
-        """Ensure data matches contract before passing to next skill"""
-        for key, expected_type in expected_schema.items():
-            if key not in data:
-                raise ValueError(f"Data missing required field: {key}")
-            if not isinstance(data[key], expected_type):
-                raise TypeError(
-                    f"Field {key} has wrong type. "
-                    f"Expected {expected_type}, got {type(data[key])}"
-                )
-```
-
-**What improved through iteration:**
-
-1. **AI taught flexibility**: Parameterized dependencies enable reuse
-2. **Developer taught constraints**: Error recovery with rollback necessary for their domain
-3. **Convergence**: Composition pattern emerged that balances flexibility with safety
-
-## Hands-On Exercise: Compose Existing Skills
-
-Now it's your turn to compose skills. You'll create a simple pipeline that combines two existing skills.
-
-### Your Task
-
-Design (don't implement yet) a skill composition that combines:
-
-- **Skill A**: `python-api-fetcher` (retrieves Python library documentation via API)
-- **Skill B**: `documentation-summarizer` (extracts key concepts from documentation)
-
-**Required outputs:**
-
-1. **Dependency declaration** (YAML)
-   - List the two dependencies
-   - Specify versions (use >=1.0)
-   - Declare purpose of each dependency
-
-2. **Data contracts**
-   - What does Skill A output? (structure, fields)
-   - What does Skill B expect as input?
-   - How does Skill A's output become Skill B's input?
-
-3. **Error handling strategy**
-   - What should happen if Skill A (fetch) fails? (fail immediately, retry, fallback?)
-   - What should happen if Skill B (summarize) fails?
-   - Should there be rollback or just logging?
-
-4. **Composition pattern**
-   - Is this sequential, parallel, or conditional?
-   - Why that pattern?
-
-## Try With AI: Collaborative Composition Design
-
-In this section, you'll work with AI to design a real-world skill composition. The collaboration will show how constraints you bring (domain knowledge) combine with patterns AI suggests (technical expertise) to create something better than either starting point.
-
-### Part 1: Initial Composition Request
-
-Ask AI to help design a skill composition for your domain. Share your constraints:
+### Prompt 1: Analyze Skill Descriptions
 
 ```
-I need to build a data-processing pipeline skill that:
-1. Fetches raw data from a CSV file
-2. Transforms the data (adds calculated fields, normalizes dates)
-3. Validates output against business rules
-4. Stores results in a database
+I have these two skills:
 
-What skill composition pattern would work for this?
+Skill 1 - code-analyzer:
+"Analyzes code for bugs and security issues"
+
+Skill 2 - code-fixer:
+"Fixes code issues and applies patches"
+
+A user says: "Review my code and fix any problems you find."
+
+How would you orchestrate these skills? What's missing from the
+descriptions that might cause problems?
 ```
 
-**What you're learning**: You're seeing what composition patterns AI suggests when given a clear specification.
+**What you're learning**: How description clarity affects skill selection and composition.
 
-### Part 2: Critical Evaluation
-
-Review AI's suggestion. Ask yourself:
-
-- Does the pattern match my constraints? (If my data needs real-time processing, is the suggested pattern too batch-oriented?)
-- What assumptions did AI make? (Does it assume small datasets? Does it assume errors are recoverable?)
-- What did AI miss? (Database connection pooling? Partial failure recovery?)
-
-Document your evaluation:
+### Prompt 2: Design a Three-Skill Workflow
 
 ```
-Pattern AI suggested: Sequential composition with rollback
-What matches my needs: Clear error recovery, rollback prevents partial updates
-What assumption I question: AI assumes rollback means deleting written data.
-  But I want to preserve fetch/transform steps, only skip validation if it fails
-What's missing: Error logging strategy (where do failure details go?)
+I need to build skills for this workflow:
+1. Research a topic (find relevant sources)
+2. Synthesize findings (combine into coherent analysis)
+3. Format for presentation (create slides or document)
+
+Design the SKILL.md frontmatter (name + description) for each skill.
+Make sure the descriptions clearly indicate when each should be invoked
+and what output format each produces.
 ```
 
-### Part 3: Constraint Teaching
+**What you're learning**: Designing skill descriptions that enable natural composition.
 
-Now tell AI your specific constraints. This teaches AI what your domain actually needs:
+### Prompt 3: Troubleshoot Composition Failure
 
 ```
-Let me clarify a few things about my constraints:
+My skills aren't being invoked correctly. When I say "analyze this data
+and create a report," Claude only invokes the report-creator skill and
+skips the data-analyzer.
 
-1. If fetch fails: Retry up to 3 times with exponential backoff.
-   If all retries fail, stop (this is critical data, we can't proceed with missing data)
+Here are my skill descriptions:
 
-2. If transform fails: Log the failure and continue.
-   We'll manually fix malformed records later
+data-analyzer: "Analyzes data"
+report-creator: "Creates reports from data analysis"
 
-3. If validate fails: Reject the batch but keep the transformed data.
-   We want to know what passed validation partially
-
-So error handling isn't uniform—each step has different failure modes.
+Why might Claude skip the data-analyzer? How should I fix these
+descriptions?
 ```
 
-**What emerged**: AI now understands that your domain needs step-specific error handling, not generic rollback. This is domain knowledge you brought that AI wouldn't know without you teaching it.
-
-### Part 4: Refinement Through Testing
-
-AI and you iterate on the design:
-
-**AI suggests**: "Based on your constraints, here's the updated composition:
-
-```yaml
-error_strategies:
-  fetch:
-    on_failure: "retry 3 times, exponential backoff"
-    final_action: "fail_entire_pipeline"
-
-  transform:
-    on_failure: "log and continue"
-    final_action: "mark_partial_batch"
-
-  validate:
-    on_failure: "skip but preserve"
-    final_action: "return_unvalidated_results"
-```
-
-**You respond**: "Good structure, but there's one thing: when fetch retries, it might be a temporary network issue OR a malformed URL. Should we distinguish?"
-
-**AI adapts**: "Yes. Check error type:
-- Network error → retry
-- Malformed URL → fail immediately (retrying won't help)
-- Authentication error → log and escalate to human
-
-This makes retry logic smarter."
-
-**What emerged**: An error handling strategy that neither you nor AI had at the start. You brought domain context (some errors are recoverable, some aren't). AI brought the pattern (conditional error handling based on error type). Together: production-grade robustness.
-
-### Part 5: Final Validation
-
-Compare your original composition request to the refined design:
-
-- What changed from first attempt to final version?
-- What constraints changed your thinking?
-- What patterns did AI suggest that you hadn't considered?
-- Is the result better than what either of you would have designed alone?
-
-This reflection locks in the learning.
+**What you're learning**: Debugging skill selection by improving descriptions.
 
 ---
 
-**Takeaway**: Skill composition isn't about writing perfect code on the first try. It's about making dependencies visible, testing data flow between skills, and designing error recovery that matches your domain's reality. When you get this right, the same composition skill can work with different skill implementations (different fetchers, different processors, same pipeline logic).
+**Takeaway**: Skill composition happens through intelligent orchestration, not formal dependencies. Claude reads descriptions, matches capabilities to tasks, and invokes skills in appropriate sequence. Your job is designing skills with clear descriptions and compatible interfaces so the orchestrator can connect them effectively.
 
-In Lesson 3, you'll see how existing skills like `fetching-library-docs` handle composition patterns. You'll reverse-engineer production patterns so you understand what makes composition robust.
-
+In Lesson 3, you'll explore existing skills like `fetching-library-docs` to see these patterns in action and understand what makes production skills robust.
