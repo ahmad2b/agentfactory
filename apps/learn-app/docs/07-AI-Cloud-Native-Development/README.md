@@ -44,20 +44,19 @@ Decouple services with asynchronous messaging.
 
 - **Event-Driven Architecture with Kafka** — Core concepts (topics, partitions, consumers), event streaming patterns, and agent communication
 
-### Dapr Framework (Chapters 53-54)
+### Dapr Fundamentals (Chapter 53)
 
 Apply Dapr's distributed runtime for production agent patterns.
 
 - **Dapr Fundamentals** — Sidecar architecture, pub/sub, state management, service invocation, and secrets
-- **Dapr Actors & Workflows** — Virtual actors for agent state, durable workflows, and long-running orchestration
 
-### Automation (Chapter 55)
+### Automation (Chapter 54)
 
 Automate the path from code to production.
 
 - **CI/CD Pipelines & GitOps with ArgoCD** — GitHub Actions for build/test, ArgoCD for declarative K8s deployments, and GitOps workflows
 
-### Operations Excellence (Chapters 56-59)
+### Operations Excellence (Chapters 55-58)
 
 Operate agent systems reliably and securely at scale.
 
@@ -66,7 +65,13 @@ Operate agent systems reliably and securely at scale.
 - **Security & Governance** — Authentication, authorization, secrets management, safety guardrails, and compliance
 - **Infrastructure-as-Code** — Terraform/Pulumi for provisioning, cloud K8s deployment (DOKS/GKE/AKS), and reproducible environments
 
-**Why this sequence?** You can't orchestrate what you can't containerize. You can't automate what you haven't deployed manually. Each stage builds capability: Containers (portable agents) → Orchestration (scaled agents) → Events (decoupled agents) → Dapr (distributed agents) → Automation (repeatable deployments) → Operations (reliable, secure, cost-effective systems).
+### Advanced Dapr Patterns (Chapter 59)
+
+Build complex stateful agent systems with durable workflows.
+
+- **Dapr Actors & Workflows** — Virtual actors for agent state, durable workflows, and long-running orchestration
+
+**Why this sequence?** You can't orchestrate what you can't containerize. You can't automate what you haven't deployed manually. Each stage builds capability: Containers (portable agents) → Orchestration (scaled agents) → Events (decoupled agents) → Dapr basics (distributed agents) → Automation (repeatable deployments) → Operations (reliable, secure, cost-effective systems) → Advanced Dapr patterns (stateful workflows).
 
 ---
 
