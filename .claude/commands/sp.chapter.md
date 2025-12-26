@@ -30,19 +30,22 @@ $ARGUMENTS
 │                    PHASE A: SKILL RESEARCH & CREATION               │
 ├─────────────────────────────────────────────────────────────────────┤
 │                                                                     │
-│  1. Fetch official docs (Context7, DeepWiki)                       │
-│  2. Research community patterns (WebSearch)                         │
-│  3. Build programmatic skill with:                                  │
-│     ├── Persona (who is this skill?)                               │
-│     ├── Logic (decision trees, workflows)                          │
-│     ├── Context (what it needs to know)                            │
-│     ├── MCP (tool integrations)                                    │
-│     ├── Data/Knowledge (embedded expertise)                        │
-│     └── Safety & Guardrails                                        │
-│  4. Test skill on real projects                                     │
-│  5. Validate skill works                                            │
+│  1. Use EXISTING skills for research:                               │
+│     ├── researching-with-deepwiki (repo architecture)              │
+│     ├── fetching-library-docs (API patterns via Context7)          │
+│     └── WebSearch (community patterns)                              │
+│  2. Build NEW programmatic skill with:                              │
+│     ├── Persona (expert identity)                                   │
+│     ├── Logic (decision trees, workflows)                           │
+│     ├── Context (prerequisites, setup)                              │
+│     ├── MCP (tool integrations)                                     │
+│     ├── Data/Knowledge (API patterns in references/)               │
+│     └── Safety & Guardrails                                         │
+│  3. Use creating-skills to build properly                           │
+│  4. Test skill on TaskManager project                               │
+│  5. Validate and commit skill                                       │
 │                                                                     │
-│  OUTPUT: .claude/skills/[framework-name]/SKILL.md                  │
+│  OUTPUT: .claude/skills/building-with-[framework]/SKILL.md          │
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
                               ↓
@@ -72,198 +75,255 @@ From user input, extract:
 - **Chapter Number**: e.g., "Ch 34", "Ch 37"
 - **Running Example**: TaskManager Agent (from Part 6 framing)
 
-### Step A.2: Research Official Documentation
+### Step A.2: Research Using EXISTING Skills
 
-**Invoke skills in sequence:**
+**Use these skills in sequence:**
+
+#### A.2.1: Repository Architecture (researching-with-deepwiki)
 
 ```
-1. Skill: researching-with-deepwiki
-   Args: "[framework] architecture patterns examples"
+Skill: researching-with-deepwiki
 
-2. Skill: fetching-library-docs
-   Args: "[framework] official documentation via Context7"
+Questions to ask DeepWiki:
+- "Analyze the architecture of github.com/[org]/[repo]"
+- "How is the agent/tool system implemented in github.com/[org]/[repo]?"
+- "What design patterns are used in github.com/[org]/[repo]?"
+- "Show the directory structure of github.com/[org]/[repo]"
 ```
 
-**Capture from official docs:**
-- Core concepts and terminology
-- API patterns and signatures
-- Best practices from maintainers
-- Common pitfalls documented
+**Capture:**
+- Core architecture patterns
+- Key abstractions (Agent, Runner, Tool, etc.)
+- How components interact
+- Example implementations in the repo
 
-### Step A.3: Research Community Patterns
+#### A.2.2: API Documentation (fetching-library-docs)
 
-**Use WebSearch for:**
-- "[framework] real world examples"
-- "[framework] production patterns"
-- "[framework] vs alternatives comparison"
-- "[framework] common mistakes"
+```bash
+# Use the token-efficient shell pipeline
+bash .claude/skills/fetching-library-docs/scripts/fetch-docs.sh \
+  --library [framework] \
+  --topic "getting started" \
+  --verbose
 
-**Capture from community:**
-- How practitioners actually use it
-- Patterns that emerged from production
-- Edge cases and gotchas
-- Integration patterns with other tools
+bash .claude/skills/fetching-library-docs/scripts/fetch-docs.sh \
+  --library [framework] \
+  --topic "agents" \
+  --mode code
+```
 
-### Step A.4: Design the Skill Architecture
+**Capture:**
+- Official API signatures
+- Code examples from docs
+- Configuration patterns
+- Error handling patterns
 
-**The skill must include these components:**
+#### A.2.3: Community Patterns (WebSearch)
 
-```yaml
-# Skill Architecture Template
-skill-name/
+```
+WebSearch queries:
+- "[framework] production examples 2024"
+- "[framework] best practices"
+- "[framework] vs [alternative] comparison"
+- "[framework] common mistakes pitfalls"
+- "[framework] with MCP integration"
+```
+
+**Capture:**
+- Real-world usage patterns
+- Community-discovered gotchas
+- Integration patterns
+- Performance considerations
+
+### Step A.3: Build the New Skill
+
+**Use creating-skills skill:**
+
+```
+Skill: creating-skills
+
+Create a skill for [framework] with:
+1. Name: building-with-[framework]
+2. Description: "Use when building agents with [framework]..."
+3. Structure per anatomy below
+```
+
+#### Skill Structure Required
+
+```
+.claude/skills/building-with-[framework]/
 ├── SKILL.md
-│   ├── Frontmatter
-│   │   ├── name: building-with-[framework]
-│   │   └── description: "Use when building [type] with [framework]..."
+│   ├── Frontmatter (name, description)
 │   └── Body
 │       ├── ## Persona
-│       │   └── Who is this skill? Expert role definition
+│       │   └── Expert identity and voice
+│       ├── ## When to Use
+│       │   └── Triggering conditions
 │       ├── ## Core Concepts
-│       │   └── Essential understanding (from official docs)
+│       │   └── Key abstractions (from DeepWiki)
 │       ├── ## Decision Logic
-│       │   └── When to use what pattern (decision trees)
+│       │   └── When to use what pattern
 │       ├── ## Workflow
-│       │   └── Step-by-step procedures
+│       │   └── Step-by-step implementation
 │       ├── ## MCP Integration
 │       │   └── How to connect with MCP servers
 │       ├── ## Safety & Guardrails
 │       │   └── What to avoid, error handling
 │       └── ## TaskManager Example
-│           └── How to build TaskManager with this framework
+│           └── How to build TaskManager with this
 │
 ├── references/
-│   ├── api-patterns.md      # API signatures and usage
-│   ├── examples.md          # Code examples from research
-│   └── community-wisdom.md  # Patterns from practitioners
+│   ├── api-patterns.md      # From fetching-library-docs
+│   ├── architecture.md      # From researching-with-deepwiki
+│   └── community-wisdom.md  # From WebSearch
 │
-├── scripts/
-│   └── verify-[framework].py  # Test the skill works
-│
-└── assets/
-    └── templates/            # Starter templates if needed
+└── scripts/
+    └── verify.py            # Validate skill works
 ```
 
-### Step A.5: Build the Skill
+#### Skill Components Detail
 
-**Use skill-creator to build:**
+**1. Persona (WHO is this skill?)**
+```markdown
+## Persona
 
+You are a [Framework] expert with production experience.
+You understand both official patterns and community wisdom.
+You've built TaskManager-style agents multiple times.
 ```
-Skill: creating-skills
-Args: "Create skill for [framework] with research from Phase A"
+
+**2. Logic (WHEN to use what?)**
+```markdown
+## Decision Logic
+
+| Situation | Pattern | Why |
+|-----------|---------|-----|
+| Simple single-purpose | Basic Agent | Less overhead |
+| Multi-step workflow | Agent with handoffs | Clear responsibility |
+| Tool-heavy operations | MCP integration | Standard connectivity |
+| Streaming responses | SSE pattern | User experience |
 ```
 
-**Skill MUST include:**
+**3. Context (WHAT does it need?)**
+```markdown
+## Prerequisites
 
-1. **Persona** - Expert identity
-   ```markdown
-   ## Persona
-   You are a [Framework] expert who has built production systems.
-   You understand both the official patterns and community wisdom.
-   ```
+Before building, verify:
+- [ ] Python 3.11+ installed
+- [ ] API key configured: `export [FRAMEWORK]_API_KEY=...`
+- [ ] Dependencies: `uv add [framework]`
+```
 
-2. **Logic** - Decision trees
-   ```markdown
-   ## When to Use What
+**4. MCP Integration (HOW to connect?)**
+```markdown
+## MCP Integration
 
-   | Situation | Pattern | Why |
-   |-----------|---------|-----|
-   | Simple agent | Single-agent | Less overhead |
-   | Complex workflow | Multi-agent | Separation of concerns |
-   | Tool-heavy | MCP integration | Standard connectivity |
-   ```
+### Connecting to MCP Servers
 
-3. **Context** - What it needs to know
-   ```markdown
-   ## Essential Context
+[Framework] connects to MCP via:
 
-   Before building, always check:
-   - [ ] Python version compatibility
-   - [ ] Required dependencies
-   - [ ] API key configuration
-   ```
+\`\`\`python
+# Pattern from official docs
+from [framework] import Agent, MCPServerStdio
 
-4. **MCP Integration** - Tool connections
-   ```markdown
-   ## MCP Integration
+agent = Agent(
+    name="TaskManager",
+    mcp_servers=[
+        MCPServerStdio(command="uvx", args=["todo-mcp"])
+    ]
+)
+\`\`\`
+```
 
-   This framework connects to MCP via:
-   - Tool registration pattern
-   - Resource exposure pattern
-   - Prompt template pattern
-   ```
+**5. Safety & Guardrails**
+```markdown
+## Safety
 
-5. **Data/Knowledge** - Embedded expertise
-   ```markdown
-   ## References
+### NEVER
+- Expose API keys in code or logs
+- Skip error handling for API calls
+- Ignore rate limits
+- Trust user input without validation
 
-   See references/api-patterns.md for:
-   - All API signatures
-   - Common usage patterns
-   - Error handling patterns
-   ```
+### ALWAYS
+- Use environment variables for secrets
+- Wrap API calls in try/except
+- Implement exponential backoff
+- Validate and sanitize inputs
+```
 
-6. **Safety & Guardrails**
-   ```markdown
-   ## Safety
+**6. TaskManager Example**
+```markdown
+## TaskManager Implementation
 
-   NEVER:
-   - Expose API keys in code
-   - Skip error handling for API calls
-   - Ignore rate limits
+Complete example building TaskManager with [Framework]:
 
-   ALWAYS:
-   - Validate inputs before API calls
-   - Handle timeout gracefully
-   - Log errors for debugging
-   ```
+\`\`\`python
+# Full working example from research
+[Code from fetching-library-docs + community patterns]
+\`\`\`
+```
 
-### Step A.6: Test the Skill
+### Step A.4: Test the Skill
 
-**Create a test project:**
+**Create test project:**
 
 ```bash
-# Create test directory
-mkdir -p /tmp/test-[framework]
-cd /tmp/test-[framework]
-
-# Use the skill to build TaskManager
-# This validates the skill works
+mkdir -p /tmp/test-[framework]-taskmanager
+cd /tmp/test-[framework]-taskmanager
+uv init
+uv add [framework]
 ```
 
-**Test criteria:**
-- [ ] Skill triggers on relevant prompts
-- [ ] Skill provides accurate guidance
-- [ ] TaskManager example works
-- [ ] No hallucinated APIs or patterns
+**Use the skill to build TaskManager:**
 
-### Step A.7: Validate and Commit Skill
+```
+"Using the building-with-[framework] skill, create a TaskManager agent
+that can add, list, and complete tasks."
+```
+
+**Validation criteria:**
+- [ ] Skill triggers on relevant prompts
+- [ ] Provides accurate API patterns
+- [ ] TaskManager code compiles/runs
+- [ ] No hallucinated methods or classes
+
+### Step A.5: Validate and Commit
 
 ```bash
 # Validate skill structure
-python3 .claude/skills/creating-skills/scripts/verify.py .claude/skills/[framework-name]
+python3 .claude/skills/creating-skills/scripts/verify.py \
+  .claude/skills/building-with-[framework]
 
 # If valid, commit
-git add .claude/skills/[framework-name]
-git commit -m "feat(skill): add [framework] expertise skill"
+git add .claude/skills/building-with-[framework]
+git commit -m "feat(skill): add [framework] expertise skill
+
+Research sources:
+- DeepWiki: github.com/[org]/[repo]
+- Context7: [framework] docs
+- Community: [key sources]
+
+Tested on: TaskManager agent implementation"
 ```
 
 ---
 
 ## PHASE B: CHAPTER CREATION
 
-**Now with deep expertise encoded in the skill, proceed with standard workflow:**
+**Now with verified skill as knowledge source:**
 
 ### Step B.1: Specification
 
 ```
 Skill: sp.specify
-Args: "Chapter [N]: [Title] - Use .claude/skills/[framework] as knowledge source"
-```
+Args: "Chapter [N]: [Title]"
 
-**The spec should reference:**
-- The skill created in Phase A
-- TaskManager as running example
-- Auxiliary domain examples (legal, finance, healthcare)
+Include in spec:
+- Reference skill: .claude/skills/building-with-[framework]
+- Running example: TaskManager Agent
+- Auxiliary examples: Legal, Finance, Healthcare agents
+```
 
 ### Step B.2: Clarification
 
@@ -277,12 +337,12 @@ Args: [feature-name]
 ```
 Skill: sp.plan
 Args: [feature-name]
-```
 
-**Plan should leverage:**
+Plan should leverage:
 - Skill's decision logic for lesson structure
 - Skill's examples for "Try With AI" sections
 - Skill's safety notes for guardrails
+```
 
 ### Step B.4: Task Generation
 
@@ -291,14 +351,14 @@ Skill: sp.tasks
 Args: [feature-name]
 ```
 
-### Step B.5: Cross-Artifact Analysis
+### Step B.5: Analysis
 
 ```
 Skill: sp.analyze
 Args: [feature-name]
 ```
 
-### Step B.6: GitHub Issues (Optional)
+### Step B.6: GitHub Issues
 
 ```
 Skill: sp.taskstoissues
@@ -310,29 +370,25 @@ Args: [feature-name]
 ```
 Skill: sp.implement
 Args: [feature-name]
-```
 
-**During implementation:**
-- Each lesson subagent has access to the skill
-- Skill provides accurate technical details
-- No hallucination because skill is verified
+Each lesson subagent has access to:
+- The framework skill (building-with-[framework])
+- Content skills (ai-collaborate-teaching, exercise-designer)
+- Validation skills (content-evaluation-framework)
+```
 
 ### Step B.8: Validation
 
-Run validators in parallel:
-- `validation-auditor`
-- `educational-validator`
-- `factual-verifier` (facts already verified in skill)
+Run in parallel:
+- `validation-auditor` - Comprehensive quality
+- `educational-validator` - Pedagogical compliance
+- `factual-verifier` - Accuracy (easier because skill is verified)
 
-### Step B.9: Update Tasks & Close Issues
-
-After each task completes:
-1. Mark task complete in tasks.md
-2. Close corresponding GitHub issue (if created)
+### Step B.9: Close Issues
 
 ```bash
-# Close issue
-gh issue close [issue-number] --comment "Completed in [commit-hash]"
+# For each completed task
+gh issue close [issue-number] --comment "Completed in [commit]"
 ```
 
 ### Step B.10: Commit and PR
@@ -344,80 +400,97 @@ Args: [feature-name]
 
 ---
 
-## Skill Components Reference
+## EXISTING SKILLS INVENTORY
 
-| Component | Purpose | Source |
-|-----------|---------|--------|
-| **Persona** | Expert identity and voice | Define based on domain |
-| **Logic** | Decision trees, when-to-use | Official docs + community |
-| **Context** | Prerequisites, setup | Official docs |
-| **MCP** | Tool integrations | MCP specification |
-| **Data** | API patterns, examples | Official docs + research |
-| **Safety** | Guardrails, what to avoid | Community wisdom + docs |
+### Research Skills (Phase A)
+| Skill | Purpose | When to Use |
+|-------|---------|-------------|
+| `researching-with-deepwiki` | Repo architecture via DeepWiki MCP | Understanding SDK internals |
+| `fetching-library-docs` | API docs via Context7 (77% token savings) | Official API patterns |
+
+### Building Skills (Phase A)
+| Skill | Purpose | When to Use |
+|-------|---------|-------------|
+| `creating-skills` | Proper skill structure & validation | Building the new skill |
+| `mcp-builder` | MCP server patterns | If SDK needs MCP server |
+
+### Content Skills (Phase B)
+| Skill | Purpose | When to Use |
+|-------|---------|-------------|
+| `ai-collaborate-teaching` | Three Roles Framework | L2 lesson design |
+| `exercise-designer` | Deliberate practice exercises | Each lesson |
+| `learning-objectives` | Bloom's/CEFR alignment | Lesson planning |
+| `content-evaluation-framework` | Quality rubric | Before commit |
+
+### Validation Skills (Phase B)
+| Skill | Purpose | When to Use |
+|-------|---------|-------------|
+| `canonical-format-checker` | Format drift prevention | Teaching platform patterns |
+| `code-validation-sandbox` | Code example validation | Before finalizing |
 
 ---
 
-## Example: Creating Chapter 34 (OpenAI Agents SDK)
+## EXAMPLE: Chapter 34 (OpenAI Agents SDK)
 
-**User Input**: "Create Chapter 34: OpenAI Agents SDK"
+### Phase A Research
 
-**Phase A Output**:
+```bash
+# 1. DeepWiki for architecture
+"Analyze github.com/openai/openai-agents-python architecture"
+
+# 2. Context7 for API
+bash scripts/fetch-docs.sh --library openai-agents --topic "agent creation"
+bash scripts/fetch-docs.sh --library openai-agents --topic "tools"
+
+# 3. WebSearch for community
+"OpenAI Agents SDK production examples 2024"
+"OpenAI Agents SDK vs LangChain comparison"
+```
+
+### Phase A Skill Output
+
 ```
 .claude/skills/building-with-openai-agents/
-├── SKILL.md (persona, logic, workflow, safety)
+├── SKILL.md
 ├── references/
-│   ├── api-patterns.md (Runner, Agent, Tool signatures)
-│   ├── examples.md (TaskManager implementation)
-│   └── community-wisdom.md (production patterns)
+│   ├── api-patterns.md (Runner, Agent, Tool, Handoff)
+│   ├── architecture.md (from DeepWiki)
+│   └── community-wisdom.md (best practices)
 └── scripts/
-    └── verify-openai-agents.py
+    └── verify.py
 ```
 
-**Phase B Output**:
+### Phase B Content Output
+
 ```
 apps/learn-app/docs/06-AI-Native-Software-Development/34-openai-agents-sdk/
 ├── 01-what-is-openai-agents-sdk.md
 ├── 02-creating-your-first-agent.md
 ├── 03-tools-and-function-calling.md
-├── 04-multi-agent-patterns.md
-├── 05-taskmanager-implementation.md
-├── 06-error-handling-and-safety.md
-├── 07-capstone-complete-agent.md
+├── 04-handoffs-and-multi-agent.md
+├── 05-taskmanager-with-openai.md
+├── 06-mcp-integration.md
+├── 07-error-handling-safety.md
 └── README.md
 ```
 
 ---
 
-## Quality Gate
+## QUALITY GATES
 
-Before proceeding from Phase A to Phase B:
+### Phase A → Phase B Transition
 
-| Check | Requirement |
-|-------|-------------|
-| Skill validates | `verify.py` passes |
-| Skill triggers correctly | Test prompts activate it |
-| TaskManager example works | Build produces working code |
-| No hallucinated patterns | All APIs verified against docs |
+| Check | Requirement | How to Verify |
+|-------|-------------|---------------|
+| Skill validates | verify.py passes | `python3 scripts/verify.py` |
+| Skill triggers | Test prompts activate it | Manual test |
+| TaskManager works | Code runs successfully | Execute test project |
+| No hallucinations | All APIs in official docs | Compare with Context7 output |
 
-**If any check fails**: Fix the skill before proceeding to content.
-
----
-
-## Integration with CLAUDE.md
-
-Add to CLAUDE.md:
-
-```markdown
-## Chapter Creation Protocol
-
-For new technical chapters (Part 6-7):
-1. **Research first**: Use /sp.chapter to build expertise skill
-2. **Skill = Source of Truth**: Content draws from verified skill
-3. **No hallucination**: All technical details skill-verified
-```
+**If any check fails**: Fix skill before proceeding to content.
 
 ---
 
 **Version**: 1.0 (December 2025)
-**Requires**: skill-creator, researching-with-deepwiki, fetching-library-docs
-**Best For**: Technical chapters teaching frameworks/SDKs
+**Required Skills**: researching-with-deepwiki, fetching-library-docs, creating-skills
+**Best For**: Technical chapters teaching frameworks/SDKs (Part 6-7)
