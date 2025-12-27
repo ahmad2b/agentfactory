@@ -1,10 +1,10 @@
 ---
-sidebar_position: 56
-title: "Chapter 56: Observability & Cost Engineering"
+sidebar_position: 55
+title: "Chapter 55: Observability & Cost Engineering"
 description: "Monitor, debug, and optimize AI agent systems in production"
 ---
 
-# Chapter 56: Observability & Cost Engineering
+# Chapter 55: Observability & Cost Engineering
 
 Your agent is deployed and automated. But can you answer: Is it healthy? Why did that request fail? How much is it costing? Observability provides the answers through metrics, logs, and traces. Cost engineering ensures you're not burning money on over-provisioned resources.
 

@@ -1,10 +1,10 @@
 ---
-sidebar_position: 55
-title: "Chapter 55: CI/CD Pipelines & GitOps with ArgoCD"
+sidebar_position: 54
+title: "Chapter 54: CI/CD Pipelines & GitOps with ArgoCD"
 description: "Automate builds, tests, and deployments with GitHub Actions and ArgoCD 3.x"
 ---
 
-# Chapter 55: CI/CD Pipelines & GitOps with ArgoCD
+# Chapter 54: CI/CD Pipelines & GitOps with ArgoCD
 
 You've been deploying manually with kubectl and helm. That works for learning but not for teams. Every deployment should be automated, tested, and auditable. CI/CD (Continuous Integration/Continuous Deployment) automates the path from code commit to production.
 

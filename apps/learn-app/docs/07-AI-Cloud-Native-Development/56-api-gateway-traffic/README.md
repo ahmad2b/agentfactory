@@ -1,10 +1,10 @@
 ---
-sidebar_position: 57
-title: "Chapter 57: API Gateway & Traffic Management"
+sidebar_position: 56
+title: "Chapter 56: API Gateway & Traffic Management"
 description: "Manage ingress, rate limiting, and traffic routing for AI services"
 ---
 
-# Chapter 57: API Gateway & Traffic Management
+# Chapter 56: API Gateway & Traffic Management
 
 Your agent is running inside Kubernetes, but external users can't reach it yet. An API Gateway sits at the edge, handling ingress traffic, authentication, rate limiting, and routing. It protects your services from abuse and provides a single entry point for clients.
 

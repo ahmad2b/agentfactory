@@ -1,10 +1,10 @@
 ---
-sidebar_position: 59
-title: "Chapter 59: Infrastructure-as-Code"
+sidebar_position: 58
+title: "Chapter 58: Infrastructure-as-Code"
 description: "Provision cloud Kubernetes clusters with Terraform for production deployment"
 ---
 
-# Chapter 59: Infrastructure-as-Code
+# Chapter 58: Infrastructure-as-Code
 
 You've built, tested, and secured your agent on Minikube. Now it's time to go to production—real cloud infrastructure that serves real users. Infrastructure-as-Code (IaC) treats infrastructure like software: version-controlled, reviewed, tested, and reproducible.
 

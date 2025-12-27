@@ -1,10 +1,10 @@
 ---
-sidebar_position: 58
-title: "Chapter 58: Security & Governance"
+sidebar_position: 57
+title: "Chapter 57: Security & Governance"
 description: "Secure AI agent systems with authentication, secrets management, and safety guardrails"
 ---
 
-# Chapter 58: Security & Governance
+# Chapter 57: Security & Governance
 
 A production agent handles user data, makes API calls with credentials, and takes actions on behalf of users. Security isn't optional—it's foundational. This chapter covers the security practices that protect your agent, your users, and your infrastructure.
 
