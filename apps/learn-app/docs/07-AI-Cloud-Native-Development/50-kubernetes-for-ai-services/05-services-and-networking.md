@@ -341,7 +341,7 @@ The Service routes to **Pod 1 only**. Pods 2 and 3 are ignored.
 
 ## Hands-On: Creating and Exposing Services
 
-You'll create a Deployment, then expose it via different Service types. Start with your Minikube cluster running.
+You'll create a Deployment, then expose it via different Service types. Start with your Docker Desktop Kubernetes cluster running.
 
 ### Step 1: Create a Deployment with Clear Labels
 
@@ -403,9 +403,9 @@ kubectl get pods -o wide
 **Output:**
 ```
 NAME                              READY   STATUS    RESTARTS   AGE   IP           NODE
-web-deployment-5d5f4c7f5b-abc12   1/1     Running   0          10s   10.244.0.3   minikube
-web-deployment-5d5f4c7f5b-def45   1/1     Running   0          10s   10.244.0.4   minikube
-web-deployment-5d5f4c7f5b-ghi78   1/1     Running   0          10s   10.244.0.5   minikube
+web-deployment-5d5f4c7f5b-abc12   1/1     Running   0          10s   10.244.0.3   docker-desktop
+web-deployment-5d5f4c7f5b-def45   1/1     Running   0          10s   10.244.0.4   docker-desktop
+web-deployment-5d5f4c7f5b-ghi78   1/1     Running   0          10s   10.244.0.5   docker-desktop
 ```
 
 Each Pod has a unique IP: `10.244.0.3`, `10.244.0.4`, `10.244.0.5`. If a Pod crashes, Kubernetes replaces it with a new Pod at a new IP. This is why Services matter—they provide stable routing regardless of which Pod IPs are currently active.
@@ -534,21 +534,10 @@ NAME          TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)
 web-service   NodePort   10.96.0.234     <none>        80:30007/TCP
 ```
 
-The Service now listens on node port 30007. Get your Minikube IP:
+The Service now listens on node port 30007. With Docker Desktop, access the Service via localhost:
 
 ```bash
-minikube ip
-```
-
-**Output:**
-```
-192.168.49.2
-```
-
-Access the Service from your laptop:
-
-```bash
-curl http://192.168.49.2:30007
+curl http://localhost:30007
 ```
 
 **Output:**
@@ -862,7 +851,7 @@ You'll describe the requirements, and you and AI will iterate on the Service con
 **Setup**:
 - Your agent Deployment is named `agent-deployment` with label `app: agent`
 - It listens on port 8000
-- You'll deploy to your Minikube cluster
+- You'll deploy to your Docker Desktop Kubernetes cluster
 
 **Part 1: Internal Access Requirement**
 
@@ -881,13 +870,13 @@ Ask yourself: What would you change to make this better?
 
 **Part 3: External Access Requirement**
 
-Tell AI: "Now I also need external clients to test the agent. Should I convert to NodePort or LoadBalancer? I'm testing locally with Minikube."
+Tell AI: "Now I also need external clients to test the agent. Should I convert to NodePort or LoadBalancer? I'm testing locally with Docker Desktop Kubernetes."
 
 Note AI's reasoning about the choice.
 
 **Part 4: Design Validation**
 
-Ask AI: "Show me the complete Service YAML for external testing access on Minikube."
+Ask AI: "Show me the complete Service YAML for external testing access on Docker Desktop Kubernetes."
 
 Apply the YAML to your cluster:
 
@@ -898,15 +887,14 @@ kubectl apply -f agent-service.yaml
 Test external access:
 
 ```bash
-minikube ip  # Get your Minikube IP
-curl http://<minikube-ip>:<nodeport>/docs  # Your FastAPI agent's Swagger docs
+curl http://localhost:<nodeport>/docs  # Your FastAPI agent's Swagger docs
 ```
 
 **Part 5: Reflection**
 
 Compare your initial understanding to what emerged:
 - Did you initially consider both internal and external access?
-- What would you do differently when deploying to a cloud cluster instead of Minikube?
+- What would you do differently when deploying to a cloud cluster instead of Docker Desktop?
 - When would you choose LoadBalancer over NodePort?
 
 These questions activate your reasoning for future Service design decisions in production environments.

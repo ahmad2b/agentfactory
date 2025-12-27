@@ -34,7 +34,7 @@ learning_objectives:
 
 # Pods: The Atomic Unit
 
-Your Minikube cluster is running. Now let's deploy something to it.
+Your Docker Desktop Kubernetes cluster is running. Now let's deploy something to it.
 
 In Docker, you ran `docker run my-agent:v1` to start a container. In Kubernetes, you don't run containers directly—you create **Pods**. A Pod wraps one or more containers and adds the production features Kubernetes needs: shared networking, health management, resource guarantees, and co-location for tightly coupled processes.
 

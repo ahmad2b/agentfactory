@@ -6,20 +6,18 @@ description: "Master Helm chart architecture for production AI deployments"
 
 # Chapter 51: Helm Charts for AI Services
 
-Chapter 50 introduced Helm as "the package manager for Kubernetes" in a 45-minute lesson. You learned to install charts, create basic templates, and manage releases. That was enough to deploy—but not enough to architect.
+Helm is the package manager for Kubernetes. Instead of managing individual YAML files, you create **Helm charts**—templated packages that parameterize deployments across environments. This chapter takes you from Helm basics to production architecture.
 
-This chapter transforms you from a Helm user into a Helm chart architect. You'll master advanced Go templating, compose multi-chart dependencies, orchestrate deployment lifecycles with hooks, distribute charts via OCI registries, and create organizational standards with library charts. By the end, you'll build production-grade charts that deploy your AI agent with a single command across any environment.
+This chapter starts with Helm fundamentals (installation, chart structure, releases) then advances to Go templating, multi-chart dependencies, lifecycle hooks, OCI distribution, and library charts. By the end, you'll build production-grade charts that deploy your AI agent with a single command across any environment.
 
 ## Prerequisites
 
 **Required from Chapter 50:**
 - Kubernetes architecture (control plane, workers, declarative model)
 - Core primitives: Pods, Deployments, Services, ConfigMaps, Secrets
-- Advanced patterns: Init containers, sidecars, StatefulSets
-- Security: RBAC, SecurityContext, NetworkPolicy
+- Security: RBAC, health checks
 - Resource management: Requests/limits, HPA
-- Basic Helm: Chart structure, values.yaml, `helm install/upgrade/rollback`
-- Minikube cluster setup and kubectl operations
+- Docker Desktop Kubernetes cluster and kubectl operations
 
 **Proficiency Level:** B1-B2 (Intermediate to Upper-Intermediate)
 
@@ -38,40 +36,46 @@ By the end of this chapter, you'll be able to:
 
 ## Chapter Structure
 
-### Foundation Phase (Lessons 1-3): Templating Vocabulary
+### Introduction Phase (Lesson 1): Helm Fundamentals
 
 | Lesson | Title | Focus |
 |--------|-------|-------|
-| 1 | Advanced Go Templating | Variables, pipelines, conditionals, ranges |
-| 2 | Named Templates and Helpers | `_helpers.tpl`, `include` vs `template`, scope rules |
-| 3 | Values Deep Dive | Hierarchy, schema validation, multi-environment configs |
+| 1 | Introduction to Helm | Installation, chart structure, public charts, release management |
 
-### Application Phase (Lessons 4-6): Real-World Patterns
+### Foundation Phase (Lessons 2-4): Templating Vocabulary
 
 | Lesson | Title | Focus |
 |--------|-------|-------|
-| 4 | Chart Dependencies | Subcharts, conditions, tags, import-values |
-| 5 | Helm Hooks and Lifecycle | 9 hook types, weights, delete policies |
-| 6 | Testing Your Charts | `helm lint`, `helm test`, template debugging |
+| 2 | Advanced Go Templating | Variables, pipelines, conditionals, ranges |
+| 3 | Named Templates and Helpers | `_helpers.tpl`, `include` vs `template`, scope rules |
+| 4 | Values Deep Dive | Hierarchy, schema validation, multi-environment configs |
 
-### Distribution Phase (Lessons 7-8): Enterprise Scaling
+### Application Phase (Lessons 5-7): Real-World Patterns
 
 | Lesson | Title | Focus |
 |--------|-------|-------|
-| 7 | OCI Registries and Distribution | `helm push`, `helm pull`, OCI URLs |
-| 8 | Library Charts and Standardization | `type: library`, organizational patterns |
+| 5 | Chart Dependencies | Subcharts, conditions, tags, import-values |
+| 6 | Helm Hooks and Lifecycle | 9 hook types, weights, delete policies |
+| 7 | Testing Your Charts | `helm lint`, `helm test`, template debugging |
 
-### Synthesis Phase (Lessons 9-11): Intelligence and Mastery
+### Distribution Phase (Lessons 8-9): Enterprise Scaling
+
+| Lesson | Title | Focus |
+|--------|-------|-------|
+| 8 | OCI Registries and Distribution | `helm push`, `helm pull`, OCI URLs |
+| 9 | Library Charts and Standardization | `type: library`, organizational patterns |
+
+### Synthesis Phase (Lessons 10-12): Intelligence and Mastery
 
 | Lesson | Title | Layer |
 |--------|-------|-------|
-| 9 | AI-Assisted Chart Development | Layer 2: AI Collaboration |
-| 10 | Capstone: Production AI Agent Chart | Layer 4: Spec-Driven |
-| 11 | Building a Helm Chart Skill | Layer 3: Intelligence Design |
+| 10 | AI-Assisted Chart Development | Layer 2: AI Collaboration |
+| 11 | Capstone: Production AI Agent Chart | Layer 4: Spec-Driven |
+| 12 | Building a Helm Chart Skill | Layer 3: Intelligence Design |
 
-## Differentiation from Chapter 50
+## What Lesson 1 Covers
 
-Chapter 50 Lesson 20 covered:
+Lesson 1 (Introduction to Helm) teaches:
 - Why Helm exists (repetitive YAML problem)
 - Basic chart structure (Chart.yaml, values.yaml, templates/)
 - Installing public charts (Bitnami Redis example)
@@ -79,7 +83,7 @@ Chapter 50 Lesson 20 covered:
 - Basic release management (install, upgrade, rollback, uninstall)
 - Environment-specific values files (dev vs prod)
 
-**This chapter adds** (not covered in Lesson 20):
+**Lessons 2-12 build on this foundation** with:
 - Advanced Go templating (variables, `with`, `range`, named templates)
 - Chart dependencies and subchart composition
 - Helm hooks and lifecycle management

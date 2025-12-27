@@ -409,7 +409,7 @@ Before touching any commands, you now understand:
 - **Worker node components**: kubelet (runs Pods), kube-proxy (networking), container runtime (runs containers).
 - **The reconciliation loop**: The heartbeat that makes Kubernetes self-healing.
 
-In Lesson 2, you'll set up Minikube—a local Kubernetes cluster—and run your first kubectl commands.
+In Lesson 2, you'll enable Kubernetes in Docker Desktop—the same Kubernetes API used in production—and run your first kubectl commands.
 
 ---
 
