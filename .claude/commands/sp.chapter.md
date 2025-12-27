@@ -7,7 +7,217 @@ handoffs:
     send: true
 ---
 
-# /sp.chapter: Research-First Chapter Creation (v1.3)
+# /sp.chapter: Research-First Chapter Creation (v1.5)
+
+## ⛔ HARD GATES (EXECUTION BLOCKED WITHOUT THESE) ⛔
+
+**These are PRE-EXECUTION checks. If ANY fails, you MUST NOT proceed.**
+
+### GATE 1: Determine Entry Mode
+
+```
+PARSE user input:
+  IF input contains "Issue #" OR "issue" OR references GitHub issues:
+    MODE = "ISSUE_EXECUTION"
+    → GATE 1A applies
+  ELSE:
+    MODE = "FRESH_START"
+    → Proceed to Phase A (skill creation)
+```
+
+### GATE 1A: Issue Execution Requires Spec (BLOCKING)
+
+```
+IF MODE = "ISSUE_EXECUTION":
+  1. Extract chapter slug from issues (e.g., "40-fastapi-for-agents")
+  2. CHECK: Does specs/chapter-[slug]/spec.md exist?
+
+  IF spec.md DOES NOT EXIST:
+    ⛔ STOP IMMEDIATELY
+    OUTPUT: "Cannot execute issues without specification.
+             Run '/sp.chapter \"Chapter N: Title\"' from scratch first,
+             OR create spec manually at: specs/chapter-[slug]/spec.md"
+    → EXIT (do not proceed)
+
+  IF spec.md EXISTS:
+    → Verify plan.md exists (WARNING if missing)
+    → Verify tasks.md exists (WARNING if missing)
+    → Proceed to Phase B, Step B.7 (Implementation)
+```
+
+### GATE 2: Context Handoff & Autonomous Execution
+
+```
+THINKING FRAMEWORK (not hardcoded rules)
+
+Skills and subagents start fresh - they don't inherit your context.
+Apply these principles dynamically to ANY skill/subagent invocation:
+
+═══════════════════════════════════════════════════════════════════
+PRINCIPLE 1: BEFORE INVOKING - "What does it need to succeed?"
+═══════════════════════════════════════════════════════════════════
+
+Ask yourself:
+  → What files does this skill need to read?
+  → What decisions have I already made that it needs to know?
+  → What constraints or requirements apply?
+  → What quality standard should it match?
+
+Then PASS ALL OF THAT in Args. If you spent time gathering context,
+that context must appear in Args or it's wasted.
+
+❌ /sp.specify                    ← Skill knows nothing
+✅ /sp.specify with 20-line Args  ← Skill has full context
+
+═══════════════════════════════════════════════════════════════════
+PRINCIPLE 2: AFTER COMPLETION - "Did it actually work?"
+═══════════════════════════════════════════════════════════════════
+
+Ask yourself:
+  → What should have been created?
+  → Does the file exist where expected?
+  → Does the content match what I asked for?
+  → Are there placeholders or missing sections?
+
+READ YOUR OUTPUT. Verify it meets requirements.
+If it doesn't, fix it yourself and continue.
+
+═══════════════════════════════════════════════════════════════════
+PRINCIPLE 3: AUTONOMOUS FLOW - "Keep moving unless stuck"
+═══════════════════════════════════════════════════════════════════
+
+Execute the full workflow without pausing for confirmation:
+  invoke → verify → continue → invoke → verify → continue → done
+
+PAUSE ONLY for genuine ambiguity:
+  - Multiple valid paths, need human to choose direction
+  - Conflicting requirements that can't be auto-resolved
+  - Validation failure you cannot fix yourself
+
+NEVER PAUSE for:
+  - "Should I proceed?" ← Just proceed
+  - "Is this okay?" ← Verify it yourself
+  - "Ready for next step?" ← Take the next step
+
+If you're asking permission after every step, the user might as
+well do it manually. Be autonomous.
+
+═══════════════════════════════════════════════════════════════════
+PRINCIPLE 4: SELF-CORRECT - "Fix it, don't ask about it"
+═══════════════════════════════════════════════════════════════════
+
+If output is wrong or incomplete:
+  → Fix it yourself
+  → Re-invoke if necessary
+  → Continue with workflow
+  → Only escalate if you genuinely cannot resolve it
+
+The goal is: User gives input → Agent delivers complete result
+Not: User gives input → Agent asks 50 questions → User does half the work
+```
+
+### GATE 3: Subagent File Writing Enforcement (MANDATORY)
+
+```
+FOR content-implementer subagents:
+
+✅ REQUIRED behavior:
+   - Subagent writes file directly via Write tool
+   - Subagent returns: "✅ Wrote [path] ([N] lines)"
+   - Orchestrator does NOT receive full content
+
+❌ FORBIDDEN behavior:
+   - Subagent returns full lesson content to orchestrator
+   - Orchestrator writes file from subagent output
+   - Multiple layers of content passing
+
+SUBAGENT PROMPT MUST INCLUDE:
+  "Execute autonomously. Write file directly. Return confirmation only (~50 lines)."
+
+IF subagent returns full content instead of writing:
+  ⛔ STOP - Subagent protocol violation
+  → Re-invoke subagent with explicit Write instruction
+```
+
+### GATE 4: Validation Before Commit (BLOCKING)
+
+```
+BEFORE any git commit:
+
+REQUIRED validators (via Task tool with subagent_type):
+  - educational-validator (per lesson)
+  - validation-auditor (chapter-wide)
+  - factual-verifier (chapter-wide)
+
+IF validators not invoked:
+  ⛔ STOP - Cannot commit without validation
+
+IF any validator returns FAIL:
+  ⛔ STOP - Cannot commit with validation failures
+  → Fix issues, re-validate, then commit
+```
+
+### GATE 5: Phase A Skill Creation (BLOCKING for Technical Chapters)
+
+```
+FOR technical chapters (Part 6-7) teaching frameworks/SDKs/tools:
+
+BEFORE Phase B (content creation):
+  1. IDENTIFY the PRIMARY framework/SDK being taught
+     Example: "FastAPI for Agents" → PRIMARY = FastAPI
+
+  2. CHECK skill existence:
+     Does .claude/skills/building-with-[framework]/SKILL.md exist?
+
+  3. IF skill DOES NOT EXIST:
+     ⛔ MUST create skill BEFORE writing content
+     → Use Phase A workflow (research → create → test → validate)
+     → Skill becomes expertise source for content
+
+  4. IF skill EXISTS but chapter covers NEW topics:
+     → Update skill with new reference materials
+     Example: Chapter covers security + SQLModel
+     → Add references/security.md
+     → Add references/sqlmodel.md
+
+SKILL STRUCTURE (one skill per framework):
+  .claude/skills/building-with-fastapi/
+    ├── SKILL.md              # Core FastAPI patterns
+    └── references/
+        ├── security.md       # JWT, OAuth, rate limiting (topic)
+        ├── sqlmodel.md       # Database integration (topic)
+        ├── testing.md        # pytest patterns (topic)
+        └── streaming.md      # SSE patterns (topic)
+
+WRONG: building-with-fastapi-security (over-fragmented)
+RIGHT: building-with-fastapi + references/security.md
+
+WHY THIS GATE EXISTS:
+- Chapter 40 incident: No skill created, content from memory
+- Skill creation IS the research that prevents hallucination
+```
+
+### GATE 6: Clarification Before Implementation (BLOCKING)
+
+```
+BEFORE implementation (Phase B, Step B.7):
+
+IF /sp.clarify was NOT invoked:
+  ⛔ STOP - Must clarify ambiguities first
+
+MINIMUM clarifications for technical chapters:
+  - Technology versions (FastAPI 0.109+? SQLModel 0.0.14+?)
+  - Scope boundaries (what's in vs out?)
+  - Prerequisite assumptions (what do readers already know?)
+  - Running example alignment (how does TaskManager connect?)
+
+IF spec seems "clear enough":
+  → Still invoke /sp.clarify
+  → Response can be "Spec is complete, no clarifications needed"
+  → But the invocation MUST happen
+```
+
+---
 
 **Purpose**: Build deep expertise BEFORE writing content. Creates a programmatic skill for the technical domain, tests it on real projects, then uses that expertise to write high-quality chapter content.
 
@@ -18,6 +228,8 @@ handoffs:
 ## ⛔ ENFORCEMENT RULES (READ FIRST) ⛔
 
 **These rules are NON-NEGOTIABLE. Violations cause quality drift.**
+
+**⚠️ SEE HARD GATES ABOVE** - Gates 1-4 are BLOCKING requirements that must pass BEFORE any work begins.
 
 ### Rule 1: NO SKIPPING STEPS
 Every step marked "EXECUTE - DO NOT SKIP" MUST be executed with the FULL prompt shown.
@@ -932,7 +1144,40 @@ apps/learn-app/docs/06-AI-Native-Software-Development/34-openai-agents-sdk/
 
 ---
 
-**Version**: 1.3 (December 2025) - Complete rewrite of Phase B with explicit prompts, enforcement rules, progress tracking, NO SHORTCUTS policy
+**Version**: 1.5 (December 2025) - Added 6 HARD GATES with blocking enforcement for all failure modes from Chapter 40 incident
 **Required Skills**: researching-with-deepwiki, fetching-library-docs, creating-skills
 **Required Validators**: educational-validator, validation-auditor, factual-verifier, pedagogical-designer
 **Best For**: Technical chapters teaching frameworks/SDKs (Part 6-7)
+
+---
+
+## CHANGELOG
+
+### v1.5 (2025-12-27)
+**ADDITIONAL FIXES**: Added 2 more hard gates after further analysis of Chapter 40 incident:
+- Phase A (skill creation) was completely skipped
+- No clarification questions were asked
+- No skills created for fastapi-security, sqlmodel domains
+
+**New gates:**
+- GATE 5: Phase A Skill Creation (BLOCKING for technical chapters)
+- GATE 6: Clarification Before Implementation (BLOCKING)
+
+### v1.4 (2025-12-27)
+**CRITICAL FIX**: Added 4 hard gates after Chapter 40 incident where:
+- Spec loop was bypassed entirely (no spec.md, plan.md, tasks.md)
+- Skills were not invoked via Skill tool
+- Subagents were not invoked via Task tool with proper subagent_type
+- Content was written directly without orchestration
+
+**New sections:**
+- GATE 1: Entry mode detection (fresh start vs issue execution)
+- GATE 1A: Spec existence check (BLOCKING for issue execution)
+- GATE 2: Skill invocation enforcement (no mentioning without invoking)
+- GATE 3: Subagent file writing protocol (write directly, return confirmation)
+- GATE 4: Validation before commit (validators must run and pass)
+
+### v1.3 (2025-12-26)
+- Complete rewrite of Phase B with explicit prompts
+- NO SHORTCUTS policy
+- Progress tracking requirements

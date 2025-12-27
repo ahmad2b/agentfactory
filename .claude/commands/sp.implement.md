@@ -2,6 +2,32 @@
 description: Execute the implementation plan by processing and executing all tasks defined in tasks.md
 ---
 
+## ⛔ HARD GATE: Spec Loop Verification (BLOCKING) ⛔
+
+**BEFORE any implementation work, verify the spec loop was followed:**
+
+```
+EXTRACT feature slug from user input or context.
+
+CHECK (in order):
+1. Does specs/<feature>/spec.md exist?
+   IF NO → ⛔ STOP: "Cannot implement without specification.
+                      Run '/sp.specify' first."
+
+2. Does specs/<feature>/tasks.md exist?
+   IF NO → ⛔ STOP: "Cannot implement without task list.
+                      Run '/sp.tasks' first."
+
+3. Does tasks.md have at least one incomplete task?
+   IF NO → "All tasks already complete. Nothing to implement."
+
+IF ALL CHECKS PASS → Proceed with implementation
+```
+
+**Why this gate exists**: Chapter 40 incident - implementation was attempted without spec.md, plan.md, or tasks.md existing. This bypassed all quality gates.
+
+---
+
 ## User Input
 
 ```text
