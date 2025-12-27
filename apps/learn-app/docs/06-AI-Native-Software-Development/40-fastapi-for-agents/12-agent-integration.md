@@ -72,11 +72,11 @@ Your Task API has these operations:
 
 | Endpoint | Operation |
 |----------|-----------|
-| POST /tasks | Create task |
-| GET /tasks | List tasks |
-| GET /tasks/{id} | Get task |
-| PUT /tasks/{id} | Update task |
-| DELETE /tasks/{id} | Delete task |
+| `POST /tasks` | Create task |
+| `GET /tasks` | List tasks |
+| `GET /tasks/{id}` | Get task |
+| `PUT /tasks/{id}` | Update task |
+| `DELETE /tasks/{id}` | Delete task |
 
 Each becomes a function an agent can call. The agent decides WHEN to call them based on natural language requests.
 
