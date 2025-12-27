@@ -347,7 +347,7 @@ Parallelize when:
 
 Don't parallelize when:
 - Tasks depend on each other (Task B needs Task A's output)
-- Tasks are very fast (<100ms) (parallelization overhead exceeds savings)
+- Tasks are very fast (under 100ms) (parallelization overhead exceeds savings)
 - You need ordered results (Sequential guarantees order; Parallel doesn't)
 
 ## LoopAgent: Iterative Refinement
