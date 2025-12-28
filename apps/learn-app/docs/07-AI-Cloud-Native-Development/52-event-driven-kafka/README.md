@@ -8,7 +8,7 @@ description: "Build decoupled, scalable agent systems with Apache Kafka event st
 
 Request-response APIs work for simple interactions. But production agent systems need decoupling—when a task is created, a notification service should be triggered, an audit log should be written, and a recurring task engine should be notified. If these are direct API calls, one slow service blocks everything. If they're events on Kafka, each service consumes independently.
 
-This chapter provides comprehensive Kafka coverage for AI agent developers. You'll progress from EDA fundamentals through production reliability patterns, learning to build event-driven systems that scale. The chapter uses Docker Compose for local development (Lessons 1-17), then deploys to Kubernetes with Strimzi (Lesson 18).
+This chapter provides comprehensive Kafka coverage for AI agent developers. You'll progress from EDA fundamentals through production reliability patterns, learning to build event-driven systems that scale. The chapter uses Docker Compose for local development (Lessons 1-17), then deploys to Docker Desktop Kubernetes with Bitnami Kafka Helm chart (Lesson 18).
 
 **Key Update (2025):** Kafka 4.0 removed ZooKeeper entirely. This chapter teaches KRaft-only deployment—the modern, simplified architecture.
 
@@ -43,7 +43,7 @@ By the end of this chapter, you'll be able to:
 
 | # | Lesson | Focus |
 |---|--------|-------|
-| 4 | Running Kafka Locally (KRaft Mode) | Docker Compose with Redpanda or Kafka KRaft, UI tools (Kafka UI, Redpanda Console) |
+| 4 | Running Kafka Locally (KRaft Mode) | Docker Compose with Kafka KRaft, Kafka UI tool, no ZooKeeper |
 | 5 | Your First Producer (Python) | confluent-kafka-python, sync send, fire-and-forget vs sync vs async |
 | 6 | Producer Deep Dive: Reliability | acks (0, 1, all), retries, delivery.timeout.ms, idempotent producer |
 | 7 | Your First Consumer (Python) | Consumer groups, poll loop, auto-commit vs manual, offset management |
@@ -77,7 +77,7 @@ By the end of this chapter, you'll be able to:
 
 | # | Lesson | Focus |
 |---|--------|-------|
-| 18 | Kafka on Kubernetes: Strimzi Operator | Strimzi CRDs, KafkaCluster, KafkaTopic, Helm chart deployment |
+| 18 | Kafka on Kubernetes: Bitnami Helm | Bitnami Kafka with KRaft, Helm install, ConfigMaps, production vs dev values |
 | 19 | Monitoring & Debugging Kafka | Consumer lag, under-replicated partitions, key metrics, tooling |
 
 ### Part G: AI Collaboration & Capstone (Lessons 20-22)
@@ -100,10 +100,10 @@ By the end of this chapter, you'll be able to:
 
 | Component | Choice | Rationale |
 |-----------|--------|-----------|
-| **Local Kafka** | Redpanda or Kafka KRaft | No ZooKeeper (Kafka 4.0+), simpler setup |
+| **Local Kafka** | Kafka KRaft (Docker Compose) | No ZooKeeper (Kafka 4.0+), simpler setup |
 | **Python Client** | confluent-kafka-python | Best performance, native async, Schema Registry support |
 | **Schemas** | Avro + Confluent Schema Registry | Industry standard, evolution support |
-| **K8s Deployment** | Strimzi Operator | Standard for Kafka on Kubernetes |
+| **K8s Deployment** | Bitnami Kafka Helm | One command install, KRaft mode, production-ready defaults |
 | **CDC** | Debezium | Best-in-class change data capture |
 
 ## What's NOT Covered
@@ -115,6 +115,7 @@ This chapter focuses on **developer skills**, not SRE operations:
 - Kafka Streams framework — separate advanced topic
 - Broker hardware sizing and tuning
 - ZooKeeper — removed in Kafka 4.0
+- Strimzi Operator — more complex, enterprise production use (Bitnami Helm covers learning needs)
 
 ## Looking Ahead
 
