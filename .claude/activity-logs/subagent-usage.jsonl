@@ -371,3 +371,53 @@
 {"timestamp":"2025-12-29T11:02:36Z","session_id":"4c396206-4d91-4cb6-8603-d15530a4a859","subagent":"pedagogical-designer","agent_id":"","status":"completed","event":"complete"}
 {"timestamp":"2025-12-29T11:02:36Z","session_id":"4c396206-4d91-4cb6-8603-d15530a4a859","subagent":"educational-validator","agent_id":"","status":"completed","event":"complete"}
 {"timestamp":"2025-12-29T11:02:36Z","session_id":"4c396206-4d91-4cb6-8603-d15530a4a859","subagent":"factual-verifier","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T12:31:58Z","session_id":"6b00ae4d-ca69-456a-8053-1101f808ae1d","subagent":"Explore","description":"Find all L00 skill lessons","background":false,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T12:33:06Z","session_id":"6b00ae4d-ca69-456a-8053-1101f808ae1d","subagent":"Explore","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:04:47Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"chapter-planner","description":"Create Ch59 implementation plan","background":false,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:12:42Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"chapter-planner","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:14:25Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"Implement L00 Extend Dapr Skill","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:14:25Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"Implement L03 Chat Actor","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:14:25Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"Implement L02 Hello Actors","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:14:25Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"Implement L01 Actor Model","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:14:25Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"Implement L04 Actor State Mgmt","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:14:26Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:14:26Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:14:26Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:14:26Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:14:26Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:15:03Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"Implement L05 Timers Reminders","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:15:03Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"Implement L06 Actor Communication","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:15:03Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"Implement L08 Actors Observability","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:15:03Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"Implement L07 Event-Driven Actors","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:15:04Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:15:04Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:15:04Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:15:04Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:15:58Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"Implement L11 Authoring Workflows","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:15:58Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"Implement L14 Saga Monitor","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:15:58Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"Implement L10 Workflow Architecture","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:15:58Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"Implement L09 Workflows Overview","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:15:58Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"Implement L13 Chaining Fan-Out","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:15:58Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"Implement L12 Managing Workflows","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:15:58Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:15:58Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:15:58Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:15:58Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:15:58Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:15:58Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:18:00Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"L19 Capstone lesson","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:18:00Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"L15 Actors+Workflows lesson","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:18:00Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"L16 Multi-App Workflows","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:18:00Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"L20 Finalize Skill","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:18:00Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"L18 Actor Security","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:18:00Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","description":"L17 Namespaced Actors","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:18:00Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:18:01Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:18:01Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:18:01Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:18:01Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:18:01Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"content-implementer","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:23:44Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"factual-verifier","description":"Fact-check Ch59","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:23:44Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"validation-auditor","description":"Validate Ch59 content","background":true,"model":"inherit","event":"spawn"}
+{"timestamp":"2025-12-29T13:23:44Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"validation-auditor","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-29T13:23:44Z","session_id":"a5c8fdce-f2d3-4aab-b50b-4e707a632e66","subagent":"factual-verifier","agent_id":"","status":"completed","event":"complete"}
