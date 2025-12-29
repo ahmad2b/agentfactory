@@ -1,140 +1,77 @@
 ---
 sidebar_position: 0
 title: "Build Your Kubernetes Skill"
-description: "Create your Kubernetes deployment skill FIRST, then learn to understand and improve it throughout the chapter"
+description: "Create your Kubernetes deployment skill in one prompt, then learn to improve it throughout the chapter"
 chapter: 50
 lesson: 0
-duration_minutes: 25
+duration_minutes: 15
 
 skills:
-  - name: "Skill-First Learning Application"
+  - name: "Skill-First Learning"
     proficiency_level: "B1"
     category: "Applied"
     bloom_level: "Apply"
     digcomp_area: "3. Digital Content Creation"
-    measurable_at_this_level: "Student applies skill-creator and fetching-library-docs to build a Kubernetes skill"
+    measurable_at_this_level: "Student creates a working Kubernetes skill using natural language"
 
 learning_objectives:
-  - objective: "Build a Kubernetes deployment skill using Chapter 5 tools"
+  - objective: "Build a Kubernetes deployment skill using natural conversation with Claude"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "Student has a working kubernetes-deployment skill in .claude/skills/"
 
 cognitive_load:
-  new_concepts: 2
-  assessment: "Applies existing Ch5 knowledge to Kubernetes domain"
+  new_concepts: 1
+  assessment: "Single concept: use Claude to build a skill from official docs"
+
+differentiation:
+  extension_for_advanced: "Add HPA and RBAC patterns during creation"
+  remedial_for_struggling: "Follow exact prompt provided"
 ---
 
 # Build Your Kubernetes Skill
 
-You're about to learn Kubernetes—orchestrating your containerized Task API at scale. But you won't start with "what is a Pod?"
-
-You'll start by **building a skill that knows Kubernetes**.
+Before learning Kubernetes—orchestrating your containerized applications at scale—you'll **own** a Kubernetes skill.
 
 ---
 
-## Step 1: Clone the Skills Lab
+## Step 1: Get the Skills Lab
+
+1. Go to [github.com/panaversity/claude-code-skills-lab](https://github.com/panaversity/claude-code-skills-lab)
+2. Click the green **Code** button
+3. Select **Download ZIP**
+4. Extract the ZIP file
+5. Open the extracted folder in your terminal
 
 ```bash
-git clone https://github.com/panaversity/claude-code-skills-lab.git
 cd claude-code-skills-lab
 claude
 ```
 
 ---
 
-## Step 2: Write Your Learning Spec
+## Step 2: Create Your Skill
+
+Copy and paste this prompt:
 
 ```
-I'm learning Kubernetes to deploy and scale containerized AI agents.
-
-Before I learn the details, help me BUILD a skill that can:
-1. Generate Kubernetes Deployments with proper resource limits
-2. Create Services for internal and external access
-3. Configure ConfigMaps and Secrets for configuration
-4. Set up health checks (liveness/readiness probes)
-5. Implement Horizontal Pod Autoscaler for auto-scaling
-
-Let's do this in two steps:
-1. First, use /fetching-library-docs to get official Kubernetes documentation
-2. Then, use /skill-creator to build a skill called "kubernetes-deployment"
+Using your skill creator skill create a new skill for Kubernetes. I will use
+it to deploy and scale containerized applications from hello world to professional
+production systems. Use context7 skill to study official documentation and then
+build it so no self assumed knowledge.
 ```
+
+Claude will:
+1. Fetch official Kubernetes documentation via Context7
+2. Ask you clarifying questions (resource limits, scaling patterns, health checks)
+3. Create the complete skill with references and templates
+
+Your skill appears at `.claude/skills/kubernetes-deployment/`.
 
 ---
 
-## Step 3: Fetch Official Documentation
+## Done
 
-```
-/fetching-library-docs kubernetes
-```
-
----
-
-## Step 4: Create the Skill
-
-```
-/skill-creator
-```
-
-You'll see `.claude/skills/kubernetes-deployment/SKILL.md` created:
-
-```markdown
----
-name: kubernetes-deployment
-description: Generate Kubernetes manifests for deploying AI agents with proper resources, health checks, and scaling
-allowed-tools: Read, Write, Bash, Glob, Grep
----
-
-## Persona
-You are a Kubernetes platform engineer...
-
-## Principles
-1. Always set resource requests AND limits
-2. Include liveness and readiness probes
-3. Use ConfigMaps for config, Secrets for sensitive data
-4. Label everything consistently for selection
-...
-```
-
----
-
-## Step 5: Test Your Skill
-
-```
-Using my kubernetes-deployment skill, generate manifests for:
-- A Deployment for task-api with 2 replicas
-- A Service exposing port 8000
-- A ConfigMap for environment settings
-
-Just generate them—I want to see what my skill produces.
-```
-
----
-
-## What Happens Next
-
-| Lesson | You Learn | Your Skill Improves |
-|--------|-----------|---------------------|
-| L00 (this) | Build skill first | Initial version from docs |
-| L01 Architecture | K8s concepts | Understand what skill generates |
-| L02 Docker Desktop | Local cluster | Validate: skill works locally |
-| L03-05 | Core objects | Refine: better manifests |
-| L06-09 | Production patterns | Add: scaling, RBAC, health |
-| L10-14 | Advanced + Capstone | **Production-ready skill** |
-
----
-
-## Your Growing Skills Library
-
-```
-.claude/skills/
-├── skill-creator/
-├── fetching-library-docs/
-├── fastapi-agent-api/       # Chapter 40
-├── docker-deployment/       # Chapter 49
-└── kubernetes-deployment/   # NEW - this chapter
-```
-
----
+You now own a Kubernetes skill built from official documentation. The rest of this chapter teaches you what it knows—and how to make it better.
 
 **Next: Lesson 1 — Kubernetes Architecture**
