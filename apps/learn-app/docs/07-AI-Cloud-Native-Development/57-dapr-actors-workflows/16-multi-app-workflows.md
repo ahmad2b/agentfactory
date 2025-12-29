@@ -3,7 +3,7 @@ sidebar_position: 16
 title: "Multi-App Workflows"
 description: "Implement cross-service workflow orchestration using Dapr's multi-app workflow capabilities, calling activities and child workflows across different services while handling distributed failure scenarios"
 keywords: ["dapr workflows", "multi-app", "cross-service", "distributed orchestration", "activity invocation", "child workflows", "microservices", "app_id", "workflow coordination"]
-chapter: 59
+chapter: 57
 lesson: 16
 duration_minutes: 30
 

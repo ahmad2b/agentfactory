@@ -3,7 +3,7 @@ sidebar_position: 10
 title: "Workflow Architecture"
 description: "Understand how Dapr Workflows achieve durability through replay-based execution, state persistence, and strict determinism requirements"
 keywords: ["dapr workflow", "workflow architecture", "replay execution", "determinism", "checkpointing", "durable task framework", "event sourcing"]
-chapter: 59
+chapter: 57
 lesson: 10
 duration_minutes: 25
 

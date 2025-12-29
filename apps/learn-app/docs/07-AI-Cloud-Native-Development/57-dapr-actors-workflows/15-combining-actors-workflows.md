@@ -3,7 +3,7 @@ sidebar_position: 15
 title: "Combining Actors with Workflows"
 description: "Design hybrid systems using actors for entity state and workflows for orchestration to build stateful, fault-tolerant agent systems"
 keywords: [dapr, actors, workflows, hybrid patterns, state coordination, orchestration, stateful agents, task management, python sdk]
-chapter: 59
+chapter: 57
 lesson: 15
 duration_minutes: 30
 

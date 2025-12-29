@@ -3,7 +3,7 @@ sidebar_position: 20
 title: "Finalize Your Dapr Skill"
 description: "Complete your dapr-deployment skill with actor and workflow patterns, validate code generation, and document your Digital FTE component"
 keywords: [dapr, skill finalization, actors, workflows, validation, digital fte, dapr-deployment, production skill]
-chapter: 59
+chapter: 57
 lesson: 20
 duration_minutes: 20
 

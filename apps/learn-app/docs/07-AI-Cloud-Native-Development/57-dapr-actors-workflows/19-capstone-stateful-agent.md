@@ -3,7 +3,7 @@ sidebar_position: 19
 title: "Capstone: Stateful Task Agent with Workflows"
 description: "Build a complete Digital FTE by integrating TaskActor for entity state, ChatActor for conversations, and TaskProcessingWorkflow with saga compensation on Docker Desktop Kubernetes"
 keywords: ["dapr actors", "dapr workflows", "capstone project", "stateful agents", "saga pattern", "digital fte", "task management", "kubernetes deployment", "actor workflow integration"]
-chapter: 59
+chapter: 57
 lesson: 19
 duration_minutes: 45
 

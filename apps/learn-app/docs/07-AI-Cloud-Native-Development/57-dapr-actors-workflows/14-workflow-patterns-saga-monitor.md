@@ -3,7 +3,7 @@ sidebar_position: 14
 title: "Workflow Patterns: Saga & Monitor"
 description: "Implement saga pattern with compensation activities for transactional consistency and monitor pattern with continue_as_new for eternal workflows"
 keywords: ["dapr workflows", "saga pattern", "compensation", "monitor pattern", "continue_as_new", "human interaction", "external events", "durable workflows"]
-chapter: 59
+chapter: 57
 lesson: 14
 duration_minutes: 35
 

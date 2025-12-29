@@ -3,7 +3,7 @@ sidebar_position: 13
 title: "Workflow Patterns: Chaining & Fan-Out"
 description: "Master task chaining for sequential data pipelines and fan-out/fan-in for parallel processing with result aggregation in Dapr Workflows"
 keywords: ["dapr workflows", "task chaining", "fan-out", "fan-in", "when_all", "parallel processing", "workflow patterns", "durable orchestration"]
-chapter: 59
+chapter: 57
 lesson: 13
 duration_minutes: 35
 

@@ -3,7 +3,7 @@ sidebar_position: 11
 title: "Authoring Workflows"
 description: "Learn to implement workflow functions and activities using dapr-ext-workflow, set up WorkflowRuntime, and orchestrate multi-step processes with durable execution"
 keywords: ["dapr workflows", "dapr-ext-workflow", "DaprWorkflowContext", "WorkflowActivityContext", "WorkflowRuntime", "DaprWorkflowClient", "yield", "call_activity"]
-chapter: 59
+chapter: 57
 lesson: 11
 duration_minutes: 35
 

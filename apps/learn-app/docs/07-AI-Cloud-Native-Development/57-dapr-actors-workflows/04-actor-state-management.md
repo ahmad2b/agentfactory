@@ -3,7 +3,7 @@ sidebar_position: 4
 title: "Actor State Management"
 description: "Master actor state persistence with _state_manager, lifecycle hooks, and turn-based concurrency guarantees"
 keywords: [dapr, actors, state management, state_manager, on_activate, on_deactivate, turn-based concurrency, virtual actors, python sdk]
-chapter: 59
+chapter: 57
 lesson: 4
 duration_minutes: 30
 

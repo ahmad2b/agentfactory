@@ -3,7 +3,7 @@ sidebar_position: 18
 title: "Actor Security Essentials"
 description: "Secure actor state with encryption at rest, verify mTLS for actor-to-actor communication, implement API token authentication, and configure audit logging for production actor deployments."
 keywords: [dapr, actors, security, mTLS, encryption, audit logging, state encryption, zero trust, kubernetes security]
-chapter: 59
+chapter: 57
 lesson: 18
 duration_minutes: 30
 

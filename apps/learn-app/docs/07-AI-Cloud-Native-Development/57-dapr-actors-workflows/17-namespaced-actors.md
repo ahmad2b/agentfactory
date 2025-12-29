@@ -3,7 +3,7 @@ sidebar_position: 17
 title: "Namespaced Actors for Multi-Tenancy"
 description: "Configure Dapr actors for multi-tenant SaaS deployments with namespace isolation, separate state stores, and tenant-safe placement"
 keywords: ["dapr actors", "multi-tenancy", "namespaced actors", "tenant isolation", "kubernetes namespaces", "state store isolation", "saas actors", "placement service"]
-chapter: 59
+chapter: 57
 lesson: 17
 duration_minutes: 25
 

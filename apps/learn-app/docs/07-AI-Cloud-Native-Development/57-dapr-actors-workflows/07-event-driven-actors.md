@@ -3,7 +3,7 @@ sidebar_position: 7
 title: "Event-Driven Actors"
 description: "Integrate Dapr actors with pub/sub topics and bindings for reactive, event-driven agent patterns. Learn when to trigger actors from external events vs internal messages."
 keywords: [dapr, actors, pub/sub, bindings, event-driven, reactive systems, triggers, external events, integration]
-chapter: 59
+chapter: 57
 lesson: 7
 duration_minutes: 35
 proficiency_level: B1

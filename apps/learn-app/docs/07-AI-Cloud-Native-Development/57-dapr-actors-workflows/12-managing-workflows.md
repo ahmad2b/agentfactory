@@ -3,7 +3,7 @@ sidebar_position: 12
 title: "Managing Workflows"
 description: "Master workflow lifecycle operations: starting, querying, raising events, and cleaning up workflow instances using both Python SDK and CLI"
 keywords: ["dapr workflow", "workflow management", "DaprWorkflowClient", "raise event", "external event", "workflow lifecycle", "purge workflow", "terminate workflow"]
-chapter: 59
+chapter: 57
 lesson: 12
 duration_minutes: 30
 

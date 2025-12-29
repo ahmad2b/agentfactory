@@ -3,7 +3,7 @@ sidebar_position: 0
 title: "Extend Your Dapr Skill"
 description: "Extend your existing Dapr skill with actor and workflow patterns using official documentation"
 keywords: [dapr, actors, workflows, skill extension, virtual actors, durable execution, python sdk]
-chapter: 59
+chapter: 57
 lesson: 0
 duration_minutes: 25
 

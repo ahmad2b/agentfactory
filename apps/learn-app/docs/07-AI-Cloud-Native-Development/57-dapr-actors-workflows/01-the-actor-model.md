@@ -3,7 +3,7 @@ sidebar_position: 1
 title: "The Actor Model"
 description: "Understand the Actor Model (Hewitt, 1973) as the conceptual foundation for building scalable, stateful AI agents with turn-based concurrency and message-passing"
 keywords: ["actor model", "hewitt 1973", "virtual actors", "turn-based concurrency", "message passing", "dapr actors", "orleans", "stateful agents"]
-chapter: 59
+chapter: 57
 lesson: 1
 duration_minutes: 25
 

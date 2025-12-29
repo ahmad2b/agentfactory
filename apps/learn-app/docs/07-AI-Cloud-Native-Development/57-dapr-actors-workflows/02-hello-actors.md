@@ -3,7 +3,7 @@ sidebar_position: 2
 title: "Hello Actors - Your First Actor"
 description: "Create, register, and invoke your first Dapr Virtual Actor using Python and FastAPI, establishing the foundation for building stateful AI agent systems"
 keywords: ["dapr actors", "virtual actors", "actormethod", "ActorInterface", "DaprActor", "actor registration", "state store", "actor invocation"]
-chapter: 59
+chapter: 57
 lesson: 2
 duration_minutes: 30
 

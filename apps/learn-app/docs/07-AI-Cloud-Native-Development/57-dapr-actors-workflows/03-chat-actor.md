@@ -3,7 +3,7 @@ sidebar_position: 3
 title: "Chat Actor - Stateful Conversations"
 description: "Build a ChatActor that maintains conversation history with Dapr pub/sub integration for message-driven AI agent interactions"
 keywords: [dapr actors, chat actor, conversation history, pub/sub, actor state, stateful agents, message-driven]
-chapter: 59
+chapter: 57
 lesson: 3
 duration_minutes: 35
 

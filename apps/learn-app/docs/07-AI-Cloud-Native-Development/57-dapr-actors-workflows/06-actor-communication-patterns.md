@@ -3,7 +3,7 @@ sidebar_position: 6
 title: "Actor Communication Patterns"
 description: "Implement actor-to-actor communication via ActorProxy for coordination patterns including parent-child delegation and peer-to-peer collaboration"
 keywords: ["actor communication", "ActorProxy", "parent-child actors", "peer-to-peer actors", "task delegation", "dapr actors"]
-chapter: 59
+chapter: 57
 lesson: 6
 duration_minutes: 30
 

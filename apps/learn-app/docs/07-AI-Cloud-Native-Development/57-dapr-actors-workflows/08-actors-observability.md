@@ -3,7 +3,7 @@ sidebar_position: 8
 title: "Actors Observability"
 description: "Configure distributed tracing with Zipkin and Jaeger, monitor actor metrics with Prometheus, and apply debugging strategies for production actor systems"
 keywords: ["dapr actors", "observability", "tracing", "zipkin", "jaeger", "prometheus", "metrics", "debugging", "opentelemetry", "actor monitoring"]
-chapter: 59
+chapter: 57
 lesson: 8
 duration_minutes: 25
 

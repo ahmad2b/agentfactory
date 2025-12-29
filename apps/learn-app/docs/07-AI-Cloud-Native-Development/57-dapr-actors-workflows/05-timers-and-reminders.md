@@ -3,7 +3,7 @@ sidebar_position: 5
 title: "Timers and Reminders"
 description: "Implement actor timers for lightweight scheduling and reminders for persistent, durable scheduling that survives actor deactivation and system restarts"
 keywords: ["dapr actors", "actor timers", "actor reminders", "scheduled callbacks", "durable scheduling", "scheduler service", "ttl", "periodic invocation"]
-chapter: 59
+chapter: 57
 lesson: 5
 duration_minutes: 30
 

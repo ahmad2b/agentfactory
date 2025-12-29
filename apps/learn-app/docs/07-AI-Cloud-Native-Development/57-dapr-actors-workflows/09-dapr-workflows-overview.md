@@ -3,7 +3,7 @@ sidebar_position: 9
 title: "Dapr Workflows Overview"
 description: "Understand durable workflow execution, event sourcing, and when to use workflows vs actors for AI agent orchestration"
 keywords: [dapr, workflows, durable execution, event sourcing, orchestration, determinism, actors vs workflows]
-chapter: 59
+chapter: 57
 lesson: 9
 duration_minutes: 25
 
