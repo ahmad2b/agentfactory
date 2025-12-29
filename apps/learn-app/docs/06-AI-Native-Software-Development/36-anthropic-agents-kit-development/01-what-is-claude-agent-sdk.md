@@ -314,3 +314,36 @@ different about how Agent SDK handles it?
 ---
 
 **Safety Note**: As you build agents with the SDK, remember that agent autonomy comes with responsibility. Always test agents in non-production environments first. Use permission callbacks to restrict what agents can do. File checkpointing exists exactly for this—so you can safely experiment knowing changes are reversible.
+
+---
+
+## Reflect on Your Skill
+
+You built a `claude-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my claude-agent skill, explain the difference between Claude Agent SDK and Claude API.
+Does my skill cover autonomous tool execution vs manual loops?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain the SDK vs API distinction clearly?
+- Did it cover the unique features (skills ecosystem, file checkpointing, runtime permissions)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My claude-agent skill is missing coverage of SDK architecture and unique features.
+Update it to include:
+- SDK vs API comparison
+- Autonomous tool execution patterns
+- Skills ecosystem benefits
+```
+
+---

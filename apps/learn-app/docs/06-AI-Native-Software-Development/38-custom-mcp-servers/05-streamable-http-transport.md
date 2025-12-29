@@ -518,3 +518,33 @@ crashes without closing their SSE stream? How would I prevent session ID collisi
 ```
 
 **What you're learning**: Production resilience patterns. Session timeouts, heartbeats, and cleanup logic aren't optional—they prevent resource leaks in long-running systems. You're thinking like a distributed systems engineer considering failure modes before they happen.
+
+---
+
+## Reflect on Your Skill
+
+You built an `mcp-server` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my mcp-server skill, configure a server for remote deployment with StreamableHTTP.
+Does my skill include guidance on session ID management, SSE connection patterns, and the dual-connection architecture?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include StreamableHTTP configuration and session lifecycle management?
+- Did it explain the difference between primary SSE and tool-specific SSE streams?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My mcp-server skill is missing remote deployment patterns with StreamableHTTP.
+Update it to include StreamableHTTP transport configuration, session ID routing, SSE connection management, and the architectural patterns for bidirectional HTTP communication.
+```
+
+---

@@ -713,3 +713,40 @@ How many iterations did it take to produce a professional response? What changed
 ---
 
 **Key Insight**: ADK gives you BOTH flexibility and determinism. Use LLM routing when the process is novel and adaptive. Use workflow agents when the process is standardized and repeatable. The most powerful production systems combine both—routing for strategy, workflows for execution.
+
+---
+
+## Reflect on Your Skill
+
+You built a `google-adk` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my google-adk skill, implement SequentialAgent, ParallelAgent, and LoopAgent workflows.
+Does my skill demonstrate when to use deterministic pipelines vs LLM routing?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include SequentialAgent for fixed-order pipelines (research → write → edit)?
+- Did it explain ParallelAgent for concurrent independent tasks (fact-check + sentiment)?
+- Did it cover LoopAgent for iterative refinement with exit conditions and max_iterations?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My google-adk skill is missing workflow agent patterns.
+Update it to include:
+- SequentialAgent with sub_agents list for guaranteed execution order
+- ParallelAgent for concurrent execution of independent tasks
+- LoopAgent with exit_loop tool and max_iterations safety limit
+- Decision framework: when to use Sequential vs Parallel vs Loop vs LLM routing
+- Composite patterns (Sequential containing Parallel, etc.)
+- Trade-offs between flexibility (routing) and predictability (workflow agents)
+```
+
+---

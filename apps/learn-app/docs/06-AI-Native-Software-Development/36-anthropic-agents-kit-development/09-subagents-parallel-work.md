@@ -601,3 +601,36 @@ What would you change to make this more production-ready for a Digital FTE?
 **What you're learning**: You're moving beyond implementation to architectural reasoning. AI helps you think through specialization tradeoffs, composition patterns, and scalability. This is the reasoning framework for designing orchestrated agents.
 
 **Important**: Keep subagent definitions simple and focused. The temptation is to create many specialized subagents ("security-reviewer", "performance-reviewer", "documentation-reviewer", "accessibility-reviewer"...). Start with 2-3 specialists. More specialists mean more coordination complexity. More complexity means harder to debug when something goes wrong. Earn additional specialists through experience with what works.
+
+---
+
+## Reflect on Your Skill
+
+You built a `claude-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my claude-agent skill, design a subagent architecture with specialized agents.
+Does my skill cover AgentDefinition and the Task tool?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain AgentDefinition with tool restrictions and model selection?
+- Did it show how to invoke subagents via the Task tool?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My claude-agent skill is missing subagent orchestration patterns.
+Update it to include:
+- AgentDefinition configuration
+- Task tool for parallel execution
+- Result synthesis from multiple subagents
+```
+
+---

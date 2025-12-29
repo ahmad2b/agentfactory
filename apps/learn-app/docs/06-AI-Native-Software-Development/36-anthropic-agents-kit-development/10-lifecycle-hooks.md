@@ -529,3 +529,36 @@ What you're learning: How permission flows work in production. This is how you b
 - Can I test this hook without needing production access?
 
 The strongest hooks are ones that prevent bad outcomes without getting in the way of good work.
+
+---
+
+## Reflect on Your Skill
+
+You built a `claude-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my claude-agent skill, implement PreToolUse and PostToolUse hooks.
+Does my skill cover HookMatcher and permission decisions?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain lifecycle events (PreToolUse, PostToolUse, etc.)?
+- Did it show how to implement hook functions with permit/deny logic?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My claude-agent skill is missing lifecycle hook patterns.
+Update it to include:
+- Hook function signatures
+- HookMatcher for targeted execution
+- Security and auditing hook examples
+```
+
+---

@@ -643,3 +643,39 @@ Or does it halt the entire workflow?
 ```
 
 **What you're learning**: Resilience patterns that distinguish production multi-agent systems from fragile prototypes—graceful degradation with placeholder data ensures the whole workflow doesn't break when individual components fail
+
+---
+
+## Reflect on Your Skill
+
+You built a `google-adk` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my google-adk skill, implement a multi-agent system with AgentTool.
+Does my skill demonstrate coordinator-specialist patterns, Pydantic schemas, and error resilience?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include AgentTool for wrapping specialist agents as callable tools?
+- Did it demonstrate Pydantic BaseModel for structured output schemas and validation?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My google-adk skill is missing multi-agent orchestration patterns.
+Update it to include:
+- AgentTool pattern for composing specialist agents
+- Pydantic schema definition (BaseModel, Field) for structured outputs
+- Coordinator agent that stays in control (vs OpenAI's handoff pattern)
+- output_schema parameter for enforcing type-safe responses
+- Graceful degradation with default values (Field(default="N/A"))
+- Error resilience patterns that prevent component failures from halting workflows
+```
+
+---

@@ -570,3 +570,38 @@ After working with AI on these prompts:
 - **Trade-offs**: When would you use coordinator (silent processing) vs streaming (real-time feedback)? When do each serve the user better?
 - **Implementation**: If you added a third tool (like audio generation), how would you maintain the two-message pattern while the agent does more work silently?
 - **Generalization**: This pattern works for research, report generation, and file persistence. What other workflows could benefit from the coordinator pattern?
+
+---
+
+## Reflect on Your Skill
+
+You built a `google-adk` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my google-adk skill, implement a coordinator agent with the two-message pattern.
+Does my skill demonstrate silent background processing and file persistence tools?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include the two-message interaction pattern (acknowledgment → silent processing → completion)?
+- Did it show how to create file persistence tools using pathlib for cross-platform paths?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My google-adk skill is missing coordinator-dispatcher patterns.
+Update it to include:
+- Two-message pattern in agent instructions (acknowledgment, silent work, completion)
+- File persistence tool with pathlib.Path and UTF-8 encoding
+- Structured markdown report templates for agent output
+- Agent instructions that prevent intermediate message streaming
+- Error handling in file tools (return status dicts, not exceptions)
+```
+
+---

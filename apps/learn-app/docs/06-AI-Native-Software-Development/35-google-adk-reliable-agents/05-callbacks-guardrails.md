@@ -629,3 +629,39 @@ print(response)
 - Modify BLOCKED_DOMAINS and SEARCH_LIMIT values; see how agent adapts
 - Check tool_context.state to understand persistence across tool calls
 - Write one additional callback (e.g., authentication, cost tracking) to solidify your understanding
+
+---
+
+## Reflect on Your Skill
+
+You built a `google-adk` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my google-adk skill, implement before_tool_callback and after_tool_callback for guardrails.
+Does my skill demonstrate domain filtering, response enhancement, and state-based rate limiting?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include the six callback types and when each executes in the agent lifecycle?
+- Did it explain callback return behavior (None vs dict vs LlmResponse)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My google-adk skill is missing callback and guardrail patterns.
+Update it to include:
+- before_tool_callback for input validation and policy enforcement
+- after_tool_callback for response enhancement and transparency
+- Callback return patterns (return None to allow, return dict to block/modify)
+- State management in callbacks (tool_context.state for audit trails, rate limiting, caching)
+- Agent instructions that reference callback behavior
+- Multiple callback registration with proper execution order
+```
+
+---

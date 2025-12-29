@@ -722,3 +722,44 @@ This is foundation of knowledge-enabled Digital FTE products—every response is
 
 **Expected outcome**: A working agent that searches knowledge bases intelligently, retrieves relevant documents, and grounds responses in current company information.
 
+---
+
+## Reflect on Your Skill
+
+You built an `openai-agents` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my openai-agents skill, implement RAG with FileSearchTool connected to OpenAI vector stores.
+Does my skill explain vector store creation, FileSearchTool configuration, and agentic retrieval decisions?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include OpenAI hosted vector store creation (vs_xxx IDs)?
+- Did it explain FileSearchTool(vector_store_ids, max_num_results) configuration?
+- Did it cover agentic RAG (agent decides when to retrieve vs always retrieving)?
+- Did it explain how to upload documents to vector stores?
+- Did it cover grounded responses with citations to source documents?
+- Did it explain the RAG pipeline (query → semantic search → context → generation)?
+- Did it compare when agents should vs shouldn't search knowledge bases?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My openai-agents skill is missing [vector stores, FileSearchTool, or agentic retrieval patterns].
+Update it to include:
+1. Creating vector stores via OpenAI dashboard or API
+2. FileSearchTool(vector_store_ids=["vs_xxx"], max_num_results=5)
+3. Adding FileSearchTool to agent tools=[file_search]
+4. Agentic RAG decision-making (when to search vs use existing knowledge)
+5. Grounding responses with citations to retrieved documents
+6. How to upload documents: client.beta.vector_stores.files.upload()
+7. Difference between retrieval for domain knowledge vs general questions
+8. Multiple vector stores for different knowledge domains
+```
+

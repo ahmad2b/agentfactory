@@ -603,3 +603,41 @@ The user should understand why they were blocked and what to do next.
 ```
 
 **What you're learning:** How to build professional error handling that users trust
+
+---
+
+## Reflect on Your Skill
+
+You built an `openai-agents` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my openai-agents skill, implement input and output guardrails with @input_guardrail and @output_guardrail decorators.
+Does my skill explain both simple keyword-based guards and agent-based validation with GuardrailFunctionOutput?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include @input_guardrail decorator for validating user requests?
+- Did it explain @output_guardrail decorator for checking agent responses?
+- Did it cover GuardrailFunctionOutput with tripwire_triggered flag?
+- Did it explain agent-based guardrails (using reasoning vs pattern matching)?
+- Did it cover exception handling (InputGuardrailTripwireTriggered, OutputGuardrailTripwireTriggered)?
+- Did it explain when to use simple keyword checks vs agent-based validation?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My openai-agents skill is missing [guardrail patterns, agent-based validation, or exception handling].
+Update it to include:
+1. @input_guardrail for blocking inappropriate requests before processing
+2. @output_guardrail for catching sensitive data in responses
+3. GuardrailFunctionOutput(output_info, tripwire_triggered) pattern
+4. Agent-based guardrails using guardrail_agent with structured output
+5. Exception handling with try/except for InputGuardrailTripwireTriggered and OutputGuardrailTripwireTriggered
+6. When to use simple keyword checks (fast) vs agent reasoning (nuanced)
+```

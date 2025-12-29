@@ -504,3 +504,36 @@ Show me the complete ClaudeAgentOptions configuration.
 ### Safety Note
 
 When you give agents access to Write/Edit/Bash and `permission_mode=bypassPermissions`, the agent can modify or delete files without asking. Start conservatively: Use `allowed_tools=["Read", "Glob", "Grep"]` first to observe how the agent behaves. Gradually expand permissions as you verify the agent works reliably.
+
+---
+
+## Reflect on Your Skill
+
+You built a `claude-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my claude-agent skill, create a basic query() call with ClaudeAgentOptions.
+Does my skill show how to configure allowed_tools and permission_mode?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include query() patterns and async iteration?
+- Did it cover ClaudeAgentOptions configuration (allowed_tools, permission_mode, max_turns)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My claude-agent skill is missing query() patterns and options configuration.
+Update it to include:
+- Basic query() with async for loop
+- ClaudeAgentOptions parameters
+- Message type processing (assistant, tool_use, result)
+```
+
+---

@@ -630,3 +630,43 @@ Write your answers in a comment. You've now built observability infrastructure t
 - Track costs per agent
 - Correlate multi-agent workflows in traces
 - Access OpenAI Platform URLs for visual debugging
+
+---
+
+## Reflect on Your Skill
+
+You built an `openai-agents` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my openai-agents skill, implement RunHooks for lifecycle tracking and use trace() for multi-agent correlation.
+Does my skill explain on_agent_start, on_agent_end, on_tool_start, on_tool_end, and trace context management?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include RunHooks class with lifecycle callback methods?
+- Did it explain on_agent_start and on_agent_end for agent lifecycle tracking?
+- Did it cover on_tool_start and on_tool_end for tool execution monitoring?
+- Did it explain RunContextWrapper access to usage metrics and messages?
+- Did it cover trace() and custom_span() for multi-agent workflows?
+- Did it explain gen_trace_id() and group_id for correlation?
+- Did it cover cost tracking using context.usage.input_tokens and output_tokens?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My openai-agents skill is missing [lifecycle hooks, tracing patterns, or usage tracking].
+Update it to include:
+1. RunHooks class with on_agent_start, on_agent_end, on_tool_start, on_tool_end
+2. Accessing RunContextWrapper.usage for token and cost tracking
+3. trace(name, group_id) for creating correlated execution contexts
+4. custom_span(name) for structured workflow phases
+5. gen_trace_id() for generating correlation IDs
+6. How to pass hooks=hooks to Runner.run()
+7. OpenAI Platform trace URL generation for visual debugging
+```

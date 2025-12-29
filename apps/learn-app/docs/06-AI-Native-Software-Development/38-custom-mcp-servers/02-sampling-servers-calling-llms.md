@@ -446,3 +446,33 @@ Ask Claude: **"Compare these two approaches: (A) sample Claude for each paper's 
 Notice what emerges: Claude will explain reasoning you might not have considered (parallelization, context window efficiency, response quality). Ask yourself: **"Which tradeoff matters most for my use case?"**
 
 This is sampling in action—not just moving code around, but reasoning about when AI involvement creates value vs when it adds latency without benefit.
+
+---
+
+## Reflect on Your Skill
+
+You built an `mcp-server` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my mcp-server skill, create a tool that uses sampling to call an LLM through the client.
+Does my skill explain when to use sampling vs direct API calls, and how to implement context.session.create_message()?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include sampling patterns and SamplingMessage structures?
+- Did it explain the tradeoffs between server-side API calls and client-side sampling?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My mcp-server skill is missing sampling implementation patterns.
+Update it to include when sampling is appropriate, how to use context.session.create_message(), and the architectural benefits of delegating LLM calls to clients.
+```
+
+---

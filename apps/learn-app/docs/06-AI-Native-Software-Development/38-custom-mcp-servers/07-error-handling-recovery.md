@@ -796,3 +796,33 @@ Write the tool implementation that handles all of this.
 **What you're learning**: How idempotency keys prevent duplicate operations and why they're critical for network-based systems.
 
 Once Claude generates the code, test it mentally: What happens if you call the tool three times with the same idempotency_key? What if you call it three times with different keys? Does the behavior match what you expect?
+
+---
+
+## Reflect on Your Skill
+
+You built an `mcp-server` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my mcp-server skill, create a tool with comprehensive error handling and retry-safe design.
+Does my skill include guidance on JSON-RPC error structure, graceful degradation, and idempotent operations?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include error handling patterns (try/except, specific vs general exceptions)?
+- Did it explain transient vs permanent errors and idempotency key patterns?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My mcp-server skill is missing production error handling patterns.
+Update it to include JSON-RPC error codes, try/except patterns with structured responses, transient vs permanent error distinction, graceful degradation strategies, and idempotent operation design with idempotency keys.
+```
+
+---

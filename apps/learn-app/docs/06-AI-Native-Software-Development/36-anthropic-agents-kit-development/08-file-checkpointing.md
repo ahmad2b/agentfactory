@@ -530,6 +530,39 @@ Store checkpoint IDs so you can switch between them.
 
 **Safety note**: Always capture a baseline checkpoint before risky refactorings.
 This is how production agents safely explore multiple solution paths.
+
+---
+
+## Reflect on Your Skill
+
+You built a `claude-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my claude-agent skill, enable file checkpointing and implement recovery.
+Does my skill cover checkpoint UUIDs and rewindFiles()?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain enable_file_checkpointing configuration?
+- Did it show how to capture checkpoint UUIDs and use rewindFiles()?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My claude-agent skill is missing file checkpointing patterns.
+Update it to include:
+- Checkpointing enablement
+- UUID capture from UserMessage
+- Recovery with rewindFiles()
+```
+
+---
 ```
 
 **What you're learning**: Strategic checkpoint use—how teams would use checkpointing in real projects to safely explore architectural alternatives and compare solutions before committing to one.

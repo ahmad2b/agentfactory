@@ -498,3 +498,37 @@ Why is this transparency important for production agents?
 ```
 
 **What you're learning:** Production agent debugging through declarative tool transparency and reasoning visibility
+
+---
+
+## Reflect on Your Skill
+
+You built a `google-adk` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my google-adk skill, create a basic ADK agent with google_search tool.
+Does my skill correctly demonstrate LlmAgent creation, model configuration, and tool integration?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include the declarative agent definition pattern (Agent class with name, model, instruction, tools)?
+- Did it explain how ADK's Runner pattern differs from OpenAI's imperative SDK approach?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My google-adk skill is missing guidance on declarative agent setup and the Agent class pattern.
+Update it to include:
+- Agent class instantiation with proper parameters
+- Tool registration (both built-in like google_search and custom tools)
+- adk run vs adk web usage patterns
+- How declarative config separates agent definition from execution
+```
+
+---

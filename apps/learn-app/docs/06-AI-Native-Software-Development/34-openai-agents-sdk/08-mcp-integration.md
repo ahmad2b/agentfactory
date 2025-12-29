@@ -663,3 +663,43 @@ Write your thoughts. You've now implemented agents that connect to external tool
 - Use Context7 for dynamic documentation lookup
 - Compose multiple MCP servers into unified tool ecosystems
 - Design agents that leverage external tools effectively
+
+---
+
+## Reflect on Your Skill
+
+You built an `openai-agents` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my openai-agents skill, connect to an MCP server using MCPServerStreamableHttp and enable agents to use external tools.
+Does my skill explain async context managers, mcp_servers parameter, and Context7 integration?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include MCPServerStreamableHttp for remote MCP connections?
+- Did it explain async with pattern for connection lifecycle management?
+- Did it cover mcp_servers=[server] parameter for agent configuration?
+- Did it explain how agents automatically discover and use MCP tools?
+- Did it cover Context7 MCP with resolve-library-id and get-library-docs?
+- Did it explain how to connect to multiple MCP servers simultaneously?
+- Did it cover authentication headers for MCP server access?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My openai-agents skill is missing [MCP integration, async patterns, or external tool ecosystems].
+Update it to include:
+1. MCPServerStreamableHttp(name, url, headers) for MCP connections
+2. async with MCPServerStreamableHttp(...) as server: pattern for lifecycle
+3. mcp_servers=[server] parameter in Agent() for tool access
+4. Context7 integration for documentation lookup (resolve-library-id, get-library-docs)
+5. How to compose multiple MCP servers: mcp_servers=[server1, server2]
+6. Authentication with headers={"Authorization": f"Bearer {token}"}
+7. When to use MCP (external integrations) vs custom tools (internal logic)
+```

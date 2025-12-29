@@ -697,3 +697,36 @@ Compare your implementation against the AI's. Ask yourself:
 
 **Safety Note**: When building custom tools that access your systems, always validate inputs strictly and log tool usage. Your tools are the security boundary—invalid input passed through could expose your databases or APIs. Design tools as if they'll be called by untrusted code.
 
+---
+
+## Reflect on Your Skill
+
+You built a `claude-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my claude-agent skill, create a custom MCP tool with proper validation.
+Does my skill cover @tool decorator and create_sdk_mcp_server?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain @tool decorator with type hints and schemas?
+- Did it show how to build MCP servers and register them in options?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My claude-agent skill is missing custom tool creation patterns.
+Update it to include:
+- @tool decorator usage
+- Input validation patterns
+- MCP server registration and naming conventions
+```
+
+---
+

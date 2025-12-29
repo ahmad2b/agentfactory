@@ -569,3 +569,36 @@ Bring your implementation code and ask Claude: "Here's my agent configuration. I
 
 **What emerged from iteration**: A cost-conscious approach to agent development where economics inform design. You're not just building agents—you're building profitable products.
 
+---
+
+## Reflect on Your Skill
+
+You built a `claude-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my claude-agent skill, implement cost tracking for agent executions.
+Does my skill cover token usage and total_cost_usd extraction?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain how to extract per-message usage and total_cost_usd?
+- Did it cover billing model design (subscription, usage-based, success-fee)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My claude-agent skill is missing cost tracking and monetization patterns.
+Update it to include:
+- Token usage extraction from messages
+- total_cost_usd tracking
+- Billing model design for Digital FTEs
+```
+
+---
+

@@ -566,3 +566,33 @@ Build a decision framework for each tool.
 ---
 
 **Safety Note for Long-Running Tools**: Long operations that timeout or fail should always report error-level logging before failing. This prevents frozen UX where client receives neither progress nor failure notification. Example: `await context.error("Timeout after 60s, cancelling operation")` before raising exception.
+
+---
+
+## Reflect on Your Skill
+
+You built an `mcp-server` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my mcp-server skill, create a tool that processes multiple items and reports progress.
+Does my skill include guidance on when to use info() vs warning() vs error(), and how to calculate progress percentages correctly?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include progress reporting patterns (report_progress with current/total)?
+- Did it explain logging severity levels and UX patterns for different operation types?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My mcp-server skill is missing notification patterns for progress and logging.
+Update it to include when to use progress vs logging, severity level guidelines (info/warning/error), and UX patterns for deterministic vs indeterminate operations.
+```
+
+---

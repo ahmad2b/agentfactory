@@ -672,3 +672,41 @@ Show the difference: What appears in history WITHOUT filtering vs WITH filtering
 
 **What you're learning**: How filtering reduces noise and helps specialists focus on what they actually need.
 
+---
+
+## Reflect on Your Skill
+
+You built an `openai-agents` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my openai-agents skill, implement agent handoffs with on_handoff callbacks and input_filter functions.
+Does my skill explain how to inject context at handoff time and filter message history before transfer?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include the handoffs=[agent] pattern for registering target agents?
+- Did it explain on_handoff callbacks for injecting runtime data before transfer?
+- Did it cover HandoffInputData structure (input_history, pre_handoff_items, new_items)?
+- Did it explain input_filter functions for cleaning message history?
+- Did it include handoff_filters utilities like remove_all_tools()?
+- Did it compare handoffs (transfer control) vs agents-as-tools (orchestrated)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My openai-agents skill is missing [handoff patterns, context injection, or message filtering].
+Update it to include:
+1. handoffs=[agent] for registering target agents
+2. handoff(agent, on_handoff=callback) for injecting context at transfer time
+3. HandoffInputData and input_filter for cleaning message history
+4. handoff_filters.remove_all_tools() utility for common filtering
+5. When to use handoffs (linear routing, specialist takes over) vs agents-as-tools (manager retains control)
+6. How to design triage → specialist workflows
+```
+

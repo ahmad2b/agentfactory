@@ -508,3 +508,33 @@ What should session_cache be? (Hint: It needs to persist across tool calls but n
 ---
 
 ✅ **Context Object & Server Lifespan enables production patterns.** You've seen how dependency injection provides logging, progress, session, and lifecycle management—all automatically. Next lesson: Using context.session.create_message() to have your server call LLMs back through connected clients.
+
+---
+
+## Reflect on Your Skill
+
+You built an `mcp-server` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my mcp-server skill, create a tool that uses Context for logging and progress reporting.
+Does my skill include guidance on dependency injection patterns and when to use context.info() vs context.report_progress()?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include Context object lifecycle patterns (on_startup/on_shutdown)?
+- Did it handle session-based caching and request-scoped state?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My mcp-server skill is missing Context lifecycle patterns and session management guidance.
+Update it to include when to use logging vs progress, how to implement startup/shutdown handlers, and session-based caching patterns.
+```
+
+---

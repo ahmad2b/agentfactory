@@ -714,3 +714,37 @@ Show me:
 
 **What you're learning**: Real-world state patterns and how to compose multiple tools that share and manage state.
 
+---
+
+## Reflect on Your Skill
+
+You built a `google-adk` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my google-adk skill, implement session state persistence with ToolContext.
+Does my skill demonstrate how tools read/write state and how to configure SessionService?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include ToolContext.state access patterns for reading and modifying session data?
+- Did it explain SessionService options (InMemorySessionService vs FirestoreSessionService vs VertexAiSessionService)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My google-adk skill is missing session state management patterns.
+Update it to include:
+- ToolContext parameter in tool functions for state access
+- Reading state with tool_context.state.get()
+- Writing state with tool_context.state['key'] = value
+- Runner configuration with appropriate SessionService backend
+- Trade-offs between InMemory (development) and Firestore/VertexAI (production)
+```
+
+---

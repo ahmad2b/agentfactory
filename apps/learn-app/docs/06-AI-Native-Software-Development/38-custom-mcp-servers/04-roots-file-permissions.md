@@ -527,3 +527,33 @@ Write these as pytest test cases.
 
 Once Claude generates the tests, **run them against your actual implementation**. Fix any failures—this is real security validation, not theoretical.
 
+---
+
+## Reflect on Your Skill
+
+You built an `mcp-server` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my mcp-server skill, create a file-processing tool with proper root validation.
+Does my skill include guidance on implementing list_roots() and is_path_allowed() with symlink resolution?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include security patterns for file access (path normalization, symlink handling)?
+- Did it explain the path discovery problem and how roots solve both UX and security concerns?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My mcp-server skill is missing file permission and root validation patterns.
+Update it to include list_roots() configuration, is_path_allowed() implementation with os.path.realpath() and os.path.commonpath(), and security best practices for path validation.
+```
+
+---
+

@@ -603,3 +603,36 @@ Also: What edge cases might cause the skill to NOT activate?
 
 **What you're learning**: How skills activate in real agents. Understanding when your skill applies (and doesn't) determines whether agents use it effectively.
 
+---
+
+## Reflect on Your Skill
+
+You built a `claude-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my claude-agent skill, explain how to create and load SKILL.md files.
+Does my skill cover settingSources and the Skill tool?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain SKILL.md structure (YAML frontmatter + content)?
+- Did it show how to configure settingSources and enable the Skill tool?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My claude-agent skill is missing skills ecosystem documentation.
+Update it to include:
+- SKILL.md file structure
+- settingSources configuration
+- Skill activation patterns
+```
+
+---
+

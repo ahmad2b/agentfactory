@@ -838,3 +838,36 @@ Provide code showing:
 
 **Safety note**: When configuring sandbox for production, start with maximum restrictions (`enabled=true, auto=false`) and relax only after testing with restricted permissions. Never assume unsafe is acceptable because "it's just this one agent."
 
+---
+
+## Reflect on Your Skill
+
+You built a `claude-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my claude-agent skill, design a production deployment architecture.
+Does my skill cover hosting patterns, sandbox config, and context compaction?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain the three hosting patterns (ephemeral, long-running, hybrid)?
+- Did it show sandbox configuration and context compaction strategies?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My claude-agent skill is missing production deployment patterns.
+Update it to include:
+- Hosting pattern comparison (ephemeral vs long-running vs hybrid)
+- Sandbox security configuration
+- PreCompact hooks for memory management
+```
+
+---
+

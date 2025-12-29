@@ -516,3 +516,36 @@ Suggest improvements to the tool configurations.
 
 **Safety Note**: Just like tools, commands follow "deny by default"—only grant specific tools your command truly needs. An agent with full tool access is like a user with root privileges; most workflows don't need it.
 
+---
+
+## Reflect on Your Skill
+
+You built a `claude-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my claude-agent skill, create a custom slash command.
+Does my skill cover command structure and tool restrictions?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain .claude/commands/ structure and YAML frontmatter?
+- Did it show the difference between commands (workflows) and skills (expertise)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My claude-agent skill is missing slash command patterns.
+Update it to include:
+- Command file structure
+- Tool restriction via allowed-tools
+- Command vs skill distinction
+```
+
+---
+

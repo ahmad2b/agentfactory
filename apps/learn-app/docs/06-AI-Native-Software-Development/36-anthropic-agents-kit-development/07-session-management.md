@@ -536,3 +536,36 @@ Show a complete class/system design that:
 **What you're learning**: This is Digital FTE architecture—designing agents that work as long-term team members, not one-off tools. Session management is how you build agents that are trustworthy enough to run unsupervised for days or weeks.
 
 **Safety Note**: Session state grows over time. Monitor session size and implement compaction or archival strategies for very long-running agents. Never store sensitive customer data in sessions—persist it in encrypted databases instead. Sessions are conversation context, not data storage.
+
+---
+
+## Reflect on Your Skill
+
+You built a `claude-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my claude-agent skill, implement session capture and resumption.
+Does my skill cover session persistence and forking?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain session ID capture and the resume parameter?
+- Did it cover session forking for parallel exploration?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My claude-agent skill is missing session management patterns.
+Update it to include:
+- Session ID capture from init messages
+- Resume parameter usage
+- Session forking for A/B testing approaches
+```
+
+---

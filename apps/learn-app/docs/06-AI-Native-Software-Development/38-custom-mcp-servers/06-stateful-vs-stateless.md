@@ -622,3 +622,33 @@ This teaches business reasoning—how architectural constraints affect product d
 4. **Choose based on:** Sampling needs, progress requirements, scale target, ops capacity
 
 Your choice here determines whether you build a system that scales elegantly or collapses under load. Make it thoughtfully, using the scenarios above as your guide.
+
+---
+
+## Reflect on Your Skill
+
+You built an `mcp-server` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my mcp-server skill, decide whether to use stateful or stateless configuration for a production deployment.
+Does my skill include guidance on the tradeoffs between stateful (sampling, progress) and stateless (horizontal scaling) modes?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include decision criteria for stateless_http and json_response configuration?
+- Did it explain the horizontal scaling problem and load balancer session routing?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My mcp-server skill is missing scaling architecture guidance.
+Update it to include when to use stateless_http=True vs False, json_response tradeoffs, feature limitations matrix, and decision frameworks for production scaling requirements.
+```
+
+---

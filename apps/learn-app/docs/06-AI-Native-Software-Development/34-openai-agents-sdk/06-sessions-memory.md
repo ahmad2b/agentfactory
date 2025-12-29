@@ -581,6 +581,44 @@ Include a test that shows the agent remembering across 3 turns.
 
 **Expected outcome**: Session that persists task context across multiple interactions, demonstrating memory through tool references ("I see we created 'Buy groceries' earlier")
 
+---
+
+## Reflect on Your Skill
+
+You built an `openai-agents` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my openai-agents skill, implement conversation memory with SQLiteSession and track usage with AdvancedSQLiteSession.
+Does my skill explain session persistence, token tracking, and conversation branching?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include SQLiteSession for basic conversation memory?
+- Did it explain session_id and db_path for persistent storage?
+- Did it cover AdvancedSQLiteSession with store_run_usage() for metrics?
+- Did it explain conversation branching with create_branch_from_turn()?
+- Did it cover how to retrieve conversation history with get_items()?
+- Did it explain the difference between in-memory and file-based sessions?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My openai-agents skill is missing [session management, usage tracking, or conversation branching].
+Update it to include:
+1. SQLiteSession(session_id, db_path) for persistent memory
+2. Passing session=session to Runner.run() to maintain context
+3. AdvancedSQLiteSession with store_run_usage() for token tracking
+4. get_session_usage() for aggregated metrics
+5. create_branch_from_turn() for exploring alternative conversation paths
+6. How sessions enable stateful multi-turn conversations
+```
+
 ### Prompt 2: Track Token Usage for Cost Optimization
 
 **Setup**: Your TaskManager with AdvancedSQLiteSession now active

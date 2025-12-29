@@ -541,3 +541,36 @@ Show me the ClaudeAgentOptions configuration for your agent.
 
 **Safety Note**: The tools are powerful. Always configure with the "deny by default" principle—grant only the specific tools your agent truly needs, never full access.
 
+---
+
+## Reflect on Your Skill
+
+You built a `claude-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my claude-agent skill, explain the 9 built-in tools and their security implications.
+Does my skill cover tool selection strategy and access control?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill document all 9 tools (Read, Write, Edit, Bash, Glob, Grep, WebSearch, WebFetch, Task)?
+- Did it explain tool selection for different agent types (read-only, modification, system)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My claude-agent skill is missing comprehensive tool documentation.
+Update it to include:
+- Description of each built-in tool
+- Security considerations per tool
+- Tool selection decision framework
+```
+
+---
+

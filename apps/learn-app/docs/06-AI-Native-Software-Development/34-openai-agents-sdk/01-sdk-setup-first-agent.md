@@ -465,3 +465,35 @@ Which would you use for your Digital FTE and why?
 ```
 
 **What you're learning:** How to evaluate models for specific agent use cases
+
+---
+
+## Reflect on Your Skill
+
+You built an `openai-agents` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my openai-agents skill, create a simple agent with Agent() and run it with Runner.run_sync().
+Does my skill correctly explain the three-part pattern (Agent → Runner → Result)?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include the basic Agent creation pattern (name and instructions)?
+- Did it explain how to use Runner.run_sync() to execute agents?
+- Did it cover how to extract final_output from results?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My openai-agents skill is missing [basic agent creation patterns, Runner execution, or result handling].
+Update it to include the Agent → Runner → Result pattern with clear examples of how to:
+1. Define an Agent with name and instructions
+2. Execute with Runner.run_sync()
+3. Extract final_output from the result object
+```

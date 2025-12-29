@@ -636,3 +636,36 @@ As you work through this conversation:
 This entire conversation is an example of **specification accumulation**: each turn adds one requirement, and the agent builds increasingly sophisticated output that respects all prior constraints.
 
 Now build your own: A different domain (content moderation, image processing, financial analysis). Follow this pattern: Vague requirement → Add constraint → Ask for artifact (schema/API/architecture) → Validate design. Watch how context accumulation eliminates repetition and improves output quality.
+
+---
+
+## Reflect on Your Skill
+
+You built a `claude-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my claude-agent skill, implement a multi-turn conversation with ClaudeSDKClient.
+Does my skill cover streaming input and message generators?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain ClaudeSDKClient for multi-turn conversations?
+- Did it show streaming input patterns with message generators?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My claude-agent skill is missing ClaudeSDKClient patterns.
+Update it to include:
+- Multi-turn conversation with context preservation
+- Message generator patterns
+- Image insertion with streaming input
+```
+
+---

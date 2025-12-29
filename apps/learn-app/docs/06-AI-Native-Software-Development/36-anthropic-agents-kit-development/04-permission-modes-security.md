@@ -553,3 +553,36 @@ Explain the security tradeoffs in your design.
 
 **Key Takeaway**: Security isn't about blocking everything. It's about designing trust boundaries so agents can be powerful and safe at the same time. Permission modes give you baseline controls. `canUseTool` gives you surgical precision. Together, they let you deploy agents in production with confidence.
 
+---
+
+## Reflect on Your Skill
+
+You built a `claude-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my claude-agent skill, design a canUseTool callback for a production agent.
+Does my skill cover permission modes and runtime security?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain the four permission modes (default, acceptEdits, bypassPermissions, plan)?
+- Did it show how to implement canUseTool callbacks for dynamic permissions?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My claude-agent skill is missing security configuration patterns.
+Update it to include:
+- Permission mode comparison
+- canUseTool callback examples
+- Context-aware security policies
+```
+
+---
+

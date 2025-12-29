@@ -526,3 +526,33 @@ Format it ready to copy into a new pyproject.toml file.
 ```
 
 **Expected result**: Claude generates a complete, properly-formatted pyproject.toml that you can immediately use as your project's packaging configuration.
+
+---
+
+## Reflect on Your Skill
+
+You built an `mcp-server` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my mcp-server skill, create a pyproject.toml configuration for packaging an MCP server.
+Does my skill include guidance on entry points, dependency specifications, and build system configuration?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include pyproject.toml structure ([project.scripts] entry points)?
+- Did it explain how to build with uv, test locally, and configure in Claude Desktop?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My mcp-server skill is missing packaging and distribution patterns.
+Update it to include pyproject.toml configuration, [project.scripts] entry point patterns, dependency version specifications, building with uv build, local installation testing, and Claude Desktop configuration.
+```
+
+---

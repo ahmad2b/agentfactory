@@ -420,3 +420,38 @@ it should be $18.00, not just $3.00 (the last item). This proves context persist
 ```
 
 **What you're learning:** How context mutations persist across multiple sequential tool calls and how your code can inspect the final state after the agent run completes.
+
+---
+
+## Reflect on Your Skill
+
+You built an `openai-agents` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my openai-agents skill, create a function tool with @function_tool decorator and a context object using Pydantic BaseModel.
+Does my skill explain how to use RunContextWrapper to access and mutate context within tools?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include the @function_tool decorator pattern with type hints and docstrings?
+- Did it explain Pydantic context model design (BaseModel)?
+- Did it cover RunContextWrapper and accessing context.context for state mutations?
+- Did it explain how context persists across multiple tool calls?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My openai-agents skill is missing [function tool patterns, context object design, or state persistence].
+Update it to include:
+1. @function_tool decorator with type hints and docstrings
+2. Pydantic BaseModel for context definition
+3. RunContextWrapper pattern for accessing context.context
+4. How mutations persist across sequential tool calls
+5. How to pass context to Runner.run_sync(context=ctx)
+```

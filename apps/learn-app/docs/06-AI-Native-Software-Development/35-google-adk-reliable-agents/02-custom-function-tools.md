@@ -549,3 +549,37 @@ After running, answer:
 ```
 
 **What you're learning:** Production-grade tools don't assume everything works perfectly. Graceful degradation—returning partial results instead of crashing—is what separates fragile tools from reliable ones that agents can depend on.
+
+---
+
+## Reflect on Your Skill
+
+You built a `google-adk` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my google-adk skill, create a custom function tool with type hints and docstrings.
+Does my skill handle FunctionTool creation, parameter validation, and graceful error handling?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include the pattern for type-annotated functions (required for ADK tool wrapping)?
+- Did it demonstrate Tool.from_function() usage and error handling patterns?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My google-adk skill is missing custom tool creation patterns.
+Update it to include:
+- Function tool pattern with complete type hints (str, List[str], Dict, etc.)
+- Docstring format that helps agents understand when to use the tool
+- Graceful error handling (return error dicts instead of raising exceptions)
+- Tool registration with Agent via Tool.from_function()
+```
+
+---

@@ -523,3 +523,39 @@ Did the 3 specialists working together produce a better response than any single
 ```
 
 **What you're learning:** How to decompose complex problems into specialist responsibilities and how manager orchestration produces better outcomes
+
+---
+
+## Reflect on Your Skill
+
+You built an `openai-agents` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my openai-agents skill, convert an agent to a tool using agent.as_tool() and create a manager agent that uses specialist agents.
+Does my skill explain the agent-as-tool pattern with tool_name, tool_description, and custom_output_extractor?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include agent.as_tool() for converting agents to callable tools?
+- Did it explain tool_name and tool_description parameters for agent tools?
+- Did it cover custom_output_extractor for transforming specialist output?
+- Did it explain the manager-specialist architecture pattern?
+- Did it compare agents-as-tools vs handoffs (when to use each)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My openai-agents skill is missing [agent composition patterns, output extractors, or orchestration strategies].
+Update it to include:
+1. agent.as_tool(tool_name, tool_description) for creating agent tools
+2. custom_output_extractor functions for filtering specialist output
+3. Manager-specialist architecture (manager orchestrates, specialists execute)
+4. When to use agents-as-tools (manager needs control) vs handoffs (linear routing)
+5. How multiple specialists can be composed under one manager
+```
