@@ -523,3 +523,34 @@ I need to:
 ```
 
 **What you're learning:** Testing authentication requires setting up test users and tokens. There are patterns to make this clean.
+
+---
+
+## Reflect on Your Skill
+
+You built a `fastapi-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my fastapi-agent skill, help me implement JWT authentication.
+Does my skill include token generation, validation, protected routes, and OAuth2 password flow?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include JWT token creation with python-jose?
+- Did it handle OAuth2PasswordBearer and get_current_user dependency?
+- Did it cover protected endpoints and token validation?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My fastapi-agent skill is missing JWT authentication patterns.
+Update it to include token creation/validation with python-jose,
+OAuth2PasswordBearer setup, protected route implementation with Depends(get_current_user),
+and proper WWW-Authenticate headers for 401 responses.
+```

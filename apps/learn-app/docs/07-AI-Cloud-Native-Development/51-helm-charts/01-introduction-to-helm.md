@@ -1008,3 +1008,36 @@ Now you'll work with AI to create a multi-environment Helm configuration for you
 
 **Expected**: You'll discover that environment-specific values files are cleaner than conditionals, and learn about Helm's secret management and hooks—features you'll explore in later lessons.
 
+---
+
+## Reflect on Your Skill
+
+You built a `helm-chart` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my helm-chart skill, generate a basic Helm chart for a web service.
+Does my skill understand Chart.yaml structure and values.yaml defaults?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include proper Chart.yaml metadata (apiVersion, name, version, description)?
+- Did it generate a sensible values.yaml with image, replicas, and service configuration?
+- Does it understand the templates/ directory structure and basic Go template syntax?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My helm-chart skill is missing [proper Chart.yaml structure / values organization / template basics].
+Update it to include best practices for:
+- Chart.yaml metadata fields
+- Default values.yaml structure
+- Basic Deployment and Service templates
+- Environment-specific values files (values-dev.yaml, values-prod.yaml)
+```
+

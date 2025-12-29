@@ -422,6 +422,36 @@ After applying the Three Roles Framework, take a moment to reflect on each scena
 
 **The pattern:** In every case, the final solution was better than either starting point. You brought context AI couldn't know. AI brought patterns you hadn't encountered. Convergence produced superior results.
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, apply the Three Roles Framework to debug a consumer lag problem.
+Does my skill demonstrate AI as Teacher (surfacing patterns), Student (learning constraints), and Co-Worker (iterating to solutions)?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill show how AI teaches new Kafka patterns you hadn't considered?
+- Did it demonstrate teaching AI your production constraints for tailored recommendations?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing AI collaboration patterns (Three Roles Framework, convergence loops, context teaching).
+Update it to include how to effectively collaborate with AI on Kafka development challenges.
+```
+
+---
+
 ## Try With AI
 
 Apply the Three Roles Framework to your own Kafka development challenges.

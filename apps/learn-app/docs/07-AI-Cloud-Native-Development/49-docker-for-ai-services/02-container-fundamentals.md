@@ -618,3 +618,33 @@ exiting? Can I see its logs? How would I know why it stopped?
 ### Safety Note
 
 Remember that container commands (`docker rm`, `docker rmi`) are destructive. Always double-check container names before removing. In production, use `docker rm` with caution—stopped containers may contain logs or state you need to investigate.
+
+---
+
+## Reflect on Your Skill
+
+You built a `docker-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my docker-deployment skill, explain the difference between images and containers.
+Does my skill correctly distinguish between immutable templates and running instances?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include the images vs containers distinction?
+- Did it handle layer architecture and copy-on-write concepts?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My docker-deployment skill is missing fundamental concepts about images and containers.
+Update it to include the image/container relationship, layer architecture, and copy-on-write mechanisms.
+```
+
+---

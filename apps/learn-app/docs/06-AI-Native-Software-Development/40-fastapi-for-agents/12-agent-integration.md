@@ -606,3 +606,35 @@ multiple specialized agents that can work together?
 ```
 
 **What you're learning:** Multi-agent architectures enable specialization. This extends to triage agents, handoffs, and agent collaboration—covered in the capstone.
+
+---
+
+## Reflect on Your Skill
+
+You built a `fastapi-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my fastapi-agent skill, help me integrate AI agents with my API endpoints.
+Does my skill include wrapping API functions as agent tools, creating agents with function_tool,
+and streaming agent responses via SSE?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include converting API endpoints to callable functions for agents?
+- Did it handle function_tool decorator and Agent creation with tools?
+- Did it cover streaming agent responses using Runner.run_streamed() and EventSourceResponse?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My fastapi-agent skill is missing agent integration patterns.
+Update it to include API-to-function conversion for tools, function_tool decorator usage,
+Agent creation with instructions and tools, Runner.run() for non-streaming,
+and Runner.run_streamed() with SSE for streaming agent responses.
+```

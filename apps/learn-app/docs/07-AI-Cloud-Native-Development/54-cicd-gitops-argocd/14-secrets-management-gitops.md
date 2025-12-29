@@ -674,3 +674,31 @@ Compare your result:
 - Could you adapt this for External Secrets later when you move to production?
 
 **Safety note**: Never paste your actual API keys into public AI conversations. Use placeholder values like `sk-proj-example-key-for-demo` and test with real keys locally.
+
+---
+
+## Reflect on Your Skill
+
+You built a `gitops-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my gitops-deployment skill, create a SealedSecret encrypted with kubeseal.
+Does my skill understand the workflow: plaintext → kubeseal → encrypted YAML → Git?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include External Secrets Operator configuration for Vault?
+- Did it handle secret rotation strategies and best practices?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My gitops-deployment skill only handles Sealed Secrets, not external vaults.
+Update it to include ExternalSecret CRDs with SecretStore configurations for HashiCorp Vault.
+```

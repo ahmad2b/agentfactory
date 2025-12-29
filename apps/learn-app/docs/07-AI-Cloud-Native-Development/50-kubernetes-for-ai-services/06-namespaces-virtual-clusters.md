@@ -512,3 +512,35 @@ You now understand how namespaces provide virtual cluster partitions with resour
 
 **Ask AI to evaluate your strategy**: Describe your namespace design, ResourceQuotas, and cross-namespace access patterns. AI can review whether your quotas are realistic for the workload types and suggest adjustments based on team requirements.
 
+---
+
+## Reflect on Your Skill
+
+You built a `kubernetes-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kubernetes-deployment skill, create Namespaces with ResourceQuotas and LimitRanges.
+Does my skill generate namespace isolation with resource limits and default container constraints?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include ResourceQuota configuration for limiting namespace resource consumption?
+- Did it explain LimitRanges for setting default container requests and limits?
+- Did it cover cross-namespace communication using fully qualified DNS names?
+- Did it include multi-environment strategies (dev, staging, prod namespaces)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kubernetes-deployment skill is missing namespace resource management and isolation patterns.
+Update it to include ResourceQuota and LimitRange configuration, cross-namespace DNS, and multi-environment namespace strategies.
+```
+
+---
+

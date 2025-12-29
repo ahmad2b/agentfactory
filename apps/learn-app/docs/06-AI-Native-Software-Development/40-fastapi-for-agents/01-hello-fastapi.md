@@ -515,3 +515,50 @@ Then show me what the Swagger UI documentation would look like for this endpoint
 ```
 
 **What you're learning:** This prompt bridges theory to your real work. By designing for your own domain, you internalize when to use path vs query parameters—knowledge that transfers directly when you expose agent capabilities as API endpoints.
+
+---
+
+## Reflect on Your Skill
+
+You built a `fastapi-agent-api` skill in Lesson 0. Now let's test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my fastapi-agent-api skill, generate a FastAPI app with:
+- A root endpoint that returns a welcome message
+- A /tasks/{task_id} endpoint with path parameter
+- A /search endpoint with query parameters
+
+Does my skill generate valid, runnable code?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include proper type hints (`task_id: int`)?
+- Did it use `@app.get()` decorators correctly?
+- Did it return dictionaries that serialize to JSON?
+
+### Improve Your Skill
+
+If you found gaps, update your skill:
+
+```
+My fastapi-agent-api skill is missing [what you noticed].
+
+Update the skill to include:
+1. Always use type hints for path/query parameters
+2. Always return dictionaries (not None)
+3. Use descriptive function names matching the endpoint purpose
+
+Show me the updated SKILL.md principles section.
+```
+
+**Your skill just got better.** Each lesson builds on this pattern.
+
+---
+
+## What's Next
+
+**Lesson 2: Pytest Fundamentals** — You'll learn to test your endpoints, and your skill will learn to generate tests alongside code.

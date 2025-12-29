@@ -322,6 +322,36 @@ Understanding Kafka's mental model helps you:
 
 In the next lesson, you'll deploy a real Kafka cluster with Strimzi and see these concepts in action.
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, explain how Kafka would handle 10 producers writing task events and 3 consumer groups reading them.
+Does my skill correctly explain topics, partitions, consumer groups, and offset management?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain the relationship between topics, partitions, and consumer groups?
+- Did it cover how offsets enable replay and parallel processing?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing Kafka's core mental model (topics, partitions, offsets, consumer groups).
+Update it to include when to partition topics and how consumer groups enable parallel processing.
+```
+
+---
+
 ## Try With AI
 
 Use your AI companion to reinforce and extend this mental model.

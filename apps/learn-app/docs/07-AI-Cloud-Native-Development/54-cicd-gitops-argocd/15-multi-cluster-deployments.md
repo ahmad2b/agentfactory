@@ -818,3 +818,31 @@ Think about:
 - Whether DNS-based failover is better than application-level failover
 - What operational runbooks you'd need for actual failure scenarios
 
+
+---
+
+## Reflect on Your Skill
+
+You built a `gitops-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my gitops-deployment skill, register an external cluster with ArgoCD.
+Does my skill describe the service account creation and argocd cluster add command?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include ApplicationSet cluster generator for multi-cluster deployments?
+- Did it handle per-cluster Helm value overrides (values-prod.yaml, values-staging.yaml)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My gitops-deployment skill doesn't generate multi-cluster ApplicationSets.
+Update it to include cluster generators with label selectors and environment-specific value files.
+```

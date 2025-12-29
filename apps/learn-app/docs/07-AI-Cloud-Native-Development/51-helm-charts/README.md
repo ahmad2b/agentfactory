@@ -1,14 +1,33 @@
 ---
 sidebar_position: 51
 title: "Chapter 51: Helm Charts for AI Services"
-description: "Master Helm chart architecture for production AI deployments"
+description: "Build your Helm skill first, then learn to understand and refine it into a production-ready asset"
 ---
 
 # Chapter 51: Helm Charts for AI Services
 
-Helm is the package manager for Kubernetes. Instead of managing individual YAML files, you create **Helm charts**—templated packages that parameterize deployments across environments. This chapter takes you from Helm basics to production architecture.
+**You will build a Helm skill BEFORE you learn Helm.**
 
-This chapter starts with Helm fundamentals (installation, chart structure, releases) then advances to Go templating, multi-chart dependencies, lifecycle hooks, OCI distribution, and library charts. By the end, you'll build production-grade charts that deploy your Task API (from Chapter 49) with a single command across any environment.
+This chapter follows the **Skill-First Learning Pattern**: In Lesson 0, you create a `helm-chart` skill using tools from Chapter 5. Then you spend the chapter understanding what you built and making it better. By the end, you don't just "know Helm"—you OWN a production-ready skill.
+
+## The Skill-First Arc
+
+```
+L00: Build Your Helm Skill (25 min)
+  │   └── Clone skills-lab, fetch docs, create skill
+  │
+  ├── L01: Helm Intro
+  │   └── Understand what your skill generates
+  │
+  ├── L02-04: Templating Foundation
+  │   └── Go templates, helpers, values
+  │
+  ├── L05-09: Advanced Patterns
+  │   └── Dependencies, hooks, testing, OCI, library
+  │
+  └── L10-12: AI Collaboration & Capstone
+      └── AI-assisted, production chart, skill finalization
+```
 
 ## Prerequisites
 
@@ -20,6 +39,34 @@ This chapter starts with Helm fundamentals (installation, chart structure, relea
 - Docker Desktop Kubernetes cluster and kubectl operations
 
 **Proficiency Level:** B1-B2 (Intermediate to Upper-Intermediate)
+
+## Chapter Structure
+
+| # | Lesson | Your Skill Improves |
+|---|--------|---------------------|
+| **0** | **Build Your Helm Skill** | **Created from official docs** |
+| 1 | Introduction to Helm | Understand: what skill generates |
+| 2 | Advanced Go Templating | Refine: better templates |
+| 3 | Named Templates & Helpers | Add: _helpers.tpl patterns |
+| 4 | Values Deep Dive | Add: multi-environment configs |
+| 5 | Chart Dependencies | Add: subchart composition |
+| 6 | Helm Hooks & Lifecycle | Add: hook patterns |
+| 7 | Testing Your Charts | Add: lint/test patterns |
+| 8 | OCI Registries | Add: distribution patterns |
+| 9 | Library Charts | Add: standardization |
+| 10 | AI-Assisted Development | Refine: AI collaboration |
+| **11** | **Capstone: Production Chart** | **Production-ready** |
+| 12 | Finalize Helm Skill | **Complete asset** |
+
+## Every Lesson Has Skill Reflection
+
+Each lesson ends with **"Reflect on Your Skill"**:
+
+1. **Test**: Does your skill handle this lesson's concepts?
+2. **Identify gaps**: What's missing?
+3. **Improve**: Add or refine the capability
+
+By Lesson 12, you've tested and improved your skill 11+ times.
 
 ## What You'll Learn
 

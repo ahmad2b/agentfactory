@@ -886,3 +886,38 @@ grep -r "include \"myapp\." templates/
 Should show calls in deployment, service, configmap—not in _helpers.tpl definitions.
 
 ---
+
+## Reflect on Your Skill
+
+You built a `helm-chart` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my helm-chart skill, create a _helpers.tpl file with reusable label templates.
+Does my skill understand define/include patterns and nindent usage?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill create templates with proper naming (chartname.templatename)?
+- Did it use `include` instead of deprecated `template`?
+- Does it handle indentation correctly with nindent?
+- Did it demonstrate passing context with the `.` parameter?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My helm-chart skill is missing [named templates / helper patterns / include syntax].
+Update it to include:
+- Naming convention: chartname.component (e.g., myapp.labels)
+- Using include instead of template for composability
+- Proper indentation with nindent function
+- Context passing with `.` and root access with `$`
+- Common helper patterns (labels, selectors, fullname)
+```
+
+---

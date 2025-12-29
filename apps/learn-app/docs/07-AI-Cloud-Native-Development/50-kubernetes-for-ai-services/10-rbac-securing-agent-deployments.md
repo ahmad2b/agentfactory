@@ -436,3 +436,35 @@ Ask AI: "What additional RBAC considerations should I include for production? Sh
 - You can design RBAC that enforces least privilege across namespaces
 - You can audit what an agent can and cannot do using kubectl auth can-i
 - You recognize that over-permissioning is a common security anti-pattern
+
+---
+
+## Reflect on Your Skill
+
+You built a `kubernetes-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kubernetes-deployment skill, create RBAC configuration for a Pod.
+Does my skill generate ServiceAccount, Role, and RoleBinding with minimal required permissions?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include the principle of least privilege (only necessary permissions)?
+- Did it explain the RBAC component hierarchy (ServiceAccount → RoleBinding → Role → Resources)?
+- Did it cover kubectl auth can-i for auditing permissions?
+- Did it distinguish between Role/RoleBinding (namespace-scoped) and ClusterRole/ClusterRoleBinding (cluster-scoped)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kubernetes-deployment skill is missing RBAC security patterns and permission auditing.
+Update it to include ServiceAccount creation, Role definition with minimal permissions, RoleBinding configuration, and kubectl auth can-i verification.
+```
+
+---

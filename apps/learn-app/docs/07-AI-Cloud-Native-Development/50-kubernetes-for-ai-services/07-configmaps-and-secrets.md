@@ -793,3 +793,35 @@ access control and to prevent accidental logging).
 
 This exercises your ability to prompt Claude for iterative refinement of configuration manifests—a skill you'll use frequently when deploying to Kubernetes.
 
+---
+
+## Reflect on Your Skill
+
+You built a `kubernetes-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kubernetes-deployment skill, inject configuration using ConfigMaps and Secrets.
+Does my skill generate environment variable injection using envFrom and valueFrom patterns?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include ConfigMap creation from literals and YAML manifests?
+- Did it explain Secret creation and the base64 encoding (not encryption) caveat?
+- Did it cover both environment variable injection and volume mount patterns?
+- Did it include security warnings about Secret management in production?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kubernetes-deployment skill is missing ConfigMap and Secret injection patterns.
+Update it to include envFrom, valueFrom, and volume mount configurations, plus security best practices for Secrets.
+```
+
+---
+

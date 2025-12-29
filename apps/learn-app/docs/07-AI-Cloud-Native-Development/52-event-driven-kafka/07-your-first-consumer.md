@@ -525,6 +525,36 @@ A lag of 0 means your consumer is caught up. Growing lag means consumer can't ke
 | Committing before processing | Message loss if processing fails | Always process first, commit second |
 | Single consumer for high-volume topic | Can't keep up, growing lag | Scale with more consumers (up to partition count) |
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, generate Python consumer code that processes task events from a Kafka topic.
+Does my skill include proper offset management, error handling, and graceful shutdown?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain auto.offset.reset and enable.auto.commit?
+- Did it show how to handle message processing errors without losing data?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing consumer implementation patterns (offset management, error handling, shutdown).
+Update it to include when to use auto-commit vs manual commit and how to handle processing failures.
+```
+
+---
+
 ## Try With AI
 
 ### Prompt 1: Debug a Consumer That's Losing Messages

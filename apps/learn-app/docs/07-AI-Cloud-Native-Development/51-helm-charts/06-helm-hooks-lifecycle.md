@@ -1313,3 +1313,38 @@ Ask AI for a test strategy:
 - Does it recommend testing both success and failure cases?
 - Does it mention checking hook order with weights?
 
+---
+
+## Reflect on Your Skill
+
+You built a `helm-chart` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my helm-chart skill, create a pre-upgrade hook for database migrations.
+Does my skill understand hook types, weights, and delete policies?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill use the correct hook annotation (helm.sh/hook: pre-upgrade)?
+- Did it include hook-weight for execution order?
+- Does it use hook-delete-policy for cleanup?
+- Did it create idempotent migrations (IF NOT EXISTS patterns)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My helm-chart skill is missing [hook lifecycle / weights / delete policies].
+Update it to include:
+- All 9 hook types (pre-install, post-install, pre-upgrade, etc.)
+- Hook weights for ordering (-10, 0, 10)
+- Delete policies (hook-succeeded, hook-failed, before-hook-creation)
+- Job-based hooks with proper backoffLimit
+- Idempotent scripts safe for re-execution
+```
+

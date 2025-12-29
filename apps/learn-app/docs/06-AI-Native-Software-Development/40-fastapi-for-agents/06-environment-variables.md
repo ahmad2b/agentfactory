@@ -496,3 +496,33 @@ practice for managing production secrets?
 ```
 
 **What you're learning:** .env is for local development. Production platforms have their own secrets management—understanding this completes the picture.
+
+---
+
+## Reflect on Your Skill
+
+You built a `fastapi-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my fastapi-agent skill, help me set up environment variable configuration.
+Does my skill include Settings class with pydantic-settings and .env file handling?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include BaseSettings class with pydantic-settings?
+- Did it handle .env file loading and .gitignore configuration?
+- Did it use lru_cache for settings and Depends() for injection?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My fastapi-agent skill is missing environment configuration patterns.
+Update it to include pydantic-settings BaseSettings, .env file usage,
+.gitignore for secrets, and cached dependency injection for configuration.
+```

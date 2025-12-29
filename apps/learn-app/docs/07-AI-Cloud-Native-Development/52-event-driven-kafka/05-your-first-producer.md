@@ -364,6 +364,36 @@ Your messages are in Kafka, persisted and ready for any consumer to read.
 | `MSG_SIZE_TOO_LARGE` | Message exceeds max.message.bytes | Increase broker limit or reduce message size |
 | Callback never called | Forgot to call poll()/flush() | Add poll(0) after produce(), flush() before exit |
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, generate Python producer code that sends task.created events to a Kafka topic.
+Does my skill include proper error handling, serialization, and callback patterns?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill show synchronous vs asynchronous producer patterns?
+- Did it include delivery callbacks and error handling?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing producer implementation patterns (sync vs async, callbacks, error handling).
+Update it to include when to use synchronous vs asynchronous producers and how to handle delivery failures.
+```
+
+---
+
 ## Try With AI
 
 ### Prompt 1: Debug a Silent Producer

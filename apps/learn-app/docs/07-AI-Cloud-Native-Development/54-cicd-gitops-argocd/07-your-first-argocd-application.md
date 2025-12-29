@@ -712,3 +712,31 @@ Before accepting Claude's response, verify it suggests:
 Then ask: "The image is correct in the registry. But I pushed to my private registry and ArgoCD doesn't have credentials. How do I give ArgoCD access to pull from my private registry?"
 
 Notice how Claude's response guides you toward the Repository credentials section (Lesson 14 topic), helping you understand that Applications depend on ArgoCD's ability to authenticate with registries and repositories.
+
+---
+
+## Reflect on Your Skill
+
+You built a `gitops-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my gitops-deployment skill, generate an ArgoCD Application manifest.
+Does my skill include source (repoURL, path), destination (server, namespace), and syncPolicy?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include health status interpretation (Healthy, Progressing, Degraded)?
+- Did it handle sync vs. health status differences?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My gitops-deployment skill doesn't distinguish between sync status and health status.
+Update it to explain that Synced means Git matches cluster, but Healthy means resources are working.
+```

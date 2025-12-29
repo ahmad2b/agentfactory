@@ -481,6 +481,36 @@ view_producer = Producer({
 - The view producer optimizes for throughput since data loss is acceptable
 - Both can coexist in the same application, sending to different topics
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, configure a Kafka cluster for production with 3 brokers that can tolerate one broker failure.
+Does my skill set replication.factor=3 and min.insync.replicas=2? Does it explain the ISR mechanism?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain In-Sync Replicas (ISR) and how replicas fall out of sync?
+- Did it cover the relationship between replication factor and min.insync.replicas for fault tolerance?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing reliability configuration (ISR, min.insync.replicas, linger.ms/batch.size tuning).
+Update it to include when to use replication.factor=3 with min.isr=2 and how to tune for latency vs throughput.
+```
+
+---
+
 ## Try With AI
 
 Apply what you've learned to configure reliability for your specific scenarios.

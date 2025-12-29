@@ -538,3 +538,31 @@ Look for:
 Finally ask: **"My builds are timing out at 20 minutes on ARM emulation. How do I split the build into separate jobs per platform instead of emulating?"**
 
 This explores the tradeoff between single builds (simpler, uses emulation) and split builds (faster per-platform, requires coordination).
+
+---
+
+## Reflect on Your Skill
+
+You built a `gitops-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my gitops-deployment skill, generate a Dockerfile build step with multi-platform support.
+Does my skill include QEMU setup, BuildKit caching, and platform targeting?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include layer caching strategies for faster builds?
+- Did it handle image tagging with commit SHA and semantic versions?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My gitops-deployment skill is missing BuildKit cache configuration and metadata tagging.
+Update it to include cache-from/cache-to directives and docker/metadata-action usage.
+```

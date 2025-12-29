@@ -550,3 +550,33 @@ Design this error format and show me how to implement it for 404, 400, and 429 (
 ```
 
 **What you're learning:** This prompt teaches you to design for machine consumers. Agents can programmatically check `error_code` for decision logic, use `retry_after` for backoff, and potentially surface `suggestions` to users. This structured approach makes your API a better citizen in agent workflows.
+
+---
+
+## Reflect on Your Skill
+
+You built a `fastapi-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my fastapi-agent skill, help me implement error handling for my endpoints.
+Does my skill include HTTPException, proper status codes, and helpful error messages?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include HTTPException patterns for different error types?
+- Did it handle the distinction between 400, 404, 422, and 500 errors?
+- Did it provide structured error responses with helpful detail messages?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My fastapi-agent skill is missing comprehensive error handling.
+Update it to include HTTPException usage, status module constants,
+custom exception handlers, and the difference between client (4xx) and server (5xx) errors.
+```

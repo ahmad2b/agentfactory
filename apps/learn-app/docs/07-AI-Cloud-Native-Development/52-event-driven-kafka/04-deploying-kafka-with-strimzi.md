@@ -442,6 +442,36 @@ kubectl delete namespace kafka
 
 For now, keep the cluster running—you'll use it in the remaining lessons.
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, generate a Strimzi Kafka Custom Resource for a development cluster on Docker Desktop.
+Does my skill produce valid Kafka CRDs with KRaft mode configuration?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include Strimzi operator deployment patterns?
+- Did it explain the difference between KRaft mode and ZooKeeper mode?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing Strimzi deployment patterns (Kafka CRDs, KRaft vs ZooKeeper).
+Update it to include how to deploy production-ready Kafka on Kubernetes using Strimzi.
+```
+
+---
+
 ## Try With AI
 
 You've deployed Kafka using Strimzi's operator pattern. Now explore how this fits into broader infrastructure decisions.

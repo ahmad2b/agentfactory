@@ -496,3 +496,33 @@ Is this efficient? Should I use connection pooling?
 ```
 
 **What you're learning:** Production databases use connection pools. SQLAlchemy (which SQLModel uses) has pooling built in—understanding when it matters is important.
+
+---
+
+## Reflect on Your Skill
+
+You built a `fastapi-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my fastapi-agent skill, help me set up database integration with SQLModel and Neon.
+Does my skill include model definitions, create_engine, Session management, and CRUD operations?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include SQLModel table definitions with table=True?
+- Did it handle database connection setup and Session dependency injection?
+- Did it cover CRUD operations using Session (add, exec, get, commit, refresh)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My fastapi-agent skill is missing database integration patterns.
+Update it to include SQLModel table definitions, Neon connection setup,
+Session management with yield dependencies, and proper CRUD operations.
+```

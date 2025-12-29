@@ -1,16 +1,30 @@
 ---
 sidebar_position: 49
 title: "Chapter 49: Docker for AI Services"
-description: "Containerize AI agents with Docker for portable, reproducible deployments"
+description: "Build your Docker skill first, then learn to understand and refine it into a production-ready asset"
 ---
 
 # Chapter 49: Docker for AI Services
 
-Your agent runs perfectly on your machine. But "works on my machine" doesn't ship products. Docker solves this by packaging your agent, its dependencies, and its runtime environment into a portable container that runs identically everywhere—your laptop, a teammate's machine, or a cloud server.
+**You will build a Docker skill BEFORE you learn Docker.**
 
-This chapter teaches containerization from first principles, with a focus on AI service patterns. Using the **Task API from Chapter 40** as your running example, you'll learn to write efficient Dockerfiles, optimize image sizes with multi-stage builds and UV, harden containers for production, and create a reusable skill that encodes your Docker expertise.
+This chapter follows the **Skill-First Learning Pattern**: In Lesson 0, you create a `docker-deployment` skill using tools from Chapter 5. Then you spend the chapter understanding what you built and making it better. By the end, you don't just "know Docker"—you OWN a production-ready skill.
 
-By the end, your FastAPI Task API will be a production-ready container pushed to a registry and ready for Kubernetes deployment.
+## The Skill-First Arc
+
+```
+L00: Build Your Docker Skill (25 min)
+  │   └── Clone skills-lab, fetch docs, create skill
+  │
+  ├── L01-04: Docker Fundamentals
+  │   └── Each lesson TESTS and IMPROVES your skill
+  │
+  ├── L05-06: Production Patterns
+  │   └── Multi-stage builds, hardening
+  │
+  └── L07-08: Skill & Capstone
+      └── Finalize your production-ready asset
+```
 
 ## What You'll Learn
 
@@ -25,16 +39,27 @@ By the end of this chapter, you'll be able to:
 
 ## Chapter Structure
 
-| Lesson | Title | Layer | Focus |
-|--------|-------|-------|-------|
-| 1 | Docker Installation & Setup | L1 (Manual) | Platform setup, Docker Desktop, resource configuration |
-| 2 | Container Fundamentals | L1 (Manual) | Images vs containers, Docker Hub, layers, lifecycle |
-| 3 | Writing Your First Dockerfile | L1 (Manual) | Containerize Task API with FROM, WORKDIR, COPY, RUN, CMD |
-| 4 | Container Lifecycle & Debugging | L1 (Manual) | Logs, exec, inspect, port conflicts, restart policies |
-| 5 | Multi-Stage Builds & Optimization | L1 (Manual) | Build vs runtime stages, UV, slim/alpine, 70%+ size reduction |
-| 6 | Production Hardening | L1 (Manual) | Environment variables, health checks, non-root users |
-| 7 | Docker Image Builder Skill | L3 (Intelligence) | Create reusable Persona + Questions + Principles skill |
-| 8 | Capstone: Containerize Your API | L4 (Spec-Driven) | Specification-first containerization of SQLModel Task API |
+| # | Lesson | Your Skill Improves |
+|---|--------|---------------------|
+| **0** | **Build Your Docker Skill** | **Created from official docs** |
+| 1 | Docker Installation & Setup | Validate: prerequisites |
+| 2 | Container Fundamentals | Test: explains images vs containers |
+| 3 | Writing Your First Dockerfile | Refine: generates valid Dockerfiles |
+| 4 | Container Lifecycle & Debugging | Add: debugging commands |
+| 5 | Multi-Stage Builds & Optimization | Add: multi-stage patterns |
+| 6 | Production Hardening | Add: security best practices |
+| 7 | Docker Image Builder Skill | Refine: Persona + Questions |
+| **8** | **Capstone: Containerize Your API** | **Production-ready** |
+
+## Every Lesson Has Skill Reflection
+
+Each lesson ends with **"Reflect on Your Skill"**:
+
+1. **Test**: Does your skill handle this lesson's concepts?
+2. **Identify gaps**: What's missing?
+3. **Improve**: Add or refine the capability
+
+By Lesson 8, you've tested and improved your skill 7+ times.
 
 **Total Duration**: 6 hours (360 minutes)
 

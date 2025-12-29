@@ -432,6 +432,36 @@ View connector logs:
 kubectl logs task-connect-connect-0 -n kafka | grep -i "file-source"
 ```
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, design a Kafka Connect pipeline that captures PostgreSQL changes and sinks them to Elasticsearch.
+Does my skill generate KafkaConnect and KafkaConnector CRDs? Does it explain source vs sink connectors?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain Kafka Connect architecture (workers, tasks, connectors)?
+- Did it cover when to use Kafka Connect versus custom producers/consumers?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing Kafka Connect patterns (source/sink connectors, KafkaConnect/KafkaConnector CRDs).
+Update it to include when to use pre-built connectors versus writing custom integration code.
+```
+
+---
+
 ## Try With AI
 
 **Setup:** You need to build a data pipeline integrating multiple systems with Kafka.

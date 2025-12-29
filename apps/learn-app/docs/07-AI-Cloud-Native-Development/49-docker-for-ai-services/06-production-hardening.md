@@ -714,3 +714,33 @@ Show me the hardened version with comments explaining each security measure.
 **What you're learning**: Applying patterns systematically transforms a development Dockerfile into production infrastructure. The comments help you understand each change so you can apply the same patterns to future projects.
 
 **Safety Note**: Never include real API keys or secrets in Dockerfiles you share with AI. Use placeholder values like `API_KEY=your-key-here` and replace them with actual secrets at runtime using `-e` flags or Docker secrets.
+
+---
+
+## Reflect on Your Skill
+
+You built a `docker-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my docker-deployment skill, generate a production-hardened Dockerfile.
+Does my skill include non-root users, health checks, and proper environment variable configuration?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include security best practices like non-root users?
+- Did it handle HEALTHCHECK instructions and environment variable management?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My docker-deployment skill is missing production hardening patterns.
+Update it to include non-root user creation, HEALTHCHECK instructions, ENV/ARG configuration, and proper file ownership with --chown.
+```
+
+---

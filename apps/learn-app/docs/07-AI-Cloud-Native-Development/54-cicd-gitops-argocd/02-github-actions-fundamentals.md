@@ -533,3 +533,31 @@ If the output is missing any of these, ask: "Add a step to cache pip dependencie
 Then iterate with: "Modify the workflow to also run on pull_request events to main. Add a linting step using flake8 that runs in parallel with tests."
 
 As you review the AI-generated workflow, ask yourself: What event triggered this? What jobs run? What's the execution order? This deep understanding makes you a confident CI/CD engineer.
+
+---
+
+## Reflect on Your Skill
+
+You built a `gitops-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my gitops-deployment skill, generate a GitHub Actions workflow with two jobs: one for linting and one for testing.
+Does my skill understand workflow syntax, triggers, and job dependencies?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include matrix strategies for testing multiple versions?
+- Did it handle environment variables and secrets correctly?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My gitops-deployment skill doesn't generate matrix strategies or handle GitHub Actions secrets.
+Update it to include matrix builds and secret references like ${{ secrets.DOCKER_TOKEN }}.
+```

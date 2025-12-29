@@ -513,3 +513,33 @@ Explain the concept before showing code.
 ```
 
 **What you're learning:** Fixtures are a pytest pattern for shared setup. Understanding why they exist helps you use them correctly.
+
+---
+
+## Reflect on Your Skill
+
+You built a `fastapi-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my fastapi-agent skill, help me write pytest tests for a FastAPI endpoint.
+Does my skill include patterns for TestClient usage, fixtures, and conftest.py setup?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include pytest test structure and naming conventions?
+- Did it handle fixture patterns for shared setup and teardown?
+- Did it cover the red-green testing cycle?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My fastapi-agent skill is missing pytest testing patterns.
+Update it to include TestClient usage, fixture patterns, conftest.py organization,
+and the red-green testing cycle for TDD.
+```

@@ -580,3 +580,33 @@ Which technology best fits? Can I handle user interrupts with SSE, or do I need 
 ```
 
 **What you're learning:** This prompt develops your architecture judgment. You'll discover that SSE handles most agent streaming needs elegantly—the "stop" button can be a separate HTTP request that cancels the stream server-side. WebSockets add complexity you rarely need for unidirectional agent output.
+
+---
+
+## Reflect on Your Skill
+
+You built a `fastapi-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my fastapi-agent skill, help me implement streaming responses with Server-Sent Events.
+Does my skill include async generators, EventSourceResponse, and proper SSE event formatting?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include async generator patterns with yield?
+- Did it handle EventSourceResponse from sse-starlette?
+- Did it cover SSE event format (event type, data as JSON string, error handling)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My fastapi-agent skill is missing streaming patterns.
+Update it to include async generators for streaming data, EventSourceResponse usage,
+SSE event format with event/data fields, and error handling mid-stream.
+```

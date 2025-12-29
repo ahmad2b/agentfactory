@@ -535,6 +535,36 @@ If you need atomic writes across multiple topics (task-created, audit-log), you 
 - Consumer idempotency can simplify producer complexity
 - Transactions add complexity but enable atomic multi-topic writes
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, configure a producer for maximum reliability (no message loss allowed).
+Does my skill set acks=all, enable.idempotence=true, and appropriate retry configuration?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain the relationship between acks, retries, and idempotence?
+- Did it cover the trade-offs between reliability and throughput?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing producer reliability configuration (acks, idempotence, retries).
+Update it to include when to use acks=all vs acks=1 and how idempotence prevents duplicates.
+```
+
+---
+
 ## Try With AI
 
 Apply what you've learned by configuring producers for different scenarios.

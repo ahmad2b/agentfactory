@@ -515,3 +515,33 @@ implement Redis-backed rate limiting for distributed systems?
 ```
 
 **What you're learning:** In-memory rate limiting fails with horizontal scaling. Redis provides shared state across instances.
+
+---
+
+## Reflect on Your Skill
+
+You built a `fastapi-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my fastapi-agent skill, help me implement password hashing and rate limiting.
+Does my skill include Argon2 hashing with pwdlib and slowapi rate limiting?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include password hashing with pwdlib and Argon2Hasher?
+- Did it handle user signup with hashed password storage?
+- Did it cover rate limiting with slowapi for authentication endpoints?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My fastapi-agent skill is missing security hardening patterns.
+Update it to include password hashing with pwdlib/Argon2, secure password verification,
+rate limiting with slowapi, and User model with hashed_password field.
+```

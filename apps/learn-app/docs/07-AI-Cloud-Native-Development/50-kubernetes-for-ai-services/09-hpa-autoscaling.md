@@ -745,3 +745,35 @@ Your challenge: Design an HPA configuration that scales based on **queue depth**
 
 **Expected outcome**: You'll understand that CPU-based scaling is simple but crude. Custom metrics enable precise control over system behavior. You don't scale "when CPU is high"—you scale "when queue depth exceeds healthy levels."
 
+---
+
+## Reflect on Your Skill
+
+You built a `kubernetes-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kubernetes-deployment skill, create an HPA that scales based on CPU utilization.
+Does my skill generate HPA manifests with minReplicas, maxReplicas, and target metrics?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include metrics-server as a prerequisite for HPA functionality?
+- Did it explain scaling behavior (scaleUp vs scaleDown stabilization windows)?
+- Did it cover the scaling calculation formula (desired = current × current_usage / target)?
+- Did it include best practices for target utilization (50-80%) and stabilization windows?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kubernetes-deployment skill is missing HPA configuration and scaling behavior details.
+Update it to include metrics-server verification, stabilization window configuration, and custom metrics patterns for AI workloads.
+```
+
+---
+

@@ -549,6 +549,36 @@ But what if sending the email succeeds and Redis fails? You'd send the email aga
 - Perfect idempotency requires careful thought about failure modes
 - Sometimes "good enough" idempotency beats "perfect" complexity
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, configure a consumer for exactly-once delivery semantics in a payment processing scenario.
+Does my skill explain idempotent consumers, transactional reads, and deduplication strategies?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain the difference between at-least-once, at-most-once, and exactly-once?
+- Did it show when each delivery semantic is appropriate?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing delivery semantics (at-least-once, exactly-once, idempotent consumers).
+Update it to include how to achieve exactly-once processing and when the trade-offs are worth it.
+```
+
+---
+
 ## Try With AI
 
 Apply these delivery semantics to your own event processing scenarios.

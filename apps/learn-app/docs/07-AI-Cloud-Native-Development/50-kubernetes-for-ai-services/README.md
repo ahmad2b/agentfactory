@@ -1,16 +1,33 @@
 ---
 sidebar_position: 50
 title: "Chapter 50: Kubernetes for AI Services"
-description: "Deploy and orchestrate AI agents on Kubernetes clusters"
+description: "Build your Kubernetes skill first, then learn to understand and refine it into a production-ready asset"
 ---
 
 # Chapter 50: Kubernetes for AI Services
 
-Docker gives you portable containers. Kubernetes orchestrates them—handling deployment, scaling, networking, and self-healing automatically. When your agent container crashes, Kubernetes restarts it. When traffic spikes, Kubernetes scales it. When you push a new version, Kubernetes rolls it out safely.
+**You will build a Kubernetes skill BEFORE you learn Kubernetes.**
 
-This chapter teaches Kubernetes from core primitives to production-ready patterns for AI services. You'll learn the declarative model that makes Kubernetes powerful, understand how the control plane manages desired state, and master the kubectl commands that make operations automated and repeatable.
+This chapter follows the **Skill-First Learning Pattern**: In Lesson 0, you create a `kubernetes-deployment` skill using tools from Chapter 5. Then you spend the chapter understanding what you built and making it better. By the end, you don't just "know Kubernetes"—you OWN a production-ready skill.
 
-By the end, your containerized FastAPI agent from Chapter 49 will be running on a Kubernetes cluster with proper health checks, resource management, security policies, and automated scaling—all without manual intervention.
+## The Skill-First Arc
+
+```
+L00: Build Your Kubernetes Skill (25 min)
+  │   └── Clone skills-lab, fetch docs, create skill
+  │
+  ├── L01-05: K8s Fundamentals
+  │   └── Architecture, Pods, Deployments, Services
+  │
+  ├── L06-12: Production Essentials
+  │   └── Config, Resources, Security, Health, Scaling
+  │
+  ├── L13-15: AI Collaboration & Capstone
+  │   └── kubectl-ai, deployment, skill finalization
+  │
+  └── L16-22 (Optional): Advanced Patterns
+      └── Init, Sidecar, Ingress, StatefulSets
+```
 
 ## What You'll Learn
 
@@ -30,23 +47,34 @@ By the end of this chapter, you'll be able to:
 
 ### Core Lessons (Required for Agent Deployment)
 
-| Lesson | Title | Layer | Focus |
-|--------|-------|-------|-------|
-| 1 | Kubernetes Architecture & the Declarative Model | L1 | Control plane, workers, desired vs observed state |
-| 2 | Enabling Kubernetes (Docker Desktop) | L1 | Enable K8s, verify, kubectl context |
-| 3 | Pods: The Atomic Unit | L1 | Pod anatomy, YAML, lifecycle |
-| 4 | Deployments: Self-Healing at Scale | L1 | ReplicaSets, rolling updates, rollbacks |
-| 5 | Services & Networking | L1 | ClusterIP, NodePort, LoadBalancer, DNS |
-| 6 | Namespaces: Virtual Clusters | L1 | Isolation, ResourceQuotas, LimitRanges |
-| 7 | ConfigMaps & Secrets | L1 | Configuration injection, security notes |
-| 8 | Resource Management & Debugging | L1 | Requests/limits, QoS, kubectl debug |
-| 9 | Horizontal Pod Autoscaler | L1 | Metrics-server, CPU/memory scaling |
-| 10 | RBAC: Securing Agent Deployments | L1 | ServiceAccount, Role, RoleBinding |
-| 11 | Health Checks & Probes | L1 | Liveness, readiness, startup probes |
-| 12 | Jobs & CronJobs: Batch Workloads | L1 | One-time tasks, scheduled jobs |
-| 13 | AI-Assisted K8s with kubectl-ai | L2 | Natural language to manifests |
-| 14 | Capstone: Deploy Your Agent to Kubernetes | L4 | Spec-driven deployment, full validation |
-| 15 | Building the Kubernetes Deployment Skill | L3 | Persona + Questions + Principles |
+| # | Lesson | Your Skill Improves |
+|---|--------|---------------------|
+| **0** | **Build Your Kubernetes Skill** | **Created from official docs** |
+| 1 | Kubernetes Architecture | Understand: what skill generates |
+| 2 | Enabling K8s (Docker Desktop) | Validate: skill works locally |
+| 3 | Pods: The Atomic Unit | Refine: Pod YAML patterns |
+| 4 | Deployments: Self-Healing | Refine: Deployment patterns |
+| 5 | Services & Networking | Add: Service types |
+| 6 | Namespaces: Virtual Clusters | Add: namespace isolation |
+| 7 | ConfigMaps & Secrets | Add: config injection |
+| 8 | Resource Management | Add: requests/limits |
+| 9 | Horizontal Pod Autoscaler | Add: HPA patterns |
+| 10 | RBAC Security | Add: RBAC scaffolding |
+| 11 | Health Checks & Probes | Add: probe patterns |
+| 12 | Jobs & CronJobs | Add: batch workloads |
+| 13 | AI-Assisted with kubectl-ai | Refine: AI collaboration |
+| **14** | **Capstone: Deploy Agent** | **Production-ready** |
+| 15 | Finalize Kubernetes Skill | **Complete asset** |
+
+## Every Lesson Has Skill Reflection
+
+Each lesson ends with **"Reflect on Your Skill"**:
+
+1. **Test**: Does your skill handle this lesson's concepts?
+2. **Identify gaps**: What's missing?
+3. **Improve**: Add or refine the capability
+
+By Lesson 15, you've tested and improved your skill 14+ times.
 
 ### Optional Lessons (Advanced Patterns)
 

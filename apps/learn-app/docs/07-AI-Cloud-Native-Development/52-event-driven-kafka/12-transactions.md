@@ -619,6 +619,36 @@ You might use transactions for `task-events` + `audit-log` only, and publish to 
 
 The decision isn't "use transactions everywhere" but rather "use transactions where atomicity is required, and simpler patterns elsewhere."
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, implement a stream processing pipeline that reads from one topic, transforms data, and writes to another topic atomically.
+Does my skill show proper transactional producer/consumer configuration and read_committed isolation?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain transactional.id and how it enables exactly-once stream processing?
+- Did it show the relationship between transactions and consumer isolation levels?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing transactional patterns (transactional.id, read_committed, atomic read-process-write).
+Update it to include when to use Kafka transactions and how they differ from database transactions.
+```
+
+---
+
 ## Try With AI
 
 Apply what you've learned by designing transactional systems for real scenarios.

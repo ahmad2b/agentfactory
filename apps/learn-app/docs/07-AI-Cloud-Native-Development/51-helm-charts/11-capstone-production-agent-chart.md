@@ -59,7 +59,7 @@ Your chart succeeds when ALL of these are true:
 
 **Criterion 1: Single `helm install` Deploys Complete Stack**
 ```
-$ helm install task-api ./ai-agent-chart -f values-prod.yaml
+$ helm install task-api ./task-api-chart -f values-prod.yaml
 Release task-api installed.
 $ kubectl get all --selector=app=task-api
 NAME                                  READY   STATUS    RESTARTS   AGE
@@ -93,13 +93,13 @@ Status:         PASSED
 **Criterion 3: Multi-Environment Deployment Works**
 ```
 # Deploy to dev with reduced resources
-$ helm install agent-dev ./ai-agent-chart -f values-dev.yaml
+$ helm install agent-dev ./task-api-chart -f values-dev.yaml
 
 # Deploy to staging with moderate resources
-$ helm install agent-staging ./ai-agent-chart -f values-staging.yaml
+$ helm install agent-staging ./task-api-chart -f values-staging.yaml
 
 # Deploy to prod with full resources
-$ helm install agent-prod ./ai-agent-chart -f values-prod.yaml
+$ helm install agent-prod ./task-api-chart -f values-prod.yaml
 ```
 Each deployment uses appropriate resource levels (dev: minimal, staging: moderate, prod: full).
 
@@ -161,7 +161,7 @@ Before implementing, visualize the component relationships.
 Your final chart will look like this:
 
 ```
-ai-agent-chart/
+task-api-chart/
 ├── Chart.yaml                                 # Chart metadata + dependencies
 ├── values.yaml                                # Base values (dev-like defaults)
 ├── values-dev.yaml                            # Dev environment overrides
@@ -235,8 +235,8 @@ Define what your chart includes and depends on:
 ```yaml
 ---
 apiVersion: v2
-name: ai-agent
-description: "Production-ready Helm chart for AI agent with PostgreSQL and Redis"
+name: task-api
+description: "Production-ready Helm chart for Task API agent with PostgreSQL and Redis"
 type: application
 version: 1.0.0
 appVersion: "1.0.0"
@@ -253,13 +253,13 @@ dependencies:
 ```
 
 **Output:** This metadata tells Helm:
-- The chart is called `ai-agent`
+- The chart is called `task-api`
 - It depends on PostgreSQL 12.x and Redis 17.x from Bitnami
 - Dependencies are only installed if `postgresql.enabled: true` and `redis.enabled: true`
 
 Update dependencies:
 ```bash
-$ helm dependency update ./ai-agent-chart
+$ helm dependency update ./task-api-chart
 Hang tight while we grab the latest from your chart repositories...
 ...Successfully got an update from the "bitnami" chart repository
 Update Complete. ⎈ Happy Helming!
@@ -277,7 +277,7 @@ Create production-appropriate defaults:
 agent:
   replicaCount: 1
   image:
-    repository: "my-company/ai-agent"
+    repository: "my-company/task-api"
     tag: "1.0.0"
     pullPolicy: IfNotPresent
   service:
@@ -324,7 +324,7 @@ redis:
 # Pre-upgrade hook configuration
 migration:
   enabled: true
-  image: "my-company/ai-agent-migrations:1.0.0"
+  image: "my-company/task-api-migrations:1.0.0"
   timeout: 300
 
 # Schema validation
@@ -535,23 +535,23 @@ Create `templates/deployment.yaml`:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "ai-agent.fullname" . }}
+  name: {{ include "task-api.fullname" . }}
   labels:
-    {{- include "ai-agent.labels" . | nindent 4 }}
+    {{- include "task-api.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.agent.replicaCount }}
   selector:
     matchLabels:
-      {{- include "ai-agent.selectorLabels" . | nindent 6 }}
+      {{- include "task-api.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "ai-agent.selectorLabels" . | nindent 8 }}
+        {{- include "task-api.selectorLabels" . | nindent 8 }}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
         checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
     spec:
-      serviceAccountName: {{ include "ai-agent.serviceAccountName" . }}
+      serviceAccountName: {{ include "task-api.serviceAccountName" . }}
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
@@ -568,12 +568,12 @@ spec:
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
-              name: {{ include "ai-agent.fullname" . }}-secret
+              name: {{ include "task-api.fullname" . }}-secret
               key: database-url
         - name: REDIS_URL
           valueFrom:
             secretKeyRef:
-              name: {{ include "ai-agent.fullname" . }}-secret
+              name: {{ include "task-api.fullname" . }}-secret
               key: redis-url
         {{- range $key, $value := .Values.agent.env }}
         - name: {{ $key }}
@@ -611,9 +611,9 @@ Create `templates/service.yaml`:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "ai-agent.fullname" . }}
+  name: {{ include "task-api.fullname" . }}
   labels:
-    {{- include "ai-agent.labels" . | nindent 4 }}
+    {{- include "task-api.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.agent.service.type }}
   ports:
@@ -622,7 +622,7 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "ai-agent.selectorLabels" . | nindent 4 }}
+    {{- include "task-api.selectorLabels" . | nindent 4 }}
 ```
 
 **Output:** Creates a ClusterIP service exposing port 8000 to other pods in the cluster.
@@ -635,9 +635,9 @@ Create `templates/configmap.yaml`:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "ai-agent.fullname" . }}-config
+  name: {{ include "task-api.fullname" . }}-config
   labels:
-    {{- include "ai-agent.labels" . | nindent 4 }}
+    {{- include "task-api.labels" . | nindent 4 }}
 data:
   LOG_LEVEL: "{{ .Values.agent.env.LOG_LEVEL }}"
   WORKER_THREADS: "{{ .Values.agent.env.WORKER_THREADS }}"
@@ -655,13 +655,13 @@ Create `templates/secret.yaml`:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: {{ include "ai-agent.fullname" . }}-secret
+  name: {{ include "task-api.fullname" . }}-secret
   labels:
-    {{- include "ai-agent.labels" . | nindent 4 }}
+    {{- include "task-api.labels" . | nindent 4 }}
 type: Opaque
 data:
-  database-url: {{ printf "postgresql://agent_user:%s@%s-postgresql:5432/agent_db" .Values.postgresql.auth.password (include "ai-agent.fullname" .) | b64enc | quote }}
-  redis-url: {{ printf "redis://:%s@%s-redis-master:6379/0" .Values.redis.auth.password (include "ai-agent.fullname" .) | b64enc | quote }}
+  database-url: {{ printf "postgresql://agent_user:%s@%s-postgresql:5432/agent_db" .Values.postgresql.auth.password (include "task-api.fullname" .) | b64enc | quote }}
+  redis-url: {{ printf "redis://:%s@%s-redis-master:6379/0" .Values.redis.auth.password (include "task-api.fullname" .) | b64enc | quote }}
 ```
 
 **Output:** Base64-encoded secrets for:
@@ -673,11 +673,11 @@ data:
 Create `templates/_helpers.tpl`:
 
 ```gotemplate
-{{- define "ai-agent.name" -}}
+{{- define "task-api.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
-{{- define "ai-agent.fullname" -}}
+{{- define "task-api.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -690,27 +690,27 @@ Create `templates/_helpers.tpl`:
 {{- end }}
 {{- end }}
 
-{{- define "ai-agent.chart" -}}
+{{- define "task-api.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
-{{- define "ai-agent.labels" -}}
-helm.sh/chart: {{ include "ai-agent.chart" . }}
-{{ include "ai-agent.selectorLabels" . }}
+{{- define "task-api.labels" -}}
+helm.sh/chart: {{ include "task-api.chart" . }}
+{{ include "task-api.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
-{{- define "ai-agent.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "ai-agent.name" . }}
+{{- define "task-api.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "task-api.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
-{{- define "ai-agent.serviceAccountName" -}}
+{{- define "task-api.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "ai-agent.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "task-api.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
@@ -727,9 +727,9 @@ Create `templates/hooks/pre-upgrade-migration.yaml`:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include "ai-agent.fullname" . }}-pre-upgrade
+  name: {{ include "task-api.fullname" . }}-pre-upgrade
   labels:
-    {{- include "ai-agent.labels" . | nindent 4 }}
+    {{- include "task-api.labels" . | nindent 4 }}
   annotations:
     "helm.sh/hook": pre-upgrade
     "helm.sh/hook-weight": "-5"
@@ -738,9 +738,9 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "ai-agent.selectorLabels" . | nindent 8 }}
+        {{- include "task-api.selectorLabels" . | nindent 8 }}
     spec:
-      serviceAccountName: {{ include "ai-agent.serviceAccountName" . }}
+      serviceAccountName: {{ include "task-api.serviceAccountName" . }}
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
@@ -752,7 +752,7 @@ spec:
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
-              name: {{ include "ai-agent.fullname" . }}-secret
+              name: {{ include "task-api.fullname" . }}-secret
               key: database-url
         command:
           - /bin/sh
@@ -785,13 +785,13 @@ Create `templates/tests/test-connection.yaml`:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: {{ include "ai-agent.fullname" . }}-connection-test
+  name: {{ include "task-api.fullname" . }}-connection-test
   labels:
-    {{- include "ai-agent.labels" . | nindent 4 }}
+    {{- include "task-api.labels" . | nindent 4 }}
   annotations:
     "helm.sh/hook": test
 spec:
-  serviceAccountName: {{ include "ai-agent.serviceAccountName" . }}
+  serviceAccountName: {{ include "task-api.serviceAccountName" . }}
   containers:
   - name: test
     image: "{{ .Values.agent.image.repository }}:{{ .Values.agent.image.tag }}"
@@ -799,12 +799,12 @@ spec:
     - name: DATABASE_URL
       valueFrom:
         secretKeyRef:
-          name: {{ include "ai-agent.fullname" . }}-secret
+          name: {{ include "task-api.fullname" . }}-secret
           key: database-url
     - name: REDIS_URL
       valueFrom:
         secretKeyRef:
-          name: {{ include "ai-agent.fullname" . }}-secret
+          name: {{ include "task-api.fullname" . }}-secret
           key: redis-url
     command:
       - /bin/sh
@@ -861,13 +861,13 @@ helm repo update
 ### Deploy to Dev
 
 ```bash
-helm install task-api ./ai-agent-chart -f values-dev.yaml --namespace dev --create-namespace
+helm install task-api ./task-api-chart -f values-dev.yaml --namespace dev --create-namespace
 ```
 
 ### Deploy to Production
 
 ```bash
-helm install task-api ./ai-agent-chart -f values-prod.yaml --namespace prod --create-namespace
+helm install task-api ./task-api-chart -f values-prod.yaml --namespace prod --create-namespace
 ```
 
 ## Configuration
@@ -875,7 +875,7 @@ helm install task-api ./ai-agent-chart -f values-prod.yaml --namespace prod --cr
 | Parameter | Description | Default |
 |-----------|-------------|---------|
 | `agent.replicaCount` | Number of agent replicas | `1` |
-| `agent.image.repository` | Agent container image | `my-company/ai-agent` |
+| `agent.image.repository` | Agent container image | `my-company/task-api` |
 | `agent.image.tag` | Agent image tag | `1.0.0` |
 | `agent.resources.requests.cpu` | CPU request | `500m` |
 | `agent.resources.requests.memory` | Memory request | `512Mi` |
@@ -889,7 +889,7 @@ helm install task-api ./ai-agent-chart -f values-prod.yaml --namespace prod --cr
 ### Update Release
 
 ```bash
-helm upgrade task-api ./ai-agent-chart -f values-prod.yaml
+helm upgrade task-api ./task-api-chart -f values-prod.yaml
 ```
 
 The pre-upgrade migration hook runs automatically before the upgrade proceeds.
@@ -957,8 +957,8 @@ Verify your chart meets the specification before deployment.
 Validate chart syntax and best practices:
 
 ```bash
-$ helm lint ./ai-agent-chart
-==> Linting ./ai-agent-chart
+$ helm lint ./task-api-chart
+==> Linting ./task-api-chart
 [INFO] Chart.yaml: icon is recommended
 
 1 chart(s) linted, 0 error(s)
@@ -971,29 +971,29 @@ $ helm lint ./ai-agent-chart
 Render templates without installing:
 
 ```bash
-$ helm template task-api ./ai-agent-chart -f values-prod.yaml | head -50
+$ helm template task-api ./task-api-chart -f values-prod.yaml | head -50
 ---
-# Source: ai-agent/templates/configmap.yaml
+# Source: task-api/templates/configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: task-api-config
   labels:
-    helm.sh/chart: ai-agent-1.0.0
-    app.kubernetes.io/name: ai-agent
+    helm.sh/chart: task-api-1.0.0
+    app.kubernetes.io/name: task-api
     app.kubernetes.io/instance: task-api
     app.kubernetes.io/managed-by: Helm
 data:
   LOG_LEVEL: "warn"
   WORKER_THREADS: "8"
 ---
-# Source: ai-agent/templates/secret.yaml
+# Source: task-api/templates/secret.yaml
 apiVersion: v1
 kind: Secret
 metadata:
   name: task-api-secret
   labels:
-    helm.sh/chart: ai-agent-1.0.0
+    helm.sh/chart: task-api-1.0.0
 ```
 
 **Output:** All YAML renders correctly with production values substituted.
@@ -1003,7 +1003,7 @@ metadata:
 Validate values against schema:
 
 ```bash
-$ helm template task-api ./ai-agent-chart -f values-invalid.yaml 2>&1 | grep -i error
+$ helm template task-api ./task-api-chart -f values-invalid.yaml 2>&1 | grep -i error
 error: values don't meet the schema requirements
 ```
 
@@ -1014,7 +1014,7 @@ error: values don't meet the schema requirements
 #### Criterion 1: Single `helm install` Deploys Complete Stack
 
 ```bash
-$ helm install task-api ./ai-agent-chart -f values-prod.yaml --namespace test --create-namespace
+$ helm install task-api ./task-api-chart -f values-prod.yaml --namespace test --create-namespace
 NAME: task-api
 LAST DEPLOYED: Thu Jan 23 14:35:00 2025
 NAMESPACE: test
@@ -1085,7 +1085,7 @@ All connectivity tests passed!
 Deploy dev:
 
 ```bash
-$ helm install agent-dev ./ai-agent-chart -f values-dev.yaml --namespace dev --create-namespace
+$ helm install agent-dev ./task-api-chart -f values-dev.yaml --namespace dev --create-namespace
 Release agent-dev installed.
 
 $ kubectl get deployment agent-dev -n dev -o wide
@@ -1098,7 +1098,7 @@ agent-dev   1/1     1            1           100m       256Mi
 Deploy staging:
 
 ```bash
-$ helm install agent-staging ./ai-agent-chart -f values-staging.yaml --namespace staging --create-namespace
+$ helm install agent-staging ./task-api-chart -f values-staging.yaml --namespace staging --create-namespace
 Release agent-staging installed.
 
 $ kubectl get deployment agent-staging -n staging -o wide
@@ -1111,7 +1111,7 @@ agent-staging    2/2     2            2           250m       512Mi
 Deploy production:
 
 ```bash
-$ helm install agent-prod ./ai-agent-chart -f values-prod.yaml --namespace prod --create-namespace
+$ helm install agent-prod ./task-api-chart -f values-prod.yaml --namespace prod --create-namespace
 Release agent-prod installed.
 
 $ kubectl get deployment agent-prod -n prod -o wide

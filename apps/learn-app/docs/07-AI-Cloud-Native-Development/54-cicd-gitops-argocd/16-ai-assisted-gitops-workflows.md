@@ -506,3 +506,31 @@ Through this 5-part process, you've:
 - Which constraints would have been hardest to debug if they were wrong?
 
 These reflections become the foundation for your next use of AI with GitOps.
+
+---
+
+## Reflect on Your Skill
+
+You built a `gitops-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my gitops-deployment skill, generate a complete multi-environment ApplicationSet with all the patterns from this chapter.
+Does my skill produce production-ready manifests with proper validation?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include all the concepts: sync waves, hooks, secrets, multi-cluster, RBAC, notifications?
+- Did it validate cluster names, registries, and environment-specific constraints?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My gitops-deployment skill generates basic manifests but misses advanced patterns.
+Review all 16 lessons and update the skill to include comprehensive GitOps workflows with all safety checks.
+```

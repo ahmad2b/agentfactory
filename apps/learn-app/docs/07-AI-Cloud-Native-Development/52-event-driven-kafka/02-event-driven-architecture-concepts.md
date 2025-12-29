@@ -391,6 +391,36 @@ Events are for facts and commands, not request-response queries.
 
 ---
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, design an event-driven architecture for an e-commerce checkout flow.
+Does my skill identify which components are producers, which are consumers, and how eventual consistency applies?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain the difference between producers, consumers, and brokers?
+- Did it address eventual consistency and how to handle it in event-driven systems?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing guidance on EDA fundamentals (producers, consumers, eventual consistency).
+Update it to include when to use event-driven architecture and how eventual consistency affects system design.
+```
+
+---
+
 ## Try With AI
 
 You now understand the core concepts. Use AI to explore their application to your own systems.

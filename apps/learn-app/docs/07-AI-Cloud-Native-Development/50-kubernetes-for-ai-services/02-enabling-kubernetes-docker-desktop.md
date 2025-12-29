@@ -322,3 +322,34 @@ requests for AI workloads?
 ```
 
 **What you're learning**: Resource management fundamentals—the relationship between node capacity, allocatable resources, and pod requests/limits that you'll configure in later lessons.
+
+---
+
+## Reflect on Your Skill
+
+You built a `kubernetes-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kubernetes-deployment skill, verify Kubernetes cluster health.
+Does my skill include commands like kubectl cluster-info and kubectl get nodes?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include kubectl context management?
+- Did it explain how to verify metrics-server and cluster components are running?
+- Did it cover the kubeconfig file and context switching?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kubernetes-deployment skill is missing cluster verification and context management commands.
+Update it to include kubectl cluster-info, kubectl get nodes, kubectl config current-context, and kubeconfig management.
+```
+
+---

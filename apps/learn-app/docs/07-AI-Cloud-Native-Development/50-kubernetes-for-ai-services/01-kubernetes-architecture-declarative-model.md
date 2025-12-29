@@ -446,3 +446,34 @@ Expected answer should trace: Deployment controller creates/updates ReplicaSet, 
 Ask AI: "My teammate says 'just use Docker Compose for production.' What's missing compared to Kubernetes?"
 
 Expected answer: Multi-machine orchestration, automatic failover across nodes, rolling updates across a fleet, service discovery at scale, built-in load balancing.
+
+---
+
+## Reflect on Your Skill
+
+You built a `kubernetes-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kubernetes-deployment skill, explain the reconciliation loop.
+Does my skill describe how the Deployment controller, ReplicaSet controller, and Scheduler work together?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include the declarative model (desired vs observed state)?
+- Did it explain the control plane components and their responsibilities?
+- Did it cover the worker node components (kubelet, kube-proxy, container runtime)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kubernetes-deployment skill is missing explanations of the reconciliation loop and component responsibilities.
+Update it to include how the API server, scheduler, controller manager, and etcd collaborate to maintain desired state.
+```
+
+---

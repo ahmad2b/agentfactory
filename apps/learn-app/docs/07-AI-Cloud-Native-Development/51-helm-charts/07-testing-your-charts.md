@@ -728,3 +728,39 @@ Compare what each testing approach revealed:
 - What did unit testing verify about template logic?
 - What would integration testing verify that unit tests cannot?
 
+---
+
+## Reflect on Your Skill
+
+You built a `helm-chart` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my helm-chart skill, create test pods and helm-unittest tests for a chart.
+Does my skill understand validation strategies and test patterns?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include helm lint checks for Chart.yaml validation?
+- Did it create test pods with helm.sh/hook: test annotation?
+- Does it demonstrate helm-unittest patterns for template logic?
+- Did it show exit code semantics (0 for success, non-zero for failure)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My helm-chart skill is missing [testing strategies / validation patterns].
+Update it to include:
+- helm lint for structural validation
+- helm template --debug for rendering inspection
+- Test pods with helm.sh/hook: test and proper exit codes
+- helm-unittest for template logic verification
+- Integration tests with kubectl commands
+- Decision framework: unit vs integration testing
+```
+

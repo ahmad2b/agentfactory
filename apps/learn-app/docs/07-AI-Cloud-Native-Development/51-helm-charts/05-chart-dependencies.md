@@ -826,3 +826,38 @@ Compare your AI-generated files against the requirements:
 
 If all match → You've successfully composed a production multi-dependency chart.
 
+---
+
+## Reflect on Your Skill
+
+You built a `helm-chart` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my helm-chart skill, add PostgreSQL and Redis dependencies to a chart.
+Does my skill understand dependency declaration and configuration?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill add dependencies to Chart.yaml with proper repository URLs?
+- Did it include version constraints (^, ~, >=) following semantic versioning?
+- Does it use conditions to make dependencies optional?
+- Did it demonstrate configuring subcharts through parent values?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My helm-chart skill is missing [dependency syntax / version constraints / subchart configuration].
+Update it to include:
+- Chart.yaml dependencies section with name, version, repository
+- Semantic versioning constraints (^ for minor updates, ~ for patches)
+- Optional dependencies with condition: subchart.enabled
+- Configuring subcharts through nested values (postgresql:, redis:)
+- Running helm dependency update to fetch subcharts
+```
+

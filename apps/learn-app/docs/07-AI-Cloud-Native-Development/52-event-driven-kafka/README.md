@@ -1,16 +1,76 @@
 ---
 sidebar_position: 52
 title: "Chapter 52: Event-Driven Architecture with Kafka"
-description: "Build decoupled, scalable agent systems with Apache Kafka event streaming"
+description: "Build your Kafka skill first, then learn to understand and refine it into a production-ready asset"
 ---
 
 # Chapter 52: Event-Driven Architecture with Kafka
 
-Request-response APIs work for simple interactions. But production agent systems need decoupling—when a task is created, a notification service should be triggered, an audit log should be written, and a recurring task engine should be notified. If these are direct API calls, one slow service blocks everything. If they're events on Kafka, each service consumes independently.
+**You will build a Kafka skill BEFORE you learn Kafka.**
 
-This chapter provides comprehensive Kafka coverage for AI agent developers. You'll progress from EDA fundamentals through production reliability patterns, learning to build event-driven systems that scale. Like Chapters 49-51, we run everything on **Docker Desktop Kubernetes**—deploying Kafka with the Strimzi operator (the industry standard for Kafka on Kubernetes).
+This chapter follows the **Skill-First Learning Pattern**: In Lesson 0, you create a `kafka-events` skill using tools from Chapter 5. Then you spend the chapter understanding what you built and making it better. By the end, you don't just "know Kafka"—you OWN a production-ready skill.
+
+## The Skill-First Arc
+
+```
+L00: Build Your Kafka Skill (25 min)
+  │   └── Clone skills-lab, fetch docs, create skill
+  │
+  ├── L01-03: EDA Foundations
+  │   └── Events vs requests, EDA concepts, Kafka mental model
+  │
+  ├── L04-08: Kafka Core
+  │   └── Strimzi deployment, producers, consumers
+  │
+  ├── L09-13: Production Patterns
+  │   └── FastAPI integration, schemas, delivery, transactions
+  │
+  ├── L14-17: Advanced Patterns
+  │   └── Connect, CDC, agent patterns, saga
+  │
+  └── L18-22: Operations & Capstone
+      └── Production Strimzi, monitoring, AI-assisted, capstone, skill
+```
 
 **Key Update (2025):** Kafka 4.0 removed ZooKeeper entirely. This chapter teaches KRaft-only deployment—the modern, simplified architecture.
+
+## Chapter Structure
+
+| # | Lesson | Your Skill Improves |
+|---|--------|---------------------|
+| **0** | **Build Your Kafka Skill** | **Created from official docs** |
+| 1 | From Request-Response to Events | Understand: why events |
+| 2 | EDA Concepts | Understand: event patterns |
+| 3 | Kafka Mental Model | Understand: topics, partitions |
+| 4 | Deploying Kafka with Strimzi | Validate: skill knows Strimzi |
+| 5 | Your First Producer | Refine: producer code |
+| 6 | Producer Reliability | Add: acks, retries |
+| 7 | Your First Consumer | Refine: consumer code |
+| 8 | Consumer Groups & Rebalancing | Add: group patterns |
+| 9 | Async FastAPI Integration | Add: async patterns |
+| 10 | Avro & Schema Registry | Add: schema patterns |
+| 11 | Delivery Semantics | Add: guarantees |
+| 12 | Transactions | Add: transaction patterns |
+| 13 | Reliability Configuration | Add: production config |
+| 14 | Kafka Connect | Add: connector patterns |
+| 15 | CDC with Debezium | Add: CDC patterns |
+| 16 | Agent Event Patterns | Add: agent events |
+| 17 | Saga Pattern | Add: saga patterns |
+| 18 | Production Strimzi | Refine: production config |
+| 19 | Monitoring & Debugging | Add: observability |
+| 20 | AI-Assisted Development | Refine: AI collaboration |
+| **21** | **Capstone: Event-Driven Notifications** | **Production-ready** |
+| 22 | Finalize Kafka Skill | **Complete asset** |
+
+## Every Lesson Has Skill Reflection
+
+Each lesson ends with **"Reflect on Your Skill"**:
+
+1. **Test**: Does your skill handle this lesson's concepts?
+2. **Identify gaps**: What's missing?
+3. **Improve**: Add or refine the capability
+
+By Lesson 22, you've tested and improved your skill 21+ times.
 
 ## What You'll Learn
 

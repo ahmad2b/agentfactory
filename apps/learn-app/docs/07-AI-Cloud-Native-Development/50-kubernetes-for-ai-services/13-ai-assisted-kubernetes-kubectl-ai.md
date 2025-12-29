@@ -621,3 +621,35 @@ Looking at the final manifest, ask yourself:
 - If a pod crashed, where would you look first to understand why?
 
 This is the practical thinking that complements AI generation—using your kubectl foundation to make confident production decisions.
+
+---
+
+## Reflect on Your Skill
+
+You built a `kubernetes-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kubernetes-deployment skill, generate a complete Deployment manifest from a natural language description.
+Does my skill produce production-ready YAML with all necessary components (resources, probes, labels, selectors)?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include manifest generation from requirements (like kubectl-ai does)?
+- Did it explain the iterative refinement process (initial generation → review → constraints → refinement)?
+- Did it cover critical evaluation patterns (recognizing over-specification, missing health checks, image pull issues)?
+- Did it include validation steps to ensure AI-generated manifests are production-appropriate?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kubernetes-deployment skill is missing AI-assisted manifest generation and validation patterns.
+Update it to include natural language → YAML translation, iterative refinement workflows, critical evaluation checklists, and production readiness validation.
+```
+
+---

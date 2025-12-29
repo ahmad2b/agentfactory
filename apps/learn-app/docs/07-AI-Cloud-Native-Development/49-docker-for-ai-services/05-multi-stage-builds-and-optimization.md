@@ -794,3 +794,33 @@ Questions:
 ---
 
 Verify your learning by building an optimized image for your Part 6 FastAPI agent and measuring the size reduction. Target: 70%+ reduction from a naive Dockerfile.
+
+---
+
+## Reflect on Your Skill
+
+You built a `docker-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my docker-deployment skill, generate a multi-stage Dockerfile for image size optimization.
+Does my skill generate separate build and runtime stages with proper COPY --from directives?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include multi-stage build patterns?
+- Did it handle UV package manager and Alpine base images?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My docker-deployment skill is missing image optimization techniques.
+Update it to include multi-stage builds, UV package manager usage, Alpine base images, and layer cache optimization strategies.
+```
+
+---

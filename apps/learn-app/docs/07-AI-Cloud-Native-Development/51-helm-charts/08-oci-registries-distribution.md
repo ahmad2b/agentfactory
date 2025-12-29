@@ -1222,3 +1222,40 @@ Compare what you learned from AI to the concepts in this lesson:
 - Can you walk through the complete workflow: package → authenticate → push → pull → install?
 - Did AI's explanations match the examples in this lesson?
 
+---
+
+## Reflect on Your Skill
+
+You built a `helm-chart` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my helm-chart skill, package and push a chart to an OCI registry.
+Does my skill understand OCI distribution and versioning?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill use helm package to create .tgz archives?
+- Did it demonstrate helm registry login authentication?
+- Does it understand oci:// URL format for registries?
+- Did it explain semantic versioning for chart releases?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My helm-chart skill is missing [OCI distribution / packaging / versioning].
+Update it to include:
+- helm package for creating distributable archives
+- helm registry login for authentication
+- helm push to OCI registries (oci://registry/repo/)
+- helm pull from OCI URLs
+- Semantic versioning strategy (MAJOR.MINOR.PATCH)
+- Installing directly from OCI URLs
+- OCI dependencies in Chart.yaml
+```
+

@@ -969,3 +969,31 @@ I want notifications when:
 Generate the complete argocd-notifications-cm ConfigMap.
 ```
 
+
+---
+
+## Reflect on Your Skill
+
+You built a `gitops-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my gitops-deployment skill, create a custom health check in Lua for a CustomResource.
+Does my skill generate correct Lua scripts that return hs.status and hs.message?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include notification configuration for Slack or webhooks?
+- Did it handle trigger conditions like on-sync-failed or on-health-degraded?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My gitops-deployment skill doesn't configure ArgoCD notifications.
+Update it to include argocd-notifications-cm with Slack service and trigger templates.
+```

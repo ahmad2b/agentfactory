@@ -713,3 +713,33 @@ Ask me clarifying questions about my specific use case if needed.
 ### Safety Note
 
 Docker provides process isolation, not security isolation. Containers share the host kernel, so a kernel vulnerability could affect all containers. For production deployments with sensitive data, use additional security layers (network policies, secrets management) covered in later lessons.
+
+---
+
+## Reflect on Your Skill
+
+You built a `docker-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my docker-deployment skill, verify I have Docker Desktop properly configured.
+Does my skill check for Docker Engine prerequisites and resource allocation?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include Docker Desktop installation steps?
+- Did it handle resource configuration for AI workloads?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My docker-deployment skill is missing prerequisite verification and resource configuration.
+Update it to include Docker Desktop setup validation and appropriate memory/CPU allocation for AI services.
+```
+
+---

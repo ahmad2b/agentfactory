@@ -645,3 +645,35 @@ Ask: "Show me how to use a work queue pattern instead of one Pod per item."
 - What's the trade-off between parallelism and completion time?
 - When is the indexed Job pattern better than a work queue?
 - How do resource limits on Job Pods affect scheduling?
+
+---
+
+## Reflect on Your Skill
+
+You built a `kubernetes-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kubernetes-deployment skill, create a Job for batch processing and a CronJob for scheduled tasks.
+Does my skill generate Job manifests with completions, parallelism, and proper restartPolicy?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include Job vs Deployment distinction (finite vs long-running workloads)?
+- Did it explain parallelism and completions for batch processing?
+- Did it cover CronJob scheduling with cron expressions and concurrency policies?
+- Did it include AI agent use cases (embedding refresh, log cleanup, model migration)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kubernetes-deployment skill is missing Job and CronJob patterns for batch workloads.
+Update it to include Job parallelism configuration, CronJob scheduling syntax, concurrency policies, and AI-specific batch processing patterns.
+```
+
+---

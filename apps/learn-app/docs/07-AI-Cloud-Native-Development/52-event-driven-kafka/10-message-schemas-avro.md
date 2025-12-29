@@ -766,6 +766,36 @@ If you need this flexibility, you've lost the schema's contract value.
 
 Flatten when possible, or use separate events for different entity states.
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, design an Avro schema for task lifecycle events with backward compatibility.
+Does my skill show proper schema evolution patterns (optional fields with defaults, logical types)?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain schema compatibility types (backward, forward, full)?
+- Did it show how to use Schema Registry and handle schema evolution?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing schema design patterns (Avro schemas, Schema Registry, compatibility rules).
+Update it to include when to use Avro vs JSON and how to evolve schemas without breaking consumers.
+```
+
+---
+
 ## Try With AI
 
 Apply schema design and evolution to your Task API events.

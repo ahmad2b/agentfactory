@@ -924,3 +924,33 @@ Then write a Dockerfile with comments explaining each choice.
 ### Safety Note
 
 When containerizing applications, never include secrets (API keys, passwords, database credentials) in your Dockerfile or image. Use environment variables passed at runtime (`-e` flag) or Docker secrets for sensitive configuration. Images may be shared or pushed to registries where secrets would be exposed.
+
+---
+
+## Reflect on Your Skill
+
+You built a `docker-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my docker-deployment skill, generate a Dockerfile for the Task API.
+Does my skill produce valid Dockerfiles with proper instruction ordering?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill generate proper FROM, WORKDIR, COPY, RUN, CMD instructions?
+- Did it handle layer caching optimization correctly?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My docker-deployment skill is missing proper Dockerfile generation patterns.
+Update it to include correct instruction ordering, layer cache optimization, and UV package manager usage.
+```
+
+---

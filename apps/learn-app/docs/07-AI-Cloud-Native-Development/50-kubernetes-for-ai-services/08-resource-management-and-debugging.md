@@ -932,3 +932,35 @@ Explain to AI:
 kubectl delete pod multi-container-app
 ```
 
+---
+
+## Reflect on Your Skill
+
+You built a `kubernetes-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kubernetes-deployment skill, debug a Pod stuck in CrashLoopBackOff.
+Does my skill include the debugging workflow: get pods, describe pod, logs, and exec for inspection?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include resource requests and limits with proper QoS class understanding?
+- Did it explain the debugging pattern (status → describe → logs → exec)?
+- Did it cover common failure states (CrashLoopBackOff, ImagePullBackOff, Pending, OOMKilled)?
+- Did it include resource management best practices (requests = baseline, limits = ceiling)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kubernetes-deployment skill is missing debugging workflows and resource management patterns.
+Update it to include the systematic debugging approach, failure state diagnosis, and QoS class configuration.
+```
+
+---
+

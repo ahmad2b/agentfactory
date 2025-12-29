@@ -854,3 +854,33 @@ Show me the docker run command and how to verify the configuration.
 **What you're learning:** This reinforces restart policies and introduces memory limits (`--memory`), which become critical when deploying AI services that can consume large amounts of RAM.
 
 **Safety note:** When debugging containers in production, use read-only commands (`docker logs`, `docker inspect`) before interactive commands (`docker exec`). Avoid running shells in production containers unless absolutely necessary, as it can affect running services.
+
+---
+
+## Reflect on Your Skill
+
+You built a `docker-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my docker-deployment skill, diagnose a failed container startup.
+Does my skill include debugging commands like docker logs, docker exec, and docker inspect?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include container lifecycle debugging techniques?
+- Did it handle restart policies and container forensics?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My docker-deployment skill is missing debugging and troubleshooting capabilities.
+Update it to include docker logs, docker exec, docker inspect usage, and restart policy configuration.
+```
+
+---

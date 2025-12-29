@@ -471,6 +471,36 @@ Processing: {"id": "task-3", "title": "Review PR"}
 Shutdown. Processed 3 messages.
 ```
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, design a consumer group strategy for a notification service with 6 partitions and 3 consumer instances.
+Does my skill explain partition assignment, rebalancing triggers, and how to minimize downtime during rebalancing?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain how consumer groups distribute partitions across instances?
+- Did it cover rebalancing triggers (consumer crash, new consumer, partition change)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing consumer group mechanics (partition assignment, rebalancing, cooperative rebalancing).
+Update it to include when rebalancing occurs and how to configure consumers to minimize rebalancing impact.
+```
+
+---
+
 ## Try With AI
 
 **Setup:** You have a Kafka consumer that's experiencing duplicate message processing after scaling events.

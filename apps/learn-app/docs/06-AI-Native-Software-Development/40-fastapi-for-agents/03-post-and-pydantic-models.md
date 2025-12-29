@@ -469,3 +469,33 @@ Show me how to configure these behaviors in Pydantic v2, and explain when reject
 ```
 
 **What you're learning:** This prompt develops your API versioning intuition. Strict validation catches bugs early but makes backward-compatible changes harder. You'll learn to choose the right strictness level for your agent's API lifecycle.
+
+---
+
+## Reflect on Your Skill
+
+You built a `fastapi-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my fastapi-agent skill, help me create Pydantic models for request and response validation.
+Does my skill handle POST endpoints, request body validation, and field constraints?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include Pydantic model patterns (BaseModel, Field constraints)?
+- Did it cover separating request models from response models?
+- Did it handle validation errors (422 vs 400) appropriately?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My fastapi-agent skill is missing Pydantic validation patterns.
+Update it to include request/response model separation, Field constraints,
+validation error handling, and the difference between 422 and 400 status codes.
+```

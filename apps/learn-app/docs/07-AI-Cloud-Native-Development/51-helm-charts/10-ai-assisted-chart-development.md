@@ -552,4 +552,40 @@ When the dialogue converges:
 
 **You've now experienced the core collaboration pattern used throughout AI-native development: iterative refinement where your domain judgment and AI's pattern library converge toward production-grade solutions.**
 
-In Lesson 10 (Capstone), you'll apply this collaboration pattern at scale—designing a production AI agent chart using specification-first methodology. In Lesson 11, you'll encode your Helm expertise as a reusable skill that helps you and your team make these collaboration decisions consistently.
+In Lesson 11 (Capstone), you'll apply this collaboration pattern at scale—designing a production AI agent chart using specification-first methodology. In Lesson 12 (Skill Building), you'll encode your Helm expertise as a reusable skill that helps you and your team make these collaboration decisions consistently.
+
+---
+
+## Reflect on Your Skill
+
+You built a `helm-chart` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my helm-chart skill, generate a complex Ingress configuration with multi-path routing.
+Does my skill understand AI collaboration patterns for iterative refinement?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill provide initial structure that I can critique?
+- Did it adapt when I taught it about my constraints (ingress controller, auth, etc.)?
+- Does it iterate based on feedback rather than trying to be perfect first try?
+- Did it validate the final result against requirements?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My helm-chart skill is missing [AI collaboration patterns / iterative refinement].
+Update it to include:
+- Three-phase pattern: initial request → evaluation → constraint teaching
+- Critical evaluation questions for AI outputs
+- Domain constraint teaching (infrastructure, team, operational model)
+- Refinement through dialogue, not "perfect first try"
+- Validation against actual requirements
+- Safety review for security configurations
+```

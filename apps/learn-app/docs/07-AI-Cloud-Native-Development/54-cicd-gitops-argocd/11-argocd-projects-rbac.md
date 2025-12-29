@@ -800,3 +800,31 @@ Check for unused roles, orphaned users, or overly permissive policies.
 - RBAC policy.csv with role definitions and user assignments
 - kubectl commands that validate the multi-tenant setup
 - Understanding of how Projects and RBAC work together to enforce isolation
+
+---
+
+## Reflect on Your Skill
+
+You built a `gitops-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my gitops-deployment skill, create an ArgoCD Project that restricts deployments to specific namespaces and repositories.
+Does my skill include sourceRepos and destinations whitelists?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include RBAC policies for role-based access control?
+- Did it handle permission scopes like applications:get vs. applications:sync?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My gitops-deployment skill doesn't generate RBAC policies.
+Update it to include role definitions with appropriate permissions and group mappings.
+```

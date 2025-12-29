@@ -696,3 +696,31 @@ Review the YAML:
 2. Watching ArgoCD sync (or waiting for the sync window to open)
 3. Making a manual change and verifying self-heal reverts it (if enabled)
 4. Checking the sync logs: `argocd app logs my-agent`
+
+---
+
+## Reflect on Your Skill
+
+You built a `gitops-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my gitops-deployment skill, explain the difference between automated sync with prune vs. self-heal.
+Does my skill describe when each option is appropriate?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include sync window configuration for scheduled deployments?
+- Did it handle emergency manual change scenarios?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My gitops-deployment skill doesn't cover sync windows or handling emergency changes.
+Update it to include cron-based sync windows and strategies for temporary manual overrides.
+```

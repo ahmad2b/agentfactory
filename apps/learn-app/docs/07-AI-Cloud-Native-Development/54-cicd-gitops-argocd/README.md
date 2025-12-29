@@ -1,14 +1,67 @@
 ---
 sidebar_position: 54
 title: "Chapter 54: CI/CD Pipelines & GitOps with ArgoCD"
-description: "Automate builds, tests, and deployments with GitHub Actions and ArgoCD 3.x"
+description: "Build your GitOps skill first, then learn to understand and refine it into a production-ready asset"
 ---
 
 # Chapter 54: CI/CD Pipelines & GitOps with ArgoCD
 
-You've been deploying manually with kubectl and helm. That works for learning but not for teams. Every deployment should be automated, tested, and auditable. CI/CD (Continuous Integration/Continuous Deployment) automates the path from code commit to production.
+**You will build a GitOps skill BEFORE you learn GitOps.**
 
-This chapter teaches two complementary practices: CI pipelines with GitHub Actions (build, test, push images) and GitOps with ArgoCD 3.x (deploy by committing to a Git repo). Together, they create a fully automated, auditable deployment pipeline for your Part 6 FastAPI agent.
+This chapter follows the **Skill-First Learning Pattern**: In Lesson 0, you create a `gitops-deployment` skill using tools from Chapter 5. Then you spend the chapter understanding what you built and making it better. By the end, you don't just "know CI/CD and ArgoCD"—you OWN a production-ready skill.
+
+## The Skill-First Arc
+
+```
+L00: Build Your GitOps Skill (25 min)
+  │   └── Clone skills-lab, fetch docs, create skill
+  │
+  ├── L01-04: CI/CD Fundamentals
+  │   └── Concepts, GitHub Actions, Docker builds, testing
+  │
+  ├── L05-09: GitOps & ArgoCD Core
+  │   └── Principles, ArgoCD, first app, sync strategies
+  │
+  ├── L10-15: Production Patterns
+  │   └── ApplicationSets, RBAC, health, progressive, secrets, multi-cluster
+  │
+  └── L16-18: AI Collaboration & Capstone
+      └── AI-assisted, end-to-end pipeline, skill finalization
+```
+
+## Chapter Structure
+
+| # | Lesson | Your Skill Improves |
+|---|--------|---------------------|
+| **0** | **Build Your GitOps Skill** | **Created from official docs** |
+| 1 | CI/CD Concepts | Understand: pipeline stages |
+| 2 | GitHub Actions Fundamentals | Refine: workflow YAML |
+| 3 | Building Docker Images in CI | Add: CI build patterns |
+| 4 | Testing & Quality Gates | Add: test automation |
+| 5 | GitOps Principles | Understand: Git as truth |
+| 6 | ArgoCD Architecture | Validate: ArgoCD knowledge |
+| 7 | Your First ArgoCD Application | Refine: Application CRD |
+| 8 | Sync Strategies & Policies | Add: sync patterns |
+| 9 | Sync Waves & Hooks | Add: ordering patterns |
+| 10 | ApplicationSets | Add: scaling patterns |
+| 11 | ArgoCD Projects & RBAC | Add: security patterns |
+| 12 | Health & Notifications | Add: observability |
+| 13 | Progressive Delivery | Add: canary/blue-green |
+| 14 | Secrets Management | Add: secrets patterns |
+| 15 | Multi-Cluster Deployments | Add: hub-spoke patterns |
+| 16 | AI-Assisted GitOps | Refine: AI collaboration |
+| **17** | **Capstone: End-to-End Pipeline** | **Production-ready** |
+| 18 | Finalize GitOps Skill | **Complete asset** |
+
+## Every Lesson Has Skill Reflection
+
+Each lesson ends with **"Reflect on Your Skill"**:
+
+1. **Test**: Does your skill handle this lesson's concepts?
+2. **Identify gaps**: What's missing?
+3. **Improve**: Add or refine the capability
+
+By Lesson 18, you've tested and improved your skill 17+ times.
 
 ## What You'll Learn
 

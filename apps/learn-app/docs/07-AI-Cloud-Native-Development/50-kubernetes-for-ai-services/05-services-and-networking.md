@@ -898,3 +898,35 @@ Compare your initial understanding to what emerged:
 - When would you choose LoadBalancer over NodePort?
 
 These questions activate your reasoning for future Service design decisions in production environments.
+
+---
+
+## Reflect on Your Skill
+
+You built a `kubernetes-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kubernetes-deployment skill, create a Service that exposes a Deployment.
+Does my skill generate ClusterIP, NodePort, or LoadBalancer Service types with proper label selectors?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include the three Service types (ClusterIP, NodePort, LoadBalancer) and when to use each?
+- Did it explain label selectors as the mechanism connecting Services to Pods?
+- Did it cover Kubernetes DNS (service.namespace.svc.cluster.local)?
+- Did it include debugging steps for Services with no endpoints?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kubernetes-deployment skill is missing Service networking patterns and DNS discovery.
+Update it to include Service type selection, label selector configuration, DNS naming conventions, and endpoint troubleshooting.
+```
+
+---

@@ -844,3 +844,40 @@ Ask yourself:
 - Can I see which values override organizational defaults?
 - Is the `include` syntax correct for pulling templates from dependency charts?
 - Would this pattern scale to 10+ applications without duplication?
+
+---
+
+## Reflect on Your Skill
+
+You built a `helm-chart` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my helm-chart skill, create a library chart with organizational standards.
+Does my skill understand type: library and template sharing?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill create a chart with type: library in Chart.yaml?
+- Did it explain why library charts cannot be installed directly?
+- Does it demonstrate creating reusable templates (_helpers.tpl patterns)?
+- Did it show how application charts consume library dependencies?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My helm-chart skill is missing [library chart patterns / organizational standards].
+Update it to include:
+- type: library declaration in Chart.yaml
+- Reusable templates for labels, annotations, probes, security
+- Naming convention: library-name.template-name
+- Application charts declaring library dependencies
+- Using include to pull library templates
+- Override patterns through values hierarchy
+- Enterprise use cases (security, compliance, cost attribution)
+```

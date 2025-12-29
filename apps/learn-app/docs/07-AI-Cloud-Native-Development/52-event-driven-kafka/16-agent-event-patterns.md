@@ -554,6 +554,36 @@ Notification Agent                            Scheduling Agent
 
 This architecture means agents evolve independently. Adding a new notification channel (mobile push, SMS) requires only deploying a new consumer—no changes to the Task API or other agents.
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, design an event schema with correlation_id and causation_id for an agent-based workflow.
+Does my skill show how to trace events across multiple agents and reconstruct causality chains?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain correlation_id (workflow tracing) vs causation_id (event causality)?
+- Did it show how agents use these IDs to coordinate distributed workflows?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing agent event patterns (correlation_id, causation_id, event chaining).
+Update it to include how to implement distributed tracing and causality tracking in agent systems.
+```
+
+---
+
 ## Try With AI
 
 **Setup:** You're designing event schemas for an AI agent system that manages tasks, sends notifications, and maintains audit trails.

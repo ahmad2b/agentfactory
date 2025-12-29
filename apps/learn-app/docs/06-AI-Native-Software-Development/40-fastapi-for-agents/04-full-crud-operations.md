@@ -500,3 +500,33 @@ Two agents call this simultaneously for the same task. What happens? Show me how
 ```
 
 **What you're learning:** This prompt introduces concurrency challenges. You'll discover that in-memory operations aren't atomic—two requests can both read "pending" before either writes. This is why production agent systems use databases with proper locking or optimistic concurrency control.
+
+---
+
+## Reflect on Your Skill
+
+You built a `fastapi-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my fastapi-agent skill, help me implement full CRUD operations for a resource.
+Does my skill include proper HTTP methods (GET, POST, PUT, DELETE) and status codes?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include all CRUD operations with correct HTTP methods?
+- Did it handle resource lookup patterns and 404 errors?
+- Did it use appropriate status codes (200, 201, 204, 404)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My fastapi-agent skill is missing complete CRUD patterns.
+Update it to include GET (list and single), POST, PUT, DELETE operations,
+proper HTTP status codes, and resource not-found handling.
+```

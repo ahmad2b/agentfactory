@@ -792,3 +792,31 @@ Check if Claude:
 - Changed deletion policy to NOT delete failed jobs?
 - OR left migration as `HookSucceeded` but added a separate debug/audit hook?
 - Explained the tradeoff between cleanup and debugging?
+
+---
+
+## Reflect on Your Skill
+
+You built a `gitops-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my gitops-deployment skill, generate manifests with sync waves to deploy a database before an application.
+Does my skill use annotations like argocd.argoproj.io/sync-wave correctly?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include resource hooks for PreSync and PostSync operations?
+- Did it handle database migrations using hooks?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My gitops-deployment skill doesn't include hook configurations.
+Update it to add PreSync hooks for schema migrations and PostSync hooks for smoke tests.
+```

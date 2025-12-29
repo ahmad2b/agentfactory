@@ -511,3 +511,33 @@ using dependency injection?
 ```
 
 **What you're learning:** Optional dependencies and conditional logic based on authentication state. Common pattern for APIs with public/private data.
+
+---
+
+## Reflect on Your Skill
+
+You built a `fastapi-agent` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my fastapi-agent skill, help me organize code with dependency injection.
+Does my skill include Depends() patterns, yield dependencies, and dependency chaining?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include creating custom dependency functions with Depends()?
+- Did it handle yield dependencies for cleanup (database sessions)?
+- Did it cover dependency chaining and app.dependency_overrides for testing?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My fastapi-agent skill is missing dependency injection organization.
+Update it to include custom dependency functions, yield dependencies with cleanup,
+dependency chaining patterns, and dependency overrides for testing.
+```

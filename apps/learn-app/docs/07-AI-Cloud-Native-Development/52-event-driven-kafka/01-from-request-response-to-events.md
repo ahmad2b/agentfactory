@@ -338,6 +338,36 @@ The key question: **Does the caller need to wait for the result?**
 - Completing a purchase: Yes. The user needs to know if it worked.
 - Sending notifications about a purchase: No. The purchase is complete; notifications are side effects.
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, analyze this scenario: A Task API calls three services directly (Notification, Audit, Reminder). Each call takes 500ms. What coupling problems exist?
+Does my skill identify temporal, availability, and behavioral coupling?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain the three types of coupling from this lesson?
+- Did it distinguish between events (immutable facts) and commands (requests)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing coverage of coupling types (temporal, availability, behavioral).
+Update it to include when each coupling type appears and how events solve them.
+```
+
+---
+
 ## Try With AI
 
 Open your AI companion (Claude, ChatGPT, Gemini) and explore these scenarios.

@@ -868,6 +868,36 @@ Task Service ────────────────────▶ Use
     SAGA ROLLED BACK
 ```
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, implement the Saga pattern for an order fulfillment workflow with compensation events.
+Does my skill generate the event schemas for both forward steps and compensating transactions?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain choreography vs orchestration for Sagas?
+- Did it show how to design compensation events and handle partial failures?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing Saga pattern implementation (compensation events, choreography, orchestration).
+Update it to include when to use Sagas and how to design reliable distributed workflows.
+```
+
+---
+
 ## Try With AI
 
 **Setup:** You're designing a saga for an order processing workflow in an e-commerce system.

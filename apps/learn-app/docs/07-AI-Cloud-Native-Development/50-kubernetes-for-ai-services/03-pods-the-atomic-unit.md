@@ -829,3 +829,35 @@ Ask AI: "My application uses about 200Mi of memory under normal load. What value
 
 Expected: AI should explain the distinction (requests for scheduling, limits for hard ceiling) and suggest reasonable safety margins.
 
+---
+
+## Reflect on Your Skill
+
+You built a `kubernetes-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kubernetes-deployment skill, create a Pod manifest with resource requests and limits.
+Does my skill generate proper YAML with requests and limits for CPU and memory?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include the Pod manifest structure (apiVersion, kind, metadata, spec)?
+- Did it explain resource requests vs limits and their impact on scheduling?
+- Did it cover multi-container Pods and the sidecar pattern?
+- Did it explain Pod networking (shared network namespace, localhost communication)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kubernetes-deployment skill is missing Pod manifest structure and resource management details.
+Update it to include proper YAML structure, resource requests/limits, multi-container patterns, and Pod networking fundamentals.
+```
+
+---
+

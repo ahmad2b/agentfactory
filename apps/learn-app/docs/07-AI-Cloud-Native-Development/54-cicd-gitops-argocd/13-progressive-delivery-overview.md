@@ -706,3 +706,31 @@ As you work through these prompts, ask yourself:
 - Why is gradual validation important for AI agent behavior changes?
 - What metrics would you actually monitor when deploying a new agent version?
 - How would you explain blue-green deployment to a teammate unfamiliar with it?
+
+---
+
+## Reflect on Your Skill
+
+You built a `gitops-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my gitops-deployment skill, explain when to use canary vs. blue-green deployment.
+Does my skill describe the tradeoffs for AI agents with subtle behavior changes?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include Argo Rollouts configuration with canary steps?
+- Did it handle analysis templates for automated promotion/rollback?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My gitops-deployment skill doesn't generate Argo Rollouts manifests.
+Update it to include Rollout CRDs with canary strategies and metric-based analysis.
+```

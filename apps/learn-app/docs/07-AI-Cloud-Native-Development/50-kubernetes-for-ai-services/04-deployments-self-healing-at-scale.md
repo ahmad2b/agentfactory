@@ -572,3 +572,35 @@ Ask: "What happens if the new version has a bug and Pods crash? How do I recover
 - Did AI's explanation match the commands you ran earlier?
 - What's the advantage of retaining the old ReplicaSet?
 - How quickly can you rollback if needed?
+
+---
+
+## Reflect on Your Skill
+
+You built a `kubernetes-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kubernetes-deployment skill, create a Deployment with 3 replicas and rolling update strategy.
+Does my skill generate a Deployment manifest with proper replica count and update configuration?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include the Deployment → ReplicaSet → Pod hierarchy?
+- Did it explain rolling updates and how Kubernetes creates new ReplicaSets for version changes?
+- Did it cover rollback using kubectl rollout undo?
+- Did it explain self-healing (automatic Pod replacement when deleted)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kubernetes-deployment skill is missing Deployment update and rollback strategies.
+Update it to include rolling update behavior, ReplicaSet management, kubectl rollout commands, and self-healing mechanisms.
+```
+
+---

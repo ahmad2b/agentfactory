@@ -574,6 +574,36 @@ kubectl get kafkaconnector task-outbox-connector -n kafka -o yaml
 
 Look at `.status.connectorStatus` for error messages.
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, implement the transactional outbox pattern for a Task API.
+Does my skill generate the outbox table schema, the transactional insert code, and the Debezium outbox event router configuration?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain the dual-write problem and how CDC solves it?
+- Did it cover the transactional outbox pattern and Debezium outbox event router?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing CDC patterns (dual-write problem, transactional outbox, Debezium connector config).
+Update it to include when to use CDC versus polling and how to implement the outbox pattern atomically.
+```
+
+---
+
 ## Try With AI
 
 ### Prompt 1: Design Your Outbox Schema

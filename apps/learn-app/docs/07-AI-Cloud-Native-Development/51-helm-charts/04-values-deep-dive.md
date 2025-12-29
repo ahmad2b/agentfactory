@@ -1484,4 +1484,39 @@ Compare your final values structure to your learning objectives:
 - Can you create a values.schema.json that prevents invalid deployments?
 - Can you design a values.yaml structure that's maintainable as the chart grows?
 
-If all are "yes," you're ready for Lesson 4 (Chart Dependencies). If any are "no," ask AI to clarify that specific concept.
+If all are "yes," you're ready for Lesson 5 (Chart Dependencies). If any are "no," ask AI to clarify that specific concept.
+
+---
+
+## Reflect on Your Skill
+
+You built a `helm-chart` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my helm-chart skill, create environment-specific values files and a values.schema.json.
+Does my skill understand values hierarchy and validation?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill demonstrate the precedence hierarchy (values.yaml < -f file < --set)?
+- Did it create environment files that only override what differs?
+- Does it include values.schema.json with required fields and type validation?
+- Did it organize values by concept (agent.*, database.*) not by template file?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My helm-chart skill is missing [values hierarchy / schema validation / environment patterns].
+Update it to include:
+- Values precedence: defaults → -f file → --set overrides
+- Environment-specific files (values-dev, values-staging, values-prod)
+- values.schema.json with required fields, types, and enums
+- Nested values organization by concept, not implementation
+- Documentation comments explaining each value's purpose
+```

@@ -492,6 +492,36 @@ When alerts fire, you need clear steps. Here's a template runbook:
    - Check network: latency between brokers
 ```
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, diagnose a consumer lag issue and identify which consumer is falling behind.
+Does my skill show how to use kafka-consumer-groups.sh and interpret lag metrics?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain consumer lag metrics and what causes lag growth?
+- Did it show how to use Kafka CLI tools for debugging (kafka-topics.sh, kafka-consumer-groups.sh)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing monitoring and debugging patterns (consumer lag, offset inspection, CLI tools).
+Update it to include how to diagnose and resolve common Kafka operational issues.
+```
+
+---
+
 ## Try With AI
 
 **Setup:** You're on-call and receive an alert about your Kafka cluster.

@@ -416,3 +416,31 @@ When Claude responds, it should suggest:
 Ask a follow-up: "I see the repo-server pod requesting 1Gi of memory. Can I safely lower this to 512Mi if I'm only deploying small applications?"
 
 Use Claude's response to understand which components are resource-sensitive and when it's safe to optimize.
+
+---
+
+## Reflect on Your Skill
+
+You built a `gitops-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my gitops-deployment skill, describe the four core ArgoCD components.
+Does my skill explain the roles of API Server, Repo Server, Controller, and Redis?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include how the controller reconciles Git state with cluster state?
+- Did it handle authentication methods (CLI login, port-forwarding)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My gitops-deployment skill doesn't explain the reconciliation mechanism.
+Update it to include how the Application Controller polls Git and applies changes.
+```

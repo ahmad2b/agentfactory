@@ -405,3 +405,31 @@ Expected evaluation points:
 - **Auditability**: Every change is in Git history, reviewable
 - **Automation**: Drift detection and correction is automatic, not manual
 - **Reproducibility**: Cluster state can be reconstructed from Git at any point in time
+
+---
+
+## Reflect on Your Skill
+
+You built a `gitops-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my gitops-deployment skill, explain the GitOps reconciliation loop.
+Does my skill describe desired state, actual state, and drift detection?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include audit trail benefits of Git as source of truth?
+- Did it handle rollback strategies using Git history?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My gitops-deployment skill doesn't explain how Git history enables rollbacks.
+Update it to include how reverting a commit automatically reverts cluster state.
+```

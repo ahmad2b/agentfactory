@@ -662,6 +662,36 @@ This adds ~20-50ms latency but guarantees the client knows if publishing failed.
 - The health endpoint helps operators verify Kafka connectivity
 - Consumer group naming with hostname enables per-pod metrics in Kubernetes
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, integrate Kafka producers and consumers into a FastAPI application.
+Does my skill show proper async producer/consumer patterns, connection pooling, and graceful shutdown?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill explain how to avoid blocking FastAPI's async event loop?
+- Did it cover lifespan events for proper producer/consumer initialization and cleanup?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing FastAPI integration patterns (async producers, background consumers, lifespan events).
+Update it to include how to integrate Kafka with FastAPI without blocking the event loop.
+```
+
+---
+
 ## Try With AI
 
 Apply what you've learned by designing FastAPI + Kafka integrations for your domain.

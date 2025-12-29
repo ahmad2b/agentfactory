@@ -725,3 +725,31 @@ After applying in your cluster:
 - Are all three syncing to their respective namespaces?
 - Can you modify values in the list elements and have all apps update automatically?
 
+
+---
+
+## Reflect on Your Skill
+
+You built a `gitops-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my gitops-deployment skill, create an ApplicationSet with a list generator for dev/staging/prod.
+Does my skill generate correct template variables and per-environment configurations?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include matrix generators for combining multiple dimensions?
+- Did it handle cluster generator for multi-cluster deployments?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My gitops-deployment skill only generates simple list-based ApplicationSets.
+Update it to include matrix generators and cluster selectors for advanced multi-environment patterns.
+```

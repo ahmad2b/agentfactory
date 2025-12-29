@@ -381,3 +381,31 @@ Spend 10 minutes sketching out your ideal pipeline for your own project:
 5. **Deploy**: Where should code run? (Kubernetes? App Engine? Lambda?)
 
 This is the foundation. Later lessons show how to implement these stages with GitHub Actions and ArgoCD.
+
+---
+
+## Reflect on Your Skill
+
+You built a `gitops-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my gitops-deployment skill, explain the five stages of a CI/CD pipeline.
+Does my skill describe trigger, build, test, push, and deploy stages correctly?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include quality gates and artifact versioning?
+- Did it handle rollback strategies and auditability?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My gitops-deployment skill is missing quality gate concepts and rollback strategies.
+Update it to include how test failures block deployment and how to rollback using versioned artifacts.
+```

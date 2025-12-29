@@ -614,6 +614,36 @@ If you have an existing development cluster, here's the migration approach:
 
 Strimzi handles partition redistribution automatically when you add brokers. The migration can be done with zero downtime.
 
+---
+
+## Reflect on Your Skill
+
+You built a `kafka-events` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kafka-events skill, configure a production Kafka cluster with TLS encryption, SCRAM authentication, and node pools.
+Does my skill generate Strimzi CRDs with proper security and resource allocation?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include TLS listener configuration and certificate management?
+- Did it cover SCRAM user authentication and ACL setup?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kafka-events skill is missing production Kafka configuration (TLS, SCRAM, node pools, resource quotas).
+Update it to include how to secure and scale Kafka clusters in production.
+```
+
+---
+
 ## Try With AI
 
 You've configured production Kafka with security and reliability features. Now explore how to validate and optimize your configuration.

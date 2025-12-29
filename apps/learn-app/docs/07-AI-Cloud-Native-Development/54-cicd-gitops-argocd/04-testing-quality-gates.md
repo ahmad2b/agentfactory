@@ -776,3 +776,31 @@ Check that:
 - Build job uses `docker/build-push-action`
 - Push job (if included) pushes to a registry
 - No job runs if its dependency fails
+
+---
+
+## Reflect on Your Skill
+
+You built a `gitops-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my gitops-deployment skill, create a testing pipeline with linting, unit tests, and coverage gates.
+Does my skill understand quality thresholds and test result reporting?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include integration testing with service containers?
+- Did it handle test failure handling and coverage reporting to GitHub?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My gitops-deployment skill doesn't include service containers for integration tests.
+Update it to add PostgreSQL/Redis containers and environment variable configuration for tests.
+```

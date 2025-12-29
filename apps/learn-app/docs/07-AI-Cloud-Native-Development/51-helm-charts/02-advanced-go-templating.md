@@ -1005,4 +1005,38 @@ If all answers are yes, you've successfully learned to combine conditionals with
 
 ---
 
-**Next lesson:** Lesson 2 teaches named templates and helpers (like `_helpers.tpl`), which let you build reusable template code across an entire chart.
+## Reflect on Your Skill
+
+You built a `helm-chart` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my helm-chart skill, generate a template with conditionals and range loops.
+Does my skill understand Go template syntax like if/else, range, and pipelines?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill use proper comparison operators (eq, ne, gt, lt) instead of symbols?
+- Did it include whitespace control ({{- and -}}) to prevent blank lines?
+- Does it handle pipelines with functions like quote, upper, default?
+- Did it demonstrate range loops over lists and maps correctly?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My helm-chart skill is missing [Go template syntax / conditionals / iteration].
+Update it to include:
+- Comparison operators (eq, ne, gt, lt, and, or)
+- Whitespace control with {{- and -}}
+- Pipeline functions (quote, upper, default, toYaml, nindent)
+- Range loops over lists and maps with proper variable scoping
+```
+
+---
+
+**Next lesson:** Lesson 3 teaches named templates and helpers (like `_helpers.tpl`), which let you build reusable template code across an entire chart.

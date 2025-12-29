@@ -880,3 +880,35 @@ Now you've learned to configure probes manually. In the next lesson, you'll use 
 4. What should failureThreshold be for liveness (more conservative)?
 
 Test your configuration by deploying to your cluster and simulating failures (make your health endpoint return 500 temporarily to test probe behavior).
+
+---
+
+## Reflect on Your Skill
+
+You built a `kubernetes-deployment` skill in Lesson 0. Test and improve it based on what you learned.
+
+### Test Your Skill
+
+```
+Using my kubernetes-deployment skill, configure liveness, readiness, and startup probes.
+Does my skill generate proper probe configurations with appropriate timing parameters?
+```
+
+### Identify Gaps
+
+Ask yourself:
+- Did my skill include the three probe types (liveness, readiness, startup) and when to use each?
+- Did it explain HTTP GET, TCP socket, and exec probe mechanisms?
+- Did it cover timing parameters (initialDelaySeconds, periodSeconds, timeoutSeconds, failureThreshold)?
+- Did it include debugging patterns for probe failures (describe pod, check logs, port-forward)?
+
+### Improve Your Skill
+
+If you found gaps:
+
+```
+My kubernetes-deployment skill is missing health probe configuration and debugging patterns.
+Update it to include all three probe types, appropriate timing for AI agents with slow initialization, and probe failure diagnosis steps.
+```
+
+---
