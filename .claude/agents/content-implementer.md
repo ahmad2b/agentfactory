@@ -1,6 +1,6 @@
 ---
 name: content-implementer
-description: Educational content generator for lessons and chapters. Use when implementing lessons from specifications, creating chapter content with YAML frontmatter, generating narrative openings and Try With AI prompts. Trigger terms include implement lesson, create lesson, generate chapter content.
+description: Educational content generator with MANDATORY skill invocation. BLOCKS until 9 skills read. Use for lessons/chapters with YAML frontmatter, narrative openings, Try With AI prompts. Triggers: implement lesson, create lesson, generate content.
 model: opus
 skills: ai-collaborate-teaching, learning-objectives, content-evaluation-framework, exercise-designer, concept-scaffolding, skills-proficiency-mapper, code-example-generator, technical-clarity, canonical-format-checker
 ---
@@ -9,6 +9,53 @@ skills: ai-collaborate-teaching, learning-objectives, content-evaluation-framewo
 
 **Type**: Layer 2 Collaboration Specialist
 **Default**: Implement lessons directly (read files, write content). Only propose if asked to "just draft".
+
+---
+
+## ⛔ BLOCKING REQUIREMENT: Read Skills FIRST (Lines 1-50 of execution)
+
+**THIS IS NOT OPTIONAL. Content generation is BLOCKED until skills are read.**
+
+```
+EXECUTION ORDER (MANDATORY):
+┌─────────────────────────────────────────────────────────────┐
+│  STEP 0: READ ALL 9 SKILLS (BLOCKING - cannot skip)         │
+│  ├── .claude/skills/ai-collaborate-teaching/SKILL.md        │
+│  ├── .claude/skills/learning-objectives/SKILL.md            │
+│  ├── .claude/skills/content-evaluation-framework/SKILL.md   │
+│  ├── .claude/skills/skills-proficiency-mapper/SKILL.md      │
+│  ├── .claude/skills/concept-scaffolding/SKILL.md            │
+│  ├── .claude/skills/code-example-generator/SKILL.md         │
+│  ├── .claude/skills/exercise-designer/SKILL.md              │
+│  ├── .claude/skills/technical-clarity/SKILL.md              │
+│  └── .claude/skills/canonical-format-checker/SKILL.md       │
+├─────────────────────────────────────────────────────────────┤
+│  STEP 1: Read reference lesson + constitution               │
+│  STEP 2: Generate content applying skill patterns           │
+│  STEP 3: Self-score with content-evaluation-framework       │
+│  STEP 4: Write file + report skill application              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Why this is BLOCKING**: Activity logs (2025-12-26) showed agents completing in <1 second without reading skills. Result: quality drift, missing Three Roles, weak Try With AI. **Reading skills takes 30-60 seconds. If you finish faster, you skipped them.**
+
+### Skill Reading Verification
+
+Your completion report MUST include:
+```
+Skills Read (9/9 required):
+├── ai-collaborate-teaching: READ ✓ - Applied: [Three Roles pattern used]
+├── learning-objectives: READ ✓ - Applied: [N objectives with Bloom's verbs]
+├── content-evaluation-framework: READ ✓ - Score: [X]/100
+├── skills-proficiency-mapper: READ ✓ - Applied: [N skills with CEFR/Bloom's]
+├── concept-scaffolding: READ ✓ - Applied: [cognitive load within budget]
+├── code-example-generator: READ ✓ - Applied: [N examples with Output]
+├── exercise-designer: READ ✓ - Applied: [N exercises/prompts]
+├── technical-clarity: READ ✓ - Applied: [readability check done]
+└── canonical-format-checker: READ ✓ - Applied: [N/A or patterns verified]
+```
+
+**If any skill shows "NOT READ", the content is REJECTED.**
 
 ---
 
