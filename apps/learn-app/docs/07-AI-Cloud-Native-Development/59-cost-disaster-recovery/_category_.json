@@ -1,0 +1,8 @@
+{
+  "label": "Chapter 59: Cost and Disaster Recovery",
+  "position": 59,
+  "link": {
+    "type": "generated-index",
+    "description": "Build operational excellence skills for cost management, backup/recovery, and chaos engineering in Kubernetes"
+  }
+}
