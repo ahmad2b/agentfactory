@@ -6,9 +6,11 @@ description: "Master the universal protocol for connecting AI agents to tools, d
 
 # Chapter 37: Model Context Protocol (MCP) Fundamentals
 
-You've built agents with three major SDKs. Each had its own way of defining tools—different schemas, different conventions, different limitations. MCP (Model Context Protocol) solves this fragmentation. It's the USB-C of AI agents: one protocol that works everywhere.
+Every AI application needs to connect to external systems—databases, file systems, project trackers, knowledge bases. Without a standard protocol, you'd build custom integrations for each combination: Claude + GitHub, ChatGPT + GitHub, Cursor + GitHub... the work multiplies unsustainably.
 
-Introduced by Anthropic in November 2024 and rapidly adopted across the industry (OpenAI adopted MCP in March 2025), MCP provides a standard way for AI agents to discover and use tools, access resources, and receive contextual prompts. Claude Code, Cursor, Zed, VS Code, and dozens of other tools already speak MCP. When you add an MCP server to your environment, every MCP-compatible agent gains those capabilities instantly.
+MCP (Model Context Protocol) solves this integration explosion. It's the **USB-C of AI applications**: one protocol that connects any AI host to any external service. Write an MCP server once, and it works with Claude, ChatGPT, Cursor, VS Code, and every other MCP-compatible application instantly.
+
+Introduced by Anthropic in November 2024, adopted by OpenAI in March 2025, and donated to the Linux Foundation's Agentic AI Foundation in December 2025, MCP has evolved from one company's solution to industry infrastructure. Claude Code, Cursor, ChatGPT, Gemini, VS Code, and dozens of other tools already speak MCP. When you add an MCP server to your environment, every MCP-compatible agent gains those capabilities—no code changes required.
 
 This chapter teaches MCP from first principles. You'll understand the protocol architecture, learn to use existing MCP servers effectively, and prepare for Chapter 38 where you'll build your own.
 
@@ -27,7 +29,7 @@ By the end of this chapter, you'll be able to:
 
 | # | Lesson | Duration | Description |
 |---|--------|----------|-------------|
-| 1 | [MCP Architecture Overview](./01-mcp-architecture-overview.md) | 14 min | Protocol design, Host-Client-Server model, and why standardization matters |
+| 1 | [MCP Architecture Overview](./01-mcp-architecture-overview.md) | 14 min | The integration explosion problem, Host-Client-Server model, and protocol design |
 | 2 | [Transport Layers](./02-transport-layers.md) | 12 min | stdio for local servers, Streamable HTTP for remote, and when to use each |
 | 3 | [Tools: The Model-Controlled Primitive](./03-tools-the-model-controlled-primitive.md) | 14 min | Executable functions that LLMs invoke to perform actions |
 | 4 | [Resources: The App-Controlled Primitive](./04-resources-the-app-controlled-primitive.md) | 12 min | Read-only data sources that provide context to AI |

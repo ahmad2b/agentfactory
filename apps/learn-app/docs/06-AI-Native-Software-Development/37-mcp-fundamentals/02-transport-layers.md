@@ -69,19 +69,19 @@ differentiation:
 
 # Transport Layers: How MCP Messages Travel
 
-If you've been following along with Claude Code, you've been using MCP without thinking about *how* the messages travel between Claude and the servers you've added to your configuration.
+You've configured an MCP server on your laptop. It works perfectly—Claude Code can read files, query databases, create issues. But what happens when you want to deploy that server to the cloud so your whole team can use it? Or run it on a customer's infrastructure?
 
-The protocol is elegant: MCP doesn't care.
+The good news: **your MCP server code doesn't change.** Only the *transport*—how messages physically travel between client and server—changes.
 
-The same JSON-RPC message format that works when your AI agent talks to a local server running as a subprocess also works when talking to a server running on a remote cloud machine handling thousands of simultaneous requests. The transport layer—how messages physically move—is completely separate from the protocol itself.
+Think of it like phone calls. Whether you call someone via landline, cellular, or WiFi calling, the conversation is the same. Only the underlying network changes. MCP works the same way: the protocol (JSON-RPC messages) stays identical whether messages travel through local process streams or across the internet via HTTP.
 
-This lesson explores that separation. You'll understand **when to use stdio transport** (perfect for development and single-client scenarios), **when to use HTTP transport** (necessary for remote servers and multi-client products), and most importantly, **why the application code doesn't need to know the difference**.
+This lesson explores that separation. You'll understand **when to use stdio transport** (perfect for development and single-client scenarios), **when to use Streamable HTTP transport** (necessary for remote servers and multi-client products), and most importantly, **why your server code doesn't need to know the difference**.
 
 ## Understanding Transport Agnosticism
 
 Before diving into specific transports, let's establish why this architecture choice matters.
 
-**Traditional approach**: Lock tools to a single communication mechanism. GraphQL needs HTTP. gRPC needs its own protocol. WebSocket connections have different semantics than REST APIs.
+**Traditional approach**: Lock tools to a single communication mechanism. GraphQL typically uses HTTP. gRPC requires its own protocol. WebSocket connections have different semantics than REST APIs.
 
 **MCP's approach**: Define the protocol (JSON-RPC message structure, capability discovery, tool schemas) completely separately from the transport. A tool definition works identically whether it arrives via subprocess streams or HTTP requests.
 
@@ -109,7 +109,7 @@ This is the simplest possible IPC (inter-process communication) mechanism. No ne
 
 ```
 ┌─────────────────────────────────────────┐
-│          Claude Code (Client)            │
+│          MCP Host (Client)               │
 │                                          │
 │  Launches:  mcp-server                  │
 │             │                            │
@@ -215,27 +215,29 @@ Server → 200 OK (SSE stream)
          data: {"result": {...}}
 ```
 
-The MCP spec recommends **stateless JSON for simplicity**—only use stateful SSE when you genuinely need streaming progress or real-time updates.
+For most use cases, **stateless JSON is simpler and scales better**—only use stateful SSE when you genuinely need streaming progress or real-time updates.
 
-For operations that need to stream results back (tool execution, resource reading), MCP supports **Server-Sent Events (SSE)**—an HTTP standard where the server sends multiple data chunks over a single connection:
+### Multi-Client Architecture
+
+Unlike stdio (one client per server process), Streamable HTTP allows multiple clients to connect to a single server:
 
 ```
 ┌──────────────────────────────────────┐
-│      Claude Code (Client 1)          │
+│         Client A                     │
 │                                      │
-│   HTTP POST /mcp/tools               │
+│   HTTP POST /mcp                     │
 │   {tool request...}                  │
 │                ↓                      │
-│   [HTTP response with result]        │
+│   [JSON or SSE response]             │
 └──────────────────────────────────────┘
 
 ┌──────────────────────────────────────┐
-│      Cursor (Client 2)               │
+│         Client B                     │
 │                                      │
-│   HTTP POST /mcp/tools               │
+│   HTTP POST /mcp                     │
 │   {tool request...}                  │
 │                ↓                      │
-│   [HTTP response with result]        │
+│   [JSON or SSE response]             │
 └──────────────────────────────────────┘
 
            ▲         ▲
@@ -247,9 +249,8 @@ For operations that need to stream results back (tool execution, resource readin
 │    MCP Server (remote service)       │
 │                                      │
 │  Listens on :8000                   │
-│  Processes HTTP POST requests       │
-│  Returns JSON-RPC responses         │
 │  Handles multiple clients           │
+│  Returns JSON or streams SSE        │
 │                                      │
 └──────────────────────────────────────┘
 ```
@@ -338,6 +339,8 @@ Whether a tool request travels through stdio or HTTP, the actual message is iden
 The transport layer handles **how** this message gets from client to server. Your tool implementation, parameter validation, and business logic remain unchanged.
 
 This is why experienced developers care about this architecture: it means **switching a server from local development (stdio) to production deployment (HTTP) requires updating configuration, not rewriting code**.
+
+An upcoming lesson covers how to configure MCP clients in various hosts—you'll see how transport selection is purely a configuration concern.
 
 ## Try With AI
 

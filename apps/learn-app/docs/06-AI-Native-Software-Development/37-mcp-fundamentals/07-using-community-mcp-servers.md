@@ -136,7 +136,7 @@ The community has created thousands of MCP servers for specialized domains: data
 | **Jira** | Project management, ticket operations | Community-maintained | Python |
 
 **Where to find community servers**:
-1. **Official MCP Registry** at [modelcontextprotocol.info/tools/registry/](https://modelcontextprotocol.info/tools/registry/) — The authoritative source with metadata and ratings
+1. **Official MCP Registry** at [registry.modelcontextprotocol.io](https://registry.modelcontextprotocol.io) — The authoritative source with metadata and ratings
 2. **Curated lists** on GitHub (e.g., [wong2/awesome-mcp-servers](https://github.com/wong2/awesome-mcp-servers), [punkpeye/awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers))
 3. **GitHub search** for "mcp-server" repository topic
 
@@ -587,9 +587,9 @@ The MCP ecosystem evolves constantly. How do you stay informed?
 
 ### Official MCP Registry
 
-**Best source**: [modelcontextprotocol.info/tools/registry/](https://modelcontextprotocol.info/tools/registry/)
+**Best source**: [registry.modelcontextprotocol.io](https://registry.modelcontextprotocol.io)
 
-The registry launched in preview (September 2025) and entered API freeze (October 2025). It's the canonical source for:
+The registry launched in preview (September 8, 2025) and entered API freeze v0.1 (October 24, 2025). It's the canonical source for:
 - Server metadata (author, version, capabilities)
 - Community ratings and reviews
 - Installation instructions

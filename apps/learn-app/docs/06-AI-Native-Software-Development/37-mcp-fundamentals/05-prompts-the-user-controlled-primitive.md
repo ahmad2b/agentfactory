@@ -140,7 +140,7 @@ The client sends a simple discovery request:
 }
 ```
 
-No pagination. No filtering. Just: "What prompts do you have?"
+Simple discovery request: "What prompts do you have?" (The spec supports optional pagination via `cursor` parameter for large prompt collections.)
 
 ### The Response
 
