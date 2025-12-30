@@ -7,6 +7,7 @@ chapter: 40
 lesson: 7
 duration_minutes: 45
 
+# HIDDEN SKILLS METADATA
 skills:
   - name: "SQLModel Table Definition"
     proficiency_level: "B1"

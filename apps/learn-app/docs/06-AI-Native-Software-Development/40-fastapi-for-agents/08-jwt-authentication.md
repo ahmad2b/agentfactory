@@ -7,6 +7,7 @@ chapter: 40
 lesson: 8
 duration_minutes: 50
 
+# HIDDEN SKILLS METADATA
 skills:
   - name: "JWT Token Generation"
     proficiency_level: "B1"

@@ -5,6 +5,7 @@ chapter: 40
 lesson: 4
 duration_minutes: 55
 
+# HIDDEN SKILLS METADATA
 skills:
   - name: "HTTP Method Semantics"
     proficiency_level: "B1"

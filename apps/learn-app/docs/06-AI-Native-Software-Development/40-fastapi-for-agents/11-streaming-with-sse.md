@@ -5,6 +5,7 @@ chapter: 40
 lesson: 11
 duration_minutes: 55
 
+# HIDDEN SKILLS METADATA
 skills:
   - name: "Server-Sent Events"
     proficiency_level: "B1"

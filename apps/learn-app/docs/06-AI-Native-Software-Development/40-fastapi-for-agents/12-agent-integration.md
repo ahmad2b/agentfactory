@@ -7,6 +7,7 @@ chapter: 40
 lesson: 12
 duration_minutes: 50
 
+# HIDDEN SKILLS METADATA
 skills:
   - name: "API-to-Function Conversion"
     proficiency_level: "B1"

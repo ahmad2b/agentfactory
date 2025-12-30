@@ -5,6 +5,7 @@ chapter: 40
 lesson: 3
 duration_minutes: 50
 
+# HIDDEN SKILLS METADATA
 skills:
   - name: "Pydantic Model Definition"
     proficiency_level: "B1"

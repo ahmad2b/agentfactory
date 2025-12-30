@@ -7,6 +7,7 @@ chapter: 40
 lesson: 6
 duration_minutes: 40
 
+# HIDDEN SKILLS METADATA
 skills:
   - name: "Environment Variable Configuration"
     proficiency_level: "B1"

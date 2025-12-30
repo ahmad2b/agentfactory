@@ -7,6 +7,7 @@ chapter: 40
 lesson: 13
 duration_minutes: 90
 
+# HIDDEN SKILLS METADATA
 skills:
   - name: "API Architecture Composition"
     proficiency_level: "B1"

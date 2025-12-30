@@ -5,6 +5,7 @@ chapter: 40
 lesson: 5
 duration_minutes: 45
 
+# HIDDEN SKILLS METADATA
 skills:
   - name: "HTTP Status Codes"
     proficiency_level: "B1"

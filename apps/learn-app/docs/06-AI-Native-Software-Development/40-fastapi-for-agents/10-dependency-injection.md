@@ -7,6 +7,7 @@ chapter: 40
 lesson: 10
 duration_minutes: 45
 
+# HIDDEN SKILLS METADATA
 skills:
   - name: "Depends() Pattern"
     proficiency_level: "B1"

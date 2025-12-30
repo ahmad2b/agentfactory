@@ -7,6 +7,7 @@ chapter: 40
 lesson: 9
 duration_minutes: 45
 
+# HIDDEN SKILLS METADATA
 skills:
   - name: "Password Hashing with Argon2"
     proficiency_level: "B1"

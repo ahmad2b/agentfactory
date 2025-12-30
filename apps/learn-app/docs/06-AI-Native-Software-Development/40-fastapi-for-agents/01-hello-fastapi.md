@@ -5,6 +5,7 @@ chapter: 40
 lesson: 1
 duration_minutes: 45
 
+# HIDDEN SKILLS METADATA
 skills:
   - name: "Creating FastAPI Applications"
     proficiency_level: "A2"
@@ -556,9 +557,3 @@ Show me the updated SKILL.md principles section.
 ```
 
 **Your skill just got better.** Each lesson builds on this pattern.
-
----
-
-## What's Next
-
-**Lesson 2: Pytest Fundamentals** — You'll learn to test your endpoints, and your skill will learn to generate tests alongside code.

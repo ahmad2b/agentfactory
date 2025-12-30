@@ -6,6 +6,7 @@ chapter: 40
 lesson: 0
 duration_minutes: 15
 
+# HIDDEN SKILLS METADATA
 skills:
   - name: "Skill-First Learning"
     proficiency_level: "B1"

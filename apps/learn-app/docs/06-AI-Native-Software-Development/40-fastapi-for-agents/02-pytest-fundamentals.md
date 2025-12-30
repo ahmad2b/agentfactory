@@ -7,6 +7,7 @@ chapter: 40
 lesson: 2
 duration_minutes: 45
 
+# HIDDEN SKILLS METADATA
 skills:
   - name: "Test Function Structure"
     proficiency_level: "B1"
