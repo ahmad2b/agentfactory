@@ -603,3 +603,7 @@
 {"timestamp":"2025-12-30T07:53:37Z","session_id":"b0b2df8e-d06f-439e-950f-1e57e061add7","subagent":"pedagogical-designer","agent_id":"","status":"completed","event":"complete"}
 {"timestamp":"2025-12-30T07:56:14Z","session_id":"b0b2df8e-d06f-439e-950f-1e57e061add7","subagent":"educational-validator","agent_id":"","status":"completed","event":"complete"}
 {"timestamp":"2025-12-30T07:56:33Z","session_id":"b0b2df8e-d06f-439e-950f-1e57e061add7","subagent":"factual-verifier","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-30T12:08:07Z","session_id":"b26f91a2-c836-44ad-9d5f-b059dc3cddda","subagent":"educational-validator","description":"Validate L02 lesson structure","background":false,"model":"haiku","event":"spawn"}
+{"timestamp":"2025-12-30T12:08:07Z","session_id":"b26f91a2-c836-44ad-9d5f-b059dc3cddda","subagent":"educational-validator","description":"Validate L06 lesson structure","background":false,"model":"haiku","event":"spawn"}
+{"timestamp":"2025-12-30T12:08:54Z","session_id":"b26f91a2-c836-44ad-9d5f-b059dc3cddda","subagent":"educational-validator","agent_id":"","status":"completed","event":"complete"}
+{"timestamp":"2025-12-30T12:09:05Z","session_id":"b26f91a2-c836-44ad-9d5f-b059dc3cddda","subagent":"educational-validator","agent_id":"","status":"completed","event":"complete"}
