@@ -42,21 +42,37 @@ learning_objectives:
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "Different paths route to correct backends"
+    three_role_integration:
+      ai_as_teacher: "Learn regex pattern best practices from AI"
+      ai_as_student: "Specify Task API endpoint structure clearly"
+      ai_as_coworker: "Test and refine path matching together"
 
   - objective: "Configure header-based routing for versioned API access"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "x-version header routes to correct service"
+    three_role_integration:
+      ai_as_teacher: "Discover header routing patterns for API versioning"
+      ai_as_student: "Define version strategy requirements"
+      ai_as_coworker: "Iterate on header matching logic"
 
   - objective: "Implement traffic weights for canary deployment patterns"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "Traffic splits correctly between backends"
+    three_role_integration:
+      ai_as_teacher: "Learn progressive rollout percentages from AI"
+      ai_as_student: "Specify risk tolerance for canary strategy"
+      ai_as_coworker: "Design weight progression together"
 
   - objective: "Configure GRPCRoute for gRPC services"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "gRPC traffic routes through Gateway"
+    three_role_integration:
+      ai_as_teacher: "Learn gRPC-specific routing differences"
+      ai_as_student: "Describe gRPC service definitions"
+      ai_as_coworker: "Validate GRPCRoute configuration"
 
 cognitive_load:
   new_concepts: 7

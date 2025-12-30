@@ -42,21 +42,37 @@ learning_objectives:
     proficiency_level: "B1"
     bloom_level: "Understand"
     assessment_method: "Student articulates cost implications"
+    three_role_integration:
+      ai_as_teacher: "Learn token economics from AI explanations"
+      ai_as_student: "Guide AI with your cost concerns"
+      ai_as_coworker: "Build cost model understanding together"
 
   - objective: "Configure token budgets per user"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "Token budget enforced correctly"
+    three_role_integration:
+      ai_as_teacher: "Discover budget allocation patterns"
+      ai_as_student: "Define user tier requirements"
+      ai_as_coworker: "Tune budgets through usage analysis"
 
   - objective: "Implement provider fallback chain (OpenAI to Anthropic)"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "Fallback triggers when primary rate limited"
+    three_role_integration:
+      ai_as_teacher: "Learn fallback chain best practices"
+      ai_as_student: "Specify provider priorities and constraints"
+      ai_as_coworker: "Test fallback scenarios together"
 
   - objective: "Design cost control patterns for AI agents"
     proficiency_level: "B1"
     bloom_level: "Create"
     assessment_method: "Student proposes budget allocation strategy"
+    three_role_integration:
+      ai_as_teacher: "Learn cost engineering strategies"
+      ai_as_student: "Share business budget constraints"
+      ai_as_coworker: "Create budget allocation design together"
 
 cognitive_load:
   new_concepts: 6

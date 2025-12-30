@@ -42,21 +42,37 @@ learning_objectives:
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "envoy-gateway pods running in envoy-gateway-system namespace"
+    three_role_integration:
+      ai_as_teacher: "Learn Helm value customizations from AI suggestions"
+      ai_as_student: "Specify cluster constraints for tailored install"
+      ai_as_coworker: "Debug installation issues through iteration"
 
   - objective: "Explain Envoy Gateway architecture (control plane + data plane)"
     proficiency_level: "B1"
     bloom_level: "Understand"
     assessment_method: "Student describes xDS protocol and proxy deployment"
+    three_role_integration:
+      ai_as_teacher: "Discover xDS protocol patterns from AI explanations"
+      ai_as_student: "Guide AI to explain at your comprehension level"
+      ai_as_coworker: "Build mental model through Q&A iteration"
 
   - objective: "Verify Gateway API CRD installation and GatewayClass creation"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "kubectl get gatewayclass shows eg"
+    three_role_integration:
+      ai_as_teacher: "Learn kubectl verification patterns from AI"
+      ai_as_student: "Describe specific verification goals to AI"
+      ai_as_coworker: "Iterate on troubleshooting if CRDs missing"
 
   - objective: "Create first Gateway resource using Envoy Gateway controller"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "Gateway shows READY status"
+    three_role_integration:
+      ai_as_teacher: "Learn listener configuration best practices"
+      ai_as_student: "Specify Task API requirements in prompts"
+      ai_as_coworker: "Validate and refine Gateway YAML together"
 
 cognitive_load:
   new_concepts: 6

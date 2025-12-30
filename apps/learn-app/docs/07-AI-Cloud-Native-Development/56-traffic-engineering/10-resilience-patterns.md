@@ -42,21 +42,37 @@ learning_objectives:
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "Retries observed in logs on transient failures"
+    three_role_integration:
+      ai_as_teacher: "Learn backoff multiplier best practices"
+      ai_as_student: "Specify failure patterns for retry design"
+      ai_as_coworker: "Tune retry counts through failure testing"
 
   - objective: "Configure timeout settings for request and connection"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "Slow requests timeout correctly"
+    three_role_integration:
+      ai_as_teacher: "Discover timeout tuning patterns"
+      ai_as_student: "Share expected response times"
+      ai_as_coworker: "Balance timeout vs user experience"
 
   - objective: "Create PodDisruptionBudget for maintenance protection"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "PDB prevents all pods from being evicted"
+    three_role_integration:
+      ai_as_teacher: "Learn PDB calculation strategies"
+      ai_as_student: "Define availability requirements"
+      ai_as_coworker: "Validate PDB during drain tests"
 
   - objective: "Implement graceful shutdown with preStop hooks"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "In-flight requests complete before termination"
+    three_role_integration:
+      ai_as_teacher: "Learn preStop timing patterns"
+      ai_as_student: "Specify drain duration needs"
+      ai_as_coworker: "Test graceful shutdown together"
 
 cognitive_load:
   new_concepts: 7

@@ -42,21 +42,37 @@ learning_objectives:
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "Requests exceeding limit return 429"
+    three_role_integration:
+      ai_as_teacher: "Learn rate limit calculation patterns"
+      ai_as_student: "Specify expected traffic patterns and limits"
+      ai_as_coworker: "Test and tune rate limits together"
 
   - objective: "Configure per-user rate limits using header-based descriptors"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "Different x-user-id headers have independent quotas"
+    three_role_integration:
+      ai_as_teacher: "Discover descriptor patterns for user isolation"
+      ai_as_student: "Define user identification strategy"
+      ai_as_coworker: "Validate per-user isolation works"
 
   - objective: "Implement circuit breaker with connection limits"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "Overloaded backends trigger 503 responses"
+    three_role_integration:
+      ai_as_teacher: "Learn circuit breaker threshold patterns"
+      ai_as_student: "Describe backend capacity constraints"
+      ai_as_coworker: "Tune thresholds through load testing"
 
   - objective: "Evaluate local vs global rate limiting trade-offs"
     proficiency_level: "B1"
     bloom_level: "Evaluate"
     assessment_method: "Student chooses correct strategy for scenarios"
+    three_role_integration:
+      ai_as_teacher: "Learn distributed rate limiting trade-offs"
+      ai_as_student: "Share deployment topology with AI"
+      ai_as_coworker: "Build decision matrix together"
 
 cognitive_load:
   new_concepts: 8

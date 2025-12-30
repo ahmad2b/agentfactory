@@ -42,21 +42,37 @@ learning_objectives:
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "Pods scale when CPU threshold exceeded"
+    three_role_integration:
+      ai_as_teacher: "Learn threshold tuning best practices"
+      ai_as_student: "Specify workload characteristics for HPA"
+      ai_as_coworker: "Tune thresholds through load testing"
 
   - objective: "Install KEDA and create ScaledObject"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "KEDA controller running, ScaledObject active"
+    three_role_integration:
+      ai_as_teacher: "Discover KEDA scaler options"
+      ai_as_student: "Define scaling triggers for Task API"
+      ai_as_coworker: "Debug ScaledObject status together"
 
   - objective: "Configure Prometheus scaler for custom metrics"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "Pods scale based on request rate"
+    three_role_integration:
+      ai_as_teacher: "Learn PromQL query patterns for scaling"
+      ai_as_student: "Specify which metrics drive scaling"
+      ai_as_coworker: "Validate scaler triggers correctly"
 
   - objective: "Observe scale-to-zero behavior"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "Pods scale to zero when idle"
+    three_role_integration:
+      ai_as_teacher: "Learn cold start mitigation patterns"
+      ai_as_student: "Specify latency tolerance for cold starts"
+      ai_as_coworker: "Balance cost vs latency together"
 
 cognitive_load:
   new_concepts: 8

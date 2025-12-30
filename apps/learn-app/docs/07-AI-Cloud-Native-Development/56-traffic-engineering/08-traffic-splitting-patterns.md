@@ -42,21 +42,37 @@ learning_objectives:
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "10% traffic goes to canary version"
+    three_role_integration:
+      ai_as_teacher: "Learn weight progression strategies from AI"
+      ai_as_student: "Specify risk tolerance and rollout pace"
+      ai_as_coworker: "Design weight schedule together"
 
   - objective: "Configure header-based routing for A/B testing"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "x-beta-user header routes to test version"
+    three_role_integration:
+      ai_as_teacher: "Discover header-based segmentation patterns"
+      ai_as_student: "Define A/B test cohort requirements"
+      ai_as_coworker: "Validate test isolation works"
 
   - objective: "Implement blue-green deployment switching"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "Instant switch between versions"
+    three_role_integration:
+      ai_as_teacher: "Learn instant cutover patterns"
+      ai_as_student: "Specify switch timing requirements"
+      ai_as_coworker: "Test switch and rollback together"
 
   - objective: "Execute rollback strategies"
     proficiency_level: "B1"
     bloom_level: "Evaluate"
     assessment_method: "Student can rollback failed canary"
+    three_role_integration:
+      ai_as_teacher: "Learn rollback trigger patterns"
+      ai_as_student: "Share failure indicators and SLOs"
+      ai_as_coworker: "Build rollback decision matrix"
 
 cognitive_load:
   new_concepts: 5

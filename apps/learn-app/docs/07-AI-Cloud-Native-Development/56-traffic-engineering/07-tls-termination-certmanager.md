@@ -42,21 +42,37 @@ learning_objectives:
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "cert-manager pods running in cert-manager namespace"
+    three_role_integration:
+      ai_as_teacher: "Learn Helm value options for Gateway API integration"
+      ai_as_student: "Specify cluster environment for tailored install"
+      ai_as_coworker: "Troubleshoot CRD installation together"
 
   - objective: "Create ClusterIssuer for Let's Encrypt using ACME protocol"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "ClusterIssuer shows Ready status"
+    three_role_integration:
+      ai_as_teacher: "Discover ACME challenge types and trade-offs"
+      ai_as_student: "Define domain and challenge preferences"
+      ai_as_coworker: "Debug ClusterIssuer status together"
 
   - objective: "Configure Gateway with TLS listener and cert-manager annotations"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "HTTPS access works with valid certificate"
+    three_role_integration:
+      ai_as_teacher: "Learn TLS listener configuration patterns"
+      ai_as_student: "Specify TLS requirements for Task API"
+      ai_as_coworker: "Validate certificate binding works"
 
   - objective: "Verify automated certificate issuance and troubleshoot common issues"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "Certificate resource shows Ready status"
+    three_role_integration:
+      ai_as_teacher: "Learn certificate debugging techniques"
+      ai_as_student: "Share error messages for diagnosis"
+      ai_as_coworker: "Iterate through troubleshooting steps"
 
 cognitive_load:
   new_concepts: 6

@@ -26,18 +26,34 @@ learning_objectives:
     proficiency_level: "B1"
     bloom_level: "Understand"
     assessment_method: "Student draws correct hierarchy diagram"
+    three_role_integration:
+      ai_as_teacher: "Learn hierarchy visualization patterns from AI diagrams"
+      ai_as_student: "Guide AI with Task API context for relevant examples"
+      ai_as_coworker: "Iterate on mental model until hierarchy is clear"
   - objective: "Apply role separation model (infrastructure, platform, application)"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "Student maps resources to team responsibilities"
+    three_role_integration:
+      ai_as_teacher: "Discover team boundary patterns AI suggests"
+      ai_as_student: "Teach AI your organization's team structure"
+      ai_as_coworker: "Refine role mapping through discussion"
   - objective: "Create Gateway and HTTPRoute resources for Task API"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "kubectl apply succeeds, traffic routed"
+    three_role_integration:
+      ai_as_teacher: "Learn YAML patterns and field requirements from AI"
+      ai_as_student: "Specify Task API requirements clearly in prompts"
+      ai_as_coworker: "Validate generated YAML, iterate on errors"
   - objective: "Compare Gateway API portability to Ingress vendor lock-in"
     proficiency_level: "B1"
     bloom_level: "Analyze"
     assessment_method: "Student articulates portability benefits"
+    three_role_integration:
+      ai_as_teacher: "Learn migration patterns between implementations"
+      ai_as_student: "Share specific Ingress pain points for analysis"
+      ai_as_coworker: "Build comparison matrix together"
 
 cognitive_load:
   new_concepts: 7
