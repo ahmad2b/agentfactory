@@ -10,8 +10,6 @@ duration_minutes: 40
 proficiency: "B1"
 concepts: 6
 
-# HIDDEN SKILLS METADATA (Institutional Integration Layer)
-# Not visible to students; enables competency assessment and differentiation
 skills:
   - name: "Progressive Loading Strategy"
     proficiency_level: "B1"
@@ -70,7 +68,7 @@ You've been working on a FastAPI project for three weeks. Across a dozen session
 
 Then you start a fresh session Monday morning.
 
-Claude has no memory of those decisions. You find yourself re-explaining: "We use SQLAlchemy query API, not ORM." "Password hashing is Argon2, not bcrypt." "Never log sensitive data." Every session, the same context re-establishment.
+The AI has no memory of those decisions. You find yourself re-explaining: "We use SQLAlchemy query API, not ORM." "Password hashing is Argon2, not bcrypt." "Never log sensitive data." Every session, the same context re-establishment.
 
 This isn't just inefficient---it's risky. Without your project's accumulated knowledge, AI might suggest patterns you've already rejected, contradicting architectural decisions you made for good reasons.
 
@@ -107,7 +105,7 @@ What belongs here:
 - Key decisions (decisions.md)
 - Critical reference files that guide every task
 
-Size target: 10-15% of context window (~20-30K tokens for Claude Sonnet)
+Size target: 10-15% of context window (~15-30K tokens for most models)
 
 Foundation provides consistent context across sessions. Without it, AI starts every session from zero, requiring you to re-establish patterns repeatedly.
 
@@ -184,7 +182,7 @@ Progressive loading tells you HOW to load context within a session. But what abo
 
 ### The Cross-Session Problem
 
-Each Claude Code session starts fresh. Decisions made Tuesday are forgotten by Thursday. The architectural choices, patterns discovered, and anti-patterns identified---all lost.
+Each AI session starts fresh. Decisions made Tuesday are forgotten by Thursday. The architectural choices, patterns discovered, and anti-patterns identified---all lost.
 
 Memory files solve this by **documenting project intelligence in files AI reads at session start**.
 

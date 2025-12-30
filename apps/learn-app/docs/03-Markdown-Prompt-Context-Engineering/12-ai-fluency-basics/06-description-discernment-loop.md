@@ -7,7 +7,6 @@ chapter: 12
 lesson: 6
 duration_minutes: 35
 
-# HIDDEN SKILLS METADATA
 skills:
   - name: "Executing the Description-Discernment Loop"
     proficiency_level: "B1"

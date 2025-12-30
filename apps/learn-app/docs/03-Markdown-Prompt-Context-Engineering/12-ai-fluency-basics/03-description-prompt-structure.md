@@ -1,13 +1,12 @@
 ---
 sidebar_position: 3
 title: "Description: Prompt Structure & Clarity"
-description: "Master Anthropic's 6 prompting techniques and the Product-Process-Performance framework to communicate effectively with AI systems"
-keywords: [prompt engineering, AI fluency, Anthropic prompting, context engineering, action verbs, prompt structure]
+description: "Master 6 proven prompting techniques and the Product-Process-Performance framework to communicate effectively with any AI system"
+keywords: [prompt engineering, AI fluency, prompting techniques, context engineering, action verbs, prompt structure]
 chapter: 12
 lesson: 3
 duration_minutes: 35
 
-# HIDDEN SKILLS METADATA
 skills:
   - name: "Prompt Structure Design"
     proficiency_level: "A2"
@@ -38,7 +37,7 @@ skills:
     measurable_at_this_level: "Student can identify what makes descriptions effective versus vague, and explain why clarity matters for AI output quality"
 
 learning_objectives:
-  - objective: "Apply Anthropic's 6 prompting techniques to structure effective prompts"
+  - objective: "Apply the 6 prompting techniques to structure effective prompts"
     proficiency_level: "A2"
     bloom_level: "Apply"
     assessment_method: "Student rewrites vague prompts using all 6 techniques"
@@ -73,18 +72,18 @@ You have decided *what* to delegate to AI. Now comes the harder question: *how* 
 
 This is where most people fail. They write vague requests like "help me with this code" and wonder why AI produces generic, unhelpful responses. The problem is not AI capability. The problem is description quality. AI systems are remarkably capable when given clear direction, but they cannot read your mind. They respond to what you actually write, not what you meant to write.
 
-Anthropic, the company behind Claude, has documented specific techniques that dramatically improve AI output quality. These are not vague suggestions. They are research-backed patterns that work consistently across different tasks and contexts. Master these six techniques, and you will communicate with AI as effectively as you communicate with your best colleagues.
+Research from AI labs has identified specific techniques that dramatically improve AI output quality. These are not vague suggestions. They are research-backed patterns that work consistently across different AI systems, tasks, and contexts. Master these six techniques, and you will communicate with AI as effectively as you communicate with your best colleagues.
 
-## Claude 4.x: Explicit Instructions Matter More
+## Modern AI Models: Explicit Instructions Matter
 
-Claude 4.x models (Sonnet 4.5, Haiku 4.5, Opus 4.5) are trained for **precise instruction following**. This is powerful but requires adjustment: behaviors that previous models would infer now need explicit requests.
+Today's AI models (GPT-4, Claude, Gemini, and others) are trained for **precise instruction following**. This is powerful but requires adjustment: behaviors that you might expect AI to infer often need explicit requests.
 
 ### "Suggest" vs. "Make"
 
-Claude 4.x takes your words literally:
+Modern AI models take your words literally:
 
-| What You Say | What Claude Does |
-|--------------|------------------|
+| What You Say | What AI Does |
+|--------------|--------------|
 | "Can you suggest some changes?" | Suggests changes (doesn't implement) |
 | "Make these changes" | Implements the changes |
 | "Help me improve this" | Provides advice (doesn't modify) |
@@ -94,7 +93,7 @@ Claude 4.x takes your words literally:
 
 ### Requesting "Above and Beyond" Behavior
 
-Previous Claude models would sometimes add helpful extras unprompted. Claude 4.x is more conservative. If you want thorough, creative, or expansive output, request it explicitly:
+Some AI models add helpful extras unprompted, while others are more conservative. If you want thorough, creative, or expansive output, request it explicitly:
 
 ```
 Less effective:
@@ -142,9 +141,9 @@ This prompt will produce dramatically better results. Not because AI suddenly be
 
 **The principle**: AI output quality is bounded by description quality. Vague input produces vague output. Precise input produces precise output.
 
-## Anthropic's 6 Prompting Techniques
+## The 6 Prompting Techniques
 
-Anthropic's research has identified six techniques that consistently improve AI performance. Each technique addresses a specific failure mode in AI communication.
+Research has identified six techniques that consistently improve AI performance across all major models. Each technique addresses a specific failure mode in AI communication.
 
 ### Technique 1: Give Context
 
@@ -419,7 +418,7 @@ The second prompt will produce dramatically better code. Not because it is longe
 
 ## Verbosity Control
 
-Claude 4.x models tend toward efficiency and may skip verbal summaries after tool calls. Control output length explicitly:
+Different AI models have different default verbosity levels. Some are concise; others are verbose. Control output length explicitly:
 
 ### Quantitative Guidelines
 
@@ -432,7 +431,7 @@ Claude 4.x models tend toward efficiency and may skip verbal summaries after too
 
 ### Requesting Updates
 
-If you want Claude to provide progress updates as it works:
+If you want the AI to provide progress updates as it works:
 
 ```
 After completing a task that involves tool use, provide a quick
@@ -463,8 +462,8 @@ Use your AI assistant (Claude, ChatGPT, or similar) to practice these techniques
 ```
 I have this vague prompt: "Fix my Python code that's not working"
 
-Help me transform this into a precise prompt using all 6 of
-Anthropic's prompting techniques:
+Help me transform this into a precise prompt using the 6
+prompting techniques:
 1. Give context
 2. Show examples
 3. Specify constraints

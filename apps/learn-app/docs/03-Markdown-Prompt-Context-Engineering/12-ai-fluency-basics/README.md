@@ -2,7 +2,7 @@
 title: "Chapter 12: AI Fluency Basics - Prompt & Context Engineering"
 sidebar_label: "Chapter 12: AI Fluency"
 sidebar_position: 12
-description: "Master AI Fluency through the 4D Framework: Delegation, Description, Discernment, and Diligence for effective AI collaboration"
+description: "Master AI Fluency through the 4D Framework—Delegation, Description, Discernment, and Diligence—for effective collaboration with any AI system"
 slides:
   source: "https://pub-80f166e40b854371ac7b05053b435162.r2.dev/books/ai-native-dev/static/slides/chapter-12-slides.pdf"
   title: "Chapter 12: AI Fluency Basics - Prompt & Context Engineering"
@@ -11,13 +11,11 @@ slides:
 
 # Chapter 12: AI Fluency Basics - Prompt & Context Engineering
 
-**Part 3: Markdown & Context Engineering** | **Proficiency Level**: A2-B1 | **Duration**: 6-8 hours
-
 You can use AI tools. But can you use them *fluently*?
 
 The difference matters enormously. A tourist can order coffee in Paris with a phrasebook. A fluent speaker negotiates complex business deals. Both "use French"—but one creates dramatically more value.
 
-AI Fluency is the professional skill that separates developers who occasionally get useful outputs from those who consistently produce production-quality results. This chapter teaches you that skill through Anthropic's 4D Framework: **Delegation, Description, Discernment, and Diligence**.
+AI Fluency is the professional skill that separates developers who occasionally get useful outputs from those who consistently produce production-quality results. This chapter teaches you that skill through the **4D Framework**: **Delegation, Description, Discernment, and Diligence**—principles that work across ChatGPT, Claude, Gemini, and any AI system you'll encounter.
 
 ## The 4D Framework
 
@@ -47,18 +45,18 @@ By completing this chapter, you will:
 
 ## Chapter Structure
 
-| Lesson | Title | Duration | Focus |
-|--------|-------|----------|-------|
-| 1 | What is AI Fluency? The 4D Framework | 25 min | Introduction & Framework |
-| 2 | Delegation: Deciding What AI Should Do | 30 min | Task Selection |
-| 3 | Description: Prompt Structure & Clarity | 35 min | Prompting Techniques |
-| 4 | Context Windows & Token Economics | 40 min | Context Foundations |
-| 5 | Progressive Loading & Memory Files | 40 min | Context Management |
-| 6 | The Description-Discernment Loop | 35 min | Iterative Workflow |
-| 7 | Discernment: Iterative Refinement | 45 min | Output Evaluation |
-| 8 | Compression & Multi-Session Workflows | 40 min | Long-term Projects |
-| 9 | Diligence: Responsible AI Collaboration | 30 min | Ethics & Quality |
-| 10 | Capstone: AI Fluency in Practice | 60 min | Integration Project |
+| Lesson | Title |
+|--------|-------|
+| 1 | What is AI Fluency? The 4D Framework |
+| 2 | Delegation: Deciding What AI Should Do |
+| 3 | Description: Prompt Structure & Clarity |
+| 4 | Context Windows & Token Economics |
+| 5 | Progressive Loading & Memory Files |
+| 6 | The Description-Discernment Loop |
+| 7 | Discernment: Iterative Refinement |
+| 8 | Compression & Multi-Session Workflows |
+| 9 | Diligence: Responsible AI Collaboration |
+| 10 | Capstone: AI Fluency in Practice |
 
 ## Prerequisites
 

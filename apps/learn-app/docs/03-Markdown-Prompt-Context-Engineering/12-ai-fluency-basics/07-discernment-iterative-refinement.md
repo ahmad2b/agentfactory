@@ -9,8 +9,6 @@ duration_minutes: 45
 proficiency: "B1"
 concepts: 7
 
-# HIDDEN SKILLS METADATA (Institutional Integration Layer)
-# Not visible to students; enables competency assessment and differentiation
 skills:
   - name: "Applied Discernment Through Iteration"
     proficiency_level: "B1"
@@ -460,7 +458,7 @@ Now practice applied discernment through a structured iteration session.
 
 ### Setup
 
-Open Claude Code or Gemini CLI. You will iterate on a Git commit message, applying Product-Process-Performance evaluation at each step.
+Open your AI coding assistant (Claude, ChatGPT, Gemini, or similar). You will iterate on a Git commit message, applying Product-Process-Performance evaluation at each step.
 
 ### Part 1: Initial Request
 

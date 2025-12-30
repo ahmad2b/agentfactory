@@ -9,7 +9,6 @@ lesson: 8
 duration_minutes: 40
 proficiency: "B1"
 
-# HIDDEN SKILLS METADATA
 skills:
   - name: "Context Checkpoint Creation"
     proficiency_level: "B1"
@@ -238,9 +237,9 @@ api/auth.py, api/middleware.py, tests/test_auth.py, models/user.py
 
 Through iteration, you arrived at a checkpoint that preserves essential decisions while discarding conversational noise---30% reduction while maintaining critical intelligence.
 
-## Claude 4.5's Multi-Window Best Practices
+## Multi-Window Best Practices
 
-Claude 4.5 models excel at long-horizon tasks and can discover state from the filesystem. Anthropic recommends specific patterns for multi-context window workflows:
+Modern AI coding assistants excel at long-horizon tasks and can discover state from the filesystem. Here are specific patterns for multi-context window workflows:
 
 ### First Window vs. Future Windows
 
@@ -254,7 +253,7 @@ Claude 4.5 models excel at long-horizon tasks and can discover state from the fi
 
 ### Structured State Files
 
-Write tests and state in structured formats that Claude can easily parse:
+Write tests and state in structured formats that AI can easily parse:
 
 ```json
 // tests.json - Structured state tracking
@@ -299,10 +298,10 @@ This prevents repeated work when continuing from a fresh context window.
 
 ### Git for State Tracking
 
-Claude 4.5 excels at using git to track state across sessions:
+AI coding assistants excel at using git to track state across sessions:
 
 ```bash
-# Claude can review what's been done
+# AI can review what's been done
 git log --oneline -10
 
 # And restore to known-good checkpoints
@@ -310,7 +309,7 @@ git stash
 git checkout main
 ```
 
-**Recommendation**: Commit frequently with descriptive messages. Claude can reconstruct context from git history.
+**Recommendation**: Commit frequently with descriptive messages. AI can reconstruct context from git history.
 
 ### Fresh Start vs. Compaction
 
@@ -318,10 +317,10 @@ When context fills up, you have two options:
 
 | Approach | When to Use | Advantage |
 |----------|-------------|-----------|
-| **Fresh start** | Filesystem has all state | Claude discovers context from files |
+| **Fresh start** | Filesystem has all state | AI discovers context from files |
 | **Compaction** | Important decisions not in files | Preserves reasoning and decisions |
 
-Claude 4.5 is extremely effective at discovering state from the local filesystem. For code projects with good git hygiene, starting fresh often works better than compacting.
+Modern AI coding assistants are effective at discovering state from the local filesystem. For code projects with good git hygiene, starting fresh often works better than compacting.
 
 **Fresh start prompt**:
 ```
@@ -653,10 +652,10 @@ AI: Token refresh for... JWT auth or import progress tracking?
 
 ## Try With AI
 
-Practice compression and multi-session strategies with Claude Code.
+Practice compression and multi-session strategies with your AI coding assistant.
 
 ### Setup
-Open Claude Code with a long development session or planned multi-task work.
+Open your AI coding assistant (Claude, ChatGPT, Cursor, etc.) with a long development session or planned multi-task work.
 
 ### Prompt 1: Request Checkpoint Extraction
 

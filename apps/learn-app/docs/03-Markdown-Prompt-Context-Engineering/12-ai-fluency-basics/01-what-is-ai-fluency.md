@@ -1,16 +1,15 @@
 ---
 sidebar_position: 1
 title: "What is AI Fluency? The 4D Framework"
-description: "Define AI Fluency as a measurable professional skill and master the 4Ds: Delegation, Description, Discernment, and Diligence for effective AI collaboration"
+description: "Define AI Fluency as a measurable professional skill and master the 4Ds: Delegation, Description, Discernment, and Diligence for effective collaboration with any AI system"
 sidebar_label: "What is AI Fluency?"
-keywords: [AI fluency, 4D framework, delegation, description, discernment, diligence, prompt engineering, Anthropic]
+keywords: [AI fluency, 4D framework, delegation, description, discernment, diligence, prompt engineering, context engineering]
 chapter: 12
 lesson: 1
 duration_minutes: 25
 proficiency: "A2"
 concepts: 5
 
-# HIDDEN SKILLS METADATA
 skills:
   - name: "Defining AI Fluency"
     proficiency_level: "A2"
@@ -76,13 +75,13 @@ You can use AI tools. But can you use them *fluently*?
 
 Consider this scenario: A marketing professional opens ChatGPT, types "write me a blog post about productivity," gets a generic 500-word article, and publishes it. A week later, a colleague produces a deeply researched, voice-consistent piece that drives 10x more engagement. Both used the same AI tool. The difference? One typed commands. The other communicated fluently.
 
-This gap exists everywhere AI tools are used. Two developers with identical Claude Code installations produce wildly different results. Two researchers using the same model reach conclusions of vastly different quality. Two entrepreneurs building AI-assisted products create experiences that feel worlds apart.
+This gap exists everywhere AI tools are used. Two developers with identical AI coding assistants produce wildly different results. Two researchers using the same model reach conclusions of vastly different quality. Two entrepreneurs building AI-assisted products create experiences that feel worlds apart.
 
 The variable isn't the tool. It's the skill of the person using it.
 
 ## The Language Analogy
 
-Anthropic's AI Fluency course, developed with professors Joseph Feller (University College Cork) and Rick Dakan (Ringling College), introduces a powerful analogy: the difference between using a phrasebook and speaking a language fluently.
+The AI Fluency framework—originally developed by Anthropic with professors Joseph Feller (University College Cork) and Rick Dakan (Ringling College)—introduces a powerful analogy that applies to *any* AI system: the difference between using a phrasebook and speaking a language fluently.
 
 A tourist can order coffee in Paris with a phrasebook. They can point at menu items and use memorized phrases. But they cannot negotiate a business deal, understand cultural nuances, or adapt when the conversation goes off-script.
 
@@ -113,7 +112,7 @@ Consider what prompt engineering *doesn't* teach:
 - **How to maintain quality over time**: Long sessions degrade without management
 - **How to use AI responsibly**: Speed without ethics creates problems faster
 
-Anthropic's framework addresses this gap. Their course reframes the question from "How do I write good prompts?" to "How do I work effectively with AI?"
+The 4D Framework addresses this gap. It reframes the question from "How do I write good prompts?" to "How do I work effectively with AI?"—regardless of which AI system you're using.
 
 ## The 4D Framework
 
@@ -151,7 +150,7 @@ Description isn't about memorizing "magic words." It's about clear communication
 
 Discernment is the essential counterbalance to Description. It's your responsibility to critically evaluate everything AI produces.
 
-The Anthropic framework identifies three dimensions of Discernment:
+The framework identifies three dimensions of Discernment:
 
 | Dimension | Question | Focus |
 |-----------|----------|-------|
@@ -229,11 +228,11 @@ Use your AI companion (Claude, ChatGPT, Gemini, or similar) to explore the 4D Fr
 ### Prompt 1: Understand the Framework
 
 ```
-I'm learning about Anthropic's AI Fluency Framework and the 4Ds:
+I'm learning about the AI Fluency Framework and the 4Ds:
 Delegation, Description, Discernment, and Diligence.
 
 Explain each D in 2-3 sentences using a concrete example.
-Then explain why the order matters---why can't I start with
+Then explain why the order matters—why can't I start with
 Description without Delegation first?
 ```
 
@@ -271,4 +270,4 @@ won't solve but AI Fluency would address.
 
 ### Safety Note
 
-As you explore these concepts, remember that AI systems can make mistakes---including when explaining their own capabilities. Cross-reference AI explanations with authoritative sources (like Anthropic's official course materials) when accuracy matters.
+As you explore these concepts, remember that AI systems can make mistakes—including when explaining their own capabilities. Cross-reference AI explanations with authoritative sources when accuracy matters.

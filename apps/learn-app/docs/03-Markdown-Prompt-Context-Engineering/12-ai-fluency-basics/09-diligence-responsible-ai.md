@@ -14,7 +14,6 @@ chapter: 12
 lesson: 9
 duration_minutes: 30
 
-# HIDDEN SKILLS METADATA
 skills:
   - name: "AI Output Verification"
     proficiency_level: "B1"
@@ -93,7 +92,7 @@ Consider what happened to a legal team in 2023: attorneys submitted a court brie
 
 This wasn't an AI failure. It was a Diligence failure. The AI did what AI does—generate plausible text. The humans failed to verify before deploying.
 
-Anthropic's AI Fluency Framework defines Diligence as the competency that "elevates the framework from a productivity hack to a model for responsible innovation." It addresses the ethical and safety dimensions that distinguish professional AI collaboration from casual tool use.
+The AI Fluency Framework defines Diligence as the competency that "elevates the framework from a productivity hack to a model for responsible innovation." It addresses the ethical and safety dimensions that distinguish professional AI collaboration from casual tool use.
 
 ## The Three Diligence Areas
 
@@ -154,15 +153,15 @@ Before providing information to any AI system:
 
 **The rule is simple**: If you wouldn't put it in an email to a stranger, don't put it in an AI prompt without explicit authorization.
 
-### Example: Evaluating Claude for Code Review
+### Example: Evaluating AI for Code Review
 
-Suppose you want to use Claude to help review a codebase. Your Creation Diligence checklist:
+Suppose you want to use an AI assistant to help review a codebase. Your Creation Diligence checklist:
 
 | Question | Assessment |
 |----------|------------|
-| Is Claude appropriate for code review? | Yes—designed for this task |
+| Is AI appropriate for code review? | Yes—most assistants handle this well |
 | Can I share this code? | Check company policy first |
-| Does Claude retain my code? | Claude doesn't train on conversations |
+| Does the AI retain my code? | Check provider's data policy |
 | Are there security concerns? | Review sensitive files separately |
 | What are the limitations? | May miss context-specific issues |
 
@@ -188,7 +187,7 @@ The key question is always: **Would a reasonable person in this context want to 
 
 **Academic Contexts**: Most institutions now have AI disclosure policies. When in doubt, disclose. A typical academic disclosure:
 
-> "This paper used Claude AI for brainstorming initial ideas and checking grammar. All substantive research, analysis, and conclusions are the author's original work. All AI-generated suggestions were verified against primary sources."
+> "This paper used AI assistance for brainstorming initial ideas and checking grammar. All substantive research, analysis, and conclusions are the author's original work. All AI-generated suggestions were verified against primary sources."
 
 **Professional Contexts**: Varies by industry and company. Common approaches:
 
@@ -197,7 +196,7 @@ The key question is always: **Would a reasonable person in this context want to 
 **Code Documentation**: When AI helped write code:
 
 ```python
-# Function generated with Claude assistance
+# Function generated with AI assistance
 # Verified: Input validation, edge cases, test coverage
 # Human modifications: Added logging, adjusted error messages
 def validate_user_input(data: dict) -> bool:
@@ -346,10 +345,10 @@ Diligence isn't about being perfect. It's about being responsible, learning from
 
 Now practice building your Diligence muscles with these exercises.
 
-### Prompt 1: Ask Claude About Its Limitations
+### Prompt 1: Ask AI About Its Limitations
 
 ```
-I'm considering using you (Claude) to help with [describe a specific high-stakes
+I'm considering using you to help with [describe a specific high-stakes
 task from your work or studies]. Before I do, I need to understand your limitations:
 
 1. What are you likely to get wrong in this domain?

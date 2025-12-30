@@ -9,8 +9,6 @@ duration_minutes: 40
 proficiency: "A2"
 concepts: 4
 
-# HIDDEN SKILLS METADATA (Institutional Integration Layer)
-# Not visible to students; enables competency assessment and differentiation
 skills:
   - name: "Context Window Understanding"
     proficiency_level: "A2"
@@ -72,7 +70,7 @@ differentiation:
 
 # Context Windows & Token Economics
 
-You've been working with AI tools like Claude Code for several chapters now. Sometimes responses feel sharp and specific. Other times, responses feel generic or repetitive. Sometimes the AI seems to forget what you discussed earlier in the same session.
+You've been working with AI coding assistants for several chapters now. Sometimes responses feel sharp and specific. Other times, responses feel generic or repetitive. Sometimes the AI seems to forget what you discussed earlier in the same session.
 
 These patterns aren't random. They're symptoms of context engineering---or the lack of it.
 
@@ -80,7 +78,7 @@ In this lesson, you'll learn to recognize what "context" means in AI development
 
 ## Understanding Context Windows
 
-When you start a conversation with Claude Code, imagine opening a notebook with exactly 200,000 pages. Everything you type and every response Claude generates gets written in this notebook, page by page. When the notebook fills up, older pages start getting compressed or forgotten to make room for new ones.
+When you start a conversation with an AI assistant, imagine opening a notebook with a fixed number of pages (ranging from 8,000 to 200,000+ depending on the model). Everything you type and every AI response gets written in this notebook, page by page. When the notebook fills up, older pages start getting compressed or forgotten to make room for new ones.
 
 That notebook is your **context window**---the AI's working memory for your session.
 
@@ -88,7 +86,7 @@ That notebook is your **context window**---the AI's working memory for your sess
 
 A context window is NOT:
 - Permanent memory (it resets when you start a new session)
-- Unlimited capacity (Claude Sonnet 4.5 has 200K tokens standard, 1M extended)
+- Unlimited capacity (models range from 8K to 2M tokens depending on provider)
 - Shared across sessions (Session A and Session B have separate context)
 
 A context window IS:
@@ -100,15 +98,15 @@ A context window IS:
 
 Different AI tools have different context capacities:
 
-| Tool | Standard Context | Extended Context | Notes |
-|------|-----------------|------------------|-------|
-| **Claude Sonnet 4.5** | 200K tokens | 1M tokens (beta) | 1M requires tier 4 organization |
-| **Claude Haiku 4.5** | 200K tokens | — | Optimized for speed |
-| **Gemini 2.5 Pro** | 2M tokens | 2M tokens | Largest context available |
+| Model | Context Window | Notes |
+|-------|----------------|-------|
+| **GPT-4o** | 128K tokens | OpenAI's flagship model |
+| **Claude Sonnet/Opus** | 200K tokens | Extended to 1M available |
+| **Gemini 2.5 Pro** | 2M tokens | Largest context available |
 
-**What this means for you**: In Claude Code, you're typically working with 200,000 tokens of context. That sounds like a lot, but it fills faster than you expect. The 1M extended context is now available in beta for tier 4 organizations, with premium pricing (2x input, 1.5x output for requests exceeding 200K tokens).
+**What this means for you**: Most modern AI coding assistants work with 128K-200K tokens of context. That sounds like a lot, but it fills faster than you expect. Extended context windows (1M-2M tokens) are available from some providers, often at premium pricing.
 
-**Long-context pricing**: If you're using the 1M context window through the API, requests over 200K tokens are automatically charged at premium rates. Plan your token usage accordingly.
+**Long-context pricing**: Extended context windows typically cost more per token. Plan your token usage accordingly.
 
 ### Estimating Context: The Token-to-Word Rule
 
@@ -216,36 +214,30 @@ As your session progresses, context utilization increases. Use these thresholds 
 
 **Why these thresholds?** Empirical observation shows that degradation symptoms typically appear around 70-80% utilization, becoming severe above 85%.
 
-## Context Awareness: Claude 4.5's Built-In Tracking
+## Built-In Context Tracking
 
-Claude Sonnet 4.5 and Haiku 4.5 include a powerful new capability called **context awareness**---the model natively tracks its remaining token budget throughout a conversation.
+Some modern AI models include **context awareness**—the model natively tracks its remaining token budget throughout a conversation and can plan accordingly.
 
 ### How It Works
 
-At the start of a conversation, Claude receives information about its total context window:
+AI coding assistants with context awareness receive updates on remaining capacity:
 
 ```
-<budget:token_budget>200000</budget:token_budget>
+Token usage: 35000/200000; 165000 remaining
 ```
 
-After each tool call, Claude receives an update on remaining capacity:
-
-```
-<system_warning>Token usage: 35000/200000; 165000 remaining</system_warning>
-```
-
-This means Claude knows exactly how much space it has left and can plan accordingly.
+This means the AI knows exactly how much space it has left.
 
 ### What This Means for You
 
 | Before Context Awareness | With Context Awareness |
 |-------------------------|------------------------|
-| Manual token estimation | Claude tracks automatically |
-| Guessing utilization % | Claude knows precisely |
-| Surprise context limits | Claude can warn you |
-| Abrupt session endings | Claude can wrap up gracefully |
+| Manual token estimation | AI tracks automatically |
+| Guessing utilization % | AI knows precisely |
+| Surprise context limits | AI can warn you |
+| Abrupt session endings | AI can wrap up gracefully |
 
-**The catch**: Context awareness helps Claude manage itself, but understanding token economics is still valuable. When you understand *why* context fills up and *how* to track it manually, you can:
+**The catch**: Context awareness helps AI manage itself, but understanding token economics is still valuable. When you understand *why* context fills up and *how* to track it manually, you can:
 - Design better loading strategies
 - Create more effective checkpoints
 - Debug unexpected behavior
@@ -255,7 +247,7 @@ This means Claude knows exactly how much space it has left and can plan accordin
 
 ### Enabling Context-Aware Workflows
 
-If you're using Claude Code or an agent harness that compacts context, you can leverage this awareness:
+If you're using an AI coding assistant that compacts context, you can leverage this awareness:
 
 ```
 Your context window will be automatically compacted as it approaches
@@ -265,7 +257,7 @@ your token budget limit, save your current progress and state to
 memory before the context window refreshes.
 ```
 
-This prompt tells Claude to be persistent and autonomous, trusting that compaction will handle context limits.
+This prompt tells the AI to be persistent and autonomous, trusting that compaction will handle context limits.
 
 ## Observable Behaviors: When Context Fills Up
 
@@ -295,12 +287,12 @@ Now it's time to build the habit of tracking context manually. These exercises h
 
 **Task**: Write a session note for a hypothetical development task.
 
-**Scenario**: You're working with Claude Code to write a project README. You've loaded:
+**Scenario**: You're working with an AI coding assistant to write a project README. You've loaded:
 - Project specification (2,500 words)
 - Existing documentation examples (1,800 words)
 - Chapter structure outline (600 words)
 
-You've had 8 exchanges with Claude (approximately 2,000 words total).
+You've had 8 exchanges with the AI (approximately 2,000 words total).
 
 **Your Task**:
 1. Create a session note using the template above
@@ -345,10 +337,10 @@ AI: "You're right, I apologize for the confusion. Let's use camelCase consistent
 
 ## Try With AI
 
-Now that you understand context windows and manual estimation, practice validating your estimates with Claude Code.
+Now that you understand context windows and manual estimation, practice validating your estimates with your AI assistant.
 
 ### Setup
-Open Claude Code and keep your session notes nearby for reference.
+Open your AI coding assistant (Claude, ChatGPT, Cursor, etc.) and keep your session notes nearby for reference.
 
 ### Prompt 1: Verify Token Estimate
 
@@ -384,7 +376,7 @@ Which warning zone am I in (green/yellow/red)? What behaviors should I watch for
 
 ### Expected Outcomes
 
-Claude Code should:
+Your AI assistant should:
 - Validate your token estimates (within ~20% accuracy)
 - Explain factors you might have missed (formatting overhead, special characters)
 - Confirm warning zone thresholds

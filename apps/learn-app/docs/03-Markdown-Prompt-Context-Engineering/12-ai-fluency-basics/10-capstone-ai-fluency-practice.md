@@ -9,8 +9,6 @@ duration_minutes: 60
 proficiency: "B1"
 concepts: 5
 
-# HIDDEN SKILLS METADATA (Institutional Integration Layer)
-# Not visible to students; enables competency assessment and differentiation
 skills:
   - name: "4D Framework Integration"
     proficiency_level: "B1"
@@ -82,7 +80,7 @@ This isn't an implementation exercise. You won't write code. Instead, you'll wri
 
 Your capstone project: Write a complete specification for a **context-aware development tool** that helps developers maintain AI session quality across complex, multi-day projects.
 
-This tool addresses a real problem. Developers working with Claude Code or similar AI assistants face these challenges:
+This tool addresses a real problem. Developers working with AI coding assistants face these challenges:
 
 - **Context degradation**: Session quality drops as conversations grow long
 - **Session boundaries**: Knowledge doesn't transfer between sessions

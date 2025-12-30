@@ -18,7 +18,6 @@ chapter: 12
 lesson: 2
 duration_minutes: 30
 
-# HIDDEN SKILLS METADATA
 skills:
   - name: "AI Delegation Decision-Making"
     proficiency_level: "A2"
