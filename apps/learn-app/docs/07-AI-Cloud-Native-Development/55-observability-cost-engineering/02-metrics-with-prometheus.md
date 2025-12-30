@@ -495,7 +495,7 @@ I need queries for: latency (P95), traffic (total RPS), errors (5xx percentage),
 and saturation (if I add container metrics).
 ```
 
-Verify your skill produces queries similar to what you learned in this lesson. If the queries use different functions or patterns, compare them - your skill may know optimizations you have not learned yet (AI as Teacher), or may need correction based on your specific label names (AI as Student).
+Verify your skill produces queries similar to what you learned in this lesson. If the queries use different functions or patterns, compare them—your skill may suggest optimizations you haven't learned yet, or it may need correction based on your specific label names.
 
 ## Try With AI
 

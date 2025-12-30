@@ -508,7 +508,7 @@ I need:
 4. Annotations with summary, description, runbook_url
 ```
 
-Verify your skill produces rules similar to what you learned. Check whether it correctly calculates the threshold (14.4 * 0.001 = 0.0144) and includes both time windows with `and` operator. If the skill uses different patterns, evaluate whether they are improvements (AI as Teacher) or need correction based on your specific requirements (AI as Student).
+Verify your skill produces rules similar to what you learned. Check whether it correctly calculates the threshold (14.4 * 0.001 = 0.0144) and includes both time windows with `and` operator. If the skill uses different patterns, evaluate whether they represent improvements or need correction based on your specific requirements.
 
 ## Try With AI
 

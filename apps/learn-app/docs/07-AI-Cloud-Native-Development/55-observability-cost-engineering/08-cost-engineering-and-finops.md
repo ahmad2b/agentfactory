@@ -7,6 +7,7 @@ chapter: 55
 lesson: 8
 duration_minutes: 30
 
+# HIDDEN SKILLS METADATA
 skills:
   - name: "FinOps Practices"
     proficiency_level: "B1"
