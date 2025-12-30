@@ -1,6 +1,6 @@
 ---
-sidebar_position: 0
-title: "TDD for Agents"
+sidebar_position: 46
+title: "Chapter 46: TDD for Agents"
 description: "Test-Driven Development for AI agent applications with pytest, respx, and zero LLM API calls"
 ---
 

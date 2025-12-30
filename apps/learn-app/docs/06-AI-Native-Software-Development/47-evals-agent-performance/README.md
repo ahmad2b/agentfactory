@@ -1,3 +1,9 @@
+---
+sidebar_position: 47
+title: "Chapter 47: Evals - Measuring Agent Performance"
+description: "Systematic approach to measuring AI agent reasoning quality with evaluation frameworks"
+---
+
 # Chapter 47: Evals - Measuring Agent Performance
 
 **Part**: 6 (AI Native Software Development)

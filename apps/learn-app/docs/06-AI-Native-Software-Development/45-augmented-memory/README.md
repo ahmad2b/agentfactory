@@ -1,3 +1,9 @@
+---
+sidebar_position: 45
+title: "Chapter 45: Augmented Memory for Agentic Applications"
+description: "Add persistent memory to AI agents using Mem0 and cognitive architecture patterns"
+---
+
 # Chapter 45: Augmented Memory for Agentic Applications
 
 Memory is what transforms a chatbot into a relationship. When your customer says "I mentioned this last week," a stateless system has to ask them to repeat themselves. A system with memory remembers—and that transforms every interaction from transactional to personal.
