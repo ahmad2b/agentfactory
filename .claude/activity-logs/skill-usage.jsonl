@@ -416,6 +416,14 @@
 {"timestamp":"2025-12-30T07:55:02Z","session_id":"b0b2df8e-d06f-439e-950f-1e57e061add7","skill":"technical-clarity","event":"start"}
 {"timestamp":"2025-12-30T07:55:02Z","session_id":"b0b2df8e-d06f-439e-950f-1e57e061add7","skill":"concept-scaffolding","event":"start"}
 {"timestamp":"2025-12-30T07:55:02Z","session_id":"b0b2df8e-d06f-439e-950f-1e57e061add7","skill":"skills-proficiency-mapper","event":"start"}
+{"timestamp":"2025-12-30T12:36:39Z","session_id":"de9fe29a-c840-404e-aa96-6a4a36d46f72","skill":"building-rag-systems","event":"start"}
+{"timestamp":"2025-12-30T13:00:04Z","session_id":"de9fe29a-c840-404e-aa96-6a4a36d46f72","skill":"content-evaluation-framework","event":"start"}
+{"timestamp":"2025-12-30T13:00:04Z","session_id":"de9fe29a-c840-404e-aa96-6a4a36d46f72","skill":"skills-proficiency-mapper","event":"start"}
+{"timestamp":"2025-12-30T13:00:04Z","session_id":"de9fe29a-c840-404e-aa96-6a4a36d46f72","skill":"canonical-format-checker","event":"start"}
+{"timestamp":"2025-12-30T13:00:04Z","session_id":"de9fe29a-c840-404e-aa96-6a4a36d46f72","skill":"technical-clarity","event":"start"}
+{"timestamp":"2025-12-30T13:00:04Z","session_id":"de9fe29a-c840-404e-aa96-6a4a36d46f72","skill":"concept-scaffolding","event":"start"}
+{"timestamp":"2025-12-30T13:00:04Z","session_id":"de9fe29a-c840-404e-aa96-6a4a36d46f72","skill":"ai-collaborate-teaching","event":"start"}
+{"timestamp":"2025-12-30T13:00:04Z","session_id":"de9fe29a-c840-404e-aa96-6a4a36d46f72","skill":"learning-objectives","event":"start"}
 {"timestamp":"2025-12-30T12:02:37Z","session_id":"3868f542-5d77-4190-94cc-e83a61f2c9a7","skill":"evaluation","event":"start"}
 {"timestamp":"2025-12-30T12:03:46Z","session_id":"3868f542-5d77-4190-94cc-e83a61f2c9a7","skill":"evaluation","event":"start"}
 {"timestamp":"2025-12-30T12:15:03Z","session_id":"3868f542-5d77-4190-94cc-e83a61f2c9a7","skill":"code-example-generator","event":"start"}
