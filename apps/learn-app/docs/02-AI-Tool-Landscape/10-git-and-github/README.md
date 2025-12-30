@@ -1,11 +1,11 @@
 ---
 slides:
-  source: "https://pub-80f166e40b854371ac7b05053b435162.r2.dev/books/ai-native-dev/static/slides/chapter-09-slides.pdf"
-  title: "Chapter 9: Git & GitHub for AI-Driven Development"
+  source: "https://pub-80f166e40b854371ac7b05053b435162.r2.dev/books/ai-native-dev/static/slides/chapter-10-slides.pdf"
+  title: "Chapter 10: Git & GitHub for AI-Driven Development"
   height: 700
 ---
 
-# Chapter 9: Git & GitHub for AI-Driven Development
+# Chapter 10: Git & GitHub for AI-Driven Development
 
 This chapter teaches you how to use Git and GitHub as essential safety mechanisms for AI-driven development. When working with AI coding assistants like Claude Code or Gemini CLI, Git provides a crucial safety net—allowing you to experiment freely, track every change, and undo mistakes instantly. You'll learn Git not by memorizing commands, but by asking your AI assistant to perform Git operations using natural language.
 

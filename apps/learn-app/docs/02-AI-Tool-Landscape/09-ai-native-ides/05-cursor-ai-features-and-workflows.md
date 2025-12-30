@@ -1,6 +1,6 @@
 ---
 title: Cursor AI Features and Workflows
-chapter: 8
+chapter: 9
 lesson: 5
 learning_objectives:
   - Apply multi-turn conversations to solve iterative coding problems

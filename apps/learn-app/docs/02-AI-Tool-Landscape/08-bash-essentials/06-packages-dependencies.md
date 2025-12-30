@@ -1,7 +1,7 @@
 ---
 sidebar_position: 6
 title: "Understanding Dependencies and Packages"
-chapter: 7
+chapter: 8
 lesson: 6
 duration_minutes: 40
 

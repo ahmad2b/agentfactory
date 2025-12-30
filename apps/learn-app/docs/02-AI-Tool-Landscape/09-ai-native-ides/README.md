@@ -1,11 +1,11 @@
 ---
 slides:
-  source: "https://pub-80f166e40b854371ac7b05053b435162.r2.dev/books/ai-native-dev/static/slides/chapter-08-slides.pdf"
-  title: "Chapter 8: AI-Native IDEs - Zed, Cursor, Antigravity, and the Future of Development"
+  source: "https://pub-80f166e40b854371ac7b05053b435162.r2.dev/books/ai-native-dev/static/slides/chapter-09-slides.pdf"
+  title: "Chapter 9: AI-Native IDEs - Zed, Cursor, Antigravity, and the Future of Development"
   height: 700
 ---
 
-# Chapter 8: AI-Native IDEs - Zed, Cursor, Antigravity, and the Future of Development
+# Chapter 9: AI-Native IDEs - Zed, Cursor, Antigravity, and the Future of Development
 
 **Part 2: AI Tool Landscape** | **Proficiency Level**: A2-B1 | **Duration**: 6-8 hours
 

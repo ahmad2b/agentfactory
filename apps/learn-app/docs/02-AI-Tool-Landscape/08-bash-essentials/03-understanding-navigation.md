@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 title: "Understanding File Navigation Through Dialogue"
-chapter: 7
+chapter: 8
 lesson: 3
 duration_minutes: 40
 

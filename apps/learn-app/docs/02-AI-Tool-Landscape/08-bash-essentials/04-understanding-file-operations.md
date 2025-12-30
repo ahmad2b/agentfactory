@@ -1,7 +1,7 @@
 ---
 sidebar_position: 4
 title: "Understanding File Operations Safely"
-chapter: 7
+chapter: 8
 lesson: 4
 duration_minutes: 45
 

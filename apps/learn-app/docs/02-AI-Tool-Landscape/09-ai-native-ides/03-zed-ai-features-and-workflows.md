@@ -1,6 +1,6 @@
 ---
 title: "Zed AI Features & Workflows"
-chapter: 8
+chapter: 9
 lesson_number: 3
 proficiency_level: "A2-B1"
 estimated_time: "75-90 minutes"

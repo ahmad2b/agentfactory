@@ -1,7 +1,7 @@
 ---
 sidebar_position: 5
 title: "Understanding Configuration and Secrets Safely"
-chapter: 7
+chapter: 8
 lesson: 5
 duration_minutes: 40
 

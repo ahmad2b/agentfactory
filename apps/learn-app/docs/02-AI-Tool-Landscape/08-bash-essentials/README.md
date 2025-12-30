@@ -1,11 +1,11 @@
 ---
 slides:
-  source: "https://pub-80f166e40b854371ac7b05053b435162.r2.dev/books/ai-native-dev/static/slides/chapter-07-slides.pdf"
-  title: "Chapter 7: Bash Essentials for AI-Driven Development"
+  source: "https://pub-80f166e40b854371ac7b05053b435162.r2.dev/books/ai-native-dev/static/slides/chapter-08-slides.pdf"
+  title: "Chapter 8: Bash Essentials for AI-Driven Development"
   height: 700
 ---
 
-# Chapter 7: Bash Essentials for AI-Driven Development
+# Chapter 8: Bash Essentials for AI-Driven Development
 
 The terminal isn't intimidating—it's just a different interface. With these essential concepts and AI assistance, you can accomplish anything you need in development.
 

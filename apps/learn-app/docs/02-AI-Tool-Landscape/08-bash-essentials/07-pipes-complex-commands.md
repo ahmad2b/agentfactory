@@ -1,7 +1,7 @@
 ---
 sidebar_position: 7
 title: "Understanding Pipes and Complex Commands"
-chapter: 7
+chapter: 8
 lesson: 7
 duration_minutes: 40
 

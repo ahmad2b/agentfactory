@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Introducing Your AI Companion's Workspace"
-chapter: 7
+chapter: 8
 lesson: 1
 duration_minutes: 35
 
