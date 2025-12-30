@@ -1,6 +1,6 @@
 ---
 title: "Chapter 12: AI Fluency Basics - Prompt & Context Engineering"
-sidebar_label: "CH 12: AI Fluency Basics: Prompt & Context Engineering"
+sidebar_label: "Chapter 12: AI Fluency Basics"
 sidebar_position: 12
 description: "Master AI Fluency through the 4D Framework—Delegation, Description, Discernment, and Diligence—for effective collaboration with any AI system"
 slides:
