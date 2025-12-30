@@ -238,6 +238,99 @@ api/auth.py, api/middleware.py, tests/test_auth.py, models/user.py
 
 Through iteration, you arrived at a checkpoint that preserves essential decisions while discarding conversational noise---30% reduction while maintaining critical intelligence.
 
+## Claude 4.5's Multi-Window Best Practices
+
+Claude 4.5 models excel at long-horizon tasks and can discover state from the filesystem. Anthropic recommends specific patterns for multi-context window workflows:
+
+### First Window vs. Future Windows
+
+| First Context Window | Future Context Windows |
+|---------------------|------------------------|
+| Set up framework (tests, scripts) | Iterate on todo-list |
+| Create quality-of-life tools | Execute incremental work |
+| Write tests in structured format | Verify and extend |
+
+**Key insight**: Use the first context window to establish infrastructure that future windows can build on.
+
+### Structured State Files
+
+Write tests and state in structured formats that Claude can easily parse:
+
+```json
+// tests.json - Structured state tracking
+{
+  "tests": [
+    {"id": 1, "name": "authentication_flow", "status": "passing"},
+    {"id": 2, "name": "user_management", "status": "failing"},
+    {"id": 3, "name": "api_endpoints", "status": "not_started"}
+  ],
+  "total": 200,
+  "passing": 150,
+  "failing": 25,
+  "not_started": 25
+}
+```
+
+```markdown
+// progress.txt - Freeform progress notes
+Session 3 progress:
+- Fixed authentication token validation
+- Updated user model to handle edge cases
+- Next: investigate user_management test failures (test #2)
+- Note: Do not remove tests as this could lead to missing functionality
+```
+
+### Quality-of-Life Tools
+
+Create setup scripts that gracefully initialize your environment:
+
+```bash
+#!/bin/bash
+# init.sh - Graceful session startup
+echo "Starting development environment..."
+./start-server.sh &
+sleep 2
+./run-tests.sh --quick
+./lint.sh --changed-only
+echo "Environment ready. Run 'npm test' for full suite."
+```
+
+This prevents repeated work when continuing from a fresh context window.
+
+### Git for State Tracking
+
+Claude 4.5 excels at using git to track state across sessions:
+
+```bash
+# Claude can review what's been done
+git log --oneline -10
+
+# And restore to known-good checkpoints
+git stash
+git checkout main
+```
+
+**Recommendation**: Commit frequently with descriptive messages. Claude can reconstruct context from git history.
+
+### Fresh Start vs. Compaction
+
+When context fills up, you have two options:
+
+| Approach | When to Use | Advantage |
+|----------|-------------|-----------|
+| **Fresh start** | Filesystem has all state | Claude discovers context from files |
+| **Compaction** | Important decisions not in files | Preserves reasoning and decisions |
+
+Claude 4.5 is extremely effective at discovering state from the local filesystem. For code projects with good git hygiene, starting fresh often works better than compacting.
+
+**Fresh start prompt**:
+```
+Call pwd; you can only read and write files in this directory.
+Review progress.txt, tests.json, and the git logs.
+Manually run through a fundamental integration test before
+moving on to implementing new features.
+```
+
 ## Session Restart Protocol
 
 Now that you have a checkpoint, here's how to restart effectively:

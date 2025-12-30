@@ -75,6 +75,49 @@ This is where most people fail. They write vague requests like "help me with thi
 
 Anthropic, the company behind Claude, has documented specific techniques that dramatically improve AI output quality. These are not vague suggestions. They are research-backed patterns that work consistently across different tasks and contexts. Master these six techniques, and you will communicate with AI as effectively as you communicate with your best colleagues.
 
+## Claude 4.x: Explicit Instructions Matter More
+
+Claude 4.x models (Sonnet 4.5, Haiku 4.5, Opus 4.5) are trained for **precise instruction following**. This is powerful but requires adjustment: behaviors that previous models would infer now need explicit requests.
+
+### "Suggest" vs. "Make"
+
+Claude 4.x takes your words literally:
+
+| What You Say | What Claude Does |
+|--------------|------------------|
+| "Can you suggest some changes?" | Suggests changes (doesn't implement) |
+| "Make these changes" | Implements the changes |
+| "Help me improve this" | Provides advice (doesn't modify) |
+| "Improve this code" | Modifies the code directly |
+
+**The fix**: Use action verbs that match your intent. If you want implementation, say "implement," "create," or "change"---not "suggest," "help," or "consider."
+
+### Requesting "Above and Beyond" Behavior
+
+Previous Claude models would sometimes add helpful extras unprompted. Claude 4.x is more conservative. If you want thorough, creative, or expansive output, request it explicitly:
+
+```
+Less effective:
+"Create an analytics dashboard"
+
+More effective:
+"Create an analytics dashboard. Include as many relevant features
+and interactions as possible. Go beyond the basics to create a
+fully-featured implementation."
+```
+
+### Scope Discipline
+
+When you want focused, minimal output, add explicit constraints:
+
+```
+Implement EXACTLY and ONLY what is requested. No extra features,
+no added components, no UX embellishments. Keep solutions simple
+and focused on the specific requirement.
+```
+
+This prevents over-engineering---a common issue when AI tries to be helpful.
+
 ## The Cost of Vague Descriptions
 
 Consider this common prompt:
@@ -373,6 +416,43 @@ The second prompt will produce dramatically better code. Not because it is longe
 | Format not specified | AI guesses output structure | Show example output |
 | Too many things at once | Attention diluted across requirements | Break into sequential steps |
 | Implicit assumptions | AI cannot read your mind | Make all assumptions explicit |
+
+## Verbosity Control
+
+Claude 4.x models tend toward efficiency and may skip verbal summaries after tool calls. Control output length explicitly:
+
+### Quantitative Guidelines
+
+| Output Type | Target Length |
+|-------------|---------------|
+| Concise summary | 45-70 words |
+| Explanation | 3-6 sentences |
+| Complex analysis | ≤5 tagged bullets + 1 overview paragraph |
+| Code review | Focus on critical issues first |
+
+### Requesting Updates
+
+If you want Claude to provide progress updates as it works:
+
+```
+After completing a task that involves tool use, provide a quick
+summary of the work you've done.
+```
+
+### Structured Output for Complex Tasks
+
+For multi-step tasks, request structured responses:
+
+```
+For complex responses, use this format:
+- What changed: [specific files/components]
+- Where: [locations affected]
+- Risks: [potential issues]
+- Next steps: [immediate actions]
+- Open questions: [decisions needed]
+```
+
+This ensures you get actionable information without verbosity.
 
 ## Try With AI
 

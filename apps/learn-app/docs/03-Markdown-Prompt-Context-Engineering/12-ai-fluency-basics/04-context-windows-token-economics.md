@@ -100,12 +100,15 @@ A context window IS:
 
 Different AI tools have different context capacities:
 
-| Tool | Standard Context | Extended Context |
-|------|-----------------|------------------|
-| **Claude Sonnet 4.5** | 200K tokens | 1M tokens |
-| **Gemini 2.5 Pro** | 2M tokens | 2M tokens |
+| Tool | Standard Context | Extended Context | Notes |
+|------|-----------------|------------------|-------|
+| **Claude Sonnet 4.5** | 200K tokens | 1M tokens (beta) | 1M requires tier 4 organization |
+| **Claude Haiku 4.5** | 200K tokens | — | Optimized for speed |
+| **Gemini 2.5 Pro** | 2M tokens | 2M tokens | Largest context available |
 
-**What this means for you**: In Claude Code, you're typically working with 200,000 tokens of context. That sounds like a lot, but it fills faster than you expect. Gemini 2.5 Pro offers 10x more context (2 million tokens), enabling you to load entire codebases---though the principles of context management still apply.
+**What this means for you**: In Claude Code, you're typically working with 200,000 tokens of context. That sounds like a lot, but it fills faster than you expect. The 1M extended context is now available in beta for tier 4 organizations, with premium pricing (2x input, 1.5x output for requests exceeding 200K tokens).
+
+**Long-context pricing**: If you're using the 1M context window through the API, requests over 200K tokens are automatically charged at premium rates. Plan your token usage accordingly.
 
 ### Estimating Context: The Token-to-Word Rule
 
@@ -212,6 +215,57 @@ As your session progresses, context utilization increases. Use these thresholds 
 - **Action**: Create checkpoint NOW and restart session
 
 **Why these thresholds?** Empirical observation shows that degradation symptoms typically appear around 70-80% utilization, becoming severe above 85%.
+
+## Context Awareness: Claude 4.5's Built-In Tracking
+
+Claude Sonnet 4.5 and Haiku 4.5 include a powerful new capability called **context awareness**---the model natively tracks its remaining token budget throughout a conversation.
+
+### How It Works
+
+At the start of a conversation, Claude receives information about its total context window:
+
+```
+<budget:token_budget>200000</budget:token_budget>
+```
+
+After each tool call, Claude receives an update on remaining capacity:
+
+```
+<system_warning>Token usage: 35000/200000; 165000 remaining</system_warning>
+```
+
+This means Claude knows exactly how much space it has left and can plan accordingly.
+
+### What This Means for You
+
+| Before Context Awareness | With Context Awareness |
+|-------------------------|------------------------|
+| Manual token estimation | Claude tracks automatically |
+| Guessing utilization % | Claude knows precisely |
+| Surprise context limits | Claude can warn you |
+| Abrupt session endings | Claude can wrap up gracefully |
+
+**The catch**: Context awareness helps Claude manage itself, but understanding token economics is still valuable. When you understand *why* context fills up and *how* to track it manually, you can:
+- Design better loading strategies
+- Create more effective checkpoints
+- Debug unexpected behavior
+- Work with models that lack this feature
+
+**Think of it like GPS vs. map reading**: GPS is incredibly useful, but understanding navigation fundamentals makes you a better driver. Context awareness automates tracking, but manual skills ensure you're never lost.
+
+### Enabling Context-Aware Workflows
+
+If you're using Claude Code or an agent harness that compacts context, you can leverage this awareness:
+
+```
+Your context window will be automatically compacted as it approaches
+its limit, allowing you to continue working indefinitely. Therefore,
+do not stop tasks early due to token budget concerns. As you approach
+your token budget limit, save your current progress and state to
+memory before the context window refreshes.
+```
+
+This prompt tells Claude to be persistent and autonomous, trusting that compaction will handle context limits.
 
 ## Observable Behaviors: When Context Fills Up
 
