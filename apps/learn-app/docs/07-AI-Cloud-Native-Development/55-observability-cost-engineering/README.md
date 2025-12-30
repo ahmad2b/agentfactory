@@ -1,45 +1,126 @@
 ---
 sidebar_position: 55
 title: "Chapter 55: Observability & Cost Engineering"
-description: "Monitor, debug, and optimize AI agent systems in production"
+description: "Master the three pillars of observability (metrics, tracing, logging), SRE foundations, and FinOps practices for cloud-native AI applications"
 ---
 
 # Chapter 55: Observability & Cost Engineering
 
-Your agent is deployed and automated. But can you answer: Is it healthy? Why did that request fail? How much is it costing? Observability provides the answers through metrics, logs, and traces. Cost engineering ensures you're not burning money on over-provisioned resources.
+**You will build an observability skill BEFORE you learn observability.**
 
-This chapter teaches the three pillars of observability (metrics, logs, traces) with OpenTelemetry, plus practical cost optimization for AI workloads—where LLM API calls can quickly become your largest expense.
+Your agent is deployed and automated through GitOps. But can you answer: Is it healthy? Why did that request fail? How much is it costing? Where's the performance bottleneck in that distributed workflow? Observability provides the answers through the three pillars: **metrics**, **traces**, and **logs**.
+
+This chapter follows the **Skill-First Learning Pattern**: In Lesson 0, you create an `observability-cost-engineer` skill using official Prometheus, OpenTelemetry, and Loki documentation. Then you spend the chapter understanding what you built and making it better. By the end, you don't just "know observability"—you OWN a production-ready skill that implements SRE best practices.
+
+## The Skill-First Arc
+
+```
+L00: Build Your Observability Skill (25 min)
+  │   └── Clone skills-lab, fetch docs, create skill
+  │
+  ├── L01: Three Pillars of Observability (Conceptual Foundation)
+  │   └── Metrics, traces, logs: when to use each
+  │
+  ├── L02-L05: Instrumentation & Collection
+  │   └── Prometheus, Grafana, OpenTelemetry, Jaeger, Loki
+  │
+  ├── L06-L07: SRE Foundations
+  │   └── SLIs, SLOs, error budgets, alerting patterns
+  │
+  ├── L08-L09: Cost Engineering & Dapr Integration
+  │   └── OpenCost, FinOps practices, Dapr observability
+  │
+  └── L10: Capstone - Full Observability Stack for Task API
+      └── Production-ready observability, skill finalization
+```
 
 ## What You'll Learn
 
 By the end of this chapter, you'll be able to:
 
-- **Understand observability pillars**: Metrics, logs, traces, and their relationships
-- **Implement OpenTelemetry**: Instrumentation for Python FastAPI services
-- **Collect metrics**: Prometheus for system and application metrics
-- **Aggregate logs**: Structured logging with Loki or cloud solutions
-- **Trace requests**: Distributed tracing across services with Jaeger
-- **Build dashboards**: Grafana dashboards for agent health and performance
-- **Set up alerting**: Alert on errors, latency, and resource exhaustion
-- **Optimize costs**: Right-sizing, spot instances, and LLM API cost management
+1. **Implement metrics collection** with Prometheus and visualize with Grafana dashboards using PromQL queries
+2. **Instrument applications** with OpenTelemetry and trace requests through distributed systems with Jaeger
+3. **Configure centralized logging** with Loki and query logs efficiently with LogQL
+4. **Define and measure** SLIs, SLOs, and error budgets for your services using SRE best practices
+5. **Set up cost monitoring** with OpenCost and implement FinOps practices for Kubernetes cost optimization
+6. **Integrate Dapr observability** features for metrics and tracing across actors and workflows
+7. **Build a complete observability stack** for production AI applications with multi-burn-rate alerting
 
 ## Chapter Structure
 
-1. **Observability Fundamentals** — Why observability? The three pillars explained
-2. **OpenTelemetry Setup** — Instrumentation, exporters, and collectors
-3. **Metrics with Prometheus** — Collection, queries, and PromQL basics
-4. **Logging Best Practices** — Structured logs, levels, and aggregation
-5. **Distributed Tracing** — Trace context, spans, and debugging slow requests
-6. **Grafana Dashboards** — Visualization, panels, and dashboard design
-7. **Alerting & Incidents** — Alert rules, escalation, and incident response
-8. **Cost Engineering** — Resource optimization, LLM costs, and budgeting
-9. **Capstone: Observable Agent** — Add full observability to your deployed agent
+| # | Lesson | Duration | Your Skill Improves |
+|---|--------|----------|---------------------|
+| **0** | **Build Your Observability Skill** | 25 min | **Created from official docs** |
+| 1 | Three Pillars of Observability | 20 min | Understand: metrics, traces, logs |
+| 2 | Metrics with Prometheus | 30 min | Add: PromQL queries, ServiceMonitor |
+| 3 | Visualization with Grafana | 25 min | Add: dashboard JSON, alerting |
+| 4 | Distributed Tracing with OpenTelemetry & Jaeger | 30 min | Add: span creation, trace analysis |
+| 5 | Centralized Logging with Loki | 25 min | Add: LogQL, structured logging |
+| 6 | SRE Foundations: SLIs, SLOs, and Error Budgets | 30 min | Add: SLO recording rules |
+| 7 | Alerting and Incident Response | 25 min | Add: multi-burn-rate alerting |
+| 8 | Cost Engineering and FinOps | 30 min | Add: OpenCost queries, cost allocation |
+| 9 | Dapr Observability Integration | 25 min | Add: Dapr metrics and tracing |
+| **10** | **Capstone: Full Observability Stack for Task API** | 40 min | **Production-ready asset** |
+
+## Every Lesson Has Skill Reflection
+
+Each lesson ends with **"Reflect on Your Skill"**:
+
+1. **Test**: Does your skill handle this lesson's concepts?
+2. **Identify gaps**: What's missing from your current skill?
+3. **Improve**: Add or refine the capability
+
+By Lesson 10, you've tested and improved your skill through hands-on practice with each observability pillar.
+
+## The Three Pillars
+
+| Pillar | Tool | Query Language | What It Answers |
+|--------|------|----------------|-----------------|
+| **Metrics** | Prometheus | PromQL | "What's the request rate? Error rate? P95 latency?" |
+| **Traces** | Jaeger | - | "Why is this request slow? Which service is the bottleneck?" |
+| **Logs** | Loki | LogQL | "What happened at 3am? What error did user X see?" |
+
+**Choosing the right signal:**
+- **Metrics** for aggregated data over time (dashboards, alerting, capacity planning)
+- **Traces** for debugging distributed request flows (latency analysis, bottleneck identification)
+- **Logs** for event-level detail (error messages, audit trails, debugging)
+
+## 4-Layer Teaching Progression
+
+This chapter follows the **4-Layer Teaching Method**:
+
+- **Lesson 0 (Layer 3)**: Build your `observability-cost-engineer` skill from official documentation using `/fetching-library-docs` and `/skill-creator`.
+
+- **Lesson 1 (Layer 1)**: Conceptual foundation—understand the three pillars before touching tools. Build mental models for when to use metrics vs traces vs logs.
+
+- **Lessons 2-9 (Layer 2)**: AI-assisted hands-on practice. Install tools, write queries, build dashboards, define SLOs, and configure alerting—all while collaborating with your skill.
+
+- **Lesson 10 (Layer 4)**: Spec-driven capstone. Build a complete observability stack for Task API with metrics, traces, logs, SLO dashboards, and cost monitoring—orchestrating everything you've learned.
 
 ## Prerequisites
 
-- Chapter 55: Deployed agent with CI/CD
-- Running Kubernetes cluster (Minikube or cloud)
+- **Chapter 49 (Docker)**: Container resource limits, image building
+- **Chapter 50 (Kubernetes)**: Pods, Deployments, Services, ConfigMaps—where observability tools deploy
+- **Chapter 51 (Helm)**: Chart installation for kube-prometheus-stack, Loki, Jaeger
+- **Chapter 52 (Kafka)**: Event-driven patterns (observability applies to message flows)
+- **Chapter 53 (Dapr Core)**: Dapr sidecar pattern—L09 observes Dapr metrics and traces
+- **Chapter 54 (GitOps)**: CI/CD pipelines—observability stack deploys via ArgoCD
+- **Chapter 57 (Dapr Actors & Workflows)**: Actor patterns—L09 observes actor-based systems
+
+## Running Example: Task API
+
+Throughout this chapter, you instrument the **Task API** from earlier chapters:
+
+- **L02**: Add Prometheus metrics (request count, latency histogram) to Task API
+- **L03**: Build Grafana dashboard showing 4 golden signals for Task API
+- **L04**: Instrument with OpenTelemetry, trace requests through Dapr sidecar to database
+- **L05**: Configure structured JSON logging, correlate logs with trace IDs
+- **L06**: Define 99.9% availability SLO for Task API, calculate error budget
+- **L07**: Set up multi-burn-rate alerts that page when burning budget too fast
+- **L08**: Configure cost allocation labels, identify Task API resource costs
+- **L09**: Enable Dapr observability for actor-based task workflows
+- **L10**: Complete observability stack with SLO dashboard and incident runbook
 
 ## Looking Ahead
 
-You can now see inside your system. Chapter 57 adds traffic management (API gateway), and Chapter 58 secures everything for production use.
+This chapter gives you visibility into your deployed systems. Chapter 56 (API Gateway & Traffic Management) builds on this observability foundation to implement traffic routing, rate limiting, and canary deployments—using metrics to make intelligent traffic decisions.
