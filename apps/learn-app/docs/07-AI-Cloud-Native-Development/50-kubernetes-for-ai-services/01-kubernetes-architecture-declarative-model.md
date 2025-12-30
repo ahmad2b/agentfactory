@@ -398,21 +398,6 @@ The key difference: a traditional OS manages one machine. Kubernetes manages a f
 
 ---
 
-## What You've Learned
-
-Before touching any commands, you now understand:
-
-- **Why orchestration exists**: Docker alone can't handle multi-machine deployment, self-healing, scaling, or service discovery.
-- **The declarative model**: You describe WHAT you want; Kubernetes figures out HOW.
-- **Desired vs observed state**: Kubernetes continuously compares and reconciles.
-- **Control plane components**: API server (entry point), etcd (state store), scheduler (placement), controller manager (reconciliation).
-- **Worker node components**: kubelet (runs Pods), kube-proxy (networking), container runtime (runs containers).
-- **The reconciliation loop**: The heartbeat that makes Kubernetes self-healing.
-
-In Lesson 2, you'll enable Kubernetes in Docker Desktop—the same Kubernetes API used in production—and run your first kubectl commands.
-
----
-
 ## Try With AI
 
 Before moving to hands-on work, solidify your understanding with these prompts:

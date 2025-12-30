@@ -481,22 +481,6 @@ The sidecar reads and streams logs, which Kubernetes collects and makes availabl
 
 ---
 
-## Summary
-
-Sidecars are helper containers that live in the same Pod as your main application. They handle operational concerns (logging, metrics, proxying, security) independently, keeping your application code clean.
-
-**Key takeaways:**
-
-1. **Native sidecars** (Kubernetes 1.28+) use `initContainers` with `restartPolicy: Always`
-2. **Shared volumes** (`emptyDir`) let containers communicate reliably
-3. **Shared network** (`localhost`) means sidecar and app can reach each other without service discovery
-4. **Lifecycle guarantees**: Sidecars start first, restart independently, and shutdown with the Pod
-5. **Separation of concerns**: Application logic stays separate from operational concerns
-
-Your FastAPI agent writes logs to `/var/log/agent/`. The logging sidecar reads them. Your agent exposes metrics on `localhost:8001/metrics`. The metrics sidecar scrapes them. Clean. Scalable. Testable.
-
----
-
 ## Try With AI
 
 Open a terminal and work through these scenarios with an AI assistant's help:

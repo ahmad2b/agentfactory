@@ -662,43 +662,6 @@ Pre-promotion analysis runs before traffic switch
 Auto-promotion after 5 min if success_rate > 99%
 ```
 
-## Summary: The Progressive Delivery Stack
-
-Here's how everything fits together:
-
-```
-Your AI Agent Code
-    ↓
-GitHub Actions (Lesson 2)
-    ├─ Build image
-    ├─ Run tests
-    └─ Push to registry
-    ↓
-Git repository with rollout.yaml
-    ↓
-ArgoCD (Lessons 5-12)
-    └─ Watches Git, applies Rollout to cluster
-    ↓
-Kubernetes Cluster
-    └─ Argo Rollouts controller (Lesson 13 - THIS LESSON)
-        ├─ Manages canary or blue-green
-        ├─ Shifts traffic safely
-        └─ Validates with metrics
-    ↓
-Your service: Progressive, observable, safe deployments
-```
-
-When you deploy a new version, it goes through:
-
-1. **Code commit** → CI pipeline validates
-2. **Image push** → Registry stores artifact
-3. **Git commit** (rollout.yaml) → ArgoCD notices
-4. **Argo Rollouts deployment** → Canary or blue-green strategy executes
-5. **Metrics collection** → System validates new version with real traffic
-6. **Promotion or rollback** → Safe transition or instant recovery
-
-This is production-grade deployment for AI agents.
-
 ## Key Concepts to Remember
 
 Before moving to implementation lessons, internalize these:
