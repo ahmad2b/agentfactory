@@ -276,8 +276,9 @@ async def get_current_user(
     return user
 ```
 
+Create `main.py`:
+
 ```python
-# main.py
 from fastapi import FastAPI, Depends
 from dependencies.database import get_session
 from dependencies.auth import get_current_user
@@ -297,10 +298,9 @@ def list_tasks(
 
 ## Testing with Dependency Overrides
 
-The real power of DI is testability. Override any dependency:
+The real power of DI is testability. Override any dependency. Create `test_main.py`:
 
 ```python
-# test_main.py
 from fastapi.testclient import TestClient
 from sqlmodel import Session, create_engine, SQLModel
 from main import app
@@ -390,10 +390,9 @@ app/
 
 **Step 4:** Update imports in main.py
 
-**Step 5:** Create a test that overrides get_session:
+**Step 5:** Create `test_tasks.py` that overrides get_session:
 
 ```python
-# test_tasks.py
 from fastapi.testclient import TestClient
 from sqlmodel import Session, create_engine, SQLModel
 from main import app

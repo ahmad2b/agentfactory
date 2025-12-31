@@ -268,10 +268,9 @@ def delete_task(task_id: int, session: Session = Depends(get_session)):
 
 ## Complete Example
 
-Here's everything together:
+Here's everything together. Create `models.py`:
 
 ```python
-# models.py
 from sqlmodel import SQLModel, Field
 from typing import Optional
 from datetime import datetime
@@ -285,8 +284,9 @@ class Task(SQLModel, table=True):
     created_at: datetime = Field(default_factory=datetime.utcnow)
 ```
 
+Create `database.py`:
+
 ```python
-# database.py
 from sqlmodel import SQLModel, create_engine, Session
 from config import get_settings
 
@@ -303,8 +303,9 @@ def get_session():
         yield session
 ```
 
+Create `main.py`:
+
 ```python
-# main.py
 from fastapi import FastAPI, Depends, HTTPException
 from sqlmodel import Session, select
 from models import Task

@@ -99,8 +99,9 @@ pydantic-settings fixes all of this:
 uv add pydantic-settings
 ```
 
+Create `config.py`:
+
 ```python
-# config.py
 from pydantic_settings import BaseSettings
 
 
@@ -122,8 +123,9 @@ class Settings(BaseSettings):
 
 ## Using Settings in Your App
 
+Create `main.py`:
+
 ```python
-# main.py
 from fastapi import FastAPI, Depends
 from config import Settings
 
@@ -223,10 +225,9 @@ Now settings load once and reuse the same instance. This is more efficient and e
 
 ## Complete Settings Example
 
-Here's the pattern you'll use throughout this chapter:
+Here's the pattern you'll use throughout this chapter. Create `config.py`:
 
 ```python
-# config.py
 from pydantic_settings import BaseSettings
 from functools import lru_cache
 
@@ -258,8 +259,9 @@ def get_settings() -> Settings:
     return Settings()
 ```
 
+Create `main.py`:
+
 ```python
-# main.py
 from fastapi import FastAPI, Depends
 from config import Settings, get_settings
 

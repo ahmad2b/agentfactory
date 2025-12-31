@@ -963,9 +963,9 @@ adk deploy agent_engine \
 
 **Deployment:**
 
-```bash
-# Create Dockerfile
-cat > Dockerfile << 'EOF'
+Create `Dockerfile`:
+
+```dockerfile
 FROM python:3.11-slim
 
 WORKDIR /app
@@ -976,9 +976,11 @@ COPY . .
 
 # Start web server exposing API
 CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8080"]
-EOF
+```
 
-# Build and deploy
+Build and deploy:
+
+```bash
 gcloud run deploy news-podcast-agent \
   --source . \
   --platform managed \

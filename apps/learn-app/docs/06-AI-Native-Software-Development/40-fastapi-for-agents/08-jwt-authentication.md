@@ -115,8 +115,9 @@ openssl rand -hex 32
 
 ## Creating Tokens
 
+Create `auth.py`:
+
 ```python
-# auth.py
 from datetime import datetime, timedelta
 from typing import Optional
 from jose import jwt, JWTError
@@ -159,10 +160,9 @@ The token has three parts (separated by dots):
 
 ## Token Endpoint
 
-FastAPI's OAuth2 expects a specific request format:
+FastAPI's OAuth2 expects a specific request format. Create `main.py`:
 
 ```python
-# main.py
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from datetime import timedelta
@@ -216,8 +216,9 @@ Note: OAuth2PasswordRequestForm expects form data (not JSON).
 
 ## Validating Tokens
 
+Add to `auth.py`:
+
 ```python
-# auth.py (add to existing file)
 def decode_token(token: str) -> Optional[dict]:
     """Decode and validate a JWT token."""
     try:
@@ -233,10 +234,9 @@ def decode_token(token: str) -> Optional[dict]:
 
 ## Protecting Routes
 
-Create a dependency that extracts the current user:
+Create a dependency that extracts the current user. Add to `main.py`:
 
 ```python
-# main.py (add to existing)
 from auth import decode_token
 
 
@@ -310,8 +310,9 @@ Now users can only see their own tasks.
 
 ## Complete Authentication Flow
 
+Create `auth.py`:
+
 ```python
-# auth.py
 from datetime import datetime, timedelta
 from typing import Optional
 from jose import jwt, JWTError
@@ -334,8 +335,9 @@ def decode_token(token: str) -> Optional[dict]:
         return None
 ```
 
+Create `main.py`:
+
 ```python
-# main.py
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from datetime import timedelta

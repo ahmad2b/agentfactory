@@ -74,10 +74,9 @@ By the end of this chapter, every endpoint you build will have tests. This lesso
 
 ## Your First Test
 
-Create a file called `test_main.py` in your project:
+Create `test_main.py` in your project:
 
 ```python
-# test_main.py
 from fastapi.testclient import TestClient
 from main import app
 
@@ -248,10 +247,9 @@ Testing the unhappy path is just as important as testing success.
 
 ## Complete Test Example
 
-Here's a test file for the Task API you'll build:
+Here's a test file for the Task API you'll build. Create `test_tasks.py`:
 
 ```python
-# test_tasks.py
 from fastapi.testclient import TestClient
 from main import app
 

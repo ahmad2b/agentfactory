@@ -242,10 +242,9 @@ print(task.title)  # Works!
 
 ## Complete Session Configuration
 
-Production-ready session setup:
+Production-ready session setup. Create `database.py`:
 
 ```python
-# database.py
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from sqlmodel import SQLModel
 from sqlmodel.ext.asyncio.session import AsyncSession

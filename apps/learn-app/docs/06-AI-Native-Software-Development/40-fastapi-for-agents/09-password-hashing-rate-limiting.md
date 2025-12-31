@@ -88,8 +88,9 @@ uv add pwdlib[argon2] slowapi
 
 ## Password Hashing with pwdlib
 
+Create `security.py`:
+
 ```python
-# security.py
 from pwdlib import PasswordHash
 from pwdlib.hashers.argon2 import Argon2Hasher
 
@@ -122,10 +123,9 @@ Notice the hash includes algorithm parameters. This means you can upgrade securi
 
 ## User Model with Password
 
-Update your models to include users:
+Update `models.py` to include users:
 
 ```python
-# models.py
 from sqlmodel import SQLModel, Field
 from typing import Optional
 from datetime import datetime
@@ -147,8 +147,9 @@ class UserCreate(SQLModel):
 
 ## Signup Endpoint
 
+Add to `main.py`:
+
 ```python
-# main.py
 from fastapi import FastAPI, Depends, HTTPException, status
 from sqlmodel import Session, select
 from models import User, UserCreate
@@ -200,10 +201,9 @@ curl -X POST http://localhost:8000/users/signup \
 
 ## Fixed Login Endpoint
 
-Replace the insecure password check from L08:
+Replace the insecure password check from L08. Update `main.py`:
 
 ```python
-# main.py
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from security import verify_password
 from auth import create_access_token
@@ -242,10 +242,9 @@ async def login(
 
 ## Rate Limiting with slowapi
 
-Rate limiting prevents brute force attacks. An attacker can't try millions of passwords if they're limited to 5 attempts per minute.
+Rate limiting prevents brute force attacks. An attacker can't try millions of passwords if they're limited to 5 attempts per minute. Update `main.py`:
 
 ```python
-# main.py
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
@@ -295,8 +294,9 @@ Clients can use these to implement backoff strategies.
 
 ## Complete Security Module
 
+Create `security.py`:
+
 ```python
-# security.py
 from pwdlib import PasswordHash
 from pwdlib.hashers.argon2 import Argon2Hasher
 
@@ -313,8 +313,9 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     return password_hash.verify(plain_password, hashed_password)
 ```
 
+Create `main.py`:
+
 ```python
-# main.py (relevant parts)
 from fastapi import FastAPI, Depends, HTTPException, status, Request
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from slowapi import Limiter, _rate_limit_exceeded_handler

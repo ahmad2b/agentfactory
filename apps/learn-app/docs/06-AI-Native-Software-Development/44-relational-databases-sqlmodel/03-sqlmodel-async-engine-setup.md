@@ -427,10 +427,9 @@ app = FastAPI(lifespan=lifespan)
 
 ## Complete Database Configuration
 
-Here's a production-ready `database.py`:
+Here's a production-ready setup. Create `database.py`:
 
 ```python
-# database.py
 import os
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlmodel import SQLModel
