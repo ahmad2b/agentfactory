@@ -83,10 +83,9 @@ Each becomes a function an agent can call. The agent decides WHEN to call them b
 
 ## Creating Tool Functions
 
-Start with simple wrappers around your existing code:
+Start with simple wrappers around your existing code. Create `tools.py`:
 
 ```python
-# tools.py
 from sqlmodel import Session, select
 from models import Task, TaskCreate
 from database import engine
@@ -156,8 +155,9 @@ Using OpenAI Agents SDK:
 uv add openai-agents
 ```
 
+Create `agent.py`:
+
 ```python
-# agent.py
 from agents import Agent, Runner, function_tool
 from tools import create_task, list_tasks, get_task, update_task_status, delete_task
 
@@ -231,10 +231,9 @@ When listing tasks, format them clearly.""",
 
 ## Non-Streaming Agent Endpoint
 
-Start with a simple endpoint that waits for the complete response:
+Start with a simple endpoint that waits for the complete response. Add to `main.py`:
 
 ```python
-# main.py
 from fastapi import FastAPI
 from pydantic import BaseModel
 from agents import Runner
@@ -278,10 +277,9 @@ curl -X POST http://localhost:8000/agent/chat \
 
 ## Streaming Agent Endpoint
 
-For better UX, stream the response as it generates:
+For better UX, stream the response as it generates. Add to `main.py`:
 
 ```python
-# main.py
 from fastapi.responses import StreamingResponse
 from sse_starlette.sse import EventSourceResponse
 import json
@@ -336,10 +334,11 @@ while (true) {
 
 ## Complete Agent Integration
 
-Here's everything together:
+Here's everything together for reference.
+
+**tools.py:**
 
 ```python
-# tools.py
 from sqlmodel import Session, select
 from models import Task
 from database import engine
@@ -390,8 +389,9 @@ def delete_task(task_id: int) -> bool:
         return True
 ```
 
+**agent.py:**
+
 ```python
-# agent.py
 from agents import Agent, function_tool
 from tools import create_task, list_tasks, get_task, update_task_status, delete_task
 
@@ -445,8 +445,9 @@ task_agent = Agent(
 )
 ```
 
+**main.py (agent routes):**
+
 ```python
-# main.py (agent routes)
 from fastapi import FastAPI
 from pydantic import BaseModel
 from sse_starlette.sse import EventSourceResponse

@@ -93,10 +93,10 @@ In this lesson, you'll learn the debugging toolkit that every container develope
 
 ## Running Your FastAPI App in Detached Mode
 
-Before debugging, let's run your Lesson 3 FastAPI container in the background. Navigate to your `my-fastapi-app` directory where you created the Dockerfile:
+Before debugging, let's run your Lesson 3 FastAPI container in the background. Navigate to your `task-api` directory from Lesson 3:
 
 ```bash
-cd my-fastapi-app
+cd task-api
 docker build -t task-api:v1 .
 ```
 
@@ -252,9 +252,8 @@ $ docker rm task-api
 task-api
 ```
 
-Create a Python script that simulates a startup failure:
+Create a Python script that simulates a startup failure. Create `broken_main.py`:
 
-**File: broken_main.py**
 ```python
 import os
 import sys
@@ -272,9 +271,8 @@ print(f"API_KEY configured: {api_key[:4]}****")
 print("Starting server...")
 ```
 
-Create a Dockerfile for this broken app:
+Create a Dockerfile for this broken app. Create `Dockerfile.broken`:
 
-**File: Dockerfile.broken**
 ```dockerfile
 FROM python:3.12-slim
 WORKDIR /app
@@ -680,9 +678,8 @@ Docker supports several restart policies:
 
 ### Testing Restart Policies
 
-Create a container that crashes sometimes:
+Create a container that crashes sometimes. Create `flaky_main.py`:
 
-**File: flaky_main.py**
 ```python
 import random
 import sys
@@ -706,9 +703,8 @@ Build it:
 docker build -f Dockerfile.broken -t flaky-api:v1 .
 ```
 
-Wait, that Dockerfile won't work for this script. Create a new one:
+Wait, that Dockerfile won't work for this script. Create `Dockerfile.flaky`:
 
-**File: Dockerfile.flaky**
 ```dockerfile
 FROM python:3.12-slim
 WORKDIR /app

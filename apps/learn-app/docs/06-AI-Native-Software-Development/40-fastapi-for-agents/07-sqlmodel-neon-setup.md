@@ -97,10 +97,9 @@ uv add sqlmodel psycopg2-binary
 
 ## Defining Your Model
 
-SQLModel classes with `table=True` become database tables:
+SQLModel classes with `table=True` become database tables. Create `models.py`:
 
 ```python
-# models.py
 from sqlmodel import SQLModel, Field
 from typing import Optional
 from datetime import datetime
@@ -124,8 +123,9 @@ class Task(SQLModel, table=True):
 
 ## Connecting to the Database
 
+Create `database.py`:
+
 ```python
-# database.py
 from sqlmodel import SQLModel, create_engine, Session
 from config import get_settings
 
@@ -154,10 +154,9 @@ def get_session():
 
 ## Creating Tables on Startup
 
-Call `create_db_and_tables()` when the app starts:
+Call `create_db_and_tables()` when the app starts. Update your `main.py`:
 
 ```python
-# main.py
 from fastapi import FastAPI
 from database import create_db_and_tables
 

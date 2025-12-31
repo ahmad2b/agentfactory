@@ -11,6 +11,62 @@ const initSatori = async () => {
   return satori;
 };
 
+// Cache fonts globally to avoid repeated file reads (major memory savings)
+let cachedFonts = null;
+const loadFontsOnce = () => {
+  if (cachedFonts) return cachedFonts;
+
+  const candidates = [
+    {
+      name: "Sans",
+      weight: 400,
+      paths: [
+        "/Library/Fonts/Arial.ttf",
+        "/System/Library/Fonts/Supplemental/Arial.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "C:/Windows/Fonts/arial.ttf",
+      ],
+    },
+    {
+      name: "Sans",
+      weight: 700,
+      paths: [
+        "/Library/Fonts/Arial Bold.ttf",
+        "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "C:/Windows/Fonts/arialbd.ttf",
+      ],
+    },
+  ];
+
+  cachedFonts = candidates
+    .map((c) => {
+      const found = c.paths.find((p) => {
+        try {
+          return fs.existsSync(p);
+        } catch {
+          return false;
+        }
+      });
+      if (!found) return null;
+      return {
+        name: c.name,
+        data: fs.readFileSync(found),
+        weight: c.weight,
+        style: "normal",
+      };
+    })
+    .filter(Boolean);
+
+  if (!cachedFonts.length) {
+    throw new Error(
+      "No suitable system fonts found for Satori (tried Arial/DejaVu/Windows Arial)."
+    );
+  }
+
+  return cachedFonts;
+};
+
 /**
  * Docusaurus plugin to automatically generate Open Graph images for each page
  */
@@ -21,6 +77,17 @@ module.exports = function (context, options) {
 
     async postBuild({ siteConfig, routesPaths, outDir, head }) {
       console.log("\n🎨 Generating Open Graph images...\n");
+
+      // Load fonts ONCE at the start (prevents repeated file reads)
+      try {
+        loadFontsOnce();
+        console.log("  ✓ Fonts loaded and cached\n");
+      } catch (err) {
+        console.log(`  ⚠ Font loading failed: ${err.message}`);
+        console.log("  ⚠ OG image generation will be skipped\n");
+        return;
+      }
+
       // Ensure OG images are generated into the FINAL BUILD output, not static/
       const ogOutDir = path.join(outDir, "img", "og");
       if (!fs.existsSync(ogOutDir)) {
@@ -49,22 +116,42 @@ module.exports = function (context, options) {
 };
 
 /**
- * Recursively scan docs directory and generate images
+ * Recursively scan docs directory and collect all markdown files
  */
-async function generateImagesFromDirectory(dir, ogDir, siteConfig, docsRoot) {
+function collectMarkdownFiles(dir, docsRoot, files = []) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
 
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);
 
     if (entry.isDirectory()) {
-      // Recursively process subdirectories
-      await generateImagesFromDirectory(fullPath, ogDir, siteConfig, docsRoot);
+      collectMarkdownFiles(fullPath, docsRoot, files);
     } else if (
       entry.isFile() &&
-      (entry.name.endsWith(".md") || entry.name.endsWith(".mdx"))
+      (entry.name.endsWith(".md") || entry.name.endsWith(".mdx")) &&
+      !entry.name.endsWith(".summary.md") // Skip summary files
     ) {
-      // Process markdown files
+      files.push(fullPath);
+    }
+  }
+
+  return files;
+}
+
+/**
+ * Process markdown files in batches to prevent memory exhaustion
+ */
+async function generateImagesFromDirectory(dir, ogDir, siteConfig, docsRoot) {
+  const files = collectMarkdownFiles(dir, docsRoot);
+  const BATCH_SIZE = 20; // Process 20 files at a time
+  let processed = 0;
+
+  console.log(`  Found ${files.length} markdown files to process\n`);
+
+  for (let i = 0; i < files.length; i += BATCH_SIZE) {
+    const batch = files.slice(i, i + BATCH_SIZE);
+
+    for (const fullPath of batch) {
       const content = fs.readFileSync(fullPath, "utf-8");
       const metadata = extractFrontMatter(content);
 
@@ -80,6 +167,17 @@ async function generateImagesFromDirectory(dir, ogDir, siteConfig, docsRoot) {
           siteConfig,
         });
       }
+      processed++;
+    }
+
+    // Hint garbage collection between batches (if available)
+    if (global.gc) {
+      global.gc();
+    }
+
+    // Progress update every batch
+    if (processed % BATCH_SIZE === 0 || processed === files.length) {
+      console.log(`  Progress: ${processed}/${files.length} docs processed`);
     }
   }
 }
@@ -119,7 +217,7 @@ async function injectOGImagesIntoHTML(outDir, siteConfig, siteDir) {
   console.log("\n🔧 Injecting OG images into HTML files...\n");
 
   const htmlFiles = [];
-  
+
   // Recursively find all HTML files
   function findHTMLFiles(dir) {
     const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -132,8 +230,10 @@ async function injectOGImagesIntoHTML(outDir, siteConfig, siteDir) {
       }
     }
   }
-  
+
   findHTMLFiles(outDir);
+
+  console.log(`  Found ${htmlFiles.length} HTML files to process\n`);
 
   // Look for generated images inside the built output directory
   const ogImagesDir = path.join(outDir, 'img', 'og');
@@ -141,7 +241,11 @@ async function injectOGImagesIntoHTML(outDir, siteConfig, siteDir) {
   // Stable version token per build, overridable from env/CI
   const buildVersion = process.env.BUILD_VERSION || String(Math.floor(Date.now() / 1000));
 
+  let processed = 0;
+  const BATCH_SIZE = 50;
+
   for (const htmlFile of htmlFiles) {
+    processed++;
     try {
       let html = fs.readFileSync(htmlFile, 'utf-8');
       
@@ -262,7 +366,16 @@ async function injectOGImagesIntoHTML(outDir, siteConfig, siteDir) {
     } catch (error) {
       console.log(`  ⊘ Error processing ${path.basename(htmlFile)}: ${error.message}`);
     }
+
+    // Progress update and GC hint every batch
+    if (processed % BATCH_SIZE === 0) {
+      console.log(`  Progress: ${processed}/${htmlFiles.length} HTML files injected`);
+      if (global.gc) global.gc();
+    }
   }
+
+  // Final progress update
+  console.log(`  Progress: ${processed}/${htmlFiles.length} HTML files injected`);
 }
 
 /**
@@ -295,54 +408,8 @@ async function generateOGImage({
         : description || "";
 
     // Create SVG using React-like JSX syntax
-    // Resolve system fonts cross-platform (macOS, Linux, Windows)
-    const candidates = [
-      {
-        name: "Sans",
-        weight: 400,
-        paths: [
-          "/Library/Fonts/Arial.ttf",
-          "/System/Library/Fonts/Supplemental/Arial.ttf",
-          "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-          "C:/Windows/Fonts/arial.ttf",
-        ],
-      },
-      {
-        name: "Sans",
-        weight: 700,
-        paths: [
-          "/Library/Fonts/Arial Bold.ttf",
-          "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
-          "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
-          "C:/Windows/Fonts/arialbd.ttf",
-        ],
-      },
-    ];
-
-    const resolvedFonts = candidates
-      .map((c) => {
-        const found = c.paths.find((p) => {
-          try {
-            return fs.existsSync(p);
-          } catch {
-            return false;
-          }
-        });
-        if (!found) return null;
-        return {
-          name: c.name,
-          data: fs.readFileSync(found),
-          weight: c.weight,
-          style: "normal",
-        };
-      })
-      .filter(Boolean);
-
-    if (!resolvedFonts.length) {
-      throw new Error(
-        "No suitable system fonts found for Satori (tried Arial/DejaVu/Windows Arial)."
-      );
-    }
+    // Use cached fonts (loaded once at plugin startup)
+    const resolvedFonts = loadFontsOnce();
 
     const svg = await satoriRenderer(
       {

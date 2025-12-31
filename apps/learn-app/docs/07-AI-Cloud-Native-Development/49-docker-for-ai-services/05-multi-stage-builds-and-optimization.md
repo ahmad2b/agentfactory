@@ -113,22 +113,20 @@ In this lesson, you'll containerize a Task API service---the same pattern you'll
 
 ---
 
-## The Application: Task API Service
+## Setup: Create the Task API Project
 
-We'll optimize a realistic FastAPI service that represents the pattern you'll use for AI agent services. This Task API manages tasks with full CRUD operations.
+Create a fresh project with UV (30 seconds):
 
-**File: requirements.txt**
-```
-fastapi==0.115.6
-uvicorn[standard]==0.32.1
-pydantic==2.10.3
+```bash
+uv init task-api-optimize && cd task-api-optimize
+uv add "fastapi[standard]"
 ```
 
-**File: main.py**
+Now add your application code. Open `main.py` and replace its contents with:
+
 ```python
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from typing import Optional
 from datetime import datetime
 
 app = FastAPI(title="Task API", version="1.0.0")
@@ -138,13 +136,13 @@ tasks: dict[str, dict] = {}
 
 class TaskCreate(BaseModel):
     title: str
-    description: Optional[str] = None
+    description: str | None = None
     priority: int = 1
 
 class Task(BaseModel):
     id: str
     title: str
-    description: Optional[str]
+    description: str | None
     priority: int
     created_at: datetime
     completed: bool = False
@@ -185,7 +183,19 @@ def complete_task(task_id: str):
     return tasks[task_id]
 ```
 
-Create these files in your working directory before proceeding.
+UV automatically created `pyproject.toml` with your dependencies. For Docker, we need a `requirements.txt`. Export it:
+
+```bash
+uv pip compile pyproject.toml -o requirements.txt
+```
+
+Verify your setup works:
+
+```bash
+uv run fastapi dev main.py
+```
+
+Visit `http://localhost:8000/health` to confirm the API responds. Press `Ctrl+C` to stop.
 
 ---
 
@@ -193,7 +203,8 @@ Create these files in your working directory before proceeding.
 
 Let's start with a Dockerfile that works but doesn't consider image size at all.
 
-**File: Dockerfile.naive**
+Create `Dockerfile.naive`:
+
 ```dockerfile
 FROM python:3.12
 
@@ -265,7 +276,8 @@ The `python:3.12` image is the full-featured version. Docker provides leaner alt
 
 Let's try slim first---it's the safest improvement with the least risk.
 
-**File: Dockerfile.v1-slim**
+Create `Dockerfile.v1-slim`:
+
 ```dockerfile
 FROM python:3.12-slim
 
@@ -321,7 +333,8 @@ Multi-stage builds use multiple `FROM` instructions in a single Dockerfile. Each
 
 We'll also introduce **UV**, a Rust-based Python package manager that's 10-100x faster than pip.
 
-**File: Dockerfile.v2-multistage**
+Create `Dockerfile.v2-multistage`:
+
 ```dockerfile
 # Stage 1: Build stage (install dependencies)
 FROM python:3.12-slim AS builder
@@ -417,7 +430,8 @@ task-api     multistage   d3c2b1a0f9e8   5 seconds ago    182MB
 
 Alpine Linux is a minimal distribution (~5MB base) designed for containers. Combined with multi-stage builds and UV, we can achieve maximum size reduction.
 
-**File: Dockerfile.v3-alpine**
+Create `Dockerfile.v3-alpine`:
+
 ```dockerfile
 # Stage 1: Build stage with Alpine
 FROM python:3.12-alpine AS builder
@@ -493,7 +507,8 @@ task-api     alpine   e4f5a6b7c8d9   4 seconds ago    118MB
 
 Docker builds images in layers. Each `RUN` instruction creates a new layer. By combining commands and cleaning up in the same layer, we can squeeze out a few more megabytes.
 
-**File: Dockerfile.v4-optimized**
+Create `Dockerfile.v4-optimized`:
+
 ```dockerfile
 # Stage 1: Build stage
 FROM python:3.12-alpine AS builder
