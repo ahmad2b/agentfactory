@@ -449,3 +449,5 @@
 {"timestamp":"2025-12-31T17:22:42Z","session_id":"cb709638-87eb-4d89-85d9-ffc8561897eb","prompt":"check part 7 all lessons as well"}
 {"timestamp":"2025-12-31T17:38:59Z","session_id":"cb709638-87eb-4d89-85d9-ffc8561897eb","prompt":"now do for part 6 all chapters"}
 {"timestamp":"2025-12-31T18:02:27Z","session_id":"cb709638-87eb-4d89-85d9-ffc8561897eb","prompt":"Were all other chaptes of part 6 perfect"}
+{"timestamp":"2025-12-31T18:30:28Z","session_id":"cb709638-87eb-4d89-85d9-ffc8561897eb","prompt":"read @apps/learn-app/docs/06-AI-Native-Software-Development/40-fastapi-for-agents/ it looks difficult and non sense the jwt and password lessons can we make them bettert to learn"}
+{"timestamp":"2026-01-01T01:29:50Z","session_id":"cb709638-87eb-4d89-85d9-ffc8561897eb","prompt":"Password hasihing is 1 lesson and Jwt is other we can remove rate limiting? "}
