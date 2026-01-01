@@ -28,7 +28,7 @@ skills:
     category: "Technical"
     bloom_level: "Understand"
     digcomp_area: "Problem-Solving"
-    measurable_at_this_level: "Student can identify filtering patterns in existing skills and explain token savings metrics (e.g., 934 tokens → 205 tokens = ~77% savings)"
+    measurable_at_this_level: "Student can identify filtering patterns in existing skills and explain token savings metrics (60-90% depending on content-type filtering)"
 
 learning_objectives:
   - objective: "Analyze existing MCP-wrapping skills and identify the intelligence layer that distinguishes them from raw MCP invocation"
@@ -51,8 +51,8 @@ cognitive_load:
   assessment: "9 concepts (MCP wrapper distinction, intelligence layer, persona conditions, result filtering, error recovery, batching, client configuration, fallback strategies, example pattern) within B2 limit (7-10) ✓"
 
 differentiation:
-  extension_for_advanced: "Analyze token counting methodology: why does fetching-library-docs achieve ~77% reduction? Calculate optimal filtering trade-offs for different library sizes and user expertise levels."
-  remedial_for_struggling: "Focus on single skill (fetching-library-docs). Map each component: MCP server → full response → filtering logic → filtered output. Trace one query end-to-end."
+  extension_for_advanced: "Analyze content-type filtering: why does fetching-library-docs achieve 60-90% reduction depending on content type? Calculate optimal filtering trade-offs for different library sizes and user expertise levels."
+  remedial_for_struggling: "Focus on single skill (fetching-library-docs). Map each component: MCP server → full response → content-type filtering → filtered output. Trace one query end-to-end."
 ---
 
 # Anatomy of MCP-Wrapping Skills
@@ -77,11 +77,11 @@ An MCP server is a tool that does one thing well. For example, Context7 (the MCP
 
 ### Skill: Intelligence Layer
 
-A skill that wraps MCP adds decision-making. Before calling the MCP server, it asks questions. After getting results, it filters them. If the MCP server fails, it recovers gracefully.
+A skill that wraps MCP adds decision-making. Before calling the MCP server, it asks questions. After getting results, it filters them based on *content type*. If the MCP server fails, it recovers gracefully.
 
-**Skill-filtered response**: 205 tokens of code examples + API signatures + key notes only.
+**Skill-filtered response**: Content-type specific output—code examples, API signatures, setup commands, or concepts—with 60-90% token reduction.
 
-**The value**: You get exactly what you asked for, in ~77% fewer tokens. The skill made decisions about what matters for your use case.
+**The value**: You specify what you need (examples, api-ref, setup, concepts, migration, troubleshooting, patterns) and get exactly that. The skill made decisions about what matters for your use case.
 
 This difference is profound. In production systems where context is precious and API calls are expensive, this intelligence layer transforms MCP from "interesting tool" to "critical production component."
 
@@ -98,6 +98,15 @@ Before understanding how the skill works, we need to know what it should do:
 **Intent**: Fetch API documentation for published libraries (React, Next.js, Prisma, etc.) with automatic token reduction via intelligent filtering.
 
 **What triggers this skill?**
+
+*Automatic triggers (context detection):*
+- Implementing code using library APIs (e.g., writing React component with hooks)
+- Debugging library-specific errors (e.g., `PrismaClientError` in console)
+- Installing or configuring frameworks (e.g., adding Tailwind to project)
+- Integrating libraries together (e.g., connecting Prisma with Next.js)
+- Upgrading between versions (e.g., Next.js 14 to 15 migration)
+
+*Explicit triggers (user requests):*
 - "Show me React hooks examples"
 - "How do I use Prisma queries?"
 - "What's the Next.js routing API?"
@@ -117,19 +126,20 @@ Before understanding how the skill works, we need to know what it should do:
 
 The skill's persona determines *when* and *how* it acts:
 
-**Persona**: "You are a library documentation specialist with deep knowledge of API patterns. Your role is to identify the specific feature the user needs, fetch that documentation via MCP, and return only the essentials—code examples, function signatures, and key constraints."
+**Persona**: "You are a library documentation specialist. Your role is to proactively fetch documentation when code is being written, errors are encountered, or frameworks are being configured—not wait for explicit requests. Fetch docs BEFORE writing code, not after guessing wrong."
 
-This persona tells us the skill makes two key decisions:
-1. **Identify the user's actual need** (sometimes users ask "How do I..." when they really need the API reference)
-2. **Filter ruthlessly** (not all documentation is equally relevant to what they asked)
+This persona tells us the skill makes three key decisions:
+1. **Detect when to invoke** (auto-trigger on implementing, debugging, installing, integrating, upgrading)
+2. **Identify what's needed** (library from context, topic from task)
+3. **Filter ruthlessly** (content-type based on task type)
 
-**Questions the skill asks itself** (implicitly, through its design):
-- What library is the user asking about?
-- What specific feature or API do they need?
-- Are they looking for code examples or conceptual explanation?
-- What's their experience level with this library?
+**Questions the skill asks itself** (through its decision logic):
+- What library is relevant? (check imports, errors, package.json, or ask user)
+- What topic is needed? (from error message, feature being implemented, or user specification)
+- What content type fits this task? (implementing → examples, debugging → troubleshooting, installing → setup)
+- Do I already have sufficient knowledge, or should I fetch fresh docs?
 
-These questions don't just guide the skill—they drive the filtering decision.
+These questions drive **proactive invocation**—the skill auto-triggers based on context, not just explicit requests.
 
 ### Step 3: Result Filtering—The Intelligence Pattern
 
@@ -137,43 +147,70 @@ Now let's see how the skill executes this intelligence. Look at the workflow:
 
 | Step | What Happens | Token Cost |
 |------|--------------|------------|
-| 1. Identify library + topic | User asks "Show me React useState examples" | 0 (intelligence, no MCP call yet) |
-| 2. Call Context7 MCP | Fetch full React documentation for useState | 934 tokens (subprocess, doesn't count toward Claude context) |
-| 3. Extract code blocks | Filter shell pipeline: extract only `\`\`\`js` and `\`\`\`jsx` blocks | 0 (shell processing) |
-| 4. Extract API signatures | Filter shell pipeline: extract `function useState(...)` patterns | 0 (shell processing) |
-| 5. Extract key notes | Filter shell pipeline: grep for "Use when", "Don't use", "limitations" | 0 (shell processing) |
-| 6. Return filtered output | Return code examples + signatures + notes to Claude | 205 tokens (stays in context) |
+| 1. Identify library + topic + content type | User asks "Show me React useState examples" → content-type: examples | 0 (intelligence, no MCP call yet) |
+| 2. Resolve library (if needed) | `--library react` → calls `resolve-library-id` MCP tool | 1 API call (can skip with `--library-id`) |
+| 3. Call Context7 MCP | Fetch React documentation via `query-docs` tool | 1 API call (subprocess, doesn't count toward Claude context) |
+| 4. Route by content type | `filter-by-type.sh` routes to appropriate extractor | 0 (shell processing) |
+| 5. Extract content | `extract-code-blocks.sh` extracts ```js/jsx blocks | 0 (shell processing) |
+| 6. Return filtered output | Return code examples to Claude | 60-70% token savings |
 
-**The breakthrough**: The MCP response (934 tokens) stays in subprocess memory. Shell scripts filter it. Only the filtered result (205 tokens) enters Claude's context. **~77% token savings achieved through intelligent filtering, not by calling MCP less often.**
+**The breakthrough**: The MCP response stays in subprocess memory. Content-type filtering extracts only what's needed. Only the filtered result enters Claude's context. **60-90% token savings achieved through content-type filtering.**
 
-This is why the skill's documentation shows: "Automatic ~77% token reduction via shell pipeline."
+**Available content types**: `examples` (code blocks), `api-ref` (signatures), `setup` (terminal commands), `concepts` (prose), `migration` (before/after), `troubleshooting` (workarounds), `patterns` (best practices), `all` (no filtering).
+
+**Call budget awareness**: Context7 has a 3-call limit per question. The skill uses max 2 calls (resolve + query when using `--library`), leaving 1 for your retry decisions. Using `--library-id` directly saves 1 call.
 
 ### Step 4: Error Recovery Patterns
 
-What happens when things go wrong?
+What happens when things go wrong? The skill distinguishes between **infrastructure failures** (safe to retry) and **API errors** (count against call budget).
 
 **Scenario 1: Library not found**
-- MCP returns "React documentation not found"
-- Skill tries library name variations: "react" → "React" → "reactjs"
-- If still not found: escalate to user with suggestions ("Did you mean React, React-Redux, or Reach-UI?")
+- `resolve-library-id` returns no matches
+- Skill returns `[LIBRARY_NOT_FOUND]` with call budget status: "1 of 3 calls used"
+- Suggests: try different spelling, common library IDs for reference
+- *Does NOT auto-retry* (would waste call budget)
 
-**Scenario 2: Topic too vague**
-- MCP returns too broad documentation
-- Skill prompts: "I found 50 matches for 'React hooks'. Did you mean useState, useEffect, useCallback, or custom hooks?"
-- On refinement: call MCP again with specific topic
+**Scenario 2: Library mismatch**
+- User asks for "anthropic" but it resolves to an unrelated library
+- Skill validates: does resolved ID contain the library name?
+- If mismatch: returns `[LIBRARY_MISMATCH]` warning with resolved ID and options
+- *Prevents wrong documentation from being used*
 
-**Scenario 3: Network timeout**
-- MCP call fails with timeout
-- Skill attempts retry with exponential backoff (wait 1 second, try again)
-- After 3 retries: inform user that Context7 is temporarily unavailable, suggest alternative (documentation.json cache or external docs link)
+**Scenario 3: Invalid library ID format**
+- User provides `--library-id react` (missing `/org/project` format)
+- Skill validates format *before* calling MCP
+- Returns `[INVALID_LIBRARY_ID]` with correct format examples
+- *Saves API calls by catching format errors early*
+
+**Scenario 4: Network timeout**
+- MCP call fails with timeout/connection error
+- Skill retries with exponential backoff (2s, 5s, 10s delays)
+- After 3 retries: returns `[FETCH_FAILED_AFTER_RETRIES]`
+- *Infrastructure retries don't count against Context7's call limit*
+
+**Scenario 5: Rate limit hit**
+- Context7 returns rate limit error
+- Skill returns `[RATE_LIMIT_ERROR]` with API key setup instructions
+- *Does NOT retry* (would be blocked anyway)
 
 ### Step 5: Configuration and Triggering
 
-The skill doesn't call MCP on every prompt. It uses a persona-based trigger condition:
+The skill doesn't call MCP on every prompt. It uses **context-based auto-detection**:
 
-**Activation rule**: "Trigger when user asks how to use a library OR needs API reference for published library. Do NOT trigger for source code exploration or comparisons."
+**Activation rules** (invoke automatically when):
+1. **Implementing**: About to write code using external library API
+2. **Debugging**: Error message contains library-specific terms
+3. **Installing**: Task involves adding new package or framework
+4. **Integrating**: Connecting two libraries/services together
+5. **Upgrading**: Version migration mentioned or detected
+6. **Uncertain**: About to use unfamiliar API or unsure of correct pattern
 
-This trigger condition is part of the intelligence layer—it prevents the skill from wasting resources on requests it's not designed for.
+**Do NOT invoke when**:
+- Already have sufficient knowledge from training
+- Task is about local/private code (use codebase search)
+- Comparing libraries (use web search)
+
+This context-detection approach is the key insight: production skills don't wait for users to ask—they **proactively fetch docs before writing code**, preventing incorrect implementations.
 
 ---
 
@@ -259,10 +296,11 @@ Now that you've seen two different MCP-wrapping skills, let's extract the common
 │  └─ Who am I? What decisions do I make?     │
 │                                              │
 │  TRIGGER CONDITIONS (When to Activate)      │
-│  └─ What prompts match my purpose?          │
+│  └─ Auto-detection: context signals         │
+│  └─ Explicit: user requests                 │
 │                                              │
 │  INTELLIGENCE QUESTIONS (How do I Decide?)  │
-│  └─ What should I ask myself?               │
+│  └─ What library? What topic? What type?    │
 │                                              │
 │  MCP CONFIGURATION (Which MCP Server?)      │
 │  └─ How do I connect to external tool?      │
@@ -280,13 +318,13 @@ Now that you've seen two different MCP-wrapping skills, let's extract the common
 ```
 
 **In `fetching-library-docs`:**
-- Persona: Library documentation specialist
-- Trigger: User asks "how do I use X library"
-- Questions: What library? What feature? Code or concepts?
-- MCP: Context7 for documentation
-- Filtering: Shell pipeline extracts code blocks + signatures
-- Error Recovery: Retry with variations, escalate with suggestions
-- Fallback: Documentation cache or external link
+- Persona: Library documentation specialist (proactive, fetches before code is written)
+- Trigger: Auto-detection (implementing, debugging, installing, integrating, upgrading) + explicit requests
+- Questions: What library? (from context) What topic? (from task) What content type? (from task type)
+- MCP: Context7 for documentation (2 tools: resolve-library-id, query-docs)
+- Filtering: Content-type router → specialized extractors (60-90% token savings)
+- Error Recovery: Library validation, format validation, exponential backoff for infrastructure
+- Call Budget: Max 2 calls per question, leaving 1 for retry
 
 **In `browsing-with-playwright`:**
 - Persona: Web automation orchestrator
@@ -309,7 +347,7 @@ Raw MCP is powerful but purposeless. A skill that wraps MCP adds purpose through
 
 ### Insight 2: Token Efficiency Is Intentional
 
-The ~77% token savings in `fetching-library-docs` didn't happen by accident. It happened because the skill's designer asked: "What does the user actually need?" Then designed filtering to return only that. This is intelligence—knowing what matters and eliminating what doesn't.
+The 60-90% token savings in `fetching-library-docs` didn't happen by accident. It happened because the skill's designer asked: "What does the user actually need?" Then designed content-type filtering to return only that. Using `--content-type examples` returns code blocks only; using `--content-type api-ref` returns signatures only. This is intelligence—knowing what matters and eliminating what doesn't.
 
 ### Insight 3: Error Recovery Makes Skills Production-Ready
 
@@ -411,17 +449,18 @@ Then, suggest one additional error scenario I should design recovery for.
 
 ```
 I'm designing a skill to wrap [your chosen MCP].
-I've heard that fetching-library-docs achieves ~77% token reduction
-and browsing-with-playwright has sophisticated error recovery.
+I've heard that fetching-library-docs achieves 60-90% token reduction
+(depending on content type) and browsing-with-playwright has sophisticated
+error recovery.
 
 Compare my design to these two reference skills:
 - Where is my design similar to their pattern?
 - Where is my design different (is that intentional or a gap)?
-- What could I learn from their approaches?
+- What could I learn from their approaches (especially call budget management)?
 ```
 
 **What you're learning**: Pattern recognition—understanding how your specific skill design fits within the broader MCP-wrapping template.
 
 ### Safety Note
 
-As you design your MCP-wrapping skill, remember: intelligent filtering requires understanding what matters in your domain. The best filtering decisions come from domain expertise (knowing your users and their actual needs) combined with iterative testing. Don't over-optimize for token reduction at the expense of functionality—the ~77% in `fetching-library-docs` works because code examples are the highest-value output; other filtering decisions would be wrong for different domains.
+As you design your MCP-wrapping skill, remember: intelligent filtering requires understanding what matters in your domain. The best filtering decisions come from domain expertise (knowing your users and their actual needs) combined with iterative testing. Don't over-optimize for token reduction at the expense of functionality—the 60-90% range in `fetching-library-docs` varies because different content types extract different amounts. Code examples (`--content-type examples`) get 60-70% savings; setup commands (`--content-type setup`) get 80-90%. Match your filtering to what users actually need.
