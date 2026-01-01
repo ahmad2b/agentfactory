@@ -62,7 +62,7 @@ differentiation:
 
 # Build Your MCP-Wrapping Skill
 
-In the previous lesson, you analyzed how skills layer intelligence on top of MCP servers. You saw how `fetching-library-docs` achieves 77% token reduction through careful filtering. You understood the persona, questions, and principles that guide intelligent decision-making.
+In the previous lesson, you analyzed how skills layer intelligence on top of MCP servers. You saw how `fetching-library-docs` achieves ~77% token reduction through careful filtering. You understood the persona, questions, and principles that guide intelligent decision-making.
 
 Now you're going to build one.
 

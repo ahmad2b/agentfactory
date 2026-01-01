@@ -28,7 +28,7 @@ skills:
     category: "Technical"
     bloom_level: "Understand"
     digcomp_area: "Problem-Solving"
-    measurable_at_this_level: "Student can identify filtering patterns in existing skills and explain token savings metrics (e.g., 934 tokens → 205 tokens = 77% savings)"
+    measurable_at_this_level: "Student can identify filtering patterns in existing skills and explain token savings metrics (e.g., 934 tokens → 205 tokens = ~77% savings)"
 
 learning_objectives:
   - objective: "Analyze existing MCP-wrapping skills and identify the intelligence layer that distinguishes them from raw MCP invocation"
@@ -51,7 +51,7 @@ cognitive_load:
   assessment: "9 concepts (MCP wrapper distinction, intelligence layer, persona conditions, result filtering, error recovery, batching, client configuration, fallback strategies, example pattern) within B2 limit (7-10) ✓"
 
 differentiation:
-  extension_for_advanced: "Analyze token counting methodology: why does fetching-library-docs achieve 77% reduction? Calculate optimal filtering trade-offs for different library sizes and user expertise levels."
+  extension_for_advanced: "Analyze token counting methodology: why does fetching-library-docs achieve ~77% reduction? Calculate optimal filtering trade-offs for different library sizes and user expertise levels."
   remedial_for_struggling: "Focus on single skill (fetching-library-docs). Map each component: MCP server → full response → filtering logic → filtered output. Trace one query end-to-end."
 ---
 
@@ -81,7 +81,7 @@ A skill that wraps MCP adds decision-making. Before calling the MCP server, it a
 
 **Skill-filtered response**: 205 tokens of code examples + API signatures + key notes only.
 
-**The value**: You get exactly what you asked for, in 77% fewer tokens. The skill made decisions about what matters for your use case.
+**The value**: You get exactly what you asked for, in ~77% fewer tokens. The skill made decisions about what matters for your use case.
 
 This difference is profound. In production systems where context is precious and API calls are expensive, this intelligence layer transforms MCP from "interesting tool" to "critical production component."
 
@@ -144,9 +144,9 @@ Now let's see how the skill executes this intelligence. Look at the workflow:
 | 5. Extract key notes | Filter shell pipeline: grep for "Use when", "Don't use", "limitations" | 0 (shell processing) |
 | 6. Return filtered output | Return code examples + signatures + notes to Claude | 205 tokens (stays in context) |
 
-**The breakthrough**: The MCP response (934 tokens) stays in subprocess memory. Shell scripts filter it. Only the filtered result (205 tokens) enters Claude's context. **77% token savings achieved through intelligent filtering, not by calling MCP less often.**
+**The breakthrough**: The MCP response (934 tokens) stays in subprocess memory. Shell scripts filter it. Only the filtered result (205 tokens) enters Claude's context. **~77% token savings achieved through intelligent filtering, not by calling MCP less often.**
 
-This is why the skill's documentation shows: "Automatic 77% token reduction via shell pipeline."
+This is why the skill's documentation shows: "Automatic ~77% token reduction via shell pipeline."
 
 ### Step 4: Error Recovery Patterns
 
@@ -309,7 +309,7 @@ Raw MCP is powerful but purposeless. A skill that wraps MCP adds purpose through
 
 ### Insight 2: Token Efficiency Is Intentional
 
-The 77% token savings in `fetching-library-docs` didn't happen by accident. It happened because the skill's designer asked: "What does the user actually need?" Then designed filtering to return only that. This is intelligence—knowing what matters and eliminating what doesn't.
+The ~77% token savings in `fetching-library-docs` didn't happen by accident. It happened because the skill's designer asked: "What does the user actually need?" Then designed filtering to return only that. This is intelligence—knowing what matters and eliminating what doesn't.
 
 ### Insight 3: Error Recovery Makes Skills Production-Ready
 
@@ -411,7 +411,7 @@ Then, suggest one additional error scenario I should design recovery for.
 
 ```
 I'm designing a skill to wrap [your chosen MCP].
-I've heard that fetching-library-docs achieves 77% token reduction
+I've heard that fetching-library-docs achieves ~77% token reduction
 and browsing-with-playwright has sophisticated error recovery.
 
 Compare my design to these two reference skills:
@@ -424,4 +424,4 @@ Compare my design to these two reference skills:
 
 ### Safety Note
 
-As you design your MCP-wrapping skill, remember: intelligent filtering requires understanding what matters in your domain. The best filtering decisions come from domain expertise (knowing your users and their actual needs) combined with iterative testing. Don't over-optimize for token reduction at the expense of functionality—the 77% in `fetching-library-docs` works because code examples are the highest-value output; other filtering decisions would be wrong for different domains.
+As you design your MCP-wrapping skill, remember: intelligent filtering requires understanding what matters in your domain. The best filtering decisions come from domain expertise (knowing your users and their actual needs) combined with iterative testing. Don't over-optimize for token reduction at the expense of functionality—the ~77% in `fetching-library-docs` works because code examples are the highest-value output; other filtering decisions would be wrong for different domains.
