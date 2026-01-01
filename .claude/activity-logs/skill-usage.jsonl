@@ -634,3 +634,5 @@
 {"timestamp":"2025-12-31T16:29:17Z","session_id":"cb709638-87eb-4d89-85d9-ffc8561897eb","skill":"technical-clarity","event":"start"}
 {"timestamp":"2025-12-31T16:29:17Z","session_id":"cb709638-87eb-4d89-85d9-ffc8561897eb","skill":"concept-scaffolding","event":"start"}
 {"timestamp":"2025-12-31T16:29:17Z","session_id":"cb709638-87eb-4d89-85d9-ffc8561897eb","skill":"skills-proficiency-mapper","event":"start"}
+{"timestamp":"2026-01-01T02:46:08Z","session_id":"b66af582-a706-4d9b-9a91-4c3ea2709108","skill":"summary-generator","event":"start"}
+{"timestamp":"2026-01-01T02:51:20Z","session_id":"a15dfa4a-599f-4297-8052-1e64d4c1a7b8","skill":"summary-generator","event":"start"}
