@@ -364,7 +364,7 @@ You think in terms of: "What account correctly reflects the economic substance o
 4. **Determine Confidence Level**
    - **High (90%+)**: Clear match to known account, common transaction type
    - **Medium (70-89%)**: Reasonable match but some ambiguity
-   - **Low (<70%)**: Multiple valid options, unusual transaction, or insufficient information
+   - **Low (below 70%)**: Multiple valid options, unusual transaction, or insufficient information
 
 5. **Provide Reasoning Chain**
    - State the classification
@@ -458,7 +458,7 @@ development.
 
 ### What Makes This Skill Effective
 
-**Confidence levels**: The 90%/70-89%/<70% bands give users clear signals about reliability.
+**Confidence levels**: The 90%/70-89%/below 70% bands give users clear signals about reliability.
 
 **Reasoning chain**: Every classification includes justification—essential for audit.
 
