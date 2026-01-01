@@ -1,8 +1,8 @@
 ### Core Concept
-MCP servers are dumb tools; MCP-wrapping skills add intelligence. The skill decides WHEN to call MCP, filters results (77% token savings), handles errors, and provides fallbacks. Intelligence layer transforms MCP from interesting to production-critical.
+MCP servers are dumb tools; MCP-wrapping skills add intelligence. The skill decides WHEN to call MCP, filters results (~77% token savings), handles errors, and provides fallbacks. Intelligence layer transforms MCP from interesting to production-critical.
 
 ### Key Mental Models
-- **Raw MCP vs wrapped**: 934 tokens raw → 205 tokens filtered = 77% savings through intelligent extraction
+- **Raw MCP vs wrapped**: 934 tokens raw → 205 tokens filtered = ~77% savings through intelligent extraction
 - **Intelligence layer components**: Persona, trigger conditions, questions, MCP config, result filtering, error recovery, fallback
 - **Filtering before processing**: Reduce call volume AND result volume; don't analyze full page when you need one form
 - **Token efficiency is intentional**: Ask "What does user actually need?" then filter to that
