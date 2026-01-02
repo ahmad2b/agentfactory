@@ -1,499 +1,723 @@
 ---
 sidebar_position: 1
 title: "SDK Setup & First Agent"
-description: "Install OpenAI Agents SDK, configure your environment, and build your first working agent in Python."
-keywords: ["OpenAI Agents SDK", "agent setup", "Python environment", "API key configuration", "first agent", "LiteLLM"]
+description: "Install OpenAI Agents SDK and build your first autonomous agent"
+keywords: [openai-agents-sdk, agent, installation, alternative-providers, runner]
 chapter: 34
 lesson: 1
-duration_minutes: 55
+duration_minutes: 45
 
 # HIDDEN SKILLS METADATA
 skills:
-  - name: "SDK Installation and Environment Configuration"
-    proficiency_level: "B1"
-    category: "Technical"
-    bloom_level: "Apply"
-    digcomp_area: "Technical Problem-Solving"
-    measurable_at_this_level: "Student can install SDK and configure API keys without errors"
-
-  - name: "Agent Class Instantiation"
+  - name: "SDK Installation"
     proficiency_level: "B1"
     category: "Technical"
     bloom_level: "Apply"
     digcomp_area: "Software Development"
-    measurable_at_this_level: "Student can create Agent with name and instructions and run synchronously"
+    measurable_at_this_level: "Student can successfully install the OpenAI Agents SDK, configure environment variables, and verify the installation works"
 
-  - name: "Understanding Runner and Result Objects"
+  - name: "Agent Configuration"
+    proficiency_level: "B1"
+    category: "Technical"
+    bloom_level: "Apply"
+    digcomp_area: "Software Development"
+    measurable_at_this_level: "Student can create an Agent instance with name, instructions, and model parameters, then execute it using Runner.run_sync()"
+
+  - name: "Alternative Model Providers"
+    proficiency_level: "B1"
+    category: "Technical"
+    bloom_level: "Apply"
+    digcomp_area: "Software Development"
+    measurable_at_this_level: "Student can configure OpenAIChatCompletionsModel to use alternative model providers (Gemini, Ollama) with the OpenAI Agents SDK"
+
+  - name: "Response Interpretation"
     proficiency_level: "B1"
     category: "Technical"
     bloom_level: "Understand"
     digcomp_area: "Software Development"
-    measurable_at_this_level: "Student can use Runner.run_sync() and extract final_output from results"
+    measurable_at_this_level: "Student can explain what result.final_output contains and describe the agent execution loop"
 
-  - name: "Alternative Model Providers with LiteLLM"
+  - name: "API Key Security"
     proficiency_level: "B1"
     category: "Technical"
     bloom_level: "Apply"
-    digcomp_area: "Resource Management"
-    measurable_at_this_level: "Student can configure agents with non-OpenAI models using LitellmModel"
+    digcomp_area: "Safety"
+    measurable_at_this_level: "Student stores API keys in environment variables, never hardcodes them, and understands why this matters"
+
+  - name: "Tracing Configuration"
+    proficiency_level: "B1"
+    category: "Technical"
+    bloom_level: "Apply"
+    digcomp_area: "Software Development"
+    measurable_at_this_level: "Student can enable or disable tracing for different model providers using set_tracing_disabled()"
 
 learning_objectives:
-  - objective: "Install OpenAI Agents SDK and verify installation with hello world"
+  - objective: "Install and configure OpenAI Agents SDK with environment variables"
     proficiency_level: "B1"
     bloom_level: "Apply"
-    assessment_method: "Successful agent creation and response printing"
+    assessment_method: "Successful SDK installation and API key configuration verified by running hello world agent"
 
-  - objective: "Configure environment variables and API keys securely"
+  - objective: "Run a basic agent using Runner.run_sync()"
     proficiency_level: "B1"
     bloom_level: "Apply"
-    assessment_method: "Agent can authenticate and respond without credential errors"
+    assessment_method: "Agent produces valid response to a simple prompt"
 
-  - objective: "Understand the Agent → Runner → Result execution pattern"
-    proficiency_level: "B1"
-    bloom_level: "Understand"
-    assessment_method: "Student can explain the three-component pattern and use each correctly"
-
-  - objective: "Use LiteLLM to run agents on free model alternatives"
+  - objective: "Configure OpenAIChatCompletionsModel for alternative model providers"
     proficiency_level: "B1"
     bloom_level: "Apply"
-    assessment_method: "Agent responds correctly using Claude or Gemini instead of GPT"
+    assessment_method: "Agent successfully runs with Gemini or another non-OpenAI model"
 
 cognitive_load:
   new_concepts: 6
-  assessment: "6 new concepts (SDK installation, API key management, Agent class, Runner.run_sync, result handling, LiteLLM integration) within B1 limit of 10 concepts - PASS"
+  assessment: "6 concepts (SDK installation, Agent class, Runner, final_output, OpenAIChatCompletionsModel, tracing) at B1 level - within cognitive limits for intermediate learners"
 
 differentiation:
-  extension_for_advanced: "Explore runner configurations (max_turns, timeout), compare response quality across different LiteLLM models, investigate streaming with run_streamed"
-  remedial_for_struggling: "Start with hello world agent first; skip LiteLLM until basic pattern is comfortable. Use synchronous examples only."
-
-generated_by: content-implementer
-source_spec: specs/047-ch34-openai-agents-sdk
-created: 2025-12-26
-last_modified: 2025-12-26
-version: 1.0.0
+  extension_for_advanced: "Experiment with multiple alternative providers in sequence, compare response quality and latency"
+  remedial_for_struggling: "Focus on OpenAI-only setup first, add alternative provider integration after confirming basic agent works"
 ---
 
 # SDK Setup & First Agent
 
-Imagine you're building a customer support system that handles inquiries 24/7. You don't want to hire staff sitting idle between requests. Instead, you deploy a Digital FTE—a fully autonomous agent that reasons about customer problems, researches solutions, and responds in your company's voice. This is where you build that system.
+What if you could build an AI employee that works 24/7, never calls in sick, and costs a fraction of a human salary? That's not science fiction---it's what you'll build in this chapter using OpenAI's Agents SDK.
 
-In Chapter 33, you learned what agents are: systems that loop through reasoning, action, and observation to solve problems. Now you'll build one. The OpenAI Agents SDK is production-grade software for exactly this—minimal abstractions, maximum control. It's what powers custom agents at scale.
+In Chapter 33, you learned the conceptual foundation: what agents are, how they reason, and why they're transforming software development. Now you transition from understanding to building. This lesson is the foundation for everything that follows---your first step in the **BUILD** phase of creating Digital FTEs (Digital Full-Time Equivalents).
 
-This lesson walks you through setup, your first working agent, and how to use it with free model alternatives. By the end, you'll have a functioning Digital FTE prototype that runs locally and can be deployed anywhere.
+The OpenAI Agents SDK was released in March 2025 as a lightweight, production-ready framework for building agentic applications. Unlike wrapper libraries, it's the same infrastructure OpenAI uses internally. By the end of this lesson, you'll have a working agent responding to prompts---the "Hello World" moment that unlocks everything else in this chapter.
 
-## Installation and Setup
+## Installing the SDK
 
-Before you can build agents, you need the SDK installed and your environment configured.
+The OpenAI Agents SDK requires Python 3.10 or later. Let's verify your environment and install the package.
 
-### Step 1: Install the SDK
-
-Open your terminal and install the openai-agents package:
+First, check your Python version:
 
 ```bash
-pip install openai-agents
-```
-
-This installs the core SDK with essential dependencies. Verify the installation worked:
-
-```bash
-pip show openai-agents
+python --version
 ```
 
 **Output:**
 ```
-Name: openai-agents
-Version: X.Y.Z  # Version varies; check PyPI for latest
-Location: /path/to/your/python/site-packages
+Python 3.12.4
 ```
 
-### Step 2: Configure Your API Key
+If your version is below 3.10, install a newer Python version before proceeding.
 
-The SDK needs authentication to call OpenAI models. Set your API key as an environment variable:
+### Setting Up Your Project with uv
+
+We'll use **uv**, the modern Python package manager that's 10-100x faster than pip and handles virtual environments automatically.
+
+First, install uv if you haven't already:
 
 ```bash
-export OPENAI_API_KEY=sk-proj-your-actual-key-here
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Windows (PowerShell)
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-On Windows, use:
+Now create your project directory and initialize it:
+
+```bash
+mkdir support-desk-agent
+cd support-desk-agent
+uv init --python 3.12
+```
+
+**Output:**
+```
+Initialized project `support-desk-agent`
+```
+
+Add the OpenAI Agents SDK and dependencies:
+
+```bash
+uv add openai-agents python-dotenv
+```
+
+**Output:**
+```
+Resolved 12 packages in 0.8s
+Prepared 12 packages in 1.2s
+Installed 12 packages in 45ms
+ + openai-agents==0.1.2
+ + openai==1.68.2
+ + python-dotenv==1.0.1
+ + pydantic==2.10.0
+ ...
+```
+
+Your project structure now looks like this:
+
+```
+support-desk-agent/
+├── .venv/              # Virtual environment (auto-created)
+├── .python-version     # Python version lock
+├── pyproject.toml      # Project configuration
+└── main.py             # Your code goes here
+```
+
+The SDK comes with everything you need to build agents with OpenAI models. Later in this lesson, you'll learn how to use alternative providers like Google Gemini.
+
+## Configuring Your API Key
+
+The SDK needs an API key to authenticate with OpenAI. **Never hardcode API keys in your code**---always use environment variables.
+
+This section covers all major platforms so you can set up your environment regardless of your operating system.
+
+### Getting Your API Key
+
+1. Visit [platform.openai.com](https://platform.openai.com)
+2. Sign in or create an account
+3. Navigate to **API Keys** in the left sidebar
+4. Click **Create new secret key**
+5. Copy the key immediately (you won't see it again)
+
+:::warning Never Commit API Keys
+API keys are sensitive credentials. If someone obtains your key:
+- They can use your account and you pay for their usage
+- They could run up thousands of dollars in charges
+- OpenAI may revoke your key, breaking your application
+
+Always use environment variables and never commit `.env` files to git.
+:::
+
+### Windows (PowerShell)
+
+For **temporary** configuration (current session only):
+
+```powershell
+$env:OPENAI_API_KEY = "sk-your-key-here"
+```
+
+For **permanent** configuration (persists across sessions):
+
+```powershell
+[System.Environment]::SetEnvironmentVariable("OPENAI_API_KEY", "sk-your-key-here", "User")
+```
+
+Verify it's set:
+
+```powershell
+echo $env:OPENAI_API_KEY
+```
+
+**Output:**
+```
+sk-your-key-here
+```
+
+:::note Restart Required for Permanent Variables
+After setting a permanent environment variable, you need to restart PowerShell (or your terminal) for the change to take effect in new sessions.
+:::
+
+### Windows (Command Prompt)
+
+For **temporary** configuration (current session only):
 
 ```cmd
-set OPENAI_API_KEY=sk-proj-your-actual-key-here
+set OPENAI_API_KEY=sk-your-key-here
 ```
 
-Or in Python, before running agents:
+For **permanent** configuration (persists across sessions):
 
-```python
-import os
-os.environ['OPENAI_API_KEY'] = 'sk-proj-your-actual-key-here'
-```
-
-Never hardcode API keys in your source code. Environment variables keep them secure.
-
-### Verify Configuration
-
-Create a simple verification script to confirm your environment is ready:
-
-```python
-import os
-from agents import Agent, Runner
-
-# Check if API key exists
-api_key = os.getenv('OPENAI_API_KEY')
-if not api_key:
-    print("ERROR: OPENAI_API_KEY not set")
-else:
-    print(f"API Key found: {api_key[:20]}...")  # Show only first 20 chars
+```cmd
+setx OPENAI_API_KEY "sk-your-key-here"
 ```
 
 **Output:**
 ```
-API Key found: sk-proj-abc123def456ghi...
+SUCCESS: Specified value was saved.
 ```
 
-## Your First Agent
+Verify in a **new** Command Prompt window:
 
-Now let's build a working agent. This is the hello world of agent development.
-
-### The Three-Part Pattern
-
-Every agent follows this pattern:
-
-1. **Agent** — Define what the agent is and how it should behave
-2. **Runner** — Execute the agent with a user prompt
-3. **Result** — Extract the agent's response
-
-### Hello World Agent
-
-Create a file called `first_agent.py`:
-
-```python
-from agents import Agent, Runner
-
-# Step 1: Define the Agent
-agent = Agent(
-    name="Greeter",
-    instructions="You are a friendly assistant. Greet the user warmly and ask what you can help with."
-)
-
-# Step 2: Run the Agent
-result = Runner.run_sync(agent, "Hello!")
-
-# Step 3: Extract and print the result
-print(result.final_output)
+```cmd
+echo %OPENAI_API_KEY%
 ```
 
-**Expected Output:**
-```
-Hello! It's wonderful to meet you! I'm here to help. What can I assist you with today?
-```
+### macOS/Linux (Bash)
 
-The exact wording varies because the LLM generates responses, but the structure is consistent:
-- The agent greets warmly (matching instructions)
-- The agent asks to help (matching instructions)
-- The agent responds to your input (responding to "Hello!")
-
-Run this script:
+For **temporary** configuration (current session only):
 
 ```bash
-python first_agent.py
+export OPENAI_API_KEY="sk-your-key-here"
 ```
 
-If you see an agent response, your SDK is working.
+For **permanent** configuration, add to your shell profile:
 
-### Understanding the Pattern
-
-Let's break down what happened:
-
-**Agent Creation**:
-```python
-agent = Agent(
-    name="Greeter",                    # Human-readable identifier
-    instructions="You are a friendly..." # Controls agent behavior
-)
-```
-
-The instructions field is critical. It tells the agent how to think. Better instructions produce better agents. Vague instructions create unreliable behavior.
-
-**Execution**:
-```python
-result = Runner.run_sync(agent, "Hello!")
-```
-
-`Runner.run_sync()` means "run this agent synchronously" (wait for completion before continuing). This is the simplest execution pattern. The second argument is your input—the user's message to the agent.
-
-**Result Extraction**:
-```python
-print(result.final_output)
-```
-
-`result.final_output` contains the agent's final response as a string. The result object has other properties (number of turns, tokens used, reasoning steps), but `final_output` is what you need for basic usage.
-
-## Customizing Your Agent
-
-Let's build a slightly more sophisticated example. Create a file called `custom_agent.py`:
-
-```python
-from agents import Agent, Runner
-
-# Technical Support Agent
-support_agent = Agent(
-    name="TechSupport",
-    instructions="""You are a helpful technical support agent for a software company.
-Your job is to:
-1. Listen to the customer's problem
-2. Ask clarifying questions if needed
-3. Provide clear, step-by-step solutions
-4. Confirm the issue is resolved
-
-Always be patient and professional. If you don't know something,
-suggest the customer contact the support team."""
-)
-
-# Run with a customer problem
-customer_issue = "I keep getting a 503 error when trying to upload files"
-result = Runner.run_sync(support_agent, customer_issue)
-
-print(result.final_output)
-```
-
-**Expected Output:**
-```
-I understand you're experiencing a 503 error during file uploads - that's frustrating!
-A 503 error typically means the server is temporarily unavailable. Let me help you
-troubleshoot this.
-
-First, could you tell me:
-1. What file size are you trying to upload?
-2. Is this happening with all file types or specific ones?
-3. When did this start - was it working before?
-
-In the meantime, here are some quick things to try:
-- Wait 5 minutes and try again (the server might recover)
-- Clear your browser cache and try a different browser
-- Try uploading from a different network (to rule out ISP issues)
-
-Let me know the answers to those questions and we can dig deeper!
-```
-
-Notice how the agent:
-- Acknowledges the problem
-- Explains what 503 means
-- Asks clarifying questions
-- Provides immediate troubleshooting steps
-
-The instructions directly shaped this behavior. Change the instructions, and the agent behaves differently.
-
-## Using LiteLLM for Free Models
-
-If you don't have an OpenAI API key or want to use free alternatives, LiteLLM lets you run agents on Claude, Gemini, and other models.
-
-### Install LiteLLM Support
+**For Bash users** (`~/.bashrc`):
 
 ```bash
-pip install "openai-agents[litellm]"
+echo 'export OPENAI_API_KEY="sk-your-key-here"' >> ~/.bashrc
+source ~/.bashrc
 ```
 
-This adds LiteLLM as an optional dependency.
+**For Zsh users** (`~/.zshrc`):
 
-### Using Anthropic's Claude
+```bash
+echo 'export OPENAI_API_KEY="sk-your-key-here"' >> ~/.zshrc
+source ~/.zshrc
+```
 
-First, get a Claude API key from https://console.anthropic.com. Then create `agent_with_claude.py`:
+Verify it's set:
+
+```bash
+echo $OPENAI_API_KEY
+```
+
+**Output:**
+```
+sk-your-key-here
+```
+
+### Using a .env File (Recommended for Projects)
+
+For project-based configuration, use a `.env` file with `python-dotenv`:
+
+```bash
+pip install python-dotenv
+```
+
+Create a `.env` file in your project root:
+
+```bash
+echo "OPENAI_API_KEY=sk-your-key-here" > .env
+```
+
+**Add `.env` to your `.gitignore` immediately:**
+
+```bash
+echo ".env" >> .gitignore
+```
+
+In your Python code, load the environment variables:
+
+```python
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Access the API key
+api_key = os.getenv("OPENAI_API_KEY")
+print(f"API key loaded: {api_key[:10]}...")  # Only show first 10 chars
+```
+
+**Output:**
+```
+API key loaded: sk-your-ke...
+```
+
+**Why environment variables?** If you commit code with hardcoded API keys:
+1. Anyone who sees your repository gains access to your account
+2. You pay for their usage---potentially thousands of dollars
+3. OpenAI may revoke your key, breaking your application
+
+Environment variables keep secrets separate from code. Your code runs on any machine with the key configured, without modification.
+
+## Your First Agent: Hello World
+
+Let's create your first agent. This is the simplest possible example---an agent with a name, instructions, and a basic conversation.
+
+Create a file called `hello_agent.py`:
 
 ```python
 from agents import Agent, Runner
-from agents.extensions.models.litellm_model import LitellmModel
 
-# Create agent using Claude instead of GPT
+# Create an agent with a name and instructions
 agent = Agent(
-    name="ClaudeAgent",
-    instructions="You are a thoughtful assistant powered by Claude. Provide helpful, accurate responses.",
-    model=LitellmModel(
-        model="anthropic/claude-3-5-sonnet-20241022",
-        api_key="your-anthropic-api-key"
-    )
+    name="Assistant",
+    instructions="You are a helpful assistant who gives brief, friendly responses."
 )
 
-# Run it the same way
-result = Runner.run_sync(agent, "Explain the concept of a loop in programming")
+# Run the agent synchronously (blocking until complete)
+result = Runner.run_sync(agent, "Hello! What can you help me with today?")
+
+# Print the agent's response
 print(result.final_output)
 ```
 
-**Expected Output:**
-```
-A loop is a fundamental programming concept that lets you repeat a block of code
-multiple times without writing it out repeatedly.
+Run the script:
 
-Think of it like an assembly line:
-- You have a set of instructions (the loop body)
-- You apply them to each item in a sequence
-- Once you finish one item, you move to the next
-
-Python has two main types of loops:
-
-1. **while loops** - repeat until a condition becomes false:
-   ```
-   count = 0
-   while count < 5:
-       print(count)
-       count += 1
-   ```
-
-2. **for loops** - iterate through items in a sequence:
-   ```
-   for number in range(5):
-       print(number)
-   ```
-
-Loops prevent repetitive code and handle large datasets efficiently.
+```bash
+python hello_agent.py
 ```
 
-### Important Note: Disable Tracing for Non-OpenAI Models
+**Output:**
+```
+Hello! I can help you with a wide range of tasks like answering questions, writing text, explaining concepts, brainstorming ideas, or working through problems. What would you like to explore?
+```
 
-When using LiteLLM with non-OpenAI models, disable tracing to avoid errors:
+Congratulations---you've built your first AI agent. Let's understand what each part does.
+
+## Understanding the Response
+
+### The Agent Class
 
 ```python
+agent = Agent(
+    name="Assistant",
+    instructions="You are a helpful assistant who gives brief, friendly responses."
+)
+```
+
+The `Agent` class is the core primitive. It represents an AI entity with:
+
+| Parameter | Purpose |
+|-----------|---------|
+| `name` | Identifies the agent in logs and multi-agent systems |
+| `instructions` | The system prompt that shapes behavior |
+| `model` | The LLM to use (defaults to `gpt-4o`) |
+| `tools` | Functions the agent can call (we'll add these in Lesson 2) |
+| `handoffs` | Other agents this agent can transfer control to (Lesson 4) |
+
+The `instructions` parameter is crucial. It's your specification for how the agent should behave. Clear, specific instructions produce better results than vague ones---this is where your specification skills from Part 4 pay off.
+
+### The Runner Class
+
+```python
+result = Runner.run_sync(agent, "Hello! What can you help me with today?")
+```
+
+The `Runner` executes the agent loop. It:
+1. Sends your message to the LLM
+2. Receives the response
+3. If the LLM requests a tool call, executes it and sends results back
+4. Repeats until the LLM produces a final response
+
+`Runner.run_sync()` is the synchronous version---it blocks until the agent finishes. For web applications or handling multiple users, you'll use `Runner.run()` (async) instead.
+
+### The Result Object
+
+```python
+print(result.final_output)
+```
+
+The `result` object contains everything about the agent's execution:
+
+| Attribute | Contents |
+|-----------|----------|
+| `final_output` | The agent's final text response |
+| `last_agent` | Which agent produced the response (important for multi-agent systems) |
+| `input` | Your original input message |
+| `new_items` | All messages generated during execution |
+
+For a simple conversation, `final_output` is usually what you need. As your agents become more complex with tools and handoffs, you'll use other attributes to understand what happened.
+
+## Running with Different Models
+
+By default, the SDK uses `gpt-4o`. You can specify a different OpenAI model:
+
+```python
+from agents import Agent, Runner
+
+agent = Agent(
+    name="Fast Assistant",
+    instructions="You are a quick helper.",
+    model="gpt-4o-mini"  # Faster, cheaper model
+)
+
+result = Runner.run_sync(agent, "What's 2 + 2?")
+print(result.final_output)
+```
+
+**Output:**
+```
+2 + 2 equals 4.
+```
+
+The `gpt-4o-mini` model is faster and cheaper than `gpt-4o`, making it ideal for simple tasks. For complex reasoning, stick with `gpt-4o` or newer models.
+
+## Using Alternative Model Providers
+
+What if you want to use Google's Gemini, a local Ollama model, or another provider? The SDK supports this through `OpenAIChatCompletionsModel`, which connects to any provider with an OpenAI-compatible API.
+
+### Using Google Gemini
+
+Google provides an OpenAI-compatible endpoint for Gemini models. Here's how to use it:
+
+First, set your Gemini API key:
+
+**macOS/Linux:**
+```bash
+export GEMINI_API_KEY="your-gemini-key-here"
+```
+
+**Windows (PowerShell):**
+```powershell
+$env:GEMINI_API_KEY = "your-gemini-key-here"
+```
+
+Then create an agent with Gemini:
+
+```python
+import os
+import openai
 from agents import Agent, Runner, set_tracing_disabled
-from agents.extensions.models.litellm_model import LitellmModel
+from agents.models.openai_chatcompletions import OpenAIChatCompletionsModel
 
-# Disable OpenAI tracing for non-OpenAI models
+# Disable OpenAI tracing when using non-OpenAI models
 set_tracing_disabled(True)
 
-agent = Agent(
-    name="ClaudeAgent",
-    instructions="You are a helpful assistant.",
-    model=LitellmModel(model="anthropic/claude-3-5-sonnet-20241022")
+# Create an OpenAI client pointing to Google's endpoint
+gemini_client = openai.OpenAI(
+    api_key=os.environ["GEMINI_API_KEY"],
+    base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
 )
 
-result = Runner.run_sync(agent, "Hello!")
+# Create a model using Gemini
+gemini_model = OpenAIChatCompletionsModel(
+    model="gemini-2.0-flash",
+    openai_client=gemini_client
+)
+
+agent = Agent(
+    name="Gemini Assistant",
+    instructions="You are a helpful assistant. Keep responses concise.",
+    model=gemini_model
+)
+
+result = Runner.run_sync(agent, "Explain what an AI agent is in one sentence.")
 print(result.final_output)
 ```
 
-The `set_tracing_disabled(True)` call prevents the SDK from trying to log to OpenAI's tracing system, which only works with OpenAI models.
-
-## Common Setup Issues
-
-**Issue: "ModuleNotFoundError: No module named 'agents'"**
-
-Your Python environment doesn't have the SDK installed. Install it:
-```bash
-pip install openai-agents
+**Output:**
+```
+An AI agent is an autonomous system that perceives its environment and takes actions to achieve specific goals.
 ```
 
-**Issue: "Authentication failed" or "Invalid API key"**
+### Using Local Models with Ollama
 
-Your API key isn't set correctly. Verify:
+For privacy-sensitive applications or offline development, you can run models locally using Ollama:
+
+First, ensure Ollama is running with a model:
+
 ```bash
-echo $OPENAI_API_KEY  # On macOS/Linux
-echo %OPENAI_API_KEY%  # On Windows
+ollama run llama3.2
 ```
 
-If empty, set it again:
-```bash
-export OPENAI_API_KEY=sk-proj-your-key
+Then configure your agent:
+
+```python
+import openai
+from agents import Agent, Runner, set_tracing_disabled
+from agents.models.openai_chatcompletions import OpenAIChatCompletionsModel
+
+# Disable tracing for non-OpenAI models
+set_tracing_disabled(True)
+
+# Create a client pointing to Ollama's local endpoint
+ollama_client = openai.OpenAI(
+    api_key="ollama",  # Ollama doesn't require a real key
+    base_url="http://localhost:11434/v1"
+)
+
+# Create a model using local Llama
+local_model = OpenAIChatCompletionsModel(
+    model="llama3.2",
+    openai_client=ollama_client
+)
+
+agent = Agent(
+    name="Local Assistant",
+    instructions="You are a helpful assistant running locally.",
+    model=local_model
+)
+
+result = Runner.run_sync(agent, "What's the capital of France?")
+print(result.final_output)
 ```
 
-**Issue: "LitellmModel not found"**
-
-You haven't installed the litellm extra:
-```bash
-pip install "openai-agents[litellm]"
+**Output:**
+```
+The capital of France is Paris.
 ```
 
-**Issue: Agent runs but takes 30+ seconds**
+### Why Disable Tracing for Non-OpenAI Models?
 
-This is normal for API calls. The agent is:
-1. Sending your prompt to OpenAI/Claude's servers
-2. Waiting for model inference
-3. Receiving and parsing the response
+You may have noticed `set_tracing_disabled(True)` in the examples. Here's why:
 
-Network latency adds up. Later lessons cover streaming and optimization.
+```python
+from agents import set_tracing_disabled
 
-## Next Steps
+# Disable tracing when not using OpenAI
+set_tracing_disabled(True)
+```
 
-You now have:
-- A working SDK installation
-- Your first agent prototype
-- Knowledge of how to configure API keys
-- Ability to use alternative models via LiteLLM
+The SDK includes built-in tracing that sends execution data to OpenAI's dashboard. This is valuable for debugging OpenAI-powered agents, but:
 
-Chapter 34 lessons explore:
-- **Lesson 2**: Building agents with tools (calling APIs, databases)
-- **Lesson 3**: Multi-agent systems and handoffs
-- **Lesson 4**: Production patterns (guardrails, error handling, structured outputs)
+1. **It doesn't work with non-OpenAI models** (no dashboard access)
+2. **It adds latency** for no benefit
+3. **It may fail** if the tracing endpoint isn't accessible
 
-For now, practice the three-part pattern (Agent → Runner → Result) until it feels natural. This pattern underlies everything else in agent development.
+When you return to using OpenAI models, you can re-enable tracing:
+
+```python
+set_tracing_disabled(False)
+```
+
+Tracing provides valuable observability---you'll learn more about it in Lesson 8 when we cover debugging production agents.
+
+## Common Issues and Solutions
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| `AuthenticationError` | Invalid or missing API key | Verify your API key is set correctly in environment variables |
+| `ModuleNotFoundError: agents` | SDK not installed | Run `uv add openai-agents` in your project |
+| `RateLimitError` | Too many requests | Add delays between calls or upgrade API tier |
+| `ModelNotFoundError` | Invalid model name | Check spelling and ensure model exists |
+| `TimeoutError` | Model taking too long | Use a faster model or increase timeout |
+| `Connection refused` (Ollama) | Ollama not running | Start Ollama with `ollama serve` |
+
+## Progressive Project: Support Desk Assistant
+
+Throughout this chapter, you'll build a complete **Support Desk Assistant**---a production-ready Digital FTE that handles customer inquiries. Each lesson adds new capabilities to the same project, so by the end, you'll have a sellable AI agent.
+
+**What you'll build across all lessons:**
+
+| Lesson | Capability Added | Your Agent Can... |
+|--------|------------------|-------------------|
+| L01 | Basic agent | Greet customers and answer simple questions |
+| L02 | Function tools | Create tickets, look up order status |
+| L03 | Sub-agents | Delegate to research and writing specialists |
+| L04 | Handoffs | Route to billing, technical, or sales teams |
+| L05 | Guardrails | Block inappropriate requests, detect PII |
+| L06 | Sessions | Remember conversation history across turns |
+| L07 | Tracing | Monitor performance and debug issues |
+| L08 | MCP | Look up documentation via external tools |
+| L09 | RAG | Answer questions from your knowledge base |
+| L10 | Production | Complete system ready for deployment |
+
+### Build the Foundation
+
+Now it's your turn. Using the patterns you learned above, create a **Support Desk Agent** for a fictional company called "TechCorp."
+
+**Step 1: Create the project file**
+
+Create a new file called `support_desk.py` in your project folder.
+
+**Step 2: Import the SDK**
+
+At the top of your file, import `Agent` and `Runner` from the `agents` package---just like you saw in the [Creating Your First Agent](#creating-your-first-agent) section.
+
+**Step 3: Create your agent**
+
+Use the `Agent()` constructor with these requirements:
+- **name**: Give it a professional name like `"SupportDesk"`
+- **instructions**: Write instructions that tell the agent to:
+  - Greet customers warmly
+  - Answer questions about TechCorp's products (make up 2-3 products)
+  - Be helpful and empathetic
+  - Ask if there's anything else it can help with
+
+Look back at the examples earlier in this lesson to see how instructions are formatted.
+
+**Step 4: Run the agent**
+
+Use `Runner.run_sync()` to send a test message to your agent and print the response. Refer to the [Running Your Agent](#running-your-agent) section if you need a reminder.
+
+**Step 5: Test with multiple queries**
+
+Create a list of test customer queries and run each one through your agent:
+- A product question
+- A troubleshooting request
+- A general inquiry
+
+### Success Criteria
+
+Your agent should:
+- ✅ Greet customers professionally
+- ✅ Know about your fictional company's products
+- ✅ Provide helpful responses to different query types
+- ✅ Maintain a consistent, friendly tone
+
+### Stuck? Check Your Work
+
+Compare your structure to the Hello World example from earlier:
+
+```python
+# Your code should follow this pattern:
+from agents import Agent, Runner
+
+agent = Agent(
+    name="...",           # Your agent's name
+    instructions="..."    # Your custom instructions
+)
+
+result = Runner.run_sync(agent, "Your test message")
+print(result.final_output)
+```
+
+Run your agent with:
+
+```bash
+uv run python support_desk.py
+```
+
+### What's Next
+
+Your agent currently can only talk---it can't actually DO anything. In Lesson 2, you'll add **function tools** that let it:
+- Create support tickets in your system
+- Look up real order status
+- Check account information
+
+Save your `support_desk.py` file---you'll extend it in every lesson!
 
 ## Try With AI
 
-### Prompt 1: Personalized Agent
+Now that you have a working agent, use your AI companion (Claude Code, ChatGPT, or similar) to explore further.
+
+### Prompt 1: Experiment with Instructions
 
 ```
-Create an agent that acts as a personal assistant for a specific profession
-(pick one: doctor, architect, teacher, lawyer, or journalist).
-Write the agent definition with appropriate instructions, run it with
-Runner.run_sync(), and capture the response.
+I have an OpenAI Agents SDK agent working. Help me experiment with
+different instruction styles. I want to create:
+1. A pirate-themed assistant that responds in pirate speak
+2. A Socratic tutor that answers questions with questions
+3. A code reviewer that's constructively critical
 
-What should this agent's instructions emphasize to do the job well?
+For each, give me the Agent() configuration and a test prompt to verify
+the personality works.
 ```
 
-**What you're learning:** How instructions shape agent behavior and specialization
+**What you're learning:** Instructions shape agent behavior. Well-crafted instructions produce consistent, predictable responses. You're practicing the specification skill---defining what you want clearly enough that the agent executes it correctly.
 
-### Prompt 2: Instructions Experiment
-
-```
-Create the same agent twice: once with vague instructions
-("Be helpful") and once with detailed instructions
-(specific persona, job responsibilities, communication style).
-Run both with the same user prompt and compare the responses.
-
-What differences do you notice? Which is better?
-```
-
-**What you're learning:** The relationship between specification quality and agent reliability
-
-### Prompt 3: Model Switching
+### Prompt 2: Compare Model Providers
 
 ```
-Set up an agent using OpenAI (gpt-4o) and another using
-LiteLLM with Claude or Gemini. Give them the same instructions
-and ask the same question. Compare:
-- Response quality
-- Speed
-- Cost differences (OpenAI vs free tier)
+I want to compare OpenAI and Gemini models using the Agents SDK with
+OpenAIChatCompletionsModel. Help me write a script that:
+1. Sends the same prompt to both providers
+2. Times each response
+3. Prints a comparison of response quality and speed
 
-Which would you use for your Digital FTE and why?
+The prompt should be something that shows differences in reasoning style,
+like "Explain the tradeoffs between microservices and monoliths for a
+startup with 3 engineers."
 ```
 
-**What you're learning:** How to evaluate models for specific agent use cases
+**What you're learning:** Different models have different strengths. By comparing them directly, you'll develop intuition for when to use which provider---a practical skill for building cost-effective agents.
 
----
-
-## Reflect on Your Skill
-
-You built an `openai-agents` skill in Lesson 0. Test and improve it based on what you learned.
-
-### Test Your Skill
+### Prompt 3: Connect to Your Domain
 
 ```
-Using my openai-agents skill, create a simple agent with Agent() and run it with Runner.run_sync().
-Does my skill correctly explain the three-part pattern (Agent → Runner → Result)?
+I want to build a Digital FTE for [your domain: sales, legal, healthcare,
+finance, education, etc.]. Starting with the basics I learned today
+(Agent, Runner, instructions), help me:
+1. Design the agent's personality and instructions for my domain
+2. Write a simple proof-of-concept that demonstrates the agent understands
+   domain-specific queries
+3. Identify what tools I'll need to add (we'll build these in Lesson 2)
+
+My domain is [describe your expertise or industry].
 ```
 
-### Identify Gaps
+**What you're learning:** Translating technical SDK knowledge into domain-specific applications. This is the core of building Digital FTEs---encoding your expertise into an agent's instructions and behavior.
 
-Ask yourself:
-- Did my skill include the basic Agent creation pattern (name and instructions)?
-- Did it explain how to use Runner.run_sync() to execute agents?
-- Did it cover how to extract final_output from results?
+### Safety Note
 
-### Improve Your Skill
-
-If you found gaps:
-
-```
-My openai-agents skill is missing [basic agent creation patterns, Runner execution, or result handling].
-Update it to include the Agent → Runner → Result pattern with clear examples of how to:
-1. Define an Agent with name and instructions
-2. Execute with Runner.run_sync()
-3. Extract final_output from the result object
-```
+As you experiment with agents, remember:
+- **API keys are sensitive.** Never share code that contains keys. Always use environment variables.
+- **API calls cost money.** Each agent execution uses tokens. Monitor your usage during development.
+- **Agents can produce incorrect outputs.** Always review agent responses before acting on them in production scenarios.

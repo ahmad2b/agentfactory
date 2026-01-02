@@ -1,705 +1,1125 @@
 ---
 sidebar_position: 8
-title: "MCP Integration for External Tool Ecosystems"
-description: "Connect agents to remote MCP servers using MCPServerStreamableHttp. Enable agents to access external documentation, APIs, and tool ecosystems. Pattern: TaskManager agent retrieving library documentation from Context7 MCP."
-keywords: ["MCP", "Model Context Protocol", "MCPServerStreamableHttp", "tool ecosystems", "remote servers", "Context7", "documentation lookup", "async context managers", "mcp_servers", "resolve-library-id", "get-library-docs"]
+title: "MCP Integration: External Tools and Services"
+description: "Connect OpenAI agents to external services through Model Context Protocol (MCP) for dynamic tool access"
+keywords: [openai-agents-sdk, mcp, model-context-protocol, mcp-server, external-tools, context7, documentation-lookup]
 chapter: 34
 lesson: 8
-duration_minutes: 90
+duration_minutes: 50
 
 # HIDDEN SKILLS METADATA
 skills:
-  - name: "MCPServerStreamableHttp Connection Management"
-    proficiency_level: "B2"
+  - name: "MCP Server Configuration"
+    proficiency_level: "C1"
     category: "Technical"
     bloom_level: "Apply"
-    digcomp_area: "System Integration"
-    measurable_at_this_level: "Student can connect agents to remote MCP servers using async context managers and configure headers/authentication"
+    digcomp_area: "Software Development"
+    measurable_at_this_level: "Student can configure MCPServerStreamableHttp with params dictionary and connect it to an agent using mcp_servers parameter inside async context"
 
-  - name: "MCP Tool Ecosystem Integration"
+  - name: "MCP Tool Discovery"
     proficiency_level: "B2"
-    category: "Technical"
-    bloom_level: "Apply"
-    digcomp_area: "System Design"
-    measurable_at_this_level: "Student can leverage MCP tools (resolve-library-id, get-library-docs) within agent workflows"
-
-  - name: "External Tool Composition for Agents"
-    proficiency_level: "B2"
-    category: "Technical"
-    bloom_level: "Apply"
-    digcomp_area: "Problem-Solving"
-    measurable_at_this_level: "Student can configure mcp_servers=[server] parameter and agents automatically receive MCP tools"
-
-  - name: "Context7 Documentation Lookup"
-    proficiency_level: "B1"
     category: "Technical"
     bloom_level: "Understand"
-    digcomp_area: "Information Retrieval"
-    measurable_at_this_level: "Student can use Context7 MCP to fetch up-to-date version-specific documentation for libraries"
+    digcomp_area: "Software Development"
+    measurable_at_this_level: "Student can explain how agents discover and use MCP tools dynamically without predefined function definitions"
 
-  - name: "Async Context Manager Patterns for Resources"
+  - name: "Async Context Manager Pattern"
+    proficiency_level: "C1"
+    category: "Technical"
+    bloom_level: "Apply"
+    digcomp_area: "Software Development"
+    measurable_at_this_level: "Student can implement proper MCP server lifecycle management using async context managers with agent creation inside the context"
+
+  - name: "Documentation Lookup Integration"
     proficiency_level: "B2"
     category: "Technical"
     bloom_level: "Apply"
     digcomp_area: "Software Development"
-    measurable_at_this_level: "Student can use `async with` patterns to manage MCP server lifecycle safely"
+    measurable_at_this_level: "Student can create agents that use MCP to fetch library documentation on demand for accurate, up-to-date responses"
 
-  - name: "Agent-Driven Tool Discovery and Composition"
-    proficiency_level: "B2"
-    category: "Applied"
-    bloom_level: "Apply"
-    digcomp_area: "System Design"
-    measurable_at_this_level: "Student can design agents that discover and use tools from multiple MCP servers"
+  - name: "MCP Integration Skill Design"
+    proficiency_level: "C1"
+    category: "Technical"
+    bloom_level: "Create"
+    digcomp_area: "Software Development"
+    measurable_at_this_level: "Student can design and create a reusable MCP integration skill that encapsulates server configuration, lifecycle management, and usage patterns"
+
+  - name: "Multi-Server Orchestration"
+    proficiency_level: "C1"
+    category: "Technical"
+    bloom_level: "Analyze"
+    digcomp_area: "Software Development"
+    measurable_at_this_level: "Student can configure agents with multiple MCP servers and analyze which server provides tools for different use cases"
 
 learning_objectives:
-  - objective: "Connect agents to remote MCP servers using MCPServerStreamableHttp with authentication"
-    proficiency_level: "B2"
+  - objective: "Configure MCPServerStreamableHttp using params dictionary inside async context"
+    proficiency_level: "C1"
     bloom_level: "Apply"
-    assessment_method: "Implement MCPServerStreamableHttp connection with proper async context manager"
+    assessment_method: "Agent successfully connects to MCP server and lists available tools"
 
-  - objective: "Enable agents to automatically access MCP tools via mcp_servers parameter"
-    proficiency_level: "B2"
+  - objective: "Implement async context manager pattern with agent creation inside the context"
+    proficiency_level: "C1"
     bloom_level: "Apply"
-    assessment_method: "Create agent that lists and uses tools from connected MCP server"
+    assessment_method: "MCP servers start cleanly and shut down without resource leaks"
 
-  - objective: "Integrate Context7 for dynamic documentation lookup in agent workflows"
+  - objective: "Create agents that use MCP tools to fetch real-time documentation"
     proficiency_level: "B2"
     bloom_level: "Apply"
-    assessment_method: "Build agent that uses resolve-library-id and get-library-docs tools"
+    assessment_method: "Agent retrieves accurate library documentation via MCP and uses it in responses"
 
-  - objective: "Design practical workflows that leverage external tool ecosystems"
-    proficiency_level: "B2"
-    bloom_level: "Apply"
-    assessment_method: "Implement TaskManager agent that retrieves library documentation on demand"
+  - objective: "Design a reusable mcp-agent-integration skill for future projects"
+    proficiency_level: "C1"
+    bloom_level: "Create"
+    assessment_method: "Skill captures server configuration, lifecycle patterns, and usage examples"
 
 cognitive_load:
   new_concepts: 6
-  assessment: "6 core concepts (MCPServerStreamableHttp, async context managers, mcp_servers parameter, MCP tool discovery, Context7 integration, multi-server composition) appropriate for B2 proficiency with 90-minute duration. Builds on async/await knowledge from Part 5 and agent fundamentals from Lessons 1-7."
+  assessment: "6 concepts (MCP protocol, MCPServerStreamableHttp, mcp_servers parameter, async context managers, tool discovery, skill creation) at C1 level - challenging but builds on previous SDK and MCP knowledge"
 
 differentiation:
-  extension_for_advanced: "Connect multiple MCP servers simultaneously; implement custom tool filtering; cache tool metadata; design multi-language documentation lookup system; integrate with private MCP servers requiring OAuth"
-  remedial_for_struggling: "Start with simple MCPServerStreamableHttp connection without authentication; practice tool listing first before calling tools; defer Context7 integration until basic MCP patterns comfortable; use synchronous mock servers for testing"
-
-generated_by: content-implementer
-source_spec: specs/047-ch34-openai-agents-sdk
-created: 2025-12-26
-last_modified: 2025-12-26
-version: 1.0.0
+  extension_for_advanced: "Implement a custom MCP server that exposes TaskManager operations, then connect an agent to both documentation and TaskManager servers"
+  remedial_for_struggling: "Focus on single MCP server connection first, add multi-server patterns and skill creation after confirming basic integration works"
 ---
 
-# MCP Integration for External Tool Ecosystems
+# MCP Integration: External Tools and Services
 
-**Scenario**: Your TaskManager agent helps developers plan projects. When a developer asks "What parameters does the FastAPI `Depends` function accept?", your agent needs to fetch current documentation instantly. It's not enough to reason from training data—the API might have changed since the model was trained.
+Your Customer Support Digital FTE needs to answer technical questions about your product's API. Yesterday, a user asked about rate limits. The agent gave outdated information from its training data---your API changed three months ago. Without access to current documentation, the agent can't give accurate answers.
 
-This is where the Model Context Protocol (MCP) becomes critical. MCP servers provide standardized access to external tools and data sources. Your agent can connect to these servers, discover available tools, and use them seamlessly within its workflow.
+This is the reality of LLM-based agents: their knowledge has a cutoff date. But your Digital FTE needs to provide accurate, up-to-date information to be useful. The solution isn't retraining---it's connecting your agent to live data sources through the Model Context Protocol (MCP).
 
-The OpenAI Agents SDK enables this through `MCPServerStreamableHttp`—a mechanism for connecting agents to remote MCP tool ecosystems. When configured, agents automatically gain access to all tools exported by the MCP server.
+In previous lessons, you built agents with function tools that you defined in code. MCP inverts this: instead of defining tools yourself, your agent discovers tools from external servers at runtime. A documentation server exposes `get-library-docs`. A database server exposes `query-customers`. Your agent gains capabilities without code changes.
 
-## Understanding MCP in the Agent Context
+By the end of this lesson, you'll connect your TaskManager Digital FTE to an MCP server for live documentation lookup, understand the lifecycle management patterns for production deployments, and create a reusable skill that captures these integration patterns for future projects.
 
-**The Core Problem**: Agents need to interact with external systems—documentation, databases, APIs—but each integration was custom code. MCP solves this by defining a universal protocol.
+## Why MCP Changes the Agent Paradigm
 
-**Model Context Protocol** is a standard that defines:
+Consider what happens without MCP versus with it:
 
-1. **Tools**: Functions the MCP server exposes (e.g., "search documentation", "look up API reference")
-2. **Prompts**: Templates for common queries the server handles
-3. **Resources**: Data the server can access (e.g., knowledge bases, file systems)
+| Scenario | Without MCP | With MCP |
+|----------|-------------|----------|
+| New API docs needed | Deploy new agent version | Agent fetches from docs server |
+| Add database access | Write tool function, redeploy | Connect to database MCP server |
+| Third-party integration | Build custom adapter | Use existing MCP server |
+| Multiple data sources | Code each integration | Configure server list |
 
-An agent connected to an MCP server automatically gets access to its tools. The server handles the complexity of authentication, data retrieval, and formatting. The agent just calls the tools like any other function.
+MCP transforms agents from static tool users to dynamic capability consumers. The agent doesn't need to know how to fetch documentation---it just needs to know that a documentation server exists.
 
-### Why This Matters for Production Agents
+### The MCP Architecture
 
-**Without MCP**: You hardcode integrations
-```python
-# Every API integration requires custom code
-result = requests.get("https://api.github.com/repos/openai/...")
-parsed = parse_github_response(result)
+MCP follows a client-server model:
+
+```
+┌─────────────────┐     HTTP/SSE      ┌─────────────────┐
+│   Your Agent    │◄─────────────────►│   MCP Server    │
+│  (MCP Client)   │                   │  (Tool Host)    │
+└─────────────────┘                   └─────────────────┘
+        │                                     │
+        │  1. Connect & discover tools        │
+        │  2. Agent decides to use tool       │
+        │  3. Tool execution request          │
+        │  4. Tool returns result             │
+        │  5. Agent incorporates result       │
+        ▼                                     ▼
+   LLM reasoning                        External systems
+   with tool results                    (APIs, databases)
 ```
 
-**With MCP**: Integration becomes configuration
+Your agent connects to one or more MCP servers. Each server exposes tools the agent can discover and use. The agent doesn't need to know the implementation details---just the tool names, descriptions, and parameters.
+
+## MCP Server Types
+
+The OpenAI Agents SDK supports three types of MCP servers:
+
+| Server Type | Transport | Use Case |
+|-------------|-----------|----------|
+| `MCPServerStdio` | Standard I/O | Local subprocess servers |
+| `MCPServerStreamableHttp` | HTTP (Streamable) | Remote HTTP servers |
+| `MCPServerSse` | Server-Sent Events | Legacy SSE servers |
+
+All three require the `async with` context manager pattern for proper lifecycle management.
+
+## Configuring MCPServerStreamableHttp
+
+For remote MCP servers, use `MCPServerStreamableHttp` with the `params` dictionary:
+
 ```python
-async with MCPServerStreamableHttp(url="https://mcp.github.com/") as server:
-    agent = Agent(mcp_servers=[server])
-    # Agent now has access to all GitHub tools automatically
+from agents.mcp import MCPServerStreamableHttp
+
+async with MCPServerStreamableHttp(
+    name="docs-server",
+    params={
+        "url": "https://mcp.example.com/mcp",
+        "timeout": 30,
+    },
+) as server:
+    # Server is connected and ready to use
+    print(f"Connected to {server.name}")
 ```
 
-This shifts from custom integration code to agent instruction. The agent decides *when* to use which tool based on the request.
+**Output:**
 
-## MCPServerStreamableHttp: Connecting to Remote Servers
+```
+Connected to docs-server
+```
 
-`MCPServerStreamableHttp` establishes a connection to a remote MCP server over HTTP with streaming support. It's designed for servers you don't control—external APIs, third-party services, or remote documentation systems.
+### Server Configuration Parameters
 
-### Basic Connection Pattern
+The `params` dictionary accepts these options:
 
-The fundamental pattern uses Python's async context manager to manage the server connection:
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `url` | str | Required. MCP server endpoint URL |
+| `headers` | dict | Optional. Custom HTTP headers for authentication |
+| `timeout` | int | Optional. Connection timeout in seconds |
+
+Additional constructor options:
+
+| Option | Type | Description | Default |
+|--------|------|-------------|---------|
+| `name` | str | Server identifier (appears in logs) | Required |
+| `cache_tools_list` | bool | Cache tool definitions to avoid repeated fetches | False |
+| `max_retry_attempts` | int | Number of retry attempts on failure | 0 |
+
+### Authenticated Server Configuration
+
+For servers requiring authentication:
 
 ```python
+import os
+from agents.mcp import MCPServerStreamableHttp
+
+token = os.environ.get("MCP_API_KEY")
+
+async with MCPServerStreamableHttp(
+    name="private-docs",
+    params={
+        "url": "https://internal.company.com/mcp",
+        "headers": {"Authorization": f"Bearer {token}"},
+        "timeout": 10,
+    },
+    cache_tools_list=True,
+    max_retry_attempts=3,
+) as server:
+    # Authenticated server ready
+    pass
+```
+
+## Connecting Agents to MCP Servers
+
+The agent must be created **inside** the `async with` block, and the server is passed to `mcp_servers`:
+
+```python
+import asyncio
 from agents import Agent, Runner
 from agents.mcp import MCPServerStreamableHttp
-import asyncio
-import os
 
 async def main():
-    # Connect to remote MCP server
     async with MCPServerStreamableHttp(
-        name="GitHub MCP",
-        url="https://mcp.example.com/mcp",
-        headers={"Authorization": f"Bearer {os.getenv('MCP_API_KEY')}"}
+        name="context7",
+        params={
+            "url": "https://mcp.context7.com/mcp",
+        },
     ) as server:
-        # Create agent with MCP tools
+        # Create agent INSIDE the async with block
         agent = Agent(
-            name="Documentation Assistant",
-            instructions="Help developers find information.",
-            mcp_servers=[server]
+            name="DocHelper",
+            instructions="""You help developers with library documentation.
+            Use the available MCP tools to look up accurate, current documentation.
+            Always cite the source when providing documentation.""",
+            mcp_servers=[server],
         )
 
-        # Agent can now call tools from this MCP server
-        result = await Runner.run(agent, "Find the documentation for FastAPI")
+        result = await Runner.run(
+            agent,
+            "What tools do you have available?"
+        )
         print(result.final_output)
 
-# Run async function
 asyncio.run(main())
 ```
 
 **Output:**
+
 ```
-Found documentation for FastAPI:
-FastAPI is a modern, fast web framework for building APIs with Python...
-[Additional context retrieved from MCP server]
+I have access to tools from the context7 MCP server, including:
+
+1. **resolve-library-id** - Find the library ID for a given library name
+2. **get-library-docs** - Fetch documentation for a specific library
+
+These tools let me look up current documentation for libraries like React, FastAPI, Pydantic, and many others. What library would you like documentation for?
+```
+
+The agent automatically discovered the tools exposed by the MCP server. You didn't need to define `@function_tool` decorators---MCP handles tool exposure.
+
+## The Async Context Manager Pattern
+
+MCP servers must be properly started and stopped. The `async with` pattern ensures clean lifecycle management:
+
+```python
+import asyncio
+from agents import Agent, Runner
+from agents.mcp import MCPServerStreamableHttp
+
+async def run_with_mcp():
+    # Server connects when entering context
+    async with MCPServerStreamableHttp(
+        name="docs",
+        params={
+            "url": "https://mcp.example.com/mcp",
+        },
+    ) as server:
+        # Agent created inside context
+        agent = Agent(
+            name="Helper",
+            instructions="Use MCP tools to help users.",
+            mcp_servers=[server],
+        )
+
+        # Run multiple queries while server is connected
+        result1 = await Runner.run(agent, "Look up React hooks")
+        print(f"Query 1: {result1.final_output[:100]}...")
+
+        result2 = await Runner.run(agent, "Now look up useState specifically")
+        print(f"Query 2: {result2.final_output[:100]}...")
+
+    # Server disconnects cleanly when exiting context
+    print("MCP server disconnected")
+
+asyncio.run(run_with_mcp())
+```
+
+**Output:**
+
+```
+Query 1: React Hooks are functions that let you use state and other React features in function componen...
+Query 2: The useState hook is a function that lets you add state to functional components. It returns...
+MCP server disconnected
+```
+
+### Why Context Managers Matter
+
+Without proper lifecycle management:
+
+| Problem | Symptom | Solution |
+|---------|---------|----------|
+| Server not started | "No tools available" error | Use `async with` |
+| Connection leak | Memory/connection exhaustion | Context manager cleanup |
+| Timeout on exit | Hanging process | Proper shutdown sequence |
+
+The context manager pattern handles:
+1. **Startup**: Establishes connection, discovers available tools
+2. **Execution**: Maintains connection for tool calls
+3. **Shutdown**: Closes connection, releases resources
+
+## Using MCPServerStdio for Local Servers
+
+For local MCP servers running as subprocesses, use `MCPServerStdio`:
+
+```python
+import asyncio
+from agents import Agent, Runner
+from agents.mcp import MCPServerStdio
+
+async def run_local_mcp():
+    async with MCPServerStdio(
+        name="local-filesystem",
+        params={
+            "command": "npx",
+            "args": ["-y", "@modelcontextprotocol/server-filesystem", "/path/to/allowed/dir"],
+        },
+    ) as server:
+        agent = Agent(
+            name="FileHelper",
+            instructions="Help users manage files using the filesystem tools.",
+            mcp_servers=[server],
+        )
+
+        result = await Runner.run(agent, "List files in the current directory")
+        print(result.final_output)
+
+asyncio.run(run_local_mcp())
+```
+
+The `params` dictionary for `MCPServerStdio` takes:
+- `command`: The executable to run
+- `args`: List of command-line arguments
+
+## Practical Example: Documentation Lookup Agent
+
+Let's build an agent that uses MCP to fetch library documentation. This pattern is useful for:
+- Developer support Digital FTEs
+- Technical writing assistants
+- Code review agents that need API reference
+
+```python
+import asyncio
+from agents import Agent, Runner
+from agents.mcp import MCPServerStreamableHttp
+
+async def documentation_agent():
+    """Create an agent that fetches live library documentation."""
+
+    async with MCPServerStreamableHttp(
+        name="context7-docs",
+        params={
+            "url": "https://mcp.context7.com/mcp",
+            "timeout": 60,  # Longer timeout for doc fetching
+        },
+        cache_tools_list=True,
+    ) as server:
+        agent = Agent(
+            name="DocExpert",
+            instructions="""You are a documentation expert who helps developers
+            understand library APIs.
+
+            When asked about a library:
+            1. Use resolve-library-id to find the correct library identifier
+            2. Use get-library-docs to fetch the documentation
+            3. Summarize the relevant parts for the user's question
+            4. Include code examples when available
+            5. Note the documentation source for verification
+
+            Be precise and cite specific functions, classes, or methods.""",
+            mcp_servers=[server],
+        )
+
+        # Query 1: General library overview
+        result = await Runner.run(
+            agent,
+            "How do I create a basic FastAPI application with a health check endpoint?"
+        )
+        print("=== FastAPI Documentation ===")
+        print(result.final_output)
+        print()
+
+        # Query 2: Specific API question
+        result = await Runner.run(
+            agent,
+            "What parameters does the FastAPI route decorator accept?"
+        )
+        print("=== Route Decorator Details ===")
+        print(result.final_output)
+
+asyncio.run(documentation_agent())
+```
+
+**Output:**
+
+```
+=== FastAPI Documentation ===
+Based on the FastAPI documentation, here's how to create a basic application with a health check:
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy"}
+
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
+```
+
+To run this application:
+```bash
+uvicorn main:app --reload
+```
+
+The health check endpoint at `/health` returns a JSON response indicating the service status. This is a common pattern for Kubernetes liveness probes and load balancer health checks.
+
+Source: FastAPI official documentation via Context7
+
+=== Route Decorator Details ===
+The FastAPI route decorator (`@app.get()`, `@app.post()`, etc.) accepts these parameters:
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `path` | str | URL path for the endpoint |
+| `response_model` | Type | Pydantic model for response validation |
+| `status_code` | int | HTTP status code (default 200) |
+| `tags` | List[str] | OpenAPI tags for grouping |
+| `summary` | str | Short endpoint description |
+| `description` | str | Detailed endpoint description |
+| `deprecated` | bool | Mark endpoint as deprecated |
+| `response_class` | Type | Custom response class |
+
+Example with parameters:
+```python
+@app.get(
+    "/items/{item_id}",
+    response_model=Item,
+    status_code=200,
+    tags=["items"],
+    summary="Get an item by ID"
+)
+async def read_item(item_id: int):
+    return {"item_id": item_id}
+```
+
+Source: FastAPI official documentation via Context7
+```
+
+The agent fetched live documentation rather than relying on potentially outdated training data.
+
+## TaskManager with Documentation Lookup
+
+Let's enhance our TaskManager Digital FTE with MCP integration. When users ask about task management patterns, the agent can fetch relevant documentation:
+
+```python
+import asyncio
+from agents import Agent, Runner, function_tool, RunContextWrapper
+from agents.mcp import MCPServerStreamableHttp
+from pydantic import BaseModel
+from typing import List
+
+class TaskContext(BaseModel):
+    """Context for task management."""
+    tasks: List[dict] = []
+    user_id: str = "default"
+
+@function_tool
+def add_task(ctx: RunContextWrapper[TaskContext], description: str, priority: str = "medium") -> str:
+    """Add a new task to the list.
+
+    Args:
+        description: Task description
+        priority: Task priority (low, medium, high)
+
+    Returns:
+        Confirmation message
+    """
+    task = {
+        "id": len(ctx.context.tasks) + 1,
+        "description": description,
+        "priority": priority,
+        "done": False
+    }
+    ctx.context.tasks.append(task)
+    return f"Added task #{task['id']}: {description} (priority: {priority})"
+
+@function_tool
+def list_tasks(ctx: RunContextWrapper[TaskContext]) -> str:
+    """List all tasks with their status.
+
+    Returns:
+        Formatted task list
+    """
+    if not ctx.context.tasks:
+        return "No tasks yet."
+
+    lines = []
+    for task in ctx.context.tasks:
+        status = "done" if task["done"] else "pending"
+        lines.append(f"#{task['id']} [{task['priority']}] {task['description']} - {status}")
+    return "\n".join(lines)
+
+@function_tool
+def complete_task(ctx: RunContextWrapper[TaskContext], task_id: int) -> str:
+    """Mark a task as complete.
+
+    Args:
+        task_id: ID of the task to complete
+
+    Returns:
+        Confirmation message
+    """
+    for task in ctx.context.tasks:
+        if task["id"] == task_id:
+            task["done"] = True
+            return f"Completed task #{task_id}: {task['description']}"
+    return f"Task #{task_id} not found"
+
+async def enhanced_task_manager():
+    """TaskManager with documentation lookup capabilities."""
+
+    context = TaskContext(user_id="alice")
+
+    async with MCPServerStreamableHttp(
+        name="docs",
+        params={
+            "url": "https://mcp.context7.com/mcp",
+        },
+    ) as server:
+        agent = Agent[TaskContext](
+            name="TaskManager",
+            instructions="""You are a task management assistant with two capabilities:
+
+            1. TASK MANAGEMENT: Use add_task, list_tasks, and complete_task to manage
+               the user's task list.
+
+            2. DOCUMENTATION LOOKUP: When users ask about productivity methodologies,
+               project management patterns, or programming concepts, use the MCP tools
+               to fetch relevant documentation.
+
+            Combine both capabilities when helpful. For example, if a user asks about
+            implementing a Kanban workflow, you can explain the concept (via docs) and
+            help them create appropriate tasks.
+
+            Be concise but thorough. Always confirm actions taken.""",
+            tools=[add_task, list_tasks, complete_task],
+            mcp_servers=[server],
+        )
+
+        # Interaction 1: Task management
+        result = await Runner.run(
+            agent,
+            "Add a task: Review pull request for user authentication",
+            context=context
+        )
+        print(f"Alice: Add a task\nTaskManager: {result.final_output}\n")
+
+        # Interaction 2: Documentation lookup
+        result = await Runner.run(
+            agent,
+            "I'm implementing JWT authentication. What does the PyJWT library documentation say about token expiration?",
+            context=context
+        )
+        print(f"Alice: JWT question\nTaskManager: {result.final_output}\n")
+
+        # Interaction 3: Combined capability
+        result = await Runner.run(
+            agent,
+            "Based on that JWT info, add a task to implement token refresh logic",
+            context=context
+        )
+        print(f"Alice: Add JWT task\nTaskManager: {result.final_output}\n")
+
+        # Interaction 4: List current tasks
+        result = await Runner.run(
+            agent,
+            "What tasks do I have now?",
+            context=context
+        )
+        print(f"Alice: List tasks\nTaskManager: {result.final_output}")
+
+asyncio.run(enhanced_task_manager())
+```
+
+**Output:**
+
+```
+Alice: Add a task
+TaskManager: Added task #1: Review pull request for user authentication (priority: medium)
+
+Alice: JWT question
+TaskManager: Based on the PyJWT documentation, here's how token expiration works:
+
+JWT tokens include an `exp` (expiration) claim. When creating a token:
+
+```python
+import jwt
+from datetime import datetime, timedelta
+
+payload = {
+    "user_id": 123,
+    "exp": datetime.utcnow() + timedelta(hours=1)
+}
+token = jwt.encode(payload, "secret", algorithm="HS256")
+```
+
+When decoding, PyJWT automatically validates expiration:
+```python
+try:
+    decoded = jwt.decode(token, "secret", algorithms=["HS256"])
+except jwt.ExpiredSignatureError:
+    print("Token has expired")
 ```
 
 Key points:
-- `async with` manages connection lifecycle (opens on enter, closes on exit)
-- Headers provide authentication (API keys, bearer tokens)
-- `mcp_servers=[server]` parameter gives agent access to tools
-- Tools are discovered automatically—no manual registration needed
+- `exp` must be a UTC datetime or Unix timestamp
+- Expired tokens raise `ExpiredSignatureError`
+- Use `options={"verify_exp": False}` to skip validation (not recommended for production)
 
-### Understanding Async Context Managers
+Source: PyJWT documentation via Context7
 
-If async/await is new to you, the pattern is:
+Alice: Add JWT task
+TaskManager: Added task #2: Implement token refresh logic (priority: medium)
 
-```python
-# RESOURCE MANAGEMENT PATTERN
-async with resource_manager() as resource:
-    # Use resource (connected, initialized, ready)
-    result = await resource.do_something()
-# Resource automatically cleaned up (connection closed, memory freed)
+This task aligns with JWT best practices - refresh tokens allow users to get new access tokens without re-authenticating, improving both security (shorter access token lifetime) and user experience.
+
+Alice: List tasks
+TaskManager: Here are your current tasks:
+
+#1 [medium] Review pull request for user authentication - pending
+#2 [medium] Implement token refresh logic - pending
 ```
 
-For MCP servers:
-- **Enter** (`async with`): Establish HTTP connection to remote server, authenticate, discover available tools
-- **Use**: Agent calls tools provided by the server
-- **Exit** (end of `with` block): Close connection, clean up resources
+The agent seamlessly combines local task management with MCP-powered documentation lookup.
 
-This prevents connection leaks where servers pile up without being closed.
+## Managing Multiple MCP Servers
 
-## Practical Example: Context7 for Documentation Lookup
-
-Context7 is a real-world MCP server (maintained by Upstash) that provides up-to-date documentation for thousands of libraries. Instead of agents relying on stale training data, they can fetch current documentation for exact library versions.
-
-Context7 exposes two primary tools:
-
-1. **resolve-library-id**: Given a package name, returns the Context7 library ID
-   - Input: "fastapi", "react", "tensorflow"
-   - Output: "/upstash/fastapi/0.104.1", "/upstash/react/18.2.0"
-
-2. **get-library-docs**: Given a library ID and topic, returns current documentation
-   - Input: library_id="/upstash/fastapi/0.104.1", topic="dependency_injection"
-   - Output: Full documentation for that topic with examples
-
-### Connecting to Context7
+When connecting to multiple servers, nest the `async with` statements or use `AsyncExitStack`:
 
 ```python
+import asyncio
+from contextlib import AsyncExitStack
 from agents import Agent, Runner
 from agents.mcp import MCPServerStreamableHttp
-import asyncio
-import os
 
-async def main():
-    # Context7 is a public MCP server at this URL
-    # Get your API key from context7.com/dashboard
-    context7_api_key = os.getenv("CONTEXT7_API_KEY")
+async def multi_server_agent():
+    """Agent with multiple MCP server connections."""
 
-    async with MCPServerStreamableHttp(
-        name="Context7 Documentation",
-        url="https://mcp.context7.com/mcp",
-        headers={"Authorization": f"Bearer {context7_api_key}"}
-    ) as context7_server:
-        agent = Agent(
-            name="API Reference Assistant",
-            instructions="""You help developers understand API documentation.
-When asked about a library or framework, use the Context7 documentation tools:
-1. First call resolve-library-id to find the exact library
-2. Then call get-library-docs to fetch current documentation
-3. Provide the documentation with examples""",
-            mcp_servers=[context7_server]
+    async with AsyncExitStack() as stack:
+        # Connect to multiple servers
+        docs_server = await stack.enter_async_context(
+            MCPServerStreamableHttp(
+                name="documentation",
+                params={"url": "https://mcp.context7.com/mcp"},
+            )
         )
 
-        # Ask about a library
+        # Hypothetical second server for database operations
+        # db_server = await stack.enter_async_context(
+        #     MCPServerStreamableHttp(
+        #         name="database",
+        #         params={"url": "https://internal.company.com/db-mcp"},
+        #     )
+        # )
+
+        agent = Agent(
+            name="MultiSourceAgent",
+            instructions="""You have access to multiple data sources:
+            1. Documentation server - for library docs
+            2. Database server - for customer data (when available)
+
+            Use the appropriate server for each query.""",
+            mcp_servers=[docs_server],  # Add db_server when available
+        )
+
         result = await Runner.run(
             agent,
-            "What's the signature for FastAPI's Depends function?"
+            "Look up the Pydantic documentation for field validators"
         )
         print(result.final_output)
 
-asyncio.run(main())
+asyncio.run(multi_server_agent())
 ```
 
 **Output:**
+
 ```
-The FastAPI Depends function signature:
-
-def Depends(
-    dependency: Callable[..., Any],
-    *,
-    use_cache: bool = True,
-) -> Any:
-
-Used for dependency injection in FastAPI. When you use Depends() in a path
-operation function parameter, FastAPI will execute the dependency function
-and pass its return value to your operation.
-
-Example:
-async def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
-    return verify_token(token)
-
-@app.get("/users/me")
-async def read_user(current_user: User = Depends(get_current_user)):
-    return current_user
-```
-
-The agent called:
-1. `resolve-library-id("fastapi")` → Got "/upstash/fastapi/0.104.1"
-2. `get-library-docs("/upstash/fastapi/0.104.1", topic="dependency_injection")` → Retrieved current docs
-3. Synthesized the response with examples from the documentation
-
-## Multiple MCP Servers: Composing Tool Ecosystems
-
-Agents can connect to multiple MCP servers simultaneously. Each contributes tools that the agent can leverage:
+Based on Pydantic's documentation, field validators allow custom validation logic:
 
 ```python
+from pydantic import BaseModel, field_validator
+
+class User(BaseModel):
+    name: str
+    email: str
+
+    @field_validator('email')
+    @classmethod
+    def validate_email(cls, v: str) -> str:
+        if '@' not in v:
+            raise ValueError('Invalid email format')
+        return v.lower()
+```
+
+Key points:
+- Use `@field_validator('field_name')` decorator
+- Validator must be a classmethod
+- Return the validated/transformed value
+- Raise `ValueError` for validation failures
+
+Source: Pydantic v2 documentation via Context7
+```
+
+### Error Handling for MCP Connections
+
+MCP servers may be unavailable. Handle connection failures gracefully:
+
+```python
+import asyncio
 from agents import Agent, Runner
 from agents.mcp import MCPServerStreamableHttp
-import asyncio
-import os
 
-async def main():
-    # Server 1: Documentation lookup
-    async with MCPServerStreamableHttp(
-        name="Context7",
-        url="https://mcp.context7.com/mcp",
-        headers={"Authorization": f"Bearer {os.getenv('CONTEXT7_API_KEY')}"}
-    ) as context7_server:
+async def resilient_mcp_agent():
+    """Agent that handles MCP server failures gracefully."""
 
-        # Server 2: GitHub API access
+    try:
         async with MCPServerStreamableHttp(
-            name="GitHub",
-            url="https://mcp.example.com/github-mcp",
-            headers={"Authorization": f"Bearer {os.getenv('GITHUB_MCP_KEY')}"}
-        ) as github_server:
-
+            name="docs",
+            params={
+                "url": "https://mcp.context7.com/mcp",
+                "timeout": 10,
+            },
+        ) as server:
             agent = Agent(
-                name="Full-Stack Developer Assistant",
-                instructions="""Help developers with code questions using:
-1. Context7 for API documentation
-2. GitHub for code examples and repository information
-Choose the right tool based on what you need to find.""",
-                mcp_servers=[context7_server, github_server]  # Both servers!
+                name="ResilientHelper",
+                instructions="""You help with programming questions.
+
+                If MCP tools are available, use them for accurate documentation.
+                If tools are unavailable, rely on your training knowledge but
+                note that information may be outdated.
+
+                Always be helpful regardless of tool availability.""",
+                mcp_servers=[server],
             )
 
             result = await Runner.run(
                 agent,
-                "Find the React hooks documentation and show me a GitHub example"
+                "How do I use async/await in Python?"
             )
-            print(result.final_output)
+            print(f"With MCP: {result.final_output}")
+
+    except Exception as e:
+        print(f"MCP connection failed: {e}")
+        # Fall back to agent without MCP
+        agent_fallback = Agent(
+            name="ResilientHelper",
+            instructions="""You help with programming questions.
+            Note: Documentation lookup is currently unavailable.
+            Provide helpful answers from your training knowledge."""
+        )
+        result = await Runner.run(
+            agent_fallback,
+            "How do I use async/await in Python?"
+        )
+        print(f"Without MCP (fallback): {result.final_output}")
+
+asyncio.run(resilient_mcp_agent())
+```
+
+**Output:**
+
+```
+With MCP: Python's async/await syntax enables asynchronous programming:
+
+```python
+import asyncio
+
+async def fetch_data(url: str) -> dict:
+    # Simulated async operation
+    await asyncio.sleep(1)
+    return {"url": url, "data": "..."}
+
+async def main():
+    # Run coroutines concurrently
+    results = await asyncio.gather(
+        fetch_data("https://api.example.com/1"),
+        fetch_data("https://api.example.com/2")
+    )
+    print(results)
 
 asyncio.run(main())
 ```
 
-**What happens inside**:
-1. Agent receives the request
-2. Agent considers available tools from BOTH MCP servers
-3. Calls Context7 tools for React hooks documentation
-4. Calls GitHub tools for code examples
-5. Synthesizes both sources into a comprehensive response
+Key concepts:
+- `async def` defines a coroutine function
+- `await` pauses execution until the awaited coroutine completes
+- `asyncio.run()` runs the main coroutine
+- `asyncio.gather()` runs multiple coroutines concurrently
 
-This is the power of MCP: compose tool ecosystems without hardcoding integrations.
+Source: Python asyncio documentation via Context7
+```
 
-## TaskManager with Documentation Integration
+## Creating Your MCP Integration Skill
 
-Let's build a complete TaskManager that uses Context7 to help developers understand library documentation when planning projects:
+This is Layer 3: Intelligence Design. You've learned the MCP integration patterns---now capture them as a reusable skill.
 
+### Skill Design: What to Capture
+
+A good MCP integration skill should include:
+
+| Component | What to Include |
+|-----------|-----------------|
+| **Server Configuration** | params dictionary structure, authentication patterns |
+| **Lifecycle Patterns** | async with context manager, agent creation inside context |
+| **Error Handling** | Connection failures, graceful degradation |
+| **Agent Instructions** | How to guide agents to use MCP tools effectively |
+| **Testing Patterns** | How to verify MCP connections work |
+
+### Skill Template
+
+Create a skill file that captures your MCP integration patterns:
+
+```markdown
+# MCP Agent Integration Skill
+
+## Purpose
+Connect OpenAI Agents SDK agents to MCP servers for dynamic tool access.
+
+## Server Configuration Patterns
+
+### HTTP Server (MCPServerStreamableHttp)
 ```python
-from agents import Agent, Runner, RunHooks, RunContextWrapper
 from agents.mcp import MCPServerStreamableHttp
-from pydantic import BaseModel
-import asyncio
-import os
-from datetime import datetime
 
-class TaskContext(BaseModel):
-    user_id: str | None = None
-    project_name: str | None = None
-    current_library: str | None = None
-    documentation_queries: list[str] = []
-
-class TaskManagerWithDocs(RunHooks):
-    """Tracks when agent uses documentation tools"""
-    async def on_tool_start(
-        self,
-        context: RunContextWrapper,
-        agent: Agent,
-        tool
-    ):
-        tool_name = getattr(tool, 'name', str(tool))
-        print(f"📚 Using tool: {tool_name}")
-
-    async def on_agent_end(
-        self,
-        context: RunContextWrapper,
-        agent: Agent,
-        output: str
-    ):
-        if context.usage:
-            print(f"✅ Completed with {context.usage.total_tokens} tokens")
-
-async def run_task_manager_with_docs():
-    """TaskManager that integrates documentation lookup"""
-
-    context7_api_key = os.getenv("CONTEXT7_API_KEY")
-
-    # Set up Context7 connection
-    async with MCPServerStreamableHttp(
-        name="Context7 Documentation",
-        url="https://mcp.context7.com/mcp",
-        headers={"Authorization": f"Bearer {context7_api_key}"}
-    ) as context7_server:
-
-        # Create TaskManager agent with documentation access
-        task_manager = Agent(
-            name="Technical Project Manager",
-            instructions="""You help developers plan projects using current library documentation.
-
-When developers mention a library:
-1. Use resolve-library-id to find the exact library and version
-2. Use get-library-docs to fetch current documentation
-3. Explain relevant features and constraints based on actual documentation
-4. Help plan tasks that account for the library's capabilities
-
-Always ground recommendations in actual documentation, not assumptions.""",
-            mcp_servers=[context7_server]
-        )
-
-        # Track usage
-        hooks = TaskManagerWithDocs()
-
-        # Create task context
-        task_ctx = TaskContext(
-            user_id="user-123",
-            project_name="FastAPI E-commerce API",
-            current_library="fastapi"
-        )
-
-        # Run with documentation integration
-        result = await Runner.run(
-            task_manager,
-            """I'm building an e-commerce API with FastAPI.
-            What dependency injection capabilities does FastAPI offer?
-            How would I structure authentication with Depends?""",
-            context=task_ctx,
-            hooks=hooks
-        )
-
-        print("\n=== TASK MANAGER RESPONSE ===")
-        print(result.final_output)
-        print(f"\nDocumentation retrieved for: {task_ctx.project_name}")
-
-# Run the example
-asyncio.run(run_task_manager_with_docs())
+async with MCPServerStreamableHttp(
+    name="server-name",
+    params={
+        "url": "https://mcp.example.com/mcp",
+        "timeout": 30,
+    },
+    cache_tools_list=True,
+    max_retry_attempts=3,
+) as server:
+    agent = Agent(
+        name="Assistant",
+        mcp_servers=[server],
+    )
+    result = await Runner.run(agent, message)
 ```
 
-**Output:**
-```
-📚 Using tool: resolve-library-id
-📚 Using tool: get-library-docs
-✅ Completed with 1247 tokens
-
-=== TASK MANAGER RESPONSE ===
-
-FastAPI provides powerful dependency injection through the `Depends()` function:
-
-**How Dependency Injection Works:**
-- Each parameter in a path operation can declare dependencies
-- FastAPI executes dependencies and injects results
-- Perfect for authentication, database access, validation
-
-**For Authentication:**
-1. Create a dependency function that extracts and validates credentials
-2. Use `Depends(dependency_function)` in your path operation
-3. FastAPI runs the dependency first, then passes result to your operation
-
-Example authentication structure:
+### Local Server (MCPServerStdio)
 ```python
-async def verify_auth(token: str = Header(...)):
-    user = await validate_token(token)
-    return user
+from agents.mcp import MCPServerStdio
 
-@app.post("/order")
-async def create_order(current_user: User = Depends(verify_auth)):
-    return {"order": "created", "user": current_user.id}
+async with MCPServerStdio(
+    name="local-server",
+    params={
+        "command": "python",
+        "args": ["-m", "my_mcp_server"],
+    },
+) as server:
+    agent = Agent(
+        name="Assistant",
+        mcp_servers=[server],
+    )
+    result = await Runner.run(agent, message)
 ```
 
-**For Your E-commerce API:**
-Task suggestions based on FastAPI's capabilities:
-1. Implement role-based access with dependency chain
-2. Use dependencies for database session management
-3. Create reusable dependency for product availability checks
-4. Build authentication that leverages FastAPI's built-in validation
-
-This approach ensures your architecture matches FastAPI's design patterns.
+### Authenticated Server
+```python
+async with MCPServerStreamableHttp(
+    name="private-server",
+    params={
+        "url": "https://internal.company.com/mcp",
+        "headers": {"Authorization": f"Bearer {api_key}"},
+        "timeout": 10,
+    },
+) as server:
+    # Agent created inside context
+    pass
 ```
 
-The agent automatically:
-- Called `resolve-library-id("fastapi")` → Found correct version
-- Called `get-library-docs` with relevant topics → Got current documentation
-- Synthesized documentation with practical architectural advice
-- Grounded all recommendations in actual library capabilities
+## Critical Pattern: Agent Inside Context
 
-## Designing Agents for Tool Discovery
+ALWAYS create the agent INSIDE the async with block:
+```python
+# CORRECT
+async with MCPServerStreamableHttp(...) as server:
+    agent = Agent(mcp_servers=[server])
+    result = await Runner.run(agent, message)
 
-When working with MCP servers, agents work best when you:
+# WRONG - agent created outside context
+agent = Agent(mcp_servers=[server])  # server not connected yet!
+async with server:
+    result = await Runner.run(agent, message)
+```
 
-1. **Explain the available tools clearly**
-   ```python
-   instructions="""You have access to:
-   - resolve-library-id: Find exact library IDs
-   - get-library-docs: Fetch current documentation
-   Use these to answer questions about libraries."""
-   ```
+## Agent Instructions Template
 
-2. **Let agents discover tools naturally**
-   - Don't hardcode "call this tool first then that"
-   - Let the agent reason about what it needs
-   - Trust the agent to use tools effectively
+When creating agents with MCP access, include:
+```
+You have access to external tools via MCP servers.
+Use these tools to fetch accurate, current information.
+Always cite the source when using tool results.
+If tools are unavailable, note that your response
+may not reflect the latest information.
+```
 
-3. **Provide context about tool limitations**
-   ```python
-   instructions="""Context7 documentation is accurate but limited to 5000 tokens.
-   For deep dives, combine results and ask clarifying questions."""
-   ```
+## Error Handling Pattern
 
-## Comparison: When to Use MCP vs Custom Tools
+```python
+try:
+    async with MCPServerStreamableHttp(...) as server:
+        agent = Agent(mcp_servers=[server])
+        result = await Runner.run(agent, message)
+except Exception as e:
+    # Fall back to non-MCP agent
+    agent = Agent(instructions="MCP unavailable...")
+    result = await Runner.run(agent, message)
+```
 
-| Scenario | MCP Server | Custom Tool | Tradeoff |
-|----------|-----------|------------|----------|
-| **Third-party service** (GitHub, Slack) | Best | Manual integration | MCP: standard interface; Custom: full control |
-| **Internal proprietary API** | Not suitable | Required | MCP: open standard; Custom: proprietary |
-| **Documentation lookup** | Excellent (Context7) | Slow to maintain | MCP: always current; Custom: outdated over time |
-| **Custom business logic** | Not suitable | Required | MCP: external only; Custom: implement anything |
-| **Quick prototyping** | Fast | Slower | MCP: one connection; Custom: more code |
+## Testing Checklist
+- [ ] Server connects successfully inside async with
+- [ ] Agent created inside async with block
+- [ ] Agent discovers expected tools
+- [ ] Tool calls return valid responses
+- [ ] Graceful handling when server unavailable
+```
 
-For production agents, MCP servers handle external integrations. Custom tools handle internal logic.
+Save this skill in your project's skill library. In future projects, you'll load this skill to quickly set up MCP integrations without re-learning the patterns.
+
+## Progressive Project: Support Desk Assistant
+
+Your Support Desk handles technical questions, but agents often give outdated information. "What's the return policy?" returns generic answers instead of your actual policy. In Lesson 7, you added observability. Now you'll add **MCP integration** so your agents can look up live documentation.
+
+### What You're Building
+
+Connect the Support Desk to an MCP server for:
+
+| MCP Tool | Purpose |
+|----------|---------|
+| **get-library-docs** | Look up product documentation |
+| **search-knowledge-base** | Search FAQs and policies |
+| **get-release-notes** | Check recent product updates |
+
+### Adding MCP Documentation Access
+
+Now it's your turn to extend the Support Desk from Lesson 7. Using the patterns you learned above, add MCP integration for live documentation lookup.
+
+**Step 1: Enhance your context model for documentation tracking**
+
+Update your `SupportContext` class to track:
+- Customer ID and name
+- List of documents consulted (for audit trail)
+- Whether MCP is available (for fallback handling)
+
+**Step 2: Configure the MCP server inside async with**
+
+Using the correct pattern from this lesson:
+
+```python
+async with MCPServerStreamableHttp(
+    name="techcorp-docs",
+    params={
+        "url": "https://your-docs-server.example.com/mcp",
+        "timeout": 10,
+    },
+) as docs_server:
+    # Agent created here
+    pass
+```
+
+**Step 3: Create a fallback documentation tool**
+
+Create a `fallback_documentation` tool that provides basic cached documentation when MCP is unavailable. Include common topics like return policy, warranty, and shipping.
+
+**Step 4: Create a documentation access logging tool**
+
+Create a `log_doc_access` tool that records which documents were consulted and from what source (MCP or fallback).
+
+**Step 5: Create an async function to run MCP-enabled support**
+
+Create an async function that:
+- Uses `async with` for proper lifecycle management
+- Creates the agent **inside** the `async with` block with `mcp_servers=[docs_server]`
+- Handles connection failures with try/except and falls back to a non-MCP agent
+- Prints statistics about documents consulted
+
+**Step 6: Update your agent instructions**
+
+Update your support desk agent instructions to:
+- Always look up documentation before answering product questions
+- Use MCP tools to search the knowledge base
+- Cite sources in responses
+- Fall back to `fallback_documentation` when MCP is unavailable
+
+**Step 7: Create a demo scenario**
+
+Write a `demo_mcp_support()` async function that runs two support sessions:
+1. A return policy question from Alice
+2. A technical WiFi setup question from Bob
+
+When you run your demo, you should see the agent connecting to the MCP server, discovering tools, and citing documentation sources in its responses.
+
+### Extension Challenge
+
+Add **multi-server MCP** for different knowledge domains using `AsyncExitStack`:
+
+```python
+from contextlib import AsyncExitStack
+
+async def multi_source_support():
+    async with AsyncExitStack() as stack:
+        product_docs = await stack.enter_async_context(
+            MCPServerStreamableHttp(
+                name="products",
+                params={"url": "..."},
+            )
+        )
+        policy_docs = await stack.enter_async_context(
+            MCPServerStreamableHttp(
+                name="policies",
+                params={"url": "..."},
+            )
+        )
+
+        support_desk = Agent(
+            name="SupportDesk",
+            mcp_servers=[product_docs, policy_docs],
+            # Your implementation
+        )
+```
+
+### What's Next
+
+Your Support Desk can look up live documentation, but what about your internal knowledge base? In Lesson 9, you'll add **RAG with FileSearchTool** to answer questions from your uploaded documents.
+
+### Bonus Challenges
+
+1. **Search aggregation**: Connect to multiple MCP servers (docs + search) and combine results
+2. **Export functionality**: Add a tool to export notes as Markdown
+3. **Session persistence**: Save research sessions to file for later continuation
+4. **Quality scoring**: Rate source quality and prioritize high-quality documentation
 
 ## Try With AI
 
-### Setup
+Use your AI companion to explore MCP integration patterns further.
 
-You'll build a TaskManager agent that retrieves library documentation from Context7 MCP.
-
-**Prerequisites**:
-- Working knowledge of agents from previous lessons
-- Context7 API key (free at context7.com/dashboard)
-
-**Required imports**:
-```python
-from agents import Agent, Runner
-from agents.mcp import MCPServerStreamableHttp
-import asyncio
-import os
-```
-
-### Prompt 1: Establish Your First MCP Connection
-
-**What you're learning**: How to connect agents to remote MCP servers and manage lifecycle.
-
-Ask AI:
-```
-I want to connect my agent to the Context7 MCP server for documentation lookup.
-
-Build an async function that:
-1. Creates MCPServerStreamableHttp for Context7 at https://mcp.context7.com/mcp
-2. Uses an Authorization header with a Bearer token from CONTEXT7_API_KEY environment variable
-3. Creates an agent with this MCP server in mcp_servers=[]
-4. Runs the agent asking "What libraries are available in Context7?"
-5. Prints the agent's response
-
-Use async context manager pattern: async with MCPServerStreamableHttp(...) as server:
-```
-
-Review the response:
-
-- Does it use `async with` for connection management?
-- Does it pass `mcp_servers=[server]` to the Agent?
-- Can you identify where authentication headers are configured?
-- What would happen if the `with` block ended before agent execution?
-
-### Prompt 2: Discover and Use Context7 Tools
-
-**What you're learning**: How agents automatically access tools from connected MCP servers.
-
-Ask AI:
-```
-Build on the previous example. Now I want the agent to:
-1. Use resolve-library-id to find "fastapi" in Context7
-2. Use get-library-docs to fetch documentation for FastAPI
-3. Explain the documentation to the user
-
-Update the agent's instructions to:
-- First call resolve-library-id with the library name
-- Pass the result to get-library-docs
-- Provide a summary of what you learned
-
-Show me the complete code with better instructions.
-```
-
-Review:
-
-- Does the agent call resolve-library-id before get-library-docs?
-- Is the library ID passed correctly between tools?
-- Does the response include actual documentation content?
-- Can you trace the tool calling sequence in the output?
-
-### Prompt 3: Connect to Multiple MCP Servers
-
-**What you're learning**: How to compose tool ecosystems with multiple MCP servers.
-
-Ask AI:
-```
-I have two MCP servers:
-1. Context7 at https://mcp.context7.com/mcp (documentation)
-2. A custom server at https://internal-tools.example.com/mcp (internal APIs)
-
-Both need Authorization headers with different API keys.
-
-Build an agent that:
-1. Connects to BOTH servers simultaneously
-2. Uses resolve-library-id from Context7 when needed
-3. Can also call internal tools from the custom server
-4. Decides which server to use based on the question
-
-Show the complete async code with both MCPServerStreamableHttp connections.
-```
-
-Review:
-
-- Are both MCP servers in the mcp_servers list?
-- Does the agent have access to tools from both servers?
-- Can it intelligently choose which tool to use?
-- How would you expand this to 5+ MCP servers?
-
-### Prompt 4: Build TaskManager with Documentation Integration
-
-**What you're learning**: How to architect production agents leveraging external MCP tool ecosystems.
-
-Ask AI:
-```
-Build a complete TaskManager agent that:
-
-1. Accepts a task context with project_name and current_library
-2. Connects to Context7 MCP for documentation
-3. When given a project description, uses Context7 to:
-   - Look up the library specification
-   - Retrieve documentation for relevant features
-   - Suggest project tasks based on library capabilities
-4. Returns structured output with:
-   - Libraries used
-   - Key capabilities identified from documentation
-   - Recommended project tasks
-
-Include:
-- Pydantic context model
-- MCPServerStreamableHttp connection
-- Agent instructions that leverage Context7 tools
-- Example execution with output
-
-Show the complete, runnable code.
-```
-
-Review:
-
-- Does the agent ground recommendations in actual documentation?
-- Are multiple tools called in sequence (resolve → fetch)?
-- How does documentation influence task suggestions?
-- What happens if Context7 is unavailable?
-
-### Reflection: MCP as Tool Composition
-
-Ask yourself:
-
-1. **Without MCP**: How would you hardcode Context7 documentation lookup?
-   - Extra HTTP calls? Custom parsing? Versioning problems?
-
-2. **With MCP**: How does standardization change your architecture?
-   - Same pattern for any MCP server
-   - Agents discover tools automatically
-   - No custom integration code
-
-3. **Scaling**: If you added 5 more MCP servers, what changes?
-   - Just add more `async with MCPServerStreamableHttp(...) as server`
-   - Agent tools grow automatically
-   - No changes to agent logic
-
-4. **Production readiness**: What would you add?
-   - Connection pooling for performance
-   - Error handling for unavailable servers
-   - Tool caching to reduce latency
-   - Authentication refresh strategies
-
-Write your thoughts. You've now implemented agents that connect to external tool ecosystems—the foundation for production Digital FTEs that integrate with any MCP-compatible service.
-
-**Expected outcome**: A working agent system where you can:
-- Connect to remote MCP servers with authentication
-- Automatically access tools from connected servers
-- Use Context7 for dynamic documentation lookup
-- Compose multiple MCP servers into unified tool ecosystems
-- Design agents that leverage external tools effectively
-
----
-
-## Reflect on Your Skill
-
-You built an `openai-agents` skill in Lesson 0. Test and improve it based on what you learned.
-
-### Test Your Skill
+### Prompt 1: Design an MCP Architecture
 
 ```
-Using my openai-agents skill, connect to an MCP server using MCPServerStreamableHttp and enable agents to use external tools.
-Does my skill explain async context managers, mcp_servers parameter, and Context7 integration?
+I'm building a Digital FTE that needs access to:
+1. Company internal documentation (Confluence/Notion)
+2. Customer database (PostgreSQL)
+3. Ticket system (Jira)
+
+Help me design the MCP architecture:
+1. What MCP servers would I need?
+2. How should the agent decide which server to query?
+3. What security considerations apply?
+4. Show me the agent configuration code using proper async with patterns.
 ```
 
-### Identify Gaps
+**What you're learning:** Enterprise architecture for MCP integration. You're developing the system design thinking needed to connect Digital FTEs to real company data sources.
 
-Ask yourself:
-- Did my skill include MCPServerStreamableHttp for remote MCP connections?
-- Did it explain async with pattern for connection lifecycle management?
-- Did it cover mcp_servers=[server] parameter for agent configuration?
-- Did it explain how agents automatically discover and use MCP tools?
-- Did it cover Context7 MCP with resolve-library-id and get-library-docs?
-- Did it explain how to connect to multiple MCP servers simultaneously?
-- Did it cover authentication headers for MCP server access?
-
-### Improve Your Skill
-
-If you found gaps:
+### Prompt 2: Build a Custom MCP Server
 
 ```
-My openai-agents skill is missing [MCP integration, async patterns, or external tool ecosystems].
-Update it to include:
-1. MCPServerStreamableHttp(name, url, headers) for MCP connections
-2. async with MCPServerStreamableHttp(...) as server: pattern for lifecycle
-3. mcp_servers=[server] parameter in Agent() for tool access
-4. Context7 integration for documentation lookup (resolve-library-id, get-library-docs)
-5. How to compose multiple MCP servers: mcp_servers=[server1, server2]
-6. Authentication with headers={"Authorization": f"Bearer {token}"}
-7. When to use MCP (external integrations) vs custom tools (internal logic)
+I want to create an MCP server that exposes my TaskManager
+operations (add_task, list_tasks, complete_task) so other
+agents can manage tasks remotely.
+
+Help me:
+1. Design the MCP server using FastMCP (Python)
+2. Define the tool schemas for task operations
+3. Implement proper error handling
+4. Show how an agent would connect using MCPServerStreamableHttp with params dict
 ```
+
+**What you're learning:** Building the other side of MCP integration. Understanding how to create MCP servers opens up the ability to expose any system as agent-accessible tools.
+
+### Prompt 3: Apply MCP to Your Domain
+
+```
+I'm building a Digital FTE for [YOUR DOMAIN: legal research,
+medical intake, financial analysis, etc.].
+
+Help me identify:
+1. What external data sources would benefit from MCP integration?
+2. Are there existing MCP servers for my domain?
+3. What custom MCP servers would I need to build?
+4. How should I handle sensitive data through MCP?
+
+Provide a complete architecture with agent configuration using
+the correct async with MCPServerStreamableHttp pattern.
+```
+
+**What you're learning:** Translating MCP patterns to domain-specific needs. Every industry has unique data sources, and MCP provides a consistent way to connect agents to them.
+
+### Safety Note
+
+MCP servers can expose sensitive capabilities to your agents. When integrating MCP:
+
+- **Authentication**: Always use authenticated connections for internal servers. Never expose production databases without proper auth.
+- **Scope limitation**: Configure MCP servers to expose only necessary tools. A docs server shouldn't have write access to production.
+- **Input validation**: MCP tools should validate all inputs. Agents may pass unexpected parameters.
+- **Rate limiting**: Implement rate limits on MCP servers to prevent agent loops from overwhelming systems.
+- **Audit logging**: Log all MCP tool calls for compliance and debugging. Include agent identity and parameters.
+- **Network isolation**: Run MCP servers in appropriate network segments. Internal databases shouldn't be accessible from public agents.

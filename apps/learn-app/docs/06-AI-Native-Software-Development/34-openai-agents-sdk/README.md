@@ -12,6 +12,26 @@ OpenAI released the Agents SDK in March 2025 as a lightweight, production-ready 
 
 This chapter follows specification-driven development throughout. You'll write specs first, then implement with Claude Code as your pair programmer. By the end, you'll have built a multi-agent system that demonstrates the patterns enterprises use in production.
 
+## Your Path to Shipping Digital FTEs
+
+This chapter is the **BUILD** phase of creating Digital Full-Time Equivalents (Digital FTEs)—AI agents that work like employees, priced and sold as workforce replacements.
+
+| Phase | Chapter | What You Learn | Outcome |
+|-------|---------|----------------|---------|
+| **BUILD** | **Ch34: OpenAI Agents SDK** | Production agent architecture, multi-agent systems, guardrails, sessions, tracing | Working agent system |
+| DISTRIBUTE | Ch42: OpenAI Apps SDK | Package agents for ChatGPT marketplace | Reach 800M+ users |
+| DEPLOY | Part 7: Cloud-Native | Kubernetes, scaling, monitoring | Production infrastructure |
+
+**By chapter's end, you'll have built a Customer Support Digital FTE** that:
+- Routes inquiries to specialist agents (FAQ, Booking, Escalation)
+- Maintains conversation context across handoffs
+- Validates inputs with guardrails (abuse detection, PII filtering)
+- Persists conversations with SQLite sessions
+- Provides full observability through tracing
+- Integrates external knowledge via MCP and RAG
+
+The capstone includes **monetization models** (subscription, success fee, hybrid) so you understand how to price your Digital FTE when you're ready to ship.
+
 ## What You'll Learn
 
 By the end of this chapter, you'll be able to:
