@@ -154,26 +154,6 @@ const ShareIcon = () => (
     </svg>
 );
 
-const MarkdownIcon = () => (
-    <svg
-        className="doc-actions-icon"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-    >
-        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-        <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z" />
-        <path d="M9 15l2-2 2 2" />
-        <path d="M11 13v4" />
-    </svg>
-);
-
 const BookIcon = () => (
     <svg
         className="doc-actions-icon"
@@ -189,24 +169,6 @@ const BookIcon = () => (
     >
         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
         <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-    </svg>
-);
-
-const PageIcon = () => (
-    <svg
-        className="doc-actions-icon"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-    >
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-        <polyline points="14 2 14 8 20 8" />
     </svg>
 );
 
@@ -356,7 +318,9 @@ export function DocPageActions() {
     const modKey = isMac ? '⌘' : 'Ctrl';
 
     // Check if user is logged in
-    const isLoggedIn = !authLoading && session?.user;
+    // DEV BYPASS: Allow chapter download on localhost for testing
+    const isDev = typeof window !== 'undefined' && window.location.hostname === 'localhost';
+    const isLoggedIn = isDev || (!authLoading && session?.user);
 
     /**
      * Redirect to login page with return URL
