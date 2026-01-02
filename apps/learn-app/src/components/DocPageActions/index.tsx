@@ -182,7 +182,7 @@ const turndownService = new TurndownService({
 // Custom rule to preserve code blocks with language hints
 turndownService.addRule('codeBlock', {
     filter: (node) => {
-        return node.nodeName === 'PRE' && node.querySelector('code');
+        return node.nodeName === 'PRE' && node.querySelector('code') !== null;
     },
     replacement: (content, node) => {
         const codeElement = (node as HTMLElement).querySelector('code');
