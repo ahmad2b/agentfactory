@@ -448,14 +448,15 @@ curl http://localhost:4000/health
 
 ## Option 3: Kubernetes
 
-See [Kubernetes Deployment Guide](./KUBERNETES.md) for Helm charts and manifests.
+For Kubernetes deployment, create Helm charts and manifests following the patterns from Part 7 (Chapters 50-51).
 
 ## Next Steps
 
-1. [Integration Guide](./INTEGRATION.md) - Connect to your applications
-2. [API Reference](./API.md) - Full API documentation
-3. [Troubleshooting](./TROUBLESHOOTING.md) - Common issues and solutions
-```
+After deployment, consider creating:
+
+1. **Integration Guide** - Document how to connect to your applications
+2. **API Reference** - Full API documentation for your Digital FTE
+3. **Troubleshooting Guide** - Common issues and solutions
 
 ## Integration SDK
 

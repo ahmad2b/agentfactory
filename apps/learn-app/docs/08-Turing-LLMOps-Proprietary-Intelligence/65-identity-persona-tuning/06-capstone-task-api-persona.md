@@ -573,7 +573,7 @@ print(f"Adapter saved to: {adapter_path}")
 
 ### Create Documentation
 
-```python
+`````python
 DEPLOYMENT_DOC = """
 # TaskMaster Persona Adapter
 
@@ -628,7 +628,7 @@ with open(f"{adapter_path}/README.md", "w") as f:
     f.write(DEPLOYMENT_DOC)
 
 print("Documentation created")
-```
+`````
 
 ### Package Structure
 
