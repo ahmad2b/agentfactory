@@ -742,23 +742,21 @@ export function DocPageActions() {
                                 className={`doc-actions-chapter-item ${chapterDownloaded ? 'doc-actions-item--success' : ''} ${!isLoggedIn ? 'doc-actions-item--locked' : ''}`}
                                 disabled={chapterDownloading}
                             >
-                                <span className="doc-actions-chapter-icon">
-                                    {chapterDownloading ? <LoadingIcon /> : chapterDownloaded ? <CheckIcon /> : <BookIcon />}
-                                </span>
+                                {chapterDownloading ? <LoadingIcon /> : chapterDownloaded ? <CheckIcon /> : <BookIcon />}
                                 <span className="doc-actions-chapter-content">
                                     <span className="doc-actions-chapter-label">
                                         {chapterDownloading
                                             ? downloadProgress
                                             : chapterDownloaded
                                                 ? 'Chapter Downloaded!'
-                                                : `Download Chapter`
+                                                : 'Download Chapter'
                                         }
                                     </span>
                                     {!chapterDownloading && !chapterDownloaded && (
                                         <span className="doc-actions-chapter-meta">
                                             {isLoggedIn
-                                                ? `${currentChapter.lessons.length} lessons as ZIP`
-                                                : <><LockIcon /> Sign in to download</>
+                                                ? `(${currentChapter.lessons.length} files)`
+                                                : <><LockIcon /> Sign in</>
                                             }
                                         </span>
                                     )}

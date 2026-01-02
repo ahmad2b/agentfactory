@@ -260,55 +260,41 @@ article {
   margin-right: 0.25rem;
 }
 
-/* Chapter download item - special styling */
+/* Chapter download item - consistent with other menu items */
 .doc-actions-chapter-item {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: flex-start !important;
-  gap: 0.625rem !important;
-  padding: 0.5rem 0.75rem !important;
-  min-height: 3rem;
+  /* Inherits base menu item styles, just adds specific overrides */
 }
 
 .doc-actions-chapter-icon {
   flex-shrink: 0;
-  margin-top: 0.125rem;
 }
 
 .doc-actions-chapter-content {
   display: flex;
-  flex-direction: column;
-  gap: 0.125rem;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
   min-width: 0;
 }
 
 .doc-actions-chapter-label {
-  font-weight: 500;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .doc-actions-chapter-meta {
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   color: var(--muted-foreground);
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  opacity: 0.8;
 }
 
 /* Locked state for non-logged-in users */
-.doc-actions-item--locked {
-  opacity: 0.85;
-}
-
-.doc-actions-item--locked:hover {
-  background: var(--accent) !important;
-}
-
 .doc-actions-item--locked .doc-actions-chapter-meta {
   color: var(--primary);
   font-weight: 500;
+  opacity: 1;
 }
 
 /* Label text */

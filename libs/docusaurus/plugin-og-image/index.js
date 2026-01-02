@@ -354,7 +354,8 @@ async function injectOGImagesIntoHTML(outDir, siteConfig, siteDir) {
         }
 
         if (homepageImageUrl) {
-          const pageUrl = `${siteConfig.url}/`;
+          // Don't add trailing slash - respect trailingSlash: false config
+          const pageUrl = siteConfig.url;
 
           // Remove existing image/url tags
           html = html.replace(/<meta[^>]*property=\"og:image\"[^>]*>/gi, '');
