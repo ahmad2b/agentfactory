@@ -1,7 +1,7 @@
 import { useState, useEffect, type ReactNode } from "react";
 import Link from "@docusaurus/Link";
 import Layout from "@theme/Layout";
-import { ChevronDown, ChevronRight, ExternalLink, Play, CheckCircle2, Circle, Clock, Target, Zap, BookOpen } from "lucide-react";
+import { ChevronDown, ChevronRight, ExternalLink, Play, CheckCircle2, Circle, Target, Zap, BookOpen } from "lucide-react";
 
 // ============================================================================
 // CHECKPOINT DATA
@@ -12,12 +12,12 @@ interface Checkpoint {
   title: string;
   goal: string;
   status: "locked" | "active" | "completed";
-  estimatedTime?: string;
   actions: string[];
   constraints?: string[];
   deliverables: string[];
   helpingLessons: string;
   lessonsLink?: string;
+  additionalContext?: string;
   successSignal: string;
 }
 
@@ -25,26 +25,26 @@ const checkpoints: Checkpoint[] = [
   {
     id: "A1",
     title: "Extract Your Human Job Into Skills",
-    goal: "Turn what you already do into 3-5 focused, reusable agent skills.",
+    goal: "Turn what you already do into 3–5 focused, reusable agent skills.",
     status: "active",
-    estimatedTime: "1-2 weeks",
     actions: [
-      "Describe your daily/weekly work to Claude",
+      "Describe your daily/weekly work to Claude Code",
       "Identify repeatable cognitive tasks (decisions, writing, analysis, coordination)",
-      "Implement 3-5 narrow, measurable skills that you actually use, save time or reduce mental load, and could be reused by someone like you",
+      "Implement 3–5 narrow, measurable skills that: (1) you actually use, (2) save time or reduce mental load, (3) could be reused by someone like you",
     ],
     constraints: [
-      "Skills must be small (10-100 LOC is fine)",
+      "Skills must be small (100–900 LOC is fine)",
       "Each skill must have one clear outcome",
       "Each skill must be measurable",
     ],
     deliverables: [
-      "3-5 skills (Claude Code / General Agent)",
-      "A short SKILLS.md describing what each skill replaces and time saved / quality improved",
-      "One 60-90 second demo (screen recording)",
+      "3–5 skills (Claude Code / General Agent)",
+      "A short README.md describing what each skill replaces and time saved / quality improved",
+      "One 60–90 second demo (screen recording) — Use Loom Chrome Extension to record easily",
     ],
-    helpingLessons: "Part 2: Chapters 5-7",
-    lessonsLink: "/docs/AI-Tool-Landscape/claude-code-features-and-workflows",
+    helpingLessons: "Classes 01–09",
+    lessonsLink: "/docs/Introducing-AI-Driven-Development/agent-factory-paradigm",
+    additionalContext: "https://www.youtube.com/watch?v=2Vcn2bAu2FA",
     successSignal: "You used at least one of these skills this week instead of doing the task manually.",
   },
   {
@@ -52,7 +52,6 @@ const checkpoints: Checkpoint[] = [
     title: "Automate Your Public Presence",
     goal: "Your social media and business communication runs without manual effort.",
     status: "locked",
-    estimatedTime: "1 week",
     actions: [
       "Build an email management skill (drafts, categorization, follow-ups)",
       "Create a social media content skill (repurpose your work into posts)",
@@ -72,7 +71,6 @@ const checkpoints: Checkpoint[] = [
     title: "Financial Intelligence Integration",
     goal: "Claude Code is embedded in your professional money workflows.",
     status: "locked",
-    estimatedTime: "1 week",
     actions: [
       "Build a financial tracking/analysis skill for YOUR situation",
       "Create invoice, expense, or budget automation",
@@ -92,7 +90,6 @@ const checkpoints: Checkpoint[] = [
     title: "Build Your First Custom Agent",
     goal: "Ship a production-ready agent using an SDK.",
     status: "locked",
-    estimatedTime: "2-3 weeks",
     actions: [
       "Choose your SDK (OpenAI Agents, Claude SDK, or Google ADK)",
       "Build an agent that solves a real problem from your domain",
@@ -114,7 +111,6 @@ const checkpoints: Checkpoint[] = [
     title: "Deploy to Production",
     goal: "Your agent runs without your laptop.",
     status: "locked",
-    estimatedTime: "1-2 weeks",
     actions: [
       "Containerize your agent with Docker",
       "Deploy to a real cloud (DigitalOcean, Hetzner, etc.)",
@@ -235,12 +231,6 @@ function CheckpointCard({ checkpoint, defaultExpanded = false }: { checkpoint: C
             <p className={`text-sm ${isLocked ? "text-muted-foreground/60" : "text-muted-foreground"}`}>
               {checkpoint.goal}
             </p>
-            {checkpoint.estimatedTime && !isLocked && (
-              <div className="flex items-center gap-1 mt-2 text-xs text-muted-foreground">
-                <Clock className="w-3 h-3" />
-                <span>{checkpoint.estimatedTime}</span>
-              </div>
-            )}
           </div>
         </div>
 
@@ -305,20 +295,37 @@ function CheckpointCard({ checkpoint, defaultExpanded = false }: { checkpoint: C
           </div>
 
           {/* Helping Lessons */}
-          <div className="flex flex-wrap items-center justify-between gap-4 p-4 bg-background border border-border">
-            <div className="flex items-center gap-3">
-              <BookOpen className="w-4 h-4 text-muted-foreground" />
-              <span className="text-sm text-muted-foreground">
-                <span className="text-muted-foreground/60">Reference:</span> {checkpoint.helpingLessons}
-              </span>
+          <div className="p-4 bg-background border border-border space-y-3">
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <BookOpen className="w-4 h-4 text-muted-foreground" />
+                <span className="text-sm text-muted-foreground">
+                  <span className="text-muted-foreground/60">Reference:</span> {checkpoint.helpingLessons}
+                </span>
+              </div>
+              {checkpoint.lessonsLink && (
+                <Link
+                  to={checkpoint.lessonsLink}
+                  className="flex items-center gap-1 text-xs text-primary hover:text-primary/80 transition-colors"
+                >
+                  Open Lessons <ExternalLink className="w-3 h-3" />
+                </Link>
+              )}
             </div>
-            {checkpoint.lessonsLink && (
-              <Link
-                to={checkpoint.lessonsLink}
-                className="flex items-center gap-1 text-xs text-primary hover:text-primary/80 transition-colors"
-              >
-                Open Lessons <ExternalLink className="w-3 h-3" />
-              </Link>
+            {checkpoint.additionalContext && (
+              <div className="flex items-center gap-3 pt-2 border-t border-border">
+                <span className="text-sm text-muted-foreground">
+                  <span className="text-muted-foreground/60">Additional:</span>{" "}
+                  <a
+                    href={checkpoint.additionalContext}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary/80 transition-colors"
+                  >
+                    {checkpoint.additionalContext.includes("youtube") ? "Watch Video" : "View Resource"}
+                  </a>
+                </span>
+              </div>
             )}
           </div>
 
