@@ -127,22 +127,25 @@ TypeScript skills enable you to build:
 
 ## Part Structure
 
-This part progresses through five stages:
+This part contains **6 chapters with 37 lessons** (~13.5 hours of content):
 
-### Stage 1: Language Fundamentals
-Master TypeScript syntax, type system, and core concepts. Understand union types, generics, and type narrowing—the features that make TypeScript powerful for complex AI data structures.
+### Chapter 73: TypeScript Fundamentals for AI Engineers (7 lessons)
+Master TypeScript syntax, type system, and core concepts. Translate your Python knowledge to TypeScript idioms. Build type-safe libraries for AI response structures using union types, generics, and discriminated unions.
 
-### Stage 2: Tooling & Project Setup
-Learn modern TypeScript tooling: tsconfig.json for compiler configuration, esbuild/Vite for fast builds, pnpm/Bun for package management. Set up professional project structures with shared types and monorepo patterns.
+### Chapter 74: Async Patterns and Streaming (7 lessons)
+Deep dive into asynchronous programming: Promises, async/await, streaming patterns. Master AbortController for cancellation, Server-Sent Events for LLM streaming, and MCP Streamable HTTP—the new standard transport for Model Context Protocol.
 
-### Stage 3: Async Patterns
-Deep dive into asynchronous programming: Promises, async/await, streaming patterns. Master AbortController for cancellation, error handling strategies, and retry logic for unreliable AI services.
+### Chapter 75: Runtime Environments and HTTP Communication (6 lessons)
+Understand where TypeScript runs: Node.js 22+ (with native TypeScript), Deno 2, Bun, and Edge Functions. Build HTTP clients and servers that work across all environments. Deploy to Cloudflare Workers and Vercel Edge for low-latency AI responses.
 
-### Stage 4: Runtime Environments & Communication
-Understand Node.js, Deno, Edge Functions, and browser environments. Implement HTTP clients, Server-Sent Events for streaming, and WebSockets for bidirectional realtime communication.
+### Chapter 76: Building Type-Safe AI SDKs (6 lessons)
+Learn SDK architecture patterns used by OpenAI, Anthropic, and Vercel. Build type-safe wrappers with Zod validation. Integrate with Vercel AI SDK 5, MCP TypeScript SDK, and tRPC for end-to-end type safety.
 
-### Stage 5: Testing & Quality
-Write professional tests with Vitest/Jest. Implement contract testing to ensure frontend-backend compatibility. Use TypeScript's type system as a development-time testing tool.
+### Chapter 77: Testing TypeScript for AI Applications (6 lessons)
+Write professional tests with Vitest. Mock AI APIs and streaming responses. Implement contract testing to ensure frontend-backend compatibility. Use TypeScript's compiler as a development-time testing tool.
+
+### Chapter 78: CLI Tools and Developer Experience (5 lessons)
+Build publishable CLI tools with Commander.js. Implement streaming output, spinners, and colors. Package your AI CLI for npm distribution. Create professional developer experiences for AI interactions.
 
 ---
 
@@ -173,14 +176,18 @@ You succeed when you can:
 
 ## What You'll Build
 
-**Practical projects** demonstrating TypeScript mastery:
+**Progressive projects** across all 6 chapters:
 
-1. **AI Chat CLI Tool**: Command-line interface for interacting with AI agents (streaming responses, conversation history)
-2. **Streaming HTTP Server**: TypeScript server that streams AI responses via SSE
-3. **Type-Safe SDK**: Wrapper around an AI API with full TypeScript types
-4. **Testing Framework**: Test utilities for AI workflows with mocking and fixtures
+| Chapter | Project | Description |
+|---------|---------|-------------|
+| 61 | **AI Response Type Library** | Type definitions for ChatGPT/Claude responses with discriminated unions |
+| 62 | **Streaming CLI Client** | CLI that streams AI responses with Ctrl+C cancellation |
+| 63 | **Cross-Runtime HTTP Client** | Fetch wrapper that works in Node, Deno, Bun, and browsers |
+| 64 | **FastAPI Agent SDK** | Type-safe SDK for your Part 7 FastAPI backend with Zod validation |
+| 65 | **SDK Test Suite** | Comprehensive tests with mocked AI responses and streaming |
+| 66 | **Published AI CLI Tool** | npm-publishable CLI with streaming, history, and professional UX |
 
-By the end, you'll be comfortable building TypeScript components for any AI system.
+**Part 9 Capstone**: By the end, you'll have a complete TypeScript CLI that connects to your Part 7 FastAPI AI backend, streams responses token-by-token, handles tool calls, and is packaged for npm distribution.
 
 ---
 
