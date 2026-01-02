@@ -209,7 +209,7 @@ dependencies = [
 | `mcp>=1.6.0` | At least 1.6.0 | Framework is stable; new minor versions are safe |
 | `mcp~=1.6.0` | 1.6.x (not 1.7) | Stricter; only patch version changes allowed |
 | `mcp==1.6.0` | Exactly 1.6.0 | Most restrictive; pinned version |
-| `mcp>=1.6.0,<2.0` | 1.6.0 to 1.x | Common pattern; avoid major version jumps |
+| `mcp>=1.6.0,&lt;2.0` | 1.6.0 to 1.x | Common pattern; avoid major version jumps |
 
 For MCP servers, use `>=1.6.0` for framework dependencies. MCP follows semantic versioning, so minor versions are backward compatible.
 

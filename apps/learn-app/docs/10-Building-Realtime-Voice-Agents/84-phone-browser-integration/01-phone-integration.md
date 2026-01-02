@@ -170,7 +170,7 @@ Response: TwiML connecting to conference room
 
 | Use Native SIP When... | Use HTTP Webhooks When... |
 |------------------------|---------------------------|
-| Latency is critical (< 200ms setup) | Simpler setup preferred |
+| Latency is critical (&lt; 200ms setup) | Simpler setup preferred |
 | High call volume (1000+ calls/day) | Lower call volume |
 | You control infrastructure | Using managed platforms |
 | Need custom call routing | Standard call flows work |

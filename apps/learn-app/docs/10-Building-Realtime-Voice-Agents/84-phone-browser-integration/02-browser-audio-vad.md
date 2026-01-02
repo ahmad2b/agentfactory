@@ -508,7 +508,7 @@ Voice Activity Detection determines when a user is speaking versus silence or ba
 | Approach | Latency Added | Bandwidth Usage |
 |----------|--------------|-----------------|
 | Server-side VAD | 50-200ms (network round-trip) | All audio uploaded |
-| Client-side VAD | <1ms (local inference) | Only speech uploaded |
+| Client-side VAD | &lt;1ms (local inference) | Only speech uploaded |
 
 For voice agents where responsiveness matters, the difference is substantial.
 
@@ -517,7 +517,7 @@ For voice agents where responsiveness matters, the difference is substantial.
 Silero VAD is a lightweight neural network for voice activity detection:
 
 - **Model size**: ~2MB (ONNX format)
-- **Inference time**: <1ms per 30ms audio chunk
+- **Inference time**: &lt;1ms per 30ms audio chunk
 - **Accuracy**: State-of-the-art for its size class
 - **Languages**: Language-agnostic (works on any spoken language)
 

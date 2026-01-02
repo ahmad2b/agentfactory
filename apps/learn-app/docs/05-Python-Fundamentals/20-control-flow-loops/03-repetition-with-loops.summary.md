@@ -10,7 +10,7 @@ Loops automate repetition by running code multiple times. `for` loops repeat a k
 ### Critical Patterns
 - **Counting Loops**: `for i in range(10)` to repeat exactly 10 times
 - **Step Sequences**: `range(0, 10, 2)` for even numbers; `range(10, 0, -1)` for countdown
-- **Condition-Based Loops**: `while age < 18:` for validation or retry scenarios
+- **Condition-Based Loops**: `while age &lt; 18:` for validation or retry scenarios
 - **Termination Logic**: Every `while` loop needs a condition that eventually becomes `False` to avoid infinite loops
 
 ### AI Collaboration Keys

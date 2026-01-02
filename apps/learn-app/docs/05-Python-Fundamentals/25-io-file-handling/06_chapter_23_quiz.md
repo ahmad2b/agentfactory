@@ -114,7 +114,7 @@ Test your understanding of console I/O, file operations, cross-platform path han
         "Validate all conditions simultaneously in single expression"
       ],
       correctOption: 1,
-      explanation: "The correct answer is option 2. Always convert first (int()), THEN check range. Why? If conversion fails (user typed 'abc'), you want the 'not a number' error, not a range error. If you check range on the string first, you get confusing behavior (strings don't compare numerically). Order matters: try: age = int(input()) / if age < 0 or age > 120: (error). Option 1 reverses the order—you can't check numeric range on a string. Option 3 wastes effort—string length doesn't correlate with valid age ('5' is length 1, '500' is invalid age). Option 4 is wrong because you can't validate simultaneously—conversion can raise exception, stopping execution before range check. This validation sequencing is covered in Lesson 1: Input Validation patterns.",
+      explanation: "The correct answer is option 2. Always convert first (int()), THEN check range. Why? If conversion fails (user typed 'abc'), you want the 'not a number' error, not a range error. If you check range on the string first, you get confusing behavior (strings don't compare numerically). Order matters: try: age = int(input()) / if age &lt; 0 or age > 120: (error). Option 1 reverses the order—you can't check numeric range on a string. Option 3 wastes effort—string length doesn't correlate with valid age ('5' is length 1, '500' is invalid age). Option 4 is wrong because you can't validate simultaneously—conversion can raise exception, stopping execution before range check. This validation sequencing is covered in Lesson 1: Input Validation patterns.",
       source: "Lesson 1: Console I/O and User Input Validation"
     },
     {
@@ -518,7 +518,7 @@ Test your understanding of console I/O, file operations, cross-platform path han
         "Load at startup into database for efficient querying"
       ],
       correctOption: 2,
-      explanation: "The correct answer is option 1. For small-scale apps (10-50 notes, ~100KB total), loading all notes on each search is SIMPLE and has negligible overhead (<10ms). Premature optimization complicates code without meaningful benefit. Option 2 (load at startup) adds complexity: you need to track which notes change, reload on updates, etc. Option 3 (caching) is over-engineering for this scale—cache invalidation is hard. Option 4 (database) is massive overkill for 50 notes. The lesson: choose SIMPLE solutions for small-scale problems, optimize only when you have evidence of performance issues (1000+ notes). Simplicity beats premature optimization. This design philosophy is covered in Lesson 5: Performance considerations for CLI apps.",
+      explanation: "The correct answer is option 1. For small-scale apps (10-50 notes, ~100KB total), loading all notes on each search is SIMPLE and has negligible overhead (&lt;10ms). Premature optimization complicates code without meaningful benefit. Option 2 (load at startup) adds complexity: you need to track which notes change, reload on updates, etc. Option 3 (caching) is over-engineering for this scale—cache invalidation is hard. Option 4 (database) is massive overkill for 50 notes. The lesson: choose SIMPLE solutions for small-scale problems, optimize only when you have evidence of performance issues (1000+ notes). Simplicity beats premature optimization. This design philosophy is covered in Lesson 5: Performance considerations for CLI apps.",
       source: "Lesson 5: Capstone - Note-Taking App"
     },
     {
@@ -578,7 +578,7 @@ Test your understanding of console I/O, file operations, cross-platform path han
         "Let user specify case sensitivity with search flag"
       ],
       correctOption: 2,
-      explanation: "The correct answer is option 1. Users expect search to 'just work'—if they search for 'python', they want results with 'Python', 'PYTHON', etc. Implement with keyword.lower() in note.get('title', '').lower(). This is standard search UX. Option 2 (case-sensitive is faster) is wrong—the performance difference (.lower() call) is trivial (<1ms), and accuracy is WORSE (misses relevant results). Option 3 (different rules for title/body) is inconsistent UX—confusing. Option 4 (user flag) adds complexity—for a simple CLI, default to case-insensitive without options. Advanced apps can add flags later, but start with helpful defaults. Case-insensitive search is covered in Lesson 5: Search and filter implementation.",
+      explanation: "The correct answer is option 1. Users expect search to 'just work'—if they search for 'python', they want results with 'Python', 'PYTHON', etc. Implement with keyword.lower() in note.get('title', '').lower(). This is standard search UX. Option 2 (case-sensitive is faster) is wrong—the performance difference (.lower() call) is trivial (&lt;1ms), and accuracy is WORSE (misses relevant results). Option 3 (different rules for title/body) is inconsistent UX—confusing. Option 4 (user flag) adds complexity—for a simple CLI, default to case-insensitive without options. Advanced apps can add flags later, but start with helpful defaults. Case-insensitive search is covered in Lesson 5: Search and filter implementation.",
       source: "Lesson 5: Capstone - Note-Taking App"
     },
     {

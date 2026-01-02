@@ -691,7 +691,7 @@ Ready to master properties, encapsulation, and validation across real-world doma
 > "Create an Invoice class with amount property that:
 > - Accepts int or float
 > - Converts int to float
-> - Rejects negative, zero, or amounts < 0.01
+> - Rejects negative, zero, or amounts &lt; 0.01
 > - Raises TypeError for non-numeric types
 > - Raises ValueError with the specific problem ('Amount must be positive', 'Minimum is 0.01')
 >
@@ -714,7 +714,7 @@ Ready to master properties, encapsulation, and validation across real-world doma
 > "Create a Task class with:
 > - title, priority, due_date attributes (protected with _)
 > - priority property with @setter (validate 1-10)
-> - is_overdue computed property (True if due_date < now() and not done)
+> - is_overdue computed property (True if due_date &lt; now() and not done)
 > - days_until_due computed property (returns int days remaining)
 > - urgency_label computed property ('Critical', 'High', 'Medium', 'Low' based on priority)
 >

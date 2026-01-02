@@ -149,7 +149,7 @@ Google's multimodal approach. Handles voice, vision, and text in unified streams
 
 | Metric | Value |
 |--------|-------|
-| Latency | <300ms (varies by configuration) |
+| Latency | &lt;300ms (varies by configuration) |
 | Cost | Competitive with OpenAI |
 | Connection | Bidirectional streaming |
 | Features | Multimodal (voice + vision), affective dialog, proactive audio |
@@ -177,7 +177,7 @@ Native S2S excels when:
 
 - **Premium user experience matters**: Consumer voice assistants, high-touch customer service
 - **Emotional intelligence is required**: Mental health support, conflict resolution, sales
-- **Latency budget is tight**: Users expect instant response (< 300ms)
+- **Latency budget is tight**: Users expect instant response (&lt; 300ms)
 - **Budget allows**: The 3-10x cost premium is justified by value delivered
 
 ---
@@ -291,7 +291,7 @@ Understanding where latency accumulates helps you optimize the right components.
 
 | Delay | User Experience |
 |-------|-----------------|
-| < 200ms | Feels instant, natural conversation |
+| &lt; 200ms | Feels instant, natural conversation |
 | 200-400ms | Acceptable, slight awareness of AI |
 | 400-600ms | Noticeable delay, feels like thinking |
 | 600-1000ms | Clearly slow, interrupting flow |
@@ -351,7 +351,7 @@ A typical production cascaded pipeline:
 
 | Scenario | Recommended | Reasoning |
 |----------|-------------|-----------|
-| Consumer voice assistant with <500ms requirement | Native S2S | Latency is primary constraint, premium experience justifies cost |
+| Consumer voice assistant with &lt;500ms requirement | Native S2S | Latency is primary constraint, premium experience justifies cost |
 | High-volume contact center (10,000+ calls/day) | Cascaded | 3-10x cost savings at scale; 500ms acceptable for support calls |
 | Voice agent needing full transcripts for compliance | Cascaded | Transcripts are inherent to pipeline; S2S requires separate transcription |
 | Emotional support or mental health application | Native S2S | Emotional intelligence and tone matching are critical |
@@ -365,12 +365,12 @@ A typical production cascaded pipeline:
 Ask these questions in order:
 
 1. **What's your latency requirement?**
-   - < 300ms mandatory: Native S2S
+   - &lt; 300ms mandatory: Native S2S
    - 300-600ms acceptable: Either (evaluate cost)
    - > 600ms tolerable: Cascaded (optimize for cost)
 
 2. **What's your call volume?**
-   - < 1,000 calls/month: Either (cost difference is minor)
+   - &lt; 1,000 calls/month: Either (cost difference is minor)
    - 1,000-10,000 calls/month: Evaluate total cost carefully
    - > 10,000 calls/month: Cascaded likely wins on economics
 

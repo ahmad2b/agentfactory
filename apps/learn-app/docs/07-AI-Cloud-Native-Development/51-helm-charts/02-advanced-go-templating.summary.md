@@ -4,7 +4,7 @@ Go templating enables dynamic Kubernetes manifests through variables, pipelines,
 ### Key Mental Models
 - **Pipelines as Transformations**: The `|` operator chains functions like Unix pipes, transforming values step-by-step (e.g., `| upper | quote`)
 - **Scope as Context**: The `.` (dot) represents current context; `with` blocks change scope; `$` always refers to root context
-- **Named Operators**: Go uses word operators (`eq`, `ne`, `gt`, `lt`) not symbols (`==`, `!=`, `>`, `<`)
+- **Named Operators**: Go uses word operators (`eq`, `ne`, `gt`, `lt`) not symbols (`==`, `!=`, `>`, `&lt;`)
 - **Whitespace Control**: `{{-` and `-}}` strip whitespace to prevent broken YAML indentation
 
 ### Critical Patterns

@@ -1,11 +1,11 @@
 ### Core Concept
-Comparison operators evaluate whether a condition is true or false by asking yes/no questions about values. There are six operators (==, !=, >, <, >=, <=) that all return boolean values, enabling decision-making and validation throughout Python programs.
+Comparison operators evaluate whether a condition is true or false by asking yes/no questions about values. There are six operators (==, !=, >, &lt;, >=, &lt;=) that all return boolean values, enabling decision-making and validation throughout Python programs.
 
 ### Key Mental Models
 - **True/False as Values**: Comparison results are boolean values (not strings), usable in further logic and assignments
 - **Value vs. Type Equality**: `==` compares values regardless of type in most cases (5 == 5.0 is True), but type mismatches between different kinds (int vs. string) make values not equal
 - **Assignment vs. Comparison**: Single `=` assigns; double `==` compares. Confusing them causes SyntaxError in conditionals
-- **Magnitude Questions**: `>`, `<`, `>=`, `<=` all ask about ordering, with `=` in `>=` and `<=` meaning "or equal to"
+- **Magnitude Questions**: `>`, `&lt;`, `>=`, `&lt;=` all ask about ordering, with `=` in `>=` and `&lt;=` meaning "or equal to"
 
 ### Critical Patterns
 - Comparison always returns bool type: `5 > 3` returns `True` (bool), not the number 1

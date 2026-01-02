@@ -2,7 +2,7 @@
 Conditionals use `if`, `elif`, and `else` statements to make decisions based on conditions that evaluate to `True` or `False`. They control which code runs based on real-world circumstances your program needs to respond to.
 
 ### Key Mental Models
-- **Boolean Evaluation**: Comparison operators (`==`, `!=`, `>`, `<`, etc.) return `True` or `False`, forming the foundation of decisions
+- **Boolean Evaluation**: Comparison operators (`==`, `!=`, `>`, `&lt;`, etc.) return `True` or `False`, forming the foundation of decisions
 - **Sequential Decision Tree**: Python evaluates conditions top-to-bottom and stops at the first match; later branches never execute once a condition is true
 - **Nested Criteria**: Complex decisions often require checking one condition, then only if true, checking another condition (multi-level validation)
 - **Logical Operators**: `and`, `or`, and `not` combine multiple conditions to express complex real-world rules

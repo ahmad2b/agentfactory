@@ -1,5 +1,5 @@
 ### Core Concept
-Values override precedence hierarchy (values.yaml < -f file < --set) enables multi-environment deployments from a single chart, while schema validation prevents invalid configurations before rendering.
+Values override precedence hierarchy (values.yaml &lt; -f file &lt; --set) enables multi-environment deployments from a single chart, while schema validation prevents invalid configurations before rendering.
 
 ### Key Mental Models
 - **Precedence Hierarchy**: Later sources override earlier ones; --set has highest priority, values.yaml has lowest

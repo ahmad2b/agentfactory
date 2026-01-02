@@ -419,7 +419,7 @@ if most_expensive:
 **What bounded generics do:**
 
 - `T: Comparable` means "T can be any type that implements Comparable"
-- The function can now safely call `>`, `<`, `==` on items of type T
+- The function can now safely call `>`, `&lt;`, `==` on items of type T
 - Your IDE validates that the bound is satisfied before running code
 - Custom types automatically work if they implement the methods the Protocol requires
 

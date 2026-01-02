@@ -383,7 +383,7 @@ def measure_safety_utility(model, test_set):
 **Target ranges:**
 - Safety rate: >95% (refuse >95% of harmful requests)
 - Utility rate: >90% (complete >90% of legitimate requests)
-- False refusal rate: <10%
+- False refusal rate: &lt;10%
 
 ## Production Guardrails
 

@@ -881,7 +881,7 @@ When is TaskManager production-ready as a Digital FTE?
 ### Go/No-Go Decision
 
 **GO if**: All checklist items complete AND cost/revenue math works
-**NO-GO if**: Any safety validation fails OR margin < 50%
+**NO-GO if**: Any safety validation fails OR margin &lt; 50%
 
 TaskManager achieves full GO status.
 

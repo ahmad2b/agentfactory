@@ -1068,7 +1068,7 @@ Use this checklist to verify you've completed the entire capstone:
 - ✅ ArgoCD synced old image to cluster
 - ✅ Agent pods restarted with previous version
 - ✅ Verified agent works again
-- ✅ Total rollback time < 10 minutes
+- ✅ Total rollback time &lt; 10 minutes
 
 ### Advanced Extensions (Optional)
 - ⭐ Add ApplicationSet for multi-environment deployment (dev/staging/prod)

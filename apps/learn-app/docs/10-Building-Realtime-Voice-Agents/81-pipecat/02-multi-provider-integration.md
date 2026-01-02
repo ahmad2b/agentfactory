@@ -315,7 +315,7 @@ pipeline = Pipeline([
 | Provider | Latency | Cost | Unique Feature |
 |----------|---------|------|----------------|
 | OpenAI Realtime | 200-300ms | ~$0.10/min | Native function calling |
-| Gemini Live | <300ms | Competitive | Multimodal, affective |
+| Gemini Live | &lt;300ms | Competitive | Multimodal, affective |
 | Nova Sonic | ~250ms | ~$0.08/min | AWS ecosystem |
 
 ---

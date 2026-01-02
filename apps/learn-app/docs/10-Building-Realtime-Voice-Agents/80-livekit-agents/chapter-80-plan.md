@@ -91,7 +91,7 @@
 1. LEARNING-SPEC.md (specification before skill creation)
 2. Documentation-grounded skill creation
 
-**Cognitive Load Validation**: 2 concepts <= 10 limit (B1) -> WITHIN LIMIT
+**Cognitive Load Validation**: 2 concepts &lt;= 10 limit (B1) -> WITHIN LIMIT
 
 **Maps to Evals**: #1 (Skill Creation)
 
@@ -224,7 +224,7 @@
 2. Job scheduling and lifecycle
 3. WebRTC audio streaming integration
 
-**Cognitive Load Validation**: 3 concepts <= 10 limit (B1) -> WITHIN LIMIT
+**Cognitive Load Validation**: 3 concepts &lt;= 10 limit (B1) -> WITHIN LIMIT
 
 **Maps to Evals**: #2 (Architecture Understanding), #3 (Voice Pipeline Implementation)
 
@@ -349,7 +349,7 @@
 2. Barge-in and interruption handling
 3. MCP server integration for voice
 
-**Cognitive Load Validation**: 3 concepts <= 10 limit (B1-B2) -> WITHIN LIMIT
+**Cognitive Load Validation**: 3 concepts &lt;= 10 limit (B1-B2) -> WITHIN LIMIT
 
 **Maps to Evals**: #4 (Turn Detection Mastery), #5 (MCP Integration)
 
@@ -477,7 +477,7 @@
 1. Multi-agent handoff with context preservation
 2. Kubernetes deployment for voice agents
 
-**Cognitive Load Validation**: 2 concepts <= 10 limit (B2) -> WITHIN LIMIT
+**Cognitive Load Validation**: 2 concepts &lt;= 10 limit (B2) -> WITHIN LIMIT
 
 **Maps to Evals**: #6 (Multi-Agent Handoff), #7 (Production Readiness)
 
@@ -661,10 +661,10 @@ Lesson 3: Multi-Agent + K8s (requires all previous)
 - [x] No premature spec-driven content (that's Chapter 85 Capstone)
 
 **Cognitive Load Validation**:
-- [x] Lesson 0: 2 concepts <= 10 (B1 limit) PASS
-- [x] Lesson 1: 3 concepts <= 10 (B1 limit) PASS
-- [x] Lesson 2: 3 concepts <= 10 (B1-B2 limit) PASS
-- [x] Lesson 3: 2 concepts <= 10 (B2 limit) PASS
+- [x] Lesson 0: 2 concepts &lt;= 10 (B1 limit) PASS
+- [x] Lesson 1: 3 concepts &lt;= 10 (B1 limit) PASS
+- [x] Lesson 2: 3 concepts &lt;= 10 (B1-B2 limit) PASS
+- [x] Lesson 3: 2 concepts &lt;= 10 (B2 limit) PASS
 
 **L00 Pattern Requirements**:
 - [x] Lesson 0 creates skill from official documentation

@@ -117,7 +117,7 @@
 2. Provider selection strategy
 3. Specification-first design
 
-**Cognitive Load Validation**: 3 integration concepts (synthesis of known material) <= 10 limit (B2) -> WITHIN LIMIT
+**Cognitive Load Validation**: 3 integration concepts (synthesis of known material) &lt;= 10 limit (B2) -> WITHIN LIMIT
 
 **Maps to Evals**: #1 (Architecture Design), #2 (Provider Selection), #7 (Cost Target)
 
@@ -147,7 +147,7 @@
      - 99.5% availability
      - GDPR compliance for call recording (if enabled)
    - **Success Metrics**:
-     - P95 latency < 800ms
+     - P95 latency &lt; 800ms
      - Task creation success rate > 95%
      - User satisfaction > 4.0/5.0
 
@@ -175,7 +175,7 @@
    - **STT**: Deepgram Nova-3 ($0.0077/min, 90ms latency)
    - **LLM**: GPT-4o-mini ($0.0015/min, 200-400ms latency)
    - **TTS**: Cartesia Sonic-3 ($0.024/min, 40-90ms latency)
-   - **VAD**: Silero VAD (free, <1ms)
+   - **VAD**: Silero VAD (free, &lt;1ms)
    - **Total**: ~$0.033/min (within target)
    - Document provider selection with alternatives
 
@@ -307,7 +307,7 @@
 2. Multimodal integration (voice + vision)
 3. Conversation design patterns
 
-**Cognitive Load Validation**: 3 integration concepts <= 10 limit (B2) -> WITHIN LIMIT
+**Cognitive Load Validation**: 3 integration concepts &lt;= 10 limit (B2) -> WITHIN LIMIT
 
 **Maps to Evals**: #3 (Multimodal Integration), #4 (Natural Conversation), #8 (End-to-End Latency)
 
@@ -474,7 +474,7 @@
 1. Kubernetes voice deployment
 2. Observability and operations
 
-**Cognitive Load Validation**: 2 integration concepts <= 10 limit (B2-C1) -> WITHIN LIMIT
+**Cognitive Load Validation**: 2 integration concepts &lt;= 10 limit (B2-C1) -> WITHIN LIMIT
 
 **Maps to Evals**: #5 (Production Deployment), #6 (Observability), #7 (Cost Target)
 
@@ -745,7 +745,7 @@ Students demonstrate their production voice agent:
 | Criterion | Weight | Excellent | Satisfactory | Needs Improvement |
 |-----------|--------|-----------|--------------|-------------------|
 | Specification Quality | 20% | Complete, measurable, realistic | Mostly complete | Missing key requirements |
-| Implementation | 30% | All channels working, <800ms latency | 2/3 channels working | 1 channel working |
+| Implementation | 30% | All channels working, &lt;800ms latency | 2/3 channels working | 1 channel working |
 | Production Deployment | 25% | K8s + monitoring + alerting | K8s + monitoring | K8s only |
 | Cost Achievement | 15% | $0.03-0.07/min achieved | $0.07-0.10/min | >$0.10/min |
 | Documentation | 10% | Spec + runbook + architecture | Spec + architecture | Spec only |
@@ -769,9 +769,9 @@ Students demonstrate their production voice agent:
 - [x] All prior layers (1-3) assumed completed in Chapters 79-84
 
 **Cognitive Load Validation**:
-- [x] Lesson 1: 3 integration concepts <= 10 (B2 limit) PASS
-- [x] Lesson 2: 3 integration concepts <= 10 (B2 limit) PASS
-- [x] Lesson 3: 2 integration concepts <= 10 (B2-C1 limit) PASS
+- [x] Lesson 1: 3 integration concepts &lt;= 10 (B2 limit) PASS
+- [x] Lesson 2: 3 integration concepts &lt;= 10 (B2 limit) PASS
+- [x] Lesson 3: 2 integration concepts &lt;= 10 (B2-C1 limit) PASS
 
 **Capstone Requirements**:
 - [x] Composes existing skills (not creates new ones)

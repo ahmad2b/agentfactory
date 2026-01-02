@@ -138,7 +138,7 @@ An SLO is the **target value** for an SLI. It's your internal quality bar---the 
 
 An SLA is a **contractual commitment** with consequences---typically financial penalties or service credits when you fail to meet it. SLAs are business decisions owned by legal and product, not engineering.
 
-**The critical relationship**: SLA < SLO < typical performance
+**The critical relationship**: SLA &lt; SLO &lt; typical performance
 
 | Layer | Target | Buffer |
 |-------|--------|--------|
@@ -240,7 +240,7 @@ The power of error budgets comes from policy---agreed-upon actions based on budg
 | **> 50%** | Ship features normally; experimental deployments allowed |
 | **25-50%** | Increased review for risky changes; prioritize reliability work |
 | **10-25%** | Feature freeze except critical fixes; focus on stability |
-| **< 10%** | Emergency mode: no deployments except to improve reliability |
+| **&lt; 10%** | Emergency mode: no deployments except to improve reliability |
 | **Exhausted** | Complete freeze until budget resets or SLO is renegotiated |
 
 **This makes reliability objective**. Instead of arguing "Is this deployment safe?", you ask "Do we have budget to absorb if it fails?"
@@ -457,7 +457,7 @@ Access Grafana and find the dashboard under "Task API SLO Dashboard".
 | Panel | What It Shows | Action Triggers |
 |-------|---------------|-----------------|
 | **Current Availability** | Real-time SLI vs SLO | Green = meeting SLO; Red = investigate now |
-| **Error Budget Remaining** | How much budget left | < 25% = slow deployments; < 10% = freeze |
+| **Error Budget Remaining** | How much budget left | &lt; 25% = slow deployments; &lt; 10% = freeze |
 | **Burn Rate** | How fast consuming budget | > 6x = investigate; > 14.4x = page immediately |
 | **30-Day Trend** | Historical availability | Identifies patterns and recurring issues |
 

@@ -11,14 +11,14 @@ skills:
     category: "Technical"
     bloom_level: "Understand + Apply"
     digcomp_area: "Problem-Solving"
-    measurable_at_this_level: "Student can write (x > 5) and (x < 10), predict True/False results, explain when each operator returns True"
+    measurable_at_this_level: "Student can write (x > 5) and (x &lt; 10), predict True/False results, explain when each operator returns True"
 
   - name: "Combining Comparisons into Complex Conditions"
     proficiency_level: "B1"
     category: "Technical"
     bloom_level: "Analyze"
     digcomp_area: "Problem-Solving"
-    measurable_at_this_level: "Student can analyze expression like not (x > 5 or y < 3) and trace evaluation step-by-step with AI support"
+    measurable_at_this_level: "Student can analyze expression like not (x > 5 or y &lt; 3) and trace evaluation step-by-step with AI support"
 
   - name: "Truth Tables and Logical Reasoning"
     proficiency_level: "A2"

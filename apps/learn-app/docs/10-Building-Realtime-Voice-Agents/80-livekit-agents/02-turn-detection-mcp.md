@@ -411,7 +411,7 @@ Different operations benefit from different filler patterns:
 
 | Operation Type | Filler Duration | Example |
 |----------------|-----------------|---------|
-| Database query (<500ms) | Short/none | "Here it is..." |
+| Database query (&lt;500ms) | Short/none | "Here it is..." |
 | API call (500-2000ms) | Medium | "Let me check that for you..." |
 | Complex operation (2-5s) | Progressive | "Working on that... almost there..." |
 | Very long (>5s) | With updates | "This might take a moment. [update every 3s]" |
@@ -455,7 +455,7 @@ task_tools = [
 | 1-10 | 95%+ | Optimal for voice agents |
 | 11-20 | 90%+ | Acceptable with clear descriptions |
 | 21-50 | 75-90% | Consider routing to specialized agents |
-| 50+ | <75% | Split into multiple agents |
+| 50+ | &lt;75% | Split into multiple agents |
 
 ---
 

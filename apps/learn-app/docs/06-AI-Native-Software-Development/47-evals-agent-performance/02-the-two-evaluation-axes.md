@@ -95,7 +95,7 @@ Objective evaluations use deterministic functions to verify correctness. The gra
 
 | Criterion | How Code Checks It |
 |-----------|-------------------|
-| Response under 500 tokens | `len(tokenize(response)) < 500` |
+| Response under 500 tokens | `len(tokenize(response)) &lt; 500` |
 | Contains required JSON fields | `set(required_keys).issubset(response.keys())` |
 | Called the expected tool | `"search_database" in trace.tool_calls` |
 | Output matches regex pattern | `re.match(pattern, output) is not None` |
@@ -505,7 +505,7 @@ After completing this lesson, consider updating your agent-evals skill with quad
 
 **Scenario 2**: Q3 (Objective + No Ground Truth)
 - Ground truth: No (there's no single "correct" description, just a constraint)
-- Code can verify: Yes (`len(description) < 500`)
+- Code can verify: Yes (`len(description) &lt; 500`)
 - Grader: Character/word count function
 
 **Scenario 3**: Q4 (Subjective + No Ground Truth)

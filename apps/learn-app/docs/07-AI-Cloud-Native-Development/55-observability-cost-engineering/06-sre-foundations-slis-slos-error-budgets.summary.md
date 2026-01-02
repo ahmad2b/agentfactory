@@ -4,13 +4,13 @@ SLIs measure what users experience (availability, latency), SLOs set internal ta
 ### Key Mental Models
 - **SLI**: Quantitative measure of service level (successful_requests / total_requests = availability)
 - **SLO**: Target value for SLI with buffer from typical performance; internal bar, not customer promise
-- **SLA**: Contractual commitment with financial consequences; SLA < SLO < typical performance
+- **SLA**: Contractual commitment with financial consequences; SLA &lt; SLO &lt; typical performance
 - **Error Budget**: 100% - SLO = monthly unreliability allowance (99.9% SLO = 43.2 min/month)
 
 ### Critical Patterns
 - Availability SLI: `sum(rate(requests{status!~"5.."}[5m])) / sum(rate(requests[5m]))`
 - Error budget consumption: `error_ratio / (1 - SLO)` gives burn rate (1x = normal, 14.4x = critical)
-- Budget policy: >50% ship normally, 25-50% increased review, 10-25% freeze, <10% emergency
+- Budget policy: >50% ship normally, 25-50% increased review, 10-25% freeze, &lt;10% emergency
 - Recording rules: Pre-compute `task_api:error_budget_remaining:ratio30d` for instant dashboards
 
 ### AI Collaboration Keys

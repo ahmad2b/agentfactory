@@ -250,7 +250,7 @@ Create scenarios where AI must:
 > ```python
 > def parse_age(age_str: str) -> int:
 >     age = int(age_str)
->     if age < 0:
+>     if age &lt; 0:
 >         raise ValueError(f"Age cannot be negative, got {age}")
 >     return age
 > ```
@@ -265,7 +265,7 @@ Create scenarios where AI must:
 
 **Expected AI Response**:
 1. Success → returns 25
-2. ValueError from `raise` statement (age < 0)
+2. ValueError from `raise` statement (age &lt; 0)
 3. ValueError from `int()` call (invalid literal)
 4. ValueError from `int()` call (empty string)
 

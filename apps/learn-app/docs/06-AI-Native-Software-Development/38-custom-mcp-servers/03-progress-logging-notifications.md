@@ -480,7 +480,7 @@ async def multi_phase_operation(
     return summary
 ```
 
-### Pattern 4: Short Operations (< 2 seconds)
+### Pattern 4: Short Operations (&lt; 2 seconds)
 
 **When**: Operations that complete very quickly
 - Simple API calls

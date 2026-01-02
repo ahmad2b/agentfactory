@@ -8,7 +8,7 @@ Specifications have four core sections (Intent, Success Criteria, Constraints, N
 - **Memory Banks vs Specs**: Memory banks are permanent organizational knowledge (security rules, tech stack); specs are temporary feature blueprints (password reset system, CSV exporter)
 
 ### Critical Patterns
-- **Good vs Bad Language**: "System should handle errors gracefully" (bad) vs "Raises FileNotFoundError if file missing" (good); "Make it fast" (bad) vs "Response time <200ms for 95th percentile at 1000 req/sec" (good)
+- **Good vs Bad Language**: "System should handle errors gracefully" (bad) vs "Raises FileNotFoundError if file missing" (good); "Make it fast" (bad) vs "Response time &lt;200ms for 95th percentile at 1000 req/sec" (good)
 - **Quality Checklist**: Clear Intent? (answers "why") → Testable Criteria? (could write tests) → Explicit Constraints? (edge cases answered) → Prevents Scope Creep? (non-goals defer features) → No Ambiguity? (two developers implement identically)
 - **Common Pitfalls**: Vague language, missing edge cases, over-specification (premature optimization), conflating spec with implementation (WHAT vs HOW), forgetting rationale
 

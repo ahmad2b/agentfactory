@@ -337,7 +337,7 @@ Fine-tuning has upfront costs and ongoing maintenance. Make sure the ROI is posi
 | **Training Runs** | $5-50 | Using efficient methods (LoRA) |
 | **Evaluation** | 10-20 hours | Test design, human eval |
 | **Deployment Setup** | 10-20 hours | Infrastructure, integration |
-| **Total** | 40-80 hours + <$100 | Initial version |
+| **Total** | 40-80 hours + &lt;$100 | Initial version |
 
 ### Ongoing Costs
 
@@ -374,7 +374,7 @@ Example:
 Break-Even = $6,000 / $1,500 = 4 months
 ```
 
-If break-even is <6 months and strategic value is high, fine-tuning is justified.
+If break-even is &lt;6 months and strategic value is high, fine-tuning is justified.
 
 ## Decision Framework Summary
 
@@ -403,7 +403,7 @@ Count anti-indicators present:
 - [ ] Rapidly changing requirements
 - [ ] Low query volume
 - [ ] Exploration phase
-- [ ] Insufficient data (<1K examples)
+- [ ] Insufficient data (&lt;1K examples)
 - [ ] Prompts already working
 
 ### Phase 4: Calculate and Decide

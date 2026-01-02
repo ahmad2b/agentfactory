@@ -375,7 +375,7 @@ Let's start with the token blacklist. Since this is MVP, would you prefer in-mem
 | Utilization > 80% AND session > 60 minutes | Create checkpoint NOW |
 | Utilization > 70% AND remaining work > 30 minutes | Plan checkpoint soon |
 | Degradation symptoms detected | Create checkpoint regardless |
-| Utilization < 70% | Continue working |
+| Utilization &lt; 70% | Continue working |
 
 **Principle**: Create checkpoints **before** degradation becomes severe, not after.
 

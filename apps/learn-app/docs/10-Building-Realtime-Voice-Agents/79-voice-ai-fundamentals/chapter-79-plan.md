@@ -82,7 +82,7 @@
 2. Framework-first vs API-first thinking
 3. LiveKit vs Pipecat strategic positioning
 
-**Cognitive Load Validation**: 3 concepts <= 10 limit (B1) -> WITHIN LIMIT
+**Cognitive Load Validation**: 3 concepts &lt;= 10 limit (B1) -> WITHIN LIMIT
 
 **Maps to Evals**: #1 (Landscape Understanding), #2 (Framework Decision)
 
@@ -178,7 +178,7 @@
 2. Cascaded Pipeline architecture
 3. Latency budget decomposition
 
-**Cognitive Load Validation**: 3 concepts <= 10 limit (B1) -> WITHIN LIMIT
+**Cognitive Load Validation**: 3 concepts &lt;= 10 limit (B1) -> WITHIN LIMIT
 
 **Maps to Evals**: #3 (Architecture Selection), #4 (Latency Budget)
 
@@ -210,7 +210,7 @@
    - Breakdown: 40ms mic → 90ms STT → 200ms LLM → 75ms TTS
    - Why each component matters
    - Which component to optimize for your use case
-   - Human perception: <300ms feels instant, >500ms feels slow
+   - Human perception: &lt;300ms feels instant, >500ms feels slow
 
 5. **Decision Matrix: When to Use Which** (~5 min)
    - Native S2S when: Premium experience matters, budget allows, emotional intelligence needed
@@ -287,7 +287,7 @@
 1. Voice AI technology stack components (STT, TTS, VAD)
 2. Transport protocols (WebRTC vs WebSocket)
 
-**Cognitive Load Validation**: 2 concepts <= 10 limit (B1) -> WITHIN LIMIT
+**Cognitive Load Validation**: 2 concepts &lt;= 10 limit (B1) -> WITHIN LIMIT
 
 **Maps to Evals**: #5 (Stack Components)
 
@@ -315,7 +315,7 @@
 4. **Voice Activity Detection (VAD)** (~5 min)
    - Why VAD matters: Detect when user is speaking vs silence
    - Turn-taking: Knowing when to interrupt, when to wait
-   - **Silero VAD**: Industry standard, <1ms latency, free/open
+   - **Silero VAD**: Industry standard, &lt;1ms latency, free/open
    - Semantic turn detection: Beyond acoustic to semantic understanding
    - LiveKit's innovation: Transformer-based turn detection
 
@@ -451,9 +451,9 @@ After this conceptual foundation:
 - [x] No spec-driven content (Layer 4 is Chapter 85 Capstone)
 
 **Cognitive Load Validation**:
-- [x] Lesson 1: 3 concepts <= 10 (B1 limit) PASS
-- [x] Lesson 2: 3 concepts <= 10 (B1 limit) PASS
-- [x] Lesson 3: 2 concepts <= 10 (B1 limit) PASS
+- [x] Lesson 1: 3 concepts &lt;= 10 (B1 limit) PASS
+- [x] Lesson 2: 3 concepts &lt;= 10 (B1 limit) PASS
+- [x] Lesson 3: 2 concepts &lt;= 10 (B1 limit) PASS
 
 **Conceptual Chapter Requirements**:
 - [x] Essay-style sections (not code-focused lessons)

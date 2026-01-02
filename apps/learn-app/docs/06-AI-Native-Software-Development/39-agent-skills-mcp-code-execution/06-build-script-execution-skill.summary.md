@@ -8,7 +8,7 @@ Build a skill that automates write-execute-analyze loop. Components: generate_co
 - **Convergence validation**: All required fields present + correct format + no errors + edge cases handled
 
 ### Critical Patterns
-- Main loop: While iteration < max: generate/execute/check convergence; if error: analyze/fix/retry
+- Main loop: While iteration &lt; max: generate/execute/check convergence; if error: analyze/fix/retry
 - Execution safety: subprocess with timeout, capture stdout/stderr, return (success, output, error)
 - Convergence check: Parse output, verify required fields, validate format, check domain constraints
 - Error recovery prompts: Show error + code + spec → ask for specific fix

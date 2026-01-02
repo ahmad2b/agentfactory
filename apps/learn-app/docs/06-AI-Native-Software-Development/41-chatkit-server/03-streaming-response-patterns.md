@@ -29,7 +29,7 @@ skills:
     measurable_at_this_level: "Student identifies and fixes async/await issues in streaming code"
 
 learning_objectives:
-  - objective: "Implement AsyncIterator for ThreadStreamEvent streaming with <100ms latency per token"
+  - objective: "Implement AsyncIterator for ThreadStreamEvent streaming with &lt;100ms latency per token"
     proficiency_level: "B1"
     bloom_level: "Apply"
     assessment_method: "Student creates streaming respond() method that delivers tokens progressively"

@@ -162,7 +162,7 @@ Test your understanding of UV package management, dependency handling, code qual
         "UV blocks all installations until you downgrade"
       ],
       correctOption: 0,
-      explanation: "UV performs dependency resolution: if Package A needs `requests>=2.30.0` and Package B needs `requests<3.0.0`, UV finds a version satisfying both (like `2.32.0`). If requirements are truly incompatible (A needs `>=3.0`, B needs `<3.0`), UV reports the conflict and suggests solutions (update one package, use older version, find alternative). UV doesn't install multiple versions of the same package in one environment—that would cause import chaos. It doesn't blindly choose the newest—it respects version constraints. It doesn't block everything—it only fails when constraints are mathematically unsatisfiable.",
+      explanation: "UV performs dependency resolution: if Package A needs `requests>=2.30.0` and Package B needs `requests&lt;3.0.0`, UV finds a version satisfying both (like `2.32.0`). If requirements are truly incompatible (A needs `>=3.0`, B needs `&lt;3.0`), UV reports the conflict and suggests solutions (update one package, use older version, find alternative). UV doesn't install multiple versions of the same package in one environment—that would cause import chaos. It doesn't blindly choose the newest—it respects version constraints. It doesn't block everything—it only fails when constraints are mathematically unsatisfiable.",
       source: "Lesson 4: Managing Dependencies with AI"
     },
     {

@@ -6,78 +6,50 @@ description: "Build your Helm skill first, then learn to understand and refine i
 
 # Chapter 51: Helm Charts for AI Services
 
-**You will build a Helm skill BEFORE you learn Helm.**
+You build the `helm-chart` skill first, then refine it through templating, testing, and distribution patterns so you can ship production-ready charts for your agents.
 
-This chapter follows the **Skill-First Learning Pattern**: In Lesson 0, you create a `helm-chart` skill using tools from Chapter 5. Then you spend the chapter understanding what you built and making it better. By the end, you don't just "know Helm"—you OWN a production-ready skill.
+---
 
-## The Skill-First Arc
+## Goals
 
-```
-L00: Build Your Helm Skill (25 min)
-  │   └── Clone skills-lab, fetch docs, create skill
-  │
-  ├── L01: Helm Intro
-  │   └── Understand what your skill generates
-  │
-  ├── L02-04: Templating Foundation
-  │   └── Go templates, helpers, values
-  │
-  ├── L05-09: Advanced Patterns
-  │   └── Dependencies, hooks, testing, OCI, library
-  │
-  └── L10-12: AI Collaboration & Capstone
-      └── AI-assisted, production chart, skill finalization
-```
+- Master Helm templating (Go templates, helpers, values)
+- Design multi-environment charts with schema validation
+- Compose dependencies and hooks for lifecycle control
+- Test and lint charts before release
+- Publish and consume charts from OCI registries
+- Capture the patterns in a reusable Helm skill
+
+---
+
+## Lesson Progression
+
+| # | Lesson | Focus |
+|---|--------|-------|
+| **0** | Build Your Helm Skill | Scaffold from official docs |
+| 1 | Helm Introduction | Chart basics and what the skill generates |
+| 2-4 | Templating Foundation | Templates, helpers, values hierarchy |
+| 5-6 | Advanced Patterns | Dependencies, hooks, lifecycle |
+| 7 | Testing Charts | Linting and template debugging |
+| 8 | OCI Registries | Push/pull/install from OCI |
+| 9 | Library Charts | Standardized building blocks |
+| 10 | AI-Assisted Development | Use AI to author/refine charts |
+| **11** | Capstone: Production Chart | Ship a production-ready chart |
+| 12 | Finalize Helm Skill | Package prompts and patterns |
+
+Each lesson ends with a skill reflection: test, find gaps, and improve the skill.
+
+---
+
+## Outcome & Method
+
+You finish with a production Helm chart for your Kubernetes-deployed agent plus a refined Helm skill. The chapter follows the 4-Layer method: foundational templating → advanced composition → AI-assisted authoring → spec-driven capstone.
+
+---
 
 ## Prerequisites
 
-**Required from Chapter 50:**
-- Kubernetes architecture (control plane, workers, declarative model)
-- Core primitives: Pods, Deployments, Services, ConfigMaps, Secrets
-- Security: RBAC, health checks
-- Resource management: Requests/limits, HPA
-- Docker Desktop Kubernetes cluster and kubectl operations
-
-**Proficiency Level:** B1-B2 (Intermediate to Upper-Intermediate)
-
-## Chapter Structure
-
-| # | Lesson | Your Skill Improves |
-|---|--------|---------------------|
-| **0** | **Build Your Helm Skill** | **Created from official docs** |
-| 1 | Introduction to Helm | Understand: what skill generates |
-| 2 | Advanced Go Templating | Refine: better templates |
-| 3 | Named Templates & Helpers | Add: _helpers.tpl patterns |
-| 4 | Values Deep Dive | Add: multi-environment configs |
-| 5 | Chart Dependencies | Add: subchart composition |
-| 6 | Helm Hooks & Lifecycle | Add: hook patterns |
-| 7 | Testing Your Charts | Add: lint/test patterns |
-| 8 | OCI Registries | Add: distribution patterns |
-| 9 | Library Charts | Add: standardization |
-| 10 | AI-Assisted Development | Refine: AI collaboration |
-| **11** | **Capstone: Production Chart** | **Production-ready** |
-| 12 | Finalize Helm Skill | **Complete asset** |
-
-## Every Lesson Has Skill Reflection
-
-Each lesson ends with **"Reflect on Your Skill"**:
-
-1. **Test**: Does your skill handle this lesson's concepts?
-2. **Identify gaps**: What's missing?
-3. **Improve**: Add or refine the capability
-
-By Lesson 12, you've tested and improved your skill 11+ times.
-
-## What You'll Learn
-
-By the end of this chapter, you'll be able to:
-
-- **Master Advanced Templating**: Variables, pipelines, flow control, and named templates
-- **Design Multi-Environment Charts**: Values hierarchy, schema validation, environment-specific configs
-- **Compose Chart Dependencies**: Integrate PostgreSQL, Redis, and other subcharts
-- **Orchestrate with Hooks**: Pre-install migrations, post-upgrade notifications, test hooks
-- **Validate Charts**: Linting, template debugging, and integration testing
-- **Distribute via OCI**: Push, pull, and install from OCI-compliant registries
+- Chapter 50 Kubernetes fundamentals (Pods, Deployments, Services, ConfigMaps, Secrets, RBAC, HPA)
+- Working Docker Desktop Kubernetes cluster and kubectl access
 - **Create Library Charts**: Organizational standards that enforce consistency
 - **Build Reusable Intelligence**: A Helm Chart Architect skill for AI-native development
 

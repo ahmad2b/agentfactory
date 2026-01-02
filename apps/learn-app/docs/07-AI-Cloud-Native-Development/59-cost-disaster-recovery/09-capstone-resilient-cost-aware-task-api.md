@@ -660,9 +660,9 @@ P95 latency: 245ms. Under the 500ms target.
 | SC-005: 30-day retention | 720h | 720h | PASS |
 | SC-006: Pre-backup hook success | Runs | Succeeded | PASS |
 | SC-007: Restore within RTO | 30 min | 2m 15s | PASS |
-| SC-008: Pod recovery time | < 30s | 4s | PASS |
+| SC-008: Pod recovery time | &lt; 30s | 4s | PASS |
 | SC-009: No 5xx during failure | 0 | 0 | PASS |
-| SC-010: P95 latency during failure | < 500ms | 245ms | PASS |
+| SC-010: P95 latency during failure | &lt; 500ms | 245ms | PASS |
 
 **All success criteria verified.**
 

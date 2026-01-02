@@ -595,7 +595,7 @@ Test your understanding of Python's three fundamental collection types: lists (m
         "Mixed lists need custom comparison function key"
       ],
       correctOption: 1,
-      explanation: "Python can't compare different types for ordering: '5' < 3 raises TypeError: '<' not supported between instances of 'str' and 'int'. sort() needs to compare items, which fails with mixed types. Option 1 is close but imprecise—the issue is comparison, not reverse. Option 3 is close but sort() doesn't check types upfront; it fails when comparing. Option 4 suggests a workaround (key parameter for custom comparison) but doesn't explain the root cause. The solution: ensure all items are comparable (all ints, all strings, or use key=str to convert during comparison). Understanding type compatibility for operations prevents errors.",
+      explanation: "Python can't compare different types for ordering: '5' &lt; 3 raises TypeError: '&lt;' not supported between instances of 'str' and 'int'. sort() needs to compare items, which fails with mixed types. Option 1 is close but imprecise—the issue is comparison, not reverse. Option 3 is close but sort() doesn't check types upfront; it fails when comparing. Option 4 suggests a workaround (key parameter for custom comparison) but doesn't explain the root cause. The solution: ensure all items are comparable (all ints, all strings, or use key=str to convert during comparison). Understanding type compatibility for operations prevents errors.",
       source: "Lesson 4: Lists Sorting and Advanced Methods"
     },
     {

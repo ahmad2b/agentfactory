@@ -396,7 +396,7 @@ Can your ops team manage:
 
 ### Pattern 1: Single Stateful Instance
 
-**When:** < 100 concurrent clients, features matter
+**When:** &lt; 100 concurrent clients, features matter
 
 ```
 Clients → Reverse Proxy → MCP Server (stateful, streaming)

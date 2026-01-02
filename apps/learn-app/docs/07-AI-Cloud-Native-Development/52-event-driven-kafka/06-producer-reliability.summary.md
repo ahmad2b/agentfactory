@@ -9,7 +9,7 @@ Production-grade Kafka producers require proper acknowledgment levels (`acks=all
 
 ### Critical Patterns
 - `acks=all` + `enable.idempotence=True` for critical business events
-- `max.in.flight.requests.per.connection <= 5` required for idempotence
+- `max.in.flight.requests.per.connection &lt;= 5` required for idempotence
 - `delivery.timeout.ms` controls total retry window
 - Dead letter queue pattern for permanently failed messages
 

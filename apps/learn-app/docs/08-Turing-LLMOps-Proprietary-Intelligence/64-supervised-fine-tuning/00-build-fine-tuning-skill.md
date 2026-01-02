@@ -300,7 +300,7 @@ training_args = TrainingArguments(
 |----------|--------------|-----------|
 | Standard SFT | 2e-4 | Default for LoRA fine-tuning |
 | Continued pre-training | 5e-5 | Gentler for knowledge preservation |
-| Small datasets (<1K) | 1e-4 | Avoid overfitting |
+| Small datasets (&lt;1K) | 1e-4 | Avoid overfitting |
 | Large datasets (>10K) | 2e-4 to 5e-4 | Can be more aggressive |
 
 ## Unsloth Optimization

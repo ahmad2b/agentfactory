@@ -316,7 +316,7 @@ except Exception as e:
 
 ## Comparable Data with order=True
 
-Sometimes you need to sort objects. The `order=True` parameter generates comparison methods (`<`, `>`, `<=`, `>=`):
+Sometimes you need to sort objects. The `order=True` parameter generates comparison methods (`&lt;`, `>`, `&lt;=`, `>=`):
 
 ```python
 from dataclasses import dataclass
@@ -618,7 +618,7 @@ Ask your AI companion:
 
 **Expected AI Response** (summary):
 - **frozen=True**: Makes instances immutable (can't change attributes after creation)
-- **order=True**: Generates `<`, `<=`, `>`, `>=` comparison methods
+- **order=True**: Generates `&lt;`, `&lt;=`, `>`, `>=` comparison methods
 - **init=False**: Don't auto-generate `__init__()` (you write it yourself)
 - **repr=False**: Don't auto-generate `__repr__()`
 - **eq=False**: Don't auto-generate `__eq__()`
@@ -829,9 +829,9 @@ class User:
 
     def __post_init__(self):
         """Validate fields after __init__."""
-        if len(self.name) < 2:
+        if len(self.name) &lt; 2:
             raise ValueError("Name too short")
-        if self.age < 0:
+        if self.age &lt; 0:
             raise ValueError("Age cannot be negative")
 
 u = User("A", 25)  # Error: Name too short

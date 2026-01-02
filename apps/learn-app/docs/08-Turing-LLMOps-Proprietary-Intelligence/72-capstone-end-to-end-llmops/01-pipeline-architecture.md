@@ -115,8 +115,8 @@ training_data = format_for_training(cleaned_data + synthetic_data)
 |--------|-----------|
 | Example count | >= 200 |
 | Format validity | 100% |
-| Deduplication ratio | < 5% duplicates |
-| Token distribution | Mean < 2048 tokens |
+| Deduplication ratio | &lt; 5% duplicates |
+| Token distribution | Mean &lt; 2048 tokens |
 
 ### Stage 2: Training Orchestration
 
@@ -152,9 +152,9 @@ trainer.train()
 **Quality Gate:**
 | Metric | Threshold |
 |--------|-----------|
-| Final loss | < 0.5 |
+| Final loss | &lt; 0.5 |
 | Validation loss | Converging (not diverging) |
-| Training time | < 2 hours (Colab limit) |
+| Training time | &lt; 2 hours (Colab limit) |
 
 ### Stage 3: Evaluation Integration
 
@@ -228,8 +228,8 @@ agent_config = generate_agent_config(model_name="task-api-v1")
 |--------|-----------|
 | Deployment success | True |
 | Health check | Responding |
-| Latency | < 500ms first token |
-| Memory usage | < 8GB |
+| Latency | &lt; 500ms first token |
+| Memory usage | &lt; 8GB |
 
 ## Stage Dependencies
 

@@ -190,7 +190,7 @@ This pattern—checking before using—is good defensive programming.
 
 Now let's bring everything together. You'll create a calculator that demonstrates:
 - **Arithmetic operators** (Lesson 1): `+`, `-`, `*`, `/`, `//`, `%`
-- **Comparison operators** (Lesson 2): `==`, `!=`, `>`, `<`, `>=`, `<=`
+- **Comparison operators** (Lesson 2): `==`, `!=`, `>`, `&lt;`, `>=`, `&lt;=`
 - **Logical operators** (Lesson 3): `and`, `or`, `not`
 - **Assignment operators** (Lesson 4): `=`, `+=`, `-=`, `*=`, `/=`
 - **Type validation**: Using `type()` to verify results
@@ -336,7 +336,7 @@ Calculation complete!
 Ready to integrate all 4 operator types into one comprehensive calculator?
 
 **🔍 Explore Multi-Operator Integration:**
-> "Show me how arithmetic, comparison, logical, and assignment operators work together. Create a calculator that: (1) performs 7 arithmetic ops (+,-,*,/,//,%,**) on two numbers, (2) uses comparisons to validate result > 0 and < 1000, (3) uses logical operators to check (num1 > 0) and (num2 > 0), (4) uses += to track running total. Explain how each operator type serves a different purpose."
+> "Show me how arithmetic, comparison, logical, and assignment operators work together. Create a calculator that: (1) performs 7 arithmetic ops (+,-,*,/,//,%,**) on two numbers, (2) uses comparisons to validate result > 0 and &lt; 1000, (3) uses logical operators to check (num1 > 0) and (num2 > 0), (4) uses += to track running total. Explain how each operator type serves a different purpose."
 
 **🎯 Practice Comprehensive Validation:**
 > "Build a production-ready calculator with type hints and validation: (1) Check num2 != 0 before division operations, (2) Validate inputs are positive using logical operators, (3) Compare results against expected ranges, (4) Use assignment operators to accumulate totals, (5) Check if proposed variable names avoid Python keywords using keyword.iskeyword(). Show complete code with clear error messages."

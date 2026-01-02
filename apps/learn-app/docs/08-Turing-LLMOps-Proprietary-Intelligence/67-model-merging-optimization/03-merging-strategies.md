@@ -37,7 +37,7 @@ learning_objectives:
   - objective: "Configure DARE-TIES for aggressive compression while maintaining capability"
     proficiency_level: "B2"
     bloom_level: "Apply"
-    assessment_method: "Student achieves 70%+ parameter drop with <5% capability degradation"
+    assessment_method: "Student achieves 70%+ parameter drop with &lt;5% capability degradation"
 
   - objective: "Evaluate merged models systematically to validate capability preservation"
     proficiency_level: "B2"

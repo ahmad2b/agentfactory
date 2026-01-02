@@ -267,10 +267,10 @@ while count <= 5:
 
 **How it works:**
 
-1. Before each iteration, Python checks: `Is count <= 5?`
+1. Before each iteration, Python checks: `Is count &lt;= 5?`
 2. If `True`, the indented code runs
 3. `count += 1` increases `count` by 1
-4. Loop repeats until `count` becomes 6 (then `count <= 5` is `False`)
+4. Loop repeats until `count` becomes 6 (then `count &lt;= 5` is `False`)
 5. Loop ends
 
 **CRITICAL:** The loop variable (`count`) MUST change inside the loop. If it doesn't, the condition stays `True` forever, creating an **infinite loop**.
@@ -312,7 +312,7 @@ while count <= 5:
 
 **What happens:**
 - `count` starts at 1
-- Condition `count <= 5` is `True`
+- Condition `count &lt;= 5` is `True`
 - Loop prints 1, then checks condition again
 - `count` is still 1, so condition is still `True`
 - Loop prints 1 again... and again... forever

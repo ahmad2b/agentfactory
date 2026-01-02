@@ -233,7 +233,7 @@ Cost alone rarely justifies fine-tuning. These factors do:
 
 ### 2. Latency Requirements
 
-**Scenario**: Your application needs <200ms response time.
+**Scenario**: Your application needs &lt;200ms response time.
 
 **Analysis**:
 - GPT-4o-mini: 500-2000ms typical

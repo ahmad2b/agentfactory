@@ -265,10 +265,10 @@ LLMs use **special tokens** to mark structure. These aren't regular words but si
 
 | Token | Purpose | Example ID |
 |-------|---------|-----------|
-| BOS (Begin of Sequence) | Marks start of input | `<\|begin_of_text\|>` |
-| EOS (End of Sequence) | Marks end of generation | `<\|eot_id\|>` |
+| BOS (Begin of Sequence) | Marks start of input | `&lt;\|begin_of_text\|>` |
+| EOS (End of Sequence) | Marks end of generation | `&lt;\|eot_id\|>` |
 | PAD (Padding) | Fills to uniform length | `<pad>` |
-| System/User/Assistant | Marks conversation roles | `<\|start_header_id\|>` |
+| System/User/Assistant | Marks conversation roles | `&lt;\|start_header_id\|>` |
 
 ### Chat Templates
 

@@ -319,7 +319,7 @@ def evaluate_safety(model, red_team_prompts):
 ```
 
 **Safety thresholds for deployment:**
-- Harmful rate: < 5% (ideally < 1%)
+- Harmful rate: &lt; 5% (ideally &lt; 1%)
 - Refusal rate on harmful prompts: > 90%
 
 ## The Metric Selection Framework
@@ -357,7 +357,7 @@ Q5: Is safety critical?
 | 2 | Schema compliance | > 95% |
 | 3 | Action accuracy | > 90% |
 | 4 | Field correctness | > 85% |
-| 5 | Safety | Harmful < 5% |
+| 5 | Safety | Harmful &lt; 5% |
 
 ### Customer Support Bot
 
@@ -367,7 +367,7 @@ Q5: Is safety critical?
 | 2 | Factual accuracy | > 95% |
 | 3 | Tone appropriateness | > 4.5/5.0 |
 | 4 | Resolution rate | > 80% |
-| 5 | Safety | Harmful < 1% |
+| 5 | Safety | Harmful &lt; 1% |
 
 ### Code Generation Assistant
 
@@ -375,7 +375,7 @@ Q5: Is safety critical?
 |----------|--------|-----------|
 | 1 | Syntax validity | > 99% |
 | 2 | Test pass rate | > 80% |
-| 3 | Code quality (lint) | < 5 issues |
+| 3 | Code quality (lint) | &lt; 5 issues |
 | 4 | Security (no vulnerabilities) | 0 critical |
 | 5 | Efficiency | Within 2x optimal |
 

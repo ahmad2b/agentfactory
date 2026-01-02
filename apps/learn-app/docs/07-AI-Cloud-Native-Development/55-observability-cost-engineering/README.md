@@ -6,37 +6,43 @@ description: "Master the three pillars of observability (metrics, tracing, loggi
 
 # Chapter 55: Observability & Cost Engineering
 
-**You will build an observability skill BEFORE you learn observability.**
+You build the `observability-cost-engineer` skill first, then implement the three pillars (metrics, traces, logs), SRE practices, and FinOps for your deployed agents.
 
-Your agent is deployed and automated through GitOps. But can you answer: Is it healthy? Why did that request fail? How much is it costing? Where's the performance bottleneck in that distributed workflow? Observability provides the answers through the three pillars: **metrics**, **traces**, and **logs**.
+---
 
-This chapter follows the **Skill-First Learning Pattern**: In Lesson 0, you create an `observability-cost-engineer` skill using official Prometheus, OpenTelemetry, and Loki documentation. Then you spend the chapter understanding what you built and making it better. By the end, you don't just "know observability"—you OWN a production-ready skill that implements SRE best practices.
+## Goals
 
-## The Skill-First Arc
+- Instrument metrics, traces, and logs with Prometheus, OpenTelemetry, Jaeger, and Loki
+- Visualize and alert with Grafana; define SLIs/SLOs and error budgets
+- Apply FinOps and OpenCost to control spend
+- Integrate Dapr observability where applicable
+- Capture the patterns in a reusable observability skill
 
-```
-L00: Build Your Observability Skill (25 min)
-  │   └── Clone skills-lab, fetch docs, create skill
-  │
-  ├── L01: Three Pillars of Observability (Conceptual Foundation)
-  │   └── Metrics, traces, logs: when to use each
-  │
-  ├── L02-L05: Instrumentation & Collection
-  │   └── Prometheus, Grafana, OpenTelemetry, Jaeger, Loki
-  │
-  ├── L06-L07: SRE Foundations
-  │   └── SLIs, SLOs, error budgets, alerting patterns
-  │
-  ├── L08-L09: Cost Engineering & Dapr Integration
-  │   └── OpenCost, FinOps practices, Dapr observability
-  │
-  └── L10: Capstone - Full Observability Stack for Task API
-      └── Production-ready observability, skill finalization
-```
+---
 
-## What You'll Learn
+## Lesson Progression
 
-By the end of this chapter, you'll be able to:
+- **L00**: Build Your Observability Skill (skill-first)
+- **L01**: Three Pillars overview (metrics, traces, logs)
+- **L02-L05**: Instrumentation and collection with Prometheus, Grafana, OTel, Jaeger, Loki
+- **L06-L07**: SRE foundations—SLIs, SLOs, error budgets, alerting
+- **L08-L09**: Cost engineering and Dapr observability (OpenCost, FinOps practices)
+- **L10**: Capstone—full observability stack for the Task API; finalize the skill
+
+Each lesson ends with a reflection: test, find gaps, and improve the skill.
+
+---
+
+## Outcome & Method
+
+You finish with a production observability stack (metrics, traces, logs, alerts, cost tracking) for the Task API plus a reusable observability/cost-engineering skill. The chapter combines foundational concepts, hands-on instrumentation, and a spec-driven capstone.
+
+---
+
+## Prerequisites
+
+- Chapters 49-54 (Docker → GitOps pipeline)
+- Part 6 Task API deployed via Kubernetes/ArgoCD
 
 1. **Implement metrics collection** with Prometheus and visualize with Grafana dashboards using PromQL queries
 2. **Instrument applications** with OpenTelemetry and trace requests through distributed systems with Jaeger

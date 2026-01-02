@@ -592,9 +592,9 @@ Your pipeline produces a quality report:
 | Metric | Value | Status | Action if Failed |
 |--------|-------|--------|------------------|
 | Example count | 195 | Pass (>= 200) | Generate more synthetic |
-| Duplicate ratio | 2.4% | Pass (< 5%) | Improve diversity prompt |
+| Duplicate ratio | 2.4% | Pass (&lt; 5%) | Improve diversity prompt |
 | Format errors | 0 | Pass (= 0) | Fix generation prompt |
-| Mean tokens | 847 | OK (< 2048) | Check for truncation risk |
+| Mean tokens | 847 | OK (&lt; 2048) | Check for truncation risk |
 
 ## What You Built
 

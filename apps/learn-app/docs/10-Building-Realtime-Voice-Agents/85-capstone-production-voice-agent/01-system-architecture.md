@@ -364,7 +364,7 @@ Your cascaded pipeline needs three providers: STT (speech-to-text), LLM (reasoni
 | **STT** | Deepgram | Nova-3 | $0.0077/min | ~90ms | Best price/quality ratio |
 | **LLM** | OpenAI | GPT-4o-mini | $0.0015/min | 200-400ms | Fast, cost-effective |
 | **TTS** | Cartesia | Sonic-3 | $0.024/min | 40-90ms | Natural voice, fast |
-| **VAD** | Silero | v5 | Free | <1ms | Client-side |
+| **VAD** | Silero | v5 | Free | &lt;1ms | Client-side |
 
 **Total: ~$0.033/min** (within $0.03-0.07 target)
 

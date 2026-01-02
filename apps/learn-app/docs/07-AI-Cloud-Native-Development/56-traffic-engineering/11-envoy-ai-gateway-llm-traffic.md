@@ -587,7 +587,7 @@ Route expensive requests to cheaper models when budget runs low:
 |-----------------|------------------|
 | > 50% | GPT-4o (highest quality) |
 | 20-50% | GPT-4o-mini (cost-efficient) |
-| < 20% | Reject or queue |
+| &lt; 20% | Reject or queue |
 
 This requires application-level logic to check remaining budget and adjust the `x-ai-eg-model` header accordingly.
 

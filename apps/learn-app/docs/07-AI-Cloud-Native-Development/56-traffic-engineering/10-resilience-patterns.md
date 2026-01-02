@@ -982,7 +982,7 @@ for my Task API that includes:
 - Graceful shutdown: 45 second grace period with 10 second preStop
 ```
 
-**What you're learning:** AI generates multiple resilience patterns. Review the output—did AI include all four components? Are the retry and timeout values consistent (per-retry timeout < request timeout)?
+**What you're learning:** AI generates multiple resilience patterns. Review the output—did AI include all four components? Are the retry and timeout values consistent (per-retry timeout &lt; request timeout)?
 
 ### Evaluate and Refine
 

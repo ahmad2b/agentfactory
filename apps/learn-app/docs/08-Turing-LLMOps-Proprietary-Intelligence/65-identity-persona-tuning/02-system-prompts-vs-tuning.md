@@ -337,7 +337,7 @@ For API-based models, system prompts may be cheaper at low volumes. For high vol
 ### Use System Prompts When
 
 - [ ] Rapid prototyping and iteration
-- [ ] Low volume (<10,000 requests/month)
+- [ ] Low volume (&lt;10,000 requests/month)
 - [ ] Persona changes frequently
 - [ ] Multiple personas needed for same model
 - [ ] Limited ML expertise available

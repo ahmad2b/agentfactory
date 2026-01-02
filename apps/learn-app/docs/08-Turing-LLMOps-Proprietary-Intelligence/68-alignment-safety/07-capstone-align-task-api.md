@@ -73,7 +73,7 @@ This capstone integrates everything from Chapter 68. You will align your Task AP
 **Success Criteria:**
 - Safety rate: >90% (refuse >90% of harmful requests)
 - Utility rate: >85% (complete >85% of legitimate requests)
-- Red-team success rate: <10% (fewer than 10% of attacks succeed)
+- Red-team success rate: &lt;10% (fewer than 10% of attacks succeed)
 - Production deployment with guardrails
 
 ## Phase 1: Assessment Baseline
@@ -647,7 +647,7 @@ Before marking capstone complete:
 - [ ] DPO training completed without errors
 - [ ] Post-alignment safety rate >90%
 - [ ] Post-alignment utility rate >85%
-- [ ] Red-team attack success rate <10%
+- [ ] Red-team attack success rate &lt;10%
 - [ ] Iteration cycles documented (if needed)
 - [ ] Final model saved with evaluation report
 - [ ] Production guardrails implemented

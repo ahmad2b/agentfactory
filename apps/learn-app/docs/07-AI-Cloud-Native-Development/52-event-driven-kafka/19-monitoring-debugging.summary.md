@@ -9,7 +9,7 @@ Consumer lag is the most critical Kafka metric - it reveals whether consumers ke
 
 ### Critical Patterns
 - `kafka-consumer-groups.sh --describe --group <name>`: Shows CURRENT-OFFSET, LOG-END-OFFSET, LAG per partition
-- `kafka-topics.sh --describe --under-replicated-partitions`: Lists partitions where ISR < RF
+- `kafka-topics.sh --describe --under-replicated-partitions`: Lists partitions where ISR &lt; RF
 - `kafka-console-consumer.sh --from-beginning --max-messages N`: Read actual messages for debugging
 - Lag alert tiers: warning (1000, 5min), critical (10000, 2min), emergency (100000, 1min approaching retention)
 - JMX metrics: `UnderReplicatedPartitions`, `BytesInPerSec`, `TotalTimeMs` for production monitoring

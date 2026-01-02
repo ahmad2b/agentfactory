@@ -17,7 +17,7 @@ Operators are the verbs of programming. In Chapter 19, you learned the nouns (da
 ---
 ## What You'll Learn
 - Perform calculations with arithmetic operators (`+`, `-`, `*`, `/`, `//`, `%`, `**`)
-- Ask True/False questions with comparison operators (`==`, `!=`, `>`, `<`, `>=`, `<=`)
+- Ask True/False questions with comparison operators (`==`, `!=`, `>`, `&lt;`, `>=`, `&lt;=`)
 - Combine conditions with logical operators (`and`, `or`, `not`)
 - Update variables with assignment operators (`=`, `+=`, `-=`, `*=`, `/=`)
 - Recognize Python's 35 reserved keywords and avoid using them as variable names

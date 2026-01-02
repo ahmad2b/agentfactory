@@ -309,7 +309,7 @@ Month 1: -$500 (setup and learning)
 Month 2: +$2,000 (partial adoption)
 Month 3+: +$4,000/month (full adoption)
 
-Break-even: < 1 month
+Break-even: &lt; 1 month
 Year 1 ROI: 800%
 ```
 

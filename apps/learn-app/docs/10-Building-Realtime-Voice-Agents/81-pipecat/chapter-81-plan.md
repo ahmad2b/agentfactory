@@ -90,7 +90,7 @@
 1. LEARNING-SPEC.md (specification before skill creation)
 2. Documentation-grounded skill creation
 
-**Cognitive Load Validation**: 2 concepts <= 10 limit (B1) -> WITHIN LIMIT
+**Cognitive Load Validation**: 2 concepts &lt;= 10 limit (B1) -> WITHIN LIMIT
 
 **Maps to Evals**: #1 (Skill Creation)
 
@@ -227,7 +227,7 @@
 3. Processors and pipelines
 4. Transport abstraction
 
-**Cognitive Load Validation**: 4 concepts <= 10 limit (B1) -> WITHIN LIMIT
+**Cognitive Load Validation**: 4 concepts &lt;= 10 limit (B1) -> WITHIN LIMIT
 
 **Maps to Evals**: #2 (Frame Understanding), #3 (Pipeline Architecture), #4 (Transport Flexibility)
 
@@ -356,7 +356,7 @@
 2. S2S model integration
 3. Custom processor implementation
 
-**Cognitive Load Validation**: 3 concepts <= 10 limit (B1-B2) -> WITHIN LIMIT
+**Cognitive Load Validation**: 3 concepts &lt;= 10 limit (B1-B2) -> WITHIN LIMIT
 
 **Maps to Evals**: #5 (Provider Integration), #6 (S2S Integration), #7 (Custom Processors)
 
@@ -534,9 +534,9 @@ Lesson 2: Multi-Provider + Custom Processors (requires frame understanding)
 - [x] No premature spec-driven content (that's Chapter 85 Capstone)
 
 **Cognitive Load Validation**:
-- [x] Lesson 0: 2 concepts <= 10 (B1 limit) PASS
-- [x] Lesson 1: 4 concepts <= 10 (B1 limit) PASS
-- [x] Lesson 2: 3 concepts <= 10 (B1-B2 limit) PASS
+- [x] Lesson 0: 2 concepts &lt;= 10 (B1 limit) PASS
+- [x] Lesson 1: 4 concepts &lt;= 10 (B1 limit) PASS
+- [x] Lesson 2: 3 concepts &lt;= 10 (B1-B2 limit) PASS
 
 **L00 Pattern Requirements**:
 - [x] Lesson 0 creates skill from official documentation

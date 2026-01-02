@@ -1292,7 +1292,7 @@ This is AI-native development at work.
 - User can save/unsave favorites
 - Saved favorites persist across page reloads
 - App handles errors gracefully (shows message if search fails)
-- Load time < 2 seconds for typical search
+- Load time &lt; 2 seconds for typical search
 
 ### Artifact-Driven Workflow: 10 Steps
 

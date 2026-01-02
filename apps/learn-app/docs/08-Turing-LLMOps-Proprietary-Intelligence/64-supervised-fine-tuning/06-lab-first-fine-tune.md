@@ -543,7 +543,7 @@ You've successfully completed this lab if:
 | Criterion | Check |
 |-----------|-------|
 | Model loads without errors | Model loaded with 4-bit quantization |
-| Training completes | Loss decreased from ~2.8 to <1.0 |
+| Training completes | Loss decreased from ~2.8 to &lt;1.0 |
 | Inference works | Model generates task-related responses |
 | Model saved | adapter_model.safetensors exists |
 

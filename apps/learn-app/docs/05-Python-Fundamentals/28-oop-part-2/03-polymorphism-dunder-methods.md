@@ -256,7 +256,7 @@ for task in sorted_tasks:
 # [○] Update docs (priority 5)
 ```
 
-**Key insight**: By implementing just `__lt__()` and `__eq__()`, Python can derive all other comparisons (`<=`, `>`, `>=`) through the `@functools.total_ordering` decorator if needed.
+**Key insight**: By implementing just `__lt__()` and `__eq__()`, Python can derive all other comparisons (`&lt;=`, `>`, `>=`) through the `@functools.total_ordering` decorator if needed.
 
 ### __hash__: Making Objects Usable in Sets and Dicts
 

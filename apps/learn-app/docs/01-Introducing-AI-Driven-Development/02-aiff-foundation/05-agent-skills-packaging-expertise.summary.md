@@ -3,7 +3,7 @@ Agent Skills are folders containing instructions (SKILL.md) that encode your dom
 
 ### Key Mental Models
 - **Matrix Skill Loading**: Like Trinity downloading helicopter skills, agents load expertise on-demand—years of experience, instantly available
-- **Progressive Disclosure**: Three-level loading (names at startup ~100 tokens, full SKILL.md when activated <5K, supporting files on demand) achieves 80-98% token reduction
+- **Progressive Disclosure**: Three-level loading (names at startup ~100 tokens, full SKILL.md when activated &lt;5K, supporting files on demand) achieves 80-98% token reduction
 - **MCP = Connectivity, Skills = Expertise**: MCP server gives agent *access* to Stripe API; skill gives agent *expertise* in handling payment scenarios properly
 
 ### Critical Patterns

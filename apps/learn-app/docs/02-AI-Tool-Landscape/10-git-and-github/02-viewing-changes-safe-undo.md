@@ -131,9 +131,9 @@ git commit -m "Initial shopping list"
 **What these commands do:**
 - `mkdir git-lesson-2` and `cd git-lesson-2` = create and enter new folder
 - `git init` = initialize Git in this folder
-- `cat > shopping-list.txt << 'EOF'` = create a file with multiple lines of text
+- `cat > shopping-list.txt &lt;&lt; 'EOF'` = create a file with multiple lines of text
   - `cat >` = create new file and put text into it
-  - `<< 'EOF'` = everything until "EOF" goes into the file (this lets you type multiple lines)
+  - `&lt;&lt; 'EOF'` = everything until "EOF" goes into the file (this lets you type multiple lines)
 - `git add` and `git commit` = save this file as a commit (from Lesson 1)
 
 **Verify**: Run `git log` to see your commit.
@@ -159,7 +159,7 @@ git status
 
 **What this command does:**
 - `cat >>` = **append** text to end of existing file (the `>>` means "add to end", not "replace")
-- `<< 'EOF'` = same multi-line input technique (everything until "EOF")
+- `&lt;&lt; 'EOF'` = same multi-line input technique (everything until "EOF")
 - Result: adds household items to the shopping list without replacing groceries
 
 **Observe**: You should see:

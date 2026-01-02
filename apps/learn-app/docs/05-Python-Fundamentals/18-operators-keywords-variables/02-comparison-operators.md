@@ -28,7 +28,7 @@ skills:
     measurable_at_this_level: "Student can explain why comparisons precede if statements in Chapter 22 and give examples"
 
 learning_objectives:
-  - objective: "Understand what each comparison operator (==, !=, >, <, >=, <=) does"
+  - objective: "Understand what each comparison operator (==, !=, >, &lt;, >=, &lt;=) does"
     proficiency_level: "A2"
     bloom_level: "Understand"
     assessment_method: "Explanation of operators; code predictions"
@@ -71,9 +71,9 @@ Python has **six comparison operators**:
 - `==` **Equality** — Are these values the same?
 - `!=` **Not equal** — Are these values different?
 - `>` **Greater than** — Is the left side bigger?
-- `<` **Less than** — Is the left side smaller?
+- `&lt;` **Less than** — Is the left side smaller?
 - `>=` **Greater than or equal** — Is the left side bigger or the same?
-- `<=` **Less than or equal** — Is the left side smaller or the same?
+- `&lt;=` **Less than or equal** — Is the left side smaller or the same?
 
 All comparisons return a **boolean value**: either `True` or `False`. This is different from arithmetic operators, which return numbers. Comparisons return yes/no answers.
 
@@ -132,7 +132,7 @@ same: bool = x >= x             # True - 10 is equal to 10
 print(f"{x} >= {x}: {same}")    # 10 >= 10: True
 ```
 
-The operators `>`, `<`, `>=`, `<=` compare magnitude—which value is bigger. They answer: "Is the left side bigger, smaller, or equal?" The `=` in `>=` and `<=` means "or equal to," so `10 >= 10` is True (they're equal).
+The operators `>`, `&lt;`, `>=`, `&lt;=` compare magnitude—which value is bigger. They answer: "Is the left side bigger, smaller, or equal?" The `=` in `>=` and `&lt;=` means "or equal to," so `10 >= 10` is True (they're equal).
 
 #### 🎓 Expert Insight
 
@@ -213,10 +213,10 @@ You might wonder: "Why are we learning comparisons separately from if statements
 Ready to master comparison operators and understand why = is different from ==?
 
 **🔍 Explore Comparison Operators:**
-> "Explain the 6 comparison operators: `==`, `!=`, `>`, `<`, `>=`, `<=`. For each, show me 2 examples with numbers and explain the True/False result. Why does Python use == for comparison but = for assignment? Show me what happens if I accidentally write if x = 5: instead of if x == 5:"
+> "Explain the 6 comparison operators: `==`, `!=`, `>`, `&lt;`, `>=`, `&lt;=`. For each, show me 2 examples with numbers and explain the True/False result. Why does Python use == for comparison but = for assignment? Show me what happens if I accidentally write if x = 5: instead of if x == 5:"
 
 **🎯 Practice Comparison Logic:**
-> "Create a movie ticket checker: movie_age_rating = 13, user_age = 12. Write comparisons to check: (1) if user can watch (user_age >= movie_age_rating), (2) if user is too young (user_age < movie_age_rating), (3) if ages are exactly equal (user_age == movie_age_rating). For each, predict True or False, then verify with code."
+> "Create a movie ticket checker: movie_age_rating = 13, user_age = 12. Write comparisons to check: (1) if user can watch (user_age >= movie_age_rating), (2) if user is too young (user_age &lt; movie_age_rating), (3) if ages are exactly equal (user_age == movie_age_rating). For each, predict True or False, then verify with code."
 
 **🧪 Test Type Comparison Edge Cases:**
 > "Test these comparisons and explain which return True: (1) 5 == 5.0 (int vs. float), (2) '5' == 5 (string vs. int), (3) True == 1 (bool vs. int), (4) False == 0 (bool vs. int). Why does Python treat some cross-type comparisons as equal but not others? Show me the type() of each value."

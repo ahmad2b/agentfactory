@@ -208,7 +208,7 @@ Partition 2 → Consumer 3
 **The rules**:
 
 1. **Each partition goes to exactly one consumer** in a group
-2. **A consumer can handle multiple partitions** (if consumers < partitions)
+2. **A consumer can handle multiple partitions** (if consumers &lt; partitions)
 3. **Extra consumers sit idle** (if consumers > partitions)
 4. **Different groups read independently** (audit-service group has its own offsets)
 

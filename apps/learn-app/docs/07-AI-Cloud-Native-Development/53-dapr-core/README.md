@@ -7,57 +7,46 @@ keywords: [dapr, sidecar, building blocks, kubernetes, microservices, state mana
 
 # Chapter 53: Dapr Core - Sidecar Building Blocks
 
-You've learned Kafka directly in Chapter 52. But what if you need to swap Kafka for RabbitMQ, or Redis, or AWS SNS? With raw clients, that's a code rewrite. **Dapr** (Distributed Application Runtime) abstracts these infrastructure dependencies behind portable HTTP/gRPC APIs. Your code talks to Dapr; Dapr talks to the infrastructure.
+Dapr abstracts infrastructure behind portable HTTP/gRPC APIs. You build the `dapr-deployment` skill, deploy Dapr to Kubernetes, and refactor the Part 6 Task API to use Dapr building blocks instead of direct clients.
 
-This chapter introduces Dapr's core building blocks: state management, pub/sub, service invocation, bindings, jobs, secrets, and configuration. You'll deploy Dapr on Docker Desktop Kubernetes using Helm and refactor your Task API agent to use Dapr's APIs instead of direct infrastructure clients.
+---
 
-**The result**: Simpler code that's portable across infrastructures. Change Redis to PostgreSQL for state by updating a YAML file, not your application code.
+## Goals
 
-## What You'll Learn
+- Understand the Dapr sidecar architecture and components
+- Deploy Dapr to Kubernetes via Helm
+- Use Dapr building blocks: state, pub/sub, service invocation, bindings, jobs, secrets, config
+- Swap infrastructure backends by updating component YAML instead of code
+- Capture the patterns in a reusable Dapr skill
 
-By the end of this chapter, you'll be able to:
+---
 
-- **Own a `dapr-deployment` skill** that you built from official documentation
-- **Understand Dapr's sidecar architecture** and how it separates infrastructure from application code
-- **Deploy Dapr on Kubernetes** with Helm in under 10 minutes
-- **Use 6+ Dapr building blocks** with async Python patterns:
-  - State management with Redis
-  - Service invocation with automatic discovery
-  - Pub/Sub messaging with CloudEvents
-  - Input/output bindings for external triggers
-  - Jobs API for scheduled tasks
-  - Secrets from Kubernetes secret stores
-- **Refactor the Part 6 Task API** to use Dapr for ALL infrastructure abstraction
-- **Swap backends** by changing component YAML, not code
+## Lesson Progression
 
-## Chapter Structure
+| Lesson | Focus |
+|--------|-------|
+| L00 | Build Your Dapr Skill (skill-first) |
+| L01-L02 | Sidecar pattern, building blocks, components |
+| L03-L08 | Deploy Dapr; state, invocation, pub/sub, bindings, jobs, secrets/config |
+| L09 | Capstone: Dapr-enabled Task API |
+| L10 | Finalize the Dapr skill |
 
-| Lesson | Title | Duration | Layer |
-|--------|-------|----------|-------|
-| L00 | Build Your Dapr Skill | 25 min | 3 (Skill-First) |
-| L01 | The Sidecar Pattern | 20 min | 1 (Conceptual) |
-| L02 | Building Blocks and Components | 20 min | 1 (Conceptual) |
-| L03 | Deploy Dapr + State Management | 35 min | 2 (Collaboration) |
-| L04 | Service Invocation | 25 min | 2 (Collaboration) |
-| L05 | Pub/Sub Messaging | 30 min | 2 (Collaboration) |
-| L06 | Bindings and Triggers | 25 min | 2 (Collaboration) |
-| L07 | Jobs API: Scheduled Tasks | 25 min | 2 (Collaboration) |
-| L08 | Secrets and Configuration | 25 min | 2 (Collaboration) |
-| L09 | Capstone: Dapr-Enabled Task API | 40 min | 4 (Integration) |
-| L10 | Finalize Your Dapr Skill | 20 min | 3 (Skill Finalization) |
+Each lesson ends with a reflection to test, find gaps, and improve the skill.
 
-**Total Duration**: ~290 minutes (~5 hours)
+---
+
+## Outcome & Method
+
+You finish with the Task API running through Dapr (state, pub/sub, invocation, bindings, jobs, secrets) plus a Dapr deployment skill. The chapter uses the 4-Layer approach: concepts → collaboration on components → spec-driven capstone → skill finalization.
+
+---
 
 ## Prerequisites
 
-Before starting this chapter, you should have completed:
-
-- **Chapter 5**: Skills creation with `/skill-creator` and `/fetching-library-docs`
-- **Chapter 49**: Docker containers and images
-- **Chapter 50**: Kubernetes pods, deployments, services, secrets
-- **Chapter 51**: Helm charts and `helm install/upgrade`
-- **Chapter 52**: Kafka concepts (what Dapr abstracts with pub/sub)
-- **Part 6**: FastAPI async patterns and Task API
+- Chapter 5 skills tooling
+- Chapters 49-51 (Docker, Kubernetes, Helm)
+- Chapter 52 (Kafka mental model for pub/sub abstraction)
+- Part 6 Task API (async FastAPI)
 
 ## Technology Stack
 

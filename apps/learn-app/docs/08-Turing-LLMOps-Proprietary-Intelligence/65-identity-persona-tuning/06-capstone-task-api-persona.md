@@ -663,8 +663,8 @@ Before submitting your capstone:
 
 - [ ] **Trained Adapter** (adapter_model.safetensors)
   - [ ] Training completed without errors
-  - [ ] Final loss < 0.4
-  - [ ] Adapter size < 50MB
+  - [ ] Final loss &lt; 0.4
+  - [ ] Adapter size &lt; 50MB
 
 - [ ] **Evaluation Results** (EVALUATION_RESULTS.json)
   - [ ] Overall score ≥ 7.5/10

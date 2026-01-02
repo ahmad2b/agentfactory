@@ -115,7 +115,7 @@ This is the Unsloth recommended default for QLoRA. It works well for most instru
 
 | Dataset Size | Recommended LR | Reasoning |
 |--------------|----------------|-----------|
-| < 100 examples | 1e-4 | Lower to prevent overfitting |
+| &lt; 100 examples | 1e-4 | Lower to prevent overfitting |
 | 100-1000 examples | 2e-4 | Standard range |
 | 1000-10000 examples | 2e-4 to 5e-5 | Can go lower for stability |
 | > 10000 examples | 5e-5 | Lower for smoother convergence |
@@ -196,7 +196,7 @@ For instruction-tuning datasets:
 
 | Dataset Size | Recommended Epochs |
 |--------------|-------------------|
-| < 200 examples | 1-2 |
+| &lt; 200 examples | 1-2 |
 | 200-500 examples | 2-3 |
 | 500-2000 examples | 1-3 |
 | > 2000 examples | 1 (often sufficient) |

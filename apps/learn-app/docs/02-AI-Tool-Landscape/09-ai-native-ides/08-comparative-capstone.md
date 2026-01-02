@@ -1099,7 +1099,7 @@ Based on what you've learned, use this framework to choose IDEs for different sc
 
 **Project characteristics**:
 - Single Python file
-- < 200 lines of code
+- &lt; 200 lines of code
 - You know exactly what you want
 - Time budget: 30 minutes
 - Testing: Manual, minimal

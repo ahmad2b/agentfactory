@@ -28,7 +28,7 @@ skills:
     category: "Technical"
     bloom_level: "Apply"
     digcomp_area: "Problem-Solving"
-    measurable_at_this_level: "Student can implement layered config with documented precedence (defaults < file < env < CLI) and handle conflicts gracefully"
+    measurable_at_this_level: "Student can implement layered config with documented precedence (defaults &lt; file &lt; env &lt; CLI) and handle conflicts gracefully"
 
   - name: "Production Code Quality"
     proficiency_level: "B2"

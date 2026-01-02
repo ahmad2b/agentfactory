@@ -307,7 +307,7 @@ Deployment transforms a model checkpoint into a production service. This stage i
 
 | Concern | Question | Typical Requirement |
 |---------|----------|---------------------|
-| **Latency** | How fast must responses be? | <500ms for interactive, <2s for batch |
+| **Latency** | How fast must responses be? | &lt;500ms for interactive, &lt;2s for batch |
 | **Throughput** | How many requests per second? | Size infrastructure accordingly |
 | **Availability** | What uptime is required? | 99.9% for production services |
 | **Cost** | What's the budget per request? | Balance model size vs. cost |
@@ -343,7 +343,7 @@ For our Task Assistant:
 1. **Platform**: Managed inference on Turing (start simple)
 2. **Endpoint**: REST API with OpenAI-compatible format
 3. **Scaling**: Auto-scale 1-4 replicas based on traffic
-4. **Latency Target**: <1 second per response
+4. **Latency Target**: &lt;1 second per response
 5. **Integration**: Connect to Task API as agent backend
 
 ## Stage 5: Monitoring
@@ -358,7 +358,7 @@ Models degrade over time. User behavior shifts. Edge cases emerge. Monitoring ca
 |----------|---------|-----------------|
 | **Latency** | P50, P95, P99 response time | P95 > 2x baseline |
 | **Errors** | Error rate, error types | >1% error rate |
-| **Quality** | LLM-as-Judge scores on sample | <80% quality score |
+| **Quality** | LLM-as-Judge scores on sample | &lt;80% quality score |
 | **Safety** | Flagged response rate | Any safety flags |
 | **Cost** | Tokens per request, $/request | >budget threshold |
 | **Drift** | Distribution of inputs, outputs | Significant shift |

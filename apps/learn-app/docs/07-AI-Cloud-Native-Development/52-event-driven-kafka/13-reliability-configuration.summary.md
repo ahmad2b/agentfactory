@@ -9,7 +9,7 @@ Kafka reliability depends on In-Sync Replicas (ISR), replication factor, and min
 
 ### Critical Patterns
 - Production baseline: `replication.factor=3`, `min.insync.replicas=2` tolerates single broker failure
-- NOT_ENOUGH_REPLICAS error protects data by refusing writes when ISR < min.insync.replicas
+- NOT_ENOUGH_REPLICAS error protects data by refusing writes when ISR &lt; min.insync.replicas
 - JVM heap sizing: Set `-Xmx` to half memory limit, leave other half for OS page cache
 - Low latency config: `linger.ms=0`, `batch.size=16KB` - send immediately
 - High throughput config: `linger.ms=50-500`, `batch.size=512KB-1MB`, `compression.type=lz4`

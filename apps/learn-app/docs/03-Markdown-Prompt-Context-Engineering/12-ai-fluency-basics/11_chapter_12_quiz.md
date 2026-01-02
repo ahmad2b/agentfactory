@@ -164,7 +164,7 @@ Test your understanding of the 4D Framework and AI Fluency concepts.
         "After 1 hour of work"
       ],
       correctOption: 1,
-      explanation: "Termination criteria include: success criteria met, diminishing returns (< 5% improvement per iteration), or time budget exceeded.",
+      explanation: "Termination criteria include: success criteria met, diminishing returns (&lt; 5% improvement per iteration), or time budget exceeded.",
       source: "Lesson 6: The Description-Discernment Loop"
     },
     {

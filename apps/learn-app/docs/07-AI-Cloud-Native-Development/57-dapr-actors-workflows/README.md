@@ -6,39 +6,41 @@ description: "Build stateful agents with virtual actors and durable workflows"
 
 # Chapter 57: Dapr Actors & Workflows
 
-Stateless pub/sub and service invocation handle many patterns. But agents often need state—conversation history, user preferences, task progress. And long-running operations—multi-step workflows that survive restarts, with retries and compensation logic.
+Add durable state and orchestration to your agents. This chapter builds a `dapr-actors-workflows` skill that uses Dapr virtual actors for per-entity state and Dapr Workflows for long-running, reliable processes.
 
-Dapr Actors provide virtual, stateful entities that encapsulate agent state. Dapr Workflows provide durable orchestration for long-running processes. Together, they enable sophisticated agent patterns like persistent conversations, scheduled reminders, and multi-step task automation.
+---
 
-## What You'll Learn
+## Goals
 
-By the end of this chapter, you'll be able to:
+- Understand the actor model: virtual actors, turn-based concurrency, lifecycle
+- Implement Dapr Actors for agent state (sessions, conversations, tasks)
+- Use timers and reminders for scheduled work
+- Design Dapr Workflows for durable orchestration with retries/compensation
+- Combine actors and workflows for complex agent behaviors
+- Package patterns into a reusable skill
 
-- **Understand the Actor model**: Virtual actors, state encapsulation, and turn-based concurrency
-- **Implement Dapr Actors**: Define actors for agent state (conversations, user sessions)
-- **Manage actor lifecycle**: Activation, deactivation, and reminders
-- **Use actor timers & reminders**: Schedule future operations
-- **Design Dapr Workflows**: Durable, restartable orchestration
-- **Implement workflow patterns**: Sequential, parallel, and saga patterns
-- **Handle failures**: Compensation, retries, and error handling in workflows
-- **Combine actors & workflows**: Actors for state, workflows for orchestration
+---
 
-## Chapter Structure
+## Lesson Progression
 
-1. **The Actor Model** — Concepts, benefits, and when to use actors
-2. **Dapr Actors Fundamentals** — Defining actors, state, and methods
-3. **Actor State Management** — Persisting and retrieving actor state
-4. **Timers & Reminders** — Scheduling future actor invocations
-5. **Dapr Workflows Overview** — Durable orchestration concepts
-6. **Workflow Implementation** — Defining workflows, activities, and child workflows
-7. **Workflow Patterns** — Sequential, fan-out/fan-in, and sagas
-8. **Capstone: Stateful Agent with Reminders** — Build an agent with persistent conversations and scheduled task reminders
+- Actor model foundations
+- Dapr Actor fundamentals and state management
+- Timers and reminders
+- Workflow patterns: sequential, parallel, saga/compensation
+- Failure handling and retries
+- Capstone: stateful agent with actors + workflows; finalize the skill
+
+Each lesson ends with a reflection to test, find gaps, and improve the skill.
+
+---
+
+## Outcome & Method
+
+You finish with a stateful Task API that uses actors for per-entity state and workflows for long-running tasks, plus a Dapr actors/workflows skill. The chapter follows the skill-first flow: learn, apply, capstone, finalize.
+
+---
 
 ## Prerequisites
 
-- Chapter 53: Dapr Fundamentals (building blocks, components)
-- Your agent service using Dapr pub/sub and state
-
-## Looking Ahead
-
-You now have a stateful, event-driven agent on Kubernetes. Chapter 55 automates deployments with CI/CD and GitOps, ensuring every code change flows to production safely.
+- Chapters 49-53 (containerized, Kubernetes, Helm, Dapr Core)
+- Chapter 55 observability for monitoring actors/workflows

@@ -474,7 +474,7 @@ training_args = TrainingArguments(
 | `train/learning_rate` | LR schedule is working | Warmup then stable/decay |
 | `train/epoch` | Training progress | 1-3 for small datasets |
 | `eval/loss` | Generalization | Close to train_loss |
-| GPU memory | Whether you'll OOM | < 15GB on T4 |
+| GPU memory | Whether you'll OOM | &lt; 15GB on T4 |
 
 ## Diagnostic Flowchart
 

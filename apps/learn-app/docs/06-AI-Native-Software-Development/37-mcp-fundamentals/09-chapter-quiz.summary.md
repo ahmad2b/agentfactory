@@ -11,7 +11,7 @@
 - Quiz targets: MCP problem solved, control model distinctions, transport selection, configuration locations
 - Multi-select questions test debugging patterns (stdout/stderr, env vars, process monitoring)
 - Practical knowledge: Inspector usage, server evaluation criteria, multi-server composition
-- Scoring: 14-15 = Mastery, 12-13 = Proficient, 10-11 = Competent, <10 = Review needed
+- Scoring: 14-15 = Mastery, 12-13 = Proficient, 10-11 = Competent, &lt;10 = Review needed
 
 ### AI Collaboration Keys
 - Use quiz to identify weak areas before building MCP servers

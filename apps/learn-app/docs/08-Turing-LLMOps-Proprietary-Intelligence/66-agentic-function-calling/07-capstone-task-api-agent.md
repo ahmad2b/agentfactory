@@ -73,7 +73,7 @@ This capstone is Layer 4: Spec-Driven Integration. You'll work from a specificat
 | Argument extraction accuracy | >90% | All required args correct |
 | JSON validity | >99% | Parseable without errors |
 | Multi-tool completion | >85% | Chains executed fully |
-| Latency (local inference) | <500ms | p95 response time |
+| Latency (local inference) | &lt;500ms | p95 response time |
 
 **Constraints**:
 - Base model: Llama-3.2-3B-Instruct (or equivalent 3B-8B model)
@@ -650,13 +650,13 @@ Before declaring the capstone complete:
 |-----------|--------|----------|
 | Dataset complete (500+ examples) | Check | 600 examples aggregated |
 | Distribution balanced | Check | 75/25 single/multi-tool |
-| Training converged | Check | Loss < 0.1, no divergence |
+| Training converged | Check | Loss &lt; 0.1, no divergence |
 | Tool selection >95% | Check | 96.0% in evaluation |
 | Argument extraction >90% | Check | 92.0% in evaluation |
 | JSON validity >99% | Check | 99.0% in evaluation |
 | Multi-tool completion >85% | Check | 90.0% in evaluation |
 | Agent framework integration | Check | OpenAI SDK compatible |
-| Latency acceptable | Check | <500ms p95 |
+| Latency acceptable | Check | &lt;500ms p95 |
 
 All criteria met: **Model is production-ready.**
 

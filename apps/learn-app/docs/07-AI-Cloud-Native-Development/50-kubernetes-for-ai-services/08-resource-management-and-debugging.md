@@ -137,7 +137,7 @@ resources:
     cpu: "500m"
 ```
 
-When requests < limits, the Pod is Burstable. Kubernetes evicts Burstable Pods second. Use this for normal workloads (most services, agents).
+When requests &lt; limits, the Pod is Burstable. Kubernetes evicts Burstable Pods second. Use this for normal workloads (most services, agents).
 
 **BestEffort** (Lowest Priority)
 

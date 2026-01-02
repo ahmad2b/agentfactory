@@ -249,7 +249,7 @@ Before you commit to building a Digital FTE in your vertical, assess your curren
 
 ## Mitigation Strategies for Capability Gaps
 
-### If Domain Expertise Score is Low (< 7)
+### If Domain Expertise Score is Low (&lt; 7)
 
 **Mitigation Strategy A: Partner with Domain Expert**
 - Recruit a co-founder or advisor with 5-10+ years of domain experience
@@ -269,7 +269,7 @@ Before you commit to building a Digital FTE in your vertical, assess your curren
 - Cost: Time to organize data
 - Timeline: Parallelize with Phase 1 and Phase 2 execution
 
-### If Integration Capability Score is Low (< 7)
+### If Integration Capability Score is Low (&lt; 7)
 
 **Mitigation Strategy A: Start with One Platform**
 - Don't try to bridge 5 platforms in Phase 1
@@ -290,7 +290,7 @@ Before you commit to building a Digital FTE in your vertical, assess your curren
 - Cost: $10-30K per platform integration (budget 3-5 platforms = $30-150K)
 - Timeline: Can parallelize with your other work
 
-### If Solution Design Score is Low (< 7)
+### If Solution Design Score is Low (&lt; 7)
 
 **Mitigation Strategy A: Customer Discovery First**
 - Before architecting your Custom Agent, spend 2-3 months interviewing 10-15 target customers

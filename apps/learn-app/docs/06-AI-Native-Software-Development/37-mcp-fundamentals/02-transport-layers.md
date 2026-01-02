@@ -380,7 +380,7 @@ Here's how the transports compare across practical dimensions:
 - Multiple users/applications need to access same MCP server
 - Building production MCP services with serverless (Lambda, Cloud Run)
 - Server needs to scale horizontally with load balancers
-- Tools complete quickly (< few seconds)
+- Tools complete quickly (&lt; few seconds)
 
 **Choose Streamable HTTP (Stateful) when**:
 - Tools take significant time (code generation, large file processing)

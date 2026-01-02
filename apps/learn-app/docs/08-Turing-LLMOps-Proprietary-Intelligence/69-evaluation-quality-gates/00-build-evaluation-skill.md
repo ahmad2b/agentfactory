@@ -233,7 +233,7 @@ lm_eval --model hf \
 def compare_models(model_a_results, model_b_results, threshold=0.02):
     """Compare two models and determine if B is a regression from A."""
     delta = model_b_results['accuracy'] - model_a_results['accuracy']
-    if delta < -threshold:
+    if delta &lt; -threshold:
         return "REGRESSION", f"Model B is {abs(delta):.2%} worse"
     elif delta > threshold:
         return "IMPROVEMENT", f"Model B is {delta:.2%} better"

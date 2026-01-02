@@ -72,8 +72,8 @@ This capstone is Layer 4: Spec-Driven Integration. You'll work from a specificat
 | Persona preservation | >85% | Voice consistency, tone, encouragement patterns |
 | Agentic preservation | >90% | Tool selection, argument extraction, JSON validity |
 | Combined capability | No regression | Both capabilities function when invoked together |
-| Latency | <500ms | p95 inference time |
-| Memory | <8 GB | Inference RAM requirement |
+| Latency | &lt;500ms | p95 inference time |
+| Memory | &lt;8 GB | Inference RAM requirement |
 
 **Source Adapters**:
 - `./adapters/task_api_persona` (Chapter 65)
@@ -670,11 +670,9 @@ def package_merged_model(
 
 ## Usage
 Load with transformers:
-```python
 from transformers import AutoModelForCausalLM, AutoTokenizer
 model = AutoModelForCausalLM.from_pretrained("{output_dir}")
 tokenizer = AutoTokenizer.from_pretrained("{output_dir}")
-```
 
 ## Source Adapters
 - Persona: {metadata['sources']['persona']}

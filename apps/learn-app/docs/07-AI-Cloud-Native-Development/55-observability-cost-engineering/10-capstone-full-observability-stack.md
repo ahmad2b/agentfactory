@@ -575,7 +575,7 @@ Define Service Level Objectives that matter for a task management API.
 | SLI | SLO Target | Error Budget (30 days) |
 |-----|------------|------------------------|
 | Availability | 99.9% | 43.2 minutes downtime |
-| Latency (P95) | < 200ms | 0.1% requests may exceed |
+| Latency (P95) | &lt; 200ms | 0.1% requests may exceed |
 
 ### PrometheusRule for SLO Recording and Alerting
 

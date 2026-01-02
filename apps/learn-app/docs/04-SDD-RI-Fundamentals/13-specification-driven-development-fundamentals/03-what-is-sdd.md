@@ -361,7 +361,7 @@ Make the system fast
 
 **✅ Good Spec (Clear Intent)**:
 ```
-API response time must be <200ms for 95th percentile of requests under normal load (1000 req/sec)
+API response time must be &lt;200ms for 95th percentile of requests under normal load (1000 req/sec)
 ```
 
 **Why better**: Measurable (200ms), specific percentile (95th), defined load (1000 req/sec).

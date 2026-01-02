@@ -248,7 +248,7 @@ Beyond complementarity, consider:
 
 | Factor | Favors Merging | Favors Retraining |
 |--------|---------------|-------------------|
-| **Data overlap** | <30% overlap | >50% overlap |
+| **Data overlap** | &lt;30% overlap | >50% overlap |
 | **Compute budget** | Limited | Ample |
 | **Iteration speed need** | High (development) | Low (production) |
 | **Quality criticality** | Acceptable to tune | Must be optimal |

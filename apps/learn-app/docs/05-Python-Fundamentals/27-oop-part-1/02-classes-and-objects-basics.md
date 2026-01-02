@@ -625,7 +625,7 @@ class Task:
 
     def update_priority(self, new_priority: int) -> None:
         """Update priority with validation."""
-        if 1 <= new_priority <= 10:
+        if 1 &lt;= new_priority &lt;= 10:
             self.priority = new_priority
         else:
             raise ValueError("Priority must be 1-10")

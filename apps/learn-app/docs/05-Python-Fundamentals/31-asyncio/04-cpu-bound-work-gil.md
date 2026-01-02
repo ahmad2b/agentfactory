@@ -659,10 +659,10 @@ python /tmp/hybrid_pipeline.py
 
 **Validation Checklist**:
 - [ ] Code runs without errors
-- [ ] Fetch tasks run concurrently (all 6 fetch < 2s)
+- [ ] Fetch tasks run concurrently (all 6 fetch &lt; 2s)
 - [ ] Process tasks run in parallel (uses ProcessPoolExecutor)
 - [ ] I/O and CPU overlap (fetch_time + process_time > total_time)
-- [ ] Total time < 6 seconds (proves parallelism)
+- [ ] Total time &lt; 6 seconds (proves parallelism)
 - [ ] Type hints complete
 - [ ] Proper executor cleanup (context manager or explicit shutdown)
 
@@ -685,7 +685,7 @@ Why does asyncio (I/O concurrency) NOT solve CPU-bound problems, and how does Pr
 > "Implement the same CPU function using loop.run_in_executor(ProcessPoolExecutor()). Compare execution time on 4-core machine for 4 parallel calls. Why is this 3-4x faster than asyncio alone?"
 
 **🧪 Test Hybrid Orchestration:**
-> "Create a pipeline: fetch 6 datasets (I/O-bound, use asyncio), process each (CPU-bound, use ProcessPoolExecutor). Show how fetch and process overlap. Why is total time < fetch_time + process_time?"
+> "Create a pipeline: fetch 6 datasets (I/O-bound, use asyncio), process each (CPU-bound, use ProcessPoolExecutor). Show how fetch and process overlap. Why is total time &lt; fetch_time + process_time?"
 
 **🚀 Apply to AI Inference Pipeline:**
 > "Design a system that fetches 10 documents from API (asyncio), runs ML inference on each (CPU-bound, ProcessPoolExecutor), then stores results (asyncio). Measure throughput and explain bottleneck identification."

@@ -40,7 +40,7 @@ skills:
     category: "Technical"
     bloom_level: "Understand"
     digcomp_area: "Information Literacy"
-    measurable_at_this_level: "Student can apply comparison operators (==, !=, >, <, >=, <=) in conditional expressions"
+    measurable_at_this_level: "Student can apply comparison operators (==, !=, >, &lt;, >=, &lt;=) in conditional expressions"
 
   - name: "Logical Operators (and/or/not)"
     proficiency_level: "A2"
@@ -102,9 +102,9 @@ Before we dive into conditionals, let's refresh what we learned in Chapter 20 ab
 | `==` | Equal to | `5 == 5` | `True` |
 | `!=` | Not equal to | `5 != 3` | `True` |
 | `>` | Greater than | `7 > 4` | `True` |
-| `<` | Less than | `3 < 10` | `True` |
+| `&lt;` | Less than | `3 &lt; 10` | `True` |
 | `>=` | Greater than or equal | `5 >= 5` | `True` |
-| `<=` | Less than or equal | `4 <= 9` | `True` |
+| `&lt;=` | Less than or equal | `4 &lt;= 9` | `True` |
 
 Here's a quick example:
 
@@ -568,7 +568,7 @@ if age >= 18 and age < 13:  # ❌ Impossible! Can't be both >= 18 AND < 13
     print("Teen discount applied")
 ```
 
-**What's wrong:** No value of `age` can satisfy both `age >= 18` and `age < 13` simultaneously. This code never runs.
+**What's wrong:** No value of `age` can satisfy both `age >= 18` and `age &lt; 13` simultaneously. This code never runs.
 
 **Fix:** Use `or` instead of `and`, or check your logic:
 
@@ -581,7 +581,7 @@ elif age >= 18:
 ```
 
 **AI Troubleshooting Prompt:**
-> "My condition `age >= 18 and age < 13` never executes. Is this logic correct? If not, what should it be?"
+> "My condition `age >= 18 and age &lt; 13` never executes. Is this logic correct? If not, what should it be?"
 
 ---
 
@@ -621,10 +621,10 @@ if age >= 18:
 Ready to make decisions with if, elif, and else statements?
 
 **🔍 Explore Conditional Logic:**
-> "Explain if, elif, and else statements with examples. Show me how Python evaluates conditions top-to-bottom and stops at the first True. Why do we need elif instead of multiple if statements? Demonstrate with age checking: child (`<13`), teen (13-17), adult (18+)."
+> "Explain if, elif, and else statements with examples. Show me how Python evaluates conditions top-to-bottom and stops at the first True. Why do we need elif instead of multiple if statements? Demonstrate with age checking: child (`&lt;13`), teen (13-17), adult (18+)."
 
 **🎯 Practice Decision Trees:**
-> "Create a grade calculator that takes a score (0-100) and returns letter grade: A (90-100), B (80-89), C (70-79), D (60-69), F (`<60`). Use if/elif/else with comparison operators. Then extend it to handle edge cases: scores `> 100`, negative scores, non-numeric input."
+> "Create a grade calculator that takes a score (0-100) and returns letter grade: A (90-100), B (80-89), C (70-79), D (60-69), F (`&lt;60`). Use if/elif/else with comparison operators. Then extend it to handle edge cases: scores `> 100`, negative scores, non-numeric input."
 
 **🧪 Test Nested Conditions:**
 > "Show me the difference between nested if statements and elif chains. For a login validator checking (1) username exists AND (2) password correct, compare: nested ifs vs. combined condition with 'and'. Which is more readable? Which handles error messages better?"

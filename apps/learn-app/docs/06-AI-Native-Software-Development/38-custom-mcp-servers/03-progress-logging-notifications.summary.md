@@ -15,7 +15,7 @@ Long operations need continuous feedback. Without notifications, client UI freez
 - Multi-phase: Combine logging (phase transitions) with progress (within phases)
 
 ### AI Collaboration Keys
-- Short operations (<2 seconds): Skip notifications—overhead exceeds benefit
+- Short operations (&lt;2 seconds): Skip notifications—overhead exceeds benefit
 - Long operations: Report progress to prevent client timeout
 - Error logging: Always log BEFORE raising exceptions
 

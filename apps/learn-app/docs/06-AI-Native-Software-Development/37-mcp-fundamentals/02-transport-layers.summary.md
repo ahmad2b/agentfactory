@@ -11,7 +11,7 @@ MCP's transport agnosticism means your server code doesn't change when switching
 - stdio config: `"command": "npx", "args": ["-y", "@modelcontextprotocol/server-filesystem"]`
 - Log redirection: `print("message", file=sys.stderr)` not `print("message")`
 - HTTP modes: Stateless for serverless/horizontal scaling; Stateful SSE for progress updates
-- Latency: stdio <1ms (local IPC); HTTP 10-100ms (network)
+- Latency: stdio &lt;1ms (local IPC); HTTP 10-100ms (network)
 
 ### AI Collaboration Keys
 - Development → stdio (simple, automatic subprocess); Production → HTTP (scalable, multi-client)

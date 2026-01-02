@@ -150,7 +150,7 @@ Test your understanding of Pydantic validation, generic programming, and type-sa
         "To improve performance by optimizing for comparison-friendly types"
       ],
       correctOption: 2,
-      explanation: "Bounded generics ensure that T supports the operations your function needs—in this case, comparison operators like `>` and `<` required by find_max. Without the `T: Comparable` bound, your IDE would flag `item > max_item` as an error because arbitrary type T might not support `>`. Option 2 is incorrect—type bounds aren't about memory management. Option 3 is wrong because bounds constrain what types are allowed, they don't convert types. Option 4 is false—type parameters don't affect runtime performance. The bound is a contract: 'I'll work with any type T, but only if T can be compared.' This lets you write generic algorithms that require specific capabilities without losing type safety.",
+      explanation: "Bounded generics ensure that T supports the operations your function needs—in this case, comparison operators like `>` and `&lt;` required by find_max. Without the `T: Comparable` bound, your IDE would flag `item > max_item` as an error because arbitrary type T might not support `>`. Option 2 is incorrect—type bounds aren't about memory management. Option 3 is wrong because bounds constrain what types are allowed, they don't convert types. Option 4 is false—type parameters don't affect runtime performance. The bound is a contract: 'I'll work with any type T, but only if T can be compared.' This lets you write generic algorithms that require specific capabilities without losing type safety.",
       source: "Lesson 4: Generic Classes and Protocols"
     },
     {
@@ -579,7 +579,7 @@ Test your understanding of Pydantic validation, generic programming, and type-sa
         "To enable rollback to previous configuration if newer source fails"
       ],
       correctOption: 2,
-      explanation: "Precedence order (defaults < file < env < CLI) allows more specific, context-aware sources to override general ones. Files provide base config; environment variables override for specific environments (dev/staging/prod); CLI arguments override for one-off testing. This hierarchy is predictable and intuitive. Option 2 is incorrect—merging isn't about parallel loading. Option 3 is misleading—sources are validated as part of merging, not a separate goal. Option 4 is wrong—precedence doesn't provide rollback capability. The pattern reflects increasing specificity: defaults work everywhere, YAML works per environment, env vars work per deployment, CLI works per invocation. Higher specificity wins.",
+      explanation: "Precedence order (defaults &lt; file &lt; env &lt; CLI) allows more specific, context-aware sources to override general ones. Files provide base config; environment variables override for specific environments (dev/staging/prod); CLI arguments override for one-off testing. This hierarchy is predictable and intuitive. Option 2 is incorrect—merging isn't about parallel loading. Option 3 is misleading—sources are validated as part of merging, not a separate goal. Option 4 is wrong—precedence doesn't provide rollback capability. The pattern reflects increasing specificity: defaults work everywhere, YAML works per environment, env vars work per deployment, CLI works per invocation. Higher specificity wins.",
       source: "Lesson 6: Capstone Project - Type-Safe Configuration Manager"
     },
     {
@@ -603,7 +603,7 @@ Test your understanding of Pydantic validation, generic programming, and type-sa
         "Pydantic stores configuration securely encrypting sensitive values automatically"
       ],
       correctOption: 1,
-      explanation: "Pydantic handles type conversion, validation, and error reporting declaratively through your model definition—you write the schema once, Pydantic enforces it automatically. Manual validation requires writing repetitive checking code for every field, type, constraint, and providing error messages. Option 2 is incorrect—performance difference is negligible. Option 3 is wrong—Pydantic validates at load time; hot reloading is separate. Option 4 is false—Pydantic doesn't encrypt; it validates. The productivity gain: instead of 50 lines of 'if port is None: raise; if not 1 <= port <= 65535: raise', you write `port: int = Field(ge=1, le=65535)`. Validation logic lives in type annotations, not imperative code.",
+      explanation: "Pydantic handles type conversion, validation, and error reporting declaratively through your model definition—you write the schema once, Pydantic enforces it automatically. Manual validation requires writing repetitive checking code for every field, type, constraint, and providing error messages. Option 2 is incorrect—performance difference is negligible. Option 3 is wrong—Pydantic validates at load time; hot reloading is separate. Option 4 is false—Pydantic doesn't encrypt; it validates. The productivity gain: instead of 50 lines of 'if port is None: raise; if not 1 &lt;= port &lt;= 65535: raise', you write `port: int = Field(ge=1, le=65535)`. Validation logic lives in type annotations, not imperative code.",
       source: "Lesson 6: Capstone Project - Type-Safe Configuration Manager"
     }
   ]}

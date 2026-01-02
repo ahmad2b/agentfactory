@@ -595,8 +595,8 @@ Go back to your specification and verify each success criterion:
 
 | Success Criterion | Status | Evidence |
 |-------------------|--------|----------|
-| Cluster provisioned in < 10 minutes | PASS | `kubectl get nodes` shows Ready in 8m |
-| Full deployment in < 30 minutes | PASS | Total deployment time: 22 minutes |
+| Cluster provisioned in &lt; 10 minutes | PASS | `kubectl get nodes` shows Ready in 8m |
+| Full deployment in &lt; 30 minutes | PASS | Total deployment time: 22 minutes |
 | HTTPS endpoint accessible | PASS | `curl https://tasks.yourdomain.com/health` returns 200 |
 | Health check returns 200 | PASS | Response: `{"status": "healthy"}` |
 | Teardown verified ($0 cost) | PENDING | Execute Phase 6 |

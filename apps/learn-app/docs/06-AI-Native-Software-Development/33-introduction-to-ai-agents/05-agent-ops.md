@@ -191,10 +191,10 @@ Simple feedback captures signal. Detailed feedback captures insight.
 **With Agent Ops**: "Is my agent improving toward my KPIs?"
 
 Define measurable success:
-- Response time < 3 seconds (P95)
+- Response time &lt; 3 seconds (P95)
 - User satisfaction > 85% (feedback surveys)
 - Resolution rate > 70% (issues closed without escalation)
-- Escalation rate < 10% (complex issues passed to humans)
+- Escalation rate &lt; 10% (complex issues passed to humans)
 
 Then track, debug, and improve systematically.
 

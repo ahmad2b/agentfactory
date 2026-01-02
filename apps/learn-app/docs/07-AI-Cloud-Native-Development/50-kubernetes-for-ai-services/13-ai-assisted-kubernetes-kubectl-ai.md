@@ -413,7 +413,7 @@ resources:
 
 Without L1 knowledge (from Lesson 7), you might accept these limits as correct. But you know from lesson 7:
 - QoS tier "Guaranteed" requires requests == limits
-- For a development agent, you probably want "Burstable" (requests < limits)
+- For a development agent, you probably want "Burstable" (requests &lt; limits)
 - 500m CPU is excessive for a FastAPI service doing inference, not compute
 
 Your evaluation prevents a misconfigurations that would waste cluster resources.

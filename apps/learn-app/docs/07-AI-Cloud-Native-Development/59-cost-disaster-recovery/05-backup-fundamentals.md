@@ -101,7 +101,7 @@ Think of RTO as answering: "How long can we be down before we're in serious trou
 | Internal reporting | 24 hours | Employees can work around it for a day |
 | Task API (B2B SaaS) | 4 hours | Customers expect same-day recovery |
 | Archive storage | 72 hours | Rarely accessed, low urgency |
-| Financial trading | < 1 minute | Seconds of downtime cost millions |
+| Financial trading | &lt; 1 minute | Seconds of downtime cost millions |
 
 ### What RTO Drives
 
@@ -287,7 +287,7 @@ Three fundamental strategies exist for creating backups. Each has tradeoffs.
 | Recovery reliability | Highest (each backup is complete) |
 
 **Best for**:
-- Small datasets (< 100 GB)
+- Small datasets (&lt; 100 GB)
 - When storage is cheap
 - When restore speed is critical
 - Weekly backups (combined with incrementals for daily)

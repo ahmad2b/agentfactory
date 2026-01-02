@@ -6,78 +6,50 @@ description: "Build your Kafka skill first, then learn to understand and refine 
 
 # Chapter 52: Event-Driven Architecture with Kafka
 
-**You will build a Kafka skill BEFORE you learn Kafka.**
+You build the `kafka-events` skill first, then use each lesson to test and deepen it—from EDA fundamentals to production-grade operations. Kafka 4.0+ KRaft mode (no ZooKeeper) is the default.
 
-This chapter follows the **Skill-First Learning Pattern**: In Lesson 0, you create a `kafka-events` skill using tools from Chapter 5. Then you spend the chapter understanding what you built and making it better. By the end, you don't just "know Kafka"—you OWN a production-ready skill.
+---
 
-## The Skill-First Arc
+## Goals
 
-```
-L00: Build Your Kafka Skill (25 min)
-  │   └── Clone skills-lab, fetch docs, create skill
-  │
-  ├── L01-03: EDA Foundations
-  │   └── Events vs requests, EDA concepts, Kafka mental model
-  │
-  ├── L04-08: Kafka Core
-  │   └── Strimzi deployment, producers, consumers
-  │
-  ├── L09-13: Production Patterns
-  │   └── FastAPI integration, schemas, delivery, transactions
-  │
-  ├── L14-17: Advanced Patterns
-  │   └── Connect, CDC, agent patterns, saga
-  │
-  └── L18-22: Operations & Capstone
-      └── Production Strimzi, monitoring, AI-assisted, capstone, skill
-```
+- Understand event-driven architecture and Kafka’s core model (topics, partitions, consumer groups)
+- Deploy Kafka with Strimzi in KRaft mode
+- Build reliable producers/consumers with delivery guarantees and transactions
+- Integrate Kafka with FastAPI using schemas (Avro + schema registry)
+- Apply advanced patterns: Connect, CDC with Debezium, agent events, saga
+- Operate Kafka: production config, monitoring, debugging
+- Capture everything in a reusable Kafka skill
 
-**Key Update (2025):** Kafka 4.0 removed ZooKeeper entirely. This chapter teaches KRaft-only deployment—the modern, simplified architecture.
+---
 
-## Chapter Structure
+## Lesson Progression
 
-| # | Lesson | Your Skill Improves |
-|---|--------|---------------------|
-| **0** | **Build Your Kafka Skill** | **Created from official docs** |
-| 1 | From Request-Response to Events | Understand: why events |
-| 2 | EDA Concepts | Understand: event patterns |
-| 3 | Kafka Mental Model | Understand: topics, partitions |
-| 4 | Deploying Kafka with Strimzi | Validate: skill knows Strimzi |
-| 5 | Your First Producer | Refine: producer code |
-| 6 | Producer Reliability | Add: acks, retries |
-| 7 | Your First Consumer | Refine: consumer code |
-| 8 | Consumer Groups & Rebalancing | Add: group patterns |
-| 9 | Async FastAPI Integration | Add: async patterns |
-| 10 | Avro & Schema Registry | Add: schema patterns |
-| 11 | Delivery Semantics | Add: guarantees |
-| 12 | Transactions | Add: transaction patterns |
-| 13 | Reliability Configuration | Add: production config |
-| 14 | Kafka Connect | Add: connector patterns |
-| 15 | CDC with Debezium | Add: CDC patterns |
-| 16 | Agent Event Patterns | Add: agent events |
-| 17 | Saga Pattern | Add: saga patterns |
-| 18 | Production Strimzi | Refine: production config |
-| 19 | Monitoring & Debugging | Add: observability |
-| 20 | AI-Assisted Development | Refine: AI collaboration |
-| **21** | **Capstone: Event-Driven Notifications** | **Production-ready** |
-| 22 | Finalize Kafka Skill | **Complete asset** |
+| # | Lesson | Focus |
+|---|--------|-------|
+| **0** | Build Your Kafka Skill | Scaffold from docs |
+| 1-3 | EDA Foundations | Why events, EDA patterns, Kafka mental model |
+| 4-8 | Kafka Core | Strimzi deploy, producers, consumers, groups |
+| 9-13 | Production Patterns | Async FastAPI integration, schemas, delivery semantics, transactions, reliability config |
+| 14-17 | Advanced Patterns | Connect, Debezium CDC, agent event design, saga orchestration |
+| 18-19 | Operations | Production Strimzi, monitoring/debugging |
+| 20 | AI-Assisted Development | Use AI to generate/tune configs |
+| **21** | Capstone: Event-Driven Notifications | Production pipeline |
+| 22 | Finalize Kafka Skill | Package prompts and patterns |
 
-## Every Lesson Has Skill Reflection
+Each lesson ends with a skill reflection: test, find gaps, and improve.
 
-Each lesson ends with **"Reflect on Your Skill"**:
+---
 
-1. **Test**: Does your skill handle this lesson's concepts?
-2. **Identify gaps**: What's missing?
-3. **Improve**: Add or refine the capability
+## Outcome & Method
 
-By Lesson 22, you've tested and improved your skill 21+ times.
+You finish with a production-ready Kafka deployment, reliable producer/consumer code integrated with FastAPI, and a Kafka skill for future projects. The chapter follows the 4-Layer approach: foundations → production patterns → AI-assisted authoring → spec-driven capstone.
 
-## What You'll Learn
+---
 
-By the end of this chapter, you'll be able to:
+## Prerequisites
 
-- **Explain why events beat direct calls**: Coupling problems, async benefits, when to use EDA
-- **Understand Kafka architecture**: Brokers, topics, partitions, consumer groups, offsets (KRaft mode)
+- Chapters 49-51: container image and Kubernetes/Helm familiarity
+- Ability to run a local Kubernetes cluster (e.g., Docker Desktop) for Strimzi
 - **Implement reliable producers**: acks semantics, retries, idempotent producer, error handling
 - **Implement robust consumers**: Consumer groups, rebalancing, offset management, lag monitoring
 - **Integrate with FastAPI**: Async producers/consumers, lifespan events, background tasks

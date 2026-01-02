@@ -409,7 +409,7 @@ Execution Time: 0.031 ms
 |------|------|-----|
 | Scan type | Index Scan, Index Only Scan | Seq Scan (on large tables) |
 | Rows | Close to actual | Wildly different = stale stats |
-| Execution Time | < 10ms for simple queries | > 100ms needs optimization |
+| Execution Time | &lt; 10ms for simple queries | > 100ms needs optimization |
 
 ### Running EXPLAIN from Python
 

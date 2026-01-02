@@ -78,7 +78,7 @@ Test your understanding of Python's arithmetic, comparison, logical, and assignm
         "Calculates two raised to tenth"
       ],
       correctOption: 3,
-      explanation: "The correct answer is 1024 (2 to the 10th power). The `**` operator raises the left operand to the power of the right operand (2 ** 10 = 2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 = 1024). The option about multiplication is incorrect—that would be `2 * 10 = 20`, not exponentiation. The option about division is wrong—division is `/`, not `**`. The option about bitwise shift is incorrect—bitwise shift uses `<<` and `>>`, not `**`. Note: Don't confuse `**` with `^` (which is XOR in Python, not exponentiation).",
+      explanation: "The correct answer is 1024 (2 to the 10th power). The `**` operator raises the left operand to the power of the right operand (2 ** 10 = 2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 = 1024). The option about multiplication is incorrect—that would be `2 * 10 = 20`, not exponentiation. The option about division is wrong—division is `/`, not `**`. The option about bitwise shift is incorrect—bitwise shift uses `&lt;&lt;` and `>>`, not `**`. Note: Don't confuse `**` with `^` (which is XOR in Python, not exponentiation).",
       source: "Lesson 1: Arithmetic Operators"
     },
     {
@@ -138,7 +138,7 @@ Test your understanding of Python's arithmetic, comparison, logical, and assignm
         "Returns None or value type"
       ],
       correctOption: 2,
-      explanation: "The correct answer is bool (True or False). All comparison operators (==, !=, >, <, >=, <=) return boolean values. For example, `5 > 3` returns `True`, and `5 == 10` returns `False`. You can verify with `type(5 > 3)` → `<class 'bool'>`. Option 2 is incorrect—though True equals 1 and False equals 0 in arithmetic contexts, the type is bool, not int. Option 3 is wrong—Python uses True/False, not strings. Option 4 is incorrect—comparisons always return bool, never None.",
+      explanation: "The correct answer is bool (True or False). All comparison operators (==, !=, >, &lt;, >=, &lt;=) return boolean values. For example, `5 > 3` returns `True`, and `5 == 10` returns `False`. You can verify with `type(5 > 3)` → `<class 'bool'>`. Option 2 is incorrect—though True equals 1 and False equals 0 in arithmetic contexts, the type is bool, not int. Option 3 is wrong—Python uses True/False, not strings. Option 4 is incorrect—comparisons always return bool, never None.",
       source: "Lesson 2: Comparison Operators"
     },
     {
@@ -214,7 +214,7 @@ Test your understanding of Python's arithmetic, comparison, logical, and assignm
       source: "Lesson 2: Comparison Operators"
     },
     {
-      question: "When would `x <= y` and `x >= y` both be True?",
+      question: "When would `x &lt;= y` and `x >= y` both be True?",
       options: [
         "When types of x y differ",
         "When x is less than y value",
@@ -222,7 +222,7 @@ Test your understanding of Python's arithmetic, comparison, logical, and assignm
         "When both x and y exactly equal"
       ],
       correctOption: 3,
-      explanation: "The correct answer is when x equals y. If `x = 5` and `y = 5`, then `x <= y` (5 is less than or EQUAL to 5: True) and `x >= y` (5 is greater than or EQUAL to 5: True) are both True. The `=` in `<=` and `>=` includes the equality case. Option 2 is wrong—if x < y, then `x >= y` would be False. Option 3 is incorrect—if x > y, then `x <= y` would be False. Option 4 is wrong—type differences don't make both True simultaneously.",
+      explanation: "The correct answer is when x equals y. If `x = 5` and `y = 5`, then `x &lt;= y` (5 is less than or EQUAL to 5: True) and `x >= y` (5 is greater than or EQUAL to 5: True) are both True. The `=` in `&lt;=` and `>=` includes the equality case. Option 2 is wrong—if x &lt; y, then `x >= y` would be False. Option 3 is incorrect—if x > y, then `x &lt;= y` would be False. Option 4 is wrong—type differences don't make both True simultaneously.",
       source: "Lesson 2: Comparison Operators"
     },
     {
@@ -270,7 +270,7 @@ Test your understanding of Python's arithmetic, comparison, logical, and assignm
         "Use expression with and operator"
       ],
       correctOption: 3,
-      explanation: "The correct answer is `(x > 5) and (x < 10)`. A range check requires TWO comparisons joined with `and` because both conditions must be True: x must be greater than 5 AND less than 10. Option 2 is wrong—`or` would include values outside the range (x < 5 or x > 10 means OUTSIDE range). Option 3 is incorrect—single comparison only checks one boundary. Option 4 is also incomplete. In Chapter 21, you'll use this pattern in if statements: `if (x > 5) and (x < 10):`.",
+      explanation: "The correct answer is `(x > 5) and (x &lt; 10)`. A range check requires TWO comparisons joined with `and` because both conditions must be True: x must be greater than 5 AND less than 10. Option 2 is wrong—`or` would include values outside the range (x &lt; 5 or x > 10 means OUTSIDE range). Option 3 is incorrect—single comparison only checks one boundary. Option 4 is also incomplete. In Chapter 21, you'll use this pattern in if statements: `if (x > 5) and (x &lt; 10):`.",
       source: "Lesson 3: Logical Operators"
     },
     {
@@ -378,7 +378,7 @@ Test your understanding of Python's arithmetic, comparison, logical, and assignm
         "Comparing price with another product"
       ],
       correctOption: 2,
-      explanation: "The correct answer is price increase. `price *= 1.10` multiplies price by 1.10 (10% increase). If price was 100, it becomes 110. This is common for: applying tax, inflation adjustment, discounts. Option 2 is wrong—initial assignment uses `=`, not `*=`. Option 3 is incorrect—checking uses comparison operators (`>`), not `*=`. Option 4 is wrong—comparison uses `==` or `<`, not multiplication assignment. `*=` is for scaling values.",
+      explanation: "The correct answer is price increase. `price *= 1.10` multiplies price by 1.10 (10% increase). If price was 100, it becomes 110. This is common for: applying tax, inflation adjustment, discounts. Option 2 is wrong—initial assignment uses `=`, not `*=`. Option 3 is incorrect—checking uses comparison operators (`>`), not `*=`. Option 4 is wrong—comparison uses `==` or `&lt;`, not multiplication assignment. `*=` is for scaling values.",
       source: "Lesson 4: Assignment Operators"
     },
     {
@@ -546,7 +546,7 @@ Test your understanding of Python's arithmetic, comparison, logical, and assignm
         "Only logical operators for control flow"
       ],
       correctOption: 0,
-      explanation: "The correct answer is all four operator types. The capstone demonstrates: arithmetic (+, -, *, /), comparison (==, !=, >, <), logical (and, or, not), and assignment (=, +=, -=). It also includes type validation (`type()`) and keyword checking. Option 2 is incomplete—calculator uses more than arithmetic. Option 3 is wrong—comparison is just one part. Option 4 is incorrect—logical operators are included but not the only ones. The capstone brings together everything from Lessons 1-5.",
+      explanation: "The correct answer is all four operator types. The capstone demonstrates: arithmetic (+, -, *, /), comparison (==, !=, >, &lt;), logical (and, or, not), and assignment (=, +=, -=). It also includes type validation (`type()`) and keyword checking. Option 2 is incomplete—calculator uses more than arithmetic. Option 3 is wrong—comparison is just one part. Option 4 is incorrect—logical operators are included but not the only ones. The capstone brings together everything from Lessons 1-5.",
       source: "Lesson 5: Keywords and Capstone"
     },
     {
@@ -594,7 +594,7 @@ Test your understanding of Python's arithmetic, comparison, logical, and assignm
         "Control flow with if statements in eighteen"
       ],
       correctOption: 3,
-      explanation: "The correct answer is Chapter 21 control flow. Chapter 19 teaches operators (comparisons return bool, logical operators combine conditions), which are the building blocks for Chapter 21's if statements and loops. When you write `if (x > 5) and (x < 10):`, you're using comparison and logical operators learned here. Option 2 is wrong—functions come later. Option 3 is incorrect—OOP is much later. Option 4 is wrong—file handling doesn't directly build on operators. Operators → Control Flow is the natural progression.",
+      explanation: "The correct answer is Chapter 21 control flow. Chapter 19 teaches operators (comparisons return bool, logical operators combine conditions), which are the building blocks for Chapter 21's if statements and loops. When you write `if (x > 5) and (x &lt; 10):`, you're using comparison and logical operators learned here. Option 2 is wrong—functions come later. Option 3 is incorrect—OOP is much later. Option 4 is wrong—file handling doesn't directly build on operators. Operators → Control Flow is the natural progression.",
       source: "Lesson 5: Keywords and Capstone"
     },
     {

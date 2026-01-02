@@ -919,7 +919,7 @@ Test AI's understanding of dataclass validation patterns.
 >     address: Address
 >
 >     def __post_init__(self):
->         if len(self.name) < 2:
+>         if len(self.name) &lt; 2:
 >             raise ValueError('Name too short')
 > ```
 >
@@ -970,9 +970,9 @@ class User:
     age: int
 
     def __post_init__(self):
-        if len(self.name) < 2:
+        if len(self.name) &lt; 2:
             raise ValueError("Name must be at least 2 characters")
-        if self.age < 0 or self.age > 150:
+        if self.age &lt; 0 or self.age > 150:
             raise ValueError("Age must be between 0 and 150")
 
 # Valid
@@ -1118,7 +1118,7 @@ class Config:
     value: int
 
     def __post_init__(self):
-        if self.value < 0:
+        if self.value &lt; 0:
             raise ValueError("Must be positive")
 
 c = Config(10)
@@ -1134,7 +1134,7 @@ class User:
     def __post_init__(self):
         # Metadata doesn't auto-validate!
         # You must manually check:
-        if self.age < 0:
+        if self.age &lt; 0:
             raise ValueError("Age must be positive")
 ```
 ```

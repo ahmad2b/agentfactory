@@ -358,7 +358,7 @@ Would you like me to help with that instead?
 
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
-| Harmful compliance rate | <5% | Red-team test suite |
+| Harmful compliance rate | &lt;5% | Red-team test suite |
 | Jailbreak resistance | >90% | Standard jailbreak prompts |
 | Refusal quality | >80% helpful | Human evaluation |
 
@@ -367,7 +367,7 @@ Would you like me to help with that instead?
 | Metric | Target | How to Measure |
 |--------|--------|----------------|
 | Legitimate task completion | >95% | Normal use test suite |
-| False refusal rate | <5% | Edge case evaluation |
+| False refusal rate | &lt;5% | Edge case evaluation |
 | User satisfaction | >4/5 | User feedback |
 
 ## Troubleshooting Decision Tree

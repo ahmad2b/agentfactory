@@ -233,7 +233,7 @@ Idempotence has constraints:
 | Setting | Required Value | Why |
 |---------|---------------|-----|
 | `acks` | `all` | Must ensure leader + replicas agree on sequence |
-| `max.in.flight.requests.per.connection` | `<= 5` | More concurrent requests can cause reordering |
+| `max.in.flight.requests.per.connection` | `&lt;= 5` | More concurrent requests can cause reordering |
 | `retries` | `> 0` | Must retry on transient failures |
 
 **Configuration that violates requirements:**

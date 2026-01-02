@@ -319,7 +319,7 @@ For real-time agents, this difference is critical.
 
 **Keep using API function calling when:**
 - Tool definitions change frequently
-- Volume is low (<10K calls/month)
+- Volume is low (&lt;10K calls/month)
 - You need GPT-4 level reasoning, not just tool execution
 - You're still iterating on agent design
 

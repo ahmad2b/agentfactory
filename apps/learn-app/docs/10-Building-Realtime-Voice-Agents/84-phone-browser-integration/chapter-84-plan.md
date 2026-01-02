@@ -94,7 +94,7 @@
 1. Dual-skill LEARNING-SPEC.md (specification for two related domains)
 2. Documentation-grounded integration skill creation
 
-**Cognitive Load Validation**: 2 concepts <= 10 limit (B1) -> WITHIN LIMIT
+**Cognitive Load Validation**: 2 concepts &lt;= 10 limit (B1) -> WITHIN LIMIT
 
 **Maps to Evals**: #1 (Skill Creation)
 
@@ -273,7 +273,7 @@
 2. Twilio Voice integration (inbound + outbound)
 3. Telnyx as cost-effective telephony alternative
 
-**Cognitive Load Validation**: 3 concepts <= 10 limit (B1) -> WITHIN LIMIT
+**Cognitive Load Validation**: 3 concepts &lt;= 10 limit (B1) -> WITHIN LIMIT
 
 **Maps to Evals**: #2 (SIP Understanding), #3 (Twilio Integration), #4 (Cost Optimization)
 
@@ -403,7 +403,7 @@
 **Learning Objectives**:
 - Implement microphone capture using Web Audio API and getUserMedia
 - Configure AudioWorklet for low-latency browser audio processing
-- Run Silero VAD in browser via WebAssembly (<1ms per 30ms audio chunk)
+- Run Silero VAD in browser via WebAssembly (&lt;1ms per 30ms audio chunk)
 - Compare WebRTC vs WebSocket for browser-server audio transport
 - Connect browser audio to voice agents (LiveKit or Pipecat)
 
@@ -416,7 +416,7 @@
 2. AudioWorklet for low-latency processing
 3. Silero VAD in browser via WebAssembly
 
-**Cognitive Load Validation**: 3 concepts <= 10 limit (B1-B2) -> WITHIN LIMIT
+**Cognitive Load Validation**: 3 concepts &lt;= 10 limit (B1-B2) -> WITHIN LIMIT
 
 **Maps to Evals**: #5 (Browser Audio Mastery), #6 (VAD Implementation)
 
@@ -441,7 +441,7 @@
 
 3. **Silero VAD in Browser** (~12 min)
    - What is Silero VAD: Voice Activity Detection model (~2MB)
-   - Performance: <1ms per 30ms audio chunk
+   - Performance: &lt;1ms per 30ms audio chunk
    - WebAssembly integration: Running ML model in browser
    - ONNX Runtime Web: Executing VAD model
    - Why client-side VAD:
@@ -572,7 +572,7 @@
 2. Call recording with compliance
 3. Failover and redundancy design
 
-**Cognitive Load Validation**: 3 concepts <= 10 limit (B2) -> WITHIN LIMIT
+**Cognitive Load Validation**: 3 concepts &lt;= 10 limit (B2) -> WITHIN LIMIT
 
 **Maps to Evals**: #7 (Production Patterns)
 
@@ -812,10 +812,10 @@ Lesson 3: Production Patterns (requires both skills + all concepts)
 - [x] No premature spec-driven content (that's Chapter 85 Capstone)
 
 **Cognitive Load Validation**:
-- [x] Lesson 0: 2 concepts <= 10 (B1 limit) PASS
-- [x] Lesson 1: 3 concepts <= 10 (B1 limit) PASS
-- [x] Lesson 2: 3 concepts <= 10 (B1-B2 limit) PASS
-- [x] Lesson 3: 3 concepts <= 10 (B2 limit) PASS
+- [x] Lesson 0: 2 concepts &lt;= 10 (B1 limit) PASS
+- [x] Lesson 1: 3 concepts &lt;= 10 (B1 limit) PASS
+- [x] Lesson 2: 3 concepts &lt;= 10 (B1-B2 limit) PASS
+- [x] Lesson 3: 3 concepts &lt;= 10 (B2 limit) PASS
 
 **L00 Pattern Requirements**:
 - [x] Lesson 0 creates TWO skills from official documentation
@@ -885,7 +885,7 @@ Lesson 3: Production Patterns (requires both skills + all concepts)
 **Browser Audio**:
 - Web Audio API requires HTTPS context for microphone access
 - AudioWorklet latency: ~128 samples (2.67ms at 48kHz)
-- Silero VAD: <1ms per 30ms audio chunk, ~2MB model
+- Silero VAD: &lt;1ms per 30ms audio chunk, ~2MB model
 
 **Transport**:
 - WebRTC: NAT traversal, adaptive bitrate, production standard

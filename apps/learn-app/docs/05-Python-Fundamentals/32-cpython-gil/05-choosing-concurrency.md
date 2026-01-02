@@ -740,7 +740,7 @@ def measure_approach(approach_name: str, func: Callable[[int], None], n: int, ru
 
 | **Speedup** | **Interpretation** | **Decision** |
 |---|---|---|
-| **< 1.0x** | Slower than baseline | Don't use this approach |
+| **&lt; 1.0x** | Slower than baseline | Don't use this approach |
 | **1.0-1.2x** | Overhead not justified | Stick with simpler approach |
 | **1.2-2.0x** | Worth considering; check overhead for your scale | Use if workload is large |
 | **> 2.0x** | Clear winner; go with this | Use in production |

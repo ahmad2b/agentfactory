@@ -164,7 +164,7 @@ TTS gives your agent a voice. The choice shapes user perception more than any ot
 | **Cartesia Sonic-3** | 40-90ms | High | No | ~$0.05/1K chars |
 | **ElevenLabs Flash v2.5** | ~75ms | Premium | Yes | Subscription |
 | **Deepgram Aura** | Low | Good | No | $4.50/hr |
-| **PlayHT 3.0-mini** | <300ms | Good | Limited | Per-character |
+| **PlayHT 3.0-mini** | &lt;300ms | Good | Limited | Per-character |
 
 ### Cartesia Sonic-3: The Speed-Quality Sweet Spot
 
@@ -205,7 +205,7 @@ Deepgram Aura offers TTS alongside their industry-leading STT:
 PlayHT offers the widest selection of voices:
 
 - **800+ voices**: Extensive multilingual library
-- **<300ms latency**: Acceptable for many use cases
+- **&lt;300ms latency**: Acceptable for many use cases
 - **Voice cloning**: Available on higher tiers
 - **Per-character pricing**: Scales with usage
 
@@ -242,13 +242,13 @@ Silero VAD dominates the voice AI ecosystem for good reasons:
 
 | Characteristic | Silero VAD |
 |----------------|------------|
-| **Latency** | <1ms per 30ms audio chunk |
+| **Latency** | &lt;1ms per 30ms audio chunk |
 | **Model size** | ~2MB (runs on edge devices) |
 | **Accuracy** | 99%+ on standard benchmarks |
 | **Cost** | Free and open-source |
 | **Integration** | Built into LiveKit Agents, Pipecat |
 
-**How it works**: Silero VAD processes 30ms audio chunks and classifies each as speech or non-speech. At <1ms per chunk, it adds negligible latency to your pipeline.
+**How it works**: Silero VAD processes 30ms audio chunks and classifies each as speech or non-speech. At &lt;1ms per chunk, it adds negligible latency to your pipeline.
 
 **Why it won**: The combination of speed, accuracy, and zero cost made alternatives unnecessary for most use cases. LiveKit and Pipecat both integrate Silero by default.
 
@@ -346,7 +346,7 @@ You now understand each component. Here is how they combine into a production-re
 | Component | Provider | Latency | Cost/min |
 |-----------|----------|---------|----------|
 | Transport | WebRTC (LiveKit) | 60-120ms | Infrastructure |
-| VAD | Silero VAD | <1ms | Free |
+| VAD | Silero VAD | &lt;1ms | Free |
 | STT | Deepgram Nova-3 | ~90ms | $0.0077 |
 | LLM | GPT-4o-mini | 200-400ms | $0.0015 |
 | TTS | Cartesia Sonic-3 | 40-90ms | $0.024 |

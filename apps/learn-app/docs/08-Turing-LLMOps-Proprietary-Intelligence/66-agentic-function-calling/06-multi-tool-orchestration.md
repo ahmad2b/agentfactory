@@ -523,7 +523,7 @@ Total multi-tool examples: 225
 | **Chain completion rate** | % of chains completed correctly | >90% |
 | **Dependency accuracy** | % of dependent calls using correct IDs | >95% |
 | **Parallel recognition** | % of parallel opportunities taken | >85% |
-| **Over-serialization** | % of parallel ops incorrectly serialized | <10% |
+| **Over-serialization** | % of parallel ops incorrectly serialized | &lt;10% |
 | **Synthesis quality** | Final response covers all operations | >90% |
 
 ### Testing Multi-Tool Capability

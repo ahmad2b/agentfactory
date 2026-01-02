@@ -438,7 +438,7 @@ You've learned how to structure values.yaml for maintainability. Quick reference
 
 | Approach | When to Use | Template Access | Override Syntax |
 |----------|-------------|-----------------|-----------------|
-| **Flat** | Simple charts (< 10 values) | `{{ .Values.agentName }}` | `--set agentName=x` |
+| **Flat** | Simple charts (&lt; 10 values) | `{{ .Values.agentName }}` | `--set agentName=x` |
 | **Nested** | Complex charts (10+ values) | `{{ .Values.agent.name }}` | `--set agent.name=x` |
 | **Hybrid** | Most production charts | Mix based on concept grouping | Varies by path |
 
@@ -1502,7 +1502,7 @@ Does my skill understand values hierarchy and validation?
 ### Identify Gaps
 
 Ask yourself:
-- Did my skill demonstrate the precedence hierarchy (values.yaml < -f file < --set)?
+- Did my skill demonstrate the precedence hierarchy (values.yaml &lt; -f file &lt; --set)?
 - Did it create environment files that only override what differs?
 - Does it include values.schema.json with required fields and type validation?
 - Did it organize values by concept (agent.*, database.*) not by template file?

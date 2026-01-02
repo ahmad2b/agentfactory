@@ -150,7 +150,7 @@ EOF
 ```
 
 **What this command does:**
-- `cat > approach-simple.txt << 'EOF'` = create file with multiple lines (from Lesson 2)
+- `cat > approach-simple.txt &lt;&lt; 'EOF'` = create file with multiple lines (from Lesson 2)
 - Everything between the first `EOF` and last `EOF` becomes the file content
 - Result: creates `approach-simple.txt` with the solution approach text inside
 

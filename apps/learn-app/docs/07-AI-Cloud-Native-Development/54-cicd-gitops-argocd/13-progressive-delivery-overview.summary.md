@@ -9,7 +9,7 @@ Progressive delivery deploys new versions safely through canary (gradual traffic
 
 ### Critical Patterns
 - Rollout CRD with `strategy.canary.steps`: setWeight for traffic percentage, pause for observation windows
-- Analysis template with metrics query and successCriteria (e.g., error_rate < 1%)
+- Analysis template with metrics query and successCriteria (e.g., error_rate &lt; 1%)
 - Blue-green uses activeService and previewService for traffic routing with prePromotionAnalysis
 - ArgoCD deploys Rollout CRD; Argo Rollouts controller manages progressive delivery
 

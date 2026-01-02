@@ -9,7 +9,7 @@ Logical operators combine multiple True/False conditions into single boolean res
 - **Operator Precedence**: `not` > `and` > `or`; parentheses clarify and override default order
 
 ### Critical Patterns
-- Range checking: `(x > 5) and (x < 10)` checks if x is between 5 and 10
+- Range checking: `(x > 5) and (x &lt; 10)` checks if x is between 5 and 10
 - Permission logic: `(is_admin or is_moderator) and account_active` — user must be admin/moderator AND account must be active
 - De Morgan's Laws: `not (a and b)` equals `(not a) or (not b)` — logically equivalent expressions that help simplify complex conditions
 

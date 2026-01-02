@@ -397,7 +397,7 @@ Watch for these patterns:
 | Loss plateaus early | Learning rate too low | Increase LR |
 | Loss spikes up | Learning rate too high | Decrease LR |
 | Val loss increasing while train decreases | Overfitting | Stop early, reduce epochs |
-| Loss very low (<0.01) | Possible overfitting | Check generalization |
+| Loss very low (&lt;0.01) | Possible overfitting | Check generalization |
 
 ## Phase 5: Validation Testing
 

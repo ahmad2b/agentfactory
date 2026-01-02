@@ -150,7 +150,7 @@ Fine-tuning requires significant effort. Use this framework to decide if it is a
 | **Need up-to-date information** | Use RAG to retrieve current data |
 | **Occasional task** | Use prompting with few-shot examples |
 | **Experimenting with behavior** | Iterate with prompts first |
-| **Limited training data (<50 examples)** | Use few-shot prompting |
+| **Limited training data (&lt;50 examples)** | Use few-shot prompting |
 | **Task changes frequently** | Keep prompts flexible |
 
 ### The Decision Tree

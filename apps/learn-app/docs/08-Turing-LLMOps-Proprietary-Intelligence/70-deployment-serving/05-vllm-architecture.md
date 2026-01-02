@@ -69,7 +69,7 @@ Consider the differences between development and production serving:
 | Aspect | Development (Ollama) | Production (vLLM) |
 |--------|---------------------|-------------------|
 | Concurrent users | 1-10 | 100-10,000+ |
-| Latency target | <1 second | <100ms (p99) |
+| Latency target | &lt;1 second | &lt;100ms (p99) |
 | GPU utilization | 20-60% | 80-95% |
 | Cost optimization | Not critical | Primary concern |
 | Batching | None | Continuous |
@@ -312,7 +312,7 @@ When should you choose each solution?
 ### Choose vLLM When
 
 - Production deployment with many concurrent users
-- Strict latency SLAs (p99 < 100ms)
+- Strict latency SLAs (p99 &lt; 100ms)
 - GPU cost optimization is critical
 - Need advanced features (prefix caching, speculative decoding)
 - Deploying on cloud GPU instances

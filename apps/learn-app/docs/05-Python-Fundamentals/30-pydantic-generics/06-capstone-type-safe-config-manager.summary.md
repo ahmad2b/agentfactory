@@ -6,7 +6,7 @@ Configuration management synthesizes Pydantic validation and generic type safety
 
 **Configuration as Specification**: Your config models document what your application needs to function. Pydantic enforces that specification: missing required fields, wrong types, constraint violations all fail at startup—not hours later in production.
 
-**Precedence Layers Prevent Confusion**: When configuration comes from multiple sources, clear precedence rules prevent "where did this value come from?" debugging. Document explicitly: defaults < file < environment < CLI, with each layer documented in code and comments.
+**Precedence Layers Prevent Confusion**: When configuration comes from multiple sources, clear precedence rules prevent "where did this value come from?" debugging. Document explicitly: defaults &lt; file &lt; environment &lt; CLI, with each layer documented in code and comments.
 
 **Type-Safe Access Through Generics**: Without generics, retrieving config is untyped: `config.get("database")` returns unknown type. With generics: `config.get[DatabaseConfig]("database")` returns fully-typed DatabaseConfig with IDE autocomplete. This type safety prevents access errors.
 

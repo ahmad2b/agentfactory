@@ -119,7 +119,7 @@ Test your understanding of specification-driven development, reusable intelligen
       source: "Lesson 2: Why Do Specs Matter NOW?"
     },
     {
-      question: "A specification states: 'API response must be <100ms for user list endpoint.' What type of specification requirement is this?",
+      question: "A specification states: 'API response must be &lt;100ms for user list endpoint.' What type of specification requirement is this?",
       options: [
         "Constraint limiting technical implementation approach choices",
         "Functional requirement describing what system should do",
@@ -571,7 +571,7 @@ Test your understanding of specification-driven development, reusable intelligen
         "Incomplete: doesn't specify performance requirements explicitly"
       ],
       correctOption: 0,
-      explanation: "This criterion is weak because it's not testable—you can't write a test proving success without a specific threshold. 'Handle large numbers efficiently' has no measurable definition: What's 'large' (1000? 1,000,000? 10^100?)? What's 'efficiently' (<100ms? <1s? <1hr?)? Strong acceptance criteria: 'GIVEN calculator initialized, WHEN multiply(999999, 999999), THEN result returned in <50ms.' This is testable—you can write a test proving success or failure. While vagueness is the problem, 'not testable' captures the specification failure most precisely. Missing context about why efficiency matters is a separate issue. Incomplete performance requirements is true but doesn't capture the testability issue specifically. The design principle: acceptance criteria should be specific enough that you can write automated tests proving them true or false.",
+      explanation: "This criterion is weak because it's not testable—you can't write a test proving success without a specific threshold. 'Handle large numbers efficiently' has no measurable definition: What's 'large' (1000? 1,000,000? 10^100?)? What's 'efficiently' (&lt;100ms? &lt;1s? &lt;1hr?)? Strong acceptance criteria: 'GIVEN calculator initialized, WHEN multiply(999999, 999999), THEN result returned in &lt;50ms.' This is testable—you can write a test proving success or failure. While vagueness is the problem, 'not testable' captures the specification failure most precisely. Missing context about why efficiency matters is a separate issue. Incomplete performance requirements is true but doesn't capture the testability issue specifically. The design principle: acceptance criteria should be specific enough that you can write automated tests proving them true or false.",
       source: "Lesson 3: What is SDD"
     },
     {

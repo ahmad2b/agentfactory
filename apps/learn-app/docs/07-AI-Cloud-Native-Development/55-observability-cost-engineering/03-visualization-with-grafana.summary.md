@@ -5,7 +5,7 @@ Grafana transforms Prometheus metrics into actionable dashboards with panels for
 - **Dashboard JSON Model**: Dashboards are JSON documents with settings, variables, rows, and panels; export to Git for version control
 - **Panel Types**: Time series for trends over time, Gauge for current status with thresholds, Table for multi-metric comparisons
 - **Variables**: Query-based dropdowns (namespace, service) that filter all panels; enable one dashboard for multiple services
-- **Thresholds**: Green/yellow/red based on SLOs (e.g., green < 500ms, yellow 500-800ms, red > 800ms)
+- **Thresholds**: Green/yellow/red based on SLOs (e.g., green &lt; 500ms, yellow 500-800ms, red > 800ms)
 
 ### Critical Patterns
 - 4 golden signals panels: P95 latency (time series), traffic (time series), error rate (gauge), saturation (gauge)

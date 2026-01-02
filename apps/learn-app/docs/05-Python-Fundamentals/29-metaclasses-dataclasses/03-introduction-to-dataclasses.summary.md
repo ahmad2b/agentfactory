@@ -1,6 +1,6 @@
 ### Core Concept
 
-Dataclasses are decorators that auto-generate `__init__()`, `__repr__()`, and `__eq__()` based on type-hinted fields, eliminating 50% of boilerplate in data-heavy classes. Write field names with type hints; `@dataclass` generates constructors, string representations, and equality comparisons automatically. Use `frozen=True` for immutability (prevents attribute modification, enables dict keys), `order=True` for comparison operators (`<`, `>`, `<=`, `>=`), and default values for optional fields. Type hints are mandatory—they tell the decorator which variables are fields versus class variables.
+Dataclasses are decorators that auto-generate `__init__()`, `__repr__()`, and `__eq__()` based on type-hinted fields, eliminating 50% of boilerplate in data-heavy classes. Write field names with type hints; `@dataclass` generates constructors, string representations, and equality comparisons automatically. Use `frozen=True` for immutability (prevents attribute modification, enables dict keys), `order=True` for comparison operators (`&lt;`, `>`, `&lt;=`, `>=`), and default values for optional fields. Type hints are mandatory—they tell the decorator which variables are fields versus class variables.
 
 ### Key Mental Models
 

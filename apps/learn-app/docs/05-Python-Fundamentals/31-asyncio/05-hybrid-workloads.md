@@ -1222,7 +1222,7 @@ python /tmp/data_pipeline.py
 - [ ] Code runs without deadlocks or race conditions
 - [ ] Stages run concurrently (not sequentially)
 - [ ] Queues implement backpressure (don't grow unbounded)
-- [ ] Total time < sequential time by at least 20%
+- [ ] Total time &lt; sequential time by at least 20%
 - [ ] Bottleneck identified correctly (slowest stage)
 - [ ] Type hints complete
 - [ ] Production-ready: proper cleanup, error handling, queue drains

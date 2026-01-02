@@ -305,7 +305,7 @@ Here's what's happening under the hood:
 
 Imagine:
 - Your project needs `requests>=2.30.0`
-- You add `httpx`, which needs `requests<3.0.0`
+- You add `httpx`, which needs `requests&lt;3.0.0`
 
 These constraints are compatible (both need 2.x versions). UV picks a version that satisfies both—say, `requests==2.32.0`.
 

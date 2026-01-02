@@ -187,7 +187,7 @@ Allowlists/blocklists make simple yes/no decisions: "Agent can use Read tool, ca
 `canUseTool()` makes context-aware decisions:
 - "Agent can use Bash to run tests, but only in /test/ directory, not /production/"
 - "Agent can use Edit on .md files, but not on .json config files"
-- "Agent can only use cost-tracking tools if total_cost_usd < $10"
+- "Agent can only use cost-tracking tools if total_cost_usd &lt; $10"
 
 This runtime evaluation of each specific tool call enables security policies that simple allowlists cannot express.
 

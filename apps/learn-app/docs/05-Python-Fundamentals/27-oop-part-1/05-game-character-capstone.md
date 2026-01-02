@@ -586,7 +586,7 @@ Now that you have a working system, challenge AI to extend it. Can the design ha
 
 > "I want tasks to have due dates and show overdue status:
 > - Task has optional due_date (datetime or None)
-> - is_overdue() method returns True if done=False and due_date < today
+> - is_overdue() method returns True if done=False and due_date &lt; today
 > - TaskManager has get_overdue_tasks() returning tasks past deadline
 >
 > How should due dates affect priority sorting? Should overdue tasks always sort first? Show me implementation with datetime usage."

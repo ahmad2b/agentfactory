@@ -661,7 +661,7 @@ Ask your AI companion:
 
 > "I have a Vector class that stores x, y coordinates. I want to:
 > 1. Add vectors with + operator (v1 + v2)
-> 2. Compare vectors with < (v1 < v2, by magnitude)
+> 2. Compare vectors with &lt; (v1 &lt; v2, by magnitude)
 > 3. Get magnitude with len(v1)
 > 4. Print nicely with print(v1)
 > 5. Iterate: for component in v1
@@ -957,7 +957,7 @@ print(f"After adding 0: {sl}")
 
 ### Validation Checklist
 
-- ✅ Vector supports +, -, *, ==, \<, len(), iteration
+- ✅ Vector supports +, -, *, ==, \&lt;, len(), iteration
 - ✅ SortedList supports len(), indexing, containment, iteration
 - ✅ __str__ and __repr__ provide clear output
 - ✅ NotImplemented returned for unsupported operations

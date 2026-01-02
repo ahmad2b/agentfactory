@@ -685,7 +685,7 @@ When building your own SDK (this chapter's capstone), apply these patterns:
 |---------|---------|----------------|
 | **Async iterator streaming** | Memory-efficient real-time output | Return `AsyncIterable<Chunk>` from API methods |
 | **Optional message accumulation** | Support both streaming and final message access | Provide `.stream()` helper that accumulates internally |
-| **Typed tool definitions** | Type-safe function schemas | Use Zod schemas with `z.infer<>` for parameters |
+| **Typed tool definitions** | Type-safe function schemas | Use Zod schemas with `z.infer&lt;>` for parameters |
 | **Conversation loop** | Multi-turn with tool handling | While loop checking for tool calls in response |
 | **Client configuration** | Production-ready defaults | Accept apiKey, baseURL, timeout, maxRetries |
 

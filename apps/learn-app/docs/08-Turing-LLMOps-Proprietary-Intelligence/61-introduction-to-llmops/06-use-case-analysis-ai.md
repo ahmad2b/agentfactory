@@ -189,7 +189,7 @@ Which of these problems will fine-tuning solve vs which need other approaches?
 > Let me analyze each problem:
 >
 > **1. Malformed JSON (15%)**
-> Fine-tuning can reduce this to <5% by training on correctly formatted examples. But you'll still need validation—models generate text probabilistically, not deterministically.
+> Fine-tuning can reduce this to &lt;5% by training on correctly formatted examples. But you'll still need validation—models generate text probabilistically, not deterministically.
 >
 > **2. Extra fields**
 > Fine-tuning directly addresses this. Training exclusively on your schema teaches the model which fields exist.
@@ -307,7 +307,7 @@ Fine-tune a Llama 3.1 8B model to serve as a task management chat assistant. The
 
 | Capability | Description | Priority | Measurable Target |
 |------------|-------------|----------|-------------------|
-| JSON output | Consistent schema-compliant JSON | Critical | <5% parse failures |
+| JSON output | Consistent schema-compliant JSON | Critical | &lt;5% parse failures |
 | Task creation | Parse creation requests into structured data | High | 95% field accuracy |
 | Task queries | Translate filter requests to query params | High | 90% query accuracy |
 | Error handling | Graceful response to invalid inputs | Medium | 80% appropriate error responses |
@@ -338,7 +338,7 @@ Fine-tune a Llama 3.1 8B model to serve as a task management chat assistant. The
 |--------|--------|-------------------|
 | JSON validity | >95% | Parse rate on test set |
 | Field accuracy | >90% | Ground truth comparison |
-| Response latency | <300ms p95 | Production monitoring |
+| Response latency | &lt;300ms p95 | Production monitoring |
 | User satisfaction | >4.0/5 | In-app rating |
 
 #### 6. Risks and Mitigations
@@ -353,11 +353,11 @@ Fine-tune a Llama 3.1 8B model to serve as a task management chat assistant. The
 
 **Proceed if**:
 - Test set accuracy >85% (MVP threshold)
-- Latency <500ms on target hardware
-- Cost per query <50% of current API cost
+- Latency &lt;500ms on target hardware
+- Cost per query &lt;50% of current API cost
 
 **Revisit if**:
-- Accuracy <80% after 3 training iterations
+- Accuracy &lt;80% after 3 training iterations
 - Required data volume exceeds available resources
 
 ---

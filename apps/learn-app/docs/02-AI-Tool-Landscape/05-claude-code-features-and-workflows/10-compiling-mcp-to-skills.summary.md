@@ -21,7 +21,7 @@ MCP servers load ALL tool definitions at startup (5,000-8,000+ tokens each), cre
 - Forgetting to start/stop the MCP server when using browsing-with-playwright
 
 ### Decision Framework
-- **Use direct MCP**: One-off queries, low-token servers (<1,500 tokens), rapidly-changing APIs, small well-formatted results
+- **Use direct MCP**: One-off queries, low-token servers (&lt;1,500 tokens), rapidly-changing APIs, small well-formatted results
 - **Use compiled skill**: Repeated workflows (3+ calls), high-token servers (5,000+), large datasets needing filtering, multi-step workflows, team sharing, privacy-sensitive data
 
 ### Connections
