@@ -16,7 +16,15 @@ let cachedFonts = null;
 const loadFontsOnce = () => {
   if (cachedFonts) return cachedFonts;
 
-  const candidates = [
+  // Bundled fonts (Inter) - these are included in the plugin and work on all platforms
+  const bundledFontsDir = path.join(__dirname, "fonts");
+  const bundledFonts = [
+    { name: "Inter", weight: 400, file: "Inter-Regular.ttf" },
+    { name: "Inter", weight: 700, file: "Inter-Bold.ttf" },
+  ];
+
+  // System font fallbacks (only used if bundled fonts are missing)
+  const systemFonts = [
     {
       name: "Sans",
       weight: 400,
@@ -39,7 +47,35 @@ const loadFontsOnce = () => {
     },
   ];
 
-  cachedFonts = candidates
+  // Try bundled fonts first (preferred - works on Vercel/CI)
+  cachedFonts = bundledFonts
+    .map((font) => {
+      const fontPath = path.join(bundledFontsDir, font.file);
+      try {
+        if (fs.existsSync(fontPath)) {
+          return {
+            name: font.name,
+            data: fs.readFileSync(fontPath),
+            weight: font.weight,
+            style: "normal",
+          };
+        }
+      } catch {
+        // Ignore errors, fall through to system fonts
+      }
+      return null;
+    })
+    .filter(Boolean);
+
+  // If bundled fonts loaded, use them
+  if (cachedFonts.length >= 2) {
+    console.log("  Using bundled Inter fonts");
+    return cachedFonts;
+  }
+
+  // Fallback to system fonts
+  console.log("  Bundled fonts not found, trying system fonts...");
+  cachedFonts = systemFonts
     .map((c) => {
       const found = c.paths.find((p) => {
         try {
@@ -60,7 +96,7 @@ const loadFontsOnce = () => {
 
   if (!cachedFonts.length) {
     throw new Error(
-      "No suitable system fonts found for Satori (tried Arial/DejaVu/Windows Arial)."
+      "No fonts found. Bundled Inter fonts missing and no system fonts available."
     );
   }
 
@@ -272,34 +308,65 @@ async function injectOGImagesIntoHTML(outDir, siteConfig, siteDir) {
       const imageFilename = slug.replace(/\//g, '-') + '.png';
       const ogImagePath = path.join(ogImagesDir, imageFilename);
 
-      // Homepage: always use the static book cover image for previews
+      // Homepage: use a static book cover image for previews
       if (slug === 'home') {
-        // Ensure a lightweight 1200x630 JPEG exists in build output for faster fetch
+        const srcPng = path.join(siteDir, 'static', 'img', 'book-cover-page.png');
+        const destJpg = path.join(outDir, 'img', 'book-cover-social.jpg');
+        let homepageImageUrl;
+
+        // Try to create optimized JPEG from source PNG
         try {
-          const srcPng = path.join(siteDir, 'static', 'img', 'book-cover-page.png');
-          const destJpg = path.join(outDir, 'img', 'book-cover-social.jpg');
           if (fs.existsSync(srcPng)) {
             await sharp(srcPng)
               .resize(1200, 630, { fit: 'cover' })
               .jpeg({ quality: 80, progressive: true, chromaSubsampling: '4:2:0' })
               .toFile(destJpg);
+            homepageImageUrl = `${siteConfig.url}/img/book-cover-social.jpg?v=${buildVersion}`;
+            console.log(`  ✓ Generated homepage social image: book-cover-social.jpg`);
+          } else {
+            console.log(`  ⚠ Homepage source image not found: ${srcPng}`);
           }
-        } catch {}
+        } catch (err) {
+          console.log(`  ⚠ Failed to generate homepage social image: ${err.message}`);
+        }
 
-        const imageUrl = `${siteConfig.url}/img/book-cover-social.jpg?v=${buildVersion}`;
-        const pageUrl = `${siteConfig.url}/`;
+        // Fallback to the original PNG if JPEG conversion failed
+        if (!homepageImageUrl) {
+          if (fs.existsSync(srcPng)) {
+            homepageImageUrl = `${siteConfig.url}/img/book-cover-page.png?v=${buildVersion}`;
+            console.log(`  ⚠ Using fallback: book-cover-page.png`);
+          } else {
+            // Generate OG image as last resort
+            try {
+              await generateOGImage({
+                title: siteConfig.title,
+                description: siteConfig.tagline,
+                slug: 'home',
+                ogDir: path.join(outDir, 'img', 'og'),
+                siteConfig,
+              });
+              homepageImageUrl = `${siteConfig.url}/img/og/home.png?v=${buildVersion}`;
+              console.log(`  ✓ Generated fallback OG image: home.png`);
+            } catch (genErr) {
+              console.log(`  ✗ Failed to generate homepage OG image: ${genErr.message}`);
+            }
+          }
+        }
 
-        // Remove existing image/url tags
-        html = html.replace(/<meta[^>]*property=\"og:image\"[^>]*>/gi, '');
-        html = html.replace(/<meta[^>]*name=\"twitter:image\"[^>]*>/gi, '');
-        html = html.replace(/<meta[^>]*property=\"og:url\"[^>]*>/gi, '');
+        if (homepageImageUrl) {
+          const pageUrl = `${siteConfig.url}/`;
 
-        const ogTags = `
-  <meta property=\"og:image\" content=\"${imageUrl}\">\n  <meta property=\"og:image:width\" content=\"1200\">\n  <meta property=\"og:image:height\" content=\"630\">\n  <meta property=\"og:image:secure_url\" content=\"${imageUrl}\">\n  <meta property=\"og:site_name\" content=\"${siteConfig.title}\">\n  <meta property=\"og:url\" content=\"${pageUrl}\">\n  <meta name=\"twitter:image\" content=\"${imageUrl}\">\n</head>`;
+          // Remove existing image/url tags
+          html = html.replace(/<meta[^>]*property=\"og:image\"[^>]*>/gi, '');
+          html = html.replace(/<meta[^>]*name=\"twitter:image\"[^>]*>/gi, '');
+          html = html.replace(/<meta[^>]*property=\"og:url\"[^>]*>/gi, '');
 
-        html = html.replace(/<\/head>/i, ogTags);
-        fs.writeFileSync(htmlFile, html, 'utf-8');
-        console.log(`  ✓ Injected OG image (home): book-cover-page.png`);
+          const ogTags = `
+  <meta property=\"og:image\" content=\"${homepageImageUrl}\">\n  <meta property=\"og:image:width\" content=\"1200\">\n  <meta property=\"og:image:height\" content=\"630\">\n  <meta property=\"og:image:secure_url\" content=\"${homepageImageUrl}\">\n  <meta property=\"og:site_name\" content=\"${siteConfig.title}\">\n  <meta property=\"og:url\" content=\"${pageUrl}\">\n  <meta name=\"twitter:image\" content=\"${homepageImageUrl}\">\n</head>`;
+
+          html = html.replace(/<\/head>/i, ogTags);
+          fs.writeFileSync(htmlFile, html, 'utf-8');
+        }
         continue;
       }
       
@@ -324,7 +391,9 @@ async function injectOGImagesIntoHTML(outDir, siteConfig, siteDir) {
             ogDir: ogImagesDir,
             siteConfig,
           });
-        } catch {}
+        } catch (err) {
+          console.log(`  ⚠ Failed to generate OG image for ${slug}: ${err.message}`);
+        }
       }
 
       if (fs.existsSync(ogImagePath)) {
@@ -426,7 +495,7 @@ async function generateOGImage({
             backgroundImage:
               "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)",
             padding: 60,
-            fontFamily: "Sans",
+            fontFamily: "Inter",
             position: "relative",
           },
           children: [
@@ -532,7 +601,7 @@ async function generateOGImage({
                         fontWeight: "bold",
                         color: "#5ee0e4",
                       },
-                      children: "ai-native.panaversity.org",
+                      children: "agentfactory.panaversity.org",
                     },
                   },
                 ],

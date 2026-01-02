@@ -137,6 +137,14 @@ npm install -g @anthropic-ai/claude-code @musistudio/claude-code-router
 
 ### Step 2: Create Config Directories
 
+Enable running scriptson your system first:
+
+```powershell
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+Now create directories:
+
 ```powershell
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude-code-router"
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude"

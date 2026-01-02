@@ -35,8 +35,8 @@ export default function Navbar() {
                 className={cn(
                     "sticky top-0 z-40 w-full border-b transition-all duration-300",
                     isScrolled
-                        ? "bg-background/80 backdrop-blur-xl border-border shadow-sm"
-                        : "bg-background/0 border-transparent"
+                        ? "bg-background/95 backdrop-blur-xl border-border shadow-sm"
+                        : "bg-background border-border/50"
                 )}
             >
                 <div className="max-w-[1800px] flex h-16 items-center justify-between mx-auto px-4">
@@ -52,8 +52,9 @@ export default function Navbar() {
                     </div>
 
                     {/* CENTER: Search Bar - Wider and centered on docs pages */}
+                    {/* Shows at 997px+ to match Docusaurus sidebar breakpoint */}
                     {!isHomepage && (
-                        <div className="hidden md:flex flex-1 justify-center max-w-lg mx-8">
+                        <div className="hidden docs:flex flex-1 justify-center max-w-lg mx-8">
                             <div className="w-full">
                                 <SearchBar />
                             </div>
@@ -88,9 +89,9 @@ export default function Navbar() {
                     {/* RIGHT: Actions */}
                     <div className="flex items-center gap-2">
 
-                        {/* GitHub - Hidden on Homepage */}
+                        {/* GitHub - Hidden on Homepage, shows at 997px+ */}
                         {!isHomepage && (
-                            <Button variant="ghost" size="icon" asChild className="hidden md:inline-flex">
+                            <Button variant="ghost" size="icon" asChild className="hidden docs:inline-flex">
                                 <Link to="https://github.com/panaversity/ai-native-software-development">
                                     <Github className="w-5 h-5" />
                                     <span className="sr-only">GitHub</span>
@@ -104,10 +105,10 @@ export default function Navbar() {
                         {/* Auth - Already uses Button variants */}
                         <NavbarAuth />
 
-                        {/* Mobile Menu Trigger */}
+                        {/* Mobile Menu Trigger - Shows below 997px to match Docusaurus sidebar */}
                         <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                             <SheetTrigger asChild>
-                                <Button variant="ghost" size="icon" className="md:hidden">
+                                <Button variant="ghost" size="icon" className="docs:hidden">
                                     <Menu className="w-6 h-6" />
                                     <span className="sr-only">Toggle menu</span>
                                 </Button>

@@ -24,7 +24,7 @@ const hydrateEnabled = process.env.R2_HYDRATE_ENABLED === "true";
 const docsPath = hydrateEnabled ? "../build-source" : "docs";
 
 const config: Config = {
-  title: "The AI Agent Factory",
+  title: "Agent Factory",
   tagline:
     "The Spec-Driven Blueprint for Building and Monetizing Digital FTEs",
   favicon: "favicon.png",
@@ -277,7 +277,7 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: "img/book-cover-page.png",
+    image: "img/og-image.jpg",
 
     // Open Graph metadata for social media sharing
     metadata: [
@@ -290,7 +290,7 @@ const config: Config = {
       { property: "og:type", content: "website" },
       {
         property: "og:image",
-        content: "https://agentfactory.panaversity.org/img/book-cover-page.png",
+        content: "https://agentfactory.panaversity.org/img/og-image.jpg",
       },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
@@ -304,7 +304,7 @@ const config: Config = {
       },
       {
         name: "twitter:image",
-        content: "https://agentfactory.panaversity.org/img/book-cover-page.png",
+        content: "https://agentfactory.panaversity.org/img/og-image.jpg",
       },
     ],
 

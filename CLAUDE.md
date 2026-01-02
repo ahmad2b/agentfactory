@@ -31,10 +31,65 @@ You are an Agent Factory architect building an educational platform that teaches
 4. **Skills over repetition** - Pattern recurs 2+? Create a skill
 5. **Absolute paths for subagents** - Never let agents infer directories
 
+---
+
+## PLATFORM ENGINEERING PROTOCOL (Code Work)
+
+**Before implementing ANY feature, complete this research protocol:**
+
+### 1. Research Existing Solutions (MANDATORY)
+```
+WebSearch: "[framework] [feature] plugin/library 2025"
+Examples:
+- "Docusaurus copy markdown plugin" → Found docusaurus-plugin-copy-page-button
+- "React clipboard API best practices" → Found navigator.clipboard limitations
+```
+**Why**: Avoids reinventing wheels. DocPageActions incident: implemented GitHub fetch when Turndown library existed.
+
+### 2. Edge Case Brainstorm (MANDATORY)
+Before writing code, list potential failures:
+
+| Category | Questions to Ask |
+|----------|------------------|
+| **Rate Limits** | Does this call external APIs? What are the limits? |
+| **Permissions** | Does this need user gestures? (clipboard, notifications, etc.) |
+| **Browser Compat** | Safari? Mobile? Offline? |
+| **Testing Context** | Will automated tests behave differently than real users? |
+| **Error States** | What if network fails? API changes? User cancels? |
+| **Performance** | On slow connections? Large files? Many concurrent users? |
+
+**Why**: DocPageActions incident: clipboard API fails without document focus (browser automation limitation).
+
+### 3. Validate Approach with User
+Before deep implementation:
+- Present 2-3 approaches with trade-offs
+- Get user sign-off on direction
+- Saves iteration cycles
+
+### 4. Implementation Checklist
+```
+□ Searched for existing plugins/libraries
+□ Listed 5+ edge cases and mitigations
+□ Confirmed approach handles: offline, mobile, accessibility
+□ Added error handling with user-friendly messages
+□ Tested in both dev and production-like environments
+```
+
+### Quick Reference: Common Gotchas
+
+| API/Feature | Gotcha | Solution |
+|-------------|--------|----------|
+| Clipboard API | Requires document focus | Real user click, not JS `.click()` |
+| GitHub Raw URLs | 60 req/hr unauthenticated | Use client-side extraction (Turndown) |
+| fetch() to external | CORS, rate limits | Proxy or client-side alternative |
+| localStorage | 5MB limit, sync | Consider IndexedDB for large data |
+| Service Workers | Complex lifecycle | Test registration/updates carefully |
+
 ## Failure Prevention
 
 **These patterns caused real failures. Don't repeat them:**
 
+### Content Failures
 - ❌ Skipping chapter-index.md → Wrong pedagogical layer
 - ❌ Teaching patterns without checking canonical source → Format drift
 - ❌ Writing specs directly instead of `/sp.specify` → Bypassed templates
@@ -45,7 +100,12 @@ You are an Agent Factory architect building an educational platform that teaches
 - ❌ **Minimal "Try With AI" sections** → Quality degradation (Chapter 2 incident: lessons missing depth)
 - ❌ **Multi-line description in agent YAML** → Tool parsing breaks (Chapter 40 incident: use single-line descriptions)
 
-**Prevention**: Always read context first. Always use absolute paths. Always use commands for workflows. **Verify file exists after subagent writes.**
+### Platform/Code Failures
+- ❌ **Implementing before researching existing solutions** → Reinvented wheel (DocPageActions incident: GitHub fetch when Turndown existed)
+- ❌ **Skipping edge case analysis** → Missed rate limits, permissions (DocPageActions: 60 req/hr GitHub limit)
+- ❌ **Not considering testing context vs production** → Browser automation behaves differently (clipboard needs document focus)
+
+**Prevention**: Always read context first. Always use absolute paths. Always use commands for workflows. **Verify file exists after subagent writes.** **Research existing solutions before implementing.**
 
 ---
 
