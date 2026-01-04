@@ -81,7 +81,18 @@ version: "3.0.0"
 
 # Setting Up Your AI Vault
 
-You're setting up Claude Code as your **General Agent** for professional work.
+You're setting up Claude Code as your **General Agent** for professional work. Your projects and rules aren't forgotten when you close the session. Claude reads your vault and starts with memory every time.
+
+![ai-vault](https://pub-80f166e40b854371ac7b05053b435162.r2.dev/books/ai-native-dev/static/images/part-2/chapter-06/ai-vault.png)
+
+This setup separates **memory**, **reasoning**, and **execution**:
+
+- 🗂 **Memory** – Stored in a vault (an Obsidian workspace you control)
+- 🧠 **Reasoning + Execution** – Done by Claude Code reading that vault
+- 📘 **Skills** – Explicitly documented behaviors Claude Code follows
+- 🛠 **MCP** – Connects your General Agent with real-world actions (like Xero MCP for accounting)
+
+**The result**: A predictable, stateful AI partner that follows your rules, retains context, and builds on prior knowledge.
 
 ---
 
