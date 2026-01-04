@@ -97,7 +97,7 @@ Most AI usage today is:
 
 Even advanced users copy-paste context, re-explain their rules, and lose knowledge over time.
 
-**The question**: How do we make AI work like a **trained professional**, not a clever chatbot?
+**The question**: How do we make AI work like a **trained professional**, not a clever chat agent without context about your professional work?
 
 ---
 
@@ -140,12 +140,6 @@ Even advanced users copy-paste context, re-explain their rules, and lose knowled
 
 Download from [obsidian.md](https://obsidian.md)
 
-| Platform | Installation |
-|----------|--------------|
-| **macOS** | Download .dmg, drag to Applications |
-| **Windows** | Download .exe, run installer |
-| **Linux** | Download .AppImage or use package manager |
-
 ---
 
 ## Step 2: Create Your Vault
@@ -164,10 +158,10 @@ Obsidian opens with an empty vault.
 
 This file contains all the governance rules for how Claude Code should operate in your vault.
 
-In Obsidian, create a new note called `AGENTS.md` and paste:
+In Obsidian, create a new note called `AGENTS` and paste:
 
 ```markdown
-# AGENTS.md - General Agent Governance
+# AGENTS - General Agent Governance
 
 ## Purpose
 
@@ -190,38 +184,6 @@ skills-lab/
 3. **Skills for guidance (2-4 decisions), agents for reasoning (5+)**
 4. **Always read this file before operating**
 
-## Skill Format
-
-```yaml
----
-name: skill-name
-description: Single line describing when to use this skill.
----
-
-# Skill Name
-
-## When to Use
-Triggers for this skill.
-
-## Instructions
-Step-by-step guidance.
-```
-
-## Agent Format
-
-```yaml
----
-name: agent-name
-description: Single line describing when to use this agent.
-model: sonnet
-tools: Read, Grep, Glob
----
-
-# Agent Name
-
-Classification logic and decision trees.
-```
-
 ## Active Projects
 
 | Project | Series | Status |
@@ -229,13 +191,13 @@ Classification logic and decision trees.
 | Email Assistant | Email-1 to Email-7 | Starting |
 ```
 
-Save the file.
+Save the file. Now if you open vault folder you will notice an AGENTS.md file there. See direct markdown without any abstractions.
 
 ---
 
 ## Step 4: Create CLAUDE.md
 
-This is the entry point Claude Code reads first. Create `CLAUDE.md` in the vault root:
+This is the entry point Claude Code reads first. Create `CLAUDE` Note in the vault root:
 
 ```markdown
 # Skills Lab
@@ -269,14 +231,6 @@ What is this workspace and what governance rules should you follow?
 ```
 
 **Expected**: Claude Code reads `CLAUDE.md`, follows the `@AGENTS.md` reference, and explains your workspace structure and governance rules.
-
-**Test prompt 2:**
-
-```
-Show me the exact format I should use to create a new skill.
-```
-
-**Expected**: Claude Code references the skill format from `AGENTS.md` and shows you the YAML frontmatter + markdown structure.
 
 If Claude Code responds with your vault-specific information, **your General Agent is configured**.
 
@@ -428,7 +382,7 @@ Based on my AGENTS.md, create the folder structure I need for skills and agents 
 **Prompt 3: Skill Preview**
 
 ```
-I'm about to create an email-drafter skill. Based on my AGENTS.md skill format, show me exactly what the file should look like and where it should go.
+I'm about to create an email-drafter skill. Research and show me exactly what the file should look like and where it should go.
 ```
 
 **What you're practicing**: Verifying Claude Code understands your skill conventions before you start Email-1.

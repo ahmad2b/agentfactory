@@ -121,6 +121,32 @@ const checkpoints: Checkpoint[] = [
     successSignal: "You can generate last month's financial summary in under 60 seconds.",
   },
   {
+    id: "A5",
+    title: "Share Your Skills With Your Domain",
+    goal: "Your skills become valuable to professionals who share your domain expertise — packaged, documented, and used by someone other than you.",
+    status: "locked",
+    actions: [
+      "Package 2–3 of your best skills for external use",
+      "Write clear documentation: what it does, how to use it, what it replaces",
+      "Share with colleagues, community, or domain professionals",
+      "Collect feedback and iterate",
+    ],
+    constraints: [
+      "Skills must solve real problems in your domain",
+      "Documentation must be clear enough for someone else to use without your help",
+      "At least one skill must be used by someone outside your immediate circle",
+    ],
+    deliverables: [
+      "2–3 packaged skills with README documentation",
+      "Distribution method (GitHub, community forum, direct share)",
+      "Feedback from at least one external user",
+      "Iteration based on real-world usage",
+    ],
+    helpingLessons: "Chapter 5: Claude Code Features — Skill Sharing",
+    lessonsLink: "/docs/AI-Tool-Landscape/claude-code-features-and-workflows",
+    successSignal: "Someone you don't work with daily is using your skill.",
+  },
+  {
     id: "B1",
     title: "Build Your First Custom Agent",
     goal: "Ship a production-ready agent using an SDK.",
@@ -253,6 +279,35 @@ const checkpoints: Checkpoint[] = [
     helpingLessons: "Chapters 50, 54, 58-60: K8s + GitOps + Observability",
     lessonsLink: "/docs/AI-Cloud-Native-Development/kubernetes-for-ai-services",
     successSignal: "Your agent completed a task while you were asleep.",
+  },
+  {
+    id: "D1",
+    title: "Monetize Your First Digital FTE",
+    goal: "Your deployed agent generates revenue — the thesis fulfilled. You now manufacture AI employees.",
+    status: "locked",
+    actions: [
+      "Add billing/subscription to your agent (Stripe, LemonSqueezy, or usage-based)",
+      "Create a landing page explaining what your Digital FTE does and for whom",
+      "Launch publicly (ProductHunt, LinkedIn, domain community)",
+      "Acquire your first paying customer",
+      "Document the business model and unit economics",
+    ],
+    constraints: [
+      "Must be a real product, not a demo",
+      "Must solve a real problem for paying customers",
+      "Pricing must be sustainable (covers infrastructure + your time)",
+      "Must have terms of service and basic legal protection",
+    ],
+    deliverables: [
+      "Payment integration with at least one provider",
+      "Public landing page with clear value proposition",
+      "First paying customer",
+      "Documentation: pricing model, CAC, unit economics",
+      "Testimonial or case study from first customer",
+    ],
+    helpingLessons: "The Agent Factory Thesis + All Prior Chapters",
+    lessonsLink: "/docs/thesis",
+    successSignal: "You earned your first dollar from an AI employee you manufactured.",
   },
 ];
 
