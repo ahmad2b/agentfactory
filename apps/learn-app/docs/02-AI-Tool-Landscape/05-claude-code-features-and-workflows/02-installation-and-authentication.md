@@ -208,6 +208,10 @@ claude
 
 **What this does**: The installer downloads Claude Code; Git for Windows provides the bash shell it runs in.
 
+:::tip Windows Installation Guide
+For a detailed step-by-step Windows installation guide with screenshots, see: [Claude Code Installation for Windows](https://wania-kazmi.notion.site/Claude-Code-CCR-Installation-Bonsai-For-Windows-2c208993d39080988fc8d5a8de5b0612?pvs=74)
+:::
+
 #### Windows Verification
 
 Open your shell (WSL terminal or Git Bash) and check your installation:
