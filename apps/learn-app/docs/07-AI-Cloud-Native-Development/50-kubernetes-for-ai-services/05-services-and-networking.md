@@ -584,10 +584,10 @@ Launch a test Pod and resolve the DNS name:
 kubectl run -it test-pod --image=alpine --rm -- sh
 ```
 
-From inside the Pod, install curl and test DNS resolution:
+From inside the Pod, install curl and bind-tools (for DNS utilities), then test DNS resolution:
 
 ```bash
-apk add curl dnsutils
+apk add curl bind-tools
 nslookup web-service
 ```
 
