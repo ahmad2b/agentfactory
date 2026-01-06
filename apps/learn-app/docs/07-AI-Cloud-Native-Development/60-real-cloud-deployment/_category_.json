@@ -1,8 +1,0 @@
-{
-  "label": "60. Real Cloud Deployment",
-  "position": 60,
-  "link": {
-    "type": "generated-index",
-    "description": "Deploy AI agent services to production Kubernetes clusters on real cloud providers. Master the universal pattern: provision cluster, connect kubectl, deploy with Helm. Two paths: DOKS ($24+/mo managed) or Hetzner K3s (~$5/mo self-managed)."
-  }
-}

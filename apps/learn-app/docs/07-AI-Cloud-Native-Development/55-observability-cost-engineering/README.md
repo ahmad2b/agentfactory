@@ -52,32 +52,6 @@ You finish with a production observability stack (metrics, traces, logs, alerts,
 6. **Integrate Dapr observability** features for metrics and tracing across actors and workflows
 7. **Build a complete observability stack** for production AI applications with multi-burn-rate alerting
 
-## Chapter Structure
-
-| # | Lesson | Duration | Your Skill Improves |
-|---|--------|----------|---------------------|
-| **0** | **Build Your Observability Skill** | 25 min | **Created from official docs** |
-| 1 | Three Pillars of Observability | 20 min | Understand: metrics, traces, logs |
-| 2 | Metrics with Prometheus | 30 min | Add: PromQL queries, ServiceMonitor |
-| 3 | Visualization with Grafana | 25 min | Add: dashboard JSON, alerting |
-| 4 | Distributed Tracing with OpenTelemetry & Jaeger | 30 min | Add: span creation, trace analysis |
-| 5 | Centralized Logging with Loki | 25 min | Add: LogQL, structured logging |
-| 6 | SRE Foundations: SLIs, SLOs, and Error Budgets | 30 min | Add: SLO recording rules |
-| 7 | Alerting and Incident Response | 25 min | Add: multi-burn-rate alerting |
-| 8 | Cost Engineering and FinOps | 30 min | Add: OpenCost queries, cost allocation |
-| 9 | Dapr Observability Integration | 25 min | Add: Dapr metrics and tracing |
-| **10** | **Capstone: Full Observability Stack for Task API** | 40 min | **Production-ready asset** |
-
-## Every Lesson Has Skill Reflection
-
-Each lesson ends with **"Reflect on Your Skill"**:
-
-1. **Test**: Does your skill handle this lesson's concepts?
-2. **Identify gaps**: What's missing from your current skill?
-3. **Improve**: Add or refine the capability
-
-By Lesson 10, you've tested and improved your skill through hands-on practice with each observability pillar.
-
 ## The Three Pillars
 
 | Pillar | Tool | Query Language | What It Answers |
@@ -90,42 +64,6 @@ By Lesson 10, you've tested and improved your skill through hands-on practice wi
 - **Metrics** for aggregated data over time (dashboards, alerting, capacity planning)
 - **Traces** for debugging distributed request flows (latency analysis, bottleneck identification)
 - **Logs** for event-level detail (error messages, audit trails, debugging)
-
-## 4-Layer Teaching Progression
-
-This chapter follows the **4-Layer Teaching Method**:
-
-- **Lesson 0 (Layer 3)**: Build your `observability-cost-engineer` skill from official documentation using `/fetching-library-docs` and `/skill-creator`.
-
-- **Lesson 1 (Layer 1)**: Conceptual foundation—understand the three pillars before touching tools. Build mental models for when to use metrics vs traces vs logs.
-
-- **Lessons 2-9 (Layer 2)**: AI-assisted hands-on practice. Install tools, write queries, build dashboards, define SLOs, and configure alerting—all while collaborating with your skill.
-
-- **Lesson 10 (Layer 4)**: Spec-driven capstone. Build a complete observability stack for Task API with metrics, traces, logs, SLO dashboards, and cost monitoring—orchestrating everything you've learned.
-
-## Prerequisites
-
-- **Chapter 49 (Docker)**: Container resource limits, image building
-- **Chapter 50 (Kubernetes)**: Pods, Deployments, Services, ConfigMaps—where observability tools deploy
-- **Chapter 51 (Helm)**: Chart installation for kube-prometheus-stack, Loki, Jaeger
-- **Chapter 52 (Kafka)**: Event-driven patterns (observability applies to message flows)
-- **Chapter 53 (Dapr Core)**: Dapr sidecar pattern—L09 observes Dapr metrics and traces
-- **Chapter 54 (GitOps)**: CI/CD pipelines—observability stack deploys via ArgoCD
-- **Chapter 57 (Dapr Actors & Workflows)**: Actor patterns—L09 observes actor-based systems
-
-## Running Example: Task API
-
-Throughout this chapter, you instrument the **Task API** from earlier chapters:
-
-- **L02**: Add Prometheus metrics (request count, latency histogram) to Task API
-- **L03**: Build Grafana dashboard showing 4 golden signals for Task API
-- **L04**: Instrument with OpenTelemetry, trace requests through Dapr sidecar to database
-- **L05**: Configure structured JSON logging, correlate logs with trace IDs
-- **L06**: Define 99.9% availability SLO for Task API, calculate error budget
-- **L07**: Set up multi-burn-rate alerts that page when burning budget too fast
-- **L08**: Configure cost allocation labels, identify Task API resource costs
-- **L09**: Enable Dapr observability for actor-based task workflows
-- **L10**: Complete observability stack with SLO dashboard and incident runbook
 
 ## Looking Ahead
 
