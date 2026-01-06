@@ -31,7 +31,7 @@ You build the `kubernetes-deployment` skill first, then refine it through core a
 | 6-12 | Production Essentials | Namespaces, config, resources, HPA, RBAC, probes, batch |
 | 13 | AI Collaboration | kubectl-ai for manifests and ops |
 | **14** | Capstone: Deploy Agent | Production deployment of the Part 6 API |
-| 15 | Finalize Skill | Package reusable patterns |
+| 15 | Test and Refine Skill | Validate cross-application transferability |
 | 16-22 (Optional) | Advanced Patterns | Init/sidecars, ingress, discovery, stateful workloads, storage, deep security |
 
 Each lesson ends with a reflection to test, find gaps, and improve the skill.
