@@ -363,51 +363,41 @@ Generate quick response options to speed up email replies while maintaining qual
 
 For FYI emails or simple confirmations:
 
-```
-- "Thanks for the update!"
-- "Got it, will review."
-- "Noted - I'll circle back if questions."
-```
+> - "Thanks for the update!"
+> - "Got it, will review."
+> - "Noted - I'll circle back if questions."
 
 ### Acceptance/Confirmation
 
 For meeting requests, proposals, approvals:
 
-```
-- "Works for me. See you then."
-- "Approved - please proceed."
-- "Confirmed for [date/time]."
-```
+> - "Works for me. See you then."
+> - "Approved - please proceed."
+> - "Confirmed for [date/time]."
 
 ### Deferral
 
 When you need time to respond properly:
 
-```
-- "Let me review and get back to you by [date]."
-- "Good question - need to check with [person] first."
-- "Can we discuss this in our 1:1?"
-```
+> - "Let me review and get back to you by [date]."
+> - "Good question - need to check with [person] first."
+> - "Can we discuss this in our 1:1?"
 
 ### Clarification Request
 
 When more information is needed:
 
-```
-- "Quick clarification - did you mean X or Y?"
-- "Before I proceed, can you confirm [detail]?"
-- "What's the deadline for this?"
-```
+> - "Quick clarification - did you mean X or Y?"
+> - "Before I proceed, can you confirm [detail]?"
+> - "What's the deadline for this?"
 
 ### Decline/Redirect
 
 When the request isn't for you:
 
-```
-- "I'm not the right person for this - try [name]."
-- "Unfortunately I can't commit to this timeline."
-- "This isn't something I can prioritize right now."
-```
+> - "I'm not the right person for this - try [name]."
+> - "Unfortunately I can't commit to this timeline."
+> - "This isn't something I can prioritize right now."
 
 ## Output Format
 
@@ -600,18 +590,16 @@ Mark as "Closed - [response type]" when detected.
 
 Generate weekly overview:
 
-```
-Follow-Up Summary (Week of Dec 22)
-
-Overdue (need immediate attention): 2
-Due this week: 5
-On track: 8
-Closed this week: 12
-
-Top priority follow-ups:
-1. Partnership proposal to Marcus (overdue 5 days)
-2. Meeting request to Sarah (due tomorrow)
-```
+> **Follow-Up Summary (Week of Dec 22)**
+>
+> Overdue (need immediate attention): 2
+> Due this week: 5
+> On track: 8
+> Closed this week: 12
+>
+> **Top priority follow-ups:**
+> 1. Partnership proposal to Marcus (overdue 5 days)
+> 2. Meeting request to Sarah (due tomorrow)
 
 ## Integration
 
