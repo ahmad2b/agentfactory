@@ -93,13 +93,20 @@ Choose your target based on your ambition and available time:
 
 ## Before You Begin
 
-### Prerequisites Checklist
+### Prerequisites (from earlier chapters)
 
 - [ ] **Chapter 5: Claude Code Features** (REQUIRED) — Skills, subagents, MCP concepts
 - [ ] **Claude Code installed and working** — From Chapter 5
-- [ ] **Obsidian installed** — Or any folder-based approach
-- [ ] **Python 3.13+** — For Watchers (Silver tier)
-- [ ] **Git installed** — For version control
+
+### Installed During This Chapter
+
+| Tool | Lesson | Reference |
+|------|--------|-----------|
+| **Obsidian** | L01 | Set up as your Memory Bank |
+| **Obsidian MCP** | L01 | Access Memory Bank from anywhere |
+| **Git** | L01 (optional) | See [Chapter 10](/docs/AI-Tool-Landscape/git-fundamentals) for installation |
+| **Python 3.13+** | L08 (Silver tier) | See [Chapter 16](/docs/Introduction-to-Python/python-installation) for installation |
+| **PM2/Supervisord** | L10 (Silver tier) | Process management for Watchers |
 
 ### Hardware (for Silver/Gold)
 
@@ -126,7 +133,7 @@ Choose your target based on your ambition and available time:
 
 | Lesson | Title | Duration | What You Build |
 |--------|-------|----------|----------------|
-| [L01](./01-your-employees-memory.md) | Your Employee's Memory | 25 min | Obsidian vault, AGENTS.md, CLAUDE.md |
+| [L01](./01-your-employees-memory.md) | Your Employee's Memory | 25 min | Obsidian vault, AGENTS.md, CLAUDE.md, Obsidian MCP |
 | [L02](./02-teaching-your-employee-to-write.md) | Teaching Your Employee to Write | 30 min | email-drafter skill |
 | [L03](./03-teaching-professional-formats.md) | Teaching Professional Formats | 25 min | email-templates skill |
 | [L04](./04-teaching-email-intelligence.md) | Teaching Email Intelligence | 25 min | email-summarizer skill |
