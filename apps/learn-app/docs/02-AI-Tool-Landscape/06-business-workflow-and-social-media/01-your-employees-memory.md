@@ -349,19 +349,46 @@ This is the most important step. Without MCP, Claude Code only accesses your vau
 
 Watchers (Silver tier) run from `/scripts/`, not inside your vault. When they trigger Claude Code, Claude needs MCP to access your Memory Bank (SOPs, rules, knowledge).
 
-### Install Obsidian MCP
+### Part A: Install Obsidian REST API Plugin
+
+The most popular Obsidian MCP server ([2.7k+ stars](https://github.com/MarkusPfundstein/mcp-obsidian)) uses Obsidian's REST API.
+
+1. In Obsidian, go to **Settings** → **Community plugins**
+2. Click **Browse** and search for "**Local REST API**"
+3. Install and enable **Local REST API** by Adam Coddington
+4. Go to the plugin settings and copy your **API Key**
+
+**Default settings:**
+- Host: `127.0.0.1`
+- Port: `27124`
+
+### Part B: Install Obsidian MCP
 
 ```bash
-claude mcp add obsidian --scope user -- npx @mauricio.wolff/mcp-obsidian@latest /path/to/your/ai-vault
+claude mcp add mcp-obsidian --scope user -- uvx mcp-obsidian
 ```
 
-**Example** (if your vault is at `~/projects/ai-vault`):
+Then set the environment variables. Edit `~/.claude.json`:
 
-```bash
-claude mcp add obsidian --scope user -- npx @mauricio.wolff/mcp-obsidian@latest ~/projects/ai-vault
+```json
+{
+  "mcpServers": {
+    "mcp-obsidian": {
+      "command": "uvx",
+      "args": ["mcp-obsidian"],
+      "env": {
+        "OBSIDIAN_API_KEY": "your-api-key-from-plugin",
+        "OBSIDIAN_HOST": "127.0.0.1",
+        "OBSIDIAN_PORT": "27124"
+      }
+    }
+  }
+}
 ```
 
-### Verify Connection
+**Replace** `your-api-key-from-plugin` with the API key from the plugin settings.
+
+### Part C: Verify Connection
 
 ```bash
 claude mcp list
@@ -369,23 +396,23 @@ claude mcp list
 
 **Expected output:**
 ```
-obsidian: connected
+mcp-obsidian: connected
   Transport: stdio
-  Tools: 11
+  Tools: 15+
 ```
 
 ### What Obsidian MCP Provides
 
 | Tool | What It Does |
 |------|--------------|
-| `read_note` | Read any note from your vault |
-| `write_note` | Create or update notes |
-| `search_vault` | Find notes by content |
-| `list_notes` | Get all notes in a directory |
-| `get_tags` | Retrieve all tags in vault |
-| `get_frontmatter` | Read note metadata |
+| `list_files_in_vault` | List all files in vault |
+| `get_file_contents` | Read any note |
+| `search` | Search across all notes |
+| `patch_content` | Update specific sections |
+| `append_content` | Add to existing notes |
+| `delete_file` | Remove notes |
 
-### Test From Another Directory
+### Part D: Test From Another Directory
 
 ```bash
 cd ~/Desktop
@@ -394,7 +421,7 @@ claude
 
 Then ask:
 ```
-Using obsidian MCP, read my AGENTS.md and tell me my governance rules.
+Using mcp-obsidian, get the contents of AGENTS.md and tell me my governance rules.
 ```
 
 If Claude responds with your vault's governance rules, **your Memory Bank is accessible from anywhere**.
@@ -402,6 +429,20 @@ If Claude responds with your vault's governance rules, **your Memory Bank is acc
 :::tip Why MCP is Essential
 Without MCP, your AI Employee is "stuck" in the vault directory. With MCP, Claude Code becomes location-independent — the foundation for watchers, scheduled tasks, and autonomous operation.
 :::
+
+:::warning Obsidian Must Be Running
+The REST API plugin requires Obsidian to be open. For always-on access (Silver tier watchers), keep Obsidian running or use the lightweight alternative below.
+:::
+
+### Alternative: Filesystem-Based MCP (No Plugin Required)
+
+If you prefer not to install the Obsidian plugin, use [@smithery-ai/mcp-obsidian](https://github.com/smithery-ai/mcp-obsidian) (1.3k stars):
+
+```bash
+claude mcp add obsidian --scope user -- npx -y @smithery/cli@latest run @smithery-ai/mcp-obsidian --config "{\"vaultPath\":\"/path/to/your/vault\"}"
+```
+
+This works directly on the filesystem without requiring Obsidian to be running.
 
 ---
 
@@ -525,7 +566,7 @@ Based on my AGENTS.md, create the folder structure I need for skills and agents 
 **Prompt 3: Verify MCP Access**
 
 ```
-Using obsidian MCP, read my AGENTS.md and summarize my governance rules.
+Using mcp-obsidian, get the contents of AGENTS.md and summarize my governance rules.
 ```
 
 **What you're practicing**: Confirming your Memory Bank is accessible from anywhere via MCP — this is the foundation for watchers.
@@ -533,7 +574,7 @@ Using obsidian MCP, read my AGENTS.md and summarize my governance rules.
 **Prompt 4: Skill Preview (from anywhere)**
 
 ```
-Using obsidian MCP, I'm about to create an email-drafter skill. Based on my AGENTS.md governance, show me exactly what the file should look like and where it should go.
+Using mcp-obsidian to read my vault, I'm about to create an email-drafter skill. Based on my AGENTS.md governance, show me exactly what the file should look like and where it should go.
 ```
 
 **What you're practicing**: Verifying Claude Code understands your skill conventions AND can access them from any directory.
