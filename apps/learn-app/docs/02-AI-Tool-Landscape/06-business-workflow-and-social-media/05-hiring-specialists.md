@@ -1,10 +1,10 @@
 ---
-sidebar_position: 4
-title: "Email-4: Creating Custom Subagents"
-sidebar_label: "Email-4: Custom Subagents"
-description: "Build three specialized email processing subagents for inbox triaging, response suggestion, and follow-up tracking using the Claude Code agent architecture."
+sidebar_position: 5
+title: "Hiring Specialists"
+sidebar_label: "L05: Hiring Specialists"
+description: "Build three specialized email processing subagents for inbox triaging, response suggestion, and follow-up tracking. Your employee hires its own team."
 series: "email"
-series_position: 4
+series_position: 5
 keywords:
   - Claude Code subagents
   - inbox triage
@@ -15,7 +15,7 @@ keywords:
   - response suggestion
   - follow-up tracking
 chapter: 6
-lesson: 4
+lesson: 5
 duration_minutes: 35
 
 # PEDAGOGICAL LAYER METADATA
@@ -111,7 +111,7 @@ created: "2026-01-01"
 version: "1.0.0"
 ---
 
-# Creating Custom Subagents
+# Hiring Specialists
 
 Your inbox receives 80 emails before lunch. Client requests mixed with newsletters. Urgent deadline reminders buried under automated notifications. Meeting follow-ups you've forgotten to send. Every day starts with the same mental labor: What matters? What can wait? What have I forgotten?
 

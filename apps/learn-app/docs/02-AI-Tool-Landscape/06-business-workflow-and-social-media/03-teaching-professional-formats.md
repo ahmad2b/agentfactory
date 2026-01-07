@@ -1,7 +1,7 @@
 ---
-sidebar_position: 2
-title: "Email-2: Email Templates Skill"
-sidebar_label: "Email-2: Templates Skill"
+sidebar_position: 3
+title: "Teaching Professional Formats"
+sidebar_label: "L03: Professional Formats"
 description: "Build a reusable email-templates skill with variable substitution, template libraries, and intelligent selection logic for consistent professional communication."
 series: "email"
 series_position: 2
@@ -15,7 +15,7 @@ keywords:
   - professional communication
   - SKILL.md
 chapter: 6
-lesson: 2
+lesson: 3
 duration_minutes: 25
 
 # PEDAGOGICAL LAYER METADATA
@@ -98,7 +98,7 @@ last_modified: "2026-01-01"
 version: "1.0.0"
 ---
 
-# Email Templates Skill
+# Teaching Professional Formats
 
 You've written the same cold outreach email a hundred times. Each time, you customize the recipient's name, personalize the hook, adjust the value proposition. It takes 10 minutes to get it right. Multiply that across dozens of prospects, and you've spent hours on what should take seconds.
 

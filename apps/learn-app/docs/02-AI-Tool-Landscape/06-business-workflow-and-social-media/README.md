@@ -1,147 +1,212 @@
 ---
 slides:
   source: "https://pub-80f166e40b854371ac7b05053b435162.r2.dev/books/ai-native-dev/static/slides/chapter-06-slides.pdf"
-  title: "Chapter 6: Claude Code for Business Workflows"
+  title: "Chapter 6: Build Your First Personal AI Employee"
   height: 700
 ---
 
-# Chapter 6: Claude Code for Business Workflows
+# Chapter 6: Build Your First Personal AI Employee
 
-You've learned Claude Code's features and understood MCP integration. Now it's time to set up Claude Code as a **General Agent** you'll use professionally — with an organized workspace, version-controlled skills, and real business automations.
+*Autonomous FTEs (Full-Time Equivalent) in 2026*
 
-This chapter establishes your professional Claude Code setup using Obsidian as a knowledge vault and Git for version control. You'll then build a complete Email Assistant that triages your inbox, drafts professional responses, and sends them on your behalf.
+**Your life and business on autopilot. Local-first, agent-driven, human-in-the-loop.**
 
-The patterns you learn here — organizing skills, building subagents, integrating MCP servers — apply to any business workflow. Email is just the first.
+This chapter guides you through building a **Digital FTE** — an AI agent that proactively manages your personal and business affairs 24/7. Not a chatbot you poke when you need something. An employee that watches for work, plans its approach, asks permission for sensitive actions, and reports results.
 
-## Your Professional Setup
+By the end of this chapter, you'll have built a Personal AI Employee using **Claude Code** as the reasoning engine, **Obsidian** as the knowledge base, **MCP servers** for real-world actions, and **Python Watchers** for autonomous perception.
+
+## What You'll Build
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  YOUR VAULT (Professional Claude Code Workspace)                │
+│               YOUR PERSONAL AI EMPLOYEE                         │
 │                                                                  │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐        │
-│  │ CLAUDE   │  │ Skills   │  │ Subagents│  │ Git      │        │
-│  │ .md      │  │          │  │          │  │ History  │        │
-│  └──────────┘  └──────────┘  └──────────┘  └──────────┘        │
+│    PERCEPTION          REASONING           ACTION               │
+│    (Watchers)       (Claude Code)        (MCP Servers)          │
 │                                                                  │
-│  Organized workspace for building business automations          │
+│  ┌──────────┐      ┌──────────────┐      ┌──────────────┐       │
+│  │  Gmail   │ ──▶  │   Skills +   │ ──▶  │ Gmail MCP    │       │
+│  │  Watcher │      │   Subagents  │      │ Browser MCP  │       │
+│  └──────────┘      └──────────────┘      └──────────────┘       │
+│  ┌──────────┐              │                    │               │
+│  │  File    │              ▼                    ▼               │
+│  │  Watcher │      ┌──────────────┐      ┌──────────────┐       │
+│  └──────────┘      │ HITL Approval│ ──▶  │ Real Actions │       │
+│                    └──────────────┘      └──────────────┘       │
 │                                                                  │
-│  ┌────────────────┐  ┌────────────────┐  ┌────────────────┐    │
-│  │ Email          │  │ Social Media   │  │ Document       │    │
-│  │ Assistant      │  │ Manager        │  │ Processor      │    │
-│  │ (This Chapter) │  │ (Future)       │  │ (Future)       │    │
-│  └────────────────┘  └────────────────┘  └────────────────┘    │
+│    Memory: Obsidian Vault (Dashboard, Goals, Handbook, Logs)    │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
+## Three Achievement Tiers
+
+Choose your target based on your ambition and available time:
+
+### Bronze Tier: Working Email Assistant
+**~4 hours** (Lessons 1-7)
+
+| Component | What You Build |
+|-----------|----------------|
+| Vault | Obsidian with AGENTS.md governance, CLAUDE.md context |
+| Skills | email-drafter, email-templates, email-summarizer |
+| Subagents | inbox-triager, response-suggester, follow-up-tracker |
+| MCP | Gmail integration (19 tools for real email) |
+| Orchestrator | email-assistant combining everything |
+
+**Outcome**: A working email assistant that triages your inbox, drafts responses, and sends them on your behalf. You still trigger it manually.
+
+### Silver Tier: Proactive Assistant
+**~8 hours** (Lessons 1-11)
+
+| Component | What You Add |
+|-----------|--------------|
+| Watchers | Gmail Watcher, File Watcher (perception layer) |
+| HITL | Approval workflows for sensitive actions |
+| Scheduling | cron/PM2 for always-on operation |
+| Intelligence | Weekly Business Audit + CEO Briefing |
+
+**Outcome**: An assistant that wakes up on its own when emails arrive, asks permission before sensitive actions, runs 24/7, and delivers a "Monday Morning CEO Briefing" summarizing your week.
+
+### Gold Tier: Autonomous Employee
+**~12+ hours** (Lessons 1-12)
+
+| Component | What You Add |
+|-----------|--------------|
+| Multi-Domain | Cross-domain integration (Email + Files + more) |
+| Resilience | Error recovery, graceful degradation, watchdog |
+| Audit | Comprehensive logging, 90-day retention |
+| Documentation | Full architecture documentation |
+
+**Outcome**: A true Digital FTE operating autonomously 24/7, handling multiple domains, recovering from errors, maintaining audit trails, and continuously improving.
+
+## The Value Proposition
+
+| Metric | Human FTE | Your Digital FTE |
+|--------|-----------|------------------|
+| Availability | 40 hours/week | 168 hours/week (24/7) |
+| Monthly Cost | $4,000 – $8,000+ | $500 – $2,000 |
+| Ramp-up Time | 3-6 months | Instant (via Skills) |
+| Annual Hours | ~2,000 | ~8,760 |
+| Cost per Task | ~$3.00 – $6.00 | ~$0.25 – $0.50 |
+
+**The math**: 85-90% cost savings, 4x the working hours. This is why enterprises are investing in Digital FTEs.
 
 ## Before You Begin
 
 ### Prerequisites Checklist
 
-- [ ] **Chapter 5: Claude Code Features and Workflows** (REQUIRED) — You must understand skills, subagents, MCP integration, and orchestration concepts
-- [ ] **Obsidian installed** (RECOMMENDED) — Or use any folder-based approach
-- [ ] **Git installed** — For version control
-- [ ] **Gmail account** (optional for Email-5) — Required only if you want to connect to actual email
+- [ ] **Chapter 5: Claude Code Features** (REQUIRED) — Skills, subagents, MCP concepts
 - [ ] **Claude Code installed and working** — From Chapter 5
+- [ ] **Obsidian installed** — Or any folder-based approach
+- [ ] **Python 3.13+** — For Watchers (Silver tier)
+- [ ] **Git installed** — For version control
 
-### Proficiency Level
+### Hardware (for Silver/Gold)
 
-**A2 (Elementary)** — This chapter guides you through building interconnected skills with clear specifications and step-by-step collaboration patterns. Each lesson builds on the previous one.
+- 8GB RAM minimum, 16GB recommended
+- For always-on: Consider dedicated mini-PC or cloud VM
 
-### Estimated Time
+### Time Investment
 
-**Total Chapter Duration**: ~4 hours
-
-## What You'll Build
-
-### Professional Workspace (Foundation)
-
-- **Obsidian vault** as organized workspace
-- **Git repository** for version control
-- **CLAUDE.md** for project context
-- **Structured folders** for skills and subagents
-
-### Email Assistant (Email Series)
-
-| Component | Type | Purpose |
-|-----------|------|---------|
-| `email-drafter` | Skill | Compose with tone control |
-| `email-templates` | Skill | Variable substitution, 3 templates |
-| `email-summarizer` | Skill | Thread parsing, action extraction |
-| `email-assistant` | Skill | Master orchestrator |
-| `inbox-triager` | Subagent | Priority classification |
-| `response-suggester` | Subagent | Quick reply options |
-| `follow-up-tracker` | Subagent | Deadline monitoring |
-| Gmail MCP | Integration | 19 tools for real email operations |
+| Tier | Lessons | Time | What You Get |
+|------|---------|------|--------------|
+| Bronze | L01-L07 | ~4 hours | Working email assistant |
+| Silver | L01-L11 | ~8 hours | Proactive + CEO Briefing |
+| Gold | L01-L12 | ~12+ hours | Full autonomous employee |
 
 ## Lesson Navigation
 
-### Foundation
+### L00: Complete Specification (Reference)
 
-| Lesson | Title | Duration | What You'll Build |
-|--------|-------|----------|-------------------|
-| [Foundation](./00-setting-up-your-ai-vault.md) | Setting Up Your AI Vault | 30 min | Professional workspace with Obsidian and Git |
+| Lesson | Duration | Purpose |
+|--------|----------|---------|
+| [L00: Complete Specification](./00-personal-ai-employee-specification.md) | 30 min | Full architectural blueprint — read first, reference throughout |
 
-### Email Workflow Series
+### Bronze Tier: Working Email Assistant
 
-| Lesson | Title | Duration | What You'll Build |
-|--------|-------|----------|-------------------|
-| [Email-1](./01-project-setup-email-drafter.md) | Project Setup & Email Drafter | 30 min | First skill with tone specification |
-| [Email-2](./02-email-templates-skill.md) | Email Templates Skill | 25 min | Template system with variable substitution |
-| [Email-3](./03-email-summarizer-skill.md) | Email Summarizer Skill | 25 min | Thread parsing and action extraction |
-| [Email-4](./04-creating-custom-subagents.md) | Creating Custom Subagents | 35 min | 3 email processing subagents |
-| [Email-5](./05-gmail-mcp-integration.md) | Gmail MCP Integration | 30 min | OAuth setup and 19 Gmail tools |
-| [Email-6](./06-orchestrating-complete-system.md) | Orchestrating Complete System | 40 min | Capstone: combine everything |
-| [Email-7](./07-chapter-quiz.md) | Chapter Quiz | 15 min | 15 questions on skills, subagents, MCP |
+| Lesson | Title | Duration | What You Build |
+|--------|-------|----------|----------------|
+| [L01](./01-your-employees-memory.md) | Your Employee's Memory | 25 min | Obsidian vault, AGENTS.md, CLAUDE.md |
+| [L02](./02-teaching-your-employee-to-write.md) | Teaching Your Employee to Write | 30 min | email-drafter skill |
+| [L03](./03-teaching-professional-formats.md) | Teaching Professional Formats | 25 min | email-templates skill |
+| [L04](./04-teaching-email-intelligence.md) | Teaching Email Intelligence | 25 min | email-summarizer skill |
+| [L05](./05-hiring-specialists.md) | Hiring Specialists | 35 min | 3 email subagents |
+| [L06](./06-granting-email-access.md) | Granting Email Access | 30 min | Gmail MCP (19 tools) |
+| [L07](./07-bronze-capstone.md) | Bronze Capstone | 40 min | email-assistant orchestrator |
 
-### Future Workflow Series (Planned)
+### Silver Tier: Proactive Assistant
 
-| Series | Domain | What You'll Build |
-|--------|--------|-------------------|
-| `SMC-N` | Social Media Content | Content scheduling and management |
-| `CRM-N` | Customer Relationship | Client communication automation |
-| `Doc-N` | Document Processing | Document analysis and generation |
+| Lesson | Title | Duration | What You Build |
+|--------|-------|----------|----------------|
+| [L08](./08-your-employees-senses.md) | Your Employee's Senses | 45 min | Gmail Watcher, File Watcher |
+| [L09](./09-trust-but-verify.md) | Trust But Verify | 30 min | HITL approval workflows |
+| [L10](./10-always-on-duty.md) | Always On Duty | 35 min | cron, PM2, watchdog |
+| [L11](./11-silver-capstone-ceo-briefing.md) | Silver Capstone: CEO Briefing | 45 min | Weekly audit + briefing |
 
-## The Bigger Picture
+### Gold Tier: Autonomous Employee
 
-This chapter teaches how to organize Claude Code for **real business work**.
+| Lesson | Title | Duration | What You Build |
+|--------|-------|----------|----------------|
+| [L12](./12-gold-capstone-autonomous-employee.md) | Gold Capstone | 60 min | Full autonomous integration |
 
-### The Problem
+### Assessment
 
-Most people use AI tools chaotically:
-- Skills scattered across random folders
-- No version history of what worked
-- Starting fresh each conversation
-- Losing accumulated knowledge
+| Lesson | Title | Duration | Purpose |
+|--------|-------|----------|---------|
+| [L13](./13-chapter-assessment.md) | Chapter Assessment | 20 min | Quiz + submission guidelines |
 
-### The Solution
+## The Architecture
 
-A professional workspace:
-- **Vault as workspace** — All skills in one organized place
-- **Git as history** — Every change tracked, nothing lost
-- **CLAUDE.md as context** — Claude Code understands your project
-- **Structured folders** — Skills and subagents where they belong
+Your Personal AI Employee has three layers:
 
-### Skills vs Subagents Decision Framework
+| Layer | Role | Tools | Lessons |
+|-------|------|-------|---------|
+| **Memory** | Long-term storage, rules, context | Obsidian vault | L01 |
+| **Reasoning** | Read, think, plan, write | Claude Code + Skills + Subagents | L02-L07 |
+| **Perception** | Watch for triggers | Python Watchers | L08 |
+| **Action** | Execute in real world | MCP servers | L06 |
+| **Governance** | Approval for sensitive actions | HITL patterns | L09 |
+| **Operations** | 24/7 reliability | cron, PM2, watchdog | L10 |
+
+## Skills vs Subagents Decision Framework
 
 You'll learn when to use each:
 
 | Component | Use When | Decision Points | Example |
 |-----------|----------|-----------------|---------|
-| **Skill** | Guidance needed for consistent execution | 2-4 | Email tone guidelines |
-| **Subagent** | Autonomous reasoning required | 5+ | Inbox triage prioritization |
-| **MCP Tool** | External system integration | N/A | Gmail read/send |
+| **Skill** | Guidance needed for consistent execution | 2-4 decisions | Email tone guidelines |
+| **Subagent** | Autonomous reasoning required | 5+ decisions | Inbox triage prioritization |
+| **MCP Server** | External system integration | N/A | Gmail read/send |
+| **Watcher** | Proactive trigger needed | N/A | New email detection |
 
-### Why Email First?
+## Why Email First?
 
-Email is the ideal first project because:
+Email is the ideal first domain because:
 
-1. **Universal relevance** — Everyone manages email
-2. **Clear inputs and outputs** — Threads in, professional responses out
-3. **Measurable improvement** — Time saved per email is quantifiable
-4. **Composition opportunity** — Multiple skills naturally combine
-5. **Real integration** — Gmail MCP provides actual send/receive
+1. **Universal**: Everyone manages email
+2. **Clear I/O**: Threads in, professional responses out
+3. **Measurable**: Time saved per email is quantifiable
+4. **Composable**: Multiple skills naturally combine
+5. **Real Integration**: Gmail MCP provides actual send/receive
+6. **Extensible**: Patterns transfer to any business workflow
 
-**By the end of this chapter**, you'll have a complete Email Assistant and, more importantly, the professional workspace pattern you'll use for all future business automations.
+The skills, subagents, and patterns you build for email work identically for CRM, social media, document processing, and any other domain.
 
-Let's build.
+## What Makes This Different
+
+| Traditional AI Assistants | Your Personal AI Employee |
+|---------------------------|---------------------------|
+| Reactive (you ask, it responds) | Proactive (watchers trigger it) |
+| Stateless (forgets between sessions) | Stateful (vault = persistent memory) |
+| Generic (same advice for everyone) | Personalized (follows your handbook) |
+| No governance (does whatever you ask) | Governed (HITL for sensitive actions) |
+| Manual operation | 24/7 autonomous operation |
+| No accountability | Full audit logging |
+
+**The key insight**: Separating memory (Obsidian) from reasoning (Claude Code) from action (MCP) creates a system that's auditable, governable, and genuinely autonomous.
+
+---
+
+**Ready to build your first Digital FTE?**
+
+Start with [L00: Complete Specification](./00-personal-ai-employee-specification.md) to understand the full architecture, then proceed to [L01: Your Employee's Memory](./01-your-employees-memory.md) to begin building.

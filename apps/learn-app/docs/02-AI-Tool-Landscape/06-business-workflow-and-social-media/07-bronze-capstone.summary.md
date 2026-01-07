@@ -136,4 +136,4 @@ You've built a complete Email Digital FTE with:
 - Gmail MCP integration
 - Master orchestrator
 
-[Take the Chapter Quiz](./07-chapter-quiz.md) to validate your understanding.
+[Take the Chapter Assessment](./13-chapter-assessment.md) to validate your understanding.

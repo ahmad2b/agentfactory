@@ -1,10 +1,10 @@
 ---
-sidebar_position: 5
-title: "Email-5: Gmail MCP Integration"
-sidebar_label: "Email-5: Gmail MCP"
-description: "Connect Claude Code to your Gmail inbox using the Gmail MCP server. Configure authentication with SMTP App Password (2 min) or OAuth (10 min), test 19 Gmail tools, and apply essential safety protocols for email automation."
+sidebar_position: 6
+title: "Granting Email Access"
+sidebar_label: "L06: Granting Email Access"
+description: "Connect Claude Code to your Gmail inbox using the Gmail MCP server. Configure SMTP App Password (2 min) or OAuth (10 min) and apply essential safety protocols."
 series: "email"
-series_position: 5
+series_position: 6
 keywords:
   - Gmail MCP
   - Claude Code email
@@ -15,7 +15,7 @@ keywords:
   - Gmail API
   - AI email assistant
 chapter: 6
-lesson: 5
+lesson: 6
 duration_minutes: 30
 
 # PEDAGOGICAL LAYER METADATA
@@ -95,7 +95,7 @@ created: "2026-01-01"
 version: "1.0.0"
 ---
 
-# Gmail MCP Integration
+# Granting Email Access
 
 You've built skills that draft professional emails. You've created subagents that triage inbox priorities and suggest responses. But there's a gap: your Email Assistant can't actually read or send emails. It's like having a brilliant assistant who can write perfect letters but has no mailbox.
 

@@ -29,11 +29,13 @@ We explore the origin story (how an internal Anthropic tool became a public phen
 
 The chapter concludes with the business angle: the Skills you create are intellectual property. They can be packaged, licensed, and sold. By the end, you'll have Claude Code running on your machine, your first Skills working, and a clear understanding of how to turn your expertise into products using the Digital FTE model and four revenue approaches.
 
-### Chapter 6: Claude Code for Business Workflows & Social Media
+### Chapter 6: Build Your First Personal AI Employee
 
-This chapter applies Claude Code to real-world communication workflows. You'll learn to use Claude Code for professional email drafting, WhatsApp business communication, LinkedIn content creation, and Twitter/X engagement strategies.
+This chapter guides you through building a **Digital FTE** (Full-Time Equivalent) — an AI agent that proactively manages your personal and business affairs 24/7. Not a chatbot you poke when you need something. An employee that watches for work, plans its approach, asks permission for sensitive actions, and reports results.
 
-The focus is practical: create Agent Skills for recurring communication tasks, build templates for professional messaging, and integrate AI assistance into your daily workflow. By the end, you'll have reusable skills that save hours of communication work each week.
+You'll build a complete Personal AI Employee using Claude Code as the reasoning engine, Obsidian as the knowledge base, MCP servers for real-world actions, and Python Watchers for autonomous perception. The chapter offers three achievement tiers: Bronze (working email assistant), Silver (proactive assistant with CEO Briefing), and Gold (full autonomous employee with error recovery and audit logging).
+
+**The signature feature**: The "Monday Morning CEO Briefing" where your AI autonomously audits your week to report revenue, bottlenecks, and proactive suggestions — transforming AI from chatbot to business partner.
 
 ### Chapter 7: Claude Code for Professions
 

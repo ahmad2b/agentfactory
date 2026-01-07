@@ -1,8 +1,8 @@
 ---
-sidebar_position: 0
-title: "Setting Up Your AI Vault"
-sidebar_label: "Setting Up Your AI Vault"
-description: "Set up your General Agent for professional work. Obsidian vault with AGENTS.md governance, CLAUDE.md context, and Claude Code as your operator."
+sidebar_position: 1
+title: "Your Employee's Memory"
+sidebar_label: "L01: Your Employee's Memory"
+description: "Set up your Personal AI Employee's memory system. Obsidian vault with AGENTS.md governance, CLAUDE.md context, and Claude Code as your operator."
 keywords:
   - Obsidian vault
   - Claude Code
@@ -11,7 +11,7 @@ keywords:
   - CLAUDE.md
   - professional workspace
 chapter: 6
-lesson: 0
+lesson: 1
 duration_minutes: 25
 
 # PEDAGOGICAL LAYER METADATA
@@ -79,7 +79,7 @@ created: "2026-01-03"
 version: "3.0.0"
 ---
 
-# Setting Up Your AI Vault - Agent Memory
+# Your Employee's Memory
 
 You're setting up Claude Code as your **General Agent** for professional work. Your projects and rules aren't forgotten when you close the session. Claude reads your vault and starts with memory every time.
 

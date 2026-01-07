@@ -1,8 +1,8 @@
 ---
-sidebar_position: 6
-title: "Email-6: Orchestrating the Complete System"
-sidebar_label: "Email-6: Orchestration"
-description: "Build the email-assistant master skill that orchestrates skills, subagents, and MCP into a complete Triage-to-Send workflow with graceful degradation and error handling."
+sidebar_position: 7
+title: "Bronze Capstone: Your First Working Employee"
+sidebar_label: "L07: Bronze Capstone"
+description: "Build the email-assistant master skill that orchestrates skills, subagents, and MCP into a complete Triage-to-Send workflow. Your employee is ready for work."
 series: "email"
 series_position: 6
 keywords:
@@ -16,7 +16,7 @@ keywords:
   - Claude Code
   - workflow automation
 chapter: 6
-lesson: 6
+lesson: 7
 duration_minutes: 40
 
 # PEDAGOGICAL LAYER METADATA
@@ -118,7 +118,7 @@ created: "2026-01-01"
 version: "1.0.0"
 ---
 
-# Orchestrating the Complete System
+# Bronze Capstone: Your First Working Employee
 
 You've built the pieces: four skills for email composition, three subagents for email processing, and MCP integration for real email operations. Each component works independently. But individually, they're just tools sitting in folders.
 

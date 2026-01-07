@@ -1,8 +1,8 @@
 ---
-sidebar_position: 1
-title: "Email-1: Project Setup & Email Drafter Skill"
-sidebar_label: "Email-1: Project Setup & Drafter"
-description: "Set up the Email Assistant project directory structure and create your first email-drafter skill with consistent tone guidelines for professional communication."
+sidebar_position: 2
+title: "Teaching Your Employee to Write"
+sidebar_label: "L02: Teaching to Write"
+description: "Create your first skill - the email-drafter - with consistent tone guidelines for professional communication. Your employee learns to write in your voice."
 series: "email"
 series_position: 1
 keywords:
@@ -14,7 +14,7 @@ keywords:
   - skill creation
   - AI collaboration
 chapter: 6
-lesson: 1
+lesson: 2
 duration_minutes: 30
 
 # PEDAGOGICAL LAYER METADATA
@@ -88,7 +88,7 @@ created: "2026-01-01"
 version: "1.0.0"
 ---
 
-# Project Setup & Email Drafter Skill
+# Teaching Your Employee to Write
 
 You send the same types of emails every week. Follow-up messages after meetings. Cold outreach to potential clients. Meeting requests with calendar coordination. Each one takes 5-15 minutes to craft well, and you write dozens of them monthly.
 

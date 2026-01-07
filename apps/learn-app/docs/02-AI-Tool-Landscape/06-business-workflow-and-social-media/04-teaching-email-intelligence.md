@@ -1,8 +1,8 @@
 ---
-sidebar_position: 3
-title: "Email-3: Email Summarizer Skill"
-sidebar_label: "Email-3: Summarizer Skill"
-description: "Build an email-summarizer skill that parses email threads, extracts decisions, action items, and open questions, with multiple output formats for different use cases."
+sidebar_position: 4
+title: "Teaching Email Intelligence"
+sidebar_label: "L04: Email Intelligence"
+description: "Build an email-summarizer skill that parses email threads, extracts decisions, action items, and open questions. Your employee learns to understand what matters."
 series: "email"
 series_position: 3
 keywords:
@@ -15,7 +15,7 @@ keywords:
   - skill chaining
   - professional communication
 chapter: 6
-lesson: 3
+lesson: 4
 duration_minutes: 25
 
 # PEDAGOGICAL LAYER METADATA
@@ -95,7 +95,7 @@ created: "2026-01-01"
 version: "1.0.0"
 ---
 
-# Email Summarizer Skill
+# Teaching Email Intelligence
 
 Your inbox shows 47 unread messages. Buried in that count is a 23-message thread about the Q4 budget that you need to respond to before 3 PM. But you can't just read the latest message—critical context is scattered across replies from five different stakeholders over two weeks. Someone made a decision about headcount. Someone assigned you an action item. Someone asked a question that's still unanswered.
 
