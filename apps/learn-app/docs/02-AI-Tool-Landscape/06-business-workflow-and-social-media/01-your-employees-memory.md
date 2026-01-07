@@ -361,6 +361,9 @@ The most popular Obsidian MCP server ([2.7k+ stars](https://github.com/MarkusPfu
 **Default settings:**
 - Host: `127.0.0.1`
 - Port: `27124`
+- Protocol: HTTPS (the MCP handles this automatically)
+
+**Verify plugin is working:** Open `https://127.0.0.1:27124/` in your browser — you should see a JSON response with `"status": "OK"`.
 
 ### Part B: Install Obsidian MCP
 
@@ -398,7 +401,7 @@ claude mcp list
 ```
 mcp-obsidian: connected
   Transport: stdio
-  Tools: 15+
+  Tools: 12 tools
 ```
 
 ### What Obsidian MCP Provides
@@ -411,6 +414,15 @@ mcp-obsidian: connected
 | `patch_content` | Update specific sections |
 | `append_content` | Add to existing notes |
 | `delete_file` | Remove notes |
+
+:::info Vault Switching
+The MCP connects to **whichever vault is currently open in Obsidian** — not to a specific vault path. To access a different vault:
+
+1. In Obsidian, switch vaults (click vault icon or **File → Open vault**)
+2. The MCP automatically connects to the new vault (no config change needed)
+
+The REST API plugin must be enabled in each vault you want to access via MCP.
+:::
 
 ### Part D: Test From Another Directory
 
