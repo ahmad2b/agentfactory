@@ -326,6 +326,8 @@ spec:
           brokers:
             - broker: 0
               nodePort: 30093
+              advertisedHost: localhost   # Required for Docker Desktop
+              advertisedPort: 30093
     config:
       offsets.topic.replication.factor: 1
       transaction.state.log.replication.factor: 1
@@ -347,7 +349,7 @@ spec:
 | `version` | 4.1.1 | Kafka version (requires Strimzi 0.49+) |
 | `metadataVersion` | 4.1-IV0 | KRaft metadata format version |
 | `listeners.plain` | port 9092, internal | For pod-to-pod communication inside K8s |
-| `listeners.external` | port 9094, nodeport 30092 | For your local machine to connect |
+| `listeners.external` | nodeport 30092, advertisedHost: localhost | For your local machine to connect (Docker Desktop) |
 | `replication.factor: 1` | - | Single replica for dev (use 3 for production) |
 | `auto.create.topics.enable` | false | Prevents accidental topic creation |
 | `entityOperator` | topicOperator, userOperator | Enable declarative topic/user management |
