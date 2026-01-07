@@ -43,8 +43,8 @@ learning_objectives:
     assessment_method: "Exercise: add new field to existing schema while maintaining consumer compatibility"
 
 cognitive_load:
-  new_concepts: 7
-  assessment: "Moderate-heavy load appropriate for B1 (7-10 range). Concepts: Avro schema syntax, record types, union types, Schema Registry client, AvroSerializer, AvroDeserializer, compatibility modes. Chunking: schema design (3) + integration (2) + evolution (2)."
+  new_concepts: 8
+  assessment: "Moderate-heavy load appropriate for B1 (7-10 range). Concepts: Avro schema syntax, record types, union types, Schema Registry deployment (Apicurio), Schema Registry client, AvroSerializer, AvroDeserializer, compatibility modes. Chunking: schema design (3) + deployment (1) + integration (2) + evolution (2)."
 
 differentiation:
   extension_for_advanced: "Explore Protobuf and JSON Schema alternatives, custom subject name strategies"
@@ -270,16 +270,105 @@ Or with pip:
 pip install confluent-kafka[avro]
 ```
 
+## Deploying Schema Registry
+
+**Important**: Strimzi doesn't include Schema Registry. You need to deploy it separately. We'll use Apicurio Registry, which is Confluent Schema Registry-compatible and works well on Kubernetes.
+
+### Deploy Apicurio Registry
+
+Create `schema-registry.yaml`:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: schema-registry
+  namespace: kafka
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: schema-registry
+  template:
+    metadata:
+      labels:
+        app: schema-registry
+    spec:
+      containers:
+        - name: apicurio
+          image: apicurio/apicurio-registry:3.0.6
+          ports:
+            - containerPort: 8080
+          env:
+            - name: APICURIO_STORAGE_KIND
+              value: kafkasql
+            - name: APICURIO_KAFKASQL_BOOTSTRAP_SERVERS
+              value: task-events-kafka-bootstrap:9092
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 100m
+            limits:
+              memory: 512Mi
+              cpu: 500m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: schema-registry
+  namespace: kafka
+spec:
+  type: NodePort
+  ports:
+    - port: 8081
+      targetPort: 8080
+      nodePort: 30081
+  selector:
+    app: schema-registry
+```
+
+Apply the configuration:
+
+```bash
+kubectl apply -f schema-registry.yaml
+```
+
+**Output:**
+
+```
+deployment.apps/schema-registry created
+service/schema-registry created
+```
+
+Wait for the pod to be ready:
+
+```bash
+kubectl wait --for=condition=ready pod -l app=schema-registry -n kafka --timeout=120s
+```
+
+### Connection Reference
+
+| Service | Local URL (Mac/Windows) | K8s Internal URL |
+|---------|------------------------|------------------|
+| Kafka | `localhost:30092` | `task-events-kafka-bootstrap:9092` |
+| Schema Registry | `http://localhost:30081` | `http://schema-registry:8081` |
+
+For local development, we use the NodePort URLs. For code running inside Kubernetes, use the internal URLs.
+
 ## Integrating Schema Registry with Python
 
 ### Setting Up the Schema Registry Client
 
 ```python
+import os
 from confluent_kafka.schema_registry import SchemaRegistryClient
+
+# Environment-aware configuration
+SCHEMA_REGISTRY_URL = os.environ.get('SCHEMA_REGISTRY_URL', 'http://localhost:30081')
 
 # Connect to Schema Registry
 sr_client = SchemaRegistryClient({
-    'url': 'http://schema-registry:8081'
+    'url': SCHEMA_REGISTRY_URL
 })
 
 # Get schema for a subject
@@ -298,13 +387,18 @@ Schema: {"type":"record","name":"TaskCreated","namespace":"com.taskapi.events"..
 ### Producer with Avro Serialization
 
 ```python
+import os
 from confluent_kafka import Producer
 from confluent_kafka.schema_registry import SchemaRegistryClient
 from confluent_kafka.schema_registry.avro import AvroSerializer
 from confluent_kafka.serialization import SerializationContext, MessageField
 
+# Environment-aware configuration
+KAFKA_BOOTSTRAP = os.environ.get('KAFKA_BOOTSTRAP_SERVERS', 'localhost:30092')
+SCHEMA_REGISTRY_URL = os.environ.get('SCHEMA_REGISTRY_URL', 'http://localhost:30081')
+
 # Schema Registry client
-sr_client = SchemaRegistryClient({'url': 'http://schema-registry:8081'})
+sr_client = SchemaRegistryClient({'url': SCHEMA_REGISTRY_URL})
 
 # Avro schema
 task_schema = """
@@ -331,7 +425,7 @@ avro_serializer = AvroSerializer(
 
 # Producer configuration
 producer = Producer({
-    'bootstrap.servers': 'localhost:30092',
+    'bootstrap.servers': KAFKA_BOOTSTRAP,
     'acks': 'all',
     'enable.idempotence': True
 })
@@ -373,13 +467,18 @@ Delivered to task-created [0] @ 57
 ### Consumer with Avro Deserialization
 
 ```python
+import os
 from confluent_kafka import Consumer
 from confluent_kafka.schema_registry import SchemaRegistryClient
 from confluent_kafka.schema_registry.avro import AvroDeserializer
 from confluent_kafka.serialization import SerializationContext, MessageField
 
+# Environment-aware configuration
+KAFKA_BOOTSTRAP = os.environ.get('KAFKA_BOOTSTRAP_SERVERS', 'localhost:30092')
+SCHEMA_REGISTRY_URL = os.environ.get('SCHEMA_REGISTRY_URL', 'http://localhost:30081')
+
 # Schema Registry client
-sr_client = SchemaRegistryClient({'url': 'http://schema-registry:8081'})
+sr_client = SchemaRegistryClient({'url': SCHEMA_REGISTRY_URL})
 
 # Create deserializer (schema fetched automatically from registry)
 avro_deserializer = AvroDeserializer(
@@ -389,7 +488,7 @@ avro_deserializer = AvroDeserializer(
 
 # Consumer configuration
 consumer = Consumer({
-    'bootstrap.servers': 'localhost:30092',
+    'bootstrap.servers': KAFKA_BOOTSTRAP,
     'group.id': 'notification-service',
     'auto.offset.reset': 'earliest',
     'enable.auto.commit': False
@@ -529,10 +628,12 @@ This is backward compatible because:
 When you try to register this schema:
 
 ```python
+import os
 from confluent_kafka.schema_registry import SchemaRegistryClient
 from confluent_kafka.schema_registry.avro import AvroSchema
 
-sr_client = SchemaRegistryClient({'url': 'http://schema-registry:8081'})
+SCHEMA_REGISTRY_URL = os.environ.get('SCHEMA_REGISTRY_URL', 'http://localhost:30081')
+sr_client = SchemaRegistryClient({'url': SCHEMA_REGISTRY_URL})
 
 new_schema = AvroSchema("""{
   "type": "record",
@@ -561,10 +662,12 @@ Schema Registry blocks the incompatible change, preventing production breakage.
 Always check compatibility before deploying schema changes:
 
 ```python
+import os
 from confluent_kafka.schema_registry import SchemaRegistryClient
 from confluent_kafka.schema_registry.avro import AvroSchema
 
-sr_client = SchemaRegistryClient({'url': 'http://schema-registry:8081'})
+SCHEMA_REGISTRY_URL = os.environ.get('SCHEMA_REGISTRY_URL', 'http://localhost:30081')
+sr_client = SchemaRegistryClient({'url': SCHEMA_REGISTRY_URL})
 
 proposed_schema = AvroSchema("""{
   "type": "record",
