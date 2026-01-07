@@ -80,7 +80,7 @@ With at-most-once delivery, a message is delivered zero or one times. If anythin
 from confluent_kafka import Consumer
 
 consumer = Consumer({
-    'bootstrap.servers': 'kafka:9092',
+    'bootstrap.servers': 'localhost:30092',
     'group.id': 'analytics-service',
     'enable.auto.commit': True,  # Commits before processing completes
     'auto.commit.interval.ms': 1000
@@ -145,7 +145,7 @@ With at-least-once delivery, every message is delivered one or more times. If an
 from confluent_kafka import Consumer
 
 consumer = Consumer({
-    'bootstrap.servers': 'kafka:9092',
+    'bootstrap.servers': 'localhost:30092',
     'group.id': 'notification-service',
     'enable.auto.commit': False,  # Manual commit after processing
     'auto.offset.reset': 'earliest'
@@ -216,14 +216,14 @@ With exactly-once delivery, every message is delivered exactly one time---no los
 from confluent_kafka import Consumer, Producer
 
 consumer = Consumer({
-    'bootstrap.servers': 'kafka:9092',
+    'bootstrap.servers': 'localhost:30092',
     'group.id': 'order-processor',
     'enable.auto.commit': False,
     'isolation.level': 'read_committed'  # Only read committed messages
 })
 
 producer = Producer({
-    'bootstrap.servers': 'kafka:9092',
+    'bootstrap.servers': 'localhost:30092',
     'transactional.id': 'order-processor-1',
     'enable.idempotence': True
 })

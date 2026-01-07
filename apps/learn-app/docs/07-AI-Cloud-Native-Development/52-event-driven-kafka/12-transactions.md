@@ -571,7 +571,7 @@ Transactions have a timeout (default 60 seconds). Long-running transactions risk
 
 ```python
 producer = Producer({
-    'bootstrap.servers': 'localhost:9092',
+    'bootstrap.servers': 'localhost:30092',
     'transactional.id': 'processor-1',
     'transaction.timeout.ms': 60000  # 60 seconds default
 })

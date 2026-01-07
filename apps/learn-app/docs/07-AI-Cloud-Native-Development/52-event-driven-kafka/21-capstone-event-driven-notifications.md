@@ -397,7 +397,7 @@ def shutdown_publisher() -> None:
 ```python
 >>> from events.publisher import init_publisher, get_publisher
 >>> from events.schemas import TaskEvent
->>> publisher = init_publisher("localhost:9092")
+>>> publisher = init_publisher("localhost:30092")
 >>> event = TaskEvent.task_created("task-789", "Review PR", "req-111")
 >>> publisher.publish(event)
 >>> publisher.flush()
@@ -424,7 +424,7 @@ from events.schemas import TaskEvent
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Manage application lifespan for Kafka producer."""
-    bootstrap_servers = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "localhost:9092")
+    bootstrap_servers = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "localhost:30092")
     init_publisher(bootstrap_servers)
     yield
     shutdown_publisher()
@@ -624,7 +624,7 @@ class NotificationService:
 
 def main():
     import os
-    bootstrap_servers = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "localhost:9092")
+    bootstrap_servers = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "localhost:30092")
 
     service = NotificationService(bootstrap_servers)
 
@@ -759,7 +759,7 @@ class AuditService:
 
 def main():
     import os
-    bootstrap_servers = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "localhost:9092")
+    bootstrap_servers = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "localhost:30092")
     audit_log_path = os.getenv("AUDIT_LOG_PATH", "audit.log")
 
     service = AuditService(bootstrap_servers, audit_log_path)
@@ -803,7 +803,7 @@ The implementation is complete. Now verify each success criterion from the speci
 # Start Kafka console consumer to observe events
 kubectl exec -it task-events-kafka-0 -n kafka -- \
   bin/kafka-console-consumer.sh \
-  --bootstrap-server localhost:9092 \
+  --bootstrap-server localhost:30092 \
   --topic task-events \
   --from-beginning
 
@@ -899,7 +899,7 @@ curl -X POST http://localhost:8000/tasks \
 # Check consumer lag
 kubectl exec task-events-kafka-0 -n kafka -- \
   bin/kafka-consumer-groups.sh \
-  --bootstrap-server localhost:9092 \
+  --bootstrap-server localhost:30092 \
   --describe --group notification-service
 ```
 

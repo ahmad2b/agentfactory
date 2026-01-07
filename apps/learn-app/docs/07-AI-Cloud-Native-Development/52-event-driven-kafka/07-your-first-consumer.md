@@ -287,7 +287,7 @@ With auto-commit enabled, Kafka periodically commits offsets in the background:
 
 ```python
 consumer = Consumer({
-    'bootstrap.servers': 'localhost:9092',
+    'bootstrap.servers': 'localhost:30092',
     'group.id': 'my-service',
     'enable.auto.commit': True,
     'auto.commit.interval.ms': 5000  # Every 5 seconds
@@ -572,7 +572,7 @@ Update it to include when to use auto-commit vs manual commit and how to handle 
 I have a Kafka consumer that seems to be losing messages. Here's my code:
 
 consumer = Consumer({
-    'bootstrap.servers': 'localhost:9092',
+    'bootstrap.servers': 'localhost:30092',
     'group.id': 'my-service',
     'enable.auto.commit': True,
     'auto.commit.interval.ms': 1000
