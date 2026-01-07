@@ -196,6 +196,13 @@ This method uses Google's App Passwords — special 16-character passwords that 
 
 ### Step 2: Add Gmail MCP to Claude Code
 
+Choose your scope:
+
+| Scope | Flag | Use When |
+|-------|------|----------|
+| 🌍 **User Scope** (Recommended) | `--scope user` | Available in all your projects |
+| 📁 **Project Scope** | `--scope project` | Only in current project |
+
 Open your terminal and run:
 
 ```bash
@@ -213,6 +220,12 @@ claude mcp add gmail --scope user -- npx mcp-remote \
 ```
 Added mcp server gmail to user settings
 ```
+
+:::warning .mcp.json Conflict
+If you have a `.mcp.json` file in your project with a `gmail` server configured, it may override your `claude mcp add` config. Either:
+- Delete the conflicting entry from `.mcp.json`, or
+- Use a different server name (e.g., `gmail-smtp`)
+:::
 
 ### Step 3: Verify Connection
 
@@ -258,44 +271,73 @@ OAuth provides full API access and is required for label management, filters, an
 
 ### Step 3: Configure OAuth Consent Screen
 
-1. Go to **APIs & Services** > **OAuth consent screen**
-2. Select **External** user type (unless you have Google Workspace)
-3. Click **Create**
-4. Fill in required fields:
-   - App name: `Gmail MCP Integration`
-   - User support email: Your email
-   - Developer contact: Your email
-5. Click **Save and Continue** through the remaining screens
+1. Go to [Google Auth Platform](https://console.cloud.google.com/auth/overview) (or **APIs & Services** > **OAuth consent screen**)
+2. If prompted, click **Get Started** or **Configure Consent Screen**
+3. Select **External** → Click **Create**
+
+**Configure Branding** (left sidebar):
+1. App name: `Gmail MCP`
+2. User support email: Your email
+3. Developer contact: Your email
+4. Click **Save**
+
+**Configure Data Access** (left sidebar):
+1. Click **Add or Remove Scopes**
+2. In the filter, search for `gmail`
+3. Select these scopes:
+   - `https://www.googleapis.com/auth/gmail.modify`
+   - `https://www.googleapis.com/auth/gmail.settings.basic`
+4. Click **Update** → **Save**
+
+**Configure Audience** (left sidebar):
+1. Click **Add Users**
+2. Add your Gmail address
+3. Click **Save**
+
+**Publish Your App** (Summary in left sidebar):
+1. Click **Publish App** to move from "Testing" to "In Production"
+2. This allows your app to request full permissions needed for all Gmail MCP tools
+
+:::tip Why Publish?
+While in "Testing" mode, tokens expire after 7 days. Publishing removes this limitation for your own use.
+:::
 
 ### Step 4: Create OAuth Credentials
 
-1. Go to **APIs & Services** > **Credentials**
-2. Click **Create Credentials** > **OAuth client ID**
+1. Go to **Clients** (left sidebar) or **APIs & Services** > **Credentials**
+2. Click **Create Client** or **Create Credentials** > **OAuth client ID**
 3. Application type: **Web application**
-4. Name: `Gmail MCP Client`
-5. Authorized redirect URIs: Add `https://developers.google.com/oauthplayground`
+4. Name: `Gmail MCP`
+5. Under **Authorized redirect URIs**, click **Add URI** and enter:
+   ```
+   https://developers.google.com/oauthplayground
+   ```
 6. Click **Create**
-7. Copy the **Client ID** and **Client Secret**
+7. Copy your **Client ID** and **Client Secret** (save them securely!)
 
-**Store these securely** — you'll need them in the next step.
+### Step 5: Get Refresh Token (OAuth Playground)
 
-### Step 5: Get Refresh Token via OAuth Playground
-
-1. Open [OAuth Playground](https://developers.google.com/oauthplayground/)
-2. Click the gear icon (settings) in the top right
-3. Check **Use your own OAuth credentials**
-4. Enter your Client ID and Client Secret
+1. Go to [Google OAuth Playground](https://developers.google.com/oauthplayground)
+2. Click ⚙️ **Settings** (gear icon, top right)
+3. Check ✅ **Use your own OAuth credentials**
+4. Enter your **Client ID** and **Client Secret**
 5. Close settings
-6. In the left panel, find **Gmail API v1** and select these scopes:
-   - `https://mail.google.com/`
+6. In left panel, find **Gmail API v1** and select:
    - `https://www.googleapis.com/auth/gmail.modify`
-   - `https://www.googleapis.com/auth/gmail.labels`
+   - `https://www.googleapis.com/auth/gmail.settings.basic`
 7. Click **Authorize APIs**
-8. Sign in with your Google account
+8. Sign in with your Google account and click **Allow**
 9. Click **Exchange authorization code for tokens**
 10. Copy the **Refresh Token** from the response
 
 ### Step 6: Add Gmail MCP with OAuth
+
+Choose your scope:
+
+| Scope | Flag | Use When |
+|-------|------|----------|
+| 🌍 **User Scope** (Recommended) | `--scope user` | Available in all your projects |
+| 📁 **Project Scope** | `--scope project` | Only in current project |
 
 ```bash
 claude mcp add gmail-oauth --scope user -- npx mcp-remote \
@@ -311,6 +353,21 @@ claude mcp add gmail-oauth --scope user -- npx mcp-remote \
 ```
 Added mcp server gmail-oauth to user settings
 ```
+
+:::warning .mcp.json Conflict
+If you have a `.mcp.json` file in your project with a `gmail` server configured for SMTP, it may override your OAuth config. Either:
+- Update `.mcp.json` to use OAuth headers, or
+- Delete the `gmail` entry from `.mcp.json`, or
+- Use a different server name (e.g., `gmail-oauth`)
+:::
+
+**Available Tools with OAuth:**
+
+| Category | Tools |
+|----------|-------|
+| **Email Operations** | `send_email`, `draft_email`, `read_email`, `search_emails`, `modify_email`, `delete_email` |
+| **Label Management** | `list_email_labels`, `create_gmail_label`, `delete_gmail_label` |
+| **Filter Management** | `create_gmail_filter`, `list_gmail_filters`, `delete_gmail_filter` |
 
 ---
 
