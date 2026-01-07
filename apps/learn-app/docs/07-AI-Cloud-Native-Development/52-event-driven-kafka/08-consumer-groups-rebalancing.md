@@ -339,7 +339,7 @@ if duration > 0.1:  # > 100ms per message
 ```python
 # Increase max.poll.records to process more per poll
 consumer = Consumer({
-    'bootstrap.servers': 'localhost:9092',
+    'bootstrap.servers': 'localhost:30092',
     'group.id': 'notification-service',
     'max.poll.records': 500,  # Default is 500, adjust based on processing speed
 })
@@ -358,7 +358,7 @@ Frequent rebalances interrupt processing. Check for:
 
 ```python
 consumer = Consumer({
-    'bootstrap.servers': 'localhost:9092',
+    'bootstrap.servers': 'localhost:30092',
     'group.id': 'notification-service',
     'session.timeout.ms': 45000,          # 45 seconds
     'max.poll.interval.ms': 300000,       # 5 minutes for slow processing
@@ -511,7 +511,7 @@ Update it to include when rebalancing occurs and how to configure consumers to m
 I have a Kafka consumer with this configuration:
 
 consumer = Consumer({
-    'bootstrap.servers': 'kafka:9092',
+    'bootstrap.servers': 'localhost:30092',
     'group.id': 'order-processor',
     'enable.auto.commit': True,
     'auto.commit.interval.ms': 5000

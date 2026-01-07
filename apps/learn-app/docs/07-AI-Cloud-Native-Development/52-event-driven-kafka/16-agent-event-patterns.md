@@ -623,7 +623,7 @@ The audit consumer shows it's connected and subscribed.
 
 Here's my audit consumer config:
 consumer = Consumer({
-    'bootstrap.servers': 'kafka:9092',
+    'bootstrap.servers': 'localhost:30092',
     'group.id': 'audit-log',
     'auto.offset.reset': 'latest'  # I want only new events
 })

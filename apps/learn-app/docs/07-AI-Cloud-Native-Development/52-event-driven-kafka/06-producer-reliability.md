@@ -241,7 +241,7 @@ Idempotence has constraints:
 ```python
 # WRONG: max.in.flight > 5 disables idempotence
 producer = Producer({
-    'bootstrap.servers': 'localhost:9092',
+    'bootstrap.servers': 'localhost:30092',
     'enable.idempotence': True,
     'max.in.flight.requests.per.connection': 10  # ERROR!
 })
@@ -519,7 +519,7 @@ If your notification consumer can handle duplicates (checking task_id before sen
 ```python
 # At-least-once with idempotent consumers (simpler)
 producer = Producer({
-    'bootstrap.servers': 'kafka:9092',
+    'bootstrap.servers': 'localhost:30092',
     'acks': 'all',
     'enable.idempotence': True,
     'delivery.timeout.ms': 30000  # Shorter timeout, faster failure
