@@ -64,10 +64,14 @@ learning_objectives:
     proficiency_level: "A2"
     bloom_level: "Apply"
     assessment_method: "Can see .claude folder in Obsidian"
+  - objective: "Configure Obsidian MCP for vault access from any directory"
+    proficiency_level: "A2"
+    bloom_level: "Apply"
+    assessment_method: "Claude Code can read vault notes via MCP from outside the vault"
 
 cognitive_load:
-  new_concepts: 4
-  assessment: "4 concepts (Obsidian vault, AGENTS.md, CLAUDE.md, hidden files plugin) - within A2 limit"
+  new_concepts: 5
+  assessment: "5 concepts (Obsidian vault, AGENTS.md, CLAUDE.md, hidden files plugin, Obsidian MCP) - within A2 limit"
 
 differentiation:
   extension_for_advanced: "Add git version control; configure additional governance rules"
@@ -87,12 +91,12 @@ You're setting up Claude Code as your **General Agent** for professional work. Y
 
 This setup separates **memory** and **reasoning**:
 
-- 🗂 **Memory** – Your vault (notes, SOPs, tasks, rules)
-- 🧠 **Reasoning** – Claude Code reads your vault and acts on it
+- 🗂 **Memory Bank** – Your vault (SOPs, knowledge base, tasks, rules)
+- 🧠 **Reasoning** – Claude Code reads your Memory Bank and acts on it
 - 📘 **Skills** – Teaching documents that make behavior predictable
-- 🛠 **MCP** – Tool connectors for real-world actions (Gmail, Xero, etc.)
+- 🛠 **MCP** – Tool connectors for real-world actions (Gmail, Obsidian vault, etc.)
 
-**Think of it this way**: Your vault is a **Second Brain**. Until now, it just stored knowledge. Skills give your Second Brain **hands**. Claude Code can now *act* on your knowledge, not just retrieve it.
+**Think of it this way**: Your vault is a **Memory Bank** — a combination of SOPs (how to do things) and Knowledge Base (what you know). Obsidian MCP makes this Memory Bank accessible to Claude Code **from anywhere**, not just when you're inside the vault folder.
 
 ---
 
@@ -365,28 +369,83 @@ To see and edit `.claude/skills/` directly in Obsidian, install the Show Hidden 
 
 ---
 
-## Where is MCP for Obsidian?
+## Step 8: Obsidian MCP Setup
 
-You might wonder: "Where is Obsidian MCP server to connect Claude Code to my vault?"
+**The Problem**: Steps 1-7 assume you run Claude Code **from inside the vault** (`cd ~/projects/ai-vault && claude`). But what if you're working in another project and need your AI Employee's memory?
 
-**Answer**: We're completing initial setup to start getting value with the simplest approach first.
-|
+**The Solution**: Obsidian MCP gives Claude Code access to your vault **from anywhere**.
 
-Claude Code can already:
-- Read your `CLAUDE.md` and `AGENTS.md`
-- Create files in `.claude/skills/`
-- Execute skills you define
+| Scenario | Without MCP | With MCP |
+|----------|-------------|----------|
+| Working in `~/projects/client-work` | ❌ No access to Memory Bank | ✅ Full vault access |
+| Running watchers from `/scripts/` | ❌ Can't read SOPs | ✅ Reads Company_Handbook.md |
+| Using Claude from VS Code terminal | ❌ No employee context | ✅ Full Memory Bank |
 
-We will setup MCP later as it adds value with **actions Claude Code can't do natively**.
+### Install Obsidian MCP
 
-**Note**: Obsidian MCP servers exist (like [`cyanheads/obsidian-mcp-server`](https://github.com/cyanheads/obsidian-mcp-server) and [`mcp-obsidian`](https://github.com/MarkusPfundstein/mcp-obsidian)) and add features beyond filesystem access:
+Run this command (replace the path with your actual vault location):
 
-| MCP Feature | What It Does |
-|-------------|--------------|
-| **Backlink discovery** | Find all notes that link to a given note |
-| **Graph connections** | Traverse note relationships via NetworkX graph |
-| **Tag/frontmatter search** | Query notes by metadata, not just content |
-| **Vault structure** | Get directory tree and connection patterns |
+```bash
+claude mcp add obsidian --scope user -- npx @anthropic-community/obsidian-mcp /path/to/your/ai-vault
+```
+
+**Example** (if your vault is at `~/projects/ai-vault`):
+
+```bash
+claude mcp add obsidian --scope user -- npx @anthropic-community/obsidian-mcp ~/projects/ai-vault
+```
+
+### Verify Connection
+
+```bash
+claude mcp list
+```
+
+**Expected output:**
+```
+obsidian: connected
+  Transport: stdio
+  Tools: 11
+```
+
+### What Obsidian MCP Provides
+
+| Tool | What It Does |
+|------|--------------|
+| `read_note` | Read any note from your vault |
+| `write_note` | Create or update notes |
+| `search_vault` | Find notes by content |
+| `list_notes` | Get all notes in a directory |
+| `get_tags` | Retrieve all tags in vault |
+| `get_frontmatter` | Read note metadata |
+
+**Key insight**: Now when you invoke Claude Code from any directory, it can still access your Memory Bank. Your AI Employee's knowledge is always available.
+
+### Test From Another Directory
+
+```bash
+cd ~/projects/some-other-project
+claude
+```
+
+Then ask:
+```
+Using obsidian MCP, read my AGENTS.md and tell me my governance rules.
+```
+
+If Claude responds with your vault's governance rules, **your Memory Bank is accessible from anywhere**.
+
+---
+
+### Advanced: Additional Obsidian MCP Options
+
+For more features (backlinks, graph connections), consider these alternatives:
+
+| Server | Features | Best For |
+|--------|----------|----------|
+| [`@anthropic-community/obsidian-mcp`](https://github.com/anthropics/anthropic-cookbook/tree/main/misc/mcp_servers/obsidian) | Read/write, search, tags | Most users |
+| [`cyanheads/obsidian-mcp-server`](https://github.com/cyanheads/obsidian-mcp-server) | Backlinks, graph, REST API | Power users |
+| [`mcp-obsidian`](https://github.com/bitbonsai/mcp-obsidian) | Lightweight, batch operations | Simple setups |
 
 ---
 
@@ -408,26 +467,30 @@ This is good practice but not required for the Email series.
 ## Your Setup Complete
 
 ```
-ai-vault/
+ai-vault/                        (Your Employee's Memory Bank)
 ├── .claude/
-│   ├── skills/         ← Visible in Obsidian, ready for Email-1
-│   └── agents/         ← Visible in Obsidian, ready for Email-4
+│   ├── skills/         ← Visible in Obsidian, ready for L02
+│   └── agents/         ← Visible in Obsidian, ready for L05
 ├── .obsidian/
 │   └── plugins/
 │       └── show-hidden-files/
 ├── references/
-├── AGENTS.md           ← Governance rules
+├── AGENTS.md           ← Governance rules (SOPs)
 └── CLAUDE.md           ← Entry point for Claude Code
+
+~/.claude.json          (MCP configuration - makes vault accessible anywhere)
+└── mcpServers.obsidian ← Points to your ai-vault
 ```
 
 **What you have:**
 
-- **Obsidian** = Human interface for reading/writing markdown
-- **Claude Code** = General Agent that operates in the same files
+- **Obsidian** = Human interface for your Memory Bank (SOPs, knowledge, tasks)
+- **Claude Code** = General Agent that operates on your Memory Bank
 - **AGENTS.md** = Single source of truth for governance
 - **CLAUDE.md** = Entry point that references AGENTS.md
+- **Obsidian MCP** = Bridge that makes Memory Bank accessible from any directory
 
-Same files. Different interfaces. No translation layer.
+**The key insight**: Your vault is now a **Memory Bank with SOPs and Knowledge Base** that Claude Code can access from anywhere — not just when you `cd` into it.
 
 ---
 
@@ -449,10 +512,26 @@ Based on my AGENTS.md, create the folder structure I need for skills and agents 
 
 **What you're practicing**: Having Claude Code execute based on your governance rules.
 
-**Prompt 3: Skill Preview**
+**Prompt 3: Test MCP Access (from any directory)**
+
+Open a terminal in a DIFFERENT directory (not your vault):
+
+```bash
+cd ~/Desktop
+claude
+```
+
+Then ask:
+```
+Using obsidian MCP, read my AGENTS.md and summarize my governance rules.
+```
+
+**What you're practicing**: Verifying your Memory Bank is accessible from anywhere via Obsidian MCP.
+
+**Prompt 4: Skill Preview**
 
 ```
-I'm about to create an email-drafter skill. Research and show me exactly what the file should look like and where it should go.
+I'm about to create an email-drafter skill. Based on my AGENTS.md governance, show me exactly what the file should look like and where it should go.
 ```
 
-**What you're practicing**: Verifying Claude Code understands your skill conventions before you start Email-1.
+**What you're practicing**: Verifying Claude Code understands your skill conventions before you start L02.
