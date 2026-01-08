@@ -31,3 +31,4 @@ By the end of this chapter, you'll have:
 - **Configuration Mastery** — Settings hierarchy (User, Project, Local) and precedence rules for team collaboration and personal customization
 - **Complete Extensibility** — Discovering and using plugins from marketplaces, hands-on installation of Anthropic's official skills repository
 - **From Skills to Business** — Understanding how Skills become monetizable products, the Digital FTE model, four revenue approaches, and the path from expertise to enterprise
+- **The Creator's Workflow** — How Boris Cherny (Claude Code's creator) uses Claude Code: parallel sessions, Plan Mode discipline, team CLAUDE.md practices, verification loops, and the principles that make it all work together
