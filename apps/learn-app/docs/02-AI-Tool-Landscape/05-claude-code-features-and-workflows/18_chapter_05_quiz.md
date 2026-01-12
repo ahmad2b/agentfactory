@@ -1,5 +1,5 @@
 ---
-sidebar_position: 16
+sidebar_position: 18
 title: "Chapter 5: Claude Code Features and Workflows Quiz"
 ---
 

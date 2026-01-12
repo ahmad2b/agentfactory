@@ -1,8 +1,8 @@
 ---
 title: "The Creator's Workflow: How Boris Uses Claude Code"
-sidebar_position: 16
+sidebar_position: 17
 chapter: 5
-lesson: 16
+lesson: 17
 duration_minutes: 15
 
 # PEDAGOGICAL LAYER METADATA

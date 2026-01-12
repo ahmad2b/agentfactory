@@ -1,8 +1,8 @@
 ---
 title: "From Skills to Business: Monetizing Agent Expertise"
-sidebar_position: 15
+sidebar_position: 16
 chapter: 5
-lesson: 15
+lesson: 16
 duration_minutes: 20
 
 # PEDAGOGICAL LAYER METADATA
