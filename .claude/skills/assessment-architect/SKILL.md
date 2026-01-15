@@ -34,9 +34,29 @@ The skill automatically asks users **two key questions**:
 | # | Question | Options | Default |
 |----|----------|---------|---------|
 | 1 | **Question Count & Time** | Accept recommended / More challenging / Quick / Custom | Auto-recommended (90-120) |
-| 2 | **Output Format** | DOCX / Markdown / PDF | DOCX (professional) |
+| 2 | **Output Format** | DOCX (printable) / Markdown / PDF | DOCX (professional) |
 
 **Note**: Scope is auto-discovered and confirmed, no user decision needed.
+
+### Format Details
+
+**DOCX (Recommended - Printable Format)**
+- Professional exam header: Title, exam code, question count, duration
+- Questions: Each on new line with all options on separate lines (A., B., C., D.)
+- Answer Key: Compact quick reference (10 answers per line for fast checking)
+- Explanations: Full detailed section for each question with source context
+- **Best for**: Printing, formal assessment, professional distribution
+
+**Markdown**
+- Version control friendly (text-based)
+- Table-based answer key (detailed with metadata)
+- Full explanations with source sections
+- **Best for**: Editing, version control, publishing to web
+
+**PDF**
+- Generated from markdown format
+- Read-only for distribution
+- **Best for**: Final deliverable, student distribution
 
 ### Optional Clarifications
 
@@ -245,24 +265,81 @@ assessments/
 
 ---
 
-## Output Format
+## Output Format Examples
+
+### DOCX Format (Printable - Recommended)
+
+```
+Agent Factory Fundamentals: Building Digital Full-Time Equivalents (FTEs)
+Exam L1: P1-AGFF
+90 Questions | 120 Minutes
+
+1) The 'Agent Factory Thesis' primarily reframes the AI business opportunity as:
+A. Manufacturing digital employees rather than selling traditional software
+B. Shipping UI features rather than codifying organizational expertise
+C. Selling token bundles rather than selling recurring subscriptions
+D. Optimizing chat workflows rather than deploying autonomous systems
+
+2) Which of the following best describes the core value proposition?
+A. Reducing software licenses by 50%
+B. Replacing human expertise with commodity AI
+C. Codifying expert knowledge into autonomous, repeatable systems
+D. Increasing chat interface sophistication
+
+[...Questions 3-90...]
+
+---
+
+Answer Key
+Reference this section after completing the quiz to check your answers.
+
+1-A, 2-C, 3-B, 4-A, 5-B, 6-B, 7-B, 8-B, 9-A, 10-D
+11-A, 12-A, 13-A, 14-C, 15-C, 16-A, 17-B, 18-D, 19-C, 20-C
+[...more grouped by 10...]
+
+---
+
+Explanations
+
+Q1 - Correct Answer: A
+Source: Agent Factory Fundamentals
+
+The Agent Factory Thesis posits that instead of selling software licenses,
+companies can manufacture digital full-time equivalents (FTEs)...
+
+------
+
+Q2 - Correct Answer: C
+Source: Agent Manufacturing Principles
+
+Manufacturing agents transforms domain expertise into codified systems...
+```
+
+**Structure**:
+- Header (title, exam code, count, duration)
+- Questions (each on new line, all options on separate lines)
+- Answer Key (compact, 10 per line for quick reference)
+- Explanations (full details for each question)
+
+### Markdown Format (Version Control Friendly)
 
 ```markdown
-# [Exam Title]
+# Agent Factory Fundamentals Assessment
 
-**Source:** [file(s)]
-**Questions:** [N]
-**Duration:** Estimated [X] min / Maximum [Y] min
+**Source:** P1-AGFF
+**Questions:** 90
+**Duration:** 120 minutes
+**Content Type:** Conceptual
 
 ---
 
 ## Questions
 
-**Q1.** [Question stem]
-A) [Option]
-B) [Option]
-C) [Option]
-D) [Option]
+**Q1.** The 'Agent Factory Thesis' primarily reframes...
+A) Manufacturing digital employees...
+B) Shipping UI features...
+C) Selling token bundles...
+D) Optimizing chat workflows...
 
 [Continue all questions...]
 
@@ -272,19 +349,18 @@ D) [Option]
 
 | Q# | Answer | Section | Difficulty | Bloom |
 |----|--------|---------|------------|-------|
-| 1 | C | Part A | Medium | Apply |
+| 1 | A | Agent Factory Fundamentals | Medium | Understand |
+| 2 | C | Agent Manufacturing Principles | Medium | Understand |
 
 ---
 
 ## Explanations
 
 ### Q1
-**Correct: C**
-[Explanation with section reference]
-Section: [Heading from source]
+**Correct: A**
+The Agent Factory Thesis posits...
+**Source Section:** Agent Factory Fundamentals
 ```
-
-**Structure**: Questions → Answer Key (at END) → Explanations
 
 ---
 

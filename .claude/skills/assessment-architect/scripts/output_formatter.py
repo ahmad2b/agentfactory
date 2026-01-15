@@ -117,6 +117,81 @@ def format_exam_markdown(exam: Exam) -> str:
     return "\n".join(lines)
 
 
+def format_exam_docx_printable(exam: Exam) -> str:
+    """
+    Format exam as printable DOCX-friendly format.
+
+    Structure:
+    - Professional header with exam code and metadata
+    - Questions: Each on new line, all options on separate lines
+    - Quick answer key: Compact format (10 per line)
+    - Detailed explanations: Full section with context
+
+    Example header:
+    Agent Factory Fundamentals: Building Digital Full-Time Equivalents
+    Exam L1: P1-AGFF
+    90 Questions | 120 Minutes
+    """
+    lines = []
+
+    # Professional header
+    lines.append(exam.title)
+
+    # Extract exam code if available in source_files (e.g., "P1-AGFF")
+    exam_code = "L1-ASA"  # Default, could be parsed from title
+    question_count = len(exam.questions)
+    lines.append(f"Exam {exam_code}")
+    lines.append(f"{question_count} Questions | {exam.duration_minutes} Minutes")
+    lines.append("")
+
+    # Questions section - printable format
+    for q in exam.questions:
+        lines.append(f"{q.number}) {q.text}")
+
+        # Each option on new line
+        option_labels = ['A', 'B', 'C', 'D']
+        for i, opt in enumerate(q.options):
+            lines.append(f"{option_labels[i]}. {opt}")
+        lines.append("")
+
+    # Answer key - quick reference (compact format, 10 per line)
+    lines.append("---")
+    lines.append("")
+    lines.append("Answer Key")
+    lines.append("Reference this section after completing the quiz to check your answers.")
+    lines.append("")
+
+    answer_key_lines = []
+    for q in exam.questions:
+        answer_letter = chr(65 + q.correct_option)
+        answer_key_lines.append(f"{q.number}-{answer_letter}")
+
+    # Format as 10 per line
+    for i in range(0, len(answer_key_lines), 10):
+        chunk = answer_key_lines[i:i+10]
+        lines.append(", ".join(chunk))
+
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # Detailed explanations
+    lines.append("Explanations")
+    lines.append("")
+
+    for q in exam.questions:
+        answer_letter = chr(65 + q.correct_option)
+        lines.append(f"Q{q.number} - Correct Answer: {answer_letter}")
+        lines.append(f"Source: {q.source_section}")
+        lines.append("")
+        lines.append(q.explanation)
+        lines.append("")
+        lines.append("-" * 70)
+        lines.append("")
+
+    return "\n".join(lines)
+
+
 def format_exam_docx_json(exam: Exam) -> Dict:
     """
     Format exam as JSON structure for docx skill conversion.
@@ -245,20 +320,27 @@ def format_exam_docx_json(exam: Exam) -> Dict:
     }
 
 
-def format_exam(exam: Exam, format: str = "markdown") -> str:
+def format_exam(exam: Exam, format: str = "markdown", printable: bool = True) -> str:
     """
     Format exam in requested format.
 
     Args:
         exam: Exam object with questions
-        format: "markdown" (default), "docx-json", or "pdf"
+        format: "markdown" (default), "docx", "docx-json", or "pdf"
+        printable: If True and format is docx, use printable format (new lines, compact answer key)
 
     Returns:
         Formatted exam string
     """
     if format.lower() == "markdown":
         return format_exam_markdown(exam)
-    elif format.lower() in ["docx", "docx-json"]:
+    elif format.lower() == "docx":
+        # DOCX printable format: new lines, compact answer key
+        if printable:
+            return format_exam_docx_printable(exam)
+        else:
+            return json.dumps(format_exam_docx_json(exam), indent=2)
+    elif format.lower() == "docx-json":
         return json.dumps(format_exam_docx_json(exam), indent=2)
     elif format.lower() == "pdf":
         # PDF would go through markdown -> docx -> pdf
