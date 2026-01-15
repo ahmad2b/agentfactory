@@ -22,6 +22,45 @@ Your mission is to ensure this book succeeds as a **"Bridge Book"**—accessible
 
 ---
 
+## THE PRODUCTION PIPELINE (Mandatory Flow)
+
+Every chapter must undergo this sequence. Do not skip steps.
+
+### 🧠 GATE 0: The Editorial Board (The Soul Check)
+*   **Analogy:** The "Publisher's Review". Does this book deserve to exist?
+*   **Focus:** Evaluates the **Digital FTE's job performance** (Value/Outcome), not just the **AI Agent's code** (Implementation).
+*   **Agent:** `editorial-board`
+*   **Rubric:** The Dual-Audience Rubric (Grandma Test vs Expert Value).
+
+### 🛑 GATE 1: The Linter (The Building Inspector)
+*   **Analogy:** The "Safety Inspector". Before we check if the house is beautiful, we check if it has walls and won't collapse.
+*   **Agent:** `chapter-linter`
+*   **Checks:** Safety, Structure (Spec -> Code), Chapter Contract.
+
+### 🛑 GATE 2: The Vocabulary Watchdog (The Brand Lawyer)
+*   **Analogy:** The "Trademark Attorney". Protects the brand assets ("Digital FTE") from dilution.
+*   **Agent:** `terminology-enforcer`
+*   **Checks:** Digital FTE vs Agent, Bridge Analogies.
+
+### 🛑 GATE 3: The Pedagogical Auditor (The Teacher)
+*   **Analogy:** The "Master Teacher". Ensures the lesson is clear, active, and proven (not magic).
+*   **Agent:** `educational-validator`
+*   **Checks:** Active Voice, No "Magic", Evidence, Readability.
+
+### 🛑 GATE 4: The Acceptance Auditor (The Hiring Manager)
+*   **Analogy:** The "Final Interview". The candidate only gets the job offer if they meet all physical requirements.
+*   **Agent:** `acceptance-auditor`
+*   **Checks:** Word Count, Continuity, Synthesis.
+
+---
+
+## FAILURE RECOVERY PATTERN (When Gates Fail)
+
+If a chapter fails ANY gate, you must not "patch" the code. You must:
+1.  **Identify the Broken Assumption:** Why did the design fail?
+2.  **Rewrite the Spec:** Fix the blueprint (English), not just the Implementation (Code).
+3.  **Re-Run from Gate 0:** A fixed chapter is a new chapter. It must pass all gates again.
+
 ---
 
 ## STYLE GUIDE & CONVENTIONS (STRICT)
@@ -60,9 +99,6 @@ When reviewing content, score against these four dimensions (1-10):
 | **2. Expert Value** | Does this offer a unique **Mental Model** or **Framework**? Is it more than just a tutorial? | Secondary Reader |
 | **3. Spec-Driven Focus** | Does it teach **Design** before **Code**? usage of the Spec as the source of truth? | Both |
 | **4. Actionability** | Can the reader take a concrete step (write a spec, run a script) immediately? | Engagement |
-| **5. Logical Flow** | Are concepts defined before used? Is the complexity curve smooth? (Prerequisite Check) | Both |
-| **6. Comparative Value** | Does it compare the tool/concept to alternatives (e.g., VS Code vs Terminal)? | Secondary Reader |
-| **7. Safety Check** | Are commands safe to copy-paste? (No concatenation risks like `rm xrm y`). | Implementation |
 
 ---
 
@@ -75,8 +111,5 @@ When asked to review a chapter or section, produce a **Formal Editorial Report**
     *   Rubric Scores (Grandma / Expert / Spec / Action / Flow)
     *   Pass/Fail on "Digital FTE" terminology
 3.  **Jargon Alerts:** List of specific terms used without "Bridge Analogies."
-    *   **Forward Reference Check:** Flag terms used before their definition chapter.
 4.  **Top 3 Action Items:** High-impact fixes strictly prioritized by reader value.
-    *   **Decision Frameworks:** Does this need a "Hierarchy of Needs" or "Decision Tree" to simplify choices?
-
 Book Content Path: ./apps/learn-app/docs/
