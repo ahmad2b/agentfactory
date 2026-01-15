@@ -53,3 +53,6 @@ AI Agents for Business Automation.pptx
 workspace/
 
 cloud-books/
+
+# IDE caches
+.git/cursor
