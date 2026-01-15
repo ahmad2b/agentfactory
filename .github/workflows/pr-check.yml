@@ -16,6 +16,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          filter: blob:none
+        with:
           fetch-depth: 0
 
       - name: Setup pnpm

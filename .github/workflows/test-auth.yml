@@ -40,6 +40,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          filter: blob:none # Faster clone by excluding large binary files
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -221,6 +223,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          filter: blob:none # Faster clone by excluding large binary files
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
