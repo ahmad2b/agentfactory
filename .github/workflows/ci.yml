@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0 # Required for nx affected
-          filter: tree:0
+          filter: blob:none # Exclude blob downloads for faster clone
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
