@@ -324,7 +324,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 3,
       explanation: "This scenario tests understanding of skill scope. Effective skills encapsulate complete, coherent workflows that developers would naturally think of as a unit—like 'test this API endpoint' includes auth, request, and validation. Breaking this into three separate skills would require developers to orchestrate them manually, adding cognitive load. Option B advocates for overly granular skills, which leads to composition complexity (needing to chain many small skills for common tasks). Option C conflates skills with subagents—skills are prompt patterns, not delegation mechanisms. Option D is a misapplication of single responsibility—skills should have single purpose (API testing) but that purpose can encompass multiple steps. The principle here mirrors function design in programming: aim for cohesion (related operations together) over arbitrary atomicity. The right granularity is 'one meaningful task,' not 'one operation.'",
-      source: "Lesson 09: Agent Skills"
+      source: "Lesson 08: Building Your Own Skills"
     },
     {
       question: "Your skill template includes: 'Analyze the code for bugs. Consider edge cases.' After testing, you find the skill produces superficial analysis. Which modification would most effectively improve the skill's depth?",
@@ -336,7 +336,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 0,
       explanation: "This scenario reveals the difference between instruction-based and reasoning-based prompts. The original skill ('Analyze... Consider...') gives commands but doesn't activate deep reasoning. The Persona + Questions + Principles pattern reframes the task as: 'You are an expert code reviewer [Persona]. Ask yourself: What edge cases does this code miss? What assumptions could break? [Questions] Apply principles: trust but verify, fail fast, defensive programming [Principles].' This activates reasoning mode, producing deeper analysis. Option B helps but doesn't fundamentally change the reasoning depth—examples show what to find, not how to think. Option C is a misconception—temperature controls randomness, not quality. Option D produces checklist-driven analysis (shallow) rather than principle-driven reasoning (deep). The key insight is about prompt engineering: reasoning-activated prompts produce better results than instruction-based prompts for complex cognitive tasks.",
-      source: "Lesson 09: Agent Skills"
+      source: "Lesson 08: Building Your Own Skills"
     },
     {
       question: "You have skills for 'code-review', 'bug-analysis', and 'security-audit'. A developer argues these are redundant and should be merged into one 'code-quality' skill. Which principle best informs this design decision?",
@@ -348,7 +348,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 2,
       explanation: "This question tests understanding of skill granularity based on cognitive context, not technical similarity. Code review, bug analysis, and security audit operate on code but apply different lenses: code review focuses on readability and maintainability; bug analysis on correctness and edge cases; security audit on vulnerabilities and attack vectors. These different contexts benefit from specialized reasoning frameworks (different Personas, Questions, and Principles). Merging them would create a generic 'check everything' skill that lacks depth in each area. Option B focuses on technical similarity (input type) rather than cognitive purpose. Option C incorrectly ties granularity to tools rather than reasoning. Option D values DRY (don't repeat yourself) over specialization, but in prompting, specialized context often outweighs code reuse benefits. The principle here mirrors software design: cohesion (related reasoning together) matters more than coupling (shared technical elements).",
-      source: "Lesson 09: Agent Skills"
+      source: "Lesson 08: Building Your Own Skills"
     },
     {
       question: "You've created a skill for database schema design. During testing, it generates schemas that work but don't follow your team's naming conventions. The conventions are documented in CLAUDE.md. What does this reveal about skill-context interaction?",
@@ -360,7 +360,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 1,
       explanation: "This scenario illustrates that skills and project context (CLAUDE.md) serve different purposes and should be composed intentionally. Skills provide reasoning patterns ('think about normalization, indexes, relationships'); CLAUDE.md provides project-specific rules ('use snake_case for columns'). Effective skills explicitly reference context: 'Follow the naming conventions in CLAUDE.md when generating schemas.' This makes the interaction explicit. Option B is incorrect—while CLAUDE.md is in context, skills should explicitly invoke it when conventions matter, not assume passive application. Option C violates DRY and creates maintenance burden (updating conventions in multiple places). Option D misunderstands precedence—skills and CLAUDE.md complement each other. The principle here is composition: skills should explicitly reference external context when needed, making dependencies clear and enabling modular reasoning.",
-      source: "Lesson 09: Agent Skills"
+      source: "Lesson 08: Building Your Own Skills"
     },
     {
       question: "You're creating a skill library for your organization. Different teams have different coding standards, but similar reasoning patterns (testing, review, refactoring). Which skill design approach best balances reusability with customization?",
@@ -372,7 +372,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 3,
       explanation: "This question tests understanding of skill parameterization and composition. Parameterized skills separate the reusable reasoning pattern (how to review code) from team-specific details (which conventions to enforce). For example: 'You are a code reviewer [Persona]. Review this code following the standards in {standards_file}. Questions: Does it follow conventions in {standards_file}? [Questions + Parameter].' Teams provide their standards_file reference. Option B creates maintenance overhead (N×M skills for N teams and M patterns). Option C produces generic, context-free skills that miss team-specific requirements. Option D creates a bloated skill with contradictory standards that would confuse the model. The principle here mirrors software engineering: parameterization enables reuse without duplication. Just as functions take parameters rather than hard-coding values, skills can reference external context rather than embedding all variations.",
-      source: "Lesson 09: Agent Skills"
+      source: "Lesson 08: Building Your Own Skills"
     },
     {
       question: "You configure a validation hook that runs linting on generated code. During a task, Claude Code generates code with linting errors, the hook blocks it, but Claude Code doesn't automatically fix the issues. What does this reveal about hook behavior?",
@@ -588,7 +588,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 2,
       explanation: "This question tests understanding of which extensibility mechanisms require programming skills versus configuration/prompting skills. CLAUDE.md (markdown documentation), settings (YAML/JSON), and agent skills (markdown with Persona+Questions+Principles patterns) all use declarative formats accessible to non-programmers. MCP servers and hooks require actual code (Python, JS, etc.) to implement logic. This is a key design principle in Claude Code—progressive complexity where basic extensibility doesn't require programming, but advanced features do. Option A incorrectly excludes skills, which use markdown. Option C wrongly suggests CLAUDE.md needs programming—it's just markdown documentation. Option D overstates accessibility—MCP and hooks definitely require programming. The principle here is tool accessibility: good platforms provide multiple extension points at different complexity levels, enabling users to start simple and grow into advanced features as skills develop.",
-      source: "Lesson 09: Agent Skills"
+      source: "Lesson 08: Building Your Own Skills"
     },
     {
       question: "Your plugin uses MCP tools, CLAUDE.md context injection, custom skills, and validation hooks. A user reports the plugin 'slows down' Claude Code. Which architectural decision would most likely cause this performance issue?",

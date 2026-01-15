@@ -62,7 +62,7 @@ version: "1.0.0"
 
 # Legacy compatibility (Docusaurus)
 prerequisites:
-  - "Completion of Lessons 01-18 in this chapter"
+  - "Completion of Lessons 01-17 in this chapter"
   - "Understanding of Skills, MCP, and Claude Code basics"
 ---
 

@@ -26,4 +26,4 @@ MCP servers load ALL tool definitions at startup (5,000-8,000+ tokens each), cre
 
 ### Connections
 - **Builds on**: Skills (Lessons 07-08) for SKILL.md format and Skills Lab; MCP Integration (Lesson 9) for understanding MCP servers
-- **Leads to**: Subagents and Orchestration (Lesson 12) for composing skills into multi-agent workflows; Advanced lessons for creating your own compiled skills
+- **Leads to**: Subagents and Orchestration (Lesson 11) for composing skills into multi-agent workflows; Advanced lessons for creating your own compiled skills

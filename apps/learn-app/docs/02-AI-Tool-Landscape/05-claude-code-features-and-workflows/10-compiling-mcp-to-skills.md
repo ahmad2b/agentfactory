@@ -547,7 +547,7 @@ Not every MCP server needs compilation. Use this matrix to decide:
 
 You've experienced compiled skills and their massive token reduction—up to 98% savings while preserving full functionality. You understand the code execution pattern and why it works. But what happens when you need multiple skills working together on complex tasks?
 
-**Lesson 12: Subagents and Orchestration** introduces the next level: specialized AI assistants that handle specific types of work with isolated context. Where compiled skills give you _efficiency_, subagents give you _coordination_—a team of focused specialists instead of one overloaded generalist.
+**Lesson 11: Subagents and Orchestration** introduces the next level: specialized AI assistants that handle specific types of work with isolated context. Where compiled skills give you _efficiency_, subagents give you _coordination_—a team of focused specialists instead of one overloaded generalist.
 
 **In advanced lessons**, you'll learn to create your own compiled skills using skill-creator, compiling other MCP servers (Google Drive, Database, etc.) and designing custom workflows. The skills you use from Skills Lab now become templates for creating your own later.
 

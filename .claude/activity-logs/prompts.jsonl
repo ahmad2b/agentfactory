@@ -662,3 +662,19 @@ File modified: /Users/mjs/.claude.json [project: /Users/mjs/Documents/code/panav
 {"timestamp":"2026-01-15T21:12:22Z","session_id":"6f511f83-db37-4ae0-abb2-ec16704b4842","prompt":"Read from lesson 05 to 09 as student and access if any of them shall be deleted?"}
 {"timestamp":"2026-01-15T21:14:54Z","session_id":"6f511f83-db37-4ae0-abb2-ec16704b4842","prompt":"Question: Does L08 already tell to create own skills I think yes? and using the lab covered in L07 where we gave student the skill to make skills?"}
 {"timestamp":"2026-01-15T21:15:59Z","session_id":"6f511f83-db37-4ae0-abb2-ec16704b4842","prompt":"okay we delete L09"}
+{"timestamp":"2026-01-15T21:23:49Z","session_id":"d98697fc-e601-434f-ad8b-e7fcf4aac2e7","prompt":"/assessment-architect Chapter 5 Exam "}
+{"timestamp":"2026-01-15T21:27:38Z","session_id":"a45a8508-578d-44a8-8367-895342a037da","prompt":"remmebr we recently made assessment architect skill for chatper/content of book exams profesisonal ones"}
+{"timestamp":"2026-01-15T21:29:07Z","session_id":"b3d8636c-5aef-4ba4-8b65-74a39441fdb2","prompt":"Problem 1 it;s question count looks a lot like for 18 lessons made 200 wuestions?"}
+
+{"timestamp":"2026-01-15T21:29:30Z","session_id":"a45a8508-578d-44a8-8367-895342a037da","prompt":"Now i want you to take current pptx skill and make it capable of making slides professionalf r any chanpter think how can we impove"}
+{"timestamp":"2026-01-15T21:30:58Z","session_id":"b3d8636c-5aef-4ba4-8b65-74a39441fdb2","prompt":"I am think it can ask 2 questions asing ask user question tool 1. suggested questions count 2. format currents it;s md only but what if i need docx 3. it shall auto decide but as content make i felt 200 was extremem it shall be under 90-120 "}
+{"timestamp":"2026-01-15T21:31:35Z","session_id":"b3d8636c-5aef-4ba4-8b65-74a39441fdb2","prompt":"I am think it can ask 2 questions asing ask user question tool 1. suggested questions count 2. format currents it;s md only but what if i need docx 3. it shall auto decide but as content make i felt 200 was extremem it shall be under 90-120 - actually we shall duggest both questions and estimated time and max time can be 3 hours?"}
+{"timestamp":"2026-01-15T21:31:47Z","session_id":"d98697fc-e601-434f-ad8b-e7fcf4aac2e7","prompt":"give it in docx format"}
+{"timestamp":"2026-01-15T21:35:25Z","session_id":"b3d8636c-5aef-4ba4-8b65-74a39441fdb2","prompt":"feels like a lot of cognitive workflow not on user msuggestions were much simple "}
+{"timestamp":"2026-01-15T21:36:01Z","session_id":"b3d8636c-5aef-4ba4-8b65-74a39441fdb2","prompt":"acutally i thunk current is same and forces claude to work berttrer?"}
+{"timestamp":"2026-01-15T21:37:25Z","session_id":"d98697fc-e601-434f-ad8b-e7fcf4aac2e7","prompt":"share what will you add in the exam skill to make the docx generation relaible using this exisitng kill any line?"}
+{"timestamp":"2026-01-15T21:39:37Z","session_id":"d98697fc-e601-434f-ad8b-e7fcf4aac2e7","prompt":"i was thinking we already have a dedicated skill sow hy not say use that sill?"}
+{"timestamp":"2026-01-15T21:39:57Z","session_id":"d98697fc-e601-434f-ad8b-e7fcf4aac2e7","prompt":"share path of exam md and docx fule?"}
+{"timestamp":"2026-01-15T21:40:48Z","session_id":"b3d8636c-5aef-4ba4-8b65-74a39441fdb2","prompt":"also where are generatd exams of md or docx placed? maybe in a project root newly created folder if not present assessments/ ?"}
+
+{"timestamp":"2026-01-15T21:45:29Z","session_id":"46c34fc9-6584-4362-b48a-1b85b3e63ab3","prompt":"currently why clone this repo takes forever users reported 10 minutes"}

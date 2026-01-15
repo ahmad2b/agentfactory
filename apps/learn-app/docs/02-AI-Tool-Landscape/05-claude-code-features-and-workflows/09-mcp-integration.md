@@ -413,7 +413,7 @@ MCP extends Claude Code's reach from your local filesystem to the entire world o
 
 ### Coming Up: Subagents
 
-Lesson 12 introduces **subagents**: focused AI specialists that handle specific types of work with isolated context. Where MCP gives Claude Code new *capabilities*, subagents give Claude Code a *team*.
+Lesson 11 introduces **subagents**: focused AI specialists that handle specific types of work with isolated context. Where MCP gives Claude Code new *capabilities*, subagents give Claude Code a *team*.
 
 ---
 
