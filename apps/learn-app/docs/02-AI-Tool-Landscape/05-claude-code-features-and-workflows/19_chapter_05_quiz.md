@@ -1,5 +1,5 @@
 ---
-sidebar_position: 20
+sidebar_position: 19
 title: "Chapter 5: Claude Code Features and Workflows Quiz"
 proficiency_level: B1
 layer: 1
@@ -204,7 +204,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 0,
       explanation: "This scenario demonstrates a key use case for MCP: extending Claude Code's capabilities with project-specific tools. By creating an MCP server that exposes database operations (e.g., 'query_users', 'update_order') implemented using your internal package, you make these operations first-class tools in Claude Code's toolbox. This is more effective than documentation alone because tools are directly invokable with typed interfaces, reducing ambiguity. Option B (CLAUDE.md) can help but doesn't give Claude Code direct access to the package's capabilities. Option C misunderstands the issue—installation doesn't teach Claude Code when or how to use the package. Option D (hooks) would require post-processing generated code, which is fragile and complex. MCP's value is adding capabilities through structured, typed tool interfaces that Claude Code can use as naturally as built-in tools.",
-      source: "Lesson 11: MCP Integration"
+      source: "Lesson 9: MCP Integration"
     },
     {
       question: "You're implementing an MCP server that provides access to your company's internal knowledge base. During testing, Claude Code makes many redundant API calls to fetch the same documentation. Which design principle would most effectively optimize this scenario?",
@@ -216,7 +216,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 1,
       explanation: "This question tests understanding of where optimization belongs in system architecture. The MCP server is the correct layer for caching because it controls the external API interaction and can implement intelligent caching policies (TTL, invalidation, etc.) transparently to Claude Code. This follows the single responsibility principle—the MCP server manages API interaction efficiency, while Claude Code focuses on using the tools. Option B is ineffective because CLAUDE.md guidance can't reliably prevent redundant calls—Claude Code might need the information multiple times for different contexts. Option C damages functionality by removing useful capabilities just to avoid optimization. Option D doesn't exist—Claude Code doesn't have built-in MCP request batching, and even if it did, caching is still needed. The principle here is architectural: handle cross-cutting concerns (caching, rate limiting) at the appropriate abstraction layer, not through caller-side behavior constraints.",
-      source: "Lesson 11: MCP Integration"
+      source: "Lesson 9: MCP Integration"
     },
     {
       question: "Your MCP server exposes a 'deploy_to_production' tool. After an incident where Claude Code triggered an unintended deployment, your team wants to add safeguards. Which approach best balances safety with MCP's tool-based architecture?",
@@ -228,7 +228,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 3,
       explanation: "This scenario illustrates how to design safe MCP tools without sacrificing automation benefits. By adding required parameters like 'confirmed=true' or 'approval_code' to the deploy tool, you force explicit intent—Claude Code must consciously construct a call with these parameters, reducing accidental triggers. This is analogous to 'rm -rf' requiring explicit paths rather than having a default. Option B overreacts by eliminating valuable automation. Option C is unreliable because CLAUDE.md guidance can be overridden or misunderstood in complex task contexts. Option D defeats MCP's purpose entirely. The design principle here is 'safe by default': tools with significant consequences should require explicit confirmation through their interface design (parameters, multi-step flows) rather than relying on external guardrails.",
-      source: "Lesson 11: MCP Integration"
+      source: "Lesson 9: MCP Integration"
     },
     {
       question: "You're building an MCP server to integrate with your GraphQL API. Claude Code needs to query user data, orders, and inventory. Which design approach would create the most maintainable and flexible MCP integration?",
@@ -240,7 +240,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 2,
       explanation: "This question tests understanding of API design principles applied to MCP. Specific, purpose-built tools (get_user, get_order) provide better developer experience than generic execution tools because they have typed parameters, clear documentation, and validation. This mirrors the REST vs. RPC debate—specific endpoints are more self-documenting than generic 'execute' endpoints. Option A (generic executor) is tempting for flexibility but creates poor UX: Claude Code must construct correct GraphQL query strings (error-prone) and handle arbitrary response shapes. Option C artificially limits functionality without clear justification. Option D leads to combinatorial explosion—too many overly-specific tools that are hard to maintain. The principle here is API design: find the right abstraction level—not so generic that it's hard to use, not so specific that it's hard to maintain. Purpose-built tools for domain concepts strike this balance.",
-      source: "Lesson 11: MCP Integration"
+      source: "Lesson 9: MCP Integration"
     },
     {
       question: "After configuring an MCP server, you run Claude Code but see 'MCP server failed to start'. The logs show 'connection refused on port 3000'. What does this error pattern suggest about MCP architecture?",
@@ -252,7 +252,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 0,
       explanation: "This debugging scenario reveals MCP's architectural model: MCP servers are separate processes (often long-running services) that Claude Code connects to via network protocols (HTTP, WebSocket, etc.). The 'connection refused' error indicates the server process isn't running or isn't listening on the expected port. This architecture enables language-agnostic MCP servers (Python, Go, Node.js) and allows servers to maintain state across multiple Claude Code sessions. Option B is incorrect—port 3000 is arbitrary; MCP servers can use any configured port. Option C misunderstands startup responsibility—MCP servers typically start independently and persist across Claude Code sessions. Option D is wrong—network communication doesn't inherently require elevated privileges (for non-privileged ports >1024). The principle here is process architecture: understanding that MCP uses inter-process communication helps debug connection issues effectively.",
-      source: "Lesson 11: MCP Integration"
+      source: "Lesson 9: MCP Integration"
     },
     {
       question: "You're working on a complex feature requiring database migrations, API updates, and frontend changes. You want Claude Code to handle each area using specialized configurations. Which Claude Code capability best addresses this orchestration challenge?",
@@ -264,7 +264,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 3,
       explanation: "This scenario tests understanding of when to use subagents versus other extensibility mechanisms. Subagents are designed for exactly this use case: orchestrating complex tasks by delegating subtasks to specialized agents, each with appropriate tools and context. For example, a database subagent might have only database-related MCP tools, while a frontend subagent has browser automation tools. This prevents tool overload and allows different prompting strategies per domain. Option B (skills) are more about reasoning patterns than orchestration—they don't provide tool isolation. Option C (hooks) are for validation/transformation, not delegation. Option D (MCP) provides tools but doesn't handle orchestration—Claude Code would still need to manage all domains simultaneously, creating complexity. The key insight is architectural: subagents enable divide-and-conquer approaches to complex problems through controlled delegation.",
-      source: "Lesson 13: Subagents and Orchestration"
+      source: "Lesson 11: Subagents and Orchestration"
     },
     {
       question: "You've created a subagent for code review tasks. During testing, you notice the subagent generates excellent feedback but takes much longer than expected. Which subagent configuration would most directly address this performance issue?",
@@ -276,7 +276,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 1,
       explanation: "This question tests understanding of the performance/quality tradeoffs in model selection. Claude Code supports multiple models (Haiku, Sonnet, Opus) with different speed/capability tradeoffs. For code review, if quality is sufficient with Haiku but Sonnet is slower, switching to Haiku directly addresses the performance issue. Haiku is designed for speed while maintaining good quality for structured tasks. Option B might help but could reduce quality by limiting necessary tools—it's treating symptoms, not optimizing configuration. Option C isn't a real configuration option and would harm quality by limiting context. Option D adds orchestration complexity without addressing the root cause (model speed). The principle here mirrors performance optimization in software engineering: before adding complexity (parallelization, caching), first optimize the direct parameter (model choice) that controls the speed/quality tradeoff.",
-      source: "Lesson 13: Subagents and Orchestration"
+      source: "Lesson 11: Subagents and Orchestration"
     },
     {
       question: "Your main agent delegates a task to a subagent for implementation. The subagent completes the work but returns results that don't match the main agent's expectations. What does this scenario reveal about subagent communication design?",
@@ -288,7 +288,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 2,
       explanation: "This scenario illustrates a fundamental principle of distributed systems: clear interface contracts are essential when components communicate. Just as microservices need well-defined APIs, agent orchestration requires clear specifications of what the main agent expects (inputs, outputs, success criteria) and what the subagent delivers. Without this, you get impedance mismatch. Option B is defeatist—complex tasks are exactly when orchestration helps, but they require better contracts. Option C is a good practice but doesn't prevent the mismatch; validation catches problems but doesn't prevent them. Option D is backwards—autonomy without constraints leads to unpredictable results. The correct approach combines clear contracts with autonomy: 'Here's what I need (contract), you decide how (autonomy).' This mirrors software engineering: good abstractions have clear interfaces but hide implementation details.",
-      source: "Lesson 13: Subagents and Orchestration"
+      source: "Lesson 11: Subagents and Orchestration"
     },
     {
       question: "You're designing a subagent for testing tasks. The main agent needs visibility into test results without managing test execution details. Which information architecture best achieves this separation of concerns?",
@@ -300,7 +300,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 0,
       explanation: "This question tests understanding of interface design in agent orchestration. A structured summary (pass/fail counts, failing test names) provides the right abstraction level: enough information for the main agent to make decisions (e.g., 'tests failed, need fixes') without overwhelming it with raw output. This applies the interface segregation principle: clients (main agent) should receive only the information they need. Option B violates this by dumping all details, forcing the main agent to parse complex output. Option C adds latency and complexity through file I/O when direct return would work. Option D overcomplicates with an additional abstraction layer (MCP) when simple return values suffice. The principle here is information hiding: good interfaces expose the right level of abstraction, not all implementation details.",
-      source: "Lesson 13: Subagents and Orchestration"
+      source: "Lesson 11: Subagents and Orchestration"
     },
     {
       question: "You're orchestrating a deployment pipeline using subagents: one for tests, one for builds, one for deployment. Tests pass, but the build subagent fails. The deployment subagent starts anyway. What does this reveal about orchestration control flow?",
@@ -312,7 +312,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 1,
       explanation: "This scenario highlights that orchestration isn't automatic—the main agent must explicitly manage dependencies and handle errors. Just as a bash script doesn't automatically stop on errors (without 'set -e'), subagent orchestration requires intentional control flow. The main agent should check the build subagent's return status and conditionally invoke the deploy subagent only on success. Option B is incorrect—parallel vs. sequential execution depends on how the main agent invokes subagents, not a global configuration. Option C describes ideal behavior but isn't automatic—you must implement this logic. Option D misses the point—deployment pipelines inherently have dependencies (can't deploy before building). The principle here mirrors error handling in programming: explicit is better than implicit. Robust orchestration requires intentional dependency management, not assumptions about automatic behavior.",
-      source: "Lesson 13: Subagents and Orchestration"
+      source: "Lesson 11: Subagents and Orchestration"
     },
     {
       question: "You're creating an agent skill for API testing. The skill needs to handle authentication, request construction, and response validation. What does this scope reveal about effective skill design?",
@@ -384,7 +384,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 2,
       explanation: "This scenario tests understanding of hook responsibility boundaries. Hooks are validation/interception mechanisms that can block or modify operations, but they don't directly control Claude Code's behavior—they provide signals (error messages, feedback). When a hook blocks an operation, Claude Code receives the error but must decide how to respond (retry with fixes, ask for guidance, etc.). This isn't automatic. Option B describes a configuration that doesn't exist—there's no 'auto-fix' mode. Option C confuses hook output with Claude Code's reasoning—suggestions help, but Claude Code must actively apply them. Option D misunderstands success—a hook successfully blocking bad code is working correctly; fixing the code is Claude Code's job, not the hook's. The principle here mirrors middleware in web frameworks: middleware intercepts requests and can reject them, but the application layer handles rejection responses.",
-      source: "Lesson 15: Hooks and Extensibility"
+      source: "Lesson 13: Hooks and Extensibility"
     },
     {
       question: "Your team wants to prevent Claude Code from making database changes during code review tasks. Which hook configuration would most effectively enforce this constraint?",
@@ -396,7 +396,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 0,
       explanation: "This question tests understanding of hook granularity and timing. A pre-tool-call hook is the right interception point because it can examine which tool Claude Code is about to invoke and block database tools specifically. This prevents the operation before it happens. Option B is too narrow—database changes might happen via tools (executing SQL), not just writing migration files. Option C (post-message) is too late—it catches changes after they happen, providing warnings rather than prevention. Option D (pre-prompt-submit) doesn't enforce anything—it modifies the prompt to instruct Claude Code, but can't guarantee compliance. The principle here mirrors security architecture: enforce constraints at the lowest level possible (tool invocation) rather than relying on higher-level agreements (prompts) or post-hoc detection (post-message). Defense in depth applies: block dangerous operations before they execute.",
-      source: "Lesson 15: Hooks and Extensibility"
+      source: "Lesson 13: Hooks and Extensibility"
     },
     {
       question: "You implement a hook that logs all file writes for audit purposes. During testing, you notice logs are massive and contain complete file contents. Which hook design principle would address this issue?",
@@ -408,7 +408,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 3,
       explanation: "This scenario tests understanding of appropriate data capture in hooks. For audit purposes, metadata (who, what, when, where) is usually sufficient—full file contents are rarely needed for audit trails and create storage/privacy issues. Logging paths, sizes, timestamps, and operation types provides traceability without bloat. Option B addresses symptoms (big logs) rather than root cause (logging too much). Option C is arbitrary—size-based filtering would miss small but sensitive files. Option D (rotation) manages storage but doesn't solve the excessive data capture problem. The principle here mirrors logging best practices in software engineering: log events and metadata, not data payloads. Payloads create noise, storage issues, and privacy concerns. Effective instrumentation captures actionable signals, not exhaustive data.",
-      source: "Lesson 15: Hooks and Extensibility"
+      source: "Lesson 13: Hooks and Extensibility"
     },
     {
       question: "Your hook validates that code changes include corresponding test updates. A developer complains this is 'too rigid' for quick prototypes. Which approach best balances validation rigor with development flexibility?",
@@ -420,7 +420,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 1,
       explanation: "This question tests understanding of configurable validation. Context-aware hooks can check environment variables (e.g., PROTOTYPE_MODE=true) or command-line flags to adjust behavior—strict enforcement in normal mode, relaxed in prototype mode. This maintains safety by default while allowing opt-out for appropriate contexts. Option B (disabling hooks) creates the problem of forgetting to re-enable them, leading to reduced quality. Option C (warnings only) doesn't solve the 'too rigid' complaint—warnings still interrupt flow. Option D (separate installations) creates maintenance overhead and environment drift. The principle here mirrors feature flags in software engineering: build flexibility into the system through configuration, not by disabling safety features. Context-aware systems adapt to different use cases without compromising core principles.",
-      source: "Lesson 15: Hooks and Extensibility"
+      source: "Lesson 13: Hooks and Extensibility"
     },
     {
       question: "You configure a post-tool-call hook that enriches tool outputs with additional context. During testing, Claude Code seems to 'hallucinate' information that wasn't in original tool outputs. What's the most likely explanation?",
@@ -432,7 +432,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 0,
       explanation: "This scenario tests understanding that hooks can modify the information flow to Claude Code—which is a feature, not a bug. Post-tool-call hooks can enrich tool outputs with additional context (e.g., adding related documentation links to code search results), and Claude Code incorporates this enriched information into its reasoning. This is working as intended. The term 'hallucinate' in the question is a misdirection—if the hook added the information, Claude Code is correctly using provided context, not inventing facts. Option B is unlikely—hooks that break output format would cause errors, not plausible-seeming information. Option C is possible but assumes the hook is poorly designed; well-designed enrichment helps rather than confuses. Option D is incorrect—hooks definitely affect Claude Code's context. The principle here is understanding information flow: hooks are part of the context provision system.",
-      source: "Lesson 15: Hooks and Extensibility"
+      source: "Lesson 13: Hooks and Extensibility"
     },
     {
       question: "You set a test coverage threshold in your project-level settings to 80%, but your team lead wants to enforce 90% for themselves while working on critical modules. Which settings hierarchy level should the team lead configure to override the project default?",
@@ -444,7 +444,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 2,
       explanation: "Option B (Local settings) is correct because Claude Code's settings hierarchy follows: User &lt; Project &lt; Local, where Local settings have the highest priority. Local settings (`.claude/settings.local.json`) override both project and user settings, allowing individual developers like the team lead to enforce stricter personal standards without changing project defaults for everyone. Option A is incorrect because User settings have the LOWEST priority and cannot override Project settings. Option C is wrong because global settings are the same as user settings (lowest priority) and don't have priority flags. Option D misunderstands the hierarchy—project settings CAN be overridden by local settings. This principle mirrors configuration cascading: more specific contexts (local) override more general defaults (project, user).",
-      source: "Lesson 14: Settings Hierarchy"
+      source: "Lesson 12: Settings Hierarchy"
     },
     {
       question: "Your global settings configure Claude Code to use Sonnet, but a specific project's configuration specifies Haiku. When working in that project, Claude Code uses Haiku. What does this behavior reveal about settings precedence?",
@@ -456,7 +456,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 3,
       explanation: "This scenario demonstrates the principle behind settings hierarchies: more specific contexts override more general defaults. Project settings take precedence over global settings because project-specific needs (e.g., 'this project is simple, Haiku is sufficient') should override personal defaults ('I generally prefer Sonnet'). This isn't about ignoring global settings entirely—if the project config doesn't specify a model, it falls back to global. Option B overstates the precedence—only conflicting properties are overridden, not entire configuration. Option C is incorrect—there's no 'conflict resolution by economy' logic. Option D misunderstands fallback behavior—global settings are the base layer, always active, but overridden by more specific layers when they define the same property. The principle here mirrors CSS specificity: more specific selectors override less specific ones, but both coexist.",
-      source: "Lesson 14: Settings Hierarchy"
+      source: "Lesson 12: Settings Hierarchy"
     },
     {
       question: "You're configuring Claude Code for a monorepo with multiple projects (frontend, backend, mobile). Each project has different linting rules and tool configurations. Which settings architecture would best support this structure?",
@@ -468,7 +468,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 1,
       explanation: "This question tests understanding of settings composition in complex project structures. Project-level settings in each subdirectory (frontend/.claude/config, backend/.claude/config) combined with workspace-level shared defaults (workspace/.claude/config) provides the right balance: shared configuration for common concerns (model choice, API keys) with project-specific overrides for domain-specific needs (linting rules). This mirrors how tools like ESLint and Prettier support monorepos. Option B (conditional logic) creates brittle, hard-to-maintain configuration files. Option C (user-level) breaks when developers work across multiple projects—they'd need different settings per task. Option D (separate installations) creates unnecessary overhead and prevents shared context. The principle here is configuration composition: layer specific overrides on shared defaults rather than duplicating everything or using complex conditional logic.",
-      source: "Lesson 14: Settings Hierarchy"
+      source: "Lesson 12: Settings Hierarchy"
     },
     {
       question: "You configure custom tool paths in user settings, but Claude Code continues using default tool locations. What's the most likely configuration issue?",
@@ -480,7 +480,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 2,
       explanation: "This scenario tests practical debugging of configuration issues. When settings appear to be ignored, the most common cause is syntax errors (invalid JSON, YAML indentation errors, etc.) that prevent the settings file from loading. Claude Code would then fall back to defaults, creating the appearance that custom settings are ignored. Option B describes valid precedence behavior, but the question states the settings 'continue' using defaults—if project settings were overriding, we'd expect those values, not defaults. Option C might be true for some settings but isn't the 'most likely' explanation. Option D is incorrect—settings take effect on next session, not after reboot. The debugging principle here mirrors many configuration systems: when configuration doesn't apply, check syntax first before investigating precedence or implementation details.",
-      source: "Lesson 14: Settings Hierarchy"
+      source: "Lesson 12: Settings Hierarchy"
     },
     {
       question: "Your organization wants to enforce security policies (e.g., no API keys in code) across all projects using Claude Code. Which settings level would most effectively implement organization-wide policies?",
@@ -492,7 +492,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 0,
       explanation: "This question tests understanding of settings distribution and governance. An organization-standard global settings file (distributed via documentation, onboarding scripts, or configuration management) ensures all developers have baseline security policies, while still allowing project-specific and user-specific customization on top. Global settings are the right level for organization-wide policies because they apply everywhere by default. Option B requires maintaining duplicate configuration across all repositories, creating consistency and maintenance issues. Option C (documentation relying on user settings) is weakest enforcement—developers might forget or ignore policies. Option D (workspace settings) limits policies to specific workspaces, not organization-wide. The principle here mirrors IT security: policies should be enforced at the broadest applicable scope (global) with mechanisms for stricter local requirements (project/user overrides), not relying on individual compliance.",
-      source: "Lesson 14: Settings Hierarchy"
+      source: "Lesson 12: Settings Hierarchy"
     },
     {
       question: "You're developing a Claude Code plugin that adds Git workflow automation. The plugin needs to read repository history and create commits. Which Claude Code integration point would provide the most appropriate access to these capabilities?",
@@ -504,7 +504,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 1,
       explanation: "This scenario tests understanding of appropriate plugin integration patterns. Git operations (log, diff, commit) are actions Claude Code should decide when to perform, so exposing them as MCP tools gives Claude Code agency while the plugin handles implementation details. This follows the 'tools, not automation' principle—provide capabilities, let Claude Code orchestrate. Option B creates implicit automation that might commit at inappropriate times—hooks aren't meant for adding new behaviors, but validating existing ones. Option C bypasses Claude Code's intelligence—CLI extensions don't integrate with Claude Code's reasoning. Option D is partial—skills help with reasoning but don't provide execution capabilities. The principle here is plugin architecture: plugins should extend Claude Code's capabilities (tools) while letting Claude Code's intelligence determine when and how to use them, not replacing its decision-making with automation.",
-      source: "Lesson 16: Discovering and Using Claude Code Plugins"
+      source: "Lesson 14: Plugins Putting It All Together"
     },
     {
       question: "Your plugin integrates with a proprietary issue-tracking system. You want Claude Code to understand issue context when implementing features. Which combination of plugin capabilities would most effectively provide this integration?",
@@ -516,7 +516,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 3,
       explanation: "This question tests understanding of how different plugin capabilities complement each other. MCP tools provide action capabilities (query issues, update status), while CLAUDE.md enhancement provides context awareness (current issue being worked on). Together, they enable Claude Code to both access information and understand the current work context. Option B (hooks injecting context) is too implicit—Claude Code should explicitly fetch issue details when needed, not have them forced into every prompt. Option C (skills) helps with reasoning but doesn't provide data access. Option D (settings) stores credentials but doesn't provide integration logic. The principle here is capability composition: combine data access (MCP) with context awareness (CLAUDE.md) and reasoning (skills) to create complete integrations, not relying on a single mechanism.",
-      source: "Lesson 16: Discovering and Using Claude Code Plugins"
+      source: "Lesson 14: Plugins Putting It All Together"
     },
     {
       question: "You're designing a plugin architecture for your team. A colleague suggests creating one large plugin that handles all integrations (database, CI/CD, monitoring). Which principle best informs whether to use one plugin or multiple specialized plugins?",
@@ -528,7 +528,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 0,
       explanation: "This scenario tests understanding of plugin modularity principles, which mirror microservices architecture. Separate plugins by domain (database plugin, CI/CD plugin, monitoring plugin) enable independent development, versioning, and adoption. A team might need database integration but not CI/CD, or they might want to upgrade the monitoring plugin without risking database functionality. Option B optimizes for initial convenience but creates long-term maintenance problems (must update all capabilities together). Option C ties modularity to implementation language, which is irrelevant to logical boundaries. Option D applies DRY prematurely—shared dependencies can be extracted to libraries without combining plugins. The principle here is modularity: optimize for independent evolution and flexible composition, not installation convenience. Good architecture separates concerns that change independently.",
-      source: "Lesson 16: Discovering and Using Claude Code Plugins"
+      source: "Lesson 14: Plugins Putting It All Together"
     },
     {
       question: "Your plugin provides MCP tools for database operations, skills for query optimization, and hooks for preventing dangerous queries. During testing, you notice configuration complexity. Which architectural principle would simplify plugin adoption?",
@@ -540,7 +540,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 2,
       explanation: "This question tests understanding of user experience in plugin design. Sensible defaults + progressive disclosure means the plugin works immediately for common cases (default database safety rules, standard query patterns) while exposing advanced configuration (custom safety rules, specialized query strategies) for users who need it. This follows the 'pit of success' principle—make the right thing easy. Option B creates adoption friction—requiring explicit configuration for everything delays value and intimidates users. Option C overreaches—auto-detection works for some settings (environment variables) but not domain logic (what queries are 'dangerous'?). Option D front-loads complexity, delaying usage until setup completes. The principle here mirrors product design: reduce time-to-value through good defaults, then enable customization progressively. Users should get value immediately, then customize as they learn.",
-      source: "Lesson 16: Discovering and Using Claude Code Plugins"
+      source: "Lesson 14: Plugins Putting It All Together"
     },
     {
       question: "You're distributing a Claude Code plugin to the community. A user reports that your plugin's MCP server fails with 'port already in use'. Which plugin design practice would have prevented this issue?",
@@ -552,7 +552,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 1,
       explanation: "This scenario tests understanding of robust plugin design. Configurable ports with smart defaults (attempt configured port, fall back to random available port if busy) prevent conflicts without requiring manual intervention. This follows the 'robust by default' principle—handle common failure cases automatically. Option B (documentation) doesn't prevent the problem, just warns about it—users still face errors and must manually resolve conflicts. Option C would cause conflicts between plugins if multiple use port 3000. Option D adds friction to installation—users must understand port selection before they've even used the plugin. The principle here is defensive programming: anticipate environmental variations and handle them gracefully. Good plugins work in diverse environments without requiring manual tuning, using configuration as an escape hatch, not a requirement.",
-      source: "Lesson 16: Discovering and Using Claude Code Plugins"
+      source: "Lesson 14: Plugins Putting It All Together"
     },
     {
       question: "Your team has CLAUDE.md project instructions, MCP tools for database access, custom hooks for validation, and agent skills for code review. A new developer asks: 'Which should I use for X?' What principle guides this decision?",
@@ -576,7 +576,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 3,
       explanation: "This scenario tests systematic debugging of complex systems with multiple interacting components. When multiple mechanisms interact (CLAUDE.md context, hooks validation, skills reasoning), isolating each component reveals where the breakdown occurs—is CLAUDE.md guidance unclear? Are hooks not triggering? Is the skill prompt ineffective? Testing each in isolation (e.g., check if hooks run and block violations; verify CLAUDE.md is loaded; test skill output directly) identifies the specific failure point. Option B assumes the problem is CLAUDE.md without validation. Option C throws away working components to build something unproven. Option D addresses symptoms (catching violations) not root cause (preventing them). The principle here mirrors systematic troubleshooting: isolate variables, test hypotheses, identify root cause. Complex systems require methodical debugging, not reactive patches.",
-      source: "Lesson 15: Hooks and Extensibility"
+      source: "Lesson 13: Hooks and Extensibility"
     },
     {
       question: "You're designing Claude Code extensibility for a team that lacks programming experience. They can write documentation and YAML config but not Python or JavaScript. Which extensibility mechanisms remain accessible to them?",
@@ -600,7 +600,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 1,
       explanation: "This scenario tests understanding of performance bottlenecks in Claude Code extensibility. Synchronous MCP network calls without caching create the most significant performance impact because they: (1) block execution waiting for responses, (2) repeat the same slow operations when Claude Code calls the tool multiple times, and (3) depend on external service latency. Option A (CLAUDE.md size) affects context window usage but doesn't slow down execution significantly—larger context increases token cost, not runtime. Option C (skill complexity) affects reasoning quality but Claude processes text quickly—prompts don't typically cause noticeable slowness. Option D (hooks on every write) might add overhead but validation logic is usually fast compared to network I/O. The principle here mirrors performance optimization: I/O operations (especially network) are typically the slowest part of systems. Optimize I/O first before worrying about computational complexity.",
-      source: "Lesson 11: MCP Integration"
+      source: "Lesson 9: MCP Integration"
     },
     {
       question: "You've built a comprehensive Claude Code setup with project instructions, MCP integrations, custom skills, and hooks. A colleague joining the project asks: 'How do I learn this system?' Which architectural principle would make the system more learnable?",
@@ -612,7 +612,7 @@ Test your understanding of Claude Code's architecture, extensibility features, a
       ],
       correctOption: 3,
       explanation: "This question tests understanding of system learnability and documentation architecture. Good documentation explains purpose (why each component exists), provides examples (how to use), and clarifies boundaries (when to use each vs. alternatives). This enables new users to understand the mental model: 'CLAUDE.md for context, MCP for tools, skills for reasoning, hooks for validation.' Option B sacrifices capability for simplicity—powerful systems can be learnable without eliminating features. Option C (videos) helps but doesn't replace conceptual understanding—videos show 'how' but often skip 'why' and 'when.' Option D (reference documentation) is necessary but insufficient—it documents 'what exists' without teaching 'how to think about the system.' The principle here mirrors software documentation best practices: teach concepts and mental models, not just API references. Users need conceptual frameworks to make decisions, not exhaustive catalogs of options.",
-      source: "Lesson 16: Discovering and Using Claude Code Plugins"
+      source: "Lesson 14: Plugins Putting It All Together"
     }
   ]}
 />

@@ -1,8 +1,8 @@
 ---
 title: "The Tool Selection Guide"
-sidebar_position: 17
+sidebar_position: 16
 chapter: 5
-lesson: 17
+lesson: 16
 duration_minutes: 10
 chapter_type: Concept
 running_example_id: tool-selection-framework

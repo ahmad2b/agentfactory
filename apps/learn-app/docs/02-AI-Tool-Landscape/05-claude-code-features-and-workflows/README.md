@@ -25,14 +25,13 @@ By the end of this chapter, you'll have:
 - **Persistent Project Context** — Creating CLAUDE.md files (Lesson 5) that eliminate repetitive context-sharing and establish team memory
 - **Teach Claude Your Way** — Mastering custom instructions (Lesson 6) to align Claude's behavior with your personal or team standards
 - **Autonomous Expertise** — Agent Skills (Lessons 7-8) with prompt patterns (Persona + Questions + Principles) and autonomous discovery
-- **Skill Factory Pattern** — Using skill-creator (Lesson 9) to generate skills efficiently and building integrated skill systems
-- **External Integration** — MCP servers (Lesson 10) for safe access to external systems with practical Playwright and Context7 workflows
-- **Token Optimization** — Compiling MCP servers to Skills (Lesson 11) for 80-98% token reduction through progressive disclosure
-- **Subagent Orchestration** — Recognizing when Claude automatically delegates to Explore agent or Plan mode (Lesson 12) for complex tasks
-- **Configuration Mastery** — Settings hierarchy (Lesson 13) and precedence rules (User, Project, Local) for team collaboration
-- **Event-Driven Automation** — Hooks (Lesson 14) for custom behaviors triggered by events (PreToolUse, PostToolUse, SessionStart)
-- **Complete Extensibility** — Discovering and using plugins (Lesson 15) from marketplaces like Anthropic's official skills repository
-- **Autonomous Iteration** — The Ralph Wiggum Loop (Lesson 16) for self-correcting, multi-step autonomous workflows
-- **Strategic Tool Selection** — A decision framework (Lesson 17) for choosing between Skills, Subagents, MCP, and Hooks based on workflow needs
-- **The Creator's Workflow** — How Boris Cherny (Lesson 18) uses Claude Code: parallel sessions, Plan Mode discipline, and verification loops
-- **From Skills to Business** — Understanding how Skills become monetizable products (Lesson 19), the Digital FTE model, and the path to revenue
+- **External Integration** — MCP servers (Lesson 9) for safe access to external systems with practical Playwright and Context7 workflows
+- **Token Optimization** — Compiling MCP servers to Skills (Lesson 10) for 80-98% token reduction through progressive disclosure
+- **Subagent Orchestration** — Recognizing when Claude automatically delegates to Explore agent or Plan mode (Lesson 11) for complex tasks
+- **Configuration Mastery** — Settings hierarchy (Lesson 12) and precedence rules (User, Project, Local) for team collaboration
+- **Event-Driven Automation** — Hooks (Lesson 13) for custom behaviors triggered by events (PreToolUse, PostToolUse, SessionStart)
+- **Complete Extensibility** — Discovering and using plugins (Lesson 14) from marketplaces like Anthropic's official skills repository
+- **Autonomous Iteration** — The Ralph Wiggum Loop (Lesson 15) for self-correcting, multi-step autonomous workflows
+- **Strategic Tool Selection** — A decision framework (Lesson 16) for choosing between Skills, Subagents, MCP, and Hooks based on workflow needs
+- **The Creator's Workflow** — How Boris Cherny (Lesson 17) uses Claude Code: parallel sessions, Plan Mode discipline, and verification loops
+- **From Skills to Business** — Understanding how Skills become monetizable products (Lesson 18), the Digital FTE model, and the path to revenue

@@ -1,8 +1,8 @@
 ---
 title: "Settings Hierarchy"
-sidebar_position: 13
+sidebar_position: 12
 chapter: 5
-lesson: 13
+lesson: 12
 duration_minutes: 8
 
 # PEDAGOGICAL LAYER METADATA
@@ -67,7 +67,7 @@ prerequisites:
 
 # Settings Hierarchy
 
-You've built **Skills** (Lesson 8), connected **MCP servers** (Lesson 10), and used **Subagents** (Lesson 12). As your agent system grows, so does the complexity.
+You've built **Skills** (Lesson 8), connected **MCP servers** (Lesson 9), and used **Subagents** (Lesson 12). As your agent system grows, so does the complexity.
 
 How do you control permissions for all these tools? How do you ensure your team uses the same safety rules? How do you switch models without editing every file?
 

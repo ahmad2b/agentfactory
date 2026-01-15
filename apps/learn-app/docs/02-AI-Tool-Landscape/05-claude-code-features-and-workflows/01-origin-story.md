@@ -66,15 +66,9 @@ prerequisites:
 
 # The Claude Code Origin Story and Paradigm Shift
 
-You've probably heard this claim before: "AI makes coding faster."
+Most AI coding tools actually slow down developers. You describe code to ChatGPT (without showing it), get generic advice, copy-paste it, adapt it, test it, fail, repeat. The AI never sees your actual project. Every conversation starts from zero.
 
-Here's the uncomfortable truth: for most developers, AI coding tools actually *slow them down*.
-
-Not because the AI is bad at writing code. Because the workflow creates friction. You're in your editor, you hit a problem, you switch to a browser, you describe your code to ChatGPT (without being able to show it), you get a response, you copy it, you paste it, you adapt it to your actual variable names, you test it, it fails, you go back to the browser, you describe the error (again, without showing your actual code)...
-
-The AI never sees your project. Every conversation starts from zero. You become a human copy-paste bridge between two worlds that can't talk to each other.
-
-What if there was a different approach? What if AI could simply *see* your code?
+What if AI could simply *see* your code?
 
 ---
 
@@ -92,17 +86,13 @@ But would anyone else actually want to use it?
 
 ---
 
-## The Dogfooding Explosion
+## The Dogfooding Results
 
-Many developers believe their peers resist new tools. Adoption is supposed to be slow. People stick with what they know.
+When Anthropic released it internally (November 2024), adoption was explosive: 20% on day one, 50% by day five. By May 2025 launch, 80%+ of engineers were using it daily.
 
-In November 2024, Anthropic released the dogfooding version internally. Twenty percent of engineering adopted it on day one. By day five, that number hit fifty percent. By the time Claude Code launched publicly in May 2025, over eighty percent of Anthropic engineers were using it daily.
+Productivity data: engineers averaged five pull requests per day (vs. one to two at typical companies). Pull request throughput jumped 67% even as the team grew from two to ten people.
 
-The productivity data was striking: engineers averaged five pull requests per day—compared to the typical one or two at most companies. The team size grew from two engineers to around ten, yet pull request throughput increased by sixty-seven percent, the opposite of what usually happens when teams scale.
-
-As of mid-2025, Claude Code generates over $500 million in annual run-rate revenue. Not from marketing. From word-of-mouth and developers telling other developers.
-
-Something about this tool spread faster than anyone predicted. The question is: what made the difference?
+By mid-2025, Claude Code generated $500M+ annual run-rate—almost entirely from word-of-mouth. The question: what made it spread so fast?
 
 ---
 
@@ -151,94 +141,42 @@ This **OODA Loop** (Observe, Orient, Decide, Act) repeats until the problem is s
 
 ## Why Terminal Integration Matters
 
-Terminal integration isn't a stylistic choice. It's what makes the agentic model *possible*.
-
-The terminal is where your code lives—Claude Code reads your actual files without you describing them. It runs your tests, sees failures, and adjusts in real time. Changes are tracked through Git, reviewable before execution. You stay in your development environment instead of context-switching to a browser. And crucially: every command is visible. You're reviewing proposals, not trusting a black box.
-
-The terminal is the foundation that makes context-aware, action-capable AI possible.
+The terminal is where the agentic model works. Claude Code reads your actual files directly—no copy-paste needed. It runs tests, sees failures, and adjusts in real time. Changes go through Git (reviewable before execution), and every action is visible. You're reviewing proposals, not trusting a black box.
 
 ---
 
-## Code Is the Universal Interface
+## Agent Skills: Encoded Expertise
 
-![code-universal-image](https://pub-80f166e40b854371ac7b05053b435162.r2.dev/books/ai-native-dev/static/images/part-2/chapter-05/code-universal-image.png)
+Before we continue, define: **Agent Skills**.
 
-Here's an insight that surprises many people: **Claude Code isn't just for software development.**
+A Skill is **encoded expertise**—a document (SKILL.md) that teaches Claude a precise procedure, reasoning pattern, or domain knowledge. Think of it as a "plugin for intelligence" you can create yourself.
 
-"Code" sounds like programming. But code is actually the universal interface to the digital world. We don't just write code to build software—we use code to **interrogate reality**.
+Your domain expertise, encoded as a Skill, is intellectual property. When you create a Skill that automates financial audits, legal contract review, or sales outreach—that's not just a tool for yourself. That's **something you can sell**.
 
-**Example: A Business Question**
-
-Your CEO asks: "Why did sales drop in Q3?"
-
-A coding assistant would be useless here. But a General Agent?
-
-1. **Writes SQL** to fetch sales data from your database
-2. **Writes Python** to analyze trends and find patterns
-3. **Creates a chart** showing the drop happened in the Enterprise segment
-4. **Reads customer churn data** to correlate with the timing
-5. **Reports**: "Sales dropped because of 40% churn in Enterprise accounts, concentrated in August when we raised prices."
-
-That's not "coding." That's using code as a tool to answer real questions.
-
-### Beyond Software: Any Domain
-
-Through code, Claude can call APIs, organize any file format, analyze data with Python, and automate workflows. In finance, it reconciles accounts. In legal, it extracts contract clauses. In marketing, it analyzes competitors. **The scaffolding is thin**: Bash, file access, and Python. That's all Claude Code needs to become useful across domains.
-
-### Skills: Encoded Expertise
-
-Before we continue, we need to define a core term: **Agent Skills**. 
-
-In Claude Code, a "Skill" isn't just a generic ability. It is a specific, **encoded piece of expertise**—a document (called `SKILL.md`) that teaches Claude a precise procedure, reasoning pattern, or style. Think of it as a "plugin for intelligence" that you can create yourself.
-
-### Skills as Monetizable Assets
-
-This is why the lessons ahead teach you to build skills that work across domains—not just programming, but expertise in finance, marketing, legal, education, and more.
-
-Claude Code is the platform. **Your domain expertise, encoded as a Skill, is what makes it valuable.**
-
-When you create a Skill that automates financial audits, or legal contract review, or sales outreach—that's not just a productivity tool for yourself. That's **intellectual property you can sell**. 
-
-In Lesson 19 of this chapter, we'll show you exactly how these Skills become revenue. For now, understand this: every Skill you create in this chapter is a potential product.
-
-So what does this new paradigm actually produce?
+In Lesson 19, we show you exactly how these Skills become revenue. For now: every Skill you build in this chapter is a potential product.
 
 ---
 
-## The Self-Building Proof
+## What This Means for Developers
 
-There's a common belief that AI can assist with coding but can't build complex systems on its own.
+Here's what's real: approximately ninety percent of Claude Code was written by Claude Code itself. Not because the AI is suddenly brilliant. Because the agentic model gives it the *access* it needs. When AI can read code, understand patterns, run tests, and iterate—it becomes capable of complex work.
 
-Here's the fact that challenges that assumption: approximately ninety percent of Claude Code was written by Claude Code itself.
-
-The team didn't just use Claude Code to help with development. They used it to build the product. Sixty to one hundred internal releases ship daily. One external npm release ships daily. The tool that developers use to build software was itself built by that same tool.
-
-This isn't a marketing claim. It's the logical conclusion of the paradigm shift. When AI can see your code, understand your patterns, propose changes, run tests, and iterate on failures—when it operates as an agent rather than an oracle—it becomes capable of sustained, complex work.
-
-The ninety percent statistic isn't about AI being smart enough. It's about AI finally having the *access* it needs to do what it was already capable of doing.
-
-What does this mean for your future as a developer?
+This is the future you're entering.
 
 ---
 
 ## Try With AI
 
-Test your understanding of the paradigm shift through active exploration.
+**🔍 Explore the Friction:**
 
-**🔍 Explore the Friction Problem:**
+> "I use ChatGPT for coding help. Show me one workflow where copy-paste friction wastes time—maybe debugging an error or integrating a library. Then show what that same workflow looks like with filesystem access. What do I type? What does the AI see? What's different?"
 
-> "I currently use ChatGPT/Claude web for coding help. Walk me through ONE specific workflow where the copy-paste friction costs me time—maybe debugging an error, or integrating a new library. Then show me what that same workflow looks like with filesystem access. Be concrete: what do I type, what does the AI see, what's different?"
+**💡 Understand Product Overhang:**
 
-**💡 Understand the Product Overhang:**
+> "Claude could already explore codebases—it just needed filesystem access. What other capabilities are locked inside AI models right now, waiting for the right product? Give me 2-3 examples."
 
-> "Boris Cherny discovered that Claude could already explore codebases—it just needed filesystem access. Help me understand this 'Product Overhang' concept. What other capabilities might be locked inside AI models right now, waiting for the right product to unlock them? Give me 2-3 examples of capabilities that exist but aren't accessible through current interfaces."
+**🚀 Apply to Your Work:**
 
-**🎯 Challenge Your Assumptions:**
+> "I work on [your domain]. Based on the paradigm shift, what parts of my workflow involve the most copy-paste friction? Where would filesystem access help most?"
 
-> "I'm skeptical that 90% of a complex tool could be built by AI. Push back on my skepticism: What specifically makes this possible? Is it because the AI is smarter than I think, or because the workflow enables something different? Help me understand what changed that made self-building realistic."
-
-**🚀 Apply to Your Context:**
-
-> "I work on [describe: web apps / data pipelines / mobile development / etc.]. Based on the paradigm shift from passive to agentic AI, what specific parts of my workflow involve the most copy-paste friction? Where would filesystem access change things most dramatically?"
-
-Note: When using AI tools that access your files, start with non-sensitive projects. Review proposed changes before accepting. The transparency of terminal-based tools makes this review straightforward—you see exactly what will change.
+**Note:** Start with non-sensitive projects. Review changes before accepting.

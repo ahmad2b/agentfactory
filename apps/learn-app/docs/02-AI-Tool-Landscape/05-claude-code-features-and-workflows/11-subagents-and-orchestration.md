@@ -1,8 +1,8 @@
 ---
 title: "Subagents and Orchestration"
-sidebar_position: 12
+sidebar_position: 11
 chapter: 5
-lesson: 12
+lesson: 11
 duration_minutes: 12
 
 # PEDAGOGICAL LAYER METADATA

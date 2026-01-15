@@ -52,6 +52,13 @@ Every chapter must undergo this sequence. **For full Chapter Reviews, you must s
 
 **Focus:** Binary PASS/FAIL for structural integrity and safety.
 
+### Execution Protocol (STRICT)
+*   **No Sampling:** You must verify **100% of files** in the chapter. Do not assume consistency based on a few files.
+*   **Tool Usage:** Use `search_file_content` (or `grep`) to enforce binary checks globally.
+    *   *Check Forbidden Headers:* `grep "## Summary" *.md` (Finds banned sections)
+    *   *Check Missing Frontmatter:* `grep -L "proficiency_level" *.md` (Finds files missing the contract)
+    *   *Check Safety:* `grep -rE "rm -rf|sudo|chmod 777" .` (Finds dangerous commands)
+
 ### Hard Gates
 
 #### 1. Safety Sanity Check (CRITICAL)
@@ -137,6 +144,11 @@ You cannot sell a concept (e.g., "Monetizable Skill") in Lesson 1 if you don't d
 ## 🛑 GATE 4: The Acceptance Auditor (The Hiring Manager)
 
 **Focus:** O'Reilly physical and continuity standards. Does not fix, only passes or fails.
+
+### Execution Protocol (STRICT)
+*   **Zero Tolerance:** Word counts and structure budgets are not guidelines; they are limits.
+*   **Verification:** Use `wc -w` on files to verify counts objectively. Do not estimate.
+*   **Output:** Any deviation >5% is a FAIL.
 
 ### Hard Gates
 
@@ -227,6 +239,29 @@ When reviewing content, score against these dimensions (1-10):
 | **3. Spec-Driven Focus** | Does it teach **Design** before **Code**? | Both |
 | **4. Actionability** | Can the reader take a step **immediately**? (No long preambles) | Engagement |
 | **5. Flow & Continuity** | **Does Lesson N depend only on Lessons 1-(N-1)?** | Structure |
+
+---
+
+## HOW TO REVIEW (THE AUDIT PROTOCOL)
+
+To avoid "content bias" (ignoring errors because the content is good), follow this two-phase process:
+
+### Phase 1: The Mechanical Audit (Gates 1, 2, 4)
+**Goal:** Strict Spec Compliance.
+**Method:** Use `grep`, `search_file_content`, and `ls` on the **entire directory**.
+1.  **Scan for Forbidden Terms:** `grep "## Summary"`, `grep "## Conclusion"`.
+2.  **Scan for Missing Contract:** `grep -L "running_example_id"`.
+3.  **Scan for Safety:** `grep "rm -rf"`.
+4.  **Count Words:** `wc -w *.md`.
+
+*Result:* If Phase 1 fails, **FAIL the chapter immediately**. Do not proceed to Phase 2.
+
+### Phase 2: The Editorial Review (Gates 0, 3, 5)
+**Goal:** Quality & Pedagogy.
+**Method:** Use `read_file` on key lessons (Intro, Middle, End).
+1.  **Assess Tone:** Is it active voice? Is it "Senior Mentor"?
+2.  **Check Flow:** Do lessons link correctly?
+3.  **Grandma Test:** Are analogies present?
 
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: "MCP Integration"
-sidebar_position: 10
+sidebar_position: 9
 chapter: 5
-lesson: 10
+lesson: 9
 duration_minutes: 14
 
 # PEDAGOGICAL LAYER METADATA
@@ -137,6 +137,23 @@ MCP is the bridge between local context and external intelligence.
 
 ---
 
+## Why This Matters: What MCP Unlocks
+
+Still not convinced you need MCP? Here's what changes:
+
+| Task | Without MCP | With MCP |
+|------|-------------|----------|
+| **Browse Amazon for products** | Can't—no web access. You do the shopping. | Playwright MCP: Claude navigates, extracts prices/reviews, summarizes results |
+| **Check React docs for latest API** | Uses training data (outdated). May hallucinate. | Context7 MCP: Fetches current docs. Real examples. Live citations. |
+| **Query your production database** | Can't—no database access. You run queries, paste results. | Database MCP: Claude executes queries safely, analyzes results |
+| **Post updates to your Slack channel** | Can't—no API access. You copy-paste manually. | Slack MCP: Claude sends messages, threads, reactions automatically |
+| **Analyze a GitHub repo structure** | Can't—no GitHub access. You clone locally. | GitHub MCP: Claude clones, analyzes, answers questions about code |
+| **Risk of data exposure** | N/A | All secured: MCP uses allow-lists, tokens stored in keychain, no secrets in plain text |
+
+**The pattern**: Without MCP, you're the bottleneck. With MCP, Claude Code becomes your autonomous partner.
+
+---
+
 ## What Is Model Context Protocol (MCP)?
 
 **Simple definition**: MCP lets Claude Code safely use external tools through standardized connections.
@@ -205,6 +222,40 @@ What happens:
 - It navigates pages, extracts details, and returns a neat summary with links
 - You can iterate naturally: "filter to long-sleeve" or "show only Prime-eligible"
 
+**Expected Output Example:**
+
+Claude will return something similar to this (content varies by what's available):
+
+```
+Found 3 men's casual shirts under $30 with good reviews:
+
+1. **Amazon Essentials Oxford Button-Down**
+   - Price: $19.99 (Prime eligible)
+   - Rating: 4.2/5 stars (2,341 reviews)
+   - Colors: Navy, Gray, White
+   - Sizing: Runs true to size; machine washable
+   - URL: https://amazon.com/dp/B0XXXXXX
+   - Why it matches: Great price, neutral colors, solid reviews
+
+2. **Goodthreads Casual Oxford**
+   - Price: $24.99
+   - Rating: 4.5/5 stars (1,892 reviews)
+   - Colors: Light Blue, Khaki, Navy
+   - Sizing: Consider sizing up one size
+   - URL: https://amazon.com/dp/B0YYYYYY
+   - Why it matches: Excellent reviews, price under budget
+
+3. **J.Crew Factory Essential Shirt**
+   - Price: $29.99
+   - Rating: 4.6/5 stars (3,204 reviews)
+   - Colors: Sage Green, White, Cream
+   - Sizing: True to size
+   - URL: https://amazon.com/dp/B0ZZZZZZ
+   - Why it matches: Highest rated option, neutral earth tones
+```
+
+**Note**: Real results vary by region, availability, and when you run this. Amazon changes its page structure frequently, so Claude adapts its browsing steps. The format (links, prices, ratings) stays consistent.
+
 If you get an error:
 - Ensure `playwright` MCP is registered: `claude mcp list`
 - Try again; websites change often, so Claude may adjust its browsing steps
@@ -227,10 +278,132 @@ What happens:
 - You get a short, current summary with citations and links
 - Ask follow-ups: "show the exact CLI command to add a server via stdio" or "compare Context7 MCP vs GitHub MCP"
 
+**Expected Output Example:**
+
+Claude returns something like (real docs are current, not from memory):
+
+```
+## Model Context Protocol (MCP) - Latest Summary
+
+**What is MCP?**
+An open standard that allows Claude Code to safely access external tools, APIs, and data sources. The official docs (modelcontextprotocol.io) define MCP as "a unified protocol for connecting language models to external systems."
+
+**How to Add an MCP Server**
+
+Using the stdio transport (current standard in 2026):
+```bash
+claude mcp add --transport stdio <name> <command>
+```
+
+Example—Playwright:
+```bash
+claude mcp add --transport stdio playwright npx @playwright/mcp@latest
+```
+
+Verify installation:
+```bash
+claude mcp list
+```
+
+**Recent Changes (2026)**
+- Stdio transport is now the default (network-based was beta in 2025)
+- Permission model: Explicit allow-list per server in CLAUDE.md
+- Context7 expanded to 200+ library documentation sources (50 in 2025)
+- GitHub MCP now supports searching PRs and issues
+
+**Best Practices (from official docs)**
+1. Use allow-list configuration—only approve servers you trust
+2. Test MCP servers in isolated projects before production
+3. Keep servers updated: `claude mcp update --all`
+4. Never store secrets in MCP commands—use environment variables
+
+**Official Resources**
+- Main docs: https://modelcontextprotocol.io/docs
+- Getting started: https://modelcontextprotocol.io/docs/getting-started
+- Server implementations: https://github.com/modelcontextprotocol
+```
+
+**Note**: Context7 fetches live documentation, so you always get the most current information. This beats searching Google and sifting through 10 outdated blog posts.
+
 **Tip**: This is your "know about anything new" button. Use it anytime you need the latest docs without hunting across websites.
 
-#### 🎓 Expert Insight
-> In AI-native development, you don't memorize documentation URLs or bookmark 47 different API reference sites—you understand WHEN you need authoritative documentation vs community knowledge. MCP servers like Context7 are your just-in-time research partners, not replacements for understanding.
+---
+
+## When to Use MCP (And When NOT To)
+
+MCP is powerful, but it's not the right tool for everything. This section shows you the boundaries.
+
+### ✅ When to Use MCP
+
+**Use MCP when you need:**
+- **Current information** (docs change frequently, your training data is outdated)
+- **Real-time data** (stock prices, database queries, API responses)
+- **Web interaction** (browsing, testing, scraping)
+- **Safe external integration** (calling trusted APIs with permission controls)
+
+**Example**: You're building a financial dashboard. Use MCP with a database server to fetch real-time trading data. Skills handle calculations. MCP handles data access.
+
+### ❌ When NOT to Use MCP
+
+**Don't use MCP for private/sensitive data:**
+- Company financial records, personal keys, SSH credentials
+- Confidential customer data, proprietary algorithms
+- **Better approach**: Use local file access or store secrets in environment variables, then prompt Claude to retrieve them locally
+
+**Example wrong**: "Use MCP to fetch our accounting database"
+**Example right**: "Here's the database dump (local file). Analyze using this skill."
+
+**Don't use MCP for real-time high-frequency queries:**
+- If you need 1000 database queries/second, use direct connections
+- MCP adds latency per call (network roundtrip + Claude reasoning)
+- **Appropriate workflow**: ~10 queries/minute with MCP; real-time streaming needs direct connections
+
+**Example wrong**: "Continuously monitor 500 database records every second"
+**Example right**: "Check production health metrics every 5 minutes and alert me"
+
+**Don't use MCP from untrusted servers:**
+- Only use MCP servers from: Anthropic's official list, Modelcontextprotocol.io, verified npm packages
+- A malicious MCP server could expose your system, read your files, access your tokens
+- **Check before installing**: Read source code on GitHub, verify maintainer reputation, check recent commits
+
+**Example wrong**: `claude mcp add mystery-tool some-random-npm-package`
+**Example right**: `claude mcp add playwright npx @playwright/mcp@latest` (widely used, verified source)
+
+**Don't build custom MCP servers before you understand the basics:**
+- Master Playwright and Context7 first (this lesson)
+- Understand the security model (permission allow-lists, token storage)
+- **Advanced topic**: Building custom MCP servers for databases, internal APIs (Part 7, Chapter 38)
+
+**Example wrong**: "I'll build a custom MCP to access our Jira board today"
+**Example right**: "I'll try Playwright/Context7 first, then explore custom MCP next quarter"
+
+---
+
+#### 🎓 Expert Insight: The Three Pillars of AI-Native Development
+
+**You've now learned the complete architecture.**
+
+Remember **Lesson 05 (CLAUDE.md)**? You taught Claude your project: files, folder structure, coding standards, team practices. That gave Claude Code *context*.
+
+Then **Lesson 08 (Skills)**? You taught Claude your domain procedures: workflows, decision trees, quality standards. That gave Claude Code *procedures*.
+
+Now **Lesson 9 (MCP)** teaches Claude where to find the world's knowledge and tools. That gives Claude Code *reach*.
+
+**Together, these three pillars form the foundation of AI-native development:**
+
+```
+CLAUDE.md  → Claude knows YOUR PROJECT
+   ↓
+Skills     → Claude knows YOUR PROCEDURES
+   ↓
+MCP        → Claude knows THE WORLD'S TOOLS
+   ↓
+Result: A Digital FTE that understands your goals, knows how you work, and can access any external system safely
+```
+
+**Why this matters**: Without CLAUDE.md, Claude is generic. Without skills, Claude repeats itself. Without MCP, Claude is blind to the outside world. With all three, Claude becomes truly autonomous.
+
+This is the thesis of AI-native development: **Context + Procedures + Access = Digital FTE**.
 
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: "Compiling MCP to Skills"
-sidebar_position: 11
+sidebar_position: 10
 chapter: 5
-lesson: 11
+lesson: 10
 duration_minutes: 20
 
 # PEDAGOGICAL LAYER METADATA
@@ -67,7 +67,7 @@ version: "1.1.0"
 prerequisites:
   - "Lesson 06: Teach Claude Your Way (Skills Lab download)"
   - "Lesson 08: Agent Skills (SKILL.md format)"
-  - "Lesson 10: MCP Integration"
+  - "Lesson 9: MCP Integration"
 ---
 
 # Compiling MCP to Skills

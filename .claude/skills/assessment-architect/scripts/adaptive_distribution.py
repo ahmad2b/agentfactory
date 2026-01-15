@@ -154,11 +154,11 @@ def calculate_recommended_questions(
     content_type: str = "mixed"
 ) -> int:
     """
-    Calculate recommended question count.
+    Calculate recommended question count (realistic range: 90-120).
 
-    Uses heuristic:
-    - 1-3 concepts per lesson minimum
-    - 2-3 questions per concept
+    Uses conservative heuristic:
+    - 5 concepts per lesson (estimated)
+    - 1-1.3 questions per concept
     - Adjusted for content type
 
     Args:
@@ -167,31 +167,32 @@ def calculate_recommended_questions(
         content_type: "conceptual", "procedural", "coding", or "mixed"
 
     Returns:
-        Recommended question count (25-250 range)
+        Recommended question count (25-120 range)
     """
     if concept_count == 0:
-        concept_count = max(1, lesson_count * 8)  # Estimate
+        concept_count = max(1, lesson_count * 5)  # Conservative: 5 concepts per lesson
 
-    # Base calculation: 2 questions per concept
-    base_questions = concept_count * 2
+    # Base calculation: 1 question per concept
+    base_questions = concept_count * 1.0
 
-    # Type adjustments
+    # Type adjustments (all conservative, max 1.3x)
     if content_type == "conceptual":
-        # Conceptual needs more questions for deep understanding
-        multiplier = 1.3
+        # Conceptual needs slightly more for deep understanding
+        multiplier = 1.2
     elif content_type == "coding":
         # Coding needs practical verification
-        multiplier = 1.2
+        multiplier = 1.15
     elif content_type == "procedural":
-        # Procedural needs step verification
-        multiplier = 1.1
+        # Procedural balanced
+        multiplier = 1.05
     else:  # mixed
         multiplier = 1.0
 
     recommended = int(base_questions * multiplier)
 
-    # Clamp to reasonable range
-    recommended = max(25, min(250, recommended))
+    # Clamp to realistic, achievable range
+    # Min 25 for tiny scopes, max 120 for comprehensive exams
+    recommended = max(25, min(120, recommended))
 
     return recommended
 
@@ -224,6 +225,44 @@ Balanced content uses default distribution:
         return rationales[content_enum]
     except (ValueError, KeyError):
         return rationales[ContentType.MIXED]
+
+
+def estimate_time_minutes(question_count: int, content_type: str = "mixed") -> dict:
+    """
+    Estimate assessment time based on question count and content type.
+
+    Args:
+        question_count: Number of questions
+        content_type: "conceptual", "procedural", "coding", or "mixed"
+
+    Returns:
+        Dict with estimated_minutes and max_minutes (capped at 180 min / 3 hours)
+    """
+    # Base: ~1 minute per question (reading, thinking, selecting)
+    # Conceptual: 1.2 min/question (requires deeper thinking)
+    # Coding: 1.3 min/question (requires implementation verification)
+    # Procedural: 1.1 min/question (step verification)
+    # Mixed: 1.0 min/question (balanced)
+
+    time_per_question = {
+        "conceptual": 1.2,
+        "procedural": 1.1,
+        "coding": 1.3,
+        "mixed": 1.0
+    }
+
+    multiplier = time_per_question.get(content_type.lower(), 1.0)
+    estimated = int(question_count * multiplier)
+
+    # Cap at 3 hours max (180 minutes)
+    max_minutes = min(180, estimated + 30)  # +30 min buffer
+
+    return {
+        "estimated_minutes": estimated,
+        "estimated_hours": round(estimated / 60, 1),
+        "max_minutes": max_minutes,
+        "max_hours": round(max_minutes / 60, 1)
+    }
 
 
 def format_distribution_summary(content_type: str, question_count: int) -> str:

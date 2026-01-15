@@ -1,8 +1,8 @@
 ---
 title: "Ralph Wiggum Loop: Autonomous Iteration Workflows"
-sidebar_position: 16
+sidebar_position: 15
 chapter: 5
-lesson: 16
+lesson: 15
 duration_minutes: 15
 
 # PEDAGOGICAL LAYER METADATA
@@ -98,8 +98,8 @@ version: "1.0.0"
 # Legacy compatibility
 prerequisites:
   - "Lessons 01-14: Complete Claude Code features (hooks, plugins, settings, subagents)"
-  - "Understanding of event-driven automation from Lesson 14"
-  - "Plugin installation from Lesson 15"
+  - "Understanding of event-driven automation from Lesson 13"
+  - "Plugin installation from Lesson 14"
 ---
 
 # Ralph Wiggum Loop: Autonomous Iteration Workflows
@@ -164,7 +164,7 @@ These aren't edge cases—they're everyday workflows. Every developer faces iter
 
 ### Architecture: How It Works
 
-Ralph Loop uses the **Stop hook** (from Lesson 14) to intercept Claude Code's normal exit behavior:
+Ralph Loop uses the **Stop hook** (from Lesson 13) to intercept Claude Code's normal exit behavior:
 
 1. **Normal flow**: You ask Claude to do something → Claude completes → Session ends
 2. **Ralph Loop flow**: You ask Claude to do something → Claude completes → Stop hook triggers → Reinjects prompt asking "Did it work? If not, fix and continue" → Claude continues → Repeat until completion criteria met
@@ -193,7 +193,7 @@ Created by Geoffrey Huntley in summer 2025, formalized by Boris Cherny (Anthropi
 
 ## How Stop Hooks Work
 
-You learned about four hook events in Lesson 14:
+You learned about four hook events in Lesson 13:
 
 - **PreToolUse**: Before Claude runs a tool
 - **PostToolUse**: After Claude completes a tool
@@ -282,7 +282,7 @@ The Ralph Wiggum plugin is available through Claude Code plugin marketplaces. Th
 
 ### Step 1: Add Marketplace
 
-If you haven't already added the Anthropic plugins marketplace (from Lesson 15):
+If you haven't already added the Anthropic plugins marketplace (from Lesson 14):
 
 ```bash
 claude

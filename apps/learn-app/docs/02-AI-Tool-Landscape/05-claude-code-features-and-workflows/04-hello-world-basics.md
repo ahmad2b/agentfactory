@@ -61,170 +61,203 @@ prerequisites:
   - "Lesson 02 or 03: Claude Code installed and authenticated"
 ---
 
-# Hello World: Mastering the Interface
+# Hello World: Being the Boss
 
-You've installed Claude Code. You've authenticated. You're staring at a cursor in your terminal.
+You've installed Claude Code. Now you're staring at a terminal cursor.
 
-Now what?
-
-Before we dive into advanced features like Context Files (Lesson 6) or Skills (Lesson 8), you need to know how to **drive**.
-
-Claude Code isn't just a chatbot in a black box. It's an interactive environment with specific controls, safety checks, and feedback loops. In this lesson, you'll master the dashboard before you drive the car.
+Before you learn advanced features, you need to master the **one skill that matters most**: being the boss.
 
 ---
 
-## The TUI Anatomy (Terminal User Interface)
+## The Problem: You Just Gave a Bad Order
 
-When you run `claude`, you enter the **TUI**. It looks simple, but it's packed with information.
+Imagine this:
 
-![claude-code-tui-anatomy](https://pub-80f166e40b854371ac7b05053b435162.r2.dev/books/ai-native-dev/static/images/part-2/chapter-05/tui-anatomy-annotated.png)
+You ask Claude Code: "Clean up my temporary files. Delete everything in the `/tmp` and `~/.cache` directories."
 
-1.  **Input Field**: Where you type natural language instructions.
-2.  **History**: Scroll up to see previous exchanges (just like a normal chat).
-3.  **The "Cost Pill"**: A small indicator showing the cost of the *current session*.
-4.  **Activity Indicator**: Shows when Claude is "Thinking" vs "Executing".
-
-### The Slash Commands
-
-Just like Discord or Slack, Claude Code uses `/` commands for controlling the tool itself.
-
-Try these right now:
-
-*   **`/help`**: Shows all available commands.
-*   **`/clear`**: Clears the screen (but keeps session context).
-*   **`/compact`**: Switches to a minimal view (hides detailed thinking/tool outputs). Great once you trust the agent.
-*   **`/cost`**: Shows detailed token usage and cost for the session.
-
-#### 💬 AI Colearning Prompt
-> "I'm new to terminal interfaces. Explain the difference between typing a natural language command (like 'list files') and a slash command (like '/help'). Who interprets which?"
-
----
-
-## The Permission Loop: Your Safety Belt
-
-This is the most important concept to understand.
-
-When you ask ChatGPT to write code, it just outputs text.
-When you ask Claude Code to write code, it **proposes an action**.
-
-**It cannot act without your permission.**
-
-### The 3 Types of Permissions
-
-1.  **Read Permissions**: "I want to read `src/main.py` to understand the code."
-    *   *Risk:* Low. (Unless you have secrets in that file).
-2.  **Write Permissions**: "I want to edit `README.md` to add installation steps."
-    *   *Risk:* Medium. (It modifies your files).
-3.  **Execute Permissions**: "I want to run `npm install`."
-    *   *Risk:* High. (It runs code on your machine).
-
-### How to Approve
-
-When Claude proposes an action, you'll see a prompt like this:
+Claude reads this and proposes:
 
 ```
-> Claude wants to run: ls -la
+> I'm about to run:
+  rm -rf /tmp/* ~/.cache/*
+
   [Enter] Approve  [Esc] Reject
 ```
 
-*   **Press Enter**: "Yes, do it."
-*   **Press Esc** (or type 'n'): "No, stop."
+You pause. That command *seems* right, but what if there's something important in those directories? What if a running process needs `/tmp`?
 
-**Pro Tip:** You can also type instructions *instead* of approving.
-*   *Claude:* "I want to delete `database.db`."
-*   *You:* "No! Rename it to `database_backup.db` instead."
+**This is the Permission Loop. And it's your safety mechanism.**
 
-This is **Steering**. You don't just say yes/no; you guide the agent.
+Claude Code doesn't just do things. It proposes actions and **waits for your approval**. You review before execution. You stay in control.
+
+This is why Claude Code is safe: not because Claude is careful, but because **you get to be careful**.
 
 ---
 
-## Hands-On: Your "Hello World" Workflow
+## Why Permissions Matter: The Three Levels
 
-Let's do a real task to build muscle memory.
+When Claude proposes something, every action has a risk level:
 
-### Step 1: Create a Project Directory
-(Do this yourself in your terminal, outside Claude if you prefer, or ask Claude to do it).
+| Action | Risk | Your Job |
+|--------|------|----------|
+| **Read**: "I'll read `src/config.py`" | Low | Usually safe, unless file has secrets |
+| **Write**: "I'll edit `README.md`" | Medium | File gets changed; you might want different changes |
+| **Execute**: "I'll run `npm install`" | High | Code runs on your machine right now |
 
+You're not approving blindly. **You're reviewing the exact command before it runs.**
+
+---
+
+## The TUI: Your Command Center
+
+When you run `claude`, you enter the **TUI** (Terminal User Interface). It's simple, but designed for control.
+
+![claude-code-tui-anatomy](https://pub-80f166e40b854371ac7b05053b435162.r2.dev/books/ai-native-dev/static/images/part-2/chapter-05/tui-anatomy-annotated.png)
+
+**Key elements:**
+- **Input field**: Type natural language instructions
+- **History**: Scroll to see previous exchanges
+- **Cost Pill**: Dollar amount for current session (top right)
+- **Activity Indicator**: Shows when Claude is "Thinking" vs "Executing"
+
+**Slash commands** (like Discord/Slack):
+- `/help` → Show available commands
+- `/clear` → Clear screen (keeps session context)
+- `/compact` → Minimal view (hide detailed outputs)
+- `/cost` → Detailed token usage
+
+---
+
+## The Permission Loop Anatomy
+
+### How It Works
+
+1. **You give an instruction** (natural language)
+2. **Claude proposes an action** (exact command or file edit)
+3. **You see the proposal** and make a choice:
+   - `[Enter]` = Approve
+   - `[Esc]` or 'n' = Reject
+4. **If approved**: Claude executes
+5. **If rejected**: You can give new instructions
+
+**Example:**
+
+```
+You:    "Write a Python script to sum numbers"
+Claude: "I'll create sum.py with this content: [shows code]
+        > Write file sum.py?
+        [Enter] Approve  [Esc] Reject"
+You:    [Press Esc]
+You:    "Actually, make it sum integers only, and handle errors"
+Claude: "Better approach: [new code shown]
+        > Write file sum.py?
+        [Enter] Approve"
+You:    [Press Enter]
+```
+
+---
+
+## Steering: The Real Skill
+
+Here's what makes you "the boss": **You don't just approve or reject. You steer.**
+
+When Claude proposes something wrong, don't say "No." Give a better instruction:
+
+```
+Claude: "I'm about to delete /tmp/*"
+You:    "Stop. Don't delete. Instead, list what's in /tmp
+         and only delete .*.tmp files older than 1 week"
+Claude: *proposes safer command*
+You:    "Approve"
+```
+
+**This feedback loop—propose, reject with correction, iterate—is how you teach Claude your standards.** You're not the rubber stamp. You're the editor, the reviewer, the decision-maker.
+
+---
+
+## Hands-On: Make a Mistake and Recover
+
+Let's build the muscle memory.
+
+### Setup
 ```bash
 mkdir hello-claude
 cd hello-claude
 claude
 ```
 
-### Step 2: The Creation Prompt
-Type this into Claude:
+### Step 1: Ask for Something Risky
 
-> "Create a python script named hello.py that prints a greeting and the current date."
+Type this:
+> "Delete all Python cache files in this directory and subdirectories"
 
-**Watch what happens:**
-1.  Claude **thinks** (planning).
-2.  Claude **proposes** a `Bash` command to create the file.
-3.  **YOU** must press `Enter` to approve.
-4.  Claude **proposes** a `FileWrite` to add the content.
-5.  **YOU** must press `Enter` to approve.
+**Watch Claude propose:**
+```
+> I'm about to run: find . -name "__pycache__" -type d -exec rm -rf {} +
+```
 
-### Step 3: The Execution Prompt
-Now type:
+### Step 2: Reject It (Even If It Looks Right)
 
-> "Run the script."
+Press `Esc`. This is practice.
 
-**Watch:**
-1.  Claude proposes running `python hello.py` (or `python3`).
-2.  **YOU** press `Enter`.
-3.  You see the output in the terminal.
+### Step 3: Steer with a Better Request
 
-### Step 4: The Iteration Prompt
-Now, let's change it.
+Type:
+> "Don't delete yet. First, let me see what we have. List all Python cache directories."
 
-> "Modify the script to ask for the user's name and greet them personally."
+Claude runs the safer `find` command (list-only).
 
-**Watch:**
-1.  Claude **reads** the file first (requests permission).
-2.  Claude **edits** the file (requests permission).
-3.  Claude might **run** it to test (requests permission).
+### Step 4: Approve the Real Action
 
-**Congratulations.** You just completed the **Read-Write-Execute Loop**. This is the fundamental heartbeat of agentic development.
+Once you see what exists:
+> "OK, now delete just the __pycache__ directories, not .pyc files"
+
+Claude proposes again. You review. You approve.
+
+**What you just did:** You experienced the Read-Write-Execute loop and steered the outcome. This is agentic development in one action.
 
 ---
 
-## The "Cost Pill" and Token Hygiene
+## Cost Pill: Understanding Token Usage
 
-Look at the top right (or type `/cost`). You'll see a dollar amount, e.g., `$0.04`.
+Top right, you'll see a number like `$0.04`. This is **session cost**.
 
-*   **Input Tokens**: What you typed + the files Claude read. (Cheaper).
-*   **Output Tokens**: What Claude wrote. (More expensive).
+- **Input tokens** (cheaper): What you type + files Claude reads
+- **Output tokens** (expensive): What Claude writes
 
-**Why it matters:**
-If you ask Claude to "Read every file in this 10,000 file project," your Input Tokens will explode, and so will the cost.
+**Cost management rule:**
+```
+Bad:  "Fix the bug in my app" → Reads everything
+Good: "Fix the bug in auth.py" → Reads one file
+```
 
-**Best Practice:** Be specific.
-*   ❌ "Fix the bug in my app." (Reads everything).
-*   ✅ "Fix the bug in `auth.py`." (Reads one file).
-
----
-
-## Troubleshooting: Getting Unstuck
-
-Sometimes Claude gets confused or stuck in a loop.
-
-*   **Ctrl+C**: Interrupts Claude immediately. Use this if it's rambling or going down the wrong path.
-*   **`/clear`**: Clears the conversation history. Useful if Claude is confused by old context. It resets the "short-term memory."
-*   **"Stop and listen"**: Just type this. "Stop. You are looking at the wrong file. Look at X instead." Steering is often faster than restarting.
+Type `/cost` to see detailed breakdown.
 
 ---
 
 ## Try With AI
 
-Now that you know the controls, practice steering.
+**Practice steering:**
+> "Ask Claude to create a file. When it asks for permission, REJECT it. Then guide it: 'Actually, make it a markdown file with a different name.' Watch how Claude adapts to your feedback."
 
-**🚗 Practice Steering:**
-> "Ask Claude to create a file called `joke.txt`. When it asks for permission, **REJECT** it (Esc/No). Then tell it: 'Actually, make it a markdown file called `joke.md`'."
-> *Goal: See how Claude adapts to rejection without crashing.*
+**Understand cost:**
+> "Run `/cost`. Ask Claude to read a large file. Run `/cost` again. How much did that file cost?"
 
-**💰 Cost Check:**
-> "Run `/cost`. Then paste a long article (or ask it to read a large file). Run `/cost` again. Calculate how much that action cost you."
-> *Goal: Develop an intuition for token costs.*
+**Master approval workflow:**
+> "Give Claude a task with 3 steps (Read → Write → Execute). Watch for all three permission requests. Approve them one at a time and see the workflow complete."
 
 ---
 
-**Next Up:** Now that you can drive, let's build the "Employee Handbook" so you don't have to explain your project every time. Proceed to **Lesson 6: CLAUDE.md Context Files**.
+## You've Just Learned the Most Important Skill
+
+You now know something most AI users miss: **Control happens through feedback, not just approval.**
+
+You're not a passive user saying "yes" or "no." You're an active editor, steering Claude toward your goals.
+
+In Lesson 6, you'll teach Claude about your project (CLAUDE.md). In Lesson 8, you'll build Skills. But none of that matters if you can't be the boss here.
+
+You've learned it. You can now build anything.
+
+---
+
+**Next Up:** Now that you know how to be the boss, let's teach Claude about your project. Proceed to **Lesson 6: CLAUDE.md Context Files**.

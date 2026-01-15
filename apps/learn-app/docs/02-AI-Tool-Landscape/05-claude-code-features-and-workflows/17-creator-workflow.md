@@ -1,8 +1,8 @@
 ---
 title: "The Creator's Workflow: How Boris Uses Claude Code"
-sidebar_position: 18
+sidebar_position: 17
 chapter: 5
-lesson: 18
+lesson: 17
 duration_minutes: 15
 estimated_time: "15 mins"
 chapter_type: Hybrid
@@ -182,7 +182,7 @@ This might be the most important insight from Boris's workflow:
 **The Philosophy**: You don't trust AI output—you instrument it. Give Claude tools to check its own work, and quality improves dramatically.
 
 **Connection to Chapter Concepts**:
-- **Lesson 10 (MCP Integration)**: MCP tools can include verification capabilities—testing endpoints, validating outputs, checking UI state
+- **Lesson 9 (MCP Integration**): MCP tools can include verification capabilities—testing endpoints, validating outputs, checking UI state
 - **Lesson 14 (Hooks)**: Hooks can trigger automated verification after Claude makes changes
 
 ---
@@ -248,7 +248,7 @@ Here's how Boris's techniques map to what you've learned:
 | Team CLAUDE.md in git | L04 (CLAUDE.md) | Every mistake becomes a rule; context evolves |
 | @.claude PR tagging | L04 (CLAUDE.md) | Code review becomes CLAUDE.md improvement |
 | Specialized subagents | L11 (Subagents) | Create subagents for repeated PR workflows |
-| Verification loops | L09 (MCP) + L13 (Hooks) | Give Claude tools to verify its own work |
+| Verification loops | L09 (MCP Integration) + L13 (Hooks) | Give Claude tools to verify its own work |
 | PostToolUse formatting | L13 (Hooks) | Automate the last 10% that causes CI failures |
 | /permissions | L12 (Settings) | Pre-allow safe commands, share with team |
 | Opus 4.5 choice | L12 (Settings) | Optimize for total iteration time, not speed |
