@@ -1,6 +1,6 @@
 ---
 name: assessment-architect
-description: Create rigorous assessments with scope intelligence, adaptive distribution, and automatic bias prevention. Auto-discovers Chapter/Part scope, detects content type (conceptual/procedural/coding), generates questions with aligned question types, and eliminates answer patterns. Scales intelligently from 25-250 questions. Triggers on "create quiz", "generate exam", "make practice questions", "assessment", or "test me on".
+description: Create rigorous assessments with scope intelligence, adaptive distribution, and automatic bias prevention. Auto-discovers Chapter/Part scope, detects content type (conceptual/procedural/coding), generates questions with aligned question types, and eliminates answer patterns. Scales intelligently from 25-120 questions (typically 90-120). Triggers on "create quiz", "generate exam", "make practice questions", "assessment", or "test me on".
 ---
 
 # Assessment Architect
