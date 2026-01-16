@@ -1,6 +1,6 @@
 ---
 name: assessment-architect
-description: Create rigorous assessments with scope intelligence, adaptive distribution, and automatic bias prevention. Auto-discovers Chapter/Part scope, detects content type (conceptual/procedural/coding), generates questions with aligned question types, and eliminates answer patterns. Scales intelligently from 25-120 questions (typically 90-120). Triggers on "create quiz", "generate exam", "make practice questions", "assessment", or "test me on".
+description: Generate professional certification exams meeting MIT/academic standards with rigorous question design, psychometric validation, and systematic distractor generation. Auto-discovers scope, selects academic rigor tier (T1-T4), generates questions using evidence-based distractor strategies, validates against psychometric standards, and eliminates answer biases. Triggers on "create exam", "certification exam", "generate assessment", "professional exam", "test me".
 ---
 
 # Assessment Architect
@@ -9,13 +9,14 @@ Create intelligent, bias-free assessments from structured content with scope dis
 
 ## What This Skill Does
 
-- **Scope Intelligence**: Parse "Chapter 5" or "Part 2" → Auto-discovers all lessons (vs. manual file listing)
-- **Content Classification**: Analyzes content type (conceptual/procedural/coding/mixed)
-- **Adaptive Distribution**: Selects question type mix based on content (more Conceptual Distinction for conceptual content, more Specification Design for coding)
-- **Intelligent Scaling**: Auto-recommends question count (25-120 range, typical 90-120 for full chapters)
-- **Bias Prevention**: Detects and eliminates length bias, position bias, specificity bias
-- **Multi-format Output**: Default DOCX (professional documents), also Markdown and PDF
-- **Quality Validation**: Validates answer distribution, difficulty spread, source coverage, and answer biases
+- **Scope Intelligence**: Parse "Chapter 5" or "Part 2" → Auto-discovers all lessons with intelligent weighting
+- **Academic Rigor Tier Selection**: Choose T1 (Foundational), T2 (Intermediate), T3 (Advanced), or T4 (PhD Qualifying) with distinct question distributions
+- **Content Classification**: Analyzes content type (conceptual/procedural/coding/mixed) to select appropriate question type distribution
+- **Rigorous Question Design**: Generate questions using evidence-based distractor strategies per question type (not generic "plausible wrong")
+- **Psychometric Validation**: Ensure difficulty index, discrimination index, and distractor functionality meet professional standards
+- **Bias Prevention & Remediation**: Automatically detect and fix length bias, position bias; flag specificity bias for expert review
+- **Multi-format Output**: DOCX (professional printable), Markdown (version control), PDF (distribution)
+- **Professional Standards**: MIT/academic certification exam standards with grading rubrics and reliability metrics
 
 ## What This Skill Does NOT Do
 
@@ -29,12 +30,13 @@ Create intelligent, bias-free assessments from structured content with scope dis
 
 ## Required Clarifications (AskUserQuestion)
 
-The skill automatically asks users **two key questions**:
+The skill automatically asks users **three key questions**:
 
 | # | Question | Options | Default |
 |----|----------|---------|---------|
-| 1 | **Question Count & Time** | Accept recommended / More challenging / Quick / Custom | Auto-recommended (90-120) |
-| 2 | **Output Format** | DOCX (printable) / Markdown / PDF | DOCX (professional) |
+| 1 | **Academic Rigor Tier** | T1 (Foundational) / T2 (Intermediate) / T3 (Advanced) / T4 (PhD Qualifying) | T2 (Intermediate) |
+| 2 | **Question Count & Time** | Accept recommended / More challenging (+15%) / Quick (-35%) / Custom | Auto-recommended per tier |
+| 3 | **Output Format** | DOCX (printable) / Markdown / PDF | DOCX (professional) |
 
 **Note**: Scope is auto-discovered and confirmed, no user decision needed.
 
@@ -81,15 +83,21 @@ Use defaults and note assumptions in exam header:
 
 ## Before Implementation
 
+Gather context to ensure successful exam generation:
+
 | Source | Gather |
 |--------|--------|
-| **Scope Discovery** | If Chapter/Part input: Auto-discover lesson files using scripts/scope_discovery.py |
-| **Content Classification** | Analyze content type (conceptual/procedural/coding) using scripts/content_classifier.py |
-| **Distribution Selection** | Choose adaptive distribution based on content type using scripts/adaptive_distribution.py |
-| **Source Files** | Read all discovered/specified Markdown files completely |
-| **Content Depth** | Assess complexity for difficulty calibration |
-| **Key Concepts** | Extract testable facts, definitions, relationships |
-| **Section Structure** | Map headings for source references |
+| **Codebase** | Read all source Markdown files completely; assess complexity |
+| **User Requirements** | Academic rigor tier (T1-T4), question count preference, output format |
+| **Skill References** | Domain expertise embedded in: |
+| | - `academic-rigor-tiers.md` → Question distributions per tier |
+| | - `distractor-generation-strategies.md` → Systematic distractor creation |
+| | - `psychometric-standards.md` → Validity/reliability standards |
+| | - `question-patterns.md` → Question type templates + examples |
+| **Concept Extraction** | Testable facts, definitions, relationships, key distinctions |
+| **Section Mapping** | Headings for source references, relative importance |
+
+**Key Point**: Question generation uses **embedded expertise from references/**, not runtime discovery. The skill contains professional exam design knowledge; you provide your domain content.
 
 ---
 
@@ -121,71 +129,163 @@ Use defaults and note assumptions in exam header:
 ```
 1. DISCOVER SCOPE
    └── Parse input: "Chapter 5", "Part 2", or explicit files
-   └── Auto-discover lessons if scope-based input
-   └── Confirm with user: "Found 19 lessons. Analyzing..."
+   └── Auto-discover lessons, assess content density
+   └── Confirm: "Found 19 lessons across 340 pages. Proceeding..."
 
-2. ANALYZE CONTENT
-   └── Read source files → Extract concepts → Map sections
+2. ANALYZE CONTENT (Professional Standards)
+   └── Read source files → Extract testable concepts
    └── Detect content type: conceptual / procedural / coding / mixed
-   └── Estimate: 95 concepts (19 lessons × 5 concepts/lesson)
+   └── Assess complexity: Beginner vs. Advanced concepts
+   └── Count unique testable facts, relationships, definitions
 
-3. CALIBRATE & ASK USER ⭐ (AskUserQuestion)
-   ├── QUESTION 1: Question Count & Time
-   │   └── Show recommendation: "95 questions (1.6 hours est. / 2.1 hours max)"
-   │   └── Options: Accept / More challenging (+15%) / Quick (-35%) / Custom (25-120)
-   │   └── Display estimated time + maximum time (capped at 3 hours)
+3. ASK USER ⭐ (AskUserQuestion - 3 Questions)
+   ├── QUESTION 1: Academic Rigor Tier
+   │   ├── T1 (Foundational): Entry-level, 70% pass expected
+   │   ├── T2 (Intermediate): Professional development, 65% pass expected
+   │   ├── T3 (Advanced): Specialist credential, 40% pass expected
+   │   └── T4 (PhD Qualifying): Doctoral preparation, 25% pass expected
    │
-   └── QUESTION 2: Output Format
-       └── Options: DOCX (professional) / Markdown (version control) / PDF (printable)
+   ├── QUESTION 2: Question Count & Time
+   │   └── Show tier-specific recommendation (T1:50-100, T2:100-150, T3:150-200, T4:200-250)
+   │   └── Options: Accept / More challenging (+15%) / Quick (-35%) / Custom
+   │
+   └── QUESTION 3: Output Format
+       └── Options: DOCX (professional printable) / Markdown / PDF
        └── Default: DOCX
 
-4. DISTRIBUTE ADAPTIVELY
-   └── Select distribution for detected content type (adaptive_distribution.py)
-   └── Conceptual: ↑ Conceptual Distinction (+7%), ↑ Critical Evaluation (+5.5%)
-   └── Coding: ↑ Specification Design (+8%), ↑ Architecture Analysis (+2.5%)
-   └── Mixed: Balanced distribution
+4. SELECT DISTRIBUTION (from references/academic-rigor-tiers.md)
+   └── T1 Foundational: 70% recall + distinction, 30% applied
+   └── T2 Intermediate: 50% foundational, 50% advanced
+   └── T3 Advanced: 30% foundational, 70% advanced
+   └── T4 PhD: 20% foundational, 80% research-ready
+   └── Content type adjustments (conceptual/procedural/coding)
 
-5. GENERATE
-   └── Create questions following type patterns
-   └── Ensure distractors are plausible (70-90% correct)
-   └── Track source section for each question
-   └── Include Bloom level + question type metadata
+5. GENERATE RIGOROUS QUESTIONS (from references/distractor-generation-strategies.md)
+   ├── For EACH question type:
+   │   ├── Extract core concept from source
+   │   ├── Formulate correct answer (aligns to Bloom level)
+   │   ├── Identify misconceptions learners make
+   │   ├── Generate 3 distractors using type-specific strategies:
+   │   │   ├── Precision Recall: Off-by-one, unit errors, adjacent values
+   │   │   ├── Conceptual Distinction: Surface-level confusion, partial truth
+   │   │   ├── Decision Matrix: Fail on each constraint individually
+   │   │   ├── Architecture Analysis: Different component roles
+   │   │   ├── Economic/Quantitative: Calculation errors
+   │   │   ├── Specification Design: Over/under-specification
+   │   │   ├── Critical Evaluation: Primary vs. secondary trade-offs
+   │   │   ├── Strategic Synthesis: Missing one integration element
+   │   │   └── Research Extension: Over-generalization or missing constraints
+   │   └── Validate: Length parity, specificity match, all distractors ≥5% function
+   │
+   └── Track metadata: Source section, Bloom level, question type, difficulty estimate
 
-6. VALIDATE & REMEDIATE
-   └── Run structure checks (questions, options, formatting)
-   └── Run answer distribution checks (A/B/C/D balance)
-   └── Run bias detection: length/position/specificity (NEW)
-   └── Auto-fix length and position bias if detected
-   └── Flag specificity bias for manual review
-   └── See references/validation-rules.md and bias-detection-guide.md
+6. VALIDATE PSYCHOMETRIC QUALITY (from references/psychometric-standards.md)
+   ├── Structure validation:
+   │   ├── ✓ Question count matches target (±5%)
+   │   ├── ✓ Each question exactly 4 options (A-D)
+   │   └── ✓ Sequential numbering with no gaps
+   ├── Distribution validation:
+   │   ├── ✓ Answer distribution: Each letter 20-30%
+   │   ├── ✓ No >3 consecutive same-letter answers
+   │   └── ✓ No predictable patterns
+   ├── Psychometric validation:
+   │   ├── ✓ Difficulty Index (DIF) per tier (T1:65-75%, T2:60-70%, T3:50-60%, T4:45-55%)
+   │   ├── ✓ Discrimination Index (DIS) > 0.30 for most questions
+   │   ├── ✓ Distractor Functionality (DF) ≥5% for all options
+   │   ├── ✓ Item-Total Correlation (ITC) average ≥0.25
+   │   └── ✓ Kuder-Richardson KR-20 per tier (T1:≥0.75, T2:≥0.80, T3:≥0.85, T4:≥0.85)
+   ├── Bias detection:
+   │   ├── ✓ Length Bias: Auto-fix if detected
+   │   ├── ✓ Position Bias: Auto-remediate with balanced sequences
+   │   └── ✓ Specificity Bias: Flag for expert review
+   └── Content validation:
+       ├── ✓ All major topics represented
+       ├── ✓ Bloom levels match tier distribution
+       └── ✓ Question types match tier distribution
 
-7. OUTPUT (Format Selected by User)
-   ├── DOCX: Professional document (via docx skill)
-   │   └── Structure: Metadata → Questions → Answer Key (at END) → Explanations
+7. REMEDIATE ISSUES
+   └── Length bias: Rewrite options to match word count
+   └── Position bias: Apply proven answer sequences for 25% per letter
+   └── Specificity bias: Enhance distractors to match detail level
+   └── Low discrimination: Review question wording, verify answer key
+   └── Nonfunctional distractors: Replace with realistic misconceptions
+
+8. OUTPUT (Format Selected by User)
+   ├── DOCX: Professional document
+   │   ├── Header: Title, exam code, question count, duration, grading scale
+   │   ├── Questions: Each on new line, all options on separate lines
+   │   ├── Answer Key: Compact reference (10 per line for fast checking)
+   │   └── Explanations: Full section with source context for each question
    ├── Markdown: Version control friendly
-   │   └── Same structure, easy to edit
-   └── PDF: Printable (via markdown → docx → pdf conversion)
+   │   ├── Same structure, easy to edit + track changes
+   │   └── Table-based answer key with metadata
+   └── PDF: Printable distribution format
+       └── Generated via markdown → docx → PDF conversion
 ```
 
-**See WORKFLOW.md for detailed step-by-step example with actual outputs.**
+**Result**: Professional certification exam meeting MIT/academic standards with validated rigor, reliability (KR-20), and discrimination across all questions.
 
 ---
 
-## Question Type Distribution
+## Question Type Distribution by Academic Rigor Tier
+
+### T1 (Foundational) - 70% Foundational, 30% Applied
 
 | Type | % | Purpose |
 |------|---|---------|
-| Precision Recall | 10 | Exact values, definitions |
-| Conceptual Distinction | 15 | Paired/contrasting concepts |
-| Decision Matrix | 12.5 | Multi-criteria scenarios |
-| Architecture Analysis | 12.5 | System components, flows |
-| Economic/Quantitative | 10 | Calculations, comparisons |
-| Specification Design | 10 | Framework application |
-| Critical Evaluation | 12.5 | Trade-offs, judgments |
-| Strategic Synthesis | 10 | Multi-concept integration |
-| Research Extension | 7.5 | Novel scenario extrapolation |
+| Precision Recall | 15 | Core definitions, terminology |
+| Conceptual Distinction | 20 | Paired concepts, clear differences |
+| Decision Matrix | 15 | Simple two-criteria scenarios |
+| Architecture Analysis | 10 | Component roles, straightforward flows |
+| Economic/Quantitative | 10 | Basic calculations |
+| Specification Design | 10 | Framework application, standard cases |
+| Critical Evaluation | 5 | Simple trade-offs |
+| Strategic Synthesis | 5 | Two-concept integration |
+| Research Extension | 0 | Not applicable |
 
-See `references/question-patterns.md` for templates and examples.
+### T2 (Intermediate) - 50% Foundational, 50% Advanced
+
+| Type | % | Purpose |
+|------|---|---------|
+| Precision Recall | 8 | Reduced - focus on understanding |
+| Conceptual Distinction | 12 | Nuanced differences, subtle confusions |
+| Decision Matrix | 15 | Multi-criteria with trade-offs |
+| Architecture Analysis | 15 | System components with constraints |
+| Economic/Quantitative | 10 | Complex calculations, ROI |
+| Specification Design | 15 | Framework application, non-standard cases |
+| Critical Evaluation | 15 | Trade-off analysis, judgment |
+| Strategic Synthesis | 10 | Multi-concept integration with constraints |
+| Research Extension | 0 | Not applicable |
+
+### T3 (Advanced) - 30% Foundational, 70% Advanced
+
+| Type | % | Purpose |
+|------|---|---------|
+| Precision Recall | 5 | Minimal - assumes mastery |
+| Conceptual Distinction | 8 | Highly nuanced distinctions |
+| Decision Matrix | 12 | Complex multi-criteria scenarios |
+| Architecture Analysis | 15 | System design with competing requirements |
+| Economic/Quantitative | 8 | Advanced modeling, comparative analysis |
+| Specification Design | 15 | Framework application, novel cases |
+| Critical Evaluation | 20 | Complex trade-offs, edge cases |
+| Strategic Synthesis | 12 | Multi-level concept synthesis |
+| Research Extension | 5 | Extrapolation to related domains |
+
+### T4 (PhD Qualifying) - 20% Foundational, 80% Research-Ready
+
+| Type | % | Purpose |
+|------|---|---------|
+| Precision Recall | 3 | Minimal - assumes deep mastery |
+| Conceptual Distinction | 5 | Subtle theoretical distinctions |
+| Decision Matrix | 8 | Complex scenarios with research findings |
+| Architecture Analysis | 10 | System design from first principles |
+| Economic/Quantitative | 5 | Advanced quantitative reasoning |
+| Specification Design | 7 | Designing methodology for novel problems |
+| Critical Evaluation | 20 | Rigorous critique of proposals |
+| Strategic Synthesis | 15 | Integration across sub-domains |
+| Research Extension | 27 | Novel scenarios, research design |
+
+See `references/academic-rigor-tiers.md` for detailed question examples per tier.
 
 ---
 
@@ -417,8 +517,11 @@ Run ALL checks before delivery. See `references/validation-rules.md`.
 
 | File | Purpose |
 |------|---------|
-| `references/question-patterns.md` | Templates for each question type with distractor strategies |
-| `references/bloom-taxonomy.md` | Cognitive level classification and auto-detection |
+| `references/academic-rigor-tiers.md` | **NEW**: T1-T4 framework with question distributions, example questions per tier, grading scales |
+| `references/distractor-generation-strategies.md` | **NEW**: Systematic procedures for generating plausible distractors per question type |
+| `references/psychometric-standards.md` | **NEW**: Professional validation metrics (DIF, DIS, DF, KR-20) and quality thresholds |
+| `references/question-patterns.md` | Templates for each question type with detailed examples and distractor strategies |
+| `references/bloom-taxonomy.md` | Cognitive level classification and auto-detection guidance |
 | `references/validation-rules.md` | Quality validation criteria (structure, distribution, content, bias) |
 | `references/bias-detection-guide.md` | Comprehensive guide to detecting and preventing answer biases |
 

@@ -1,5 +1,5 @@
 ---
-title: "The Tool Selection Guide"
+title: "Strategic Tool Selection: Build Your Digital FTE Architecture"
 sidebar_position: 16
 chapter: 5
 lesson: 16
@@ -82,26 +82,25 @@ If you stop reading here, memorize this table. It solves 90% of architectural de
 
 ---
 
-## The Decision Tree visualization
+## The Decision Flow
 
-When you face a new automation challenge, follow this logic flow:
+When you face a new automation challenge, ask these questions in order:
 
-```mermaid
-graph TD
-    Start[I have an Automation Goal] --> Q1{Does it need external data/tools?}
-    
-    Q1 -- Yes, outside my computer --> MCP[MCP Server]
-    Q1 -- No, local only --> Q2{Is it a complex, multi-step workflow?}
-    
-    Q2 -- Yes, needs autonomy --> Sub[Subagent]
-    Q2 -- No, it's a specific task --> Q3{Is it about enforcing rules/safety?}
-    
-    Q3 -- Yes, block/validate actions --> Hook[Hook]
-    Q3 -- No, it's a helpful procedure --> Q4{Do I explain it every time?}
-    
-    Q4 -- Yes, constant repetition --> Skill[Agent Skill]
-    Q4 -- No, general knowledge --> Context[CLAUDE.md]
-```
+**Question 1: Does it need external data or external systems?**
+- **Yes** (Jira, database, API, website) → **Use MCP**
+- **No** (local files, local context) → Continue to Q2
+
+**Question 2: Is it a complex, multi-step workflow requiring autonomy?**
+- **Yes** (research, analysis, report generation) → **Use Subagent**
+- **No** (specific, bounded task) → Continue to Q3
+
+**Question 3: Is it about enforcing rules or preventing bad actions?**
+- **Yes** (validation, security, compliance) → **Use Hook**
+- **No** (helpful procedure) → Continue to Q4
+
+**Question 4: Do you explain this task the same way every time?**
+- **Yes** (repetitive, consistent procedure) → **Use Skill**
+- **No** (context-dependent, general knowledge) → **Use CLAUDE.md**
 
 ---
 
@@ -109,56 +108,101 @@ graph TD
 
 To truly design "Digital Employees," stop thinking like a developer (functions, scripts) and start thinking like a Manager (roles, responsibilities).
 
-### 1. CLAUDE.md = The Employee Handbook 📘
+#### 1. CLAUDE.md: The Employee Handbook
+
 Every new hire gets a handbook. It tells them: *"Here is our mission. Here is how we prefer things formatted. Here is who to ask for help."*
-*   **Use when:** You want to set the baseline culture and context for *every* interaction.
-*   **Don't use for:** Specific, granular tasks (too much noise).
 
-### 2. Skills = Standard Operating Procedures (SOPs) 📋
+**Use when:**
+- You want to set the baseline culture and context for every interaction
+
+**Don't use for:**
+- Specific, granular tasks (too much noise)
+
+#### 2. Skills: Standard Operating Procedures
+
 When you hire an accountant, you give them a checklist: *"Project Setup Checklist."* *"End-of-Month Protocol."*
-*   **Use when:** You have a repeatable task (writing a test, formatting a blog post) that you want done *your way*.
-*   **Don't use for:** Massive, ambiguous projects requiring 2 hours of autonomy.
 
-### 3. Subagents = Specialized Departments 🏢
+**Use when:**
+- You have a repeatable task (writing a test, formatting a blog post) that you want done *your way*
+
+**Don't use for:**
+- Massive, ambiguous projects requiring 2 hours of autonomy
+
+#### 3. Subagents: Specialized Departments
+
 You don't ask the "General Receptionist" to audit your taxes. You send that to the "Accounting Department."
-*   **Use when:** The task requires a different *mindset* or set of tools. (e.g., A "Testing Subagent" needs different prompts than a "Creative Writing Subagent").
-*   **Don't use for:** Simple tasks. Creating a whole department to "fix a typo" is bureaucracy.
 
-### 4. MCP = IT Access & Software 🔌
-An employee can’t check Salesforce if you don’t give them a login. MCP is that login.
-*   **Use when:** The intelligence is locked away in a database, API, or website.
-*   **Don't use for:** Things the model already knows (e.g., Python syntax).
+**Use when:**
+- The task requires a different *mindset* or set of tools
+- Example: A "Testing Subagent" needs different prompts than a "Creative Writing Subagent"
 
-### 5. Hooks = Compliance & Security 👮
+**Don't use for:**
+- Simple tasks (creating a whole department to "fix a typo" is bureaucracy)
+
+#### 4. MCP: IT Access & Software
+
+An employee can't check Salesforce if you don't give them a login. MCP is that login.
+
+**Use when:**
+- The intelligence is locked away in a database, API, or website
+
+**Don't use for:**
+- Things the model already knows (e.g., Python syntax)
+
+#### 5. Hooks: Compliance & Security
+
 The Compliance Officer doesn't do the work; they typically *stop* work that is dangerous. *"Stop! You can't merge to main without approval."*
-*   **Use when:** You need to enforce hard constraints or automate invisible logging.
-*   **Don't use for:** Helpful suggestions. That's a Skill.
+
+**Use when:**
+- You need to enforce hard constraints or automate invisible logging
+
+**Don't use for:**
+- Helpful suggestions (that's a Skill)
 
 ---
 
 ## Common Scenarios: What Would You Pick?
 
-### Scenario A: "I want Claude to check our Jira board for new tickets."
-*   **Analysis:** Does it need external data? Yes (Jira is a project management tool outside your computer).
-*   **Selection:** **MCP**. You need a Jira MCP server.
+#### Scenario A: "I want Claude to check our Jira board for new tickets."
 
-### Scenario B: "Every time Claude writes code, I want it to follow our specific engaging naming convention (e.g., `unicorn_launcher`)."
-*   **Analysis:** Is it a repeated procedure/preference? Yes.
-*   **Selection:** **CLAUDE.md** (if global project rule) or **Skill** (if specific to one task type). Likely **CLAUDE.md**.
+**Analysis:** Does it need external data? Yes (Jira is a project management tool outside your computer).
 
-### Scenario C: "I want to give Claude a 'Research Mode' where it browses the web, summarizes 50 pages, and writes a report without distracting me."
-*   **Analysis:** Is it complex? Yes. Does it need focused autonomy? Yes.
-*   **Selection:** **Subagent**. Create a "Researcher" subagent equipped with Browser MCP.
+**Selection:** **MCP**. You need a Jira MCP server.
 
-### Scenario D: "Stop Claude from committing secrets/API keys to git."
-*   **Analysis:** Is it safety/validation? Yes. (Preventing accidental leaks of passwords).
-*   **Selection:** **Hook**. A `pre-git-commit` hook (a script that runs before saving changes).
+#### Scenario B: "Every time Claude writes code, I want it to follow our naming conventions consistently."
+
+**Analysis:** Is it a repeated preference? Yes.
+
+**Selection:** **CLAUDE.md** (if it's a global project rule) or **Skill** (if specific to one task type). Likely **CLAUDE.md**.
+
+#### Scenario C: "I want to give Claude a 'Research Mode' where it browses the web, summarizes 50 pages, and writes a report without distracting me."
+
+**Analysis:** Is it complex? Yes. Does it need focused autonomy? Yes.
+
+**Selection:** **Subagent**. Create a "Researcher" subagent equipped with Browser MCP.
+
+#### Scenario D: "Stop Claude from committing secrets/API keys to git."
+
+**Analysis:** Is it safety/validation? Yes (preventing accidental leaks of passwords).
+
+**Selection:** **Hook**. A `pre-git-commit` hook (a script that runs before saving changes).
 
 ---
 
 ## The Strategic Takeaway
 
-**Amateurs build prompts.**
+**Amateurs build prompts to conplete current work - vibe code the current task.**
+
 **Professionals build Systems.**
 
 A "System" is simply the smart combination of these five elements. Your goal as an Agent Architect is to place the complexity in the right bucket.
+
+---
+
+## See It in Action
+
+This framework is the decision-making engine. But what does it look like when applied?
+
+Lesson 17 shows how Boris Cherny—the creator of Claude Code—actually uses these tools together in his daily workflow. 15-20 parallel sessions, Plan Mode discipline, specialized subagents for different tasks, Hooks automating the edge cases.
+
+Study his patterns. They're blueprints for your own systems.
