@@ -199,10 +199,9 @@ class TemplateManager:
                 continue
 
             # Find {{#key}}...{{/key}} blocks
-            pattern = re.compile(
-                rf"{{{{{#{re.escape(key)}}}}(.*?){{{{{/{re.escape(key)}}}}}",
-                re.DOTALL
-            )
+            escaped_key = re.escape(key)
+            pattern_str = "{{#" + escaped_key + "}}(.*?){{/" + escaped_key + "}}"
+            pattern = re.compile(pattern_str, re.DOTALL)
 
             matches = pattern.findall(result)
             if matches:

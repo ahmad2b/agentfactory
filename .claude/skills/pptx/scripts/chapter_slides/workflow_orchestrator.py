@@ -133,7 +133,10 @@ class ChapterSlideWorkflow:
             self.scope = parse_scope_input(self.user_input)
 
             # Discover lesson files
-            base_path = Path(__file__).parent.parent.parent.parent.parent / "apps/learn-app/docs"
+            # Path: .claude/skills/pptx/scripts/chapter_slides/workflow_orchestrator.py
+            # Target: apps/learn-app/docs (at repo root)
+            # Solution: 6 parent directories to reach repo root
+            base_path = Path(__file__).parent.parent.parent.parent.parent.parent / "apps/learn-app/docs"
             self.lesson_files = discover_lesson_files(self.scope, base_path)
 
             if not self.lesson_files:

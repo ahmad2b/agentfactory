@@ -406,3 +406,26 @@ print("code block")
     print(f"  How to sections: {count_how_to_sections(test_content)}")
     print(f"  Conceptual keywords: {count_conceptual_keywords(test_content)}")
     print(f"  Inline code: {count_inline_code(test_content)}")
+
+
+def classify_section_content(content: str) -> str:
+    """
+    Determine section content type by analyzing content.
+
+    Priority order (check in sequence):
+    1. Contains table (|---|---|) → "table"
+    2. Contains code block (```) → "code"
+    3. Contains numbered list (1. 2. 3.) → "list"
+    4. Heading contains "Try With AI" → "try_with_ai"
+    5. Otherwise → "text"
+    """
+    if re.search(r"\|.*\|.*\|", content):
+        return "table"
+    elif re.search(r"```", content):
+        return "code"
+    elif re.search(r"^\d+\.\s+", content, re.M):
+        return "list"
+    elif re.search(r"try\s+with\s+ai", content, re.IGNORECASE):
+        return "try_with_ai"
+    else:
+        return "text"
