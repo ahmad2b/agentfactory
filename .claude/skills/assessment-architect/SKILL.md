@@ -87,7 +87,11 @@ Gather context to ensure successful exam generation:
 
 | Source | Gather |
 |--------|--------|
-| **Codebase** | Read all source Markdown files completely; assess complexity |
+| **Book Base Path** | `apps/learn-app/docs/` ← FIXED PATH (all chapters stored here) |
+| **Scope Discovery** | Parse user input: "Chapter 5", "Part 2", "Ch5 Lesson 3" |
+| | Auto-discover matching lesson files using `scripts/scope_discovery.py` |
+| | If not found: Show available chapters/parts and ask user to clarify |
+| **Source Files** | Read all matched Markdown files completely; assess complexity |
 | **User Requirements** | Academic rigor tier (T1-T4), question count preference, output format |
 | **Skill References** | Domain expertise embedded in: |
 | | - `academic-rigor-tiers.md` → Question distributions per tier |
@@ -97,7 +101,11 @@ Gather context to ensure successful exam generation:
 | **Concept Extraction** | Testable facts, definitions, relationships, key distinctions |
 | **Section Mapping** | Headings for source references, relative importance |
 
-**Key Point**: Question generation uses **embedded expertise from references/**, not runtime discovery. The skill contains professional exam design knowledge; you provide your domain content.
+**Key Points**:
+- Book is always at: `apps/learn-app/docs/`
+- Question generation uses **embedded expertise from references/**, not runtime discovery
+- The skill contains professional exam design knowledge; you provide your domain content
+- If chapter not found after scope discovery: Show available options, ask clarification
 
 ---
 
@@ -155,10 +163,16 @@ Gather context to ensure successful exam generation:
 ## Generation Workflow
 
 ```
-1. DISCOVER SCOPE
-   └── Parse input: "Chapter 5", "Part 2", or explicit files
-   └── Auto-discover lessons, assess content density
-   └── Confirm: "Found 19 lessons across 340 pages. Proceeding..."
+1. DISCOVER SCOPE (using fixed base path: apps/learn-app/docs/)
+   ├── Parse user input: "Chapter 5", "Part 2", "Ch5 Lesson 3", or explicit files
+   ├── Search base path: apps/learn-app/docs/[chapter-dir]/
+   ├── Success path:
+   │   └── Auto-discover lesson files in chapter directory
+   │   └── Confirm: "Found 19 lessons across 340 pages. Analyzing..."
+   └── Failure path (not found):
+       ├── List available chapters/parts in apps/learn-app/docs/
+       ├── Ask user: "Which chapter did you mean? Available: [list]"
+       └── Restart discovery with user's clarification
 
 2. ANALYZE CONTENT (Professional Standards)
    └── Read source files → Extract testable concepts
@@ -567,6 +581,38 @@ Run ALL checks before delivery. See `references/validation-rules.md`.
 - [ ] Every question has section reference
 - [ ] No direct quotes in explanations
 - [ ] Difficulty distribution matches content complexity
+
+---
+
+## Book Structure Reference
+
+For auto-discovery at `apps/learn-app/docs/`, the book structure is:
+
+```
+apps/learn-app/docs/
+├── 01-agent-factory-paradigm/          [Part 1: Fundamentals]
+│   ├── 01-digital-fte-revolution.md
+│   ├── 02-agent-manufacturing.md
+│   └── [... more lessons ...]
+│
+├── 02-AI-Tool-Landscape/               [Part 2: AI Tools]
+│   ├── 05-claude-code-features-and-workflows/  [Chapter 5]
+│   │   ├── 04-hello-world-basics.md
+│   │   ├── 05-tool-landscaping.md
+│   │   ├── 16-tool-selection-guide.md
+│   │   └── [... other lessons ...]
+│   └── [... other chapters ...]
+│
+└── [... other parts ...]
+```
+
+**How to specify in user input:**
+- `"Chapter 5"` → Auto-discovers `02-AI-Tool-Landscape/05-claude-code-features-and-workflows/`
+- `"Part 2"` → Auto-discovers all chapters in `02-AI-Tool-Landscape/`
+- `"Chapter 5, Lesson 4"` → Specifically targets `04-hello-world-basics.md`
+- Explicit path: `"02-AI-Tool-Landscape/05-claude-code-features-and-workflows/"`
+
+**If discovery fails:** Show available chapters/parts and ask user to clarify.
 
 ---
 
