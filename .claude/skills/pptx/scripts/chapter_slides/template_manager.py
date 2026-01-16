@@ -32,7 +32,9 @@ class TemplateManager:
                          (defaults to ./templates relative to this module)
         """
         if template_dir is None:
-            template_dir = Path(__file__).parent.parent / "templates"
+            # Path: .claude/skills/pptx/scripts/chapter_slides/template_manager.py
+            # Go to: .claude/skills/pptx/templates
+            template_dir = Path(__file__).parent.parent.parent / "templates"
 
         self.template_dir = template_dir
         self.master_templates: Dict[str, str] = {}
